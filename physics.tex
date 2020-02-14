@@ -1,0 +1,50 @@
+\documentclass[11pt]{report}            
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{epigraph}
+
+\title{Thoughts about Physics}
+\author{Shimon Panfil, Ph.D.\\
+e-mail: shimon.panfil@gmail.com\\
+https://pshimon.github.io}
+
+\addbibresource{phys-lib.bib}
+
+\begin{document}                        
+\maketitle
+\epigraph{Physics is becoming so unbelievably complex that it is taking longer
+and longer to train a physicist. It is taking so long, in fact, to train a 
+physicist to the place where he understands the nature of physical problems that 
+he is already too old to solve them.}{Eugene Paul Wigner}
+\tableofcontents                        
+\chapter{Mathematical Model }
+\label {math-mod}
+Physics is about building and investigation of mathematical models  of natural phenomena. 
+Proper model should have definite domain where it describes the nature correctly, i.e.
+its results do not contradict experimental facts. It should be able to produce answer
+to any reasonable question and explain why the question is unreasonable in case it fails.
+\chapter{Classical Mechanics}
+\label{class-mech}
+The best introduction into classical or Newtonian mechanics is written by mathematician V.I. Arnold \cite{arnold-cm}.
+All phenomena exist in space (three-dimensional and euclidean) and time (one-dimensional).
+There exist coordinate systems (called inertial) possessing the following two properties:
+\begin{enumerate}
+    \item All the laws of nature at all moments of time are the same in all inertial coordinate systems;
+\item  All coordinate systems in uniform rectilinear motion with respect to an inertial one are themselves inertial.
+\end{enumerate}
+This is called "Galileo's principle of relativity".
+
+
+The initial state of a mechanical system (the totality of positions and
+velocities of its points at some moment of time) uniquely determines all of
+its motion. This is called "Newton's principle of determinacy"
+\printbibliography[
+heading=bibintoc,
+title={References}
+] 
+\clearpage
+\end{document}
