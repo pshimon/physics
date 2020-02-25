@@ -1,6 +1,7 @@
 \documentclass[11pt]{report}            
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[russian,english]{babel}
+\usepackage{csquotes}
 \usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -15,7 +16,8 @@ https://pshimon.github.io}
 
 \addbibresource{phys-lib.bib}
 
-\begin{document}                        
+\begin{document}  
+
 \maketitle
 \epigraph{Physics is becoming so unbelievably complex that it is taking longer
 and longer to train a physicist. It is taking so long, in fact, to train a 
@@ -34,21 +36,32 @@ Experience shows us that questions "when?" and "where?" are reasonable and the a
 the theory starting form these questions and answers. However there is much simpler way.
 We can claim that all phenomena exist in space (three-dimensional and euclidean) 
 and time (one-dimensional), so all terms listed before can be defined naturally.
+Even in case when "actually" space and (or) time are discrete we can model them
+by continuous quantities (atomic structure does not prevent us from using
+continuous media approach).
 
 Space and time may be represented as independent entities (classical mechanics), as parts of 
 four-dimensional continuum (special relativity), as local chart
 of Riemannian manifold (general relativity), as some kind of projection
-of multi-dimensional object, \ldots .
+of multi-dimensional object, etc. . Having space and time we can define position, velocity, acceleration  and hence the movement (evolution).
 
-Having space and time we can define position, velocity, acceleration \ldots, and hence
-the movement (evolution).
+Classical mechanics tacitly supposes that
+\begin{enumerate}
+    \item we can measure time and space intervals exactly,
+    \item measurements do not disturb the system,
+    \item measurements do not take space and time for themselves.
+\end{enumerate}
 
-Physical objects exist independently of the model chosen to describe them. 
+
+Physical objects exist independently of the model chosen to describe them. They exist
+also even nobody observes or measures them.\footnote{"Moon exists even nobody looks at it".
+In other case we should investigate a number of "important problems" e.g. what is going
+with moon when nobody measures its movement, but some wolf is howling on it.}
 \chapter{Classical Mechanics}
 \label{class-mech}
 \section{Definitions}
 \label{class-mech-def}
-Here we follow \cite{arnold-cm}.
+Here we follow  \cite{arnold-cm-r}.%\cite{arnold-cm},
 
 There exist coordinate systems (called inertial) possessing the following two properties:
 \begin{enumerate}
@@ -150,6 +163,8 @@ and initial conditions
 Newton's equation \eqref{newton1} is  the basis of mechanics. Functions $\vec F_j$
 are called forces they should be determined experimentally for each specific mechanical system.
 Galilean invariance is the only restriction put on forces.
+
+\selectlanguage{russian}
 \printbibliography[
 heading=bibintoc,
 title={References}
