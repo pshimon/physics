@@ -24,27 +24,52 @@ and longer to train a physicist. It is taking so long, in fact, to train a
 physicist to the place where he understands the nature of physical problems that 
 he is already too old to solve them.}{Eugene Paul Wigner}
 \tableofcontents                        
-\chapter{Mathematical Model }
+\chapter{Space, Time, Mass \ldots }
 \label {math-mod}
 Physics is about building and investigation of mathematical models  of natural phenomena. 
 Proper model should have definite domain where it describes the nature correctly, i.e.
-its results do not contradict experimental facts. It should be able to produce answer
-to any reasonable question and explain why the question is unreasonable in case it fails.
+its results should be supported by experimental facts. Though the exact 
+meaning of "experimental support" is not clear as Hempel's raven paradox: "observing
+objects that are neither black nor ravens may formally increase the likelihood 
+that all ravens are black"\footnote{All ravens are black. In the form of an 
+implication, this can be expressed as: If something is a raven, then it 
+is black. Via contraposition, this statement is equivalent to: If something is 
+not black, then it is not a raven. So an observation of, say, red cow supports 
+the statement that all ravens are black} shows I should not discuss it further.
+
+Physical objects are entities which we can observe and measure, they exist 
+independently of the model chosen to describe them. They exist
+also even nobody observes or measures them.\footnote{"Moon exists even nobody looks at it".
+In other case we should investigate a number of "important problems" e.g. what is going
+with moon when nobody measures its movement, but some wolf is howling on it.}
+
+The model should be able to produce answer
+to any reasonable question and explain why the question is
+unreasonable in case it fails. Such model can be constructed in two steps:
+\begin{enumerate}
+    \item determine what physical phenomena are relevant;
+        \item describe relevant phenomena with tractable mathematics. 
+\end{enumerate}
 
 Experience shows us that questions "when?" and "where?" are reasonable and the answers may be
-"here","now","far","near","before","later", \ldots . Probably it is possible to build 
+"here","now","far","near","before","later" and so on . Probably it is possible to build 
 the theory starting form these questions and answers. However there is much simpler way.
 We can claim that all phenomena exist in space (three-dimensional and euclidean) 
-and time (one-dimensional), so all terms listed before can be defined naturally.
+and time (one-dimensional, real), so all terms listed before can be defined naturally.
 Even in case when "actually" space and (or) time are discrete we can model them
 by continuous quantities (atomic structure does not prevent us from using
-continuous media approach).
+continuous media approach). Similarly we can define mass as the formal answer 
+to questions like "how much?".
 
 Space and time may be represented as independent entities (classical mechanics), as parts of 
 four-dimensional continuum (special relativity), as local chart
 of Riemannian manifold (general relativity), as some kind of projection
 of multi-dimensional object, etc. . Having space and time we can define position, velocity, acceleration  and hence the movement (evolution).
 
+
+
+\chapter{Classical Mechanics}
+\label{class-mech}
 Classical mechanics tacitly supposes that
 \begin{enumerate}
     \item we can measure time and space intervals exactly,
@@ -52,24 +77,18 @@ Classical mechanics tacitly supposes that
     \item measurements do not take space and time for themselves.
 \end{enumerate}
 
-
-Physical objects exist independently of the model chosen to describe them. They exist
-also even nobody observes or measures them.\footnote{"Moon exists even nobody looks at it".
-In other case we should investigate a number of "important problems" e.g. what is going
-with moon when nobody measures its movement, but some wolf is howling on it.}
-\chapter{Classical Mechanics}
-\label{class-mech}
 \section{Definitions}
 \label{class-mech-def}
-Here we follow  \cite{arnold-cm-r}.%\cite{arnold-cm},
 
+Here we follow  \cite{arnold-cm-r}.%\cite{arnold-cm},
+%\cite{dubrovin-novikov-fomenko}.
 There exist coordinate systems (called inertial) possessing the following two properties:
 \begin{enumerate}
     \item All the laws of nature at all moments of time are the same in all inertial coordinate systems;
     \item  All coordinate systems in uniform rectilinear motion with respect to an inertial one are themselves inertial.
 \end{enumerate}
 This is called "Galileo's principle of relativity".
-
+%\cite{maslov}
 We denote the set of all real numbers by $\mathbb{R}$. We denote by $\mathbb{R}^n$ an $n$-dimensional 
 real vector space. Affine $n$-dimensional space $\mathbb{A}^n$ is distinguished 
 from $\mathbb{R}^n$ in that there is "no fixed origin." Thus the sum of two points
@@ -164,6 +183,14 @@ Newton's equation \eqref{newton1} is  the basis of mechanics. Functions $\vec F_
 are called forces they should be determined experimentally for each specific mechanical system.
 Galilean invariance is the only restriction put on forces.
 
+Mathematics of  Cauchy problem (\ref{newton1},\ref{newton2}) 
+one can find in e.g. \cite{arnold-ode}. Generally the unique solution exists if
+all functions are smooth enough.
+
+Note that initial conditions have nothing to do with causality. In many cases we are
+interested in solution of equation \eqref{newton1} with final 
+conditions (aiming) or in finding the solution which does not 
+depend on initial conditions.
 \selectlanguage{russian}
 \printbibliography[
 heading=bibintoc,
