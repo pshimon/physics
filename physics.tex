@@ -27,14 +27,11 @@ he is already too old to solve them.}{Eugene Paul Wigner}
 \chapter{Metaphysics }
 \label {metaphysics}
 Physics is about building and investigation of abstract models  of natural phenomena.
-My favorite picture taken from \cite{strugatsky} consists of "Real World" (Reality, Nature), "Ideal world" (Model space)
-and two mapping --- "idealization" which maps "Real World" into "Ideal world" and "realization"
-mapping "Ideal world" into "Real World". 
+My favorite picture taken from \cite{strugatsky} consists of `Real World' (Reality, Nature), `Ideal world' (Model space)
+and two mapping --- `idealization' which maps Real World into Ideal world and `realization'
+mapping Ideal world into Real World. 
 
-Nature is unique and exists independently of any observer\footnote{"Moon exists even nobody looks at it".
-In other case we should investigate a number of "important problems" e.g. what is going
-with moon when nobody measures its movement, but some wolf is howling on it.}
-. Real word objects behave 
+Nature is unique and exists independently of any observer\footnote{`Moon exists even nobody looks at it' and so does electron.}. Real word objects behave 
 according to Laws of Nature and discovering of these laws is the goal of physics.
 
 Ideal world is populated by models (mainly mathematical). Elements of these models
@@ -46,29 +43,29 @@ If the model fails to produce results to be mapped, it simply makes no sense.
 
 Idealization and realization mappings are natural and normally implicit. It is
 the point of modelling after all. However some notions like causality, probability, likelihood,
-"experimental support" need special care. Let us take for example  Hempel's raven paradox: "observing
+`experimental support' need special care. Let us take for example  Hempel's raven paradox: ``observing
 objects that are neither black nor ravens may formally increase the likelihood 
-that all ravens are black". 
+that all ravens are black''. 
 
-Indeed suppose that the statement "All ravens are black" is true.
+Indeed suppose that the statement `All ravens are black' is true.
 In the form of an 
 implication, this can be expressed as: If something is a raven, then it 
 is black. Via contraposition, this statement is equivalent to: If something is 
 not black, then it is not a raven. So an observation of, say, red cow supports 
 the statement that all ravens are black. This looks very strange but actually is quite
-straightforward. In formal logic (ideal world) there is now such thing as "experimental support" or
-likelihood. Statement may be invalidated by the observation of non black raven, but can not be confirmed in any way. So contraposition means simply that the statement "raven is found which is not black" is equivalent to "something not black is found which is raven". 
+straightforward. In formal logic (ideal world) there is now such thing as experimental support or
+likelihood. Statement may be invalidated by the observation of non black raven, but can not be confirmed in any way. So contraposition means simply that the statement `raven is found which is not black' is equivalent to `something not black is found which is raven'. 
 
-On the other hand common sense (real world) does not allow statements about {\em all} ravens. We should say "majority" or "practically all" and  contraposition  disappears.
+On the other hand common sense (real world) does not allow statements about {\em all} ravens. We should say majority or practically all and  contraposition  disappears.
 
-Idealization mapping is multi-valued, realization is single-valued (but one-to-one) mapping \footnote{As V. Korneev (see \cite{strugatsky}) put it: Transfer of real object to ideal world
-is not the same as transfer of ideal object to real world.}. Physicist often uses more than one model simultaneously and change them on the fly without warning or use some conditions which were not stated explicitly. These tricks irritate mathematicians and confuse engineers. However they are natural parts of physicist's way of thinking.
+Idealization mapping is multi-valued, realization is single-valued (but not one-to-one) mapping \footnote{As V. Korneev (see \cite{strugatsky}) put it: `Transfer of real object to ideal world
+is not the same as transfer of ideal object to real world.'}. Physicist often uses more than one model simultaneously and change them on the fly without warning or use some conditions which were not stated explicitly. These tricks irritate mathematicians and confuse engineers. However they are natural parts of physicist's way of thinking.
 
 So what is wrong with standard courses of physics? I see three problems:
 \begin{enumerate}
     \item when comparing different models say quantum and classical mechanics the accent is 
         on difference but it should be on similarity and interaction;
-    \item adherence to standard (sometimes too restricting) formulation of the problems \footnote{As C. Hunta (see \cite{strugatsky}) said: "I know that solution does not exist, but I want to solve the problem.};
+    \item adherence to standard (sometimes too restricting) formulation of the problems \footnote{As C. Hunta (see \cite{strugatsky}) said: `I know that solution does not exist, but I want to solve the problem.'};
     \item too much attention to exact solutions of highly oversimplified problems and too little to computational aspects, I see theoretical and computational physics not as different disciplines but as two sides of the same physics.
 \end{enumerate}
 
@@ -78,71 +75,14 @@ Below I shall consider in details some topics in classical quantum and statistic
 
 \chapter{Classical Mechanics}
 \label{class-mech}
-Classical mechanics tacitly supposes that
-\begin{enumerate}
-    \item we can measure time and space intervals exactly,
-    \item measurements do not disturb the system,
-    \item measurements do not take space and time for themselves.
-\end{enumerate}
 
-\section{Definitions}
-\label{class-mech-def}
+\section{Newton's equations}
+\label{newton-eqs}
 
-Here we follow  \cite{arnold-cm}.There exist coordinate systems (called inertial) possessing the following two properties:
-\begin{enumerate}
-    \item All the laws of nature at all moments of time are the same in all inertial coordinate systems;
-    \item  All coordinate systems in uniform rectilinear motion with respect to an inertial one are themselves inertial.
-\end{enumerate}
-This is called "Galileo's principle of relativity".
-%\cite{maslov}
-We denote the set of all real numbers by $\mathbb{R}$. We denote by $\mathbb{R}^n$ an $n$-dimensional 
-real vector space. Affine $n$-dimensional space $\mathbb{A}^n$ is distinguished 
-from $\mathbb{R}^n$ in that there is "no fixed origin." Thus the sum of two points
-of $\mathbb{A}^n$ is not defined, but their difference is defined and is a vector in $\mathbb{R}^n$.
-The group $\mathbb{R}^n$ acts on $\mathbb{A}^n$ as the group of parallel displacements: 
-\[a \rightarrow a+b,\quad a,a+b \in \mathbb{A}^n,b\in\mathbb{R}^n\]
-
-A euclidean structure on the vector space $\mathbb{R}^n$ is a positive definite symmetric
-bilinear form called a scalar product. The scalar product enables one to
-define the distance
-\[ \rho(x,y)=||x-y||=\sqrt{(x - y,x- y)} \]
-between points of the corresponding affine space $\mathbb{A}^n$. An affine space with this
-distance function is called a euclidean space and is denoted by $\mathbb{E}^n$.
-
-The galilean space-time structure consists of the following three elements:
-\begin{enumerate}
-    \item The universe --- a four-dimensional affine \footnote{Formerly, the universe was provided not with an affine, but with a linear structure (the geocentric system + creation of the universe).} space $\mathbb{A}^4$. 
-        The points of $\mathbb{A}^4$ are called world points or events. 
-        The parallel displacements of the universe $\mathbb{A}^4$
-        constitute a vector space $\mathbb{R}^4$.
-    \item Time -—- a linear mapping $t: \mathbb{R}^4 \rightarrow \mathbb{R}$ 
-        from the vector space of parallel displacements of the 
-        universe to the real "time axis." 
-        The time interval from event $a \in \mathbb{A}^4$ 
-        to event $b \in \mathbb{A}^4$ is the number $t(b - a)$. 
-        If $t(b - a) = 0$, then the events $a$ and $b$ are called simultaneous.
-The set of events simultaneous with a given event forms a three-
-dimensional affine subspace $\mathbb{A}^3$ in $\mathbb{A}^4$. 
-        It is called a space of simultaneous events.
-The kernel of the mapping $t$ consists of those parallel displacements of
- $\mathbb{A}^4$ which take some (and therefore every) event into an event simultaneous
-with it. This kernel is a three-dimensional linear subspace $\mathbb{R}^3$ of the vector
-space $\mathbb{R}^4$.
-\item The distance between simultaneous events
-    \[\rho(a, b) = ||a - b|| =\sqrt{(a - b,a - b)}\qquad a,b \in \mathbb{A}^3 \]
-is given by a scalar product on the space $\mathbb{R}^3$. This distance makes every
-space of simultaneous events into a three-dimensional euclidean space $\mathbb{E}^3$.
-\end{enumerate}
-
-A space $\mathbb{A}^4$, equipped with a galilean space-time structure, is called a
-galilean space. The galilean group is the group of all transformations of a galilean space
-which preserve its structure. The elements of this group are called galilean
-transformations. Thus, galilean transformations are affine transformations
-of $\mathbb{A}^4$ which preserve intervals of time and the distance between simultaneous
-events. All galilean spaces are isomorphic to the coordinate space $\mathbb{R} \times \mathbb{R}^3$.
-
-Every galilean transformation of  coordinate space $\mathbb{R} \times \mathbb{R}^3$
-can be written in a unique way as the composition of a rotation, a translation,
+Classical mechanics considers  space to be three-dimensional  and euclidean $\mathbb{R}^3$ and time 
+to be one-dimensional $\mathbb{T}$. Let us call the space $\mathbb{T} \times \mathbb{R}^3$ the (galilean) universe. 
+ The  group of galilean transformations acts on universe \cite{arnold-cm}. 
+Every galilean transformation can be written in a unique way as the composition of a rotation, a translation,
 and a uniform motion ($g = g_1 \circ g_2 \circ g_3$), where
 \[g_1(t,\vec x)=(t,\vec x+\vec v t)\qquad \forall t\in \mathbb{R},\vec x \in\mathbb{R}^3\] is uniform motion with velocity $\vec v \in\mathbb{R}^3$,
 \[g_2(t,\vec x)=(t+t_0,\vec x+\vec x_0)\qquad \forall t\in \mathbb{R},\vec x \in\mathbb{R}^3\] is translation of the origin, and
@@ -150,28 +90,24 @@ and a uniform motion ($g = g_1 \circ g_2 \circ g_3$), where
 
 Let $M$ be a set. A one-to-one correspondence 
 \[\phi_1: M \rightarrow \mathbb{R} \times \mathbb{R}^3\]
-is called a galilean coordinate system on the set $M$. A coordinate system $\phi_2$ moves
+is called a galilean (inertial) coordinate system on the set $M$. A coordinate system $\phi_2$ moves
 uniformly with respect to $\phi_1$  if $\phi_1\circ\phi_2^{-1}$ is a galilean
-transformation. The galilean coordinate systems $\phi_2$ and $\phi_1$ give M the same
-galilean structure.
+transformation. 
 
-A motion in $\mathbb{R}^n$ is a differentiable mapping 
-$x: \mathbb{I}\rightarrow \mathbb{R}^n, \mathbb{I} \subset \mathbb{R}$.
+Inertial coordinate systems  possess the following two properties :
+\begin{enumerate}
+    \item All the laws of nature at all moments of time are the same in all inertial coordinate systems;
+    \item  All coordinate systems in uniform rectilinear motion with respect to an inertial one are themselves inertial.
+\end{enumerate}
+This is called `Galileo's principle of relativity'.
 
-The derivative $\dot{x}(t_0)=\frac{dx}{dt}|_{t=t_0}$ is called the velocity vector. 
-The second derivative $\ddot{x}(t_0)=\frac{d^2x}{dt^2}|_{t=t_0}$ is called the acceleration vector.
-We will assume that the functions we encounter are continuously 
-differentiable as many times as necessary.
+The simplest object of classical mechanics is point mass (particle) i.e. object whose shape, sizes and internal structure are inessential, so mass (positive scalar $m$) is the only parameter. The state of a particle is fully determined by position ($\vec x \in\mathbb{R}^3$) and velocity ($\vec v \in\mathbb{R}^3$). More accurately: A motion in $\mathbb{R}^n$ is a differentiable mapping 
+$\vec x: \mathbb{I}\rightarrow \mathbb{R}^3, \mathbb{I} \subset \mathbb{R}$. The derivative $\dot \vec{x}(t_0)=\frac{d\vec x}{dt}|_{t=t_0}$ is called the velocity vector. The derivative $\ddot \vec x(t_0)=\frac{ d^2 \vec x}{dt^2}|_{t=t_0}$ is called the acceleration vector. The image of motion (curve in $\mathbb{R}^3$) called trajectory and  curve in $\mathbb{T} \times \mathbb{R}^3$ which appears  as the graph of a motion, is called a world line.
 
-The image of motion (curve in $\mathbb{R}^n$) called trajectory and  curve in galilean space which appears in some (and therefore every) galilean coordinate system as the graph of a motion, is called a world line.
-\section{Newton's equations}
-\label{newton-eqs}
-Newtonian mechanics studies the motion of a system of point masses (i.e. particles whose
-shapes and sizes are inessential, so mass is the only parameter) in three-dimensional euclidean space. 
 The initial state of a mechanical system (the totality of positions and
 velocities of its points at some moment of time) uniquely determines all of
 its motion. In particular, the initial positions and velocities determine the accelerations.
-This is called "Newton's principle of determinacy".
+This is called `Newton's principle of determinacy'.
 
 Let us consider the mechanical system consisting of $n$ particles 
 with masses $m_j,j=1\ldots n$ and word lines $\vec x_j(t)$.
@@ -186,17 +122,36 @@ and initial conditions
     \vec x_j(t_0)=\vec y_j\quad\dot \vec x_j(t_0)=\vec v_j  \quad j=1\ldots n \label {newton2}
 \end{equation}
 Newton's equation \eqref{newton1} is  the basis of mechanics. Functions $\vec F_j$
-are called forces they should be determined experimentally for each specific mechanical system.
-Galilean invariance is the only restriction put on forces.
+are called forces they should be determined  for each specific mechanical system. If our system
+is isolated i.e. includes explicitly all interacting particles, then galilean invariance puts some restrictions on forces.
+
+Actually in most cases it is more convenient to write
+\eqref{newton1} as a system of first order equations. 
+To do so we should express the  velocity vector explicitly.
 
 Mathematics of  Cauchy problem (\ref{newton1},\ref{newton2}) 
 one can find in e.g. \cite{arnold-ode}. Generally the unique solution exists if
-all functions are smooth enough.
+all functions are smooth enough. However such conditions may be violated in physically
+important cases.
 
 Note that initial conditions have nothing to do with causality. In many cases we are
 interested in solution of equation \eqref{newton1} with final 
 conditions (aiming) or in finding the solution which does not 
 depend on initial conditions.
+
+\section{Foundations}
+\label{cm-foundations}
+
+
+Classical mechanics tacitly supposes that
+\begin{enumerate}
+    \item we can measure time and space intervals exactly,
+    \item measurements do not disturb the system,
+    \item measurements do not take space and time for themselves.
+\end{enumerate}
+
+
+
 
 
 
