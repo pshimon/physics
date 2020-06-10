@@ -131,24 +131,36 @@ To do so we should express the  velocity vector explicitly.
 
 Mathematics of  Cauchy problem (\ref{newton1},\ref{newton2}) 
 one can find in e.g. \cite{arnold-ode}. Generally the unique solution exists if
-all functions are smooth enough. However such conditions may be violated in physically
-important cases.
+all functions are smooth enough. However smoothness may be violated in physically
+important cases, anyway functions $x_j(t)$ should be continuous, $\vec v_j(t)$ may
+have finite jumps as a results of strong force acting for very short time (e.g. 
+elastic collision).
 
 Note that initial conditions have nothing to do with causality. In many cases we are
 interested in solution of equation \eqref{newton1} with final 
 conditions (aiming) or in finding the solution which does not 
-depend on initial conditions.
+depend on initial conditions. Very important variational problem when
+conditions are set at two different times may have more than one solutions
+or no solutions at all.
 
 \section{Foundations}
 \label{cm-foundations}
+\subsection{Global Simultaneity}
+Time is universal and global in classical mechanics. State of the system is determined by
+positions and velocities at fixed time. Every particle has its own coordinates however time
+is common. We can always measure time  exactly and instantly without any influence 
+on mechanical systems. Time is continuous, discrete time would lead to finite difference
+equations instead of differential ones. So dynamics would be undefined, since one always can
+add periodical function to solution.
 
+\subsection{Instant Interaction}
+All interactions are instant i.e. depend on particle states at one and the same moment of time.
+In particular it means that all accelerations and hence evolution is determined by one state (not necessary initial one). It is possible to think that any interaction takes small but finite period of time. This supposition will lead to functional equations instead of differential ones.
 
-Classical mechanics tacitly supposes that
-\begin{enumerate}
-    \item we can measure time and space intervals exactly,
-    \item measurements do not disturb the system,
-    \item measurements do not take space and time for themselves.
-\end{enumerate}
+\subsection{Exactness}
+We can find out and set up exact value of any variable at any time instantly without disturbing
+the system in any way. In particular we can set exactly positions and velocities which means 
+among other things that space is continuous.
 
 
 
