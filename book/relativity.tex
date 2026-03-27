@@ -1,0 +1,314 @@
+% content of the chapter relativity
+\chapter{Relativity}
+\label{relativity}
+
+Prior to 1905, physics was dominated by Newtonian mechanics and Maxwell’s 
+equations of electromagnetism. However, a conflict existed between 
+the two. Newtonian physics allowed for infinite speeds, while Maxwell’s 
+equations suggested that light travels at a fixed speed, $c$.
+The "luminiferous aether" --- a hypothetical medium thought to carry 
+light wave --- was proposed to resolve this, but the famous Michelson-Morley
+experiment failed to detect it. Albert Einstein resolved this paradox 
+not by fixing the old theories, but by reinventing the definitions of space and time.
+
+Special Relativity  is built upon two deceptively simple postulates:
+\begin{description}
+    \item [The Principle of Relativity] 
+       The laws of physics are the same in all inertial frames of reference.
+   \item[The Constancy of the Speed of Light] 
+       The speed of light in a vacuum ($c \approx 3.00 \times 10^8$ m/s) is constant for all observers, regardless of the motion of the light source or the observer.
+\end{description}
+
+If the speed of light must remain constant, then space and time must be flexible to accommodate it.
+\begin{description}
+    \item[Time Dilation] Time is not absolute. A moving clock ticks more slowly than a stationary clock. As an object approaches the speed of light, time slows down significantly relative to a stationary observer.
+ \item[Length Contraction] Objects moving at relativistic speeds appear shorter along the direction of motion to a stationary observer.
+ \item[Mass-Energy Equivalence] 
+    $E = mc^2$
+    This implies that a small amount of mass can be converted into a tremendous amount of energy, the principle behind nuclear power and stars.
+\end{description}
+General relativity adds time dilation due to gravity to this list.
+
+There is solid  experimental evidence in favor of relativity, both 
+from specially designed physical experiments and the facts of everyday life.
+The Global Positioning System (GPS) is a daily application of relativity.
+ Satellites move fast ($\approx 14,000$ km/h), causing their clocks to tick {\em slower} by 7 microseconds per day according to Special Relativity.
+ Satellites are far from Earth's mass (weaker gravity), causing their clocks to tick {\em faster} by 45 microseconds per day according to General Relativity.
+Without correcting for this net difference of 38 microseconds daily, GPS accuracy would drift by kilometers every day, rendering the system useless.
+
+The conventional wisdom that classical mechanics is recovered from relativity 
+when $v/c \ll 1$ is deeply entrenched in the physics literature. Textbooks 
+frequently state that Newtonian formulas emerge by taking the first terms in 
+a Taylor expansion of relativistic expressions, or by taking the limit $c \to \infty$.
+While such approximations correctly reproduce certain numerical results 
+(for one particle), they do not recover the {\em classical mechanics}.
+The absence of absolute simultaneity, the lack of global time, incompatibility 
+of instantaneous constraints, and the necessity of fields for 
+interactions signal a profound structural divergence.
+
+Newtonian mechanics requires a global time parameter shared by all 
+degrees of freedom. This time orders events, defines simultaneity, 
+and underlies the Hamiltonian formulation. Phase space trajectories 
+evolve with respect to a universal time coordinate. The Newtonian $N$-particle 
+configuration space $\mathbb{R}^{3N}$ is defined on simultaneous positions of all particles.
+
+Rigid bodies in classical mechanics require instantaneous constraint 
+enforcement and a notion of shape preserved by all inertial observers. 
+These presuppose global simultaneity. In relativity, Born rigidity 
+is possible only under highly restricted motions and cannot be maintained 
+for general accelerations. Constraint forces propagate at finite speed, 
+so multi-point instantaneous constraints are prohibited.
+
+Constraints defining rigid links, rods, joints, or holonomic relations 
+are not relativistically admissible, except as approximations mediated 
+through elastic or electromagnetic fields with finite propagation speed. 
+The configuration spaces associated with classical mechanical systems 
+(e.g., rigid rotors, articulated bodies) have no relativistic analogue.
+
+The famous no-interaction theorem (\cite{cjs-no-int},\cite{leutwyler}) 
+demonstrates that a system of finitely many relativistic particles 
+cannot interact through potentials if one demands Poincar'e invariance 
+and a single time parameter. Nontrivial interactions require fields. 
+Thus classical particle mechanics with inter particle forces has no relativistic extension.
+
+This result explains the structural collapse of the Newtonian 
+$N$-body problem in relativity. The notion of an instantaneous 
+force depending on simultaneous positions is meaningless. 
+Relativity allows only local interactions mediated by fields or 
+direct interactions (collisions).
+
+One might hope that classical continuum mechanics survives relativity 
+even if rigid bodies do not. However, relativistic continuum mechanics 
+is fundamentally different from its Newtonian counterpart. 
+A relativistic continuum is defined by a stress--energy tensor $T^{ij}$ 
+satisfying local conservation laws. There is no concept of a 
+perfectly rigid body, and the equations of state must respect causality.
+
+In Newtonian continuum mechanics, pressure and stress can adjust 
+instantaneously across the medium. In relativity, signals propagate 
+at finite speed, invalidating classical constitutive relations. 
+The Newtonian limit of relativistic continua yields compressible, 
+not rigid, media. The structural assumptions are thus incompatible.
+
+Given the collapse of constraints, multi-particle structure, 
+and continuum rigidity, the only part of classical mechanics 
+that survives intact in relativity is the motion of a single 
+particle under an external electromagnetic field. 
+The Lorentz force law is compatible with Minkowski geometry and 
+requires no global time. Maxwell's equations provide the necessary field mediation.
+Everything else---interacting particles, rigid bodies, 
+constrained systems, Newtonian continua---is not contained within relativity.
+
+Classical mechanics is not a limit case of relativity. 
+These are two different models of reality with one particle
+problems as common domain and they should cooperate for
+physical problems. It is not uncommon that only part of
+the system is relativistic, e.g. fast electrons may
+interact with slow ions. Besides that for most physical
+problems {\em there is} natural frame, the most convenient
+for analysis.
+
+\section{Special Relativity}
+\label{special-relativity}
+
+\subsection{Relativistic particle}
+\label {relativistic-particle}
+
+ Lagrangian function for relativistic
+particle in electromagnetic field can be written as
+\cite{Landau-Lifshitz-2},\cite{Goldstein}:
+\begin{equation}
+   \label {lagr-3d}
+   L=-m c^2 \sqrt{1-\frac{v^2}{c^2}} - e \phi + \frac{e}{c} \vec A \vec v
+\end{equation}
+So canonical moment $ \vec P = \partial L/\partial \vec v $ is
+\begin{equation}
+   \label {mon-3d}
+    \vec P=\frac{m \vec v}{\sqrt{1-\frac{v^2}{c^2}}} +\frac{e}{c} \vec A 
+\end{equation}
+and Hamiltonian is
+\begin{equation}
+   \label {ham-3d}
+    H=\sqrt{m^2 c^4+c^2 (\vec P -\frac{e}{c} \vec A)^2} +e \phi
+\end{equation}
+and equation of motion are
+\begin{equation}
+   \label {eqm-3d}
+   \frac{d \vec P}{d t}=e \vec E + \frac{e}{c} \vec v \times \vec B
+\end{equation}
+
+\subsection{Minkowski spacetime}
+\label {minkowski-spacetime}
+Newtonian mechanics is inseparable from Galilean spacetime,
+which possesses
+absolute time and Euclidean space. The geometry consists of a 
+three-dimensional spatial manifold evolving in a universal time $t$.
+Simultaneity is observer-independent. The symmetry group is 
+the Galilei group, comprising translations,rotations and Galilei boost
+(see Chapter \ref{class-mech}):
+\begin{equation}
+   \label {gal-boost}
+   \begin{split}
+       t' &= t \\
+       \vec x' &= \vec x -\vec v t
+   \end{split}
+\end{equation}
+
+In contrast, special relativity is formulated in Minkowski spacetime (see \ref{me-cov})
+ and the symmetry group is the Poincare group, consisting of
+ inhomogeneous linear transformations preserving metric \eqref{minkg}, which also
+ contains translations and rotations, but Lorenz boost
+ \begin{equation}
+    \label {lor-boost}
+    \begin{split}
+        t' &= \gamma (t-\frac{\vec v \vec x}{c^2}) \\
+        \vec x' &= \vec x + \frac{(\gamma -1)}{v^2} (\vec v \cdot \vec x) \vec v-\gamma \vec v t  \\
+        \gamma &= \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}
+    \end{split}
+ \end{equation}
+ replaces Galilean one.
+
+Points in that manifold are called events. Taking arbitrary 
+event as the origin one can see that
+The separation between events (square of invariant interval) 
+\begin{equation}
+   \label {interval}
+    s^2=c^2 t^2-|\vec x|^2
+\end{equation}
+may be timelike ($s>0$), lightlike ($s=0$) or spacelike ($s<0$).
+So when the origin in Minkowski space is fixed, it is divided into
+five regions: future ($ s>0 $ $ t>0 $), cone ($ s>0 $ $ t<0 $),
+future light cone ($ s=0 $ $ t>0 $), past light cone ($ s=0 $ $ t<0 $)
+and elsewhere ($ s<0 $).
+
+The limit $c \to \infty$ is often said to make \eqref{gal-boost} 
+from \eqref{lor-boost} 
+and collapse the light cones and elsewhere 
+into a spatial hyperplane $ t=0 $ --- now. However this limit
+does not exists in any mathematical sense. 
+
+There are three types of vectors in Minkowski space,
+a vector $v^i$ is timelike if $g(v,v)= g_{ij} v^i v^j=v_i v^i>0$,
+lightlike if $v_i v^i=0$ and spacelike if $v_i v^i<0$
+Note that for pair of orthogonal vectors only two possibilities exist:
+one of them is timelike another is spacelike, or both are lightlike.
+
+
+It is often said that relativity makes time and space coordinate equal. 
+This is plain wrong,
+time is not at the least equal to space position, beside difference in sign there is fundamental contrast: we can always stop the particle so
+that is coordinates $ \vec x=0 $ but we can not stop time flow. The only documented case \footnote {
+Joshua 10:12-14
+Then spake Joshua to the LORD in the day when the LORD delivered 
+up the Amorites before the children of Israel, and he said in the 
+sight of Israel, Sun, stand thou still upon Gibeon; and thou, 
+Moon, in the valley of Ajalon.
+And the sun stood still, and the moon stayed, until the people 
+had avenged themselves upon their enemies. Is not this written 
+in the book of Jasher? So the sun stood still in the midst of heaven,
+and hasted not to go down about a whole day.} 
+raises doubts about its authenticity.
+
+Any  particle of positive mass has its worldline $x^i(s)$ a curve in $M$ 
+with timelike tangent vector. Curves with lightlike tangent vector 
+correspond to zero mass objects --- light rays, for example.  
+
+Parameter $ s $ may be arbitrary, for timelike curves we choose it to be the
+length of the curve.
+\begin{equation}
+   \label {int4}
+   ds^2=c^2 dt^2-(dx^2+dy^2+dz^2)
+\end{equation}
+$ d \tau = ds/c $ is called proper time.
+We define four-velocity $u^i = \frac{dx^i}{ds}$.
+\begin{equation}
+   \label {vel4}
+    u^i=(\gamma,\gamma \vec v/c)
+\end{equation}
+Note that 
+\begin{equation}
+   \label {4vnorm}
+u_i u^i=1
+\end{equation} 
+Four-acceleration is defined as 
+\begin{equation}
+   \label {4acc}
+ w^i = \frac{du^i}{ds}  
+\end{equation}
+From \eqref{4vnorm} we see that $ u_i w^i=0 $.
+
+Four-momentum is defined as $p^i = m c u^i$,hence $ p^i p_i = m^2 c^2$.
+Dynamics is encoded by the equation $\frac{dp^i}{d\tau} = f^i$, note that $ u_i f^i = 0$ (mass-shell preservation).
+
+We can formally expand Principle of Least Action on relativity. Luck of global time 
+deprives state of the system in fixed time from any physical sense so limits of integration
+become undefined. Nevertheless it remains good way of defining equation of motion.
+
+Covariant action my be written as  
+\begin{equation}
+   \label {act-1}
+    S_1=-m c \int (\sqrt{g_{i j} d x^i d x^j}  - \frac{e}{c} A_i d x^i)
+\end{equation}
+it is evidently independent of parametrization of the worldline. 
+Let $ \dot x^i (\lambda)=d x^i / d \lambda $, $ \lambda $ is 
+arbitrary. So Lagrangian is:
+\begin{equation}
+   \label {lag-1}
+    L_1=-m c \sqrt{g_{i j} \dot x^i \dot x^j} -\frac{e}{c} A_i \dot x^i
+\end{equation}
+momentum 
+\begin{equation}
+   \label {mom-1}
+   P_i = -m c \frac{\dot x_i}{\sqrt{\dot x^l \dot x_l}} -\frac{e}{c} A_i
+\end{equation}
+and equations of motion are
+\begin{equation}
+   \label {eqm-1}
+    m c \frac{\ddot x_j}{\sqrt{\dot x^l \dot x_l}} (\delta_i^j -
+    \frac{\dot x^i \dot x_j}{\dot x^l \dot x_l}) = \frac{e}{c} F_{j i} \dot x^i
+\end{equation}
+The equation \eqref{eqm-1} does not include longitudinal component of 
+4-velocity. If we choose it to satisfy \eqref{4vnorm} (i.e. use natural
+parametrisation we get:
+\begin{equation}
+   \label {eqm-2}
+    m c w_j = \frac{e}{c} F_{j i} u^i
+\end{equation}
+which corresponds to momenta:
+\begin{equation}
+   \label {mom-2}
+   P_i = -m c  u_i -\frac{e}{c} A_i
+\end{equation}
+and Lagrangian:
+\begin{equation}
+   \label {lag-2}
+    L_2=- \frac{m c}{2} g_{i j} \dot x^i \dot x^j -\frac{e}{c} A_i \dot x^i
+\end{equation}
+We ignore restriction \eqref{4vnorm} calculating variation of action. 
+Though it often said that \eqref{4vnorm} is constraint it is not
+actually, it is constant of motion and should be added to \eqref{eqm-2}
+as restriction on initial conditions, to provide physically meaningful
+solutions. The same situation exactly as with Lorenz gauge for wave
+equation \eqref{me-potc}.
+
+\section{General Relativity}
+\label{general_relativity}
+Special Relativity had a major limitation: it did not account 
+for acceleration or gravity. After a decade of struggle, 
+Einstein published General Relativity, which redefined 
+gravity not as a force, but as the curvature of spacetime.
+
+Newton viewed gravity as a force pulling objects together. 
+Einstein viewed it as geometry. Massive objects (like the Sun) 
+warp the four-dimensional fabric of spacetime 
+(three dimensions of space + one dimension of time).
+"Matter tells space how to curve; space tells matter how to move."(John Archibald Wheeler).
+
+Planets do not orbit the Sun because the Sun pulls them; 
+they orbit because they are following the straightest possible path 
+(a geodesic) along the curved surface of spacetime created by the Sun's mass.
+Actually general relativity gives only small corrections even 
+at Solar system scale it is probably the most beautiful theory but too
+complicated to be considered here. 
+
+

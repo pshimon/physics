@@ -1,0 +1,33 @@
+\documentclass[russian,english]{book}            
+\input{packages.tex}
+\defaultfontfeatures{Ligatures={TeX}} 
+\setmainfont{DejaVu Serif} 
+\setsansfont{DejaVu Sans} 
+\setmonofont{DejaVu Sans Mono} 
+\addbibresource{rop.bib}
+
+\title{Размышления о физике}
+\author{Семён Панфиль}
+
+
+\begin{document}  
+
+\maketitle
+
+\frontmatter
+\include{preface-r}
+\tableofcontents                        
+
+\mainmatter
+\include{metaphysics-r}
+%\include{models}
+%\include{class-mech}
+
+\backmatter
+\printbibliography[
+heading=bibintoc,
+title={References}
+] 
+
+\clearpage
+\end{document}

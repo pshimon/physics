@@ -1,0 +1,302 @@
+%content of the chapter classical electrodynamics
+\chapter{Classical Electrodynamics}
+\label{class-ed}
+\section{Microscopic Maxwell Equations}
+\label{micro-maxwell-eqs}
+
+Omitting the long history of misconceptions and discoveries, 
+one may say that, in addition to mass, particles may possess 
+electric charge. Like mass, it is a scalar quantity, but unlike mass, 
+charge may be positive, negative, or zero.
+To describe the interaction of charged particles, 
+it is necessary to introduce a new entity --- the electromagnetic field $ (\vec E(\vec r,t),\vec B(\vec r,t)) $.
+
+The motion of  particle with charge $ e $ is described by Lorentz force
+\begin{equation}
+   \label {lorentz-force}
+   \frac{d \vec p}{d t}=e \vec E(\vec r,t) + \frac{e}{c}\vec v \times \vec B(\vec r,t)
+\end{equation}
+Dynamics of electromagnetic field is described   Maxwell’s equations:
+\begin{align}
+\nabla \times \vec{E} + \frac{1}{c}\frac{\partial \vec{B}}{\partial t} &= 0, \label{me-faraday} \\
+\nabla \cdot \vec{B} &= 0, \label{me-monopole} \\
+\nabla \cdot \vec{E} &= 4\pi \rho, \label{me-gauss} \\
+\nabla \times \vec{B} - \frac{1}{c}\frac{\partial \vec{E}}{\partial t} &= \frac{4\pi}{c}\vec{j}. \label{me-ampere}
+\end{align}
+Here 
+\begin{equation}
+   \label {dens1}
+    \rho(\vec r,t)=\Sigma_a e_a \delta (\vec r-\vec r_a)
+\end{equation}
+and
+\begin{equation}
+   \label {curr1}
+    \vec j(\vec r,t)=\Sigma_a e_a \vec v_a \delta (\vec r-\vec r_a)
+\end{equation}
+It is important to know that $ \delta $-function is actually not a function, but distribution
+--- linear functional on the space of test functions. It is very useful in linear problems
+but makes a lot of troubles in non-linear ones.
+
+Taking the divergence of \eqref{me-ampere} and using \eqref{me-gauss} yields the continuity equation:
+\begin{equation}
+    \label{cont}
+\partial_t \rho + \nabla \cdot \vec{j} = 0,
+\end{equation}
+demonstrating that charge conservation is not an independent 
+postulate but a structural consequence of Maxwell’s equations.
+In particular \eqref{dens1} and \eqref{curr1} satisfy \eqref{cont}.
+
+\section{Maxwell Equations in Media}
+\label{maxwell-eqs}
+
+
+In media we can somehow divide charges and currents into two groups: 
+bound ones which belong to media and free ones.
+Bound charges can be expressed as
+\begin{equation}
+   \label {bound-charge}
+   \rho_b=-\nabla \vec P
+\end{equation}
+where $ \vec P $  (polarization) is the dipole moment of unit volume
+\begin{equation}
+   \label {bound-current}
+   \vec j_b =\frac{\partial \vec P}{\partial t}+ c \nabla \times \vec M
+\end{equation}
+where $ \vec M$ (magnetization) is the magnetic dipole moment of unit volume.
+
+Thus macroscopic (averaged) charge and current densities become
+\begin{equation}
+   \label {tot-cur-ch}
+   \vec j=\vec j_f+ \vec j_b \qquad \rho=\rho_f+\rho_b
+\end{equation}
+and macroscopic Maxwell equations read:
+\begin{align}
+    \nabla \cdot \vec{E} &= 4\pi (\rho_f -\nabla \vec P), \label{me-g1} \\
+    \nabla \times \vec{B} - \frac{1}{c}\frac{\partial \vec{E}}{\partial t} &= 
+    \frac{4\pi}{c}(\vec j_f+\frac{\partial \vec P}{\partial t}+ c \nabla \times \vec M). \label{me-a1}
+\end{align}
+or:
+\begin{align}
+    \nabla \cdot \vec D &= 4\pi \rho_f , \label{me-g2} \\
+    \nabla \times \vec H - \frac{1}{c}\frac{\partial \vec D}{\partial t} &= \frac{4\pi}{c}\vec j_f . \label{me-a2}
+\end{align}
+Here $ \vec D = \vec E+4 \pi \vec P $ and $ \vec H = \vec E-4 \pi \vec M $.
+In equations \eqref{me-g2} and \eqref{me-a2} $ \rho $ and $ \vec j $ are supposed to be smooth
+functions as a result of averaging of \eqref{dens1} and \eqref{curr1}.
+Homogeneous equations \eqref{me-faraday} and \eqref{me-monopole} remain the same.  
+
+Some information about media should be added to make Maxwell
+equations solvable. Usually it is done by introducing constitutive
+relations and generalized Ohm's law which define somehow 
+$ \vec H $ , $ \vec D $ and $ \vec j $ in terms of 
+$ \vec E $ and $ \vec B $. A lot of interesting physics
+is contained in specific form of these relations.
+
+\section{Gauge Transformations}
+\label{gauge-transformations}
+
+It is convenient to introduce scalar $\phi$ and vector $\vec A$ such that
+\begin{equation}
+   \label {potA}
+   \vec B = \nabla \times \vec A \quad \vec E = -\frac{1}{c} \frac{\partial \vec A}{\partial t} - \nabla \phi
+\end{equation}
+so the equations \eqref{me-monopole} and \eqref{me-faraday} become identities, remaining equations will
+take the form
+\begin{equation}
+   \label {me-pot}
+   \begin{split}
+       \Box \vec A + \nabla ( \nabla \cdot \vec A+ \frac{1}{c} \dot \phi) &= \frac{4 \pi}{c} \vec j \\
+       \Box \phi -\frac{1}{c} \frac{\partial}{\partial t}( \nabla \cdot \vec A+ \frac{1}{c} \dot \phi) & = 4 \pi \rho
+   \end{split}
+\end{equation}
+Here $ \Box $ is d'alambert operator defined as \[  \frac{1}{c^2} \frac{\partial^2}{\partial t^2}-\nabla^2 \]
+
+Equations \eqref{potA} do not define potentials uniquely, gauge transformation: 
+\begin{equation}
+   \label {gauge-transformation}
+   \begin{split}
+       \vec A &\rightarrow \vec A+ \nabla \chi \\
+       \phi & \rightarrow \phi - \dot \chi /c
+   \end{split}
+\end{equation}
+ where $ \chi  $ is arbitrary leaves fields $ \vec B $
+and $ \vec E $ unchanged. So we can prescribe additional
+condition (gauge) on potentials.
+
+If we prescribe the condition :
+\begin{equation}
+   \label {lg}
+    \nabla \cdot \vec A+ \frac{1}{c} \dot \phi=0
+\end{equation}
+which is evidently compatible with \eqref{cont} equations \eqref{me-pot} separate and read:
+\begin{equation}
+   \label {me-pot-lg}
+   \begin{split}
+       \Box \vec A &= -\frac{4 \pi}{c} \vec j \\
+       \Box \phi  & = -4 \pi \rho
+   \end{split}
+\end{equation}
+
+
+The Lorenz gauge \eqref{lg} is the most popular one, it
+allows us to uncouple equations \eqref{me-pot-lg}   so that the scalar and vector
+potentials are described by symmetrical uncoupled wave equations,
+which is a characteristic of this gauge. 
+%It is the only covariant gauge.
+However even Lorenz condition leaves some arbitrariness: $ \chi \rightarrow \chi + \psi $ 
+ in \eqref{gauge-transformation} changes nothing if $ \Box \psi=0 $.
+
+A less popular gauge in textbooks is the Coulomb gauge.
+\begin{equation}
+   \label {cg}
+   \nabla \cdot \vec A=0
+\end{equation}
+In this gauge the scalar potential satisfies an instantaneous
+Poisson equation, which is a peculiar characteristic of this
+gauge.
+A number of other gauges was studied in \cite{heras}:
+Kirchhoff gauge:
+\begin{equation}
+   \label {kg}
+    \nabla \cdot \vec A- \frac{1}{c} \dot \phi=0
+\end{equation}
+which can be seen as Lorenz gauge in Euclidean 4-space.
+Velocity gauge:
+\begin{equation}
+   \label {vg}
+    \nabla \cdot \vec A- \frac{1}{v} \dot \phi=0
+\end{equation}
+The velocity gauge is one in which the scalar
+potential propagates with an arbitrary speed. This gauge is
+not well known despite the fact that it was proposed several
+years ago. The v-gauge is really a family of gauges that
+contains the Lorenz and Coulomb gauges as particular cases
+and also includes the Kirchhoff gauge.
+
+Temporal gauge:
+\begin{equation}
+   \label {tg}
+   \phi=0
+\end{equation}
+ The temporal gauge is one in which 
+the scalar potential is identically zero, which means that 
+the electric and magnetic fields are defined 
+only by the vector potential.
+
+It is shown in \cite{heras} that  all these  potentials yield the 
+same  retarded
+electric and magnetic fields. 
+
+\section {Covariant Form of Maxwell Equations}
+\label{me-cov}
+
+Introducing (formally) fourth coordinate $ x^0=c t $ we can define
+ Minkowski space as  the manifold $M \cong \mathbb{R}^4$ 
+equipped with the  metric
+\begin{equation}
+   \label {minkg}
+    g_{i j} = g^{i j}=\mathrm{diag}(1,-1,-1,-1).
+\end{equation} 
+The meaning of it will be discussed later, meanwhile
+it is used only to simplify notations. So
+\begin{align}
+    x^i&=(ct,\vec x) \label{x4} \\
+    A^i&=(\phi,\vec A) \label{a4}\\
+    j^i&=(c \rho, \vec j) \label{j4}\\
+    \partial_i&= \frac{\partial}{\partial x^i} \label{d4}
+\end{align}
+So $ \Box=g^{i k} \partial_i \partial_k $ 
+Lorenz gauge \eqref{lg} reads:
+\begin{equation}
+   \label {lgc}
+   \partial_i A^i=0
+\end{equation} 
+ continuity equation \eqref{cont} becomes
+\begin{equation}
+   \label {contc}
+   \partial_i j^i=0
+\end{equation} 
+and Maxwell equations \eqref{me-pot} take the form:
+\begin{equation}
+   \label {me-potc}
+    \Box A^i= \frac{4 \pi}{c} j^i
+\end{equation}
+
+The fields $ (\vec E,\vec B) $ in covariant formalism
+become parts of antisymmetric tensor of second rank:
+\begin{equation}
+   \label {ebc}
+    F_{i k}=\partial_i A_k-\partial_k A_i
+\end{equation}
+where $ A_k=g_{k i} A^i=(\phi,-\vec A) $ so equations \eqref{me-gauss}
+and \eqref{me-ampere} take the form
+\begin{equation}
+   \label {mec}
+    \partial_k F^{i k}=-\frac{4 \pi}{c} j^k
+\end{equation}
+
+One can easily see that Maxwell equations save their form
+under linear transformations preserving metric \eqref{minkg}.
+However Galilean transformations change them, in particular
+the velocity of light does not depend on inertial frame of
+reference, which contradicts the rule of adding velocities.
+
+
+It is often stated that the fields $ (\vec E,\vec B) $ or
+$ F_{i k} $ are the physical variables and potentials
+$A^i$ have no physical meaning. This statement based
+on fact that potentials $ A^i $ are not gauge invariant.
+However with argument is not sound, following this logic
+we must declare canonical momenta as not physical since
+it  is also not gauge invariant (see section \ref{gauge-invariance}).
+In both cases there is specific gauge which gives direct physical
+meaning, it is Lorenz gauge in case of potentials and
+zero total derivative in Lagrangian in case of momenta.
+
+\section{Lagrangian for Electromagnetic Field}
+\label{lag-em}
+
+Electromagnetic field is an example of continuous system, where
+dynamic variables depend not only on $ t $ but also on $ \vec x $.
+Such systems may be seen as infinite set of "usual" variables, so
+that dependence on $ \vec x $ is a generalisation of index, numbering
+"particles". Another (and I think more reasonable) approach is to
+consider any component of the  field as as degree of freedom depending
+on multidimensional "time".
+
+Anyway Lagrange function is represented as space integral of 
+Lagrange density and action becomes 4-dimensional integral.
+
+Equations \eqref{mec} follow from action integral
+\begin{equation}
+   \label {em-ac-1}
+    S_1=-\frac{1}{c^2} \int A_i j^i d^4 x-\frac{1}{16 \pi c} \int F_{ik} F^{ik} d^4 x
+\end{equation}
+and equations \eqref{me-potc} can be obtained from
+action
+Equations \eqref{mec} follow from action integral
+\begin{equation}
+   \label {em-ac-2}
+    S_2=-\frac{1}{c^2} \int A_i j^i d^4 x-\frac{1}{8 \pi c} \int \partial_i A^k \partial^i A_k d^4 x 
+\end{equation}
+here potential $ A^i $ should be in Lorenz gauge \eqref{lgc}.
+
+\section{Physics of Electromagnetic Field}
+\label{phys-em}
+
+
+Any solution of wave equation may be represented as linear combination of specific
+solution of inhomogeneous equation and general solution of homogeneous one:
+\begin{equation}
+   \label {we-sol}
+    A_i(x)=\int G_{ik}(x,y)j^k(y) d^4 y +A_i^{free} (x)
+\end{equation}
+where $  G_{ik}(x,y)$ is a Green's function.
+On the other hand potential determines the motion of charges by Lorentz force \eqref{lorentz-force}
+and hence currents. Generally the self-consistent problem can not be solved,
+it can not be even correctly posed. 
+
+
+
+
+

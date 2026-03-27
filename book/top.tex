@@ -1,0 +1,111 @@
+\documentclass[russian,english]{book}            
+\usepackage{babel}
+\usepackage{csquotes}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+\usepackage{amsmath,amssymb,amsfonts}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{tikz}
+%\usepackage{geometry}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{tensor}
+\usepackage{mathtools}
+%\usetikzlibrary{quotes}
+%\usepackage{verse}
+\usepackage{epigraph}
+\usepackage{siunitx}
+\defaultfontfeatures{Ligatures={TeX}} 
+% for russian letters
+\setmainfont{DejaVu Serif} 
+\setsansfont{DejaVu Sans} 
+\setmonofont{DejaVu Sans Mono} 
+\addbibresource{top.bib}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{axiom}{Axiom}
+
+%\includeonly{quant-mech}
+
+\title{Thoughts on Physics}
+\author{Shimon Panfil}
+
+
+\begin{document}  
+
+\maketitle
+
+\frontmatter
+\chapter{Preface}
+
+\epigraph{Physics is becoming so unbelievably complex that it is taking longer
+and longer to train a physicist. It is taking so long, in fact, to train a 
+physicist to the place where he understands the nature of physical problems that 
+he is already too old to solve them.}{Eugene Paul Wigner}
+
+ I am physicist. I've got my MSc in Physics from Novosibirsk State University in 1977 
+ and PhD in Theoretical and Mathematical Physics from Institute of Nuclear Physics 
+ in 1984 (both in Novosibirsk, Russia). Still in Novosibirsk I enjoyed doing 
+ theoretical physics for 15 years. In 1992 I made aliyah (repatriated to Israel)
+ and my academic career ended. I never regretted both events.
+
+During next 30 years I was "industrial physicist",engineer,algorithm designer, 
+software developer and even quant for a couple of years (from 2007 till 2009).
+The latter was actually failure, being physicist I tried to understand how all this
+is working and could not. Fortunately 2008 crisis came to the rescue: it does not
+work at all.
+
+For me being physicist means to always try to understand the problem, to 
+construct mathematical model, investigate it and compare the results to 
+real world. This approach contradicts very popular and sometimes successful
+pure statistical ones, like AI and all that. It is hard to miss bitter irony
+in the fact that the Nobel Prize in Physics in 2024 was awarded "for foundational discoveries 
+and inventions that enable machine learning with artificial neural networks".
+
+Now I am retired and decided to share my thoughts about  physics
+in the book, which is a set of loosely connected comments on questions 
+which frequently arise on studying theoretical physics but rarely answered.
+ These questions may be not so important for calculations, but essential for understanding.
+ In a sense it is feedback of  industrial physics to theoretical physics. As young
+ theoretical physicist I always tried to study the problem in its most general form,
+ never made numerical calculations being convinced that order of magnitude
+ estimations are enough. Now I understand the importance of proper balance between
+ generality and practicality, and always ask myself how small (large) 
+ is small (large) enough.
+  Partially this book is motivated by the fact that I see no significant progress in 
+ quantum field theory and theory of elementary particles for the last 50 years!  
+
+ Probably the world would be better without this book.
+ Anyway since I don't intend to publish it on paper, the harm will
+be minimal.
+
+\tableofcontents                        
+
+\mainmatter
+
+%\input{intro.tex}
+\include{intro}
+
+%\input{class-mech}
+\include{class-mech}
+
+%\input{class-ed}
+\include{class-ed}
+
+%\input{relativity}
+\include{relativity}
+
+\include{quant-mech}
+
+\backmatter
+\printbibliography[
+heading=bibintoc,
+title={References}
+] 
+\clearpage
+\end{document}

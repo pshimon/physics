@@ -1,0 +1,373 @@
+% contents of the chapter Classical mechanics
+\chapter{Classical Mechanics}
+\label{class-mech}
+{
+\setlength\epigraphwidth{0.6\textwidth}
+\epigraph {
+    Motion\\
+There is no motion, said a wise old Greek.\\
+The other sage just smiled and walked around.\\
+A better answer hardly could be found,\\
+And everybody praised this tongue in cheek.\\
+But, gentlemen, this funny story might\\
+Remind us of a man of great renown:\\
+Day after day the Sun walks up and down,\\
+And yet the stubborn Galilei was right.
+} {A.S. Pushkin, Translated by D. Broytman }
+}
+
+One of the most important models in physics is mechanics.
+Until the end of the 19th century, mechanics was considered as direct and the only
+the basis of all physics. By words understand or
+to explain a physical phenomenon meant constructing a mechanical model of it.
+
+Situation has changed,  other physical models exist, e.g. quantum mechanics so 
+"usual" mechanics has changed its name to "classical mechanics" and still is
+the central part of theoretical physics. All main physical concepts emerged from
+it.
+
+As a physical model classical mechanics is based on three principles.
+\begin{description}
+  \item[ Global Simultaneity] 
+    Time is universal and global in classical mechanics. State of the system is determined by
+    positions and velocities at fixed time. Every particle has its own coordinates however time
+    is common. We can always measure time  exactly and instantly without any influence 
+    on mechanical systems. Time is continuous, discrete time would lead to finite difference
+    equations instead of differential ones. So dynamics would be undefined, since one always can
+    add periodical function to solution.
+  \item[ Instant Interaction]
+    All interactions are instant i.e. depend on particle states at one and the same moment of time.
+    In particular it means that all accelerations and hence evolution is determined by one state (not necessary initial one). It is possible to think that any interaction takes small but finite period of time. This supposition will lead to functional equations instead of differential ones.
+  \item [ Precision]
+    We can find out and set up exact value of any variable at any time instantly without disturbing
+    the system in any way. In particular we can set exactly positions and velocities which means 
+    among other things that space is continuous.
+\end{description}
+
+There is a great number of books about classical mechanics 
+(see e.g\cite{Arnold-cm},\cite{Landau-Lifshitz-1},
+\cite{Lanczos},\cite{Goldstein}). 
+
+Let philosophers discuss what is time, space and matter in Real world. 
+In Ideal world space is three-dimensional  and euclidean $\mathbb{R}^3$,
+mass is real number and time is one-dimensional $\mathbb{T}$.
+
+So universe of classical mechanics is $\mathbb{T} \times \mathbb{R}^3$. 
+ The  group of galilean transformations acts on universe \cite{Arnold-cm}. 
+Every galilean transformation can be written in a unique way as the composition of a rotation, a translation,
+and a uniform motion ($g = g_1 \circ g_2 \circ g_3$), where
+\[g_1(t,\vec x)=(t,\vec x+\vec v t)\qquad \forall t\in \mathbb{R},\vec x \in\mathbb{R}^3\] is uniform motion with velocity $\vec v \in\mathbb{R}^3$,
+\[g_2(t,\vec x)=(t+t_0,\vec x+\vec x_0)\qquad \forall t\in \mathbb{R},\vec x \in\mathbb{R}^3\] is translation of the origin, and
+\[g_3(t,\vec x)=(t,O\vec x)\qquad \forall t\in \mathbb{R},\vec x \in\mathbb{R}^3\] rotation of the coordinate axes ($O:\mathbb{R}^3 \rightarrow \mathbb{R}^3$ is an orthogonal transformation).
+
+Let $M$ be a set. A one-to-one correspondence 
+\[\phi_1: M \rightarrow \mathbb{R} \times \mathbb{R}^3\]
+is called a galilean (inertial) coordinate system on the set $M$. A coordinate system $\phi_2$ moves
+uniformly with respect to $\phi_1$  if $\phi_1\circ\phi_2^{-1}$ is a galilean
+transformation. 
+
+Inertial coordinate systems  possess the following two properties:
+\begin{enumerate}
+    \item All the laws of nature at all moments of time are the same in all inertial coordinate systems;
+    \item  All coordinate systems in uniform rectilinear motion with respect to an inertial one are themselves inertial.
+\end{enumerate}
+This is called `Galileo's principle of relativity'.
+
+The simplest object of classical mechanics is point mass (particle) i.e. object whose shape, 
+sizes and internal structure are inessential, so mass (positive scalar $m$) is the only parameter. 
+The state of a particle is fully determined by position ($\vec x \in\mathbb{R}^3$) 
+and velocity ($\vec v \in\mathbb{R}^3$). 
+More accurately: A motion in $\mathbb{R}^n$ is a differentiable mapping 
+$\vec x: \mathbb{I}\rightarrow \mathbb{R}^3, \mathbb{I} \subset \mathbb{R}$. 
+The derivative $\dot \vec{x}(t_0)=\frac{d\vec x}{dt}|_{t=t_0}$ is called the velocity vector. 
+The derivative $\ddot \vec x(t_0)=\frac{ d^2 \vec x}{dt^2}|_{t=t_0}$ is called the acceleration vector. 
+The image of motion (curve in $\mathbb{R}^3$) called trajectory and  curve in 
+$\mathbb{T} \times \mathbb{R}^3$ which appears  as the graph of a motion, is called a world line.
+
+The initial state of a mechanical system (the totality of positions and
+velocities of its points at some moment of time) uniquely determines all of
+its motion. In particular, the initial positions and velocities determine the accelerations.
+This is called `Newton's principle of determinacy'.
+
+\section{Newtonian mechanics}
+\label{newt-mech}
+
+Let us consider the mechanical system consisting of $n$ particles 
+with masses $m_j,j=1\ldots n$ and word lines $\vec x_j(t)$.
+Suppose that $n$ vector functions  
+$\vec F_j:\mathbb{R}^{3 n}\times\mathbb{R}^{3 n}\times\mathbb{R}\rightarrow\mathbb{R}^3,j=1\ldots n$ 
+are defined. Then the motion of all particles is determined by equations
+\begin{equation}
+  \label {newtoneq}
+    m_j \ddot \vec x_j=\vec F_j(\vec x_k,\dot \vec x_k,t) \quad j,k=1\ldots n 
+\end{equation}
+and initial conditions
+\begin{equation}
+\label {newtonic}
+   \vec x_j(t_0)=\vec y_j\quad\dot \vec x_j(t_0)=\vec v_j  \quad j=1\ldots n \end{equation}
+
+Newton's equation \eqref{newtoneq} is  the basis of mechanics. Functions $\vec F_j$
+are called forces they should be determined  for each specific mechanical system. If our system
+is isolated i.e. includes explicitly all interacting particles, then galilean invariance puts some restrictions on forces.
+Namely 
+\begin{equation}
+  \label {newtoneq-isolated}
+    m_j \ddot \vec x_j=\vec F_j(\vec x_j-\vec x_k,\dot \vec x_j-\dot \vec x_k) \quad j,k=1\ldots n 
+\end{equation}
+practically such systems occur in celestial mechanics. In most other cases the system 
+considered is not isolated and forces of general kind \eqref{newtoneq} appear as a result 
+of interaction with environment.
+
+
+Mathematics of  Cauchy problem (\ref{newtoneq},\ref{newtonic}) 
+one can find in e.g. \cite{Arnold-ode}. Generally the unique solution exists if
+all functions are smooth enough. However smoothness may be violated in physically
+important cases, anyway functions $\vec x_j(t)$ should be continuous, $\vec v_j(t)$  may
+have finite jumps as a results of strong force acting for very short time (e.g. 
+elastic collision).
+
+Note that initial conditions have nothing to do with causality. Causality makes sense in Real world only,
+in Ideal world we are free to set final conditions or fix $\vec x_j(t_1)$ and $\vec v_j(t_1)$ for
+some intermediate time $t_1$. In many cases we are 
+interested in solution of equation \eqref{newtoneq} with fixed initial velocities and final
+coordinates  (aiming) or fixed coordinates on both ends (variational problem). Anyway when
+conditions are set at two different times  solution may be not unique (unless force is changing relatively slow)
+\footnote {I discovered this fact around 1980 and was very proud of myself until I found papers \cite{Maslov-1} and 
+\cite{Maslov-2}.}.
+
+        \subsection{Constraints}
+In addition to Newton's equations the motion of the system may be restricted by additional equations or inequalities.
+Constraints introduce two types of difficulties in the solution of mechanical
+problems. First, the coordinates $\vec x_j$ are no longer all independent, since they are
+connected by the equations of constraint; hence the equations of motion  
+are not all independent. Second, the forces of constraint  are not furnished a priori. 
+They are among the unknowns of the problem and must be obtained from the
+solution we seek. Indeed, imposing constraints on the system  is simply another
+method of stating that there are forces present in the problem that cannot be specified 
+directly but are known rather in terms of their effect on the motion of the system.
+There is no general method of solving (even numerically) these problems, they are tackled on case by case basis.
+To advance we should restrict ourselves with so called holonomic constraints which have the form:
+\begin{equation}
+        f(\vec x_j,t)=0 \label {hol-const}
+\end{equation}
+
+\subsection{Numerical solution}
+Generally Newton's equations are to be solved numerically which is a difficult task. 
+Two large class of methods are in use:
+\begin{enumerate}
+        \item "Usual" one-time integrators when differential equations are replaced with finite difference
+ones defining snapshots at discrete time steps. These integrators allow accurate description of standard problem:
+initial conditions, finite time interval.
+\item Geometric integrators which are less accurate for any single trajectory but accurately present qualitative 
+        picture for large set of initial data and long times. Such integrators may calculate  coordinates and 
+                momenta at different times
+\end{enumerate}
+One can look for details in \cite{Hairer-Lubich-Wanner} for example. 
+
+\section{Lagrangian mechanics}
+
+If we allow only potential forces i.e. 
+\begin{equation}
+  \label {potforce}
+        \vec F_j(\vec x_k,t)=-\frac{\partial U(\vec x_k,t)}{\partial \vec x_j} \quad j,k=1\ldots n 
+\end{equation}
+we shall see that equations of motion (\ref{newtoneq}) can be written as 
+\begin{equation}
+   \label {lagr}
+   \begin{split}
+      \vec p_j&=\frac{\partial L(\vec x_k,\vec v_k,t)}{\partial \vec v_j} \\ 
+        \dot \vec p_j&= \frac{\partial L(\vec x_k,\vec v_k,t)}{\partial \vec x_j}\quad j,k=1\ldots n 
+   \end{split}
+\end{equation}  
+where 
+\begin{equation}
+  \label{lagr3}
+        L(\vec x_k,\vec v_k,t)=\Sigma_1^n \frac{m_k}{2} \vec v_k \cdot \vec v_k-U(\vec x_k,t) 
+\end{equation}
+
+If we can solve the equation \[ \vec p_j=\frac{\partial L(\vec x_k,\vec v_k,t)}{\partial \vec v_j} \] for $ \vec v_j $
+which of course is not always possible, we can write the equations \eqref{lagr}
+in more symmetrical way:
+\begin{equation}
+   \label {ham}
+   \begin{split}
+        \dot \vec x_j&=\frac{\partial H(\vec x_k,\vec p_k,t)}{\partial \vec p_j}  \\ 
+        \dot \vec p_j&= -\frac{\partial H(\vec x_k,\vec p_k,t)}{\partial \vec x_j}\quad j,k=1\ldots n    
+   \end{split}
+\end{equation}
+where 
+\begin{equation}
+        H(\vec x_k,\vec p_k,t)=\Sigma_1^n \frac{1}{2 m_k} \vec p_k \cdot \vec p_k+U(\vec x_k,t) \label{ham3}
+\end{equation}
+Note that functions $L$ (Lagrangian) and $H$ (Hamiltonian) are connected by Legendre transform:
+\begin{equation}
+        L(\vec x_k,\vec v_k,t)=\Sigma_1^n  \vec p_k \cdot \vec v_k -H(\vec x_k,\vec p_k,t)|_{\vec p_k=m_k\vec v_k}
+\quad k=1\ldots n \label {lagr-ham}
+\end{equation}
+
+
+\section{Principle of least action}
+\label{least-action}
+\begin{definition}
+        The equation
+        \[\frac{d}{d t}(\frac{\partial L}{\partial \dot x})-\frac{\partial L}{\partial  x}=0 \]
+        is called the Euler-Lagrange equation for the functional
+        \[\Phi=\int_{t_1}^{t_2} L(x,\dot x,t) dt \]
+\end{definition}
+Let \( \gamma= \vec x(t) \quad t_1 \le t \le t_2 \) be a curve  in  $\mathbb{R} \times \mathbb{R}^n$ and 
+$L: \mathbb{R}^n \times \mathbb{R}^n \times \mathbb{R}\rightarrow \mathbb{R}$ a function of $2 n +1$
+variables, then
+\begin{theorem}
+         The curve $\gamma$ is an extremal of the functional \[\Phi=\int_{t_1}^{t_2} L(\vec x,\dot \vec x,t) dt \]
+        on the space of curves joining $(t_1, \vec x_1)$ and $(t_2,\vec x_2)$, if and only if the Euler-
+Lagrange equation is satisfied along $\gamma$.
+\end{theorem}
+This is a system of n second-order equations, and the solution depends on
+$2 n$ arbitrary constants. The $2 n$ conditions $x(t_1) = x_0$ and $x(t_2) = x_2$ are used
+for finding them.
+Two important remarks:
+\begin{enumerate}
+        \item There may be many extremals connecting two
+given points or none at all.
+\item The condition for a curve  to be an extremal of a functional does not depend
+on the choice of coordinate system. This paves way to geometrisation of mechanics.
+\end{enumerate}
+
+It is easy to see that equation of motion (\ref{lagr}) are actually  Euler-Lagrange equations 
+for lagrangian \eqref{lagr3}. 
+So we have  Hamilton's principle of least action.
+
+I believe that least action principle  is nothing but (powerful) heuristic. Indeed, to compute 
+action functional we should define explicitly {\em all} curves connecting given pair of points.
+This seems to be impossible or at least very difficult problem. Fortunately we do not need it.
+All what we really need is to set configuration space, choose Lagrange function 
+\eqref{lagr3} and get equations of motion \eqref{lagr}. It does not matter at all
+if we have minimum, maximum, saddle point or whatever property of some functional.
+
+On the other hand having equations of motion as system of ordinary differential equations,
+we can transform it into equivalent one, say by multiplying every equation by arbitrary 
+function which never becomes zero. This new system may correspond to another Lagrangian and
+the difference between new and old one need not come down to total derivative. Most probably
+new system will not be Lagrangian at all.
+
+Let us look at simple example --- two-dimensional harmonic oscillator.
+Usual Lagrangian is
+\begin{equation}
+   \label {ho1}
+    L_1= \frac{1}{2} (\dot x^2+\dot y^2) -\frac{ \omega^2}{2} ( x^2+ y^2)
+\end{equation}
+which yields equation  of motions:
+\begin{equation}
+   \label {hoe1}
+   \begin{split}
+       \ddot x+ \omega^2 x & =0 \\
+       \ddot y+ \omega^2 y & =0 
+   \end{split}
+\end{equation}
+Same equations of motion come form 
+another Lagrangian
+\begin{equation}
+   \label {ho2}
+    L_2= \frac{1}{2} (\dot x^2-\dot y^2) -\frac{ \omega^2}{2} ( x^2- y^2)
+\end{equation}
+or
+\begin{equation}
+   \label {ho3}
+    L_3= \dot x\dot y - \omega^2  x y
+\end{equation}
+corresponding  Hamiltonians 
+\begin{equation}
+   \label {ho2h}
+    H_2= \frac{1}{2} ( p_x^2-p_y^2) +\frac{ \omega^2}{2} ( x^2- y^2)
+\end{equation}
+and
+\begin{equation}
+   \label {ho3h}
+    H_3= p_x p_y +\omega^2  x y
+\end{equation}
+are not even positive definite!
+
+\section{Gauge invariance} 
+\label{gauge-invariance}
+
+From now on we shall use generalized coordinates $ q=\{q_j, j=1\ldots n\} $, where $ n $ is the number of
+degrees of freedom. These coordinates may have or have not physical meaning.
+
+We are used to think that gauge invariance is about electromagnetism, actually it appears
+already in classical mechanics. It is easy to prove that adding the total derivative
+\begin{equation}
+   \label {tot-der}
+    \frac{d \Phi (q,t)}{d t}=\frac{\partial \Phi(q,t)}{\partial t} + \frac{ \partial \Phi (q,t)}{\partial q_j} \dot q_j
+\end{equation}
+to Lagrangian does not change equations of motion. However canonical momenta
+\begin{equation}
+   \label {can-mom}
+   p_j=\frac{ \partial L(q,\dot q,t)}{\partial \dot q_j}
+\end{equation}
+
+becomes \[ P_j=p_j+\frac{\partial \Phi}{\partial q_j} \] Transformation $ p,q \rightarrow P,q $ is evidently
+canonical and new Hamiltonian becomes 
+\[ H_{new}=H(p(P),q)- \frac{\partial \Phi}{\partial t}\]
+The fact that canonical momenta have no physical meaning is not a weak but strong point of Hamiltonian 
+mechanics.
+
+I skip the  discussion of standard things like Poisson brackets, integrals of motion and all that.
+
+\section{"Spin" in constant magnetic field}
+\label{mag-mom}
+We used to natural systems where hamiltonian is quadratic form over momenta,
+but there are physical systems with hamiltonians linear over momenta.
+So lagrangian does not exist. Let us consider 
+dynamic of point magnetic moment in constant magnetic field has not only
+clear physical meaning but also significant practical value. I investigated
+this problem (actually slightly more general one) in connection with control of MRI
+scanner \cite{RPZ4},\cite{RPZ3},\cite{RPZ2},\cite{RPZ1}.
+
+
+Hamiltonian is $ H=\vec M \cdot \vec B $ where $\vec M$ is magnetic moment 
+and $ \vec B $ is constant magnetic field.
+It is convenient to write $ \vec M=\frac{e}{m c}\vec S $ where $ \vec S $
+is angular moment ("spin")  and  include gyromagnetic ratio into magnetic field
+$ \vec \Omega = \frac{e}{m c}\vec B$. Components of $ \vec S $ are not
+canonical variables, their Poisson brackets are
+\begin{equation}
+   \label {pb}
+    \{S_i,S_j\}= \epsilon_{ijk} S_k
+\end{equation}
+However they define phase space (sphere)  and equation of motion:
+\begin{equation}
+   \label {sp1}
+    \dot S_i=\{S_i,H\}
+\end{equation} 
+or 
+\begin{equation}
+   \label {sp2}
+    \dot {\vec S} =-\vec S \times \vec \Omega
+\end{equation}
+
+In canonical variables 
+\begin{equation}
+   \label {sp3}
+   \begin{split}
+       S_x & = \sqrt{S^2-p^2} \cos q \\
+       S_y & = \sqrt{S^2-p^2} \sin q \\
+       S_z & = p,\quad -S\le p \le S
+   \end{split}
+\end{equation}
+Let $ \vec \Omega =(0,0, \Omega) $ then $ H=p \Omega $ and canonical equations are:
+\begin{equation}
+   \label {sp4}
+   \begin{split}
+       \dot p & =0\\
+       \dot q & = \Omega
+   \end{split}
+\end{equation}
+Lagrangian $ L=0 $, so we can not get equations of motion as second order equation.
+
+Moment $ p $ is integral of motion which is fine but velocity is not connected to 
+moment at all, it is constant. For pair of points in phase space generally there is
+no trajectory passable for given time. Variation problem simply can not be posed.
+
+ Hamiltonian $ H=p \Omega $ looks like that for harmonic oscillator in action-angle variables
+and so we can  transform it to usual quadratic form, but the condition $  -S\le p \le S$
+makes this transformation pure formal.
