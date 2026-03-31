@@ -75,16 +75,18 @@ Furthermore,
 \partial_y^2 \psi = -\frac{k^2}{\hbar^2}\psi.
 \end{equation}
 
-Substitution into the Schr"odinger equation yields the reduced equation
+Substitution into the Schr\"odinger equation yields the reduced equation
 \begin{equation}
 -\frac{\hbar^2}{2}\phi''(x)+V_{\mathrm{eff}}(x)\phi(x)=E\phi(x),
 \end{equation}
 with effective potential
 \begin{equation}
-V_{\mathrm{eff}}(x)=\frac{k^2}{2a(x)}+\frac{\hbar^2}{2}\left(-\frac{a''}{4a}
-+\frac{5}{16}\frac{(a')^2}{a^2}\right).
+    V_{eff}(x)=\frac{k^2}{2a(x)}+\frac{\hbar^2}{2} Q(x),
 \end{equation}
-
+where
+\begin{equation}
+    Q(x)= -\frac{a''}{4a}+\frac{5}{16}\frac{(a')^2}{a^2}.
+\end{equation}
 \section{Identification of the Schwarzian Term}
 
 Define a new coordinate
@@ -109,7 +111,7 @@ A direct calculation gives
 
 Therefore
 \begin{equation}
-V_{\mathrm{eff}}(x)=\frac{k^2}{2a(x)}+\frac{\hbar^2}{4}{z,x}.
+Q(x)=\frac{1}{2}\{z,x\}.
 \end{equation}
 We have thus proven:
 
@@ -118,9 +120,9 @@ Let $(M^2,g)$ be a two-dimensional Riemannian manifold with metric
 \[
 ds^2 = dx^2 + a(x)dy^2
 \]
-and Killing symmetry $\partial_y$. Quantum Hamiltonian reduction of the Laplace--Beltrami operator at fixed momentum $k$ yields a one-dimensional Schr"odinger operator whose effective potential is
+and Killing symmetry $\partial_y$. Quantum Hamiltonian reduction of the Laplace--Beltrami operator at fixed momentum $k$ yields a one-dimensional Schr\"odinger operator whose effective potential is
 \[
-V_{\mathrm{eff}}(x)=\frac{k^2}{2a(x)}+\frac{\hbar^2}{4}\{z,x\},
+V_{eff}(x)=\frac{k^2}{2a(x)}+\frac{\hbar^2}{4}\{z,x\},
 \]
 where $z(x)=\int^x a^{-1/2}(x')dx'$ and $\{z,x\}$ is the Schwarzian derivative.
 \end{theorem}
@@ -137,7 +139,7 @@ transforms with an additive Schwarzian term.
 The preceding theorem shows that the quantum correction induced by Hamiltonian reduction is precisely the Schwarzian term required for projective covariance. Therefore:
 
 \begin{corollary}
-The reduced Schr"odinger operator is naturally a projective connection on the one-dimensional base manifold.
+The reduced Schr\"odinger operator is naturally a projective connection on the one-dimensional base manifold.
 \end{corollary}
 
 \section{Emergence of the Hypergeometric Equation}
