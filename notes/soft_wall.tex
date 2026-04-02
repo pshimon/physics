@@ -1,0 +1,264 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm,physics,geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\title{\textbf{Exact Solution of the Repulsive Inverse--Square Potential\\
+and Comparison with a Hard Wall at the Origin}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We derive the exact radial solution of the Schrödinger equation
+with repulsive inverse--square potential $V(r)=g/r^2$, $g>0$.
+The regular solution is expressed in terms of Bessel functions
+of non-integer order.
+We analyze the near--origin behavior, prove essential self--adjointness,
+and compute the scattering phase shift.
+A precise comparison with the Dirichlet hard wall at $r=0$
+is provided.
+\end{abstract}
+
+\section{Radial Equation}
+
+Consider the three–dimensional Hamiltonian
+\begin{equation}
+H=-\frac{\hbar^2}{2m}\nabla^2+\frac{g}{r^2},
+\qquad g>0.
+\end{equation}
+
+After separation of variables
+\(
+\psi(r,\theta,\phi)=R_l(r)Y_{lm}(\theta,\phi),
+\)
+define the reduced radial function
+\(
+u(r)=rR_l(r).
+\)
+
+The radial Schrödinger equation becomes
+\begin{equation}
+-\frac{\hbar^2}{2m}u''(r)
++
+\frac{\hbar^2\lambda}{2m r^2}u(r)
+=
+Eu(r),
+\end{equation}
+where
+\begin{equation}
+\lambda
+=
+l(l+1)+\frac{2mg}{\hbar^2}.
+\end{equation}
+
+Define
+\begin{equation}
+\nu=\sqrt{\lambda+\frac{1}{4}}.
+\end{equation}
+
+For $g>0$ one has
+\(
+\nu>l+\tfrac{1}{2}.
+\)
+
+The equation reduces to
+\begin{equation}
+u''(r)+\left(k^2-\frac{\lambda}{r^2}\right)u(r)=0,
+\qquad
+k^2=\frac{2mE}{\hbar^2}.
+\end{equation}
+
+\section{Exact Scattering Solution ($E>0$)}
+
+The general solution is
+\begin{equation}
+u(r)
+=
+\sqrt{r}
+\left[
+A J_\nu(kr)
++
+B Y_\nu(kr)
+\right].
+\end{equation}
+
+\subsection*{Behavior near the origin}
+
+Using small–argument asymptotics,
+\begin{align}
+J_\nu(z) &\sim \frac{1}{\Gamma(\nu+1)}\left(\frac{z}{2}\right)^\nu,\\
+Y_\nu(z) &\sim -\frac{\Gamma(\nu)}{\pi}\left(\frac{2}{z}\right)^\nu,
+\end{align}
+we obtain
+\begin{equation}
+u(r)\sim
+A\, r^{\nu+\frac{1}{2}}
++
+B\, r^{-\nu+\frac{1}{2}}.
+\end{equation}
+
+Since $\nu>1/2$ for $g>0$ and $l\ge0$,
+the $Y_\nu$ branch diverges too strongly to be square–integrable.
+
+Therefore physical regularity selects uniquely
+\begin{equation}
+u_{\text{reg}}(r)
+=
+C\sqrt{r}J_\nu(kr).
+\end{equation}
+
+Thus the Hamiltonian is essentially self–adjoint:
+no boundary condition at $r=0$ is needed.
+
+\section{Asymptotics and Phase Shift}
+
+For large $r$,
+\begin{equation}
+J_\nu(kr)
+\sim
+\sqrt{\frac{2}{\pi kr}}
+\cos\left(kr-\frac{\pi\nu}{2}-\frac{\pi}{4}\right).
+\end{equation}
+
+Hence
+\begin{equation}
+u(r)
+\sim
+\sqrt{\frac{2}{\pi k}}
+\cos\left(kr-\frac{\pi\nu}{2}-\frac{\pi}{4}\right).
+\end{equation}
+
+Compare with free radial solution (no $g$):
+\begin{equation}
+u^{(0)}(r)
+=
+\sqrt{r}J_{l+\frac{1}{2}}(kr)
+\sim
+\sqrt{\frac{2}{\pi k}}
+\cos\left(
+kr-\frac{\pi}{2}\left(l+\frac{1}{2}\right)-\frac{\pi}{4}
+\right).
+\end{equation}
+
+Therefore the phase shift is
+\begin{equation}
+\boxed{
+\delta_l
+=
+-\frac{\pi}{2}
+\left(
+\nu - \left(l+\frac{1}{2}\right)
+\right).
+}
+\end{equation}
+
+Since $g>0$ implies $\nu>l+\tfrac{1}{2}$,
+the phase shift is negative: purely repulsive scattering.
+
+\section{Comparison with Hard Wall at $r=0$}
+
+Consider instead a free particle with Dirichlet boundary
+\begin{equation}
+u(0)=0.
+\end{equation}
+
+For the free Hamiltonian,
+the regular solution is
+\begin{equation}
+u^{\text{wall}}(r)=\sqrt{r}J_{l+\frac{1}{2}}(kr).
+\end{equation}
+
+Near the origin,
+\begin{equation}
+u^{\text{wall}}(r)\sim r^{l+1}.
+\end{equation}
+
+For inverse–square repulsion,
+\begin{equation}
+u(r)\sim r^{\nu+\frac{1}{2}}.
+\end{equation}
+
+Thus the repulsive inverse–square potential
+produces stronger suppression:
+\begin{equation}
+\nu+\frac{1}{2}
+>
+l+1.
+\end{equation}
+
+\subsection*{Interpretation}
+
+\begin{itemize}
+\item Hard wall enforces $u(0)=0$ but leaves power fixed by $l$.
+\item Repulsive $g/r^2$ modifies the effective centrifugal barrier:
+\begin{equation}
+l(l+1)\longrightarrow l(l+1)+\frac{2mg}{\hbar^2}.
+\end{equation}
+\item The wavefunction vanishes with higher power.
+\item No reflection at a sharp boundary occurs.
+\item The effect is purely phase–shifted scattering.
+\end{itemize}
+
+\section{Effective Angular Momentum}
+
+Define
+\begin{equation}
+l_{\text{eff}}
+=
+\nu-\frac{1}{2}.
+\end{equation}
+
+Then the solution equals exactly the free radial solution
+with noninteger angular momentum:
+\begin{equation}
+u(r)
+=
+\sqrt{r}J_{l_{\text{eff}}+\frac{1}{2}}(kr).
+\end{equation}
+
+Hence:
+
+\begin{center}
+\textbf{Repulsive inverse--square potential
+is equivalent to shifting $l\to l_{\text{eff}}$.}
+\end{center}
+
+This is stronger than a hard wall,
+because it modifies the centrifugal barrier rather than imposing
+a boundary constraint.
+
+\section{Bound States}
+
+For $g>0$, there are no bound states.
+
+For $E<0$, the solution involves modified Bessel functions:
+\begin{equation}
+u(r)=\sqrt{r}K_\nu(\kappa r),
+\end{equation}
+but these are not normalizable at infinity without additional
+confinement.
+
+\section{Conclusion}
+
+For $g>0$:
+
+\begin{enumerate}
+\item Exact solution: $u(r)=\sqrt{r}J_\nu(kr)$.
+\item Hamiltonian is essentially self–adjoint.
+\item No bound states.
+\item Scattering phase shift:
+\(
+\delta_l=-\frac{\pi}{2}(\nu-l-\tfrac{1}{2}).
+\)
+\item Physically equivalent to fractional angular momentum.
+\item Stronger suppression than a hard wall at the origin.
+\end{enumerate}
+
+Thus the repulsive inverse–square potential
+acts not as a boundary,
+but as a dynamical renormalization of angular momentum.
+\end{document}

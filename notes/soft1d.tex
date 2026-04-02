@@ -1,0 +1,190 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm,physics,geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\title{\textbf{Inverse--Square Potential on the Half--Line\\
+Boundary Conditions and the Hard--Wall Limit}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We solve the Schrödinger equation on the half--line
+with repulsive inverse--square potential $V(x)=g/x^2$, $g>0$.
+We analyze boundary behavior at $x=0$,
+prove essential self--adjointness,
+and demonstrate explicitly that the Dirichlet hard wall
+arises as the limit $g\to+\infty$.
+\end{abstract}
+
+\section{Hamiltonian on the Half--Line}
+
+Consider
+\begin{equation}
+H_g
+=
+-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
++
+\frac{g}{x^2},
+\qquad x>0,
+\qquad g>0.
+\end{equation}
+
+The time–independent Schrödinger equation is
+\begin{equation}
+-\frac{\hbar^2}{2m}\psi''(x)
++
+\frac{g}{x^2}\psi(x)
+=
+E\psi(x).
+\end{equation}
+
+Define
+\begin{equation}
+k^2=\frac{2mE}{\hbar^2},
+\qquad
+\gamma=\frac{2mg}{\hbar^2}.
+\end{equation}
+
+Then
+\begin{equation}
+\psi''(x)
++
+\left(
+k^2-\frac{\gamma}{x^2}
+\right)\psi(x)=0.
+\end{equation}
+
+\section{Exact Solution}
+
+Introduce
+\begin{equation}
+\nu=\sqrt{\frac{1}{4}+\gamma}.
+\end{equation}
+
+The general solution for $E>0$ is
+\begin{equation}
+\psi(x)
+=
+\sqrt{x}
+\left[
+A J_\nu(kx)
++
+B Y_\nu(kx)
+\right].
+\end{equation}
+
+\section{Behavior at the Origin}
+
+Using small--argument asymptotics:
+\begin{align}
+J_\nu(z)&\sim \frac{1}{\Gamma(\nu+1)}\left(\frac{z}{2}\right)^\nu,\\
+Y_\nu(z)&\sim -\frac{\Gamma(\nu)}{\pi}\left(\frac{2}{z}\right)^\nu.
+\end{align}
+
+Thus
+\begin{equation}
+\psi(x)
+\sim
+A\, x^{\nu+\frac{1}{2}}
++
+B\, x^{-\nu+\frac{1}{2}}.
+\end{equation}
+
+\subsection*{Square Integrability}
+
+Near $x=0$:
+\begin{equation}
+\int_0 x^{2(-\nu+\frac{1}{2})} dx
+\end{equation}
+converges only if
+\begin{equation}
+-\nu+\frac{1}{2} > -\frac{1}{2}
+\quad\Longrightarrow\quad
+\nu<1.
+\end{equation}
+
+For $g>0$ one has
+\(
+\nu>\frac{1}{2}.
+\)
+
+Moreover, for any $g>0$:
+\begin{equation}
+\nu \ge 1
+\quad \text{if} \quad
+g \ge \frac{3\hbar^2}{8m}.
+\end{equation}
+
+But even when $1/2<\nu<1$, the Hamiltonian is in the
+limit–point case at $x=0$ for $g>0$.
+The singular branch must be excluded.
+
+Thus the physically acceptable solution is uniquely
+
+\begin{equation}
+\boxed{
+\psi(x)=C\sqrt{x}J_\nu(kx).
+}
+\end{equation}
+
+Hence:
+
+\begin{center}
+For $g>0$, the Hamiltonian is essentially self–adjoint.
+No boundary condition at $x=0$ is imposed externally.
+\end{center}
+
+\section{Near–Origin Suppression}
+
+As $x\to 0$,
+\begin{equation}
+\psi(x)\sim x^{\nu+\frac{1}{2}}.
+\end{equation}
+
+For the free half–line problem with Dirichlet boundary:
+\begin{equation}
+\psi_{\text{wall}}(x)\sim x.
+\end{equation}
+
+Since
+\begin{equation}
+\nu+\frac{1}{2}>1,
+\end{equation}
+the inverse–square potential suppresses the wavefunction
+more strongly than a hard wall.
+
+\section{Scattering Phase Shift}
+
+Large-$x$ asymptotics:
+\begin{equation}
+J_\nu(kx)
+\sim
+\sqrt{\frac{2}{\pi kx}}
+\cos\left(
+kx-\frac{\pi\nu}{2}-\frac{\pi}{4}
+\right).
+\end{equation}
+
+For the free half–line Dirichlet problem:
+\begin{equation}
+\psi_{\text{free}}
+\sim
+\sin(kx).
+\end{equation}
+
+Matching phases yields
+\begin{equation}
+\delta
+=
+-\frac{\pi}{2}\left(\nu-\frac{1}{2}\right).
+\end{equation}
+
+Thus the inverse–square potential produces
+a purely repulsive phase shift.
+
+\end{document}
