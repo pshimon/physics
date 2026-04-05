@@ -1,0 +1,52 @@
+\section{Axioms of Quantum Mechanics}
+\label{aqm}
+
+Today we understand that Dirac’s formalism is rigorously captured by:
+\begin{itemize}
+   \item rigged Hilbert spaces;
+\item spectral theorem for unbounded self-adjoint operators;
+\item distribution theory
+\end{itemize}
+and there is no reason not to use it.
+
+Formally a quantum system is defined by four axioms:
+\begin{axiom}[States]
+    \label{states}
+Physical state is a vector in complex separable Hilbert space $ \mathcal{H} $
+\[ |\psi \rangle \in \mathcal{H} .\]
+\end{axiom}
+\begin{axiom}[Observables]
+    \label{observs}
+Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$. 
+\end{axiom}
+\begin{axiom}[Dynamics]
+    \label{dynamics}
+    There is an observable $ \hat H$ (Hamiltonian),which generates time evolution
+    (unitary group):
+    \begin{equation}
+       \label {evol}
+ \hat U(t) = e^{-i \hat Ht/\hbar}.
+    \end{equation}
+\end{axiom}
+    Evolution may be seen as action on observables (Heisenberg picture)
+\begin{align}
+   \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {heis1}\\
+    \frac{d \hat A}{d t} &= \frac{i}{\hbar}[\hat H,\hat A].\label{heis2}
+\end{align}
+    Or as action on states (Schr\"odinger picture)
+\begin{align}
+    |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{schr1} \\
+    \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{schr2}
+\end{align}
+\begin{axiom}[Born rule]
+    \label{born-rule}
+    \[  \frac{\langle{\psi}|{\phi}\rangle}{\|{\psi}\| \|{\phi}\|}  \]
+     is probability amplitude of transition between states.
+    Expectation value of an observable in a state 
+    \begin{equation}
+       \label {exp1}
+    \langle \hat A \rangle_\psi = \frac{\langle \psi| \hat A |\psi \rangle} {\langle \psi|\psi \rangle}
+    \end{equation}
+    comprises all available information.
+\end{axiom}
+

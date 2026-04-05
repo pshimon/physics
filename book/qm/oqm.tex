@@ -1,0 +1,217 @@
+\chapter{ Origin of Quantum Mechanics}
+\label{oqm}
+{
+    \setlength\epigraphwidth{0.6\textwidth}
+\epigraph{ Quantum mechanics is a
+different kind of a theory to represent the world.
+} {R. P. Feynman}
+}
+The relation between classical and quantum mechanics is often
+described as one of extension: quantum mechanics generalizes
+classical mechanics. Actually it is correct only for a
+part (though very important one) of classical
+ systems ---  systems with phase space $ \mathbb{R}^{2 n} $
+ and  Hamiltonian which is quadratic function of momenta,
+ and beside them some relatively exotic highly symmetric systems. 
+ In that case quantum mechanics
+replaces classical mechanics by altering its fundamental
+mathematical structure. Classical mechanics reappears only 
+as some kind of  singular limit.
+On the other hand  crucial components of classical theory 
+like constraints, canonical transformations, trajectories,
+have no faithful quantum analogues.
+
+Non-relativistic quantum mechanics can be presented axiomatically,
+without explicit reference to a classical precursor. 
+However all rigorous definitions and theorems give us no way to connect 
+the mathematical constructions to the real world. 
+"Of course, nature knows the quantum mechanics,
+and the classical mechanics is only an approximation; so there is no mystery in
+the fact that in classical mechanics there is some shadow of quantum mechanical
+laws---which are truly the ones underneath. To reconstruct the original object
+from the shadow is not possible in any direct way, but the shadow does help
+you to remember what the object looks like" \cite{flp3}. 
+So the problem of \emph{quantization}---the transition from 
+classical to quantum descriptions---actually works backward.
+
+\section{Bra-Ket Notation}
+\label{bra-ket-notation}
+
+Bra--ket notation is the standard symbolic language of quantum
+mechanics. While extraordinarily powerful and conceptually elegant,
+it compresses multiple layers of mathematical structure into compact
+expressions. 
+Its success stems from its ability to encode:
+\begin{itemize}
+\item Linear algebraic structure,
+\item Operator theory,
+\item Spectral decomposition,
+\item Measurement theory,
+\item Tensor products and entanglement.
+\end{itemize}
+However, the notation often suppresses functional-analytic and
+geometric subtleties. 
+
+It appears at Paul Dirac's book \cite{dirac-pqm}  "The Principles of Quantum Mechanics" (first edition 1930). Let's describe pros and cons:
+\subsection{ Pros}
+\begin{enumerate}
+   \item
+ Coordinate-free and basis-independent
+bra--ket notation expresses quantum states abstractly:
+\[|\psi\rangle \in \mathcal{H}, \qquad \langle \phi| \in \mathcal{H}^*\]
+This makes the formalism:
+\begin{itemize}
+\item
+  independent of representation (position, momentum, spin, etc.)
+\item
+  cleanly adaptable to changes of basis
+\item
+  naturally compatible with symmetry arguments
+\end{itemize}
+Example:
+\[\psi(x) = \langle x|\psi\rangle\]
+The same state appears as a function only after choosing the position
+basis.
+\item
+ Clear dual structure
+  The notation explicitly encodes:
+\begin{itemize}
+\item
+  kets: vectors \(|\psi\rangle\)
+\item
+  bras: dual vectors \(\langle\psi|\)
+\item
+  inner product:
+\end{itemize}
+\[\langle \phi | \psi \rangle\]
+This makes conjugation and adjoints transparent:
+\[(|\psi\rangle)^\dagger = \langle \psi|\]
+\item
+elegant operator representation:
+\[A|\psi\rangle\]
+outer products generate rank-one operators:
+\[|\psi\rangle\langle\phi|\]
+projection operators:
+\[P = |a\rangle\langle a|\]
+spectral decomposition:
+\[A = \sum_a a |a\rangle\langle a|\]
+or (continuous spectrum)
+\[A = \int a\, |a\rangle\langle a|\, da\]
+This makes the spectral theorem visually intuitive.
+\item
+Simplifies tensor products ---
+composite systems are naturally written:
+\[|\psi\rangle \otimes |\phi\rangle\]
+Entangled states appear transparently:
+\[|\Psi\rangle = \sum_{ij} c_{ij} |i\rangle \otimes |j\rangle\]
+\item
+Works naturally with PVM and POVM formalism
+projection-valued measure:
+\[E(\Delta) = \int_\Delta |x\rangle\langle x| dx\]
+POVM elements:
+\[F_i = M_i^\dagger M_i\]
+Bra--ket notation makes these constructions compact and readable.
+\end{enumerate}
+
+\subsection{ Cons}
+\begin{enumerate}
+   \item
+Lack of mathematical rigor (without extra care)---
+Dirac freely wrote expressions like:
+\[\langle x|x' \rangle = \delta(x-x').\]
+But:
+\begin{itemize}
+\item
+  \(|x\rangle \notin L^2(\mathbb{R})\)
+\item
+  delta functions are distributions, not functions
+\item
+  continuous ``eigenvectors'' are not true Hilbert space elements.
+\end{itemize}
+Strictly speaking, this requires the theory of rigged Hilbert spaces:
+\[\Phi \subset \mathcal{H} \subset \Phi',\]
+Without this, the notation hides subtle functional analysis.
+   \item
+Can hide domain issues ---
+unbounded operators (like momentum or Hamiltonians) require domain care:
+\[P = -i\hbar \frac{d}{dx}.\]
+In bra--ket notation, one may forget:
+\begin{itemize}
+\item
+  domain restrictions
+\item
+  self-adjoint extensions
+\item
+  boundary conditions.
+\end{itemize}
+These are essential in rigorous analysis.
+   \item
+Ambiguity in infinite dimensions---
+in finite dimensions:
+\[\langle \psi| = |\psi\rangle^\dagger\]
+in infinite dimensions:
+\begin{itemize}
+\item
+  The identification depends on Riesz representation.
+\item
+  Not all linear functionals are representable without topology
+  assumptions.
+\end{itemize}
+The notation may conceal these subtleties.
+   \item
+ Overuse leads to symbolic manipulation without understanding.
+Some common problems:
+\begin{itemize}
+\item
+  Treating kets like column vectors everywhere.
+\item
+  Confusing formal identities with rigorous equalities.
+\item
+  Ignoring operator domains and closure.
+\end{itemize}
+It encourages formal calculation over structural analysis.
+\end{enumerate}
+
+\subsection{Some Explanations}
+\label{some-explanations}
+
+Dirac's book \cite{dirac-pqm} contains
+statements that are mathematically unclear, incomplete, or (by modern standards) incorrect. 
+But he did not work in the modern functional-analytic framework that developed later.
+For example:
+\begin{itemize}
+   \item He freely used “eigenvectors” of operators with continuous spectrum.
+    \item He manipulated $ \delta $-functions before distribution theory existed.
+    \item He treated unbounded operators without domain analysis.
+    \item He wrote symbolic identities like \[ \langle x|p \rangle=\exp(i p x/\hbar) \]
+as if everything were finite-dimensional.
+\end{itemize}
+From today’s perspective, this is not rigorous.
+From 1930’s perspective, it was revolutionary.
+
+When Dirac wrote his book:
+\begin{itemize}
+   \item Hilbert space theory was still developing.
+\item Spectral theorem was not yet standard physics language.
+\item Rigged Hilbert spaces did not exist.
+\item Distribution theory did not exist.
+\end{itemize}
+He was not misusing established mathematics.
+He was inventing a new symbolic calculus before the mathematics to justify it existed.
+Later, mathematicians 
+provided rigorous frameworks that made Dirac’s manipulations meaningful.
+
+However some of statements are genuinely incorrect, for example:
+\begin{itemize}
+   \item implicit assumption that every observable has a complete set of eigenvectors;
+\item overuse of spectral decompositions without domain care;
+\item loose treatment of continuous spectra;
+\item ambiguities about self-adjoint vs symmetric operators;
+\item (most serious!) statement that canonical transformations in classical mechanics 
+    may be lifted to unitary transformations in quantum mechanics.
+\end{itemize}
+
+In his book \cite{neumann-mfqm}  Mathematische Grundlagen der Quantenmechanik (1932) von Neumann made everything measure-theoretic and Hilbert-space rigorous and avoided $ \delta $-functions entirely.
+Though von Neumann’s formulation is mathematically precise,
+Dirac’s notation became universal in physics.
+Because Dirac’s formalism is vastly more flexible and computationally powerful.
