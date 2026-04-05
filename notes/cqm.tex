@@ -1,0 +1,237 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm,physics,geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\title{\textbf{Inverse–Square Potential on the Half–Line\\
+and Conformal Quantum Mechanics}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We connect the one–dimensional half–line inverse–square
+Schrödinger Hamiltonian with the generators of conformal quantum mechanics.
+The Hamiltonian, dilation, and special conformal operators
+form the Lie algebra $\mathfrak{so}(2,1)$.
+We analyze the representation parameter,
+its relation to the coupling constant,
+and show how the hard–wall boundary condition arises
+as a singular strong–coupling limit within the conformal algebra.
+\end{abstract}
+
+\section{Hamiltonian on the Half–Line}
+
+Consider
+\begin{equation}
+H
+=
+\frac{p^2}{2m}
++
+\frac{g}{x^2},
+\qquad x>0,
+\qquad p=-i\hbar\frac{d}{dx}.
+\end{equation}
+
+Introduce
+\begin{equation}
+\gamma=\frac{2mg}{\hbar^2},
+\qquad
+\nu=\sqrt{\frac{1}{4}+\gamma}.
+\end{equation}
+
+The stationary equation becomes
+\begin{equation}
+\psi''(x)+\left(k^2-\frac{\gamma}{x^2}\right)\psi(x)=0.
+\end{equation}
+
+For $g>0$, the Hamiltonian is essentially self–adjoint,
+and the physical solution is
+\begin{equation}
+\psi(x)=\sqrt{x}J_\nu(kx).
+\end{equation}
+
+\section{Conformal Generators}
+
+Define the three operators
+
+\begin{align}
+H &= \frac{p^2}{2m}+\frac{g}{x^2}, \\
+D &= \frac{1}{2}(xp+px), \\
+K &= \frac{m x^2}{2}.
+\end{align}
+
+They satisfy the commutation relations
+
+\begin{align}
+[ D,H ] &= i\hbar H, \\
+[ D,K ] &= -i\hbar K, \\
+[ H,K ] &= 2i\hbar D.
+\end{align}
+
+This is the Lie algebra $\mathfrak{so}(2,1)$.
+
+\section{Casimir Operator}
+
+The quadratic Casimir is
+\begin{equation}
+C = HK + KH - D^2.
+\end{equation}
+
+A direct calculation yields
+\begin{equation}
+C
+=
+\frac{\hbar^2}{4}
+\left(
+\nu^2-\frac{1}{4}
+\right).
+\end{equation}
+
+Thus the representation is characterized by
+\begin{equation}
+\nu=\sqrt{\frac{1}{4}+\frac{2mg}{\hbar^2}}.
+\end{equation}
+
+Hence:
+
+\begin{center}
+The coupling constant $g$ determines the
+$\mathfrak{so}(2,1)$ representation weight.
+\end{center}
+
+\section{Dilation Properties}
+
+The dilation generator acts as
+\begin{equation}
+D=-i\hbar\left(x\frac{d}{dx}+\frac{1}{2}\right).
+\end{equation}
+
+The regular solution behaves near $x=0$ as
+\begin{equation}
+\psi(x)\sim x^{\nu+\frac{1}{2}}.
+\end{equation}
+
+Thus it is an eigenfunction of $D$ asymptotically:
+\begin{equation}
+D\,x^{\nu+\frac{1}{2}}
+=
+-i\hbar\left(\nu+1\right)x^{\nu+\frac{1}{2}}.
+\end{equation}
+
+The exponent $\nu+\frac{1}{2}$ is the conformal scaling dimension.
+
+\section{Compact Generator (DFF Construction)}
+
+Define the compact Hamiltonian
+\begin{equation}
+H_\omega = H+\omega^2 K.
+\end{equation}
+
+Explicitly,
+\begin{equation}
+H_\omega
+=
+\frac{p^2}{2m}
++
+\frac{g}{x^2}
++
+\frac{1}{2} m\omega^2 x^2.
+\end{equation}
+
+This has discrete spectrum
+\begin{equation}
+E_n
+=
+2\hbar\omega
+\left(
+n+\frac{1}{2}+\frac{\nu}{2}
+\right),
+\quad n=0,1,2,\dots
+\end{equation}
+
+The operators
+\begin{equation}
+J_0=\frac{1}{2\omega}H_\omega,
+\qquad
+J_\pm
+=
+\frac{1}{2}\left(\frac{K}{\omega}-\omega H\right)
+\mp iD
+\end{equation}
+satisfy
+\begin{align}
+[J_0,J_\pm]&=\pm J_\pm,\\
+[J_+,J_-]&=-2J_0.
+\end{align}
+
+Thus the spectrum is generated algebraically.
+
+\section{Hard Wall as Strong–Coupling Limit}
+
+As $g\to+\infty$:
+\begin{equation}
+\nu\sim \sqrt{\frac{2mg}{\hbar^2}}\to\infty.
+\end{equation}
+
+Then near the origin
+\begin{equation}
+\psi(x)\sim x^{\nu+\frac{1}{2}}.
+\end{equation}
+
+For any fixed $x>0$:
+\begin{equation}
+\lim_{g\to\infty} x^{\nu+\frac{1}{2}}=0.
+\end{equation}
+
+In representation terms:
+\begin{itemize}
+\item The Casimir $C\to\infty$.
+\item The conformal weight diverges.
+\item The scaling dimension becomes infinite.
+\end{itemize}
+
+This forces
+\begin{equation}
+\psi(0)=0,
+\end{equation}
+which is precisely the Dirichlet hard–wall boundary condition.
+
+Thus:
+
+\begin{center}
+The hard wall is the infinite–weight limit
+of a conformal $\mathfrak{so}(2,1)$ representation.
+\end{center}
+
+\section{Structural Picture}
+
+\begin{itemize}
+\item $H$ generates time translations.
+\item $D$ generates scale transformations.
+\item $K$ generates special conformal transformations.
+\item $g$ fixes the representation via the Casimir.
+\item $g\to\infty$ collapses the representation into
+a boundary constraint.
+\end{itemize}
+
+Therefore the half–line inverse–square system
+is the minimal conformal quantum mechanics model,
+with the hard wall emerging as a singular representation limit.
+
+\section{Conclusion}
+
+The inverse–square Hamiltonian on the half–line:
+
+\begin{enumerate}
+\item Realizes $\mathfrak{so}(2,1)$ exactly.
+\item Has coupling–dependent conformal weight $\nu$.
+\item Becomes a hard wall when $\nu\to\infty$.
+\item Provides the primitive building block of
+conformal quantum mechanics.
+\end{enumerate}
+
+\end{document}
