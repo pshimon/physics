@@ -1,18 +1,31 @@
 \chapter{Axioms of Quantum Mechanics}
 \label{aqm}
 
-Formally a quantum system is defined by four axioms:
-\begin{axiom}[States]
+Formally a quantum system is defined by four axioms,
+describing states,observables,dynamics, and probabilities.
+\section{States}
     \label{states}
+
+\begin{axiom}[States]
+    \label{sts}
 Physical state is a vector in complex separable Hilbert space $ \mathcal{H} $
 \[ |\psi \rangle \in \mathcal{H} .\]
 \end{axiom}
+%description and discussion of states vectors rays etc
+
+\section{Observables}
+    \label{observables}
+
 \begin{axiom}[Observables]
     \label{observs}
 Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$. 
 \end{axiom}
-\begin{axiom}[Dynamics]
+% discussion of observables SA HERM etc.
+
+\section{Dynamics}
     \label{dynamics}
+\begin{axiom}[Dynamics]
+    \label{dyn}
     There is an observable $ \hat H$ (Hamiltonian),which generates time evolution
     (unitary group):
     \begin{equation}
@@ -20,6 +33,7 @@ Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$
  \hat U(t) = e^{-i \hat Ht/\hbar}.
     \end{equation}
 \end{axiom}
+
     Evolution may be seen as action on observables (Heisenberg picture)
 \begin{align}
    \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {heis1}\\
@@ -30,10 +44,15 @@ Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$
     |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{schr1} \\
     \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{schr2}
 \end{align}
+%here about dynamics
+
+\section{Probabilities}
+\label{probabilities}
 \begin{axiom}[Born rule]
     \label{born-rule}
-    \[  \frac{\langle{\psi}|{\phi}\rangle}{\|{\psi}\| \|{\phi}\|}  \]
-     is probability amplitude of transition between states.
+    \[  B_\psi=\frac{\langle{\psi}|{\phi}\rangle}{\|{\psi}\| \|{\phi}\|}  \]
+     is probability amplitude of transition between states. Corresponding 
+     probability is $ P_\psi=|B_\psi|^2 $.
     Expectation value of an observable in a state 
     \begin{equation}
        \label {exp1}
@@ -41,4 +60,5 @@ Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$
     \end{equation}
     comprises all available information.
 \end{axiom}
+%here about prob,measurement, projection etc
 
