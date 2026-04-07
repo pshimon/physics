@@ -1,6 +1,7 @@
-NAME:=top
+NAME:=top-test
 BLD_DIR=../build
 $(NAME).pdf $(NAME).bcf: $(NAME).bbl $(NAME).tex
+	echo "making $(NAME)"
 #	pdflatex $(NAME)
 	xelatex --output-directory=$(BLD_DIR) $(NAME)
 #	lualatex $(NAME)
