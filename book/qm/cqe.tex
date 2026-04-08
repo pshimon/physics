@@ -1,5 +1,89 @@
 \chapter{Canonical Quantization Examples}
 \label{cqe}
+
+\section {Canonical Quantization}
+\label{canonical-quantization}
+Let start from some definitions \footnote{
+ There is some confusion in terminology, exact  operator domain 
+ rarely important in physical problems, so physicists generally do 
+ not pay attention to difference between Hermitian and self-adjoint operators.}:
+\begin{definition}
+    Operator $ \hat A^\dag$ is called adjoint to operator $ \hat A $,
+    if 
+$ \langle \hat A\phi,\psi \rangle = \langle \phi,\hat A^\dag \psi \rangle$.
+\end{definition}
+Note that domain of $ \hat A^\dag$ includes that of $ \hat A $
+$ D( \hat A)\subseteq D( \hat A^\dag)$.
+\begin{definition}
+    Operator $ \hat A $ is called Hermitian if $ \hat A = \hat A^\dag $ on
+    $D( \hat A)$.
+\end{definition}
+\begin{definition}
+    Operator $ \hat A $ is called  self-adjoint if $ \hat A = \hat A^\dag $
+    and $D( \hat A) = D( \hat A^\dag)$.
+\end{definition}
+For bounded operators on Hilbert space $ \mathcal{H} $ 
+$D( \hat A) = \mathcal{H} = D( \hat A^\dag)$ so Hermitian
+and self-adjoint bounded operators are the same. 
+
+Canonical quantization assigns Hermitian (self-adjoint) operators
+$\hat q_i, \hat p_j$ on Hilbert space $ \mathcal{H} $
+satisfying canonical commutation relations
+\begin{equation}
+    \label{cqe:ccr}
+    [\hat q_i, \hat p_j] = i\hbar \delta_{ij}.
+\end{equation}
+to classical observables $q_i, p_j$ --- coordinates on phase space $ \mathbb{R}^{2 n} $.
+All other observables are obtained by substitution of these operators into
+classical observables --- functions on phase space.
+Generally operator ordering ambiguities arise,  
+and additional analytic input is required to ensure self-adjointness.
+This prescription is insufficient for general systems, it works only
+if system is described by global Cartesian coordinates.
+So the standard name "canonical quantization" is misleading, but generally used.
+
+Operator $ \hat H$ (Hamiltonian) generates time evolution (unitary group):
+    \begin{equation}
+       \label {cqe:evol}
+ \hat U(t) = e^{-i \hat H t/ \hbar}.
+    \end{equation}
+    Evolution may be seen as action on observables (Heisenberg picture)
+\begin{align}
+   \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {cqe:heis1}\\
+    \frac{d \hat A}{d t} &= \frac{i}{\hbar}[\hat H,\hat A],\label{cqe:heis2}
+\end{align}
+    or as action on states (Schr\"odinger picture)
+\begin{align}
+    |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{cqe:schr1} \\
+    \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{cqe:schr2}
+\end{align}
+
+For "usual" Hamiltonian function $ H=p^2/(2 m) +V(q) $ we get:
+\begin{equation}
+   \label {cqe:ham}
+    \hat H = \frac{\hat p^2}{2 m}+V(\hat q)
+\end{equation}
+
+In particular using \eqref{cqe:ham},\eqref{cqe:ccr} and \eqref{cqe:heis2} we get:
+\begin{equation}
+   \label {cqe:ehrenfest}
+   \begin{split}
+       \frac{d \hat q_i}{d t} &= \frac{\hat p_i}{m}\\
+       \frac{d \hat p_j}{d t} &= - \frac{\partial V}{\partial q_j}(\hat q)
+   \end{split}
+\end{equation}
+which formally coincide with classical equation of motion.
+
+For most practical problems canonical quantization is realized as
+\begin{equation}
+q_i \mapsto \hat q_i = q_i, \qquad p_j \mapsto \hat p_j = -i\hbar \frac{\partial}{\partial q_j},
+\end{equation}
+acting on $\mathcal{H}=L^2(Q,dq)$. \footnote{ Actually this representation
+is essentially unique.}
+
+Below we shall consider a number of very simple but instructive 
+examples.
+
 \section{Quantum Dynamics of a Wave Packet in a Square Well}
 
 Consider a particle confined to a one-dimensional infinite square well of width $L$,
