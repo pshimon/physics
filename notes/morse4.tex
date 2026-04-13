@@ -1,0 +1,274 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{physics}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{\textbf{Spectral Geometry and Limiting Structures of the Morse Hamiltonian}}
+\author{ }
+\date{}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a complete spectral-theoretic analysis of the Morse Hamiltonian on the real line, including bound states, scattering states, self-adjointness, deficiency indices, resonances, and limiting regimes.
+Special attention is given to the hard-wall limit $a\to\infty$ and its comparison with large-parameter limits of the P\"oschl--Teller and Scarf families.
+The analysis clarifies how boundary formation, algebraic contraction, and hypergeometric confluence govern spectral transitions.
+\end{abstract}
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Morse Hamiltonian}
+
+We consider
+\[
+H = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
++ D_e(1-e^{-a(x-x_0)})^2,
+\quad x\in\mathbb R,
+\]
+with parameters $D_e,a>0$.
+
+Define
+\[
+\lambda=\frac{\sqrt{2mD_e}}{\hbar a}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Self-Adjointness}
+
+\begin{theorem}
+The Morse Hamiltonian is essentially self-adjoint on $C_c^\infty(\mathbb R)$.
+\end{theorem}
+
+\begin{proof}
+As $x\to -\infty$, $V(x)\to +\infty$.
+As $x\to +\infty$, $V(x)\to D_e$.
+The operator is limit-point at both endpoints by Weyl’s alternative.
+Thus deficiency indices vanish.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discrete Spectrum}
+
+\begin{theorem}
+If $\lambda>1/2$, the discrete spectrum consists of
+\[
+E_n = D_e - \frac{\hbar^2 a^2}{2m}(\lambda-n-\tfrac12)^2,
+\quad n=0,\dots,n_{\max},
+\]
+with
+\[
+n_{\max}=\lfloor\lambda-\tfrac12\rfloor.
+\]
+\end{theorem}
+
+Eigenfunctions:
+\[
+\psi_n(x)
+=
+N_n\, y^{\lambda-n-\frac12}
+e^{-y/2}
+L_n^{(2\lambda-2n-1)}(y),
+\quad
+y=2\lambda e^{-a(x-x_0)}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Continuous Spectrum}
+
+\begin{theorem}
+The essential spectrum is
+\[
+\sigma_{\text{ess}}(H)=[D_e,\infty).
+\]
+\end{theorem}
+
+Scattering solutions:
+\[
+\psi_k(x)
+=
+e^{ikx}
+{}_1F_1\!\left(
+\lambda+\tfrac12-\frac{ik}{a},
+\,1-\frac{2ik}{a};
+\,2\lambda e^{-a(x-x_0)}
+\right).
+\]
+
+Reflection coefficient:
+\[
+R(k)=
+\frac{\Gamma(-2ik/a)\Gamma(\lambda+\tfrac12+ik/a)}
+{\Gamma(2ik/a)\Gamma(\lambda+\tfrac12-ik/a)}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Resonances}
+
+Poles of $R(k)$ in $\Im k<0$ occur at
+\[
+\lambda+\tfrac12-\frac{ik}{a}=-n,
+\]
+giving
+\[
+k_n=-i a(\lambda+\tfrac12+n).
+\]
+
+These define Gamow states satisfying outgoing boundary conditions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hard-Wall Limit $a\to\infty$}
+
+\begin{theorem}
+As $a\to\infty$,
+\[
+H\to
+-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+D_e
+\quad\text{on }(x_0,\infty)
+\]
+with Dirichlet boundary at $x_0$.
+\end{theorem}
+
+\begin{proof}[Sketch]
+For $x<x_0$, $V\to\infty$.
+For $x>x_0$, $V\to D_e$.
+Norm-resolvent convergence holds.
+\end{proof}
+
+Reflection:
+\[
+R(k)\to -1.
+\]
+
+Discrete spectrum disappears.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comparison with P\"oschl--Teller and Scarf}
+
+\subsection{Hyperbolic P\"oschl--Teller}
+
+\[
+V(x)=
+-\frac{\hbar^2 a^2}{2m}
+\frac{\lambda(\lambda-1)}{\cosh^2(ax)}.
+\]
+
+Bound states:
+\[
+E_n=-\frac{\hbar^2 a^2}{2m}(\lambda-1-n)^2.
+\]
+
+Large-$a$ limit localizes to delta-type interaction.
+Large-$\lambda$ limit produces deep symmetric well.
+
+\subsection{Trigonometric P\"oschl--Teller}
+
+Defined on finite interval.
+Hardening produces infinite square well.
+Spectrum remains purely discrete.
+
+\subsection{Scarf Potentials}
+
+Scarf I: compact interval ($\mathfrak{su}(2)$).
+Scarf II: full line ($\mathfrak{su}(1,1)$).
+Large parameter limits deepen wells rather than create boundaries.
+
+\subsection{Geometric Distinction}
+
+\[
+\text{Morse: boundary formation}
+\qquad
+\text{P\"oschl--Teller/Scarf: well deepening}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algebraic Contraction}
+
+Morse and hyperbolic PT realize $\mathfrak{su}(1,1)$.
+Trigonometric PT realizes $\mathfrak{su}(2)$.
+
+Hard-wall limit corresponds to contraction:
+\[
+\mathfrak{su}(1,1)
+\longrightarrow
+\text{free translation algebra on half-line}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Semiclassical Interpretation}
+
+Bohr–Sommerfeld:
+\[
+\oint p(x)\,dx
+=
+2\pi\hbar(n+\tfrac12).
+\]
+
+As $a\to\infty$:
+Turning point collapses to boundary.
+Action integral reduces to half-line free motion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+
+\section{Weyl’s Alternative}
+
+For Sturm–Liouville operator
+\[
+-\psi''+V\psi=E\psi,
+\]
+an endpoint is:
+
+\begin{itemize}
+\item limit-point if at most one $L^2$ solution,
+\item limit-circle if two $L^2$ solutions.
+\end{itemize}
+
+Morse is limit-point at both infinities.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{thebibliography}{99}
+
+\bibitem{ReedSimon}
+M. Reed and B. Simon,
+\textit{Methods of Modern Mathematical Physics II},
+Academic Press (1975).
+
+\bibitem{Teschl}
+G. Teschl,
+\textit{Mathematical Methods in Quantum Mechanics},
+AMS (2009).
+
+\bibitem{Flugge}
+S. Fl\"ugge,
+\textit{Practical Quantum Mechanics},
+Springer (1971).
+
+\bibitem{CooperKhareSukhatme}
+F. Cooper, A. Khare, U. Sukhatme,
+Supersymmetry in Quantum Mechanics,
+Phys. Rep. 251 (1995).
+
+\bibitem{Gendenshtein}
+L. Gendenshtein,
+JETP Lett. 38 (1983).
+
+\bibitem{Taylor}
+J. R. Taylor,
+\textit{Scattering Theory},
+Wiley (1972).
+
+\end{thebibliography}
+
+\end{document}

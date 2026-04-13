@@ -1,0 +1,609 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\section{The Small-$a$ Limit of the Scattering Sector}
+
+We analyze the behavior of the Morse scattering states as
+\[
+a \to 0,
+\]
+with $D_e$ fixed. Physically, this corresponds to flattening the
+potential so that it approaches a constant background.
+
+\subsection{Scaling of Parameters}
+
+Recall the definitions
+\[
+\lambda = \frac{\sqrt{2mD_e}}{\hbar a},
+\qquad
+\kappa = \frac{k}{a},
+\qquad
+y = 2\lambda e^{-a(x-x_0)}.
+\]
+
+As $a\to 0$,
+\[
+\lambda \to \infty,
+\qquad
+\kappa \to \infty,
+\qquad
+\frac{\kappa}{\lambda}
+=
+\frac{\hbar k}{\sqrt{2mD_e}}
+\quad \text{fixed}.
+\]
+
+Expand the potential:
+\[
+V(x)
+=
+D_e\left(1-e^{-a(x-x_0)}\right)^2.
+\]
+
+For small $a$,
+\[
+e^{-a(x-x_0)}
+=
+1-a(x-x_0)+\mathcal O(a^2),
+\]
+so
+\[
+V(x)
+=
+D_e a^2 (x-x_0)^2 + \mathcal O(a^3).
+\]
+
+Hence for fixed $x$,
+\[
+V(x)\to 0,
+\]
+while $V(+\infty)=D_e$ remains the asymptotic threshold.
+Thus the Hamiltonian approaches
+\[
+H \to -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + D_e.
+\]
+
+\subsection{Limit of the Scattering Solutions}
+
+The continuum wavefunctions are
+\[
+\psi_k(x)
+=
+\mathcal N(k)\,
+y^{i\kappa}
+e^{-y/2}
+U\!\left(
+\frac12-\lambda+i\kappa,
+1+2i\kappa,
+y
+\right).
+\]
+
+We examine the asymptotics for large $\lambda,\kappa$.
+
+Using
+\[
+y = 2\lambda e^{-a(x-x_0)}
+=
+2\lambda\left[1-a(x-x_0)+\mathcal O(a^2)\right],
+\]
+we write
+\[
+y = 2\lambda - 2\lambda a(x-x_0)+\mathcal O(a^2).
+\]
+
+Since
+\[
+\lambda a = \frac{\sqrt{2mD_e}}{\hbar},
+\]
+the combination
+\[
+2\lambda a(x-x_0)
+=
+\frac{2\sqrt{2mD_e}}{\hbar}(x-x_0)
+\]
+remains finite.
+
+One uses the large-parameter asymptotics of the confluent
+hypergeometric function $U(a,b,y)$
+(see \cite{olver})
+to obtain
+
+\[
+\psi_k(x)
+\longrightarrow
+\frac{1}{\sqrt{2\pi}}
+e^{ikx},
+\]
+up to an irrelevant phase factor.
+
+\subsection{Limit of the Reflection Amplitude}
+
+Recall
+\[
+R(k)=
+\frac{\Gamma(-2i\kappa)
+\,\Gamma(\frac12-\lambda+i\kappa)}
+{\Gamma(2i\kappa)
+\,\Gamma(\frac12-\lambda-i\kappa)}.
+\]
+
+For large $\lambda,\kappa$,
+using Stirling’s formula,
+
+\[
+\frac{\Gamma(\frac12-\lambda+i\kappa)}
+{\Gamma(\frac12-\lambda-i\kappa)}
+\sim
+e^{2i\delta(k)},
+\]
+with phase shift
+
+\[
+\delta(k) \to 0
+\quad (a\to 0).
+\]
+
+Hence
+\[
+R(k)\to 1.
+\]
+
+Since transmission is already absent,
+this means scattering becomes trivial:
+the potential becomes flat.
+
+\subsection{Result}
+
+\begin{theorem}
+In the limit $a\to 0$ with $D_e$ fixed,
+the Morse Hamiltonian converges (in strong resolvent sense)
+to the free Hamiltonian shifted by $D_e$,
+\[
+H \to -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+D_e,
+\]
+and the scattering eigenfunctions converge to plane waves.
+\end{theorem}
+
+\subsection{Physical Interpretation}
+
+As $a\to 0$:
+
+\begin{itemize}
+\item The exponential wall recedes to $x=-\infty$.
+\item The potential becomes spatially flat.
+\item Bound states disappear ($n_{\max}\to\infty$ but
+      levels accumulate at $D_e$).
+\item The S-matrix becomes trivial.
+\end{itemize}
+
+Thus the Morse potential interpolates between a confining
+anharmonic well and a constant free background,
+with $a$ controlling the geometric scale of the exponential wall.
+
+\begin{thebibliography}{99}
+\bibitem{olver}
+F.~W.~J.~Olver et al.,
+\textit{NIST Handbook of Mathematical Functions},
+Cambridge Univ. Press (2010).
+\end{thebibliography}
+
+
+\section{The Hard-Wall Limit $a\to\infty$}
+
+We now analyze the opposite regime,
+\[
+a \to \infty,
+\]
+with $D_e$ fixed.
+This corresponds to compressing the exponential wall so that
+the potential becomes infinitely steep at $x=x_0$.
+
+\subsection{Pointwise Limit of the Potential}
+
+Recall
+\[
+V(x)
+=
+D_e\left(1-e^{-a(x-x_0)}\right)^2.
+\]
+
+Consider separately the regions:
+
+\paragraph{1. $x>x_0$.}
+Then $e^{-a(x-x_0)}\to 0$ as $a\to\infty$,
+so
+\[
+V(x)\to D_e.
+\]
+
+\paragraph{2. $x<x_0$.}
+Then $e^{-a(x-x_0)}=e^{a(x_0-x)}\to\infty$,
+so
+\[
+V(x)\to\infty.
+\]
+
+Thus, in the limit,
+
+\[
+V_\infty(x)
+=
+\begin{cases}
+\infty, & x<x_0,\\[6pt]
+D_e, & x>x_0.
+\end{cases}
+\]
+
+This is a hard wall at $x=x_0$ together with a constant background.
+
+\subsection{Limiting Hamiltonian}
+
+The limiting operator is therefore
+
+\[
+H_\infty
+=
+-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
++
+D_e,
+\]
+acting on $L^2(x_0,\infty)$
+with Dirichlet boundary condition
+\[
+\psi(x_0)=0.
+\]
+
+\begin{theorem}
+As $a\to\infty$, the Morse Hamiltonian converges
+in the strong resolvent sense to
+\[
+H_\infty =
+-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
++D_e
+\quad \text{on } (x_0,\infty),
+\]
+with Dirichlet boundary condition at $x_0$.
+\end{theorem}
+
+\begin{proof}[Sketch]
+The quadratic form of $H$ is
+\[
+Q_a[\psi]
+=
+\frac{\hbar^2}{2m}\int |\psi'|^2 dx
++
+\int V(x)|\psi|^2 dx.
+\]
+
+As $a\to\infty$, $V(x)\to\infty$ for $x<x_0$,
+forcing $\psi(x)=0$ in that region.
+Hence the domain collapses to functions supported on $(x_0,\infty)$.
+Standard results on monotone convergence of quadratic forms
+imply strong resolvent convergence.
+\end{proof}
+
+\subsection{Continuous Spectrum}
+
+The limiting spectrum is purely continuous:
+
+\[
+\sigma(H_\infty)
+=
+[D_e,\infty).
+\]
+
+The generalized eigenfunctions are
+
+\[
+\psi_k(x)
+=
+\sqrt{\frac{2}{\pi}}
+\sin\big(k(x-x_0)\big),
+\qquad
+E=D_e+\frac{\hbar^2 k^2}{2m}.
+\]
+
+These are free half-line states satisfying Dirichlet boundary condition.
+
+\subsection{Limit of the Reflection Amplitude}
+
+Recall the Morse reflection amplitude:
+
+\[
+R(k)=
+\frac{\Gamma(-2i\kappa)
+\,\Gamma(\frac12-\lambda+i\kappa)}
+{\Gamma(2i\kappa)
+\,\Gamma(\frac12-\lambda-i\kappa)},
+\qquad
+\kappa=\frac{k}{a},
+\qquad
+\lambda=\frac{\sqrt{2mD_e}}{\hbar a}.
+\]
+
+As $a\to\infty$,
+
+\[
+\kappa\to 0,
+\qquad
+\lambda\to 0.
+\]
+
+Using small-argument expansion of Gamma functions,
+one finds
+
+\[
+R(k)\to -1.
+\]
+
+Thus the phase shift tends to
+
+\[
+\delta(k)\to \frac{\pi}{2},
+\]
+
+which is precisely the phase shift for
+a hard Dirichlet wall:
+
+\[
+e^{ikx} - e^{-ikx}
+=
+2i \sin(kx).
+\]
+
+\subsection{Discrete Spectrum in the Limit}
+
+The bound-state energies are
+
+\[
+E_n
+=
+D_e
+-
+\frac{\hbar^2 a^2}{2m}
+\left(\lambda-n-\frac12\right)^2.
+\]
+
+Since
+\[
+\lambda=\frac{\sqrt{2mD_e}}{\hbar a}\to 0,
+\]
+we have
+\[
+n_{\max}=\left\lfloor\lambda-\frac12\right\rfloor\to -1.
+\]
+
+Hence for sufficiently large $a$,
+\[
+\text{no bound states remain.}
+\]
+
+\subsection{Physical Interpretation}
+
+As $a\to\infty$:
+
+\begin{itemize}
+\item The exponential wall sharpens into an impenetrable barrier.
+\item The well structure disappears.
+\item The discrete spectrum vanishes.
+\item The system becomes a free particle on the half-line.
+\item The reflection coefficient becomes $R=-1$.
+\end{itemize}
+
+Thus the Morse family interpolates between:
+
+\[
+\boxed{
+\text{free line } (a\to 0)
+\quad \longleftrightarrow \quad
+\text{hard half-line } (a\to\infty)
+}
+\]
+
+with intermediate values producing
+a finite ladder of bound states and
+nontrivial scattering phase.
+
+\bigskip
+
+This completes the description of the two extreme geometric limits
+of the Morse Hamiltonian.
+
+\section{Comparison of the Hard-Wall Limits:
+Morse vs.\ P\"oschl--Teller}
+
+We compare the limit $a\to\infty$ for the Morse potential
+with the analogous large-parameter limit of the
+hyperbolic P\"oschl--Teller potential.
+Although both produce infinitely steep barriers,
+their geometric realizations differ.
+
+\subsection{1. Morse Hard-Wall Limit}
+
+Recall
+\[
+V_M(x)=D_e\left(1-e^{-a(x-x_0)}\right)^2.
+\]
+
+As $a\to\infty$,
+
+\[
+V_M(x)\to
+\begin{cases}
+\infty, & x<x_0,\\[6pt]
+D_e, & x>x_0.
+\end{cases}
+\]
+
+The limiting Hamiltonian is
+
+\[
+H_\infty
+=
+-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}
++D_e
+\quad \text{on } (x_0,\infty)
+\]
+
+with Dirichlet boundary condition at $x_0$.
+The spectrum is purely continuous:
+
+\[
+\sigma(H_\infty)=[D_e,\infty).
+\]
+
+The reflection coefficient tends to
+
+\[
+R(k)\to -1,
+\]
+
+corresponding to a perfectly reflecting wall.
+
+\medskip
+
+Thus the Morse family interpolates
+\[
+\mathbb R
+\quad\longrightarrow\quad
+\text{half-line }(x_0,\infty).
+\]
+
+\subsection{2. Hyperbolic P\"oschl--Teller Potential}
+
+Consider the attractive hyperbolic P\"oschl--Teller potential
+
+\[
+V_{PT}(x)
+=
+-\frac{\hbar^2 a^2}{2m}
+\frac{\lambda(\lambda-1)}{\cosh^2(ax)}.
+\]
+
+Its bound-state energies are
+
+\[
+E_n
+=
+-\frac{\hbar^2 a^2}{2m}
+(\lambda-1-n)^2.
+\]
+
+The potential is symmetric and localized near $x=0$.
+
+\subsection{Hardening the P\"oschl--Teller Well}
+
+Two distinct limits may be considered:
+
+\paragraph{(i) $a\to\infty$ with $\lambda$ fixed.}
+
+Then
+\[
+\cosh^2(ax)\sim
+\begin{cases}
+1, & x=0,\\
+\infty, & x\neq 0.
+\end{cases}
+\]
+
+The potential collapses to a sharply localized well
+at $x=0$,
+approaching a delta-type interaction after suitable scaling.
+The system remains defined on the full line.
+
+\paragraph{(ii) $\lambda\to\infty$ with $a$ fixed.}
+
+The well depth grows like $\lambda^2$.
+After rescaling coordinates,
+the system approaches an infinite square well on a finite interval.
+
+Thus the P\"oschl--Teller family can produce
+a two-sided confinement,
+in contrast with Morse which produces a one-sided wall.
+
+\subsection{3. Spectral Comparison}
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+ & Morse ($a\to\infty$) & P\"oschl--Teller (large param.)\\
+\hline
+Domain & Half-line & Full line or finite interval \\
+Discrete spectrum & disappears & may persist or diverge \\
+Continuous spectrum & $[D_e,\infty)$ & $[0,\infty)$ \\
+Reflection & $R=-1$ & symmetric scattering \\
+Geometry & one-sided wall & symmetric well \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{4. Algebraic Perspective}
+
+The Morse system carries a truncated
+$\mathfrak{su}(1,1)$ representation.
+As $a\to\infty$,
+the representation collapses and no discrete ladder remains.
+
+The hyperbolic P\"oschl--Teller system also realizes
+$\mathfrak{su}(1,1)$,
+but in the deep-well limit the discrete representation
+may become large rather than disappear.
+
+The trigonometric P\"oschl--Teller system instead realizes
+$\mathfrak{su}(2)$;
+in its hard-wall limit it approaches an infinite square well,
+retaining a purely discrete spectrum.
+
+\subsection{5. Geometric Interpretation}
+
+\begin{itemize}
+\item Morse hard-wall limit:
+      removes one half of configuration space.
+\item Hyperbolic P\"oschl--Teller limit:
+      produces symmetric short-range interaction.
+\item Trigonometric P\"oschl--Teller limit:
+      produces confinement on a compact interval.
+\end{itemize}
+
+Hence the Morse and P\"oschl--Teller hardening mechanisms
+are geometrically distinct:
+
+\[
+\boxed{
+\text{Morse: boundary formation}
+\qquad
+\text{P\"oschl--Teller: well deepening}
+}
+\]
+
+\subsection{6. Confluent vs.\ Hypergeometric Origin}
+
+Morse arises from a confluent hypergeometric equation,
+while P\"oschl--Teller arises from the Gauss hypergeometric equation.
+
+In the hard-wall limit:
+
+\begin{itemize}
+\item Morse $\rightarrow$ half-line free Laplacian.
+\item Trigonometric P\"oschl--Teller $\rightarrow$ square well.
+\item Hyperbolic P\"oschl--Teller $\rightarrow$ delta-type or deep symmetric well.
+\end{itemize}
+
+Thus the limiting operator retains memory of
+the global geometry of the original system.
+
+\bigskip
+
+In conclusion, although both potentials admit
+a steep-barrier limit,
+the Morse family generates a geometric boundary,
+whereas the P\"oschl--Teller family modifies the depth
+or compactness of the confining region.
+
+\end{document}
