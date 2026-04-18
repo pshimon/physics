@@ -118,7 +118,7 @@ When $g \to 0$ $\nu \to 1/2$ since
 the solution of \eqref{cqe:swe1} becomes that of \eqref{cqe:hwe1},
 without need in boundary conditions.
 
-\section{Quantum Dynamics of a Wave Packet in a Square Well}
+\section{Particle in Box}
 
 Consider a particle confined to a one-dimensional infinite square well of width $L$,
 \begin{equation}
@@ -184,4 +184,159 @@ The dynamics of a wave packet in a square well illustrate:
 This system exemplifies the interplay between classical intuition and fundamentally quantum effects.
 However despite the fact that packet behaves as if momentum reverses sign at the walls,
 no self-adjoint momentum operator exists. So momentum is not observable!
+
+Let us again go to smooth potential.
+\[
+    V(x)=a^2\cot^2(bx), \qquad x\in(0,\pi/b),
+\]
+The Schr\"odinger equation is 
+\begin{equation}
+    \label{cqe:pte}
+    \frac{\hbar^2}{2m}\frac{d^2 \Psi}{dx^2}+(E-a^2\cot^2(bx))\Psi
+\end{equation}
+Let 
+\[ k^2=\frac{2 m (E+a^2)}{\hbar^2 b^2} \quad 
+\lambda(\lambda-1)=\frac{2 m a^2}{\hbar^2 b^2}
+\]
+so equation \eqref{cqe:pte} becomes
+\[ \Psi''+(k^2-\frac{\lambda (\lambda-1)}{\sin^2(x)}) \Psi=0 \]
+Substituting \[ \Psi(x)=\sin^\lambda(x) y(\cos(x)) \] we get
+equation ($ \xi=\cos(x) $)
+\[ y''-\frac{(2 \lambda+1)\xi}{1-\xi^2} y' +\frac{n(n+2 \lambda)}{1-\xi^2}y=0 , \] where $ k^2-\lambda^2=n(n+2 \lambda) $
+Gegenbauer polynomials $G^\lambda_n$ are solutions of this equation.
+So eigenvalues are 
+\begin{equation}
+   \label {cqe:ptev}
+   E_n=\frac{\hbar ^2 b^2}{2 m}(n^2+(2 n+1) \lambda)
+\end{equation}
+and eigenfunctions are 
+\begin{equation}
+   \label {cqe:ptef}
+    \Psi_n=A_n \sin^\lambda(x) G^\lambda_n(cos(x)) \quad x\in (0,\pi)
+\end{equation}
+Let \[ \gamma=\frac{8 m a^2}{\hbar^2 b^2} \] then \[ 
+\lambda=\frac{1}{2} (1+\sqrt{1+\gamma})\]
+Since $ \lambda>1 $ and $ G^\lambda_n $ are finite, one can see that there is no need in boundary conditions.
+
+Note that $\lambda \to 1$ when $ \gamma \to 0 $ and \[ 
+G^1_n(\cos x)=\frac{\sin(n+1)x}{\sin(x)}\] so eigenvalues \eqref{cqe:ptev}
+and eigenfunctions \eqref{cqe:ptef} become that of the box.
+
+\section{The Ground State Determines  Dynamics }
+\label{cqe:gsdd}
+
+In classical mechanics, dynamics is specified by a Hamiltonian function;
+individual solutions do not determine the Hamiltonian. In quantum
+mechanics, however, the structure of the Schr\"odinger equation implies
+a striking inversion: knowledge of a single, sufficiently regular
+stationary state---specifically the nondegenerate ground state---fixes
+the potential and thereby all dynamics.
+
+Consider a single nonrelativistic particle of mass $m$ on $\mathbb{R}^n$ governed by
+\begin{equation}
+\hat H = -\frac{\hbar^2}{2m}\nabla^2 + V(\vec x),
+\end{equation}
+with $V$ real-valued, locally bounded, and confining enough to admit a normalizable ground state $\psi_0>0$ almost everywhere.
+
+We assume:
+\begin{enumerate}
+\item The ground state is nondegenerate.
+\item $\psi_0(\vec{x})$ is twice differentiable and nowhere vanishing.
+\item Boundary conditions (e.g. decay at infinity) are known.
+\end{enumerate}
+These assumptions are standard in both mathematical physics and quantum chemistry.
+
+Let $E_0$ be the ground-state energy. The time-independent Schr\"odinger equation reads
+\begin{equation}
+-\frac{\hbar^2}{2m}\nabla^2\psi_0 + V\psi_0 = E_0\psi_0.
+\end{equation}
+Solving for the potential yields
+\begin{equation}
+    \label{pot1d}
+V(\vec{x}) = E_0 + \frac{\hbar^2}{2m}\frac{\nabla^2\psi_0(\vec{x})}{\psi_0(\vec{x})}.
+\end{equation}
+Thus, given $\psi_0$ and $E_0$, the potential is uniquely determined
+pointwise. Since adding a constant to $V$ merely shifts all energies
+uniformly, the potential is fixed up to an additive constant even if
+$E_0$ is unknown.
+
+The positivity of $\psi_0$ ensures that the reconstruction formula is
+well defined. Any other potential $V'$ admitting the same ground 
+state must coincide with $V$ almost everywhere. Hence the ground 
+state uniquely specifies the Hamiltonian.
+
+Once $V$ is fixed, the entire spectral problem is fixed: all excited
+eigenstates and eigenvalues are determined, the propagator 
+$U(t)=e^{-i\hat H t/\hbar}$ is fixed, and all expectation values
+and transition amplitudes follow. Therefore, the ground state 
+determines not merely low-energy physics but the complete time 
+evolution of the system.
+
+In one dimension, the result is a special case of inverse 
+Sturm--Liouville theory, where knowledge of the lowest 
+eigenfunction suffices to reconstruct the potential locally.
+
+Defining the superpotential
+\begin{equation}
+W(x) = -\frac{\hbar}{\sqrt{2m}}\frac{\psi_0'(x)}{\psi_0(x)},
+\end{equation}
+we obtain
+\begin{equation}
+V(x) = W^2(x) - \frac{\hbar}{\sqrt{2m}}W'(x) + E_0,
+\end{equation}
+showing again that $\psi_0$ encodes the full Hamiltonian structure.
+
+
+Let the ground-state wave function be written as
+\begin{equation}
+\psi_0(\vec{x}) = e^{-\phi(\vec{x})},
+\end{equation}
+where $\phi$ is a smooth real-valued function. Positivity of the ground state guarantees that this representation is globally well defined. Substituting into the reconstruction formula yields
+\begin{equation}
+V(\vec{x}) = E_0 + \frac{\hbar^2}{2m}\Big[(\nabla \phi)^2 - \nabla^2 \phi\Big].
+\end{equation}
+The potential is thus a scalar functional constructed from first 
+and second derivatives of $\phi$, suggesting an intrinsic geometric interpretation.
+
+Degenerate ground states may lead to non-uniqueness. Excited states 
+cannot be used directly due to the presence of nodes. For interacting
+many-body systems the statement generalizes formally, but 
+reconstruction becomes non-local in configuration space. 
+
+This determinacy challenges the intuition that dynamics is prior to 
+states. In the Schr\"odinger framework, the ground state contains 
+the full dynamical content. The Hamiltonian may therefore be regarded
+as a derived object, secondary to a privileged stationary state. 
+This perspective aligns naturally with structural and geometric 
+interpretations of quantum theory.
+
+\subsection{Explicit Example}
+
+Consider the nontrivial ground state
+\begin{equation}
+    \label{gsx4}
+\psi_0(x) = A \exp\Big(-\frac{a}{4} x^4\Big), \quad a>0.
+\end{equation}
+
+Substituting \eqref{gsx4} into \eqref{pot1d}, we compute:
+\begin{align*}
+\psi_0'(x) &= -a x^3 \psi_0(x), \
+\psi_0''(x) &= (a^2 x^6 - 3 a x^2) \psi_0(x).
+\end{align*}
+Thus the potential is
+\begin{equation}
+V(x) = E_0 + \frac{\hbar^2}{2m} (a^2 x^6 - 3 a x^2),
+\end{equation}
+a sextic potential with a negative quadratic term, uniquely determined by $\psi_0$.
+
+Writing excited states as $\psi_n = \psi_0 P_n$, the Sturm--Liouville operator for $P_n$ is
+\begin{equation}
+L = -\frac{\hbar^2}{2m} \left( \frac{d^2}{dx^2} + 2 a x^3 \frac{d}{dx} \right),
+\end{equation}
+with weight $w(x) = \psi_0^2 = A^2 e^{- \frac{a}{2} x^4}$. The eigenvalue equation is
+\begin{equation}
+L P_n = (E_n - E_0) P_n,
+\end{equation}
+which defines the spectrum and orthogonal polynomials (Freud polynomials) relative to $w(x)$.
+Numerical or recursive methods can be used to compute $E_n$ and $P_n$.
 

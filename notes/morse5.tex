@@ -1,0 +1,214 @@
+\section{Morse Potential: Exact Solutions in the Classically Forbidden Region}
+
+\subsection{Schrödinger Equation and Setup}
+
+We consider the one-dimensional stationary Schrödinger equation
+\begin{equation}
+- \frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}
++ V(x)\psi
+= E\psi,
+\label{SE}
+\end{equation}
+with the Morse potential
+\begin{equation}
+V(x)=D\left(e^{-2a(x-x_0)}-2e^{-a(x-x_0)}\right),
+\qquad
+D>0,\; a>0 .
+\label{Morse}
+\end{equation}
+
+The potential satisfies
+\[
+\lim_{x\to -\infty}V(x)=+\infty,
+\qquad
+\lim_{x\to +\infty}V(x)=0,
+\]
+and has a minimum $V_{\min}=-D$ at $x=x_0$.
+
+For bound states one has $-D<E<0$.  
+The classically forbidden region is defined by
+\[
+V(x)>E .
+\]
+
+\subsection{Reduction to Confluent Hypergeometric Form}
+
+Introduce the dimensionless variable
+\begin{equation}
+y = 2\lambda e^{-a(x-x_0)},
+\qquad
+\lambda=\frac{\sqrt{2mD}}{\hbar a}.
+\label{ydef}
+\end{equation}
+
+Define also the dimensionless energy parameter
+\begin{equation}
+\epsilon = -\frac{2mE}{\hbar^2 a^2} >0,
+\qquad
+s=\sqrt{\epsilon}.
+\label{edef}
+\end{equation}
+
+A straightforward computation shows that Eq.~\eqref{SE} reduces to
+\begin{equation}
+y\frac{d^2\psi}{dy^2}
++(1-y)\frac{d\psi}{dy}
++\left(
+-\frac{s^2}{y}
++\frac{\lambda^2}{4}
+-\frac{\lambda}{2}
+\right)\psi
+=0 .
+\label{reduced}
+\end{equation}
+
+Setting
+\[
+\psi(y)=y^{s}e^{-y/2}w(y),
+\]
+Eq.~\eqref{reduced} transforms into the confluent hypergeometric equation
+\begin{equation}
+y w'' + (2s+1-y) w' - (s-\lambda+1) w =0.
+\end{equation}
+
+\subsection{Exact General Solution}
+
+The general solution is therefore
+\begin{equation}
+\psi(y)
+=
+y^{s} e^{-y/2}
+\left[
+A\, M(s-\lambda+1,\,2s+1,\,y)
++
+B\, U(s-\lambda+1,\,2s+1,\,y)
+\right],
+\label{general}
+\end{equation}
+where $M(a,b,y)$ and $U(a,b,y)$ denote Kummer's and Tricomi's confluent
+hypergeometric functions, respectively.
+
+\subsection{Behavior in the Forbidden Region}
+
+\subsubsection*{Left Forbidden Region ($x\to -\infty$)}
+
+As $x\to -\infty$, one has $y\to\infty$.  
+Using the asymptotics
+\[
+M(a,b,y)\sim e^{y}y^{a-b},
+\qquad
+U(a,b,y)\sim y^{-a},
+\qquad y\to\infty,
+\]
+we obtain
+\[
+\psi(y)\sim
+A\, y^{s+a-b} e^{+y/2}
++
+B\, y^{s-a} e^{-y/2}.
+\]
+
+The first term grows exponentially and is therefore non-square-integrable.
+Thus physical solutions require $A=0$.
+
+The admissible solution behaves as
+\begin{equation}
+\psi(x)
+\sim
+\exp\!\left[-\lambda e^{-a(x-x_0)}\right]
+e^{-as(x-x_0)},
+\qquad x\to -\infty.
+\label{leftasymp}
+\end{equation}
+
+Hence the wave function exhibits \emph{double-exponential decay}
+in the strongly repulsive region.
+
+\subsubsection*{Right Forbidden Region ($x\to +\infty$)}
+
+As $x\to +\infty$, one has $y\to 0$.  
+Using
+\[
+U(a,b,y)\sim y^{-a},
+\qquad y\to 0,
+\]
+we find
+\[
+\psi(y)\sim y^{s},
+\]
+so that
+\begin{equation}
+\psi(x)
+\sim
+e^{-as(x-x_0)}.
+\end{equation}
+
+Since
+\[
+as = \sqrt{\frac{-2mE}{\hbar^2}},
+\]
+we obtain
+\begin{equation}
+\psi(x)
+\sim
+\exp\!\left[
+-\sqrt{\frac{-2mE}{\hbar^2}}\,x
+\right],
+\qquad x\to +\infty.
+\label{rightasymp}
+\end{equation}
+
+This coincides with the standard exponential tunneling form
+predicted by semiclassical analysis.
+
+\subsection{Final Physical Solution}
+
+The physically admissible bound-state solution in the classically
+forbidden region is therefore
+\begin{equation}
+\boxed{
+\psi(x)
+=
+C\, y^{s} e^{-y/2}
+U(s-\lambda+1,\,2s+1,\,y),
+\qquad
+y=2\lambda e^{-a(x-x_0)}.
+}
+\label{physical}
+\end{equation}
+
+Its asymptotic behavior is
+\[
+\psi(x)\sim
+\begin{cases}
+\exp\!\left[-\lambda e^{-a(x-x_0)}\right],
+& x\to -\infty, \\[6pt]
+\exp\!\left[-\sqrt{\dfrac{-2mE}{\hbar^2}}\,x\right],
+& x\to +\infty .
+\end{cases}
+\]
+
+\subsection{Semiclassical Comparison}
+
+In a classically forbidden region, the WKB approximation gives
+\[
+\psi(x)\sim
+\exp\!\left[
+-\int^x
+\sqrt{\frac{2m}{\hbar^2}\left(V(t)-E\right)}
+\,dt
+\right].
+\]
+
+For the Morse potential:
+
+\begin{itemize}
+\item As $x\to +\infty$, $V(x)\to 0$, and the integral grows linearly,
+      reproducing the standard exponential decay.
+\item As $x\to -\infty$, $V(x)\sim D e^{-2a(x-x_0)}$,
+      and the integral grows exponentially,
+      yielding double-exponential suppression.
+\end{itemize}
+
+Thus the asymmetric tunneling behavior is an intrinsic structural
+feature of the Morse potential.
