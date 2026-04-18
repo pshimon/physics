@@ -25,64 +25,98 @@ $ D( \hat A)\subseteq D( \hat A^\dag)$.
 For bounded operators on Hilbert space $ \mathcal{H} $ 
 $D( \hat A) = \mathcal{H} = D( \hat A^\dag)$ so Hermitian
 and self-adjoint bounded operators are the same. 
-
-Canonical quantization assigns Hermitian (self-adjoint) operators
-$\hat q_i, \hat p_j$ on Hilbert space $ \mathcal{H} $
-satisfying canonical commutation relations
-\begin{equation}
-    \label{cqe:ccr}
-    [\hat q_i, \hat p_j] = i\hbar \delta_{ij}.
-\end{equation}
-to classical observables $q_i, p_j$ --- coordinates on phase space $ \mathbb{R}^{2 n} $.
-All other observables are obtained by substitution of these operators into
-classical observables --- functions on phase space.
-Generally operator ordering ambiguities arise,  
-and additional analytic input is required to ensure self-adjointness.
-This prescription is insufficient for general systems, it works only
-if system is described by global Cartesian coordinates.
-So the standard name "canonical quantization" is misleading, but generally used.
-
-Operator $ \hat H$ (Hamiltonian) generates time evolution (unitary group):
-    \begin{equation}
-       \label {cqe:evol}
- \hat U(t) = e^{-i \hat H t/ \hbar}.
-    \end{equation}
-    Evolution may be seen as action on observables (Heisenberg picture)
-\begin{align}
-   \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {cqe:heis1}\\
-    \frac{d \hat A}{d t} &= \frac{i}{\hbar}[\hat H,\hat A],\label{cqe:heis2}
-\end{align}
-    or as action on states (Schr\"odinger picture)
-\begin{align}
-    |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{cqe:schr1} \\
-    \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{cqe:schr2}
-\end{align}
-
-For "usual" Hamiltonian function $ H=p^2/(2 m) +V(q) $ we get:
-\begin{equation}
-   \label {cqe:ham}
-    \hat H = \frac{\hat p^2}{2 m}+V(\hat q)
-\end{equation}
-
-In particular using \eqref{cqe:ham},\eqref{cqe:ccr} and \eqref{cqe:heis2} we get:
-\begin{equation}
-   \label {cqe:ehrenfest}
-   \begin{split}
-       \frac{d \hat q_i}{d t} &= \frac{\hat p_i}{m}\\
-       \frac{d \hat p_j}{d t} &= - \frac{\partial V}{\partial q_j}(\hat q)
-   \end{split}
-\end{equation}
-which formally coincide with classical equation of motion.
+In many cases Hermitian operators used in quantum mechanics 
+are not self-adjoint but have self-adjoint extensions.
 
 For most practical problems canonical quantization is realized as
 \begin{equation}
-q_i \mapsto \hat q_i = q_i, \qquad p_j \mapsto \hat p_j = -i\hbar \frac{\partial}{\partial q_j},
+q_i \mapsto \hat q_i = x_i, \qquad p_j \mapsto \hat p_j = -i\hbar \frac{\partial}{\partial x_j},
 \end{equation}
-acting on $\mathcal{H}=L^2(Q,dq)$. \footnote{ Actually this representation
+acting on $\mathcal{H}=L^2(\mathbb{R}^n,dx)$. \footnote{ Actually this representation
 is essentially unique.}
 
 Below we shall consider a number of very simple but instructive 
 examples.
+
+\section{Hard Wall}
+\label{cqe:hw}
+Let us consider a particle moving at half line:
+\begin{equation}
+    \label{cqe:hwp}
+V(x) = 
+\begin{cases}
+0, & 0 < x ,\\
+\infty, & x<0.
+\end{cases}
+\end{equation}
+
+The time–independent Schrödinger equation is
+\[
+-\frac{\hbar^2}{2m}\psi''(x)
+= E\psi(x).
+\]
+Define $ k^2=\frac{2mE}{\hbar^2} $,then
+\begin{equation}
+    \label{cqe:hwe1}
+\psi''(x)+k^2 \psi(x)=0.
+\end{equation}
+Surely we should add boundary condition $ \psi(0)=0 $.
+The solution (which can not be normalized) is evidently 
+\begin{equation}
+   \label {cqe:hws1}
+    \psi(x)=\sin(k x)
+\end{equation}
+Physically the situation is clear: interference of in-going and out-going waves, however since values of $x$ are restricted $ x \ge 0 $,
+no self-adjoint operator of momentum satisfying canonical commutation
+relations \eqref{oqm-ccr} exists \footnote{ Just here mathematically oriented people start talking about difference between Hermitian and 
+self-adjoint operators}. So momentum is not observable--- rather 
+strange statement!
+
+Physical answer is based on remark that potential \eqref{cqe:hwp} 
+is only idealization used to simplify calculations.
+
+We should start from some smooth but fast growing potential,
+like
+\begin{equation}
+   \label {cqe:swp}
+   V(x)=g/x^2,\quad g>0.
+\end{equation}
+So time–independent Schrödinger equation becomes
+\begin{equation}
+    \label{cqe:swe1}
+\psi''(x)+\left(k^2-\frac{\gamma}{x^2}\right)\psi(x)=0.
+\end{equation}
+where 
+\[
+k^2=\frac{2mE}{\hbar^2},
+\quad
+\gamma=\frac{2mg}{\hbar^2}.
+\]
+Let $\nu=\sqrt{\frac{1}{4}+\gamma}$.
+The general solution for $E>0$ finite at small $x$ is 
+\begin{equation}
+    \label{cqe:sws}
+\psi(x)=\sqrt{x}A J_\nu(kx).
+\end{equation}
+\begin{remark}
+For $g>0$, the Hamiltonian is essentially self–adjoint.
+No boundary condition at $x=0$ is imposed externally.
+\end{remark}
+As $x\to 0$,
+\[\psi(x)\sim x^{\nu+\frac{1}{2}}\]
+and ass $x \to \infty$
+\[
+J_\nu(kx)
+\sim
+\sqrt{\frac{2}{\pi kx}}
+\cos\left(
+kx-\frac{\pi\nu}{2}-\frac{\pi}{4}
+\right).
+\]
+When $g \to 0$ $\nu \to 1/2$ since
+\[J_{1/2}(x)=sqrt{\frac{2}{\pi x}} \sin(x)\]
+the solution of \eqref{cqe:swe1} becomes that of \eqref{cqe:hwe1},
+without need in boundary conditions.
 
 \section{Quantum Dynamics of a Wave Packet in a Square Well}
 
@@ -137,14 +171,8 @@ At $t = T_{\mathrm{rev}}$, the wave packet reconstructs itself up to a global ph
 \begin{equation}
 \Psi(x,T_{\mathrm{rev}}) = e^{i \theta} \Psi(x,0),
 \end{equation}
-while at rational fractions $t = \frac{p}{q} T_{\mathrm{rev}}$, \emph{fractional revivals} occur, splitting the packet into $q$ localized copies.
+while at rational fractions $t = \frac{m}{k} T_{\mathrm{rev}}$, \emph{fractional revivals} occur, splitting the packet into $k$ localized copies.
 
-Inside the infinite well:
-\begin{itemize}
-    \item A self-adjoint momentum operator compatible with the boundary conditions does not exist.
-    \item Operationally, momentum must be described via a POVM, not a PVM.
-    \item The packet behaves as if momentum reverses sign at the walls, producing strong interference near the boundaries.
-\end{itemize}
 
 The dynamics of a wave packet in a square well illustrate:
 \begin{description}
@@ -154,4 +182,6 @@ The dynamics of a wave packet in a square well illustrate:
     \item [Unitary boundary-induced interference:] Reflections at the walls generate characteristic oscillations without dissipation.
 \end{description}
 This system exemplifies the interplay between classical intuition and fundamentally quantum effects.
+However despite the fact that packet behaves as if momentum reverses sign at the walls,
+no self-adjoint momentum operator exists. So momentum is not observable!
 

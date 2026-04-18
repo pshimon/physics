@@ -111,7 +111,8 @@ composite systems are naturally written:
 Entangled states appear transparently:
 \[|\Psi\rangle = \sum_{ij} c_{ij} |i\rangle \otimes |j\rangle\]
 \item
-Works naturally with PVM and POVM formalism
+Works naturally with PVM and POVM formalism \footnote{ I'll discuss 
+   these things later.     }
 projection-valued measure:
 \[E(\Delta) = \int_\Delta |x\rangle\langle x| dx\]
 POVM elements:
@@ -262,6 +263,7 @@ Q : C^\infty(M) \to \mathcal{A}(\mathcal{H}),
 from classical observables to operators on a Hilbert space $\mathcal{H}$, satisfying 
 linearity, reality, normalization, and the Poisson--commutator correspondence
 \begin{equation}
+    \label{oqm:pcc}
 Q(\{f,g\}) = \frac{1}{i\hbar}[Q(f),Q(g)].
 \end{equation}
 
@@ -271,4 +273,57 @@ Even for $M=\mathbb{R}^{2n}$, the correspondence can be consistently imposed onl
 restricted subalgebras \footnote{ In my paper \cite{panfil-q} I studied these subalgebras},
 demonstrating that quantization is intrinsically limited.
 
+Suppose that phase space admits global Cartesian coordinates 
+and restrict \eqref{oqm:pcc} to these variables, 
+then quantization assigns Hermitian (self-adjoint) operators
+$\hat q_i, \hat p_j$ on Hilbert space $ \mathcal{H} $
+satisfying canonical commutation relations
+\begin{equation}
+    \label{oqm:ccr}
+    [\hat q_i, \hat p_j] = i\hbar \delta_{ij}.
+\end{equation}
+to classical observables $q_i, p_j$ --- coordinates on phase space $ \mathbb{R}^{2 n} $.
+All other observables are obtained by substitution of these operators into
+classical observables --- functions on phase space.
+Generally operator ordering ambiguities arise,  
+and additional analytic input is required to ensure self-adjointness.
+This prescription is insufficient for general systems, it works only
+if system is described by global Cartesian coordinates.
+So the standard name "canonical quantization" is misleading, but generally used.
 
+Operator $ \hat H$ (Hamiltonian) generates time evolution (unitary group):
+    \begin{equation}
+       \label {oqm:evol}
+ \hat U(t) = e^{-i \hat H t/ \hbar}.
+    \end{equation}
+    Evolution may be seen as action on observables (Heisenberg picture)
+\begin{align}
+   \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {oqm:heis1}\\
+    \frac{d \hat A}{d t} &= \frac{i}{\hbar}[\hat H,\hat A],\label{oqm:heis2}
+\end{align}
+    or as action on states (Schr\"odinger picture)
+\begin{align}
+    |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{oqm:schr1} \\
+    \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{oqm:schr2}
+\end{align}
+
+For "usual" Hamiltonian function $ H=p^2/(2 m) +V(q) $ we get:
+\begin{equation}
+   \label {oqm:ham}
+    \hat H = \frac{\hat p^2}{2 m}+V(\hat q)
+\end{equation}
+
+In particular using \eqref{oqm:ham},\eqref{oqm:ccr} and \eqref{oqm:heis2} we get:
+\begin{equation}
+   \label {oqm:ehrenfest}
+   \begin{split}
+       \frac{d \hat q_i}{d t} &= \frac{\hat p_i}{m}\\
+       \frac{d \hat p_j}{d t} &= - \frac{\partial V}{\partial q_j}(\hat q)
+   \end{split}
+\end{equation}
+which formally coincide with classical equation of motion
+--- Ehrenfest's theorem.
+\begin{remark}
+    Spectrum of all operators $ \hat q_i, \hat p_j$ satisfying
+    canonical commutation relations \eqref{oqm:ccr} is unbounded.
+\end{remark}  
