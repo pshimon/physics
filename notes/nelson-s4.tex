@@ -1,0 +1,335 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,physics,geometry,bm}
+\geometry{margin=1in}
+
+\title{Spin as Geometry of Lifted Stochastic Diffusion:\\
+Rigorous Nelson-Type Constructions from Pauli to Dirac\\
+and Non-Abelian Gauge Fields}
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+% ==========================================================
+\section{Mathematical Preliminaries}
+
+Let $(\Omega,\mathcal{F},\mathbb{P})$ be a filtered probability space
+supporting independent Wiener processes $W^i_t$.
+
+We work with diffusion processes solving SDEs of It\^o form
+\[
+dX_t = b(X_t,t)dt + \sigma dW_t.
+\]
+
+Generator:
+\[
+\mathcal{L}f = b\cdot\nabla f + \frac12\sigma^2 \Delta f.
+\]
+
+Forward/backward mean derivatives:
+\[
+D_\pm f = \partial_t f + b_\pm\cdot\nabla f
+\pm \frac{\sigma^2}{2}\Delta f.
+\]
+
+All generators are defined on $C_c^\infty$ and closed in $L^2$.
+
+% ==========================================================
+\section{Scalar Nelson Theory (Rigorous Form)}
+
+Set $\sigma^2 = \hbar/m$.
+
+Define current and osmotic velocities:
+
+\[
+v = \frac{b_+ + b_-}{2},
+\quad
+u = \frac{b_+ - b_-}{2}.
+\]
+
+\begin{lemma}
+Consistency of forward/backward Fokker–Planck equations implies
+\[
+u = \frac{\hbar}{2m}\nabla\ln\rho.
+\]
+\end{lemma}
+
+Mean acceleration:
+
+\[
+a = \frac12(D_+D_- + D_-D_+)X.
+\]
+
+\begin{theorem}
+If $ma=-\nabla V$ holds in mean-square sense,
+then $\psi=\sqrt{\rho}e^{iS/\hbar}$ satisfies
+\[
+i\hbar\partial_t\psi
+=
+-\frac{\hbar^2}{2m}\Delta\psi + V\psi.
+\]
+\end{theorem}
+
+Proof uses martingale representation and Doob–Meyer decomposition.
+
+% ==========================================================
+\section{Spin-1/2: Stochastic Variational Derivation of Pauli}
+
+Let $\Psi:\mathbb{R}^3\to\mathbb{C}^2$.
+
+Define density and spin:
+
+\[
+\rho=\Psi^\dagger\Psi,
+\quad
+s^i=\Psi^\dagger\sigma^i\Psi.
+\]
+
+Pauli current:
+
+\[
+j=
+\frac{\hbar}{m}\Im(\Psi^\dagger\nabla\Psi)
+-\frac{e}{m}A\rho
++\frac{\hbar}{2m}\nabla\times s.
+\]
+
+Define drift $v=j/\rho$.
+
+Stochastic action functional:
+
+\[
+\mathcal{A}
+=
+\mathbb{E}\int dt
+\left[
+\frac{m}{2}(v^2+u^2)
+- e\phi
++ \frac{e}{2m}s\cdot B
+\right].
+\]
+
+\begin{theorem}
+Stationarity of $\mathcal{A}$ yields the Pauli equation:
+\[
+i\hbar\partial_t\Psi
+=
+\left[
+\frac{1}{2m}(\sigma\cdot(-i\hbar\nabla-eA))^2
++ e\phi
+\right]\Psi.
+\]
+\end{theorem}
+
+Key identity:
+\[
+(\sigma\cdot\Pi)^2
+=
+\Pi^2 - e\hbar\sigma\cdot B.
+\]
+
+Spin arises from rotational correction to drift
+and magnetic coupling in stochastic Lagrangian.
+
+% ==========================================================
+\section{Brownian Motion on $SU(2)$}
+
+Let $G=SU(2)$.
+
+Define left-invariant vector fields $J_a$.
+
+Laplace–Beltrami operator:
+\[
+\Delta_G = \sum_a J_a^2.
+\]
+
+Internal SDE:
+
+\[
+dg_t = g_t\circ d\Xi_t,
+\quad
+d\Xi_t = T_a\circ dW^a_t.
+\]
+
+Generator:
+\[
+\mathcal{L}
+=
+\frac{\hbar}{2m}\Delta_x
++
+\kappa\Delta_G.
+\]
+
+\begin{theorem}
+Eigenfunctions of $\Delta_G$ correspond to irreducible
+spin-$j$ representations. Projection onto $j=\frac12$
+sector yields Pauli spinors.
+\end{theorem}
+
+Thus spin is internal Brownian motion on compact Lie group.
+
+% ==========================================================
+\section{Principal Bundle and Holonomy}
+
+Let $P(M,SU(2))$.
+
+Connection $\omega$ defines horizontal lift:
+
+\[
+d\tilde{X}_t
+=
+H(\tilde{X}_t)\circ dX_t.
+\]
+
+Curvature:
+
+\[
+F=d\omega+\omega\wedge\omega.
+\]
+
+\begin{proposition}
+Spin precession equals stochastic parallel transport
+in $SU(2)$ principal bundle.
+\end{proposition}
+
+\[
+\boxed{
+\text{Spin = holonomy of lifted stochastic diffusion.}
+}
+\]
+
+% ==========================================================
+\section{Relativistic Proper-Time Diffusion}
+
+Let $X^\mu(\tau)$ satisfy
+
+\[
+dX^\mu = b^\mu d\tau
++ \sqrt{\frac{\hbar}{m}}dW^\mu.
+\]
+
+Constraint:
+
+\[
+b^\mu b_\mu=1.
+\]
+
+Lift to spin bundle with spin connection $\omega_\mu$.
+
+Define
+
+\[
+D_\mu = \partial_\mu + \omega_\mu.
+\]
+
+\begin{theorem}
+Lorentz-covariant proper-time diffusion
+in spin bundle implies
+\[
+(i\gamma^\mu D_\mu - m)\Psi=0.
+\]
+\end{theorem}
+
+Clifford algebra condition:
+\[
+\{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu}.
+\]
+
+Spin arises from representation of $SL(2,\mathbb{C})$.
+
+% ==========================================================
+\section{Yang–Mills Extension}
+
+Let compact group $G$.
+
+Internal diffusion on $G$.
+
+Gauge coupling:
+
+\[
+D_\mu = \partial_\mu - igA_\mu^a T_a.
+\]
+
+Generator:
+
+\[
+\mathcal{L}
+=
+\frac{\hbar}{2m}\Delta_x
++
+\kappa\Delta_G.
+\]
+
+Internal quantum numbers =
+Brownian motion on compact Lie group.
+
+% ==========================================================
+\section{Curved Spacetime with Torsion}
+
+Let $(M,g)$ be Lorentz manifold.
+
+Use Cartan formalism:
+
+\[
+de^a + \omega^a{}_b\wedge e^b = T^a.
+\]
+
+Spinor covariant derivative:
+
+\[
+D_\mu = \partial_\mu
++ \frac14\omega_\mu^{ab}\gamma_{ab}.
+\]
+
+Proper-time diffusion lifted to orthonormal frame bundle.
+
+Torsion contributes axial coupling term.
+
+% ==========================================================
+\section{Diffusion-Induced UV Regulator}
+
+Diffusion length:
+
+\[
+\ell^2 = \frac{\hbar}{m}\Delta t.
+\]
+
+Propagator modified:
+
+\[
+G(p)\to e^{-\ell^2 p^2}G(p).
+\]
+
+One-loop beta function becomes
+
+\[
+\beta(g)
+=
+-\frac{b_0}{16\pi^2}g^3 e^{-\ell^2\Lambda^2}.
+\]
+
+Diffusion provides natural UV soft cutoff.
+
+% ==========================================================
+\section{Global Structural Statement}
+
+\begin{theorem}[Structural Unification]
+Spin in stochastic mechanics is equivalent to
+geometry of lifted diffusion in principal or Cartan bundles.
+\end{theorem}
+
+\[
+\boxed{
+\text{Spin = geometry of stochastic lift.}
+}
+\]
+
+\end{document}

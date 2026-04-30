@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\title{\textbf{Landau Levels in Nelson's Stochastic Mechanics}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+To understand how Landau levels appear in Nelson's stochastic mechanics, we first need to look at how Nelson's framework translates standard quantum mechanics into the language of classical Brownian motion. 
+
+In standard quantum mechanics, Landau levels are the quantized energy states of a charged particle moving in a uniform magnetic field, derived by solving the Schr\"odinger equation. In Nelson's stochastic mechanics, these levels emerge not from a wave equation, but as the \textbf{stationary probability distributions of a specific stochastic process} (Brownian motion) interacting with a magnetic field.
+
+Here is a breakdown of how this derivation works in the stochastic framework.
+
+\section{The Basics of Nelson's Mechanics}
+Nelson proposed that a quantum particle is actually a classical particle undergoing a very specific type of Brownian motion in the vacuum, characterized by a kinematic diffusion coefficient $\nu = \hbar / (2m)$.
+
+The state of the system is described by two fields:
+\begin{itemize}
+    \item \textbf{Current velocity ($\mathbf{v}$):} The macroscopic drift of the probability fluid.
+    \item \textbf{Osmotic velocity ($\mathbf{u}$):} The velocity associated with the diffusion of the probability density $\rho$, defined as $\mathbf{u} = \nu \nabla \ln \rho$.
+\end{itemize}
+
+Nelson formulated a ``stochastic Newton's equation'' (stochastic acceleration equals force divided by mass) which is mathematically equivalent to the Schr\"odinger equation when you map the wave function $\psi = \sqrt{\rho} e^{iS/\hbar}$.
+
+\section{Introducing the Magnetic Field}
+When a magnetic field $\mathbf{B} = \nabla \times \mathbf{A}$ is introduced, the Lorentz force must be incorporated into the stochastic equations. In Nelson's mechanics, the magnetic force acts on the \emph{current velocity} $\mathbf{v}$, not the instantaneous, highly irregular stochastic velocity of the particle.
+
+The generalized momentum incorporates the vector potential $\mathbf{A}$. The current velocity becomes:
+\begin{equation}
+\mathbf{v} = \frac{1}{m}(\nabla S - q\mathbf{A})
+\end{equation}
+where $q$ is the particle's charge and $S$ is the phase of the wavefunction.
+
+The stochastic acceleration equation (Nelson's equivalent to $F=ma$) for a particle in an electromagnetic field becomes:
+\begin{equation}
+m \mathbf{a} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})
+\end{equation}
+
+\section{The Emergence of Landau Levels}
+To find the Landau levels in this framework, we look for \textbf{stationary states} of the stochastic process. A stationary state in stochastic mechanics means that the probability density $\rho$ is constant in time, meaning the current velocity $\mathbf{v}$ obeys $\nabla \cdot (\rho \mathbf{v}) = 0$.
+
+Let's assume a uniform magnetic field $\mathbf{B}$ along the z-axis. 
+
+\subsection{The Lowest Landau Level (Ground State)}
+In the symmetric gauge $\mathbf{A} = \frac{1}{2}\mathbf{B} \times \mathbf{r}$, the lowest Landau level in standard QM has a Gaussian probability distribution. 
+
+In Nelson's mechanics, the current velocity $\mathbf{v}$ for this state corresponds to a rigid rotation around the origin at the Larmor frequency. Because the particle is rotating, there is a classical ``centrifugal'' effect. However, the stochastic process demands a balance of forces. The stochastic differential equation for the particle's position $\mathbf{X}_t$ will take the form of an Ornstein-Uhlenbeck process in the transverse $(x,y)$ plane. 
+
+The osmotic velocity $\mathbf{u}$ points inwards toward the center of the orbit, perfectly balancing the diffusion. The resulting stationary distribution of this stochastic differential equation is exactly the Gaussian density:
+\begin{equation}
+\rho_0(x,y) \propto \exp\left(-\frac{qB}{2\hbar}(x^2 + y^2)\right)
+\end{equation}
+This confirms that the particle spends most of its time near the ``guiding center'' of the orbit, smeared out by the background quantum noise.
+
+\subsection{Higher Landau Levels}
+Higher Landau levels correspond to excited stationary states. In standard QM, these involve Laguerre polynomials. 
+
+In Nelson's mechanics, these states appear as different, highly structured stationary probability distributions of the stochastic process. For higher Landau levels, the drift vector fields (combinations of $\mathbf{v}$ and $\mathbf{u}$) become much more complex. They create ``nodal lines'' (regions where the probability density drops to zero). 
+
+The stochastic trajectories of particles in higher Landau levels will:
+\begin{enumerate}
+    \item Drift along the equipotential lines of the density profile.
+    \item Be strictly confined between the nodal lines, because the osmotic velocity $\mathbf{u} = \nu \nabla \ln \rho$ diverges at the nodes ($\rho = 0$), acting as an infinite repulsive barrier that the Brownian particle cannot cross.
+\end{enumerate}
+
+\section{A Note on Gauge Dependence}
+One of the most fascinating (and heavily debated) aspects of Landau levels in Nelson's mechanics is \textbf{gauge dependence}. 
+
+In standard quantum mechanics, changing the gauge (e.g., from the symmetric gauge to the Landau gauge $\mathbf{A} = (0, Bx, 0)$) changes the phase of the wavefunction, but not the physical observables. 
+
+However, in Nelson's mechanics, the current velocity $\mathbf{v}$ directly depends on $\mathbf{A}$. Therefore, the \emph{actual physical trajectories} of the Brownian particle change depending on the gauge you choose:
+\begin{itemize}
+    \item In the \textbf{symmetric gauge}, the trajectories look like noisy circular orbits around a fixed center.
+    \item In the \textbf{Landau gauge}, the trajectories look like noisy straight lines drifting uniformly in the y-direction while undergoing an Ornstein-Uhlenbeck process in the x-direction.
+\end{itemize}
+
+Despite the trajectories looking completely different, the resulting stationary probability distributions (and thus the observable macroscopic physics, like energy levels and transition probabilities) remain perfectly consistent with the standard quantum mechanical Landau levels.
+
+\end{document}

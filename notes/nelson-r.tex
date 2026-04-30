@@ -1,0 +1,547 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\title{
+Relativistic Quantum Field Theory from Null Stochastic Geometry:\\
+A Ray-Free Axiomatic Reconstruction
+}
+
+\author{}
+\date{}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{axiom}[definition]{Axiom}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{remark}[definition]{Remark}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We propose a geometric-stochastic foundation of relativistic quantum
+field theory in which Hilbert space is not fundamental.
+Starting from Lorentzian spacetime and a null-direction bundle endowed
+with a Lorentz-invariant switching dynamics,
+we reconstruct the Dirac equation, spin structure,
+spin–statistics connection, second quantization,
+and local operator algebras.
+Renormalization appears as stochastic coarse-graining of null microstructure.
+\end{abstract}
+
+\tableofcontents
+
+% ============================================================
+\section{Introduction}
+
+Quantum field theory is traditionally formulated via Hilbert spaces,
+operator algebras, or path integrals.
+We propose instead that relativistic quantum theory emerges from:
+
+\begin{itemize}
+\item Lorentzian spacetime geometry,
+\item A null-direction bundle,
+\item A Lorentz-invariant stochastic switching dynamics,
+\item A linearization principle.
+\end{itemize}
+
+Hilbert space appears as a representation space of an underlying
+geometric Markov generator.
+
+% ============================================================
+\section{Spacetime and Null Direction Bundle}
+
+\subsection{Lorentzian Structure}
+
+\begin{axiom}[Spacetime]
+Spacetime is a smooth, oriented 4-dimensional Lorentzian manifold
+$(M,g)$ of signature $(+,-,-,-)$.
+\end{axiom}
+
+\subsection{Null Direction Bundle}
+
+\begin{definition}
+The future null direction bundle is
+\[
+\mathcal{N}
+=
+\{ (x,n)\in TM \mid g(n,n)=0,\, n^0>0 \}.
+\]
+\end{definition}
+
+Each fiber is diffeomorphic to $S^2$.
+
+\begin{remark}
+This bundle replaces internal spin space.
+\end{remark}
+
+% ============================================================
+\section{Stochastic Worldline Dynamics}
+
+\subsection{Worldline Process}
+
+\begin{definition}
+A particle is a Markov process
+\[
+(x(\tau), n(\tau)) \in \mathcal{N}
+\]
+with generator
+\[
+\mathcal{G}
+=
+n^\mu \nabla_\mu
++
+m \mathcal{R}.
+\]
+\end{definition}
+
+Here:
+
+\begin{itemize}
+\item $n^\mu \nabla_\mu$ = null transport,
+\item $\mathcal{R}$ = Lorentz-invariant switching operator on $S^2$,
+\item $m>0$ = switching frequency (mass parameter).
+\end{itemize}
+
+% ============================================================
+\section{Clifford Algebra Emergence}
+
+\subsection{Switching Generators}
+
+\begin{axiom}[Clifford Structure]
+There exist fiber operators $E_\mu$ satisfying
+\[
+\{E_\mu,E_\nu\}=2g_{\mu\nu}.
+\]
+\end{axiom}
+
+\begin{theorem}
+The switching algebra generates a representation of
+$\mathrm{Cl}(1,3)$.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Lorentz invariance and bilinearity force quadratic closure
+under anticommutation. Irreducibility yields the Dirac representation.
+\end{proof}
+% ============================================================
+\section{Emergence of Gauge Interactions from Fiber Extension}
+
+\subsection{Extended Internal Bundle}
+
+To incorporate interactions, we enlarge the internal fiber.
+
+\begin{definition}
+Let $G$ be a compact Lie group.
+Define the extended bundle
+\[
+\mathcal{E}
+=
+\mathcal{N} \times_G V,
+\]
+where $V$ is a unitary representation space of $G$.
+\end{definition}
+
+Each particle now carries:
+
+\begin{itemize}
+\item spacetime position $x$,
+\item null direction $n$,
+\item internal charge variable $q \in V$.
+\end{itemize}
+
+Thus the state space becomes
+\[
+(x,n,q).
+\]
+
+\subsection{Local Fiber Covariance}
+
+Switching must remain Lorentz invariant
+and now also covariant under local $G$-rotations:
+
+\[
+q(x) \mapsto U(x) q(x),
+\quad U(x) \in G.
+\]
+
+\begin{axiom}[Local Covariance]
+The stochastic generator must be equivariant under local $G$ transformations.
+\end{axiom}
+
+This forces introduction of a connection.
+
+\subsection{Gauge Connection from Generator Consistency}
+
+Replace directional derivative by covariant derivative:
+
+\[
+\nabla_\mu
+\longrightarrow
+D_\mu
+=
+\partial_\mu + A_\mu(x),
+\]
+
+where
+
+\[
+A_\mu(x) \in \mathfrak{g}
+\]
+
+is a Lie-algebra valued connection.
+
+The worldline generator becomes
+
+\[
+\mathcal{G}
+=
+n^\mu D_\mu
++
+m\mathcal{R}.
+\]
+
+\begin{theorem}
+Local equivariance of the stochastic generator uniquely introduces
+a principal $G$-connection $A_\mu$.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Under local transformation $U(x)$,
+equivariance of $n^\mu D_\mu$ requires
+\[
+A_\mu \mapsto U A_\mu U^{-1}
+- (\partial_\mu U)U^{-1}.
+\]
+Thus $A_\mu$ transforms as a gauge connection.
+\end{proof}
+
+\subsection{Dirac Equation with Gauge Coupling}
+
+Applying the envelope principle yields
+
+\[
+(i\gamma^\mu D_\mu - m)\psi = 0.
+\]
+
+Thus minimal coupling emerges from
+bundle covariance of null transport.
+
+No gauge symmetry is postulated —
+it is required for consistency of fiber switching.
+
+% ============================================================
+\subsection{Emergence of Yang–Mills Dynamics}
+
+So far $A_\mu$ is background.
+To promote it to dynamical field,
+we require consistency of many-worldline interactions.
+
+Birth–death processes involving charged particles
+induce fluctuations in $A_\mu$.
+
+Coarse-graining of worldline loops produces
+an effective action for the connection:
+
+\[
+S_\text{eff}[A]
+=
+\int d^4x \,
+\mathrm{Tr}(F_{\mu\nu}F^{\mu\nu})
++ \cdots
+\]
+
+where
+
+\[
+F_{\mu\nu}
+=
+\partial_\mu A_\nu
+-
+\partial_\nu A_\mu
++
+[A_\mu,A_\nu].
+\]
+
+\begin{theorem}
+One-loop worldline fluctuations generate
+the Yang–Mills kinetic term.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Small closed zig-zag loops produce curvature contributions
+via non-commutativity of parallel transport.
+Expanding the worldline effective action yields $F^2$.
+This reproduces the standard background-field computation.
+\end{proof}
+
+% ============================================================
+\subsection{Geometric Interpretation}
+
+Gauge field = curvature of internal fiber transport.
+
+Mass = switching frequency.
+
+Charge = representation of $G$ carried by internal variable $q$.
+
+Interaction = modification of null transport by connection curvature.
+
+Thus gauge theory is not added —
+it is the geometry of extended switching bundle.
+
+% ============================================================
+\subsection{Renormalization of Gauge Couplings}
+
+Short zig-zag loops produce scale dependence of coupling:
+
+\[
+g(\Lambda)
+\]
+
+Beta function arises from density of microscopic loops.
+
+Thus asymptotic freedom corresponds to
+decrease of effective switching coherence at short scales.
+
+% ============================================================
+\subsection{Unification Perspective}
+
+The hierarchy now becomes:
+
+\begin{enumerate}
+\item Lorentz manifold
+\item Null direction bundle
+\item Extended internal bundle
+\item Stochastic switching
+\item Clifford algebra
+\item Dirac equation with $D_\mu$
+\item Worldline loop corrections
+\item Yang–Mills dynamics
+\item Renormalization group
+\end{enumerate}
+
+Gauge symmetry appears as
+compatibility condition for local fiber transport.
+% ============================================================
+\section{Linear Envelope and Dirac Equation}
+
+\subsection{Forward Kolmogorov Equation}
+
+Probability density $\rho(x,n)$ satisfies:
+
+\[
+\partial_\tau \rho = \mathcal{G}\rho.
+\]
+
+\subsection{Linearization Principle}
+
+\begin{axiom}[Envelope Principle]
+There exists a complex envelope field $\psi(x)$
+obtained from coarse-graining over fiber variables.
+\end{axiom}
+
+\begin{theorem}
+The envelope satisfies the Dirac equation:
+\[
+(i\gamma^\mu \partial_\mu - m)\psi=0.
+\]
+\end{theorem}
+
+\begin{proof}[Sketch]
+Fourier analysis of null switching yields a first-order relativistic
+dispersion relation.
+Irreducibility of the Clifford representation fixes matrix dimension.
+\end{proof}
+
+% ============================================================
+\section{Spin and Spin--Statistics}
+
+\subsection{Spin Structure}
+
+\begin{proposition}
+Parallel transport around $2\pi$ spatial rotation induces
+$\psi \mapsto -\psi$.
+\end{proposition}
+
+\subsection{Exchange Topology}
+
+Configuration space of $N$ particles:
+
+\[
+\Gamma_N = (M\times S^2)^N / S_N.
+\]
+
+\begin{theorem}[Spin–Statistics]
+Compatibility of bundle holonomy with exchange loops forces
+antisymmetry of spin-$\frac12$ states.
+\end{theorem}
+
+% ============================================================
+\section{Many-Worldline Extension and Fock Space}
+
+\subsection{Configuration Space}
+
+\[
+\Gamma
+=
+\bigsqcup_{N=0}^\infty \Gamma_N.
+\]
+
+\subsection{Birth–Death Generator}
+
+\[
+\mathcal{G}_\text{tot}
+=
+\sum_i \mathcal{G}_i
++
+\mathcal{B}
++
+\mathcal{D}.
+\]
+
+\begin{theorem}
+Linearization of the many-worldline generator produces Fock space.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Creation/annihilation correspond to linear representation of
+configuration-space inclusion/exclusion maps.
+\end{proof}
+
+% ============================================================
+\section{Renormalization as Stochastic Coarse-Graining}
+
+\subsection{Worldline Kernel Representation}
+
+\[
+G(x,y)
+=
+\int_0^\infty dT \, e^{-mT} K(x,y;T).
+\]
+
+Small-$T$ divergences correspond to short zig-zag loops.
+
+\subsection{Effective Generator}
+
+\[
+\mathcal{G}_\Lambda
+=
+n^\mu\partial_\mu
++
+m(\Lambda)\mathcal{R}
++
+\sum_i g_i(\Lambda)\mathcal{O}_i.
+\]
+
+\begin{theorem}
+Running couplings arise from scale dependence of null-switching
+correlation length.
+\end{theorem}
+
+% ============================================================
+\section{Algebraic Quantum Field Theory Reconstruction}
+
+\subsection{Local Algebras}
+
+For region $\mathcal{O}\subset M$ define:
+
+\[
+\mathcal{A}(\mathcal{O})
+=
+\text{algebra generated by worldlines intersecting } \mathcal{O}.
+\]
+
+\subsection{Haag–Kastler Properties}
+
+\begin{theorem}
+The net $\mathcal{O}\mapsto \mathcal{A}(\mathcal{O})$
+satisfies isotony and locality.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Null propagation enforces microcausality.
+Inclusion of regions induces algebra inclusion.
+\end{proof}
+
+Vacuum = stationary measure of birth–death generator.
+
+GNS reconstruction yields standard Fock representation.
+
+% ============================================================
+\section{Lie–Poisson Formulation}
+
+\subsection{Bilinear Observables}
+
+\[
+Q_A = \int \bar\psi A \psi.
+\]
+
+\[
+\{Q_A,Q_B\} = Q_{[A,B]}.
+\]
+
+\begin{theorem}
+Dirac dynamics is Hamiltonian flow on a coadjoint orbit
+of an infinite-dimensional unitary group.
+\end{theorem}
+
+% ============================================================
+\section{Conceptual Hierarchy}
+
+\begin{enumerate}
+\item Lorentz manifold
+\item Null direction bundle
+\item Stochastic switching
+\item Clifford algebra
+\item Dirac equation
+\item Many-worldline dynamics
+\item Fock space
+\item Local operator algebras
+\item Renormalization group
+\end{enumerate}
+
+% ============================================================
+\section{Outlook}
+
+Future directions:
+
+\begin{itemize}
+\item Emergence of gauge symmetry from fiber extension
+\item Coupling to gravity via null bundle curvature
+\item Comparison with Nelson stochastic mechanics
+\item Relation to worldline path integral formalism
+\item Nonperturbative renormalization analysis
+\end{itemize}
+
+% ============================================================
+\begin{thebibliography}{99}
+
+\bibitem{Dirac}
+P. A. M. Dirac,
+\textit{The Quantum Theory of the Electron}.
+
+\bibitem{Nelson}
+E. Nelson,
+\textit{Derivation of the Schrödinger Equation from Newtonian Mechanics}.
+
+\bibitem{Haag}
+R. Haag,
+\textit{Local Quantum Physics}.
+
+\bibitem{Simon}
+B. Simon,
+\textit{Functional Integration and Quantum Physics}.
+
+\bibitem{DeWitt}
+B. S. DeWitt,
+\textit{Dynamical Theory of Groups and Fields}.
+
+\end{thebibliography}
+
+\end{document}
