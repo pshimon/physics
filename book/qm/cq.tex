@@ -1,5 +1,5 @@
 \chapter{Canonical Quantization}
-\label{canonical_quantization}
+\label{cq:canonical_quantization}
 {
     \setlength\epigraphwidth{0.6\textwidth}
 \epigraph{ Quantum mechanics is a
@@ -41,7 +41,7 @@ So the problem of \emph{quantization}---the transition from
 classical to quantum descriptions---actually works backward.
 
 \section{Bra-Ket Notation}
-\label{bra-ket-notation}
+\label{cq:bra-ket-notation}
 
 Bra--ket notation is the standard symbolic language of quantum
 mechanics. While extraordinarily powerful and conceptually elegant,
@@ -234,31 +234,76 @@ Today we understand that Dirac’s formalism is rigorously captured by:
 \end{itemize}
 and there is no reason not to use it.
 
-\section{Axioms of Quantum Mechanics}
-\label{cq:aqm}
+\section{Mathematical Structure of Quantum Mechanics}
+\label{cq:msqm}
 
-Formally a quantum system is defined by the following axioms,
+Formally a quantum system is defined by the following definitions and axioms,
 describing states,observables,dynamics, and probabilities.
-\begin{axiom}[States]
+\subsection{States}
     \label{cq:sts}
-    Physical state is a (non-zero) vector in complex separable Hilbert space $ \mathcal{H} $
+\begin{definition}
+    Pure state is a (non-zero) vector in complex separable Hilbert space $ \mathcal{H} $
 \[ |\psi \rangle \in \mathcal{H} .\]
+\end{definition}
+It is not the most general definition of physical state. Physical state may belong to rigged 
+Hilbert space i.e. it may be a limit of sequence of vectors. 
+Later we shall discuss more general states (mixed) which are represented by tensor product of
+pure states. Meanwhile we shall omit "pure".
+
+\begin{definition}
+    The quantity
+    \begin{equation}
+       \label {cq:pa}
+        B(\psi,\phi)=\frac{\langle{\psi},{\phi}\rangle}{\|{\psi}\| \|{\phi}\|}  
+    \end{equation} 
+    is called probability amplitude.
+\end{definition}  
+\begin{axiom}[Born rule]
+     The probability of the transition between states $ \phi $ and $ \psi $ is
+     \begin{equation}
+        \label {cq:br}
+         P(\psi,\phi)=|B(\psi,\phi)|^2
+     \end{equation}
 \end{axiom}
 
-\begin{axiom}[Observables]
+\subsection{Observables}
     \label{cq:obs}
+\begin{axiom}[Observables]
 Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$.
 \end{axiom}
 Strange thing about quantum mechanics is that observables act on states.
-\begin{axiom}[Dynamics]
+For any observable $ \hat A $ and any (pure) state $ \psi $ exits (pure)
+state $ \phi = \hat A \psi $ provided that
+\begin{itemize}
+    \item $ \psi \in \text{Dom} A $
+       \item $ \phi \neq 0 $
+           \item Superselection \footnote{Will be discussed later} rules are not violated
+\end{itemize}
+\begin{remark}
+    $  \hat A \psi$ is not a result of measurement of observable  $ \hat A $ in
+    state $ \psi $.
+\end{remark}
+\begin{definition}
+    The quantity $ \langle \phi,\hat A \psi \rangle $ is called matrix element.
+\end{definition}  
+Matrix elements are actually the base of all quantum theory. 
+\begin{axiom}[Expectation value]
+    Expectation value of an observable in a state 
+    \begin{equation}
+       \label {cq:exp1}
+    \langle \hat A \rangle_\psi = \frac{\langle \psi, \hat A \psi \rangle} {\langle \psi,\psi \rangle}
+    \end{equation}
+    comprises all available information.
+\end{axiom}
+
+\subsection{Dynamics}
     \label{cq:dyn}
     There is an observable $ \hat H$ (Hamiltonian),which generates time evolution
     (unitary group):
     \begin{equation}
-       \label {evol}
+       \label {cq:evol}
  \hat U(t) = e^{-i \hat Ht/\hbar}.
     \end{equation}
-\end{axiom}
 
     Evolution may be seen as action on observables (Heisenberg picture)
 \begin{align}
@@ -271,18 +316,6 @@ Strange thing about quantum mechanics is that observables act on states.
     \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{cq:schr2}
 \end{align}
 
-\begin{axiom}[Born rule]
-    \label{born-rule}
-    \[  B_\psi=\frac{\langle{\psi}|{\phi}\rangle}{\|{\psi}\| \|{\phi}\|}  \]
-     is probability amplitude of transition between states. Corresponding 
-     probability is $ P_\psi=|B_\psi|^2 $.
-    Expectation value of an observable in a state 
-    \begin{equation}
-       \label {exp1}
-    \langle \hat A \rangle_\psi = \frac{\langle \psi| \hat A |\psi \rangle} {\langle \psi|\psi \rangle}
-    \end{equation}
-    comprises all available information.
-\end{axiom}
 
 \section{Dirac Quantization}
 \label{dirac-quantization}
@@ -316,7 +349,7 @@ Q : C^\infty(M) \to \mathcal{A}(\mathcal{H}),
 from classical observables to operators on a Hilbert space $\mathcal{H}$, satisfying 
 linearity, reality, normalization, and the Poisson--commutator correspondence
 \begin{equation}
-    \label{oqm:pcc}
+    \label{cq:pcc}
 Q(\{f,g\}) = \frac{1}{i\hbar}[Q(f),Q(g)].
 \end{equation}
 
@@ -327,12 +360,12 @@ restricted subalgebras \footnote{ In my paper \cite{panfil-q} I studied these su
 demonstrating that quantization is intrinsically limited.
 
 Suppose that phase space admits global Cartesian coordinates 
-and restrict \eqref{oqm:pcc} to these variables, 
+and restrict \eqref{cq:pcc} to these variables, 
 then quantization assigns Hermitian (self-adjoint) operators
 $\hat q_i, \hat p_j$ on Hilbert space $ \mathcal{H} $
 satisfying canonical commutation relations
 \begin{equation}
-    \label{oqm:ccr}
+    \label{cq:ccr}
     [\hat q_i, \hat p_j] = i\hbar \delta_{ij}.
 \end{equation}
 to classical observables $q_i, p_j$ --- coordinates on phase space $ \mathbb{R}^{2 n} $.
@@ -344,31 +377,15 @@ This prescription is insufficient for general systems, it works only
 if system is described by global Cartesian coordinates.
 So the standard name "canonical quantization" is misleading, but generally used.
 
-Operator $ \hat H$ (Hamiltonian) generates time evolution (unitary group):
-    \begin{equation}
-       \label {oqm:evol}
- \hat U(t) = e^{-i \hat H t/ \hbar}.
-    \end{equation}
-    Evolution may be seen as action on observables (Heisenberg picture)
-\begin{align}
-   \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {oqm:heis1}\\
-    \frac{d \hat A}{d t} &= \frac{i}{\hbar}[\hat H,\hat A],\label{oqm:heis2}
-\end{align}
-    or as action on states (Schr\"odinger picture)
-\begin{align}
-    |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{oqm:schr1} \\
-    \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{oqm:schr2}
-\end{align}
-
 For "usual" Hamiltonian function $ H=p^2/(2 m) +V(q) $ we get:
 \begin{equation}
-   \label {oqm:ham}
+   \label {cq:ham}
     \hat H = \frac{\hat p^2}{2 m}+V(\hat q)
 \end{equation}
 
-In particular using \eqref{oqm:ham},\eqref{oqm:ccr} and \eqref{oqm:heis2} we get:
+In particular using \eqref{cq:ham},\eqref{cq:ccr} and \eqref{cq:heis2} we get:
 \begin{equation}
-   \label {oqm:ehrenfest}
+   \label {cq:ehrenfest}
    \begin{split}
        \frac{d \hat q_i}{d t} &= \frac{\hat p_i}{m}\\
        \frac{d \hat p_j}{d t} &= - \frac{\partial V}{\partial q_j}(\hat q)
@@ -378,5 +395,5 @@ which formally coincide with classical equation of motion
 --- Ehrenfest's theorem.
 \begin{remark}
     Spectrum of all operators $ \hat q_i, \hat p_j$ satisfying
-    canonical commutation relations \eqref{oqm:ccr} is unbounded.
+    canonical commutation relations \eqref{cq:ccr} is unbounded.
 \end{remark}  
