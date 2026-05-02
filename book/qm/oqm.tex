@@ -1,5 +1,5 @@
-\chapter{ Origin of Quantum Mechanics}
-\label{oqm}
+\chapter{Canonical Quantization}
+\label{canonical_quantization}
 {
     \setlength\epigraphwidth{0.6\textwidth}
 \epigraph{ Quantum mechanics is a
@@ -58,7 +58,8 @@ Its success stems from its ability to encode:
 However, the notation often suppresses functional-analytic and
 geometric subtleties. 
 
-It appears at Paul Dirac's book \cite{dirac-pqm}  "The Principles of Quantum Mechanics" (first edition 1930). Let's describe pros and cons:
+It appears at Paul Dirac's book \cite{dirac-pqm}  "The Principles of Quantum Mechanics"
+(first edition 1930). Let's describe pros and cons:
 \subsection{ Pros}
 \begin{enumerate}
    \item
@@ -179,8 +180,8 @@ Some common problems:
 It encourages formal calculation over structural analysis.
 \end{enumerate}
 
-\subsection{Some Explanations}
-\label{some-explanations}
+\subsection{Explanation}
+\label{cq:explanation}
 
 Dirac's book \cite{dirac-pqm} contains
 statements that are mathematically unclear, incomplete, or (by modern standards) incorrect. 
@@ -218,7 +219,9 @@ However some of statements are genuinely incorrect, for example:
     may be lifted to unitary transformations in quantum mechanics.
 \end{itemize}
 
-In his book \cite{neumann-mfqm}  Mathematische Grundlagen der Quantenmechanik (1932) von Neumann made everything measure-theoretic and Hilbert-space rigorous and avoided $ \delta $-functions entirely.
+In his book \cite{neumann-mfqm}  Mathematische Grundlagen der Quantenmechanik (1932)
+von Neumann made everything measure-theoretic and Hilbert-space rigorous and avoided 
+$ \delta $-functions entirely.
 Though von Neumann’s formulation is mathematically precise,
 Dirac’s notation became universal in physics.
 Because Dirac’s formalism is vastly more flexible and computationally powerful.
@@ -230,6 +233,56 @@ Today we understand that Dirac’s formalism is rigorously captured by:
 \item distribution theory
 \end{itemize}
 and there is no reason not to use it.
+
+\section{Axioms of Quantum Mechanics}
+\label{cq:aqm}
+
+Formally a quantum system is defined by the following axioms,
+describing states,observables,dynamics, and probabilities.
+\begin{axiom}[States]
+    \label{cq:sts}
+    Physical state is a (non-zero) vector in complex separable Hilbert space $ \mathcal{H} $
+\[ |\psi \rangle \in \mathcal{H} .\]
+\end{axiom}
+
+\begin{axiom}[Observables]
+    \label{cq:obs}
+Observables are self-adjoint operators $ \hat A= \hat A^\dagger$ on $\mathcal H$.
+\end{axiom}
+Strange thing about quantum mechanics is that observables act on states.
+\begin{axiom}[Dynamics]
+    \label{cq:dyn}
+    There is an observable $ \hat H$ (Hamiltonian),which generates time evolution
+    (unitary group):
+    \begin{equation}
+       \label {evol}
+ \hat U(t) = e^{-i \hat Ht/\hbar}.
+    \end{equation}
+\end{axiom}
+
+    Evolution may be seen as action on observables (Heisenberg picture)
+\begin{align}
+   \hat A(t)&= \hat U(t) \hat A \hat U^{-1}(t), \label {cq:heis1}\\
+    \frac{d \hat A}{d t} &= \frac{i}{\hbar}[\hat H,\hat A].\label{cq:heis2}
+\end{align}
+    Or as action on states (Schr\"odinger picture)
+\begin{align}
+    |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{cq:schr1} \\
+    \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{cq:schr2}
+\end{align}
+
+\begin{axiom}[Born rule]
+    \label{born-rule}
+    \[  B_\psi=\frac{\langle{\psi}|{\phi}\rangle}{\|{\psi}\| \|{\phi}\|}  \]
+     is probability amplitude of transition between states. Corresponding 
+     probability is $ P_\psi=|B_\psi|^2 $.
+    Expectation value of an observable in a state 
+    \begin{equation}
+       \label {exp1}
+    \langle \hat A \rangle_\psi = \frac{\langle \psi| \hat A |\psi \rangle} {\langle \psi|\psi \rangle}
+    \end{equation}
+    comprises all available information.
+\end{axiom}
 
 \section{Dirac Quantization}
 \label{dirac-quantization}
