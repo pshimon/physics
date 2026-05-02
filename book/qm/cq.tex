@@ -275,9 +275,9 @@ Strange thing about quantum mechanics is that observables act on states.
 For any observable $ \hat A $ and any (pure) state $ \psi $ exits (pure)
 state $ \phi = \hat A \psi $ provided that
 \begin{itemize}
-    \item $ \psi \in \text{Dom} A $
-       \item $ \phi \neq 0 $
-           \item Superselection \footnote{Will be discussed later} rules are not violated
+    \item $ \psi \in \text{Dom}(A) $
+    \item $ \phi \neq 0 $
+    \item Superselection \footnote{Will be discussed later} rules are not violated
 \end{itemize}
 \begin{remark}
     $  \hat A \psi$ is not a result of measurement of observable  $ \hat A $ in
@@ -315,8 +315,16 @@ Matrix elements are actually the base of all quantum theory.
     |\psi(t)\rangle&= \hat U^{-1}(t) |\psi \rangle, \label{cq:schr1} \\
     \frac{d |\psi \rangle}{d t} &=-\frac{i}{\hbar} \hat H |\psi \rangle. \label{cq:schr2}
 \end{align}
-
-
+   
+\begin{remark}
+    The structure described above is way too abstract. All infinite
+    dimensional separable Hilbert spaces are unitary equivalent to
+    $ l^2 $ ---the space of square-summable sequences.
+    All commuting  observables can be represented as functions of
+    one observable. Such representations certainly have no physical
+    sense. So we should use more specific constructions, respecting
+    geometry and all that.
+\end{remark}
 \section{Dirac Quantization}
 \label{dirac-quantization}
 However  not all Dirac's ideas prove to be right. He sees
@@ -397,3 +405,28 @@ which formally coincide with classical equation of motion
     Spectrum of all operators $ \hat q_i, \hat p_j$ satisfying
     canonical commutation relations \eqref{cq:ccr} is unbounded.
 \end{remark}  
+
+ There is some confusion in terminology, exact  operator domain is 
+ rarely important in physical problems, so physicists generally do 
+ not pay attention to difference between Hermitian and self-adjoint operators.
+\begin{definition}
+    Operator $ \hat A^\dag$ is called adjoint to operator $ \hat A $,
+    if 
+$ \langle \hat A\phi,\psi \rangle = \langle \phi,\hat A^\dag \psi \rangle$.
+\end{definition}
+Note that domain of $ \hat A^\dag$ includes that of $ \hat A $
+$ D( \hat A)\subseteq D( \hat A^\dag)$.
+\begin{definition}
+    Operator $ \hat A $ is called Hermitian if $ \hat A = \hat A^\dag $ on
+    $D( \hat A)$.
+\end{definition}
+\begin{definition}
+    Operator $ \hat A $ is called  self-adjoint if $ \hat A = \hat A^\dag $
+    and $D( \hat A) = D( \hat A^\dag)$.
+\end{definition}
+For bounded operators on Hilbert space $ \mathcal{H} $ 
+$D( \hat A) = \mathcal{H} = D( \hat A^\dag)$ so Hermitian
+and self-adjoint bounded operators are the same. 
+In many cases Hermitian operators used in quantum mechanics 
+are not self-adjoint but have self-adjoint extensions.
+
