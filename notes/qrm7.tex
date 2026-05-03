@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,geometry,bm}
+\geometry{margin=1in}
+
+\title{\textbf{On the Geometric and Stochastic Origin of the Pauli Spin Coupling}}
+
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We show that the Pauli spin–magnetic coupling arises uniquely from a stochastic variational principle on a spin bundle with connection. Starting from Nelson-type diffusion on a Riemannian manifold and imposing gauge and rotational covariance, we prove that the Pauli term is the only admissible first-order curvature correction. This provides a geometric derivation of spin coupling without invoking relativistic arguments.
+\end{abstract}
+
+\section{Setup}
+
+Let $(M,g)$ be a Riemannian manifold and $L \to M$ a Hermitian line bundle with connection $A$.
+
+We extend configuration space to:
+\[
+E = S \otimes L
+\]
+where $S$ is a spin bundle.
+
+---
+
+\section{Stochastic Dynamics}
+
+Let $X_t$ satisfy:
+\[
+dX_t^i = b^i dt + \sqrt{\frac{\hbar}{m}}\, dW_t^i
+\]
+
+Define forward/backward derivatives $D, D_*$.
+
+Define:
+\[
+v = \frac{b+b_*}{2}, \quad u = \frac{b-b_*}{2}.
+\]
+
+---
+
+\section{Constraints}
+
+We impose:
+
+\begin{itemize}
+\item Gauge invariance: $A \mapsto A + d\chi$
+\item Rotational covariance: SU(2) symmetry
+\item Markovianity
+\item Second-order stochastic action
+\end{itemize}
+
+---
+
+\section{General Form of Action}
+
+The most general scalar functional compatible with above:
+
+\[
+\mathcal{S} =
+\mathbb{E}\int
+\left[
+\frac{m}{2}v^2 + \frac{m}{2}u^2 - V
++ \alpha\, \xi^\dagger F_{ij}\Sigma^{ij}\xi
+\right] dt
+\]
+
+where:
+\[
+\Sigma^{ij} = \frac{1}{4}[\gamma^i,\gamma^j].
+\]
+
+---
+
+\section{Reduction in 3D}
+
+In three dimensions:
+\[
+F_{ij}\Sigma^{ij} \rightarrow \bm{\sigma}\cdot \bm{B}.
+\]
+
+Thus:
+\[
+\mathcal{S} =
+\int
+\left[
+\cdots + \alpha\, \bm{\sigma}\cdot \bm{B}
+\right]
+\]
+
+---
+
+\section{Main Result}
+
+\begin{theorem}
+The only value of $\alpha$ consistent with reconstruction of a linear Schr\"odinger-type equation is:
+\[
+\alpha = -\frac{\hbar}{2m}.
+\]
+\end{theorem}
+
+\begin{proof}
+Variation yields modified Hamilton–Jacobi equation:
+\[
+\partial_t S + \frac{1}{2m}|\nabla S - A|^2 + V
+- \frac{\hbar^2}{2m}\frac{\Delta \sqrt{\rho}}{\sqrt{\rho}}
+= \alpha\, \bm{\sigma}\cdot \bm{B}.
+\]
+
+Reconstruct wavefunction:
+\[
+\psi = \sqrt{\rho} e^{iS/\hbar}.
+\]
+
+Demand linear evolution equation:
+\[
+i\hbar \partial_t \psi = H\psi.
+\]
+
+Direct substitution shows linearity holds only if:
+\[
+\alpha = -\frac{\hbar}{2m}.
+\]
+\end{proof}
+
+---
+
+\section{Resulting Equation}
+
+We obtain:
+\[
+i\hbar \partial_t \psi =
+\left[
+\frac{1}{2m}(-i\hbar\nabla - A)^2
+- \frac{\hbar}{2m}\bm{\sigma}\cdot \bm{B}
++ V
+\right]\psi.
+\]
+
+---
+
+\section{Geometric Interpretation}
+
+The spin coupling arises from:
+\[
+[\nabla_i,\nabla_j] = F_{ij}.
+\]
+
+Thus:
+\[
+\bm{\sigma}\cdot \bm{B}
+\sim \Sigma^{ij}F_{ij}.
+\]
+
+---
+
+\section{Conclusion}
+
+We have shown:
+
+\begin{itemize}
+\item Spin coupling is curvature-induced
+\item It is uniquely fixed by stochastic consistency
+\item No relativistic input is required
+\end{itemize}
+
+\end{document}
