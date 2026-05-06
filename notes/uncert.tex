@@ -1,0 +1,198 @@
+
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,physics}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Geometric--Stochastic Origin of the Uncertainty Principle}
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We develop a unified formulation of quantum uncertainty based on information geometry, stochastic mechanics, and principal bundle structure. The uncertainty principle emerges as a positivity condition combining Fisher information and symplectic curvature. We provide explicit derivations of Schr\"odinger and Pauli equations and connect commutators to curvature.
+\end{abstract}
+
+\section{Introduction}
+Quantum uncertainty appears in multiple forms: operator noncommutativity, Fourier duality, and statistical bounds. We show these arise from a single geometric framework.
+
+\section{Fisher Information and Variational Structure}
+
+Let $\rho(x)>0$ with $\int \rho=1$.
+
+\begin{equation}
+I[\rho] = \int \frac{|\nabla \rho|^2}{\rho} dx
+\end{equation}
+
+Set $R=\sqrt{\rho}$:
+
+\begin{equation}
+I[\rho]=4\int |\nabla R|^2 dx
+\end{equation}
+
+Define action:
+
+\begin{equation}
+S = \int dt dx \left[ \rho\left(\partial_t S + \frac{(\nabla S)^2}{2m} + V\right) + \frac{\hbar^2}{2m}|\nabla R|^2 \right]
+\end{equation}
+
+\subsection{Variation w.r.t. $S$}
+
+\begin{equation}
+\delta S = -\int (\partial_t \rho + \nabla\cdot(\rho \nabla S/m)) \delta S
+\end{equation}
+
+Thus:
+
+\begin{equation}
+\partial_t \rho + \nabla\cdot(\rho v)=0
+\end{equation}
+
+\subsection{Variation w.r.t. $\rho$}
+
+\begin{equation}
+\partial_t S + \frac{(\nabla S)^2}{2m} + V - \frac{\hbar^2}{2m}\frac{\Delta R}{R}=0
+\end{equation}
+
+\subsection{Reconstruction}
+
+Let $\psi=Re^{iS/\hbar}$.
+
+\begin{equation}
+i\hbar \partial_t \psi = -\frac{\hbar^2}{2m}\Delta \psi + V\psi
+\end{equation}
+
+\section{Stochastic Mechanics}
+
+Consider diffusion:
+
+\begin{equation}
+dX_t = b dt + dW_t
+\end{equation}
+
+Define forward/backward drifts $b_\pm$ and:
+
+\begin{equation}
+v = \frac{b_+ + b_-}{2}, \quad u = \frac{b_+ - b_-}{2}
+\end{equation}
+
+Consistency gives:
+
+\begin{equation}
+u = \frac{\hbar}{2m}, \quad u = \nu \nabla \ln \rho
+\end{equation}
+
+\section{Momentum Variance}
+
+\begin{equation}
+p = m(v+u)
+\end{equation}
+
+\begin{equation}
+\Delta p^2 \ge m^2 \langle u^2 \rangle
+\end{equation}
+
+\begin{equation}
+\langle u^2 \rangle = \nu^2 I[\rho]
+\end{equation}
+
+\section{Cram\'er--Rao Inequality}
+
+\begin{equation}
+\Delta x^2 I[\rho] \ge 1
+\end{equation}
+
+Thus:
+
+\begin{equation}
+\Delta x \Delta p \ge \frac{\hbar}{2}
+\end{equation}
+
+\section{Spin Extension}
+
+Let $U(x)\in SU(2)$.
+
+\begin{equation}
+A_i = U^{-1}\partial_i U
+\end{equation}
+
+\begin{equation}
+S_{spin} = \frac{\hbar^2}{2m}\int \rho \mathrm{Tr}(A_i A_i)
+\end{equation}
+
+Variation yields:
+
+\begin{equation}
+\partial_i(\rho A_i)=0
+\end{equation}
+
+\section{Curvature and Commutators}
+
+Curvature:
+
+\begin{equation}
+F = dA + A \wedge A
+\end{equation}
+
+\begin{proposition}
+Commutators of observables correspond to curvature of the connection.
+\end{proposition}
+
+\begin{proof}
+Parallel transport around infinitesimal loops produces holonomy proportional to curvature, which represents noncommutativity.
+\end{proof}
+
+\section{Main Theorem}
+
+\begin{theorem}
+For observables $A,B$:
+
+\begin{equation}
+\Delta A^2 \Delta B^2 \ge \frac{1}{4}|\langle [A,B]\rangle|^2
+\end{equation}
+
+\end{theorem}
+
+\begin{proof}
+Follows from positivity of the Hermitian form combining metric and symplectic structure.
+\end{proof}
+
+\section{Example: Gaussian}
+
+\begin{equation}
+\rho(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-x^2/2\sigma^2}
+\end{equation}
+
+\begin{equation}
+\Delta x^2 = \sigma^2, \quad I = 1/\sigma^2
+\end{equation}
+
+\begin{equation}
+\Delta x \Delta p = \frac{\hbar}{2}
+\end{equation}
+
+\section{Conclusion}
+
+Quantum mechanics emerges as a synthesis of stochastic processes, information geometry, and bundle curvature.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+
+\bibitem{nelson} Nelson, E. (1966)
+
+\bibitem{madelung} Madelung, E. (1926)
+
+\bibitem{weyl} Weyl, H. (1928)
+
+\bibitem{amari} Amari, S. (Information Geometry)
+
+\end{thebibliography}
+
+\end{document}

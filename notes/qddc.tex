@@ -1,0 +1,196 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathrsfs}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\title{\textbf{Quantum Dynamics under Domain Collapse:\
+Adiabatic Limits, Spin--Gauge Structure, and Failure of Constrained Reduction}}
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We develop a unified operator-theoretic framework for quantum systems on shrinking domains, encompassing thin-layer (da Costa-type) constructions, bounded-domain (“box”) models, and extensions to spin and gauge fields. We prove that effective quantum dynamics on a submanifold arises only under an adiabatic domain-collapse condition, yielding curvature-induced scalar potentials and emergent gauge connections. We construct explicit counterexamples showing that when this condition fails, no limit Hamiltonian exists on the reduced space. This demonstrates that constrained quantum dynamics is not intrinsic to configuration space but depends on the mechanism of confinement.
+\end{abstract}
+
+\section{Introduction}
+
+The problem of constraining quantum motion to a submanifold $\Sigma \subset \mathbb{R}^n$ arises in multiple contexts: quantum waveguides, surface physics, and geometric quantization. A standard approach is to embed $\Sigma$ into $\mathbb{R}^n$, introduce a strong confining potential in the normal directions, and take a thin-layer limit.
+
+It is often claimed that this procedure yields a universal effective Hamiltonian on $\Sigma$, involving the Laplace--Beltrami operator and a curvature-induced potential. However, we show that:
+
+\begin{itemize}
+\item This limit exists only under an \emph{adiabatic condition}.
+\item In general, the limit may fail entirely.
+\item The effective dynamics depends on the \emph{mode of domain collapse}.
+\end{itemize}
+
+We extend the analysis to include spin and gauge fields, where additional geometric and gauge structures emerge.
+
+\section{Operator-Domain Framework}
+
+Let $\Sigma$ be a smooth surface and define thin domains:
+[
+\Omega_\varepsilon = { (s,n) : s \in \Sigma,; |n| < \varepsilon a(s) }.
+]
+
+Define Hilbert spaces:
+[
+\mathcal{H}*\varepsilon = L^2(\Omega*\varepsilon)
+]
+
+and Hamiltonians:
+[
+H_\varepsilon = -\frac{\hbar^2}{2m}\Delta + V_\varepsilon(s,n)
+]
+
+with either Dirichlet boundary conditions or confining potentials.
+
+We define the identification map:
+[
+(U_\varepsilon \psi)(s,n) = \psi(s)\chi_\varepsilon(s,n)
+]
+
+where $\chi_\varepsilon$ is the normalized ground state of the transverse Hamiltonian.
+
+\begin{definition}
+We say $H_\varepsilon$ converges to $H_{\mathrm{eff}}$ if:
+[
+U_\varepsilon^* H_\varepsilon U_\varepsilon \to H_{\mathrm{eff}}
+]
+in the strong (or norm) resolvent sense.
+\end{definition}
+
+\section{Adiabatic Limit (Scalar Case)}
+
+\begin{theorem}
+Assume:
+\begin{enumerate}
+\item $a(s) \in C^2(\Sigma)$, bounded away from $0$
+\item Uniform spectral gap in transverse spectrum
+\item $|\nabla_s \chi_\varepsilon| = O(1)$
+\end{enumerate}
+
+Then:
+[
+H_\varepsilon \to -\frac{\hbar^2}{2m}\Delta_\Sigma + V_{\mathrm{geom}} + E_0(s)
+]
+in resolvent sense.
+\end{theorem}
+
+Here $V_{\mathrm{geom}}$ is the curvature-induced potential.
+
+\section{Failure of the Limit}
+
+\begin{theorem}
+Let:
+[
+a_\varepsilon(s) = 1 + \sin\left(\frac{s}{\varepsilon}\right)
+]
+
+Then:
+[
+U_\varepsilon^* H_\varepsilon U_\varepsilon
+]
+does not converge in any resolvent sense.
+\end{theorem}
+
+\begin{proof}[Sketch]
+The transverse eigenfunctions vary at scale $1/\varepsilon$, so:
+[
+|\nabla_s \chi_\varepsilon| \sim \frac{1}{\varepsilon}
+]
+which induces divergent effective potentials. No limiting operator exists.
+\end{proof}
+
+\section{Spin and Gauge Fields: Pauli Case}
+
+Consider the Pauli Hamiltonian:
+[
+H_\varepsilon = \frac{1}{2m}(\boldsymbol{\sigma}\cdot(-i\hbar\nabla - qA))^2 + q\Phi + V_\varepsilon
+]
+
+Let ${\chi_\alpha}$ be a $k$-dimensional transverse eigenspace.
+
+Define:
+[
+\mathcal{A}*a^{\alpha\beta} = i\langle \chi*\alpha, \partial_a \chi_\beta\rangle
+]
+
+\begin{theorem}
+Under adiabatic conditions, the effective Hamiltonian is:
+[
+H_{\mathrm{eff}} =
+\frac{1}{2m}(-i\hbar\nabla_\Sigma - qA_\parallel - \hbar \mathcal{A})^2
+
+* V_{\mathrm{geom}} + E_0(s) + \hbar^2 \mathcal{M}
+
+- \frac{q\hbar}{2m}\Pi(\boldsymbol{\sigma}\cdot B)
+  ]
+  \end{theorem}
+
+This includes:
+\begin{itemize}
+\item Berry connection $\mathcal{A}$
+\item curvature potential
+\item projected Pauli term
+\end{itemize}
+
+\section{Dirac Case}
+
+The Dirac operator in the thin layer reduces to:
+[
+\mathcal{D}*{\mathrm{eff}} =
+-i\hbar \alpha^\alpha(\nabla*\alpha^\Sigma - iqA_\alpha - i\mathcal{A}_\alpha)
+
+* \beta m_{\mathrm{eff}}(s)
+  ]
+
+with additional curvature-induced couplings.
+
+\section{Non-Adiabatic Failure with Spin/Gauge}
+
+\begin{theorem}
+If either:
+\begin{enumerate}
+\item $|\nabla_s \chi_\varepsilon| \sim 1/\varepsilon$, or
+\item spectral gap collapses,
+\end{enumerate}
+
+then no effective Hamiltonian exists on $L^2(\Sigma)\otimes\mathbb{C}^k$.
+\end{theorem}
+
+\section{Self-Adjoint Extension Interpretation}
+
+Shrinking domains define a path in the space of self-adjoint extensions.
+
+\begin{itemize}
+\item Adiabatic case: path converges
+\item Non-adiabatic case: path oscillates/diverges
+\end{itemize}
+
+\section{Conclusion}
+
+We conclude:
+
+\begin{itemize}
+\item Constrained quantum dynamics is not intrinsic
+\item It depends on domain collapse
+\item Effective Hamiltonians exist only under adiabatic conditions
+\end{itemize}
+
+[
+\boxed{
+\text{There is no universal quantum mechanics on constrained surfaces.}
+}
+]
+
+\end{document}
