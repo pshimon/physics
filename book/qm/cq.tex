@@ -1,5 +1,5 @@
 \chapter{Canonical Quantization}
-\label{cq:canonical_quantization}
+\label{cq}
 {
     \setlength\epigraphwidth{0.6\textwidth}
 \epigraph{ Quantum mechanics is a
@@ -50,7 +50,7 @@ Below  we analyze some quantization schemes,
 discuss no-go theorems limiting the existence of consistent quantization maps.
 
 \section{Bra-Ket Notation}
-\label{cq:bra-ket-notation}
+\label{cq:bk}
 
 Bra--ket notation is the standard symbolic language of quantum
 mechanics. While extraordinarily powerful and conceptually elegant,
@@ -189,8 +189,6 @@ Some common problems:
 It encourages formal calculation over structural analysis.
 \end{enumerate}
 
-\subsection{Explanation}
-\label{cq:explanation}
 
 Dirac's book \cite{dirac-pqm} contains
 statements that are mathematically unclear, incomplete, or (by modern standards) incorrect. 
@@ -334,8 +332,40 @@ Matrix elements are actually the base of all quantum theory.
     sense. So we should use more specific constructions, respecting
     geometry and all that.
 \end{remark}
+
+\section{Linear QM vs Non-Linear CM}
+\label{cq:lqm-ncm}
+Non-linearity in finite dimensional space (phase space of classical mechanics)
+can be traded for linearity in infinite dimensions (state space of quantum mechanics).
+This slogan has several precise mathematical meanings. It is not mystical 
+--- it reflects the fact that many nonlinear evolutions become linear 
+when lifted to a suitable function space.
+
+This principle was made systematic by
+Bernard Koopman.
+Given a nonlinear dynamical system with flow $ \Phi_t $
+, define: $ (U_t \phi)(x)= \phi(\Phi_t(x)) $
+Even if $ \Phi_t $
+is nonlinear, the operator $ U_t $
+  is linear on the function space.
+The generator is the linear differential operator:
+$L=F(x) \nabla$. 
+For example instead of evolving points $ \dot x=F(x) $
+evolve probability densities $ \partial \rho+\nabla (F \rho)=0 $ 
+This is the classical Liouville picture.
+
+Actually  nothing becomes simpler or harder --- the difficulty just moves.
+
+\section{Rays or Vectors}
+\label{cq:rorv}
+
+Expectation value of an observable in a state \eqref{cq:exp1} does not
+depend on length $  $
+
+
+
 \section{Dirac Quantization}
-\label{dirac-quantization}
+\label{cq:dirac-quantization}
 However  not all Dirac's ideas prove to be right. He sees
 quantization as a map of classical Hamiltonian system into
 quantum one.
