@@ -1,6 +1,14 @@
 \chapter{Quantizations }
 \label{qnt}
 
+\section{Deformation Quantization}
+
+Deformation quantization replaces the pointwise product of functions on phase space by a star product
+\begin{equation}
+f \star g = fg + \frac{i\hbar}{2}{f,g} + O(\hbar^2).
+\end{equation}
+Quantum mechanics is then viewed as a deformation of the classical observable algebra rather than as an operator theory ab initio.
+
 \section{Geometric Quantization}
 
 Geometric quantization begins with a complex line bundle $L \to M$ equipped with a connection $\nabla$ satisfying
@@ -11,14 +19,85 @@ This requires the integrality condition $[\omega]/2\pi\hbar \in H^2(M,\mathbb{Z}
 
 To obtain a physical Hilbert space, one introduces a polarization selecting a subset of compatible observables. The choice of polarization is generally non-unique and may not exist globally.
 
-\section{Deformation Quantization}
+\section{Geometric Quantization}
 
-Deformation quantization replaces the pointwise product of functions on phase space by a star product
-\begin{equation}
-f \star g = fg + \frac{i\hbar}{2}{f,g} + O(\hbar^2).
-\end{equation}
-Quantum mechanics is then viewed as a deformation of the classical observable algebra rather than as an operator theory ab initio.
+Deformation quantization modifies the algebra. 
+Geometric quantization instead attempts to construct the Hilbert space 
+directly from symplectic geometry.
 
+\subsection{Prequantization}
+
+Given $(M,\omega)$ with integral symplectic form:
+
+\[
+[\omega] \in H^2(M,\mathbb Z),
+\]
+
+there exists a Hermitian line bundle $L \to M$ with curvature:
+
+\[
+F_\nabla = -i\omega.
+\]
+
+Prequantum Hilbert space:
+
+\[
+\mathcal H_{pre} = L^2(M,L).
+\]
+
+Prequantum operator:
+
+\[
+\hat f = -i\hbar \nabla_{X_f} + f.
+\]
+
+However:
+
+\[
+[\hat f, \hat g] = i\hbar \widehat{\{f,g\}}.
+\]
+
+This space is too large.
+
+\subsection{Polarization}
+
+To reduce degrees of freedom, choose a polarization 
+(e.g., vertical polarization in $T^*Q$). 
+
+Wavefunctions become sections constant along half of phase space directions.
+
+Example:
+\[
+\mathcal H = L^2(Q).
+\]
+
+\subsection{Metaplectic Correction}
+
+For consistency of half-forms, one introduces the metaplectic correction.
+
+\subsection{Non-Functoriality}
+
+Quantization is not a functor:
+
+\[
+\text{Symplectic manifolds}
+\not\longrightarrow
+\text{Hilbert spaces}
+\]
+
+in a structure-preserving categorical sense.
+
+Obstructions include:
+
+\begin{itemize}
+\item Groenewold–Van Hove no-go theorem
+\item Dependence on polarization
+\item Global topological constraints
+\end{itemize}
+
+Thus quantization is not canonical.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Path Integral Quantization}
 
 In the path-integral approach, transition amplitudes are formally expressed as
