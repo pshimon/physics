@@ -1,0 +1,1012 @@
+
+% Mathematical Formulations of Classical Mechanics: Comparative LaTeX Monograph
+
+\documentclass[11pt]{book}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathtools}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{tensor}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tikz-cd}
+\usepackage{slashed}
+\usepackage{cite}
+
+\title{Mathematical Formulations of Classical Mechanics\\
+A Comparative Monograph of Geometric, Variational, Statistical, and Algebraic Structures}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter*{Preface}
+
+Classical mechanics is often presented as a single theory possessing several equivalent mathematical representations.
+
+In reality, classical mechanics admits a remarkably rich hierarchy of formulations based upon fundamentally different mathematical structures:
+
+\begin{itemize}
+\item Newtonian vector dynamics,
+\item variational principles,
+\item symplectic geometry,
+\item Hamilton--Jacobi theory,
+\item contact geometry,
+\item Poisson geometry,
+\item kinetic theory,
+\item hydrodynamics,
+\item geometric mechanics,
+\item Lie-group methods,
+\item Koopman operator theory,
+\item information geometry,
+\item category-theoretic formulations,
+\item integrable-system methods,
+\item stochastic mechanics.
+\end{itemize}
+
+These are not merely calculational variants. Each formulation emphasizes different primitive notions:
+
+\begin{center}
+\begin{tabular}{ll}
+Newtonian mechanics & forces and trajectories \\
+Lagrangian mechanics & action functionals \\
+Hamiltonian mechanics & symplectic flow \\
+Hamilton--Jacobi theory & generating functions \\
+Poisson mechanics & Lie algebras \\
+Geometric mechanics & manifolds and momentum maps \\
+Kinetic theory & probability densities \\
+Hydrodynamics & continuum fields \\
+Koopman mechanics & Hilbert-space evolution \\
+Integrable systems & spectral structures
+\end{tabular}
+\end{center}
+
+The purpose of this monograph is to compare these formulations systematically from the viewpoint of mathematical structure.
+
+\part{Foundational Structures}
+
+\chapter{Configuration Space and Kinematics}
+
+\section{Configuration Manifolds}
+
+The configuration space of a mechanical system is a differentiable manifold:
+
+\[
+Q.
+\]
+
+Local coordinates:
+
+\[
+q^i.
+\]
+
+Examples:
+
+\begin{itemize}
+\item particle in Euclidean space:
+\[
+Q=\mathbb R^3,
+\]
+
+\item rigid body:
+\[
+Q=SO(3),
+\]
+
+\item pendulum:
+\[
+Q=S^1,
+\]
+
+\item double pendulum:
+\[
+Q=S^1\times S^1.
+\]
+\end{itemize}
+
+\section{Velocity Phase Space}
+
+Velocities belong to tangent bundle:
+
+\[
+TQ.
+\]
+
+Coordinates:
+
+\[
+(q^i,\dot q^i).
+\]
+
+Acceleration defines second-order vector field:
+
+\[
+X:TQ\to TTQ.
+\]
+
+\chapter{Newtonian Mechanics}
+
+\section{Newton's Laws}
+
+Dynamics governed by:
+
+\[
+m_i \ddot q^i = F^i.
+\]
+
+For conservative systems:
+
+\[
+F^i = -\frac{\partial V}{\partial q^i}.
+\]
+
+Hence:
+
+\[
+m_i \ddot q^i
++
+\frac{\partial V}{\partial q^i}
+=0.
+\]
+
+\section{Geometry of Newtonian Mechanics}
+
+Newtonian mechanics naturally lives on tangent bundle:
+
+\[
+TQ.
+\]
+
+Dynamics becomes flow of second-order differential equations.
+
+\section{Conservation Laws}
+
+Momentum conservation:
+
+\[
+\frac{dp}{dt}=0.
+\]
+
+Energy conservation:
+
+\[
+E=T+V.
+\]
+
+Angular momentum:
+
+\[
+L=q\times p.
+\]
+
+These emerge from symmetry.
+
+\part{Variational Mechanics}
+
+\chapter{Lagrangian Mechanics}
+
+\section{Action Principle}
+
+Lagrangian:
+
+\[
+L:TQ\to\mathbb R.
+\]
+
+Action functional:
+
+\[
+S[q]
+=
+\int_{t_1}^{t_2}
+L(q,\dot q,t)dt.
+\]
+
+Physical trajectories satisfy:
+
+\[
+\delta S=0.
+\]
+
+\section{Euler--Lagrange Equations}
+
+Variation gives:
+
+\[
+\frac{d}{dt}
+\frac{\partial L}{\partial \dot q^i}
+-
+\frac{\partial L}{\partial q^i}
+=0.
+\]
+
+For:
+
+\[
+L=T-V,
+\]
+
+Newton equations are recovered.
+
+\section{Coordinate Invariance}
+
+Lagrangian mechanics is naturally covariant under coordinate transformations.
+
+This makes it ideal for:
+
+\begin{itemize}
+\item constrained systems,
+\item curved manifolds,
+\item field theories,
+\item relativity.
+\end{itemize}
+
+\chapter{Noether Theory}
+
+\section{Continuous Symmetries}
+
+Suppose:
+
+\[
+q^i \to q^i+\epsilon X^i(q).
+\]
+
+If action invariant:
+
+\[
+\delta S=0,
+\]
+
+then conserved quantity exists.
+
+\section{Noether Current}
+
+Conserved quantity:
+
+\[
+J
+=
+\sum_i
+\frac{\partial L}{\partial \dot q^i}
+X^i.
+\]
+
+\section{Examples}
+
+Time translation:
+
+\[
+\Rightarrow
+\text{energy conservation}.
+\]
+
+Spatial translation:
+
+\[
+\Rightarrow
+\text{momentum conservation}.
+\]
+
+Rotational symmetry:
+
+\[
+\Rightarrow
+\text{angular momentum conservation}.
+\]
+
+\part{Hamiltonian and Symplectic Mechanics}
+
+\chapter{Hamiltonian Mechanics}
+
+\section{Cotangent Bundle}
+
+Phase space is cotangent bundle:
+
+\[
+T^*Q.
+\]
+
+Coordinates:
+
+\[
+(q^i,p_i).
+\]
+
+Canonical one-form:
+
+\[
+\theta
+=
+p_i dq^i.
+\]
+
+Canonical symplectic form:
+
+\[
+\omega
+=
+dq^i\wedge dp_i.
+\]
+
+\section{Legendre Transform}
+
+Momenta:
+
+\[
+p_i
+=
+\frac{\partial L}{\partial \dot q^i}.
+\]
+
+Hamiltonian:
+
+\[
+H(q,p)
+=
+p_i\dot q^i-L.
+\]
+
+\section{Hamilton Equations}
+
+Dynamics:
+
+\begin{align}
+\dot q^i &= \frac{\partial H}{\partial p_i},\\
+\dot p_i &= -\frac{\partial H}{\partial q^i}.
+\end{align}
+
+\section{Hamiltonian Vector Fields}
+
+Hamiltonian flow satisfies:
+
+\[
+i_{X_H}\omega=dH.
+\]
+
+Thus mechanics becomes symplectic geometry.
+
+\chapter{Poisson Geometry}
+
+\section{Poisson Brackets}
+
+Define:
+
+\[
+\{f,g\}
+=
+\omega(X_f,X_g).
+\]
+
+Canonical form:
+
+\[
+\{f,g\}
+=
+\sum_i
+\left(
+\frac{\partial f}{\partial q^i}
+\frac{\partial g}{\partial p_i}
+-
+\frac{\partial f}{\partial p_i}
+\frac{\partial g}{\partial q^i}
+\right).
+\]
+
+\section{Lie Algebra Structure}
+
+Poisson brackets satisfy:
+
+\begin{align}
+\{f,g\} &=-\{g,f\},\\
+\{f,gh\} &= \{f,g\}h+g\{f,h\},\\
+\{f,\{g,h\}\} &+ \text{cyclic}=0.
+\end{align}
+
+Hence observables form Poisson algebra.
+
+\section{General Poisson Manifolds}
+
+Poisson tensor:
+
+\[
+\Pi^{ij}.
+\]
+
+Bracket:
+
+\[
+\{f,g\}
+=
+\Pi^{ij}
+\partial_i f
+\partial_j g.
+\]
+
+This generalizes symplectic geometry.
+
+\chapter{Hamilton--Jacobi Theory}
+
+\section{Hamilton Principal Function}
+
+Action:
+
+\[
+S(q,t).
+\]
+
+Hamilton--Jacobi equation:
+
+\[
+\frac{\partial S}{\partial t}
++
+H\left(q,\frac{\partial S}{\partial q}\right)
+=0.
+\]
+
+\section{Characteristics}
+
+Characteristics satisfy Hamilton equations.
+
+Hence HJ theory converts ODE mechanics into PDE theory.
+
+\section{Canonical Transformations}
+
+Generating function:
+
+\[
+F(q,Q,t).
+\]
+
+Transformation equations:
+
+\begin{align}
+p_i &= \frac{\partial F}{\partial q^i},\\
+P_i &= -\frac{\partial F}{\partial Q^i}.
+\end{align}
+
+\section{Action-Angle Variables}
+
+For integrable systems:
+
+\[
+(I_i,\theta_i).
+\]
+
+Dynamics simplifies to:
+
+\begin{align}
+\dot I_i &=0,\\
+\dot \theta_i &= \omega_i(I).
+\end{align}
+
+\part{Geometric Mechanics}
+
+\chapter{Symplectic Geometry}
+
+\section{Symplectic Manifolds}
+
+A symplectic manifold is:
+
+\[
+(M,\omega)
+\]
+
+with:
+
+\begin{align}
+d\omega &=0,\\
+\omega^n &\neq 0.
+\end{align}
+
+\section{Darboux Theorem}
+
+Locally:
+
+\[
+\omega
+=
+\sum_i dq^i\wedge dp_i.
+\]
+
+Thus all symplectic manifolds locally equivalent.
+
+\section{Symplectic Flow}
+
+Hamiltonian flow preserves symplectic form:
+
+\[
+\mathcal L_{X_H}\omega=0.
+\]
+
+Hence phase-space volume preserved.
+
+\chapter{Momentum Maps and Reduction}
+
+\section{Lie Group Actions}
+
+Suppose Lie group:
+
+\[
+G
+\]
+
+acts symplectically on:
+
+\[
+(M,\omega).
+\]
+
+\section{Momentum Map}
+
+Momentum map:
+
+\[
+\mu:M\to\mathfrak g^*.
+\]
+
+satisfies:
+
+\[
+d\langle\mu,\xi\rangle
+=
+i_{X_\xi}\omega.
+\]
+
+\section{Marsden--Weinstein Reduction}
+
+Reduced phase space:
+
+\[
+M_{red}
+=
+\mu^{-1}(0)/G.
+\]
+
+Gauge theories naturally arise this way.
+
+\chapter{Contact Geometry}
+
+\section{Odd-Dimensional Geometry}
+
+Contact manifold:
+
+\[
+(M,\alpha)
+\]
+
+with:
+
+\[
+\alpha\wedge(d\alpha)^n\neq0.
+\]
+
+\section{Dissipative Systems}
+
+Contact Hamilton equations:
+
+\begin{align}
+\dot q^i &= \frac{\partial H}{\partial p_i},\\
+\dot p_i &= -\frac{\partial H}{\partial q^i}-p_i\frac{\partial H}{\partial s},\\
+\dot s &= p_i\frac{\partial H}{\partial p_i}-H.
+\end{align}
+
+This geometrizes friction and thermodynamics.
+
+\part{Statistical and Kinetic Formulations}
+
+\chapter{Liouville Mechanics}
+
+\section{Phase-Space Densities}
+
+Probability density:
+
+\[
+\rho(q,p,t).
+\]
+
+\section{Liouville Equation}
+
+\[
+\partial_t\rho
++
+\{\rho,H\}
+=0.
+\]
+
+Equivalent form:
+
+\[
+\frac{d\rho}{dt}=0.
+\]
+
+\section{Ergodic Theory}
+
+Important concepts:
+
+\begin{itemize}
+\item invariant measures,
+\item mixing,
+\item recurrence,
+\item entropy.
+\end{itemize}
+
+\chapter{BBGKY and Kinetic Theory}
+
+\section{Distribution Functions}
+
+Many-body systems described by:
+
+\[
+f_N(q_1,p_1,\dots,q_N,p_N).
+\]
+
+Reduced distributions:
+
+\[
+f_n.
+\]
+
+\section{BBGKY Hierarchy}
+
+Hierarchy equations couple:
+
+\[
+f_n
+\leftrightarrow
+f_{n+1}.
+\]
+
+Boltzmann equation emerges under molecular chaos assumptions.
+
+\chapter{Hydrodynamics}
+
+\section{Euler Equations}
+
+Fluid density:
+
+\[
+\rho(x,t).
+\]
+
+Velocity field:
+
+\[
+v(x,t).
+\]
+
+Continuity equation:
+
+\[
+\partial_t\rho
++
+\nabla\cdot(\rho v)=0.
+\]
+
+Euler equation:
+
+\[
+\partial_t v
++
+(v\cdot\nabla)v
+=
+-\frac1\rho\nabla p.
+\]
+
+\section{Vorticity}
+
+Vorticity:
+
+\[
+\omega=\nabla\times v.
+\]
+
+Kelvin circulation theorem follows geometrically.
+
+\part{Operator and Hilbert-Space Formulations}
+
+\chapter{Koopman--von Neumann Mechanics}
+
+\section{Hilbert Space of Classical Mechanics}
+
+Wave functions on phase space:
+
+\[
+\psi(q,p).
+\]
+
+Inner product:
+
+\[
+\langle\phi,\psi\rangle
+=
+\int
+\phi^*\psi\,dqdp.
+\]
+
+\section{Liouville Operator}
+
+Dynamics:
+
+\[
+i\partial_t\psi
+=
+\hat L\psi.
+\]
+
+where:
+
+\[
+\hat L
+=
+i\{H,\cdot\}.
+\]
+
+\section{Importance}
+
+Classical mechanics already possesses:
+
+\begin{itemize}
+\item Hilbert spaces,
+\item unitary evolution,
+\item operator methods.
+\end{itemize}
+
+Thus Hilbert structure alone does not imply quantization.
+
+\chapter{Operator and Spectral Methods}
+
+\section{Lax Pairs}
+
+Integrable systems satisfy:
+
+\[
+\frac{dL}{dt}=[L,M].
+\]
+
+Spectrum of:
+
+\[
+L
+\]
+
+is conserved.
+
+\section{Inverse Scattering}
+
+Dynamics encoded spectrally.
+
+Examples:
+
+\begin{itemize}
+\item KdV equation,
+\item nonlinear Schr"odinger equation,
+\item Toda lattice.
+\end{itemize}
+
+\part{Stochastic and Information-Theoretic Mechanics}
+
+\chapter{Stochastic Mechanics}
+
+\section{Langevin Equation}
+
+Stochastic dynamics:
+
+\[
+mdv
+=
+-Fdt
+-\gamma vdt
++\sqrt{2D}\,dW_t.
+\]
+
+\section{Fokker--Planck Equation}
+
+Probability density evolves via:
+
+\[
+\partial_t\rho
+=
+-\nabla\cdot(b\rho)
++
+D\nabla^2\rho.
+\]
+
+\section{Brownian Motion on Manifolds}
+
+Generator becomes Laplace--Beltrami operator:
+
+\[
+\Delta_g.
+\]
+
+\chapter{Information Geometry and Optimal Transport}
+
+\section{Fisher Geometry}
+
+Probability manifold metric:
+
+\[
+g_{ij}
+=
+\int
+\rho
+\partial_i\ln\rho
+\partial_j\ln\rho
+ dx.
+\]
+
+\section{Wasserstein Geometry}
+
+Optimal transport metric:
+
+\[
+W_2(\rho_1,\rho_2).
+\]
+
+Hydrodynamics can be reformulated as geodesic flow on probability space.
+
+\part{Topological and Category-Theoretic Structures}
+
+\chapter{Topological Mechanics}
+
+\section{Configuration-Space Topology}
+
+Topology influences mechanics through:
+
+\begin{itemize}
+\item winding numbers,
+\item homotopy classes,
+\item monodromy,
+\item braid groups.
+\end{itemize}
+
+\section{Morse Theory}
+
+Critical points of action functional determine topology of trajectory space.
+
+\chapter{Category-Theoretic Mechanics}
+
+\section{Functorial Dynamics}
+
+Mechanical systems can be organized categorically.
+
+Morphisms preserve:
+
+\begin{itemize}
+\item symplectic structure,
+\item Poisson structure,
+\item variational structure.
+\end{itemize}
+
+\section{Symplectic Category}
+
+Objects:
+
+\[
+(M,\omega).
+\]
+
+Morphisms:
+
+canonical relations.
+
+\part{Comparative Structures}
+
+\chapter{Relations Between Formulations}
+
+\section{Transformation Web}
+
+\begin{center}
+\begin{tabular}{lll}
+Newton & $\to$ Lagrange & variational principle \\
+Lagrange & $\to$ Hamilton & Legendre transform \\
+Hamilton & $\to$ HJ & generating function \\
+Hamilton & $\to$ Liouville & statistical lift \\
+Hamilton & $\to$ KvN & Koopman representation \\
+Hydrodynamics & $\to$ optimal transport & Wasserstein geometry
+\end{tabular}
+\end{center}
+
+\section{Primitive Structures}
+
+Different formulations privilege:
+
+\begin{center}
+\begin{tabular}{ll}
+Newtonian & trajectories \\
+Lagrangian & actions \\
+Hamiltonian & symplectic flow \\
+Poisson & Lie algebras \\
+Hydrodynamic & continuum fields \\
+Statistical & measures \\
+KvN & Hilbert evolution
+\end{tabular}
+\end{center}
+
+\chapter{Conclusion}
+
+Classical mechanics is not a single theory but an interconnected network of mathematical languages.
+
+Its formulations involve:
+
+\begin{itemize}
+\item differential equations,
+\item variational principles,
+\item symplectic geometry,
+\item Poisson algebras,
+\item kinetic theory,
+\item probability geometry,
+\item operator theory,
+\item topology,
+\item category theory.
+\end{itemize}
+
+Many structures usually considered uniquely quantum already appear classically:
+
+\begin{itemize}
+\item Hilbert spaces,
+\item operator evolution,
+\item noncommutative brackets,
+\item geometric phases,
+\item stochastic dynamics.
+\end{itemize}
+
+The modern view of classical mechanics is therefore fundamentally geometric, statistical, and structural rather than merely Newtonian.
+
+\bibliographystyle{plain}
+
+\begin{thebibliography}{99}
+
+\bibitem{Arnold}
+V.~I.~Arnold,
+\textit{Mathematical Methods of Classical Mechanics}.
+
+\bibitem{MarsdenRatiu}
+J.~Marsden and T.~Ratiu,
+\textit{Introduction to Mechanics and Symmetry}.
+
+\bibitem{AbrahamMarsden}
+R.~Abraham and J.~Marsden,
+\textit{Foundations of Mechanics}.
+
+\bibitem{Goldstein}
+H.~Goldstein,
+\textit{Classical Mechanics}.
+
+\bibitem{JoseSaletan}
+J.~Jose and E.~Saletan,
+\textit{Classical Dynamics}.
+
+\bibitem{LibermannMarle}
+P.~Libermann and C.~Marle,
+\textit{Symplectic Geometry and Analytical Mechanics}.
+
+\bibitem{deLeon}
+M.~de Le\'on and P.~Rodrigues,
+\textit{Methods of Differential Geometry in Analytical Mechanics}.
+
+\bibitem{Morrison}
+P.~Morrison,
+``Hamiltonian description of fluid and plasma systems.''
+
+\bibitem{Koopman}
+B.~Koopman,
+``Hamiltonian systems and transformation in Hilbert space.''
+
+\bibitem{vonNeumann}
+J.~von Neumann,
+``Zur Operatorenmethode in der klassischen Mechanik.''
+
+\end{thebibliography}
+
+\end{document}
