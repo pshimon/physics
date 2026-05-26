@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+
+\title{Detailed Quantum Mechanical Description of the Water ($H_2O$) Wave Function}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{The Electronic Hamiltonian}
+Under the Born-Oppenheimer approximation, the nuclear kinetic energy is neglected, and the nuclear-nuclear repulsion is treated as a constant. For a water molecule with 10 electrons and 3 nuclei (Oxygen at origin, Hydrogens at $\mathbf{R}_{H_A}$ and $\mathbf{R}_{H_B}$), the electronic Hamiltonian in atomic units is:
+
+\begin{equation}
+\hat{H}_{el} = -\sum_{i=1}^{10} \frac{1}{2} \nabla_i^2 - \sum_{i=1}^{10} \sum_{A=1}^{3} \frac{Z_A}{|\mathbf{r}_i - \mathbf{R}_A|} + \sum_{i=1}^{10} \sum_{j>i}^{10} \frac{1}{|\mathbf{r}_i - \mathbf{r}_j|}
+\end{equation}
+
+Where $Z_O = 8$ and $Z_{H_A} = Z_{H_B} = 1$. The terms represent electron kinetic energy, electron-nucleus Coulombic attraction, and electron-electron Coulombic repulsion, respectively.
+
+\section{Basis Set and LCAO Approximation}
+To solve the time-independent Schr\"{o}dinger equation $\hat{H}_{el} \Psi = E \Psi$, we expand the one-electron molecular orbitals (MOs), $\psi_i$, as a Linear Combination of Atomic Orbitals (LCAO):
+
+\begin{equation}
+\psi_i = \sum_{\mu=1}^K c_{\mu i} \phi_\mu
+\end{equation}
+
+Using a minimal basis set (e.g., STO-3G), we have $K=7$ basis functions:
+\begin{itemize}
+    \item Oxygen: $\phi_{O_{1s}}, \phi_{O_{2s}}, \phi_{O_{2p_x}}, \phi_{O_{2p_y}}, \phi_{O_{2p_z}}$
+    \item Hydrogen A: $\phi_{H_A}$
+    \item Hydrogen B: $\phi_{H_B}$
+\end{itemize}
+
+\section{Symmetry Adapted Linear Combinations (SALCs)}
+Water belongs to the $C_{2v}$ point group. To block-diagonalize the Hamiltonian, we construct SALCs from the equivalent hydrogen $1s$ orbitals.
+Assuming the molecule lies in the $yz$-plane with the $z$-axis bisecting the H-O-H angle:
+
+\subsection{$a_1$ Symmetry (Totally Symmetric)}
+These orbitals remain unchanged under all symmetry operations ($E, C_2, \sigma_v(xz), \sigma_v'(yz)$):
+\begin{align}
+\chi_1 &= \phi_{O_{1s}} \\
+\chi_2 &= \phi_{O_{2s}} \\
+\chi_3 &= \phi_{O_{2p_z}} \\
+\chi_4 &= \frac{1}{\sqrt{2(1+S)}} (\phi_{H_A} + \phi_{H_B})
+\end{align}
+Where $S$ is the overlap integral $\langle \phi_{H_A} | \phi_{H_B} \rangle$.
+
+\subsection{$b_2$ Symmetry}
+Changes sign upon $C_2$ rotation and $\sigma_v(xz)$ reflection:
+\begin{align}
+\chi_5 &= \phi_{O_{2p_y}} \\
+\chi_6 &= \frac{1}{\sqrt{2(1-S)}} (\phi_{H_A} - \phi_{H_B})
+\end{align}
+
+\subsection{$b_1$ Symmetry}
+Changes sign upon $C_2$ rotation and $\sigma_v'(yz)$ reflection:
+\begin{equation}
+\chi_7 = \phi_{O_{2p_x}}
+\end{equation}
+
+\section{The Roothaan-Hall Equations}
+To find the optimal coefficients $c_{\mu i}$, we minimize the total energy using the Variational Principle, leading to the pseudo-eigenvalue problem:
+
+\begin{equation}
+\mathbf{F} \mathbf{C} = \mathbf{S} \mathbf{C} \mathbf{\epsilon}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\mathbf{F}$ is the Fock matrix, with elements $F_{\mu\nu} = \langle \phi_\mu | \hat{f} | \phi_\nu \rangle$.
+    \item $\mathbf{C}$ is the matrix of MO coefficients $c_{\mu i}$.
+    \item $\mathbf{S}$ is the overlap matrix, $S_{\mu\nu} = \langle \phi_\mu | \phi_\nu \rangle$.
+    \item $\mathbf{\epsilon}$ is a diagonal matrix of orbital energies.
+\end{itemize}
+
+Because $\hat{f}$ depends on the density matrix (and thus on $\mathbf{C}$), this equation is solved iteratively via the Self-Consistent Field (SCF) method.
+
+\section{The Total Many-Body Wave Function}
+For the closed-shell singlet ground state of $H_2O$ (${}^1A_1$), the 10 electrons occupy the 5 lowest-energy MOs ($1a_1, 2a_1, 1b_2, 3a_1, 1b_1$). The total N-electron wave function is written as a Slater determinant to enforce antisymmetry:
+
+\begin{equation}
+\Psi_{el} = \frac{1}{\sqrt{10!}} 
+\begin{vmatrix}
+\psi_{1a_1}(1)\alpha(1) & \psi_{1a_1}(1)\beta(1) & \dots & \psi_{1b_1}(1)\beta(1) \\
+\psi_{1a_1}(2)\alpha(2) & \psi_{1a_1}(2)\beta(2) & \dots & \psi_{1b_1}(2)\beta(2) \\
+\vdots & \vdots & \ddots & \vdots \\
+\psi_{1a_1}(10)\alpha(10) & \psi_{1a_1}(10)\beta(10) & \dots & \psi_{1b_1}(10)\beta(10)
+\end{vmatrix}
+\end{equation}
+
+\end{document}
