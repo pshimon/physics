@@ -330,7 +330,6 @@ the potential remains finite:
 \[\phi(0) = \frac{q}{\ell}.\]
 The self-energy is therefore finite.
 
-\section{Interpretation of the Fundamental Length}
 The parameter $\ell$ may be interpreted in two ways.
 First, it may represent a modification of the electromagnetic field itself.
 Second, it may reflect finite particle structure.
@@ -355,3 +354,783 @@ zero space-time volume. Whenever finite spatial or space-time structure is
 introduced, the singularities disappear.
 This does not prove that particles are extended objects. However, it strongly 
 suggests that the point-particle paradigm may be a singular approximation to a deeper theory. 
+
+\section{Point Interactions in Quantum Theory}
+The difficulties encountered in classical electrodynamics might suggest 
+that quantum theory would naturally replace point particles with extended
+objects. Indeed, quantum mechanics introduces wave functions that are spread
+over finite regions of space. Nevertheless, the point-particle concept survives
+in a subtle and surprisingly robust form.
+The central paradox of quantum theory is that particles appear spatially 
+extended during propagation but point-like during interaction. A free electron
+may be represented by a wave packet extending over macroscopic distances, 
+yet it produces localized detector clicks and participates in interactions that are
+mathematically represented by point vertices.
+
+Quantum mechanics initially appears to replace particles by extended wave packets.
+However, closer examination reveals that point-like concepts remain deeply 
+embedded in the theory. Exact localization, delta-function interactions, local 
+field couplings, and ultraviolet divergences all arise from the persistence of 
+the point-particle paradigm.
+The next chapter will examine relativistic localization in greater detail and 
+show that the concept of a particle occupying a precise space-time point 
+becomes increasingly problematic once special relativity is taken seriously.
+
+\section{Localization in Relativistic Quantum Theory}
+In non-relativistic quantum mechanics one may define a position operator 
+whose eigenstates correspond to perfectly localized particles. In relativistic
+theories this construction becomes problematic. Localization acquires a 
+frame dependence, positive-energy constraints become important, and the very 
+notion of a particle occupying a definite space-time point comes into question.
+
+An important asymmetry exists in ordinary quantum mechanics.
+Position is represented by an operator,
+while time appears only as an external parameter,
+Consequently, spatial localization is described dynamically, whereas temporal 
+localization is imposed externally.
+This asymmetry is inherited from Newtonian mechanics rather than from relativity.
+
+For a free relativistic particle,
+The spectrum contains both positive and negative branches,
+This fact fundamentally alters localization theory.
+Sharp localization requires superpositions involving arbitrarily large momenta.
+The corresponding energies eventually probe both branches of the spectrum.
+The separation between particles and antiparticles becomes unavoidable.
+
+Newton and Wigner sought a relativistic analogue of the non-relativistic 
+position operator.
+Their requirements included:
+\begin{enumerate}
+\item orthogonality of localized states,
+\item translational covariance,
+\item rotational covariance,
+\item completeness.
+\end{enumerate}
+The resulting position operator exists for massive particles.
+At first glance this appears to solve the localization problem.
+Closer inspection reveals significant difficulties.
+
+The Newton-Wigner position operator depends on the chosen Lorentz frame.
+A state localized at
+for one observer is generally not localized for another.
+Localization therefore becomes observer dependent.
+This behavior contrasts sharply with the geometric simplicity of space-time
+points in classical relativity.
+
+The difficulties become even more severe for massless particles.
+For photons no satisfactory Newton-Wigner position operator exists.
+The obstacle is connected with the structure of massless representations
+of the Poincaré group.
+Thus one of the most fundamental particles in nature resists localization 
+from the outset.
+
+For the free Dirac particle,
+\begin{equation}
+    \label{zbw}
+\hat{\mathbf{x}}(t) = \hat{\mathbf{x}}(0)+\frac{\hat{\mathbf{p}}}{H}t
++\text{oscillatory terms}.
+\end{equation}
+The oscillation frequency is approximately
+\begin{equation}
+    \label{zbw-fr}
+\omega \sim \frac{2mc^2}{\hbar}.
+\end{equation}
+The amplitude is of order $ \lambda_C. $
+Many authors have interpreted zitterbewegung as evidence that relativistic
+particles possess intrinsic space-time structure at approximately 
+the Compton scale.
+
+Quantum field theory replaces particles by field operators.
+Field at a single point is not a genuine operator but an operator-valued 
+distribution.
+Physical observables require finite space-time averaging.
+Remarkably, the formalism itself therefore suggests that space-time points
+may not possess independent physical meaning.
+
+A recurring theme in relativistic localization is the distinction 
+between objects and events.
+Classical mechanics emphasizes persisting objects.
+Relativity emphasizes space-time events.
+Quantum theory suggests that elementary particles may be better described as
+localized event distributions rather than permanently localized objects.
+
+The localization theories discussed above retain the conventional 
+treatment of time as a parameter.
+A more symmetric approach would seek localization directly in space-time.
+Localization then becomes a four-dimensional concept.
+The particle is represented by a finite space-time packet rather 
+than a sequence of spatial localizations.
+
+\section{Space-Time Wave Packets and Four-Dimensional Localization}
+The wave function depends on both space and time, yet the two play 
+fundamentally different roles.
+Spatial coordinates are represented by operators,
+while time remains an external parameter.
+Consequently:
+\begin{enumerate}
+\item position is observable,
+\item time is not,
+\item spatial uncertainty exists,
+\item temporal uncertainty is indirect.
+\end{enumerate}
+This asymmetry appears unnatural from the viewpoint of relativity.
+
+Special relativity combines space and time into space-time,
+Lorentz transformations mix temporal and spatial coordinates:
+The distinction between space and time becomes observer dependent.
+One may therefore question whether a quantum theory treating space and 
+time differently can be fundamentally complete.
+
+Suppose a particle is represented by a space-time density $ \rho(x^\mu). $
+Normalization becomes $ \int \rho(x)d^4x = 1. $
+The particle occupies a finite space-time volume.
+
+The most obvious analogue of an ordinary wave packet is
+\begin{equation}
+\rho(x)=A \exp \left(-\frac{x_\mu x^\mu}{2\sigma^2}\right).
+\end{equation}
+Using the metric
+\begin{equation}
+x_\mu x^\mu = c^2t^2-r^2,
+\end{equation}
+one obtains
+\begin{equation}
+\rho(x) = A \exp\left(-\frac{c^2t^2-r^2}{2\sigma^2}\right).
+\end{equation}
+Unfortunately this expression grows exponentially for sufficiently large 
+spacelike separations.
+It is not normalizable.
+This is the first major obstacle confronting space-time localization theory.
+
+The root of the problem lies in the hyperbolic structure of Minkowski space.
+Surfaces
+\begin{equation}
+x_\mu x^\mu = \mathrm{const}
+\end{equation}
+form hyperboloids rather than spheres.
+Localization theory must therefore be reformulated using Lorentzian geometry
+rather than Euclidean intuition.
+The resulting mathematics is substantially more complicated.
+
+Ordinary quantum mechanics assigns probabilities to positions at fixed time.
+The space-time approach assigns probabilities directly to events:
+$dP = \rho(x)d^4x.$
+The quantity $ \rho(x) $
+represents the probability that an event occurs within the space-time 
+volume element $d^4x.$
+The primary object is therefore an event rather than a particle.
+
+Given a sequence of space-time blobs,
+$\rho(x,\tau),$ one may define
+\[X^\mu(\tau)=\int x^\mu \rho(x,\tau)d^4x.\]
+The curve $X^\mu(\tau)$
+plays the role of a world-line.
+Importantly, the world-line is no longer fundamental.
+It emerges from the motion of the blob centroid.
+
+A space-time packet admits a Fourier representation
+\begin{equation}
+    \label{ft1}
+\Psi(x) = \int \tilde\Psi(k) e^{-ik_\mu x^\mu}d^4k.
+\end{equation}
+Unlike ordinary quantum mechanics, the integration includes both energy 
+and momentum components.
+The dual variables are
+\begin{equation}
+    \label{ft2}
+k^\mu = \left(\frac{E}{c},\mathbf{p}\right).
+\end{equation}
+Thus localization in time becomes directly connected with energy uncertainty.
+Fourier analysis yields
+\begin{equation}
+    \label{ft3}
+\Delta E \Delta t \gtrsim \frac{\hbar}{2}.
+\end{equation}
+In conventional quantum mechanics this relation differs conceptually 
+from position-momentum uncertainty.
+Within space-time localization theory both arise from the same four-dimensional
+Fourier structure.
+
+Ordinary relativistic quantum theory typically imposes
+\begin{equation}
+    \label{ms}
+p^\mu p_\mu = m^2c^2.
+\end{equation}
+space-time wave packets naturally contain components violating \eqref{ms}
+Such states are called off-shell.
+They play a crucial role in manifestly covariant formulations of 
+relativistic dynamics.
+
+The support of a space-time blob defines a world tube.
+The tube possesses finite radius in both spatial and temporal directions.
+The point-particle limit is therefore a singular limit of the blob theory.
+
+Suppose two space-time blobs interact.
+Instead of intersecting at a point, the interaction occurs within 
+an overlap region  so
+the singular concept of a point vertex is replaced by a finite space-time overlap.
+
+The Fourier transform of a finite blob suppresses large momenta.
+So large values of $k^\mu$
+are exponentially damped.
+This suggests a natural mechanism for ultraviolet regularization.
+The suppression arises geometrically from finite space-time extent 
+rather than from ad hoc cutoffs.
+
+The space-time packet naturally leads to an event-based interpretation.
+A particle is interpreted as a correlated sequence of such events.
+This viewpoint differs substantially from the traditional ontology of 
+persisting point objects.
+The kinematical concept of a space-time blob is insufficient.
+A complete theory requires:
+\begin{enumerate}
+\item evolution equations,
+\item conserved currents,
+\item interactions,
+\item many-body dynamics,
+\item gauge invariance.
+\end{enumerate}
+Historically, the most developed realization of this program emerged in the 
+work of Stueckelberg, Horwitz, and Piron.
+
+The notion of a space-time wave packet provides a natural alternative to the 
+point-particle paradigm. Instead of describing a particle by a world-line, 
+one represents it by a finite space-time distribution characterized by 
+a centroid and covariance tensor.
+Several attractive features emerge immediately:
+\begin{enumerate}
+\item localization becomes fully four-dimensional,
+\item world lines become emergent rather than fundamental,
+\item interactions occur through finite overlap regions,
+\item ultraviolet behavior is softened,
+\item event ontology arises naturally.
+\end{enumerate}
+The principal challenge is dynamical: how should such space-time blobs evolve?
+
+\section{Stueckelberg Dynamics and the Introduction of Universal Time}
+The point-particle paradigm encounters 
+persistent conceptual and mathematical difficulties. Classical electrodynamics 
+leads to divergent self-energies, relativistic quantum theory challenges exact 
+localization, and four-dimensional wave packets suggest a natural description in
+terms of finite space-time distributions.
+A central question remains unanswered:
+\begin{quote}
+How can one formulate a dynamical theory in which space-time itself
+    becomes the arena of quantum evolution?
+\end{quote}
+The first systematic answer was proposed by Ernst Stueckelberg in the early 1940s.
+Stueckelberg introduced an invariant evolution parameter, now commonly denoted by $ \tau $
+which parametrizes the evolution of events in space-time.
+The resulting framework differs fundamentally from both ordinary classical mechanics
+and conventional quantum theory.
+In Stueckelberg theory, both $ t $ and $\mathbf{x}$
+become dynamical variables, while $ \tau $
+plays the role of universal evolution time.
+
+Stueckelberg's original motivation was the construction of a relativistically
+covariant mechanics.
+Conventional relativistic dynamics suffers from an asymmetry:
+\begin{enumerate}
+\item spatial coordinates are dynamical,
+\item coordinate time is privileged.
+\end{enumerate}
+This asymmetry becomes particularly problematic in quantum theory.
+Stueckelberg proposed treating all space-time coordinates equally:
+$x^\mu = (ct,\mathbf{x}).$
+To describe motion, an additional invariant parameter is introduced.
+This parameter is independent of Lorentz transformations.
+
+The fundamental object is not a particle but an event.
+An event is represented by $x^\mu(\tau).$
+Unlike a conventional world-line,
+the coordinates are functions of universal time.
+The physical interpretation changes profoundly.
+Ordinary relativity describes the history of a particle.
+Stueckelberg theory describes the evolution of events through space-time.
+A particle trajectory emerges only as a sequence of correlated events.
+
+The invariant evolution parameter satisfies is invariant 
+under Lorentz transformations.
+It provides a universal ordering of dynamical processes.
+The existence of such a parameter appears at first sight to conflict with relativity.
+However, this is not the case.
+Lorentz covariance acts on space-time coordinates,
+$x^\mu,$ while $\tau$
+belongs to a different level of description.
+The situation resembles Newtonian time in ordinary Hamiltonian mechanics, 
+except that coordinate time itself is now a dynamical variable.
+
+The configuration space consists of space-time coordinates
+$x^\mu.$ The conjugate momenta are $ p_\mu. $
+The phase space therefore contains eight dimensions.
+The canonical Poisson brackets become
+\begin{equation}
+    \label{shp-pb}
+\{x^\mu,p_\nu\} = \delta^\mu_\nu.
+\end{equation}
+Unlike ordinary relativistic mechanics, time and energy form a canonical pair:
+\[ \{t,E\} = 1.\]
+This symmetry between space and time is one of the defining features of the theory.
+
+The simplest Lorentz-invariant Hamiltonian is
+\begin{equation}
+    \label{shp-h0}
+K=\frac{1}{2M} p^\mu p_\mu.
+\end{equation}
+Using metric signature $(+,-,-,-),$
+one obtains
+\[ K=\frac{1}{2M}\left(\frac{E^2}{c^2}-\mathbf{p}^2\right).\]
+The parameter $ M $
+is a constant with dimensions of mass.
+It should not necessarily be identified with the physical particle mass.
+
+The equations of motion are
+\begin{align}
+    \label{shp-heq}
+\frac{dx^\mu}{d\tau}&=\frac{\partial K}{\partial p_\mu},\\
+\frac{dp_\mu}{d\tau}&=-\frac{\partial K}{\partial x^\mu}.
+\end{align}
+For the free Hamiltonian,
+one finds
+    \[\frac{dx^\mu}{d\tau} = \frac{p^\mu}{M}.\]
+The momentum remains constant:
+    \[\frac{dp^\mu}{d\tau} = 0.\]
+Thus free events move uniformly through space-time.
+
+The space-time interval is $ ds^2 = dx^\mu dx_\mu. $
+Using the equations of motion, $  ds^2 = \frac{p^\mu p_\mu}{M^2}d\tau^2.$
+Therefore, $  \frac{ds}{d\tau} = \sqrt{\frac{p^\mu p_\mu}{M^2}}.$
+Only for $ p^\mu p_\mu = \mathrm{const} $
+does universal time become proportional to proper time.
+In general the two parameters differ.
+
+A major novelty appears immediately.
+The event can move off the conventional mass shell.
+This feature is known as off-shell dynamics.
+The observed particle mass corresponds to an equilibrium value rather 
+than a fundamental constant.
+This interpretation differs radically from standard relativistic mechanics.
+
+\section{Interaction Potentials}
+Interactions are introduced through
+\begin{equation}
+    \label{shp-h}
+K = \frac{p^\mu p_\mu}{2M}+V(x).
+\end{equation}
+The equations become
+\begin{align}
+    \label{shp-heq}
+\frac{dx^\mu}{d\tau}&=\frac{p^\mu}{M},\\
+\frac{dp_\mu}{d\tau}&=-\partial_\mu V.
+\end{align}
+The force acts directly in space-time.
+Temporal as well as spatial components contribute.
+
+The temporal Hamilton equation is
+    \[\frac{dt}{d\tau} = \frac{E}{Mc^2}.\]
+Coordinate time becomes a dynamical variable.
+In particular, $\frac{dt}{d\tau}$ may change sign.
+The event may therefore move backward in coordinate time while continuing 
+forward in universal time.
+
+One of Stueckelberg's most remarkable observations was that a trajectory 
+reversing its direction in coordinate time can be interpreted as an antiparticle.
+A particle moving backward in coordinate time appears equivalent to an 
+antiparticle moving forward in time.
+This idea later influenced the work of Richard Feynman and John Wheeler.
+
+The action is
+\begin{equation}
+    \label{shp-a}
+S=\int\left(p_\mu \frac{dx^\mu}{d\tau}-K\right)d\tau.
+\end{equation}
+Variation yields the Hamilton equations.
+The action is manifestly Lorentz covariant.
+No preferred inertial frame appears.
+
+For several interacting events,
+\begin{equation}
+    \label{shp-hint}
+K = \sum_i \frac{p_i^\mu p_{i\mu}}{2M_i}+V(x_1,\ldots,x_N).
+\end{equation}
+All events evolve with respect to the same universal time.
+The framework therefore provides a manifestly covariant many-body theory.
+This achievement was one of Stueckelberg's principal motivations.
+
+Quantization proceeds through
+\begin{equation}
+p_\mu \rightarrow -i\hbar\partial_\mu.
+\end{equation}
+The wave function becomes
+\begin{equation}
+\Psi(x^\mu,\tau).
+\end{equation}
+The evolution equation is
+\begin{equation}
+i\hbar \frac{\partial\Psi}{\partial\tau}=K\Psi.
+\end{equation}
+For a free event,
+\begin{equation}
+i\hbar \frac{\partial\Psi}{\partial\tau}=-\frac{\hbar^2}{2M}\partial^\mu\partial_\mu\Psi.
+\end{equation}
+This equation is the space-time analogue of the Schrödinger equation.
+
+The natural normalization is
+\begin{equation}
+\int |\Psi(x,\tau)|^2 d^4x = 1.
+\end{equation}
+Unlike the Klein-Gordon theory, the density
+\begin{equation}
+|\Psi|^2
+\end{equation}
+is positive definite.
+The interpretation is straightforward:
+\begin{equation}
+|\Psi(x,\tau)|^2 d^4x
+\end{equation}
+gives the probability of finding the event within the space-time volume element
+\begin{equation}
+d^4x.
+\end{equation}
+
+Solutions naturally form four-dimensional wave packets.
+For example,
+\begin{equation}
+    \Psi(x,\tau) = N \exp \left[-\frac{1}{2}(x-X)^\mu A_{\mu\nu} (x-X)^\nu\right]
+\end{equation}
+describes a localized space-time blob.
+The packet evolves continuously in universal time.
+Its centroid follows the classical event trajectory.
+
+Several longstanding difficulties are addressed simultaneously:
+\begin{enumerate}
+\item space and time are treated symmetrically,
+\item localization becomes four-dimensional,
+\item antiparticles emerge geometrically,
+\item many-body relativistic dynamics becomes possible,
+\item event ontology replaces particle ontology.
+\end{enumerate}
+The framework therefore provides a natural foundation for space-time-blob physics.
+
+Despite its elegance, Stueckelberg's original formulation left important 
+questions unanswered:
+\begin{enumerate}
+\item gauge interactions were not fully developed,
+\item quantum measurement theory remained unclear,
+\item many-particle interactions required further work,
+\item the physical interpretation of universal time was debated.
+\end{enumerate}
+These issues were addressed in later developments.
+
+Stueckelberg's theory represents the first complete dynamical framework in 
+which particles are replaced by evolving space-time events. The introduction
+of universal time allows space-time coordinates to become genuine dynamical
+variables and naturally leads to four-dimensional wave packets, off-shell
+motion, and event-based ontology.
+From the perspective of the present monograph, the importance of Stueckelberg 
+dynamics lies not merely in its mathematical structure but in its conceptual 
+shift. The fundamental object is no longer a point particle tracing a world-line.
+Instead, physics is formulated in terms of events evolving through space-time 
+with respect to an invariant parameter.
+This framework provides the foundation upon which later developments were built, 
+most notably the theory developed by Lawrence Horwitz and Louis Piron,
+now known as the Stueckelberg--Horwitz--Piron framework.
+
+ \section{The Stueckelberg--Horwitz--Piron Framework}
+While Stueckelberg's 
+theory provided a profound reformulation of relativistic mechanics,
+many aspects remained incomplete. In particular:
+\begin{enumerate}
+\item a rigorous Hilbert-space structure was lacking,
+\item relativistic many-body systems required clarification,
+\item gauge interactions were not fully developed,
+\item the relation between events and particles remained ambiguous.
+\end{enumerate}
+
+Beginning in the 1970s,Lawrence Horwitz and Louis Piron developed these 
+ideas into a comprehensive framework now known as the 
+Stueckelberg--Horwitz--Piron (SHP) theory.
+The SHP framework provides one of the most mathematically developed realizations
+of the space-time-blob paradigm.
+
+The primary ontological object is an event,
+rather than a particle.
+An event represents a localized occurrence in space-time.
+A particle is understood as a correlated sequence of events evolving with respect to universal time
+This viewpoint reverses the conventional hierarchy.
+Particles become derived concepts rather than fundamental entities.
+
+The SHP wave function is
+\begin{equation}
+\Psi(x^\mu,\tau).
+\end{equation}
+The Hilbert space consists of square-integrable functions on space-time:
+\begin{equation}
+\mathcal H = L^2(\mathbb R^4).
+\end{equation}
+The inner product is
+\begin{equation}
+\langle \Phi | \Psi \rangle = \int \Phi^*(x,\tau)\Psi(x,\tau)d^4x.
+\end{equation}
+Unlike Klein-Gordon theory, the norm is positive definite.
+Therefore,
+\begin{equation}
+|\Psi|^2 = \int |\Psi|^2 d^4x
+\end{equation}
+admits a direct probabilistic interpretation.
+
+The quantity
+\begin{equation}
+\rho(x,\tau) = |\Psi(x,\tau)|^2
+\end{equation}
+represents the probability density for an event.
+The probability of finding the event inside a space-time volume
+\begin{equation}
+\Omega
+\end{equation}
+is
+\begin{equation}
+P(\Omega) = \int_\Omega |\Psi(x,\tau)|^2 d^4x.
+\end{equation}
+This interpretation differs fundamentally from ordinary quantum mechanics.
+The probability refers directly to space-time events rather than positions 
+at a fixed time.
+
+The basic dynamical equation is
+\begin{equation}
+i\hbar \frac{\partial \Psi}{\partial \tau} = K \Psi.
+\end{equation}
+For a free event,
+\begin{equation}
+K=\frac{p^\mu p_\mu}{2M}.
+\end{equation}
+Substituting
+\begin{equation}
+p_\mu=-i\hbar\partial_\mu
+\end{equation}
+gives
+\begin{equation}
+i\hbar \frac{\partial \Psi}{\partial \tau}=-\frac{\hbar^2}{2M}\Box\Psi,
+\end{equation}
+where
+\begin{equation}
+\Box = \partial^\mu\partial_\mu
+\end{equation}
+is the d'Alembert operator.
+This equation plays the same role as the ordinary Schrödinger 
+equation but acts in space-time.
+
+Multiplying the equation by
+\begin{equation}
+\Psi^*
+\end{equation}
+and subtracting the conjugate equation yields
+\begin{equation}
+\frac{\partial \rho}{\partial \tau}+\partial_\mu j^\mu=0.
+\end{equation}
+The event current is
+\begin{equation}
+j^\mu=\frac{\hbar}{2Mi}\left(\Psi^*\partial^\mu\Psi-\Psi\partial^\mu\Psi^*\right).
+\end{equation}
+This continuity equation expresses conservation of event probability.
+
+Applying the WKB approximation,
+\begin{equation}
+\Psi=R e^{iS/\hbar},
+\end{equation}
+and taking
+\begin{equation}
+\hbar\rightarrow 0,
+\end{equation}
+one obtains
+\begin{equation}
+\frac{\partial S}{\partial \tau}+\frac{1}{2M}\partial^\mu S\partial_\mu S
++V=0.
+\end{equation}
+This is the covariant Hamilton-Jacobi equation.
+The classical event trajectories emerge from
+\begin{equation}
+p_\mu = \partial_\mu S.
+\end{equation}
+Thus the classical theory appears as the geometric-optics limit of event quantum mechanics.
+
+In ordinary relativistic mechanics,
+\begin{equation}
+m=\mathrm{constant}.
+\end{equation}
+In SHP theory,
+\begin{equation}
+m^2 =\frac{p^\mu p_\mu}{c^2}
+\end{equation}
+is generally dynamical.
+The particle may evolve off-shell:
+\begin{equation}
+p^\mu p_\mu \neq m_0^2 c^2.
+\end{equation}
+Observed masses correspond to stable dynamical configurations rather 
+than exact constraints.
+
+Off-shell evolution is often misunderstood.
+The theory does not imply arbitrary violation of energy-momentum conservation.
+Instead, it permits temporary excursions away from the conventional mass 
+shell during interactions.
+Far from interactions,
+\begin{equation}
+p^\mu p_\mu
+\end{equation}
+typically approaches a constant value.
+Consequently, ordinary relativistic particle dynamics emerges as an 
+effective approximation.
+
+For $N$ events,
+\begin{equation}
+\Psi = \Psi(x_1,\ldots,x_N,\tau).
+\end{equation}
+The Hilbert space becomes
+\begin{equation}
+L^2(\mathbb R^{4N}).
+\end{equation}
+The Hamiltonian is
+\begin{equation}
+K = \sum_i \frac{p_i^\mu p_{i\mu}}{2M_i}+V(x_1,\ldots,x_N).
+\end{equation}
+All events evolve with respect to the same universal time.
+This construction avoids many of the difficulties that plague 
+conventional relativistic many-body quantum mechanics.
+
+Entanglement now occurs in space-time rather than merely in space.
+A two-event state may have the form
+\begin{equation}
+\Psi(x_1,x_2,\tau).
+\end{equation}
+Correlations can involve temporal coordinates as well as spatial coordinates.
+The resulting structure is sometimes called space-time entanglement.
+Such correlations are a natural consequence of treating time as an 
+observable variable.
+
+An important model is
+\begin{equation}
+V=\frac{k}{2}(x^\mu x_\mu).
+\end{equation}
+The Hamiltonian becomes
+\begin{equation}
+K=\frac{p^\mu p_\mu}{2M}+\frac{k}{2}x^\mu x_\mu.
+\end{equation}
+This system possesses discrete spectra and localized space-time wave packets.
+Historically it played a major role in demonstrating the viability of 
+the SHP framework.
+
+For two interacting events,
+\begin{equation}
+V=V(\rho),
+\end{equation}
+where
+\begin{equation}
+\rho^2=(x_1-x_2)^\mu(x_1-x_2)_\mu.
+\end{equation}
+The interaction depends on invariant space-time separation.
+This construction preserves Lorentz covariance while allowing bound states.
+Hydrogen-like systems can be formulated within this framework.
+
+A local phase transformation is
+\begin{equation}
+\Psi \rightarrow e^{i\Lambda(x,\tau)}\Psi.
+\end{equation}
+To preserve invariance one introduces gauge fields
+\begin{equation}
+a_\alpha = (a_\mu,a_5),
+\end{equation}
+where
+\begin{equation}
+\alpha=0,1,2,3,5.
+\end{equation}
+The covariant derivative becomes
+\begin{equation}
+D_\alpha = \partial_\alpha-iea_\alpha.
+\end{equation}
+Remarkably, the theory naturally generates a five-dimensional gauge structure.
+
+The field strength tensor is
+\begin{equation}
+f_{\alpha\beta} = \partial_\alpha a_\beta-\partial_\beta a_\alpha.
+\end{equation}
+The field equations become
+\begin{equation}
+\partial_\beta f^{\alpha\beta} = j^\alpha.
+\end{equation}
+The additional component
+\begin{equation}
+a_5
+\end{equation}
+has no analogue in ordinary Maxwell theory.
+It is intimately connected with off-shell dynamics and mass exchange.
+
+The fifth gauge field can alter
+\begin{equation}
+p^\mu p_\mu.
+\end{equation}
+Consequently, interactions may transfer mass between events and fields.
+This phenomenon provides a dynamical mechanism for off-shell evolution.
+From the blob perspective, mass becomes a collective property of the 
+space-time distribution rather than an immutable parameter.
+
+Localized event states may be represented by
+\begin{equation}
+    \Psi(x,\tau) = N \exp\left[-\frac{1}{2}(x-X)^\mu A_{\mu\nu} (x-X)^\nu\right].
+\end{equation}
+The covariance tensor
+\begin{equation}
+A_{\mu\nu}^{-1}
+\end{equation}
+determines the space-time size and orientation of the blob.
+The event is therefore naturally represented as an extended 
+space-time structure.
+
+A sequence of overlapping space-time packets defines a world tube.
+The centroid
+\begin{equation}
+X^\mu(\tau) = \langle x^\mu\rangle
+\end{equation}
+traces the effective trajectory.
+Thus:
+\begin{equation}
+\text{world-line} = \text{centroid approximation}.
+\end{equation}
+The exact object is a finite space-time tube.
+
+Ordinary quantum mechanics emerges when:
+\begin{enumerate}
+\item temporal uncertainties become negligible,
+\item off-shell effects are suppressed,
+\item coordinate time becomes approximately monotonic,
+\item space-time packets become narrow in the temporal direction.
+\end{enumerate}
+Under these conditions,
+\begin{equation}
+\Psi(x,\tau) \rightarrow \psi(\mathbf{x},t).
+\end{equation}
+The familiar formalism is recovered.
+
+The SHP framework offers several notable advantages:
+\begin{enumerate}
+\item manifest Lorentz covariance,
+\item positive-definite probability,
+\item relativistic many-body dynamics,
+\item natural space-time localization,
+\item event ontology,
+\item geometric interpretation of antiparticles,
+\item finite space-time wave packets.
+\end{enumerate}
+These features make SHP one of the most developed space-time-blob
+theories currently available.
+
+Despite its achievements, important questions remain:
+\begin{enumerate}
+\item connection with the Standard Model,
+\item quantization of the five-dimensional gauge sector,
+\item experimental signatures of off-shell effects,
+\item relation to quantum gravity,
+\item emergence of macroscopic time.
+\end{enumerate}
+These issues remain active subjects of research.
+
