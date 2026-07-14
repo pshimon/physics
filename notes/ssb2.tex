@@ -1,0 +1,1072 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chapter 2
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Mathematical Theory of Symmetry}
+
+\label{chap:symmetry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+The notion of symmetry occupies a unique position in modern theoretical
+physics. Virtually every fundamental theory is constructed by specifying
+its symmetry group. Classical mechanics, electrodynamics, general
+relativity, quantum mechanics, quantum field theory and the Standard
+Model are all formulated in terms of invariance principles.
+
+In spontaneous symmetry breaking the mathematical structure of the
+symmetry group becomes even more important. The vacuum manifold, the
+number of Goldstone bosons, the Higgs mechanism and topological defects
+are all determined almost entirely by properties of Lie groups and their
+actions.
+
+The purpose of this chapter is therefore to establish the mathematical
+language that will be used throughout the remainder of this monograph.
+
+Although many of the concepts originate in abstract algebra and
+differential geometry, our presentation emphasizes physical intuition
+without sacrificing mathematical rigor.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Transformations}
+
+A transformation is a map
+
+\[
+T:X\rightarrow X
+\]
+
+which associates to every point
+
+\[
+x\in X
+\]
+
+another point
+
+\[
+T(x).
+\]
+
+In physics,
+
+the set
+
+\[
+X
+\]
+
+may denote
+
+\begin{itemize}
+
+\item Euclidean space,
+
+\item Minkowski spacetime,
+
+\item phase space,
+
+\item Hilbert space,
+
+\item field configurations,
+
+\item vacuum manifold.
+
+\end{itemize}
+
+Examples include
+
+translation,
+
+\[
+x
+\rightarrow
+x+a,
+\]
+
+rotation,
+
+\[
+\mathbf x
+\rightarrow
+R\mathbf x,
+\]
+
+reflection,
+
+\[
+x
+\rightarrow
+-x,
+\]
+
+and Lorentz transformation,
+
+\[
+x^\mu
+\rightarrow
+\Lambda^\mu_{\ \nu}
+x^\nu.
+\]
+
+The physical importance of transformations lies not in the individual
+maps but in the algebraic relations among them.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Groups}
+
+The abstract mathematical object describing symmetry is the group.
+
+\bigskip
+
+\textbf{Definition.}
+
+A group is a set
+
+\[
+G
+\]
+
+equipped with a binary operation
+
+\[
+G\times G
+\rightarrow
+G,
+\]
+
+satisfying
+
+\begin{enumerate}
+
+\item closure,
+
+\[
+ab\in G,
+\]
+
+\item associativity,
+
+\[
+(ab)c
+=
+a(bc),
+\]
+
+\item existence of an identity element,
+
+\[
+ea=ae=a,
+\]
+
+\item existence of inverses,
+
+\[
+aa^{-1}
+=
+a^{-1}a
+=
+e.
+\]
+
+\end{enumerate}
+
+Groups provide the mathematical language of symmetry because successive
+symmetry transformations again constitute symmetry transformations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Examples}
+
+The integers under addition,
+
+\[
+(\mathbb Z,+),
+\]
+
+form an infinite Abelian group.
+
+The real numbers,
+
+\[
+(\mathbb R,+),
+\]
+
+also form an Abelian group.
+
+Rotations in three-dimensional space form the non-Abelian group
+
+\[
+SO(3).
+\]
+
+Lorentz transformations form
+
+\[
+SO(1,3).
+\]
+
+Gauge transformations of electromagnetism form
+
+\[
+U(1).
+\]
+
+The electroweak theory is based upon
+
+\[
+SU(2)\times U(1).
+\]
+
+Quantum chromodynamics employs
+
+\[
+SU(3).
+\]
+
+Already one observes that nearly every modern physical theory is
+specified by its symmetry group.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Abelian and Non-Abelian Groups}
+
+Two elements
+
+\[
+a,b\in G
+\]
+
+need not commute.
+
+If
+
+\[
+ab
+=
+ba
+\]
+
+for every pair,
+
+the group is called Abelian.
+
+Otherwise,
+
+the group is non-Abelian.
+
+Electromagnetism is governed by an Abelian gauge group,
+
+whereas both the weak and strong interactions possess non-Abelian gauge
+symmetries.
+
+This distinction has profound consequences.
+
+For example,
+
+non-Abelian gauge bosons interact with one another,
+
+whereas photons do not at tree level.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Subgroups}
+
+A subset
+
+\[
+H
+\subset
+G
+\]
+
+is called a subgroup if it forms a group under the same operation.
+
+We write
+
+\[
+H<G.
+\]
+
+Examples include
+
+\[
+SO(2)
+<
+SO(3),
+\]
+
+and
+
+\[
+U(1)
+<
+SU(2).
+\]
+
+Subgroups play a central role in spontaneous symmetry breaking because
+the vacuum preserves only a subgroup of the original symmetry.
+
+One therefore writes
+
+\[
+G
+\rightarrow
+H.
+\]
+
+This notation should never be interpreted as a change in the underlying
+Lagrangian.
+
+Instead,
+
+it indicates that
+
+\[
+H
+\]
+
+is the isotropy subgroup of the vacuum.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Invariant Subgroups}
+
+A subgroup
+
+\[
+N
+\]
+
+is called normal if
+
+\[
+gNg^{-1}
+=
+N
+\]
+
+for every
+
+\[
+g\in G.
+\]
+
+Normal subgroups permit construction of quotient groups,
+
+\[
+G/N.
+\]
+
+Although quotient groups appear throughout gauge theory, spontaneous
+symmetry breaking more commonly involves quotient manifolds,
+
+\[
+G/H,
+\]
+
+where
+
+\[
+H
+\]
+
+need not be normal.
+
+The distinction between quotient groups and homogeneous spaces will be
+discussed later.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Matrix Groups}
+\label{sec:matrix_groups}
+
+Most symmetry groups encountered in physics are realized as groups of
+invertible matrices.
+
+Let
+
+\[
+M_n(\mathbb{F})
+\]
+
+denote the set of all
+
+\[
+n\times n
+\]
+
+matrices over the field
+
+\[
+\mathbb{F},
+\]
+
+where
+
+\[
+\mathbb{F}
+=
+\mathbb{R}
+\quad\text{or}\quad
+\mathbb{C}.
+\]
+
+Matrix multiplication endows many important subsets of
+\(M_n(\mathbb F)\) with natural group structures.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{General Linear Group}
+
+\textbf{Definition.}
+
+The general linear group is
+
+\[
+GL(n,\mathbb F)
+=
+\{
+A\in M_n(\mathbb F)
+\;|\;
+\det A\neq0
+\}.
+\]
+
+The group operation is ordinary matrix multiplication.
+
+The inverse exists because
+
+\[
+\det A\neq0.
+\]
+
+The identity element is
+
+\[
+I_n.
+\]
+
+The dimension of
+
+\[
+GL(n,\mathbb R)
+\]
+
+is
+
+\[
+n^2,
+\]
+
+since every matrix element may vary independently.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example}
+
+For
+
+\[
+n=2,
+\]
+
+\[
+A
+=
+\begin{pmatrix}
+a&b\\
+c&d
+\end{pmatrix},
+\]
+
+belongs to
+
+\[
+GL(2,\mathbb R)
+\]
+
+whenever
+
+\[
+ad-bc\neq0.
+\]
+
+\end{example}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark}
+
+Every finite-dimensional continuous symmetry may be represented as a
+subgroup of some
+
+\[
+GL(n,\mathbb C).
+\]
+
+This remarkable result follows from Ado's theorem for Lie algebras.
+
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Orthogonal Groups}
+
+Euclidean geometry is characterized by preservation of distances.
+
+Suppose
+
+\[
+x,y\in\mathbb R^n.
+\]
+
+Their scalar product is
+
+\[
+x\cdot y
+=
+x^Ty.
+\]
+
+A linear transformation
+
+\[
+x'
+=
+Rx
+\]
+
+preserves distances whenever
+
+\[
+(Rx)^T(Ry)
+=
+x^Ty.
+\]
+
+Since this must hold for arbitrary vectors,
+
+\[
+R^TR
+=
+I.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Definition.}
+
+The orthogonal group is
+
+\[
+O(n)
+=
+\{
+R
+\in
+GL(n,\mathbb R)
+\;|\;
+R^TR=I
+\}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Taking determinants,
+
+\[
+(\det R)^2=1,
+\]
+
+therefore
+
+\[
+\det R=\pm1.
+\]
+
+Matrices with determinant
+
+\[
++1
+\]
+
+represent proper rotations,
+
+whereas
+
+\[
+-1
+\]
+
+includes reflections.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Special Orthogonal Group}
+
+The subgroup
+
+\[
+SO(n)
+=
+\{
+R
+\in
+O(n)
+\;|\;
+\det R=1
+\}
+\]
+
+contains only orientation-preserving rotations.
+
+Its dimension is
+
+\[
+\boxed{
+\dim SO(n)
+=
+\frac{n(n-1)}2.
+}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Proof.}
+
+Write
+
+\[
+R
+=
+I+\epsilon A,
+\]
+
+where
+
+\[
+\epsilon
+\]
+
+is infinitesimal.
+
+Then
+
+\[
+R^TR
+=
+(I+\epsilon A)^T
+(I+\epsilon A)
+=
+I
++
+\epsilon(A+A^T)
++
+O(\epsilon^2).
+\]
+
+Therefore
+
+\[
+A^T=-A.
+\]
+
+Thus the generators are antisymmetric matrices.
+
+An antisymmetric
+
+\[
+n\times n
+\]
+
+matrix possesses
+
+\[
+\frac{n(n-1)}2
+\]
+
+independent entries.
+
+Hence
+
+\[
+\dim SO(n)
+=
+\frac{n(n-1)}2.
+\]
+
+\hfill$\square$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Unitary Groups}
+
+Quantum mechanics preserves probabilities rather than Euclidean lengths.
+
+The relevant inner product is
+
+\[
+\langle\psi|\phi\rangle.
+\]
+
+Suppose
+
+\[
+\psi'
+=
+U\psi.
+\]
+
+Probability conservation requires
+
+\[
+\langle
+U\psi
+|
+U\phi
+\rangle
+=
+\langle
+\psi
+|
+\phi
+\rangle.
+\]
+
+Therefore
+
+\[
+U^\dagger U
+=
+I.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Definition.}
+
+The unitary group is
+
+\[
+U(n)
+=
+\{
+U
+\in
+GL(n,\mathbb C)
+\;|\;
+U^\dagger U=I
+\}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Its Lie algebra satisfies
+
+\[
+X^\dagger
+=
+-X.
+\]
+
+Thus every generator is anti-Hermitian.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The dimension is
+
+\[
+\boxed{
+\dim U(n)=n^2.
+}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Special Unitary Groups}
+
+The determinant defines a homomorphism
+
+\[
+U(n)
+\rightarrow
+U(1).
+\]
+
+The kernel consists of matrices satisfying
+
+\[
+\det U=1.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Definition.}
+
+The special unitary group is
+
+\[
+SU(n)
+=
+\{
+U
+\in
+U(n)
+\;|\;
+\det U=1
+\}.
+\]
+
+Its Lie algebra satisfies
+
+\[
+X^\dagger=-X,
+\]
+
+together with
+
+\[
+\mathrm{Tr}(X)=0.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Therefore
+
+\[
+\boxed{
+\dim SU(n)
+=
+n^2-1.
+}
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Examples include
+
+\[
+SU(2),
+\]
+
+the gauge group of weak isospin,
+
+and
+
+\[
+SU(3),
+\]
+
+the gauge group of quantum chromodynamics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Examples}
+
+\subsection{The Group \(SO(2)\)}
+
+Every element has the form
+
+\[
+R(\theta)
+=
+\begin{pmatrix}
+\cos\theta&
+-\sin\theta\\
+\sin\theta&
+\cos\theta
+\end{pmatrix}.
+\]
+
+Composition satisfies
+
+\[
+R(\theta_1)
+R(\theta_2)
+=
+R(\theta_1+\theta_2).
+\]
+
+Hence
+
+\[
+SO(2)
+\simeq
+U(1).
+\]
+
+This group will later describe the vacuum manifold of the Abelian Higgs
+model.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The Group \(SO(3)\)}
+
+The rotation group of ordinary three-dimensional space possesses
+
+\[
+3
+\]
+
+independent generators,
+
+usually denoted
+
+\[
+J_x,
+\qquad
+J_y,
+\qquad
+J_z.
+\]
+
+Their algebra is
+
+\[
+[J_i,J_j]
+=
+\epsilon_{ijk}
+J_k.
+\]
+
+This Lie algebra underlies orbital angular momentum,
+spin,
+ferromagnetism,
+and rotational spontaneous symmetry breaking.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{The Group \(SU(2)\)}
+
+Every element may be written
+
+\[
+U
+=
+\exp
+\left(
+i
+\theta^a
+\frac{\sigma_a}{2}
+\right),
+\]
+
+where
+
+\[
+\sigma_a
+\]
+
+are the Pauli matrices.
+
+Explicitly,
+
+\[
+\sigma_1
+=
+\begin{pmatrix}
+0&1\\
+1&0
+\end{pmatrix},
+\]
+
+\[
+\sigma_2
+=
+\begin{pmatrix}
+0&-i\\
+i&0
+\end{pmatrix},
+\]
+
+\[
+\sigma_3
+=
+\begin{pmatrix}
+1&0\\
+0&-1
+\end{pmatrix}.
+\]
+
+The generators satisfy
+
+\[
+[\sigma_i,\sigma_j]
+=
+2i
+\epsilon_{ijk}
+\sigma_k.
+\]
+
+Consequently,
+
+\[
+[T_i,T_j]
+=
+i
+\epsilon_{ijk}
+T_k,
+\]
+
+where
+
+\[
+T_i
+=
+\frac{\sigma_i}{2}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark}
+
+Although
+
+\[
+SU(2)
+\]
+
+and
+
+\[
+SO(3)
+\]
+
+possess identical Lie algebras,
+
+their global topology differs.
+
+Specifically,
+
+\[
+SU(2)
+\simeq
+S^3,
+\]
+
+whereas
+
+\[
+SO(3)
+\simeq
+\mathbb{RP}^3.
+\]
+
+The map
+
+\[
+SU(2)
+\rightarrow
+SO(3)
+\]
+
+is a two-to-one covering map.
+
+This distinction explains the existence of spinor
+representations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

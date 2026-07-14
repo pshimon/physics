@@ -1,0 +1,381 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{microtype}
+
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\ii}{\mathrm{i}}
+
+\title{\bfseries Generalizations of Nelson's Stochastic Mechanics:\\
+Spin and Relativistic Extensions\\[4pt]
+\large A Technical Review}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Nelson's stochastic mechanics reconstructs non-relativistic quantum theory from a postulate that particles undergo a universal, momentum-diffusing Brownian motion with diffusion coefficient $\hbar/2m$, governed by a time-symmetric ``stochastic Newton equation.'' In its original 1966 form the theory is spinless, non-relativistic, and restricted to a single global time. This review surveys the substantial body of work that has tried to lift these three restrictions, concentrating on the two axes named in the title: the incorporation of spin, and the extension to relativistic covariance. We trace the main constructions --- Dankel's manifold-valued diffusions, the Guerra--Marra discrete-state formulation of spin-$\tfrac12$, the Euclidean-Markov and Klein--Gordon routes to relativistic covariance, the Dohrn--Guerra stochastic differential geometry programme and its modern continuation by Kuipers, and the handful of constructions that combine spin with relativity --- and show how the well-known Wallstrom quantization obstruction links the two generalization programmes more tightly than is usually appreciated. We close with a comparative summary table and an assessment of what remains open.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction}
+% =====================================================================
+
+In 1966, Edward Nelson proposed that the Schr\"odinger equation could be derived, rather than postulated, by assuming that every massive particle is subject to a universal, frictionless Brownian motion of diffusion coefficient $\nu = \hbar/2m$, on top of the usual Newtonian force law~\cite{nelson66,nelson67}. The resulting \emph{stochastic mechanics} (a name Nelson later used interchangeably with \emph{stochastic quantization}, not to be confused with the unrelated Parisi--Wu scheme of the same name) gives a manifestly realist, trajectory-based reformulation of quantum kinematics: particles have continuous, if nowhere-differentiable, sample paths, and the wavefunction is reconstructed \emph{a posteriori} from the process's probability density and phase. The programme has a precursor in Fényes's 1952 probabilistic derivation of the Schr\"odinger equation~\cite{fenyes52}, and Nelson himself substantially deepened it in his 1985 monograph \emph{Quantum Fluctuations}~\cite{nelson85}.
+
+Nelson's original construction, however, is deliberately minimal: one non-relativistic, spinless particle (or an $N$-particle non-relativistic system) moving in $\R^{3N}$ under an external potential. Almost immediately, two natural and largely independent-looking questions were asked: can the same kinematic idea be extended to particles carrying spin, and can it be made compatible with special (or general) relativity? Both questions turn out to be technically difficult for related reasons, and --- as this review tries to bring out --- the difficulties are not entirely separate. A well-known internal obstruction to the whole programme, due to Wallstrom~\cite{wallstrom94}, shows that Nelson's kinematics alone under-determines the wavefunction unless a quantization condition on the phase is added by hand; one of the more convincing recent responses to this problem locates the missing physics precisely in a relativistic, spin-associated internal oscillation (\emph{zitterbewegung}) that a purely non-relativistic, spinless treatment cannot see~\cite{derakhshani15,derakhshani16}. Spin and relativity, in other words, may be jointly necessary for the internal consistency of stochastic mechanics, not just two independent items on a wish list of generalizations.
+
+This review is organized as follows. Section~\ref{sec:framework} recalls Nelson's original kinematic and dynamical framework in enough detail to fix notation. Section~\ref{sec:wallstrom} states the Wallstrom obstruction, which motivates much of what follows. Section~\ref{sec:spin} surveys the spin-generalization literature, from Dankel's 1970 manifold-valued diffusions to the zitterbewegung programme. Section~\ref{sec:relativity} surveys the relativistic-generalization literature along its three main routes: the Euclidean-Markov/field-theoretic route, the single-particle Klein--Gordon route, and the curved-manifold/second-order-geometry route, together with the handful of works that combine spin and relativity. Section~\ref{sec:summary} gives a comparative table, and Section~\ref{sec:outlook} discusses open problems and adjacent modern programmes before a brief conclusion.
+
+We emphasize at the outset that this is a review of a minority research programme within the foundations of quantum theory. Stochastic mechanics in its original form is known \emph{not} to reproduce all quantum-mechanical predictions --- most importantly, it predicts two-time correlation functions that disagree with those of orthodox quantum mechanics, a discrepancy established by Grabert, H\"anggi and Talkner~\cite{grabert79} and reinforced by more recent multi-time analyses~\cite{derakhshanibacciagaluppi22}. Nelson himself, in a late retrospective, candidly reassessed the theory's successes and failures and suggested that it might at best survive as an approximation to some deeper, still-unknown account of quantum phenomena~\cite{nelson2012}. The generalizations surveyed below should accordingly be read not as steps toward a finished rival to quantum mechanics, but as a mathematically rich set of attempts to see exactly how far a realist, diffusion-based completion of quantum kinematics can be pushed, and where it breaks.
+
+% =====================================================================
+\section{Nelson's Original Framework}\label{sec:framework}
+% =====================================================================
+
+\subsection{Kinematics of Markovian diffusions}
+
+Let $X(t)\in\R^{3}$ (the generalization to $\R^{3N}$ for $N$ particles is immediate) be a continuous Markov process adapted to an increasing family of $\sigma$-algebras $(\mathcal F_t)$ (the ``past'') and to a decreasing family $(\mathcal P_t)$ (the ``future''). Nelson's kinematics is built from the \emph{forward} and \emph{backward mean derivatives},
+\begin{equation}
+DX(t) = \lim_{\Delta t\to 0^+}\E\!\left[\frac{X(t+\Delta t)-X(t)}{\Delta t}\;\middle|\;X(t)\right], \qquad
+D_*X(t) = \lim_{\Delta t\to 0^+}\E\!\left[\frac{X(t)-X(t-\Delta t)}{\Delta t}\;\middle|\;X(t)\right].
+\end{equation}
+Equivalently, $X(t)$ solves a pair of stochastic differential equations,
+\begin{equation}
+dX(t) = b(X(t),t)\,dt + dW(t), \qquad dX(t) = b_*(X(t),t)\,dt + dW_*(t),
+\end{equation}
+where $W$ and $W_*$ are, respectively, forward and backward Wiener processes with $\langle dW^i\,dW^j\rangle = 2\nu\,\delta^{ij}\,dt$ and $\nu = \hbar/2m$ fixed by Planck's constant. The \emph{current velocity} $v$ and \emph{osmotic velocity} $u$ are defined by
+\begin{equation}
+v = \tfrac12\big(DX+D_*X\big) = \tfrac12(b+b_*), \qquad
+u = \tfrac12\big(DX-D_*X\big) = \tfrac12(b-b_*).
+\end{equation}
+The forward and backward Fokker--Planck equations for the density $\rho(x,t)$ of $X(t)$,
+\begin{equation}
+\partial_t\rho = -\nabla\!\cdot(b\rho)+\nu\nabla^2\rho, \qquad \partial_t\rho = -\nabla\!\cdot(b_*\rho)-\nu\nabla^2\rho,
+\end{equation}
+are consistent only if
+\begin{equation}\label{eq:osmotic}
+\partial_t \rho = -\nabla\!\cdot(v\rho) \qquad\text{(continuity equation)}, \qquad u = \nu\,\nabla\ln\rho.
+\end{equation}
+Thus the osmotic velocity is not an independent degree of freedom: it is fixed by the density itself, so the only genuinely new kinematic object beyond $\rho$ is the current velocity $v$ (or, in irrotational form, its potential).
+
+\subsection{Dynamics: the stochastic Newton equation and the Schr\"odinger equation}
+
+Nelson defines a \emph{mean (second-order) acceleration} that is symmetric under time reversal,
+\begin{equation}
+a = \tfrac12\big(DD_* + D_*D\big)X = \partial_t v + (v\cdot\nabla)v - (u\cdot\nabla)u - \nu\nabla^2 u,
+\end{equation}
+and postulates the \emph{stochastic Newton equation}
+\begin{equation}\label{eq:stochnewton}
+m\,a = -\nabla V(x).
+\end{equation}
+Writing $\psi = \sqrt{\rho}\;e^{\ii S/\hbar}$ with $v=\nabla S/m$ and using~\eqref{eq:osmotic}, Eq.~\eqref{eq:stochnewton} together with the continuity equation is equivalent to the Schr\"odinger equation
+\begin{equation}
+\ii\hbar\,\partial_t\psi = -\frac{\hbar^2}{2m}\nabla^2\psi + V\psi .
+\end{equation}
+This equivalence can be organized as a genuine variational principle. Guerra and Morato showed that Eq.~\eqref{eq:stochnewton} follows from extremizing the mean action
+\begin{equation}\label{eq:guerramorato}
+\mathcal A[v] = \E\int_{t_1}^{t_2}\left[\frac m2\,v(X(t),t)^2 - \frac m2\,u(X(t),t)^2 - V(X(t))\right]dt,
+\end{equation}
+over current-velocity fields $v$, subject to the continuity constraint~\eqref{eq:osmotic} that determines $\rho$ (and hence $u$) from $v$~\cite{guerramorato83}. Independently, Yasue reformulated the same problem as a stochastic calculus of variations~\cite{yasue81}, and the whole construction admits a further, purely information-theoretic reformulation as a stochastic optimal-control (Schr\"odinger-bridge) problem, due to Pavon~\cite{pavon95}, in which Nelson's dynamics emerges from minimizing a relative-entropy functional over path measures with prescribed endpoint marginals. These variational reformulations matter for what follows, because both the relativistic and the spin generalizations discussed below reuse the same Guerra--Morato/Yasue variational architecture with a modified configuration space or a modified (proper-time) parametrization.
+
+\subsection{Known limitations of the original theory}
+
+Three difficulties, largely orthogonal to spin or relativity as such, are worth flagging because they recur throughout the generalization literature. First, Grabert, H\"anggi and Talkner showed already in 1979 that the two-time correlation functions predicted by Nelson's diffusion process do not, in general, match those of orthodox quantum mechanics, so that stochastic mechanics is not simply an equivalent reformulation of non-relativistic quantum theory but a distinct (and empirically falsified, in this respect) statistical theory~\cite{grabert79}. Second, because the completed theory reproduces the same nonlocal correlations as de Broglie--Bohm pilot-wave theory, it inherits the same tension with relativistic locality that motivates much of the relativistic-generalization literature surveyed in Section~\ref{sec:relativity}~\cite{derakhshanibacciagaluppi22}. Third, and most consequential for the spin generalizations surveyed in Section~\ref{sec:spin}, is the quantization-condition obstruction identified by Wallstrom, to which we now turn.
+
+% =====================================================================
+\section{The Wallstrom Obstruction}\label{sec:wallstrom}
+% =====================================================================
+
+Differentiating the Schr\"odinger equation and separating $\psi=\sqrt\rho\,e^{\ii S/\hbar}$ into real and imaginary parts yields the Madelung hydrodynamic equations: the continuity equation of~\eqref{eq:osmotic} together with a quantum Hamilton--Jacobi equation for $S$. It is tempting to regard these two real equations, for the two real fields $\rho$ and $S$, as simply \emph{equivalent} to the Schr\"odinger equation, and a great deal of the appeal of Nelson-type hydrodynamic/stochastic reformulations of quantum mechanics rests on this equivalence. Wallstrom proved that the equivalence is false in general~\cite{wallstrom88,wallstrom94}: because $S$ is only defined up to $\nabla S$, and because $\nabla S = m v$ need not be curl-free once $\rho$ vanishes on a nontrivial set (or the configuration space is multiply connected), the Madelung system has solutions with no corresponding single-valued wavefunction. Recovering exactly the wavefunctions of ordinary quantum mechanics requires imposing, by hand, the quantization condition
+\begin{equation}\label{eq:wallstrom}
+\oint_{\gamma}\nabla S\cdot d\boldsymbol\ell = 2\pi n\hbar, \qquad n\in\mathbb Z,
+\end{equation}
+for every closed loop $\gamma$ in configuration space at fixed $t$ --- a condition automatically satisfied by any single-valued $\psi$, but not derivable from Nelson's stochastic dynamics itself. Wallstrom traced an early version of the same difficulty, in the context of Bohm's 1952 hidden-variables papers, to Takabayasi~\cite{takabayasi52,takabayasi53}. The condition~\eqref{eq:wallstrom} is precisely the same integrality condition that appears in the old quantum theory's Bohr--Sommerfeld quantization, and its ad hoc reappearance here is widely regarded as the single most serious technical objection to reading stochastic mechanics as a genuine \emph{derivation}, rather than merely a reformulation with a smuggled-in extra postulate.
+
+Several responses have been proposed. Smolin suggested that the required quantization might be tied to short-distance (possibly gravitational) modifications of the stochastic dynamics~\cite{smolin86}; Carlen and Loffredo showed that on the circle $S^1$ a natural stochastic analogue of the condition can be formulated and is equivalent to the topological requirement on the wavefunction, though the argument does not obviously generalize beyond that special case; Schmelzer proposed replacing~\eqref{eq:wallstrom} with a positivity condition on the Laplacian of the density at the zeros of $\rho$, argued to follow from a ``minimal distortion'' principle for sub-quantum theories~\cite{schmelzer2011}; and Hushwater argued that the single-valuedness of $\psi$ is in fact automatic for non-spurious local solutions of the Madelung system, disputing the generality of Wallstrom's counterexamples~\cite{hushwater2010}. None of these responses, however, ties the resolution to a specific piece of missing physics in Nelson's original ontology. The response that does --- and that motivates much of Section~\ref{sec:spin} --- is the observation that a particle's phase $S$ has a natural relativistic origin if the particle is assumed to carry an internal oscillation at the Compton (zitterbewegung) frequency $\omega_c = mc^2/\hbar$, the same oscillation that appears in the exact rest-frame solutions of the free Dirac equation and that Schr\"odinger originally associated with electron spin. If so, spin (or at least its zitterbewegung shadow) is not an optional add-on to Nelson's theory but part of what is needed to make the theory work even in the spinless, non-relativistic limit.
+
+% =====================================================================
+\section{Generalizing to Spin}\label{sec:spin}
+% =====================================================================
+
+\subsection{Early proposals}
+
+One of the earliest attempts to add spin to a Nelson/Fényes-type stochastic quantum mechanics is due to de la Peña, who introduced extra stochastic variables coupled to the translational motion in an attempt to reproduce the Pauli equation~\cite{delapena70}. This work sits at the boundary between stochastic mechanics proper and the related but distinct programme of stochastic electrodynamics, which derives quantum-like behaviour from classical electrodynamics coupled to a classical zero-point radiation field rather than from Nelson's kinematic postulate; we mention it here as an early precedent rather than pursue the stochastic-electrodynamics literature in its own right.
+
+\subsection{Dankel: spin from a manifold-valued diffusion}
+
+The first rigorous incorporation of spin into Nelson's own framework is Dankel's 1970 paper, which generalizes Nelson's theory from $\R^3$-valued to manifold-valued diffusion processes~\cite{dankel70}. Dankel takes as his starting point a classical model, due to Bopp and Haag, of a spinning charged ball of radius $R$, with a Hamiltonian of the generic form $H=(p-A)^2+\varphi$ defined on an enlarged configuration manifold that carries rotational as well as translational degrees of freedom (schematically $\R^3\times S^2$, position together with the orientation of the ball's spin axis). Constructing the corresponding Nelson-type diffusion on this manifold, Dankel shows that the point-particle limit $R\to 0$ reproduces the Pauli equation,
+\begin{equation}
+\ii\hbar\,\partial_t\psi = \left[\frac{1}{2m}\Big(\mathbf p-\frac{e}{c}\mathbf A\Big)^2 - \frac{e\hbar}{2mc}\,\boldsymbol\sigma\!\cdot\!\mathbf B + e\phi\right]\psi,
+\end{equation}
+and, in the field-free case, identifies a continuous random variable that he calls the angular momentum of the process, whose ensemble expectation matches the quantum-mechanical value of spin angular momentum, and for which he proves an ergodic theorem equating this ensemble average to the corresponding time average along individual sample trajectories. This is arguably still the cleanest existence proof that spin-$\tfrac12$ quantum kinematics can emerge from an honest classical stochastic process on a suitably enlarged, but still classical, configuration manifold.
+
+\subsection{Guerra and Marra: spin as a discrete-state jump process}
+
+A structurally different strategy was pursued by Guerra and Marra, who observed that a genuinely two-level system --- the paradigm case being a spin-$\tfrac12$ particle's internal degree of freedom, or a mode of a Fermi field --- is more naturally modelled by a configuration space with only \emph{two points}, rather than by a continuous manifold~\cite{guerramarra84}. They extended the Guerra--Morato variational strategy from diffusion processes (continuous, Wiener-driven paths) to Markov \emph{jump} processes on this discrete configuration space, obtaining a self-contained stochastic description of unperturbed two-level quantum evolution, and studying how a measurement-like coupling to an external system drives the process toward the formation of a genuine statistical mixture --- a stochastic-mechanical analogue of decoherence. Blanchard, Golin and Serva subsequently examined repeated measurements within this same discrete framework in more detail~\cite{blanchardgolinserva86}. The discrete-state route is a useful complement to Dankel's continuous-manifold route: it handles the genuinely two-valued character of spin-$\tfrac12$ without needing an auxiliary classical model (such as Bopp--Haag's spinning ball) or a singular point-particle limit, at the cost of not, by itself, specifying how the discrete internal process couples to continuous spatial motion in general.
+
+\subsection{Faris: spin correlations and Bell-type constraints}
+
+Because any stochastic-mechanical completion of quantum spin is, in the relevant sense, a hidden-variable theory, it inherits the full weight of Bell's theorem. Faris constructed explicit Nelson-type stochastic models of spin-correlated (EPR/Bohm) particle pairs and examined whether the resulting hidden trajectories can reproduce the quantum-mechanical singlet correlation as a function of the relative measurement angle~\cite{faris82}. The analysis situates stochastic mechanics squarely within the broader hidden-variables and Bell-nonlocality discussion: any successful spin extension must reproduce the same nonlocal statistical dependence between distant measurement outcomes that de Broglie--Bohm theory reproduces, since (as noted in Section~\ref{sec:framework}) the two theories share essentially the same trajectory ontology augmented by noise.
+
+\subsection{Spin together with relativity: early and geometric syntheses}
+
+Dohrn, Guerra and Ruggiero addressed spinning and relativistic particles together within Nelson's scheme as early as 1979~\cite{dohrnguerraruggiero79}, a paper we discuss further in Section~\ref{sec:relativity_spin} below. A far more elaborate synthesis was later attempted by Drechsler, whose \emph{geometro-stochastic quantization} programme introduces a four-real-dimensional internal spin space $\bar S$, a homogeneous space of $SL(2,\mathbb C)$ parametrized by two-component spinors $\alpha\in\mathbb C^2$ (following Bacry and Kihlberg), such that restricting $\alpha$ to a ``spin shell'' of radius $r=2s$ selects wavefunctions of definite mass and spin $[m,s]$, with $s=0,\tfrac12,1,\tfrac32,\dots$~\cite{drechsler96}. This internal spinor space is combined with an external geometro-stochastic description of propagation on a curved spacetime carrying torsion. Formally, this is the most general known attempt to unite arbitrary spin with curved, relativistic propagation inside a single stochastic-quantization scheme; its considerable technical complexity has, however, limited its adoption relative to the more concrete constructions discussed elsewhere in this review.
+
+\subsection{Zitterbewegung stochastic mechanics: spin as the resolution of Wallstrom's problem}
+
+The most conceptually striking recent development ties the spin generalization directly back to the Wallstrom obstruction of Section~\ref{sec:wallstrom}. In a two-part study, Derakhshani (building on his doctoral thesis~\cite{derakhshanithesis}) and Bacciagaluppi propose modifying the Nelson--Yasue formulation for a nominally spinless particle of rest mass $m$ by hypothesizing that the particle in fact undergoes a driven, steady-state oscillation at the zitterbewegung frequency $\omega_c = mc^2/\hbar$ in its instantaneous mean rest frame~\cite{derakhshani15,derakhshani16}. Time-symmetrizing the phase of this internal oscillation as seen in the lab frame, they show that the resulting phase function $S$ satisfies the Wallstrom quantization condition~\eqref{eq:wallstrom} \emph{as a consequence of the construction}, rather than as a separate postulate, thereby deriving --- for the cases they treat --- exactly the single-valued wavefunctions of ordinary quantum mechanics and no more. Because the zitterbewegung frequency $\omega_c=mc^2/\hbar$ is intrinsically relativistic, and because zitterbewegung is historically and structurally associated with the spin degree of freedom in the exact solutions of the free Dirac equation, this construction gives a concrete technical sense in which resolving Nelson's foundational quantization gap requires borrowing structure from \emph{both} of the generalizations surveyed in this review at once. The second paper in the series addresses several objections (apparent wavefunction discontinuities, the scope of Smolin's and of Carlen--Loffredo's earlier proposals) and argues that, unlike those earlier responses, the zitterbewegung construction is not restricted to special (e.g.\ multiply-connected, one-dimensional) configuration spaces.
+
+An independent, related line of reasoning was pursued somewhat earlier by Fritsche and Haugk, who split the stochastic ensemble describing a single particle into two equally populated sub-ensembles obeying, respectively, Navier--Stokes-type and ``anti''-Navier--Stokes-type equations of motion; in a magnetic field, the ensemble decomposes further into right- and left-handed irregular circular (zitterbewegung-like) sub-motions, which the authors argue reproduce spin-type angular momentum and its coupling to the field~\cite{fritschehaugk09}. More speculatively, Tiwari has proposed replacing the imaginary unit $\ii$ in the Schr\"odinger equation by a real antisymmetric $2\times2$ matrix, producing a pair of coupled real field equations in which spin appears as a topological invariant of the resulting spinor/random-field structure~\cite{tiwari19}. We flag these as further, less mainstream, independent lines rather than pursue them in detail.
+
+\subsection{Assessment}
+
+Two complementary strategies for incorporating spin into Nelson's mechanics have emerged: enlarging the configuration space to carry an explicit internal degree of freedom, either continuous (Dankel; Drechsler) or discrete (Guerra--Marra); and reinterpreting the existing spinless kinematics in terms of an internal relativistic oscillation whose orientation degeneracy \emph{is} spin (Fritsche--Haugk; the zitterbewegung programme of Derakhshani and Bacciagaluppi). The second strategy has the notable advantage of simultaneously addressing the Wallstrom obstruction that afflicts the theory even before spin is considered. What is still missing is a single, fully interacting, Lorentz-covariant construction that reproduces the \emph{full} Dirac equation (not merely the non-relativistic Pauli equation, nor a free, low-dimensional relativistic toy model) as the marginal theory of an explicit Nelson-type stochastic process; the closest existing results, discussed next, remain restricted in dimension or to free fields.
+
+% =====================================================================
+\section{Generalizing to Relativity}\label{sec:relativity}
+% =====================================================================
+
+\subsection{Why relativistic covariance is hard for Nelson processes}\label{sec:rel_obstruction}
+
+Two structural features of Nelson's construction resist relativistic generalization directly. First, diffusive scaling implies $\E\big[(X(t+\Delta t)-X(t))^2\big]\sim 2n\nu\,\Delta t$ (with $n$ the spatial dimension), so that sample paths are almost surely nowhere differentiable and have formally infinite mean-square velocity over any finite lab-time interval --- in obvious tension with a finite maximal signal speed $c$. Second, the forward/backward mean-derivative kinematics of Section~\ref{sec:framework} is defined with respect to a single global time coordinate $t$ and a fixed pair of filtrations, which singles out a preferred equal-time foliation of the kind that Lorentz-covariant physics is usually built to avoid. These are not merely presentational difficulties: Dudley and, independently, Hakim showed already in the mid-1960s that genuinely Lorentz-invariant Markov processes in relativistic phase space cannot, in general, be simple Wiener-type diffusions~\cite{dudley65,hakim65,hakim68}, so that a relativistic ``Brownian motion'' typically requires either non-Gaussian (e.g.\ Poisson- or L\'evy-type) noise, or an auxiliary, frame-independent evolution parameter distinct from ordinary coordinate time, or both. The relativistic-generalization literature accordingly splits into a small number of routes distinguished by which of these accommodations they adopt.
+
+\subsection{The field-theoretic (Euclidean-Markov) route}
+
+The earliest and, in a precise sense, most successful relativistic extension of Nelson's ideas concerns free relativistic \emph{fields} rather than single particles. Guerra and Ruggiero represented the free relativistic scalar field as an infinite collection of decoupled harmonic-oscillator modes in momentum space and applied ordinary (non-relativistic-looking) Nelson stochastic mechanics mode by mode, constructing the stochastic process describing the field's ground state~\cite{guerraruggiero73}. They then showed that this process coincides, as a probability measure, with the Euclidean-Markov (Nelson--Symanzik) random field familiar from constructive Euclidean quantum field theory, so that the underlying four-dimensional manifold on which the Markov field lives can be identified with ordinary Minkowski spacetime --- an unexpectedly direct probabilistic bridge between Nelson's programme and rigorous Euclidean field theory. A companion paper sharpened this correspondence~\cite{guerraruggiero78}, Guerra and Loffredo extended it to the Maxwell field~\cite{guerraloffredo80}, and Guerra's 1981 \emph{Physics Reports} article gives a comprehensive account of the whole programme~\cite{guerra81}. Nelson himself returned to this construction late in his career~\cite{nelson2014}. The approach is best understood as sidestepping, rather than resolving, the single-particle causality tension identified above: manifest relativistic symmetry is carried by the analytic continuation to Euclidean (imaginary) time, while the physical, real-time process again requires a distinguished time slicing, and the construction is naturally suited to free (or perturbatively coupled) fields around their ground state rather than to a fully interacting single relativistic particle.
+
+\subsection{The single-particle Klein--Gordon route}
+
+A second route keeps the single-particle language of Nelson's original theory but introduces an auxiliary, Lorentz-invariant evolution parameter $\tau$ (in the spirit of the Stueckelberg--Horwitz--Piron off-shell formalism) distinct from the coordinate time $x^0$, building a Markov process $X^\mu(\tau)$ in Minkowski space whose kinematics generalizes that of Section~\ref{sec:framework} to four-vectors: forward/backward quadrivelocities $D^{\pm}X^\mu$, a current quadrivelocity $V^\mu = \tfrac12(D^++D^-)X^\mu$, and an osmotic quadrivelocity $U^\mu = \tfrac12(D^+-D^-)X^\mu = \D\,\partial^\mu\ln\rho$ for a suitable relativistic diffusion coefficient $\D$. A relativistic stochastic Newton-type equation $m\bar A^\mu = -\partial^\mu V(x)$ for the corresponding mean quadriacceleration $\bar A^\mu$, combined with $\psi=\sqrt\rho\,e^{\ii S/\hbar}$ and $V^\mu = \partial^\mu S/m$, reduces in the free case to the Klein--Gordon equation
+\begin{equation}
+\left(\Box + \frac{m^2c^2}{\hbar^2}\right)\psi = 0 .
+\end{equation}
+The detailed technical implementation of this pattern differs considerably from one construction to the next --- in particular whether the driving noise is Wiener-type or (as the Dudley--Hakim obstruction suggests is more natural) Poisson- or L\'evy-type, and whether $\tau$ or the lab time $x^0$ is treated as fundamental. Lehr and Park gave the first stochastic derivation of the Klein--Gordon equation along these lines~\cite{lehrpark77}. Serva subsequently gave a systematic construction of relativistic stochastic processes tied rigorously to the Klein--Gordon equation~\cite{serva88}, and Marra and Serva supplied a Guerra--Morato-type variational principle underlying it~\cite{marraserva90}. Zastawniak gave an independent relativistic version of Nelson's stochastic mechanics built from non-Wiener noise~\cite{zastawniak90}, later connected by Gliklikh to weak solutions on Riemannian manifolds under stochastic-completeness assumptions. De Angelis studied the relativistic spinless particle directly~\cite{deangelis90,deangelisserva90}, and Morato and Viola refined the construction using coordinates comoving with the particle's own rest frame, improving its geometric transparency~\cite{moratoviola95}. Garbaczewski, and later Garbaczewski, Klauder and Olkiewicz, connected the relativistic problem to a broader class of L\'evy-noise processes, consistent with the expectation that finite propagation speed requires non-Gaussian driving noise~\cite{garbaczewski92,garbaczewskiklauder95}.
+
+\subsection{The curved-manifold route: Dohrn--Guerra stochastic differential geometry}
+
+A third route generalizes not the noise but the underlying geometry. Dohrn and Guerra recast Nelson's forward/backward derivatives and mean acceleration using It\^o stochastic calculus adapted to a Riemannian connection (stochastic parallel transport), allowing the theory to be formulated covariantly on curved configuration or spacetime manifolds rather than only on flat $\R^n$~\cite{dohrnguerra78}, with a companion paper on geodesic corrections to stochastic parallel displacement of tensors~\cite{dohrnguerra79b}. A key structural result of this programme is the identification, by Dohrn and Guerra, of a compatibility condition between the metric that sets the diffusion tensor (the ``Brownian metric'') and the metric appearing in the classical kinetic-energy/Hamilton--Jacobi structure (the ``kinetic metric''): consistency of the stochastic-mechanical theory generically forces these two metrics to coincide~\cite{dohrnguerra85}, a constraint with direct bearing on how such a theory could couple to gravity. Aldrovandi, Dohrn and Guerra supplied the corresponding stochastic action principle (``geodesic interpolation'') on curved manifolds~\cite{aldrovandi90,aldrovandi92}, giving the Riemannian extension its own Guerra--Morato-type variational underpinning.
+
+This manifold-based line is the direct ancestor of the most complete modern synthesis of the relativistic-generalization literature, due to Kuipers. Building on the Schwartz--Meyer \emph{second-order geometry} --- the appropriate covariant differential calculus for It\^o-type stochastic processes on manifolds, in which the ordinary tangent bundle is replaced by a jet-bundle-like second-order structure so that It\^o's rules become manifestly covariant --- Kuipers embeds Nelson's stochastic quantization in this framework and derives a non-perturbative, manifestly covariant quantum mechanics on general (pseudo-)Riemannian manifolds~\cite{kuipers2021a}. Within this formalism he derives stochastic differential equations, and the associated Schr\"odinger-type equation, for a massive spin-0 test particle coupled to scalar potentials, vector (gauge) potentials, and gravity, and finds that consistency requires the particle to be \emph{conformally} coupled to the gravitational background --- a constraint reminiscent of, but derived independently of, the conformal-coupling requirement familiar from quantum field theory in curved spacetime. A companion letter shows that imposing a stochastic energy--momentum relation on this construction restricts it to genuinely relativistic (proper-time-governed) dynamics, extends the framework to massless scalar particles, and derives non-perturbative quantum corrections to the effective line element measured by a scalar particle~\cite{kuipers2021b}. A later paper unifies the whole picture --- flat and curved, non-relativistic and relativistic --- by showing that ordinary non-relativistic quantum mechanics of a spinless particle is reproduced by a Wiener process rotated in the complex plane, with the relativistic, curved-manifold theory arising as the natural extension of the same idea~\cite{kuipers2023}. Like the rest of the manifold route, this synthesis remains, at the time of writing, confined to spin-0 particles.
+
+\subsection{The optimal-control (Schr\"odinger-bridge) route}
+
+A fourth, more indirect route reformulates stochastic mechanics as a problem in stochastic optimal control. Pavon showed that Nelson's original non-relativistic dynamics itself can be recovered as the solution of a Schr\"odinger-bridge problem: given prescribed initial and final probability distributions and a reference (typically Wiener) path measure, the physically realized process is the one of minimal relative entropy (Kullback--Leibler divergence) relative to the reference measure among all processes with the given endpoint marginals~\cite{pavon95}. This furnishes an information-theoretic foundation for Nelson's dynamics independent of the original Guerra--Morato Lagrangian~\eqref{eq:guerramorato}. Pavon subsequently extended the same control-theoretic reformulation to the relativistic free particle, deriving the associated Klein--Gordon-related diffusion as the entropy-minimizing bridge process~\cite{pavon2001}. This route has since grown into an active, largely independent area of research on stochastic optimal transport and the Schr\"odinger problem, only loosely tied to the rest of the Nelson-mechanics literature but sharing its variational core.
+
+\subsection{Uniting spin and relativity}\label{sec:relativity_spin}
+
+Only a handful of constructions attempt to combine spin and relativistic covariance within an explicit Nelson-type process, and each is restricted in scope. Dohrn, Guerra and Ruggiero's 1979 study of spinning and relativistic particles together is the earliest such attempt, essentially combining the manifold-valued (spin) and relativistic-diffusion ideas within a single formalism~\cite{dohrnguerraruggiero79}. De Angelis, Jona-Lasinio, Serva and Zangh\`{\i} constructed an explicit Nelson-type stochastic process reproducing the Dirac equation in two spacetime dimensions~\cite{deangelisjls86}, exploiting the comparative simplicity of $(1{+}1)$-dimensional spinors, which are equivalent, via the classical Feynman-checkerboard/telegraph-process analogy, to a finite-propagation-speed random process rather than a Wiener diffusion --- consistent with the Dudley--Hakim obstruction of Section~\ref{sec:rel_obstruction}. This remains one of the few places where a genuinely relativistic, spin-carrying Nelson-type process has been constructed in closed form, at the cost of being restricted to one spatial dimension. De Angelis, Rinaldi and Serva constructed a Euclidean (imaginary-time) Feynman--Kac-type functional-integral representation for a relativistic spin-$\tfrac12$ particle coupled to a magnetic field~\cite{deangelisrinaldiserva91}, in the spirit of the Guerra--Ruggiero stochastic-mechanics/Euclidean-field correspondence, but extended to the spinning case. Drechsler's geometro-stochastic programme (Section~\ref{sec:spin}) remains the most general formal attempt to unite arbitrary spin, mass, and curved-spacetime (including torsion) propagation within a single stochastic-quantization scheme~\cite{drechsler96}, though its considerable complexity has limited concrete applications relative to the Klein--Gordon-route and manifold-route constructions above. No existing construction achieves an interacting, $(3{+}1)$-dimensional, Lorentz-covariant Nelson process for the full Dirac equation.
+
+% =====================================================================
+\section{Comparative Summary}\label{sec:summary}
+% =====================================================================
+
+Table~\ref{tab:summary} collects the main lines of generalization discussed above, together with their representative references, core technique, principal achievement, and main limitation.
+
+\begingroup
+\small
+\begin{longtable}{@{}p{2.6cm}p{3.3cm}p{4.0cm}p{4.7cm}@{}}
+\toprule
+\textbf{Axis} & \textbf{Representative work} & \textbf{Core technique} & \textbf{Achievement / limitation} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Axis} & \textbf{Representative work} & \textbf{Core technique} & \textbf{Achievement / limitation} \\
+\midrule
+\endhead
+Spin, continuous internal d.o.f.\ &
+Dankel 1970~\cite{dankel70} &
+Manifold-valued diffusion (Bopp--Haag ball, $R\to0$ limit) &
+Recovers Pauli equation and an ergodic theorem for spin angular momentum; non-relativistic, relies on a specific classical model input. \\[4pt]
+Spin, discrete internal d.o.f.\ &
+Guerra \& Marra 1984~\cite{guerramarra84}; Blanchard, Golin \& Serva 1986~\cite{blanchardgolinserva86} &
+Markov jump process on a two-point configuration space &
+Self-contained two-level/spin-$\tfrac12$ dynamics and measurement-induced mixture formation; coupling to continuous spatial motion left open. \\[4pt]
+Spin correlations \& nonlocality &
+Faris 1982~\cite{faris82} &
+Explicit correlated-pair (EPR/Bohm) construction &
+Clarifies the Bell-theorem status of stochastic mechanics; inherits the full nonlocality of any hidden-variable completion. \\[4pt]
+Spin via zitterbewegung &
+Derakhshani \& Bacciagaluppi 2015--2019~\cite{derakhshani15,derakhshani16} &
+Internal oscillation at the Compton frequency $\omega_c=mc^2/\hbar$ &
+Resolves the Wallstrom quantization condition non ad hoc; worked out mainly for free or simple interacting cases. \\[4pt]
+Relativistic fields &
+Guerra \& Ruggiero 1973, 1978~\cite{guerraruggiero73,guerraruggiero78}; Guerra 1981~\cite{guerra81} &
+Mode-by-mode oscillator quantization; identification with the Euclidean-Markov field &
+Rigorous link to constructive Euclidean QFT; ground-state/free-field emphasis, single-particle causality issue not resolved. \\[4pt]
+Relativistic single particle (Klein--Gordon) &
+Lehr \& Park 1977~\cite{lehrpark77}; Serva 1988~\cite{serva88}; Marra \& Serva 1990~\cite{marraserva90}; Zastawniak 1990~\cite{zastawniak90}; De Angelis 1990~\cite{deangelis90}; Morato \& Viola 1995~\cite{moratoviola95} &
+Proper-time-parametrized, typically non-Wiener diffusions &
+Klein--Gordon current reproduced, with a variational principle available; interacting, spin-carrying case largely open. \\[4pt]
+Curved-manifold / Lorentzian &
+Dohrn \& Guerra 1978, 1985~\cite{dohrnguerra78,dohrnguerra85}; Aldrovandi, Dohrn \& Guerra 1990/92~\cite{aldrovandi90,aldrovandi92}; Kuipers 2021--2023~\cite{kuipers2021a,kuipers2021b,kuipers2023} &
+Second-order (It\^o/Schwartz--Meyer) stochastic differential geometry &
+Covariant formulation on (pseudo-)Riemannian manifolds; conformal-coupling result; energy--momentum-constrained relativistic reduction; restricted to spin 0. \\[4pt]
+Optimal control / Schr\"odinger bridge &
+Pavon 1995, 2001~\cite{pavon95,pavon2001} &
+Relative-entropy minimization over path measures &
+Information-theoretic re-derivation, extended to the relativistic free particle; reformulates rather than adds new physical content. \\[4pt]
+Spin \emph{and} relativity combined &
+Dohrn, Guerra \& Ruggiero 1979~\cite{dohrnguerraruggiero79}; De Angelis, Jona-Lasinio, Serva \& Zangh\`{\i} 1986~\cite{deangelisjls86}; De Angelis, Rinaldi \& Serva 1991~\cite{deangelisrinaldiserva91}; Drechsler 1996~\cite{drechsler96} &
+Dirac equation in $1{+}1$D; Euclidean spin-$\tfrac12$ path integral; internal $SL(2,\mathbb C)$ spinor space on curved, torsion-carrying spacetime &
+Only concrete constructions of relativistic, spin-carrying Nelson processes to date; strongly restricted regimes (low dimension, Euclidean signature, or high formal complexity). \\
+\bottomrule
+\caption{Comparative summary of the main generalizations of Nelson's stochastic mechanics discussed in this review.}
+\label{tab:summary}
+\end{longtable}
+\endgroup
+
+% =====================================================================
+\section{Outstanding Issues and Outlook}\label{sec:outlook}
+% =====================================================================
+
+No existing construction combines, at once: manifest Lorentz covariance, a single consistent global (or proper-time) postulate structure, a non-ad-hoc resolution of the Wallstrom quantization condition, applicability to an interacting spin-$\tfrac12$ particle in $3{+}1$ dimensions, and a consistent many-particle (multi-time) extension. Each generalization surveyed above secures some subset of these properties at the cost of others: the Euclidean-Markov route secures relativistic covariance for free fields at the cost of an explicit real-time single-particle causal picture; the Klein--Gordon route secures a single-particle relativistic current at the cost of introducing an auxiliary evolution parameter and non-Gaussian noise; the manifold route secures general covariance and a clean connection to gravity at the cost of remaining confined to spin 0; and the handful of constructions that do carry spin through a relativistic construction are restricted to $1{+}1$ dimensions, Euclidean signature, or a formally heavy internal-spinor-space apparatus.
+
+The multi-particle, multi-time extension of stochastic mechanics is itself an active and only partially resolved question distinct from, but related to, the single-particle relativistic problem: extending Nelson's construction to $N$ relativistic particles requires either a common (frame-dependent) time or a genuinely multi-time wavefunction of the Dirac--Fock--Tomonaga type, and Derakhshani and Bacciagaluppi's more recent work on multi-time correlations in stochastic mechanics examines exactly this question, alongside a renewed assessment of the two-time-correlation and locality difficulties discussed in Section~\ref{sec:framework}~\cite{derakhshanibacciagaluppi22}.
+
+Two adjacent, more recent research directions are worth noting even though they are not, strictly speaking, generalizations of Nelson's specific construction. Barandes has proposed a broader ``stochastic--quantum correspondence,'' mapping a wide class of generic (in his terminology, indivisible) classical stochastic processes onto quantum systems, in a programme that shares Nelson's ambition of a realist stochastic foundation for quantum theory without being restricted to Nelson's particular diffusion kinematics~\cite{barandes23}. On a more computational note, Neklyudov and collaborators have introduced ``deep stochastic mechanics,'' using deep neural networks to represent the score function $\nabla\ln\rho$ that enters Nelson's osmotic velocity, making numerical simulation of (non-relativistic) Nelson dynamics tractable in much higher dimensions than earlier finite-difference or Monte Carlo methods allowed~\cite{neklyudov23}. Advances of this computational kind do not by themselves resolve any of the conceptual obstructions surveyed above, but they may eventually make it practical to test the more ambitious spin and relativistic constructions --- most of which have so far been developed only at the level of formal existence proofs --- against concrete, numerically tractable model systems.
+
+% =====================================================================
+\section{Conclusion}
+% =====================================================================
+
+Sixty years after Nelson's original paper, stochastic mechanics remains what it was recognized to be within about two decades of its introduction: a structurally elegant, but empirically and conceptually incomplete, realist reformulation of non-relativistic, spinless quantum kinematics. The generalizations surveyed here have not closed that incompleteness, but they have mapped its shape with considerable precision. The spin-generalization literature shows that spin can be obtained, on the one hand, as an emergent property of a classical diffusion on a suitably enlarged configuration manifold or discrete state space, and, on the other, as a byproduct of taking seriously an internal relativistic oscillation that the original theory silently omits --- an omission that, via the Wallstrom obstruction, turns out to compromise the theory even in its ostensibly spinless sector. The relativity-generalization literature shows that a fully covariant, single-time Markovian completion of quantum mechanics is obstructed at a rather basic kinematic level (unbounded diffusive velocities, the Dudley--Hakim no-go results for relativistic Markov processes), and that the most successful relativistic extensions --- the Euclidean-Markov field construction and the modern second-order-geometry programme on Lorentzian manifolds --- achieve covariance by relaxing some other feature of Nelson's original single-particle, real-time picture. The very small number of constructions that combine spin with relativity underscore how much of this territory remains open. As a research programme, generalized Nelson mechanics is therefore best understood today not as a nearly finished alternative to orthodox quantum theory, but as a demanding and still-productive stress test of what, precisely, a classical stochastic-process ontology can and cannot deliver once spin and relativity are taken seriously together.
+
+% =====================================================================
+\begin{thebibliography}{99}
+
+\bibitem{fenyes52} I.~Fényes, ``Eine wahrscheinlichkeitstheoretische Begründung und Interpretation der Quantenmechanik,'' \emph{Zeitschrift für Physik} \textbf{132}, 81 (1952).
+
+\bibitem{nelson66} E.~Nelson, ``Derivation of the Schrödinger Equation from Newtonian Mechanics,'' \emph{Phys. Rev.} \textbf{150}, 1079 (1966).
+
+\bibitem{nelson67} E.~Nelson, \emph{Dynamical Theories of Brownian Motion} (Princeton University Press, Princeton, 1967).
+
+\bibitem{nelson85} E.~Nelson, \emph{Quantum Fluctuations} (Princeton University Press, Princeton, 1985).
+
+\bibitem{nelson2012} E.~Nelson, ``Review of stochastic mechanics,'' \emph{J. Phys.: Conf. Ser.} \textbf{361}, 012011 (2012).
+
+\bibitem{nelson2014} E.~Nelson, ``Stochastic mechanics of relativistic fields,'' \emph{J. Phys.: Conf. Ser.} \textbf{504}, 012013 (2014).
+
+\bibitem{grabert79} H.~Grabert, P.~Hänggi, and P.~Talkner, ``Is quantum mechanics equivalent to a classical stochastic process?'' \emph{Phys. Rev. A} \textbf{19}, 2440 (1979).
+
+\bibitem{derakhshanibacciagaluppi22} M.~Derakhshani and G.~Bacciagaluppi, ``On Multi-Time Correlations in Stochastic Mechanics,'' arXiv:2208.14189 (2022).
+
+\bibitem{wallstrom88} T.~C.~Wallstrom, ``On the derivation of the Schrödinger equation from stochastic mechanics,'' \emph{Found. Phys. Lett.} \textbf{2}, 113 (1989).
+
+\bibitem{wallstrom94} T.~C.~Wallstrom, ``Inequivalence between the Schrödinger equation and the Madelung hydrodynamic equations,'' \emph{Phys. Rev. A} \textbf{49}, 1613 (1994).
+
+\bibitem{takabayasi52} T.~Takabayasi, ``On the Formulation of Quantum Mechanics associated with Classical Pictures,'' \emph{Prog. Theor. Phys.} \textbf{8}, 143 (1952).
+
+\bibitem{takabayasi53} T.~Takabayasi, ``Remarks on the Formulation of Quantum Mechanics with Classical Pictures and on Relations between Linear Scalar Fields and Hydrodynamical Fields,'' \emph{Prog. Theor. Phys.} \textbf{9}, 187 (1953).
+
+\bibitem{smolin86} L.~Smolin, ``Stochastic mechanics, hidden variables, and gravity,'' in \emph{Quantum Concepts in Space and Time}, eds.\ R.~Penrose and C.~J.~Isham (Oxford University Press, Oxford, 1986), p.~147.
+
+\bibitem{schmelzer2011} I.~Schmelzer, ``An answer to the Wallstrom objection against Nelsonian stochastics,'' arXiv:1101.5774 (2011).
+
+\bibitem{hushwater2010} V.~Hushwater, ``Comment on `Inequivalence between the Schrödinger equation and the Madelung hydrodynamic equations','' arXiv:1005.2420 (2010).
+
+\bibitem{delapena70} L.~de la Peña-Auerbach, ``Stochastic quantum mechanics for particles with spin,'' \emph{Phys. Lett. A} \textbf{31}, 403 (1970).
+
+\bibitem{dankel70} T.~G.~Dankel, Jr., ``Mechanics on manifolds and the incorporation of spin into Nelson's stochastic mechanics,'' \emph{Arch. Rational Mech. Anal.} \textbf{37}, 192 (1970).
+
+\bibitem{guerramarra84} F.~Guerra and R.~Marra, ``Stochastic mechanics of spin-$\tfrac12$ particles,'' \emph{Phys. Rev. D} \textbf{30}, 2579 (1984).
+
+\bibitem{blanchardgolinserva86} P.~Blanchard, S.~Golin, and M.~Serva, ``Repeated measurements in stochastic mechanics,'' \emph{Phys. Rev. D} \textbf{34}, 3732 (1986).
+
+\bibitem{faris82} W.~G.~Faris, ``Spin correlation in stochastic mechanics,'' \emph{Found. Phys.} \textbf{12}, 1 (1982).
+
+\bibitem{drechsler96} W.~Drechsler, ``Geometro-Stochastically Quantized Fields with Internal Spin Variables,'' arXiv:gr-qc/9610046 (1996).
+
+\bibitem{derakhshanithesis} M.~Derakhshani, \emph{Stochastic Mechanics Without Ad Hoc Quantization: Theory and Applications to Semiclassical Gravity}, Ph.D.\ thesis, Utrecht University (2017).
+
+\bibitem{derakhshani15} M.~Derakhshani, ``A Suggested Answer To Wallstrom's Criticism: Zitterbewegung Stochastic Mechanics I,'' arXiv:1510.06391 (2015).
+
+\bibitem{derakhshani16} M.~Derakhshani, ``A Suggested Answer To Wallstrom's Criticism: Zitterbewegung Stochastic Mechanics II,'' arXiv:1607.08838 (2016).
+
+\bibitem{fritschehaugk09} L.~Fritsche and M.~Haugk, ``Stochastic Foundation of Quantum Mechanics and the Origin of Particle Spin,'' arXiv:0912.3442 (2009).
+
+\bibitem{tiwari19} S.~C.~Tiwari, ``Stochasticity, topology, and spin,'' arXiv:1907.03546 (2019).
+
+\bibitem{dudley65} R.~M.~Dudley, ``Lorentz-invariant Markov processes in relativistic phase space,'' \emph{Ark. Mat.} \textbf{6}, 241 (1965).
+
+\bibitem{hakim65} R.~Hakim, ``A covariant theory of relativistic Brownian motion. I. Local equilibrium,'' \emph{J. Math. Phys.} \textbf{6}, 1482 (1965).
+
+\bibitem{hakim68} R.~Hakim, ``Relativistic stochastic processes,'' \emph{J. Math. Phys.} \textbf{9}, 1805 (1968).
+
+\bibitem{guerraruggiero73} F.~Guerra and P.~Ruggiero, ``New interpretation of the Euclidean-Markov field in the framework of physical Minkowski space-time,'' \emph{Phys. Rev. Lett.} \textbf{31}, 1022 (1973).
+
+\bibitem{guerraruggiero78} F.~Guerra and P.~Ruggiero, ``A note on relativistic Markov processes,'' \emph{Lett. Nuovo Cimento} \textbf{23}, 529 (1978).
+
+\bibitem{guerraloffredo80} F.~Guerra and M.~I.~Loffredo, ``Stochastic equations for the Maxwell field,'' \emph{Lett. Nuovo Cimento} \textbf{27}, 41 (1980).
+
+\bibitem{guerra81} F.~Guerra, ``Structural Aspects of Stochastic Mechanics and Stochastic Field Theory,'' \emph{Phys. Rep.} \textbf{77}, 263 (1981).
+
+\bibitem{lehrpark77} W.~J.~Lehr and J.~L.~Park, ``A stochastic derivation of the Klein-Gordon equation,'' \emph{J. Math. Phys.} \textbf{18}, 1235 (1977).
+
+\bibitem{serva88} M.~Serva, ``Relativistic stochastic processes associated to the Klein-Gordon equation,'' \emph{Ann. Inst. Henri Poincaré Phys. Théor.} \textbf{49}, 415 (1988).
+
+\bibitem{marraserva90} R.~Marra and M.~Serva, ``Variational principles for a relativistic stochastic mechanics,'' \emph{Ann. Inst. Henri Poincaré Phys. Théor.} \textbf{53}, 97 (1990).
+
+\bibitem{zastawniak90} T.~Zastawniak, ``A relativistic version of Nelson's stochastic mechanics,'' \emph{Europhys. Lett.} \textbf{13}, 13 (1990).
+
+\bibitem{deangelis90} G.~F.~De Angelis, ``Stochastic mechanics of a relativistic spinless particle,'' \emph{J. Math. Phys.} \textbf{31}, 1408 (1990).
+
+\bibitem{deangelisserva90} G.~F.~De Angelis and M.~Serva, \emph{Ann. Inst. Henri Poincaré Phys. Théor.} \textbf{53}, 301 (1990).
+
+\bibitem{moratoviola95} L.~M.~Morato and L.~Viola, ``Markov diffusions in comoving coordinates and stochastic quantization of the free relativistic spinless particle,'' \emph{J. Math. Phys.} \textbf{36}, 4691 (1995); erratum \textbf{37}, 4769 (1996).
+
+\bibitem{garbaczewski92} P.~Garbaczewski, ``Relativistic problem of random flights and Nelson's stochastic mechanics,'' \emph{Phys. Lett. A} \textbf{164}, 6 (1992).
+
+\bibitem{garbaczewskiklauder95} P.~Garbaczewski, J.~R.~Klauder, and R.~Olkiewicz, ``The Schrödinger problem, Lévy processes, and all that noise in relativistic quantum mechanics,'' \emph{Phys. Rev. E} \textbf{51}, 4114 (1995).
+
+\bibitem{dohrnguerra78} D.~Dohrn and F.~Guerra, ``Nelson's stochastic mechanics on Riemannian manifolds,'' \emph{Lett. Nuovo Cimento} \textbf{22}, 121 (1978).
+
+\bibitem{dohrnguerra79b} D.~Dohrn and F.~Guerra, ``Geodesic correction to stochastic parallel displacement of tensors,'' in \emph{Stochastic Behavior in Classical and Quantum Physics}, Springer Lecture Notes in Physics \textbf{93} (1979), p.~241.
+
+\bibitem{dohrnguerra85} D.~Dohrn and F.~Guerra, ``Compatibility between the Brownian metric and the kinetic metric in Nelson stochastic quantization,'' \emph{Phys. Rev. D} \textbf{31}, 2521 (1985).
+
+\bibitem{aldrovandi90} E.~Aldrovandi, D.~Dohrn, and F.~Guerra, ``Stochastic action of dynamical systems on curved manifolds: The geodesic interpolation,'' \emph{J. Math. Phys.} \textbf{31}, 639 (1990).
+
+\bibitem{aldrovandi92} E.~Aldrovandi, D.~Dohrn, and F.~Guerra, ``The Lagrangian approach to stochastic variational principles on curved manifolds,'' \emph{Acta Appl. Math.} \textbf{26}, 219 (1992).
+
+\bibitem{kuipers2021a} F.~Kuipers, ``Stochastic Quantization on Lorentzian Manifolds,'' \emph{J. High Energy Phys.} \textbf{2021}, 028 (2021).
+
+\bibitem{kuipers2021b} F.~Kuipers, ``Stochastic Quantization of Relativistic Theories,'' \emph{J. Math. Phys.} \textbf{62}, 122301 (2021).
+
+\bibitem{kuipers2023} F.~Kuipers, ``Stochastic Mechanics and the Unification of Quantum Mechanics with Brownian Motion,'' arXiv:2301.05467 (2023).
+
+\bibitem{pavon95} M.~Pavon, ``A new formulation of stochastic mechanics,'' \emph{Phys. Lett. A} \textbf{209}, 143 (1995).
+
+\bibitem{pavon2001} M.~Pavon, ``On the stochastic mechanics of the free relativistic particle,'' \emph{J. Math. Phys.} \textbf{42}, 4846 (2001).
+
+\bibitem{yasue81} K.~Yasue, ``Stochastic calculus of variations,'' \emph{J. Funct. Anal.} \textbf{41}, 327 (1981).
+
+\bibitem{guerramorato83} F.~Guerra and L.~M.~Morato, ``Quantization of dynamical systems and stochastic control theory,'' \emph{Phys. Rev. D} \textbf{27}, 1774 (1983).
+
+\bibitem{dohrnguerraruggiero79} D.~Dohrn, F.~Guerra, and P.~Ruggiero, ``Spinning particles and relativistic particles in the framework of Nelson's stochastic mechanics,'' in \emph{Feynman Path Integrals}, Springer Lecture Notes in Physics \textbf{106} (1979), p.~165.
+
+\bibitem{deangelisjls86} G.~F.~De Angelis, G.~Jona-Lasinio, M.~Serva, and N.~Zangh\`{\i}, ``Stochastic mechanics of a Dirac particle in two space-time dimensions,'' \emph{J. Phys. A: Math. Gen.} \textbf{19}, 865 (1986).
+
+\bibitem{deangelisrinaldiserva91} G.~F.~De Angelis, A.~Rinaldi, and M.~Serva, ``Imaginary-time path integral for a relativistic spin-$\tfrac12$ particle in a magnetic field,'' \emph{Europhys. Lett.} \textbf{14}, 95 (1991).
+
+\bibitem{barandes23} J.~A.~Barandes, ``The Stochastic-Quantum Correspondence,'' arXiv:2302.10778 (2023).
+
+\bibitem{neklyudov23} K.~Neklyudov, R.~Brekelmans, A.~Tong, L.~Atanackovic, Q.~Liu, and A.~Makhzani, ``Deep Stochastic Mechanics,'' arXiv:2305.19685 (2023).
+
+\end{thebibliography}
+
+\end{document}
