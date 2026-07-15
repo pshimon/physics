@@ -1,0 +1,74 @@
+########################################################################
+# Shimon Panfil: Industrial Physics and Simulations                   ##
+# http://pshimon.github.io                                           ##
+# THE SOFTWARE IS PROVIDED "AS IS", USE IT AT YOUR OWN RISK           ##
+########################################################################
+CUBPACKDIR=../cubpack
+CUBLIB:=$(CUBPACKDIR)/libcubpack.a
+SPHDIR:=../sph_bess
+SPHLIB:=$(SPHDIR)/libsph.a
+FPIC:=-fpic
+RM:=rm -f
+LBS:=ar crv
+LM:=-lm -lrt
+NOUT:= -o
+#FC:=gfortran
+FC:=ifort
+CC:=icc
+COPT:=-Ofast -g $(CINC)  $(FPIC) -Wall
+CLOPT:= $(COPT)
+
+
+ifeq ($(FC),gfortran)
+   FOPT:=-Ofast $(FPIC) -Wall -g  -cpp -fdefault-real-8 -m64 -I$(CUBPACKDIR)
+   FPE:= -ffpe-trap=invalid,zero,overflow
+   FLOPT:=$(FOPT)  
+else
+   FOPT:=-Ofast -fpp -real-size 64 -warn all -nogen-interface -fpe0 -g  -I${MKLROOT}/include  -I$(CUBPACKDIR) #-qopenmp
+   FLOPT:=$(FOPT) #$(MKL_LIBS_IF)
+   MKL_LIBS:=-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl
+   MKL_LIBS_P:=-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm -ldl
+endif   
+%.o: %.f90
+	$(FC) -c $(FOPT)    $<  $(NOUT) $@ 
+%: %.f90
+	$(FC)   $(NOUT) $@ $^  $(FLOPT)
+%.o: %.c
+	$(CC) -c $(COPT)   $< $(NOUT) $@ 
+# F library sources
+ALSTF:=fdefs.f90 arrio.f90 facet.f90  tsurf.f90 qsurf.f90 model.f90 fext.f90  lin_alg.f90 integrator.f90 large_matrix.f90  bh_mie_mod.f90 mie_mod.f90
+# C library sources
+ALSTC:= #trgint.c lplgf.c
+ASLST:=$(ALSTF:.f90=.o) $(ALSTC:.c=.o) 
+
+#static library name
+ALIB:=libbem.a
+# F program sources
+LSTBF:=  mk_tsurf.f90 mk_model.f90  mk_sph.f90 mk_brick.f90  mk_lmb.f90 mk_ffpb.f90 print_fa.f90   mk_lm.f90 mk_ffp.f90 get_fields.f90 get_null_fields.f90  mk_tet.f90 mk_cpa.f90 mk_ffp.f90 mie.f90 bh_mie.f90
+#bash scripts
+LSTSH:=make_model.sh make_lm.sh make_ffp.sh
+TRG:=$(LSTBF:.f90=) $(LSTSH:.sh=) 
+
+#targets
+.PHONY: all clean install
+all: $(ALIB) $(TRG)
+
+$(TRG): $(ALIB) $(CUBLIB)
+$(ALIB): $(ASLST) 
+	$(LBS) $(ALIB) $^
+clean:	
+	$(RM)    $(TRG) *.mod *.o *.a
+mk_lm: mk_lm.f90
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P) #-qopenmp
+mk_lmb: mk_lmb.f90
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P) #-qopenmp
+get_fields: get_fields.f90
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P)
+get_null_fields: get_null_fields.f90
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P)
+check_mesh: check_mesh.f90
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P)
+mie: mie.f90 $(ALIB) $(SPHLIB)
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P)
+bh_mie: bh_mie.f90 $(ALIB) $(SPHLIB)
+	$(FC)   $(NOUT) $@ $^  $(FLOPT) $(MKL_LIBS_P)
