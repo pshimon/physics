@@ -74,59 +74,24 @@ Brownian motion first encounters difficulties.
 
 Consider first ordinary Brownian motion in Euclidean space. During a small
 time interval $dt$, the random displacement satisfies
-
-\[
-\langle dW_i \rangle =0,
-\]
-
+\[\langle dW_i \rangle =0,\]
 and
-
-\[
-\langle dW_i\,dW_j\rangle
-=
-2D\,\delta_{ij}\,dt,
-\]
-
+\[\langle dW_i\,dW_j\rangle=2D\,\delta_{ij}\,dt,\]
 where $D$ is the diffusion coefficient.
-
 The covariance matrix is positive definite, guaranteeing that the variance of
 every component is non-negative.
 
 The obvious relativistic generalization would appear to be
-
-\[
-\langle dW^\mu\rangle =0,
-\]
-
+\[\langle dW^\mu\rangle =0,\]
 and
-
-\[
-\langle dW^\mu dW^\nu\rangle
-=
-2D\,\eta^{\mu\nu}\,d\tau,
-\]
-
+\[\langle dW^\mu dW^\nu\rangle=2D\,\eta^{\mu\nu}\,d\tau,\]
 where $\eta^{\mu\nu}$ is the Minkowski metric.
-
 This expression is manifestly Lorentz covariant. Unfortunately, it cannot
 describe an ordinary stochastic process.
-
 Indeed,
-
-\[
-\langle (dW^0)^2\rangle
-=
-2D\,d\tau,
-\]
-
+\[\langle (dW^0)^2\rangle=2D\,d\tau,\]
 whereas
-
-\[
-\langle (dW^1)^2\rangle
-=
--2D\,d\tau,
-\]
-
+\[\langle (dW^1)^2\rangle=-2D\,d\tau,\]
 and similarly for the remaining spatial components. The variances of the
 spatial increments are therefore negative, which is impossible for real random
 variables.
@@ -139,17 +104,10 @@ signature of Minkowski space.
 
 Consequently, relativistic stochastic mechanics cannot be obtained by the
 simple replacement
-
-\[
-\delta_{ij}
-\longrightarrow
-\eta_{\mu\nu}.
-\]
-
+\[\delta_{ij}\longrightarrow\eta_{\mu\nu}.\]
 A successful relativistic theory must therefore modify the very notion of
 diffusion rather than merely rewriting the nonrelativistic equations in a
 covariant notation.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Second Obstacle: The Evolution Parameter}
@@ -160,7 +118,6 @@ discussed in the previous section demonstrates that relativistic stochastic
 mechanics cannot be obtained by simply replacing Euclidean geometry with
 Minkowski geometry. Before attempting to construct a relativistic diffusion
 process, one must first answer a more elementary question:
-
 \begin{center}
 \emph{With respect to which parameter should the stochastic evolution be
 defined?}
@@ -168,48 +125,24 @@ defined?}
 
 In nonrelativistic mechanics the answer is obvious. The trajectory of a
 particle,
-
-\[
-{\bf x}={\bf x}(t),
-\]
-
+\[{\bf x}={\bf x}(t),\]
 is parametrized by the universal Newtonian time $t$. Since every observer
 agrees on the value of $t$, it provides a natural ordering of successive
 events. Consequently, the stochastic process
-
-\[
-{\bf X}(t)
-\]
-
+\[{\bf X}(t)\]
 is defined without ambiguity.
 
 Relativistic mechanics changes this situation completely. The coordinate time
-
-\[
-x^0=ct
-\]
-
+\[x^0=ct\]
 is no longer an invariant quantity. Different inertial observers assign
 different time coordinates to the same event, related by Lorentz
 transformations,
-
-\[
-x'^{0}
-=
-\gamma(x^{0}-\beta x^{1}).
-\]
-
+\[x'^{0}=\gamma(x^{0}-\beta x^{1}).\]
 Thus a stochastic process defined with respect to $x^0$ is tied to a
 particular Lorentz frame and therefore loses manifest covariance.
 
 One might attempt to replace coordinate time by the proper time
-
-\[
-ds^{2}
-=
-dx^{\mu}dx_{\mu}.
-\]
-
+\[ds^{2}=dx^{\mu}dx_{\mu}.\]
 Although proper time is Lorentz invariant, it is not suitable as a universal
 evolution parameter. It is defined only along timelike worldlines and depends
 upon the trajectory itself. Furthermore, interacting systems containing
@@ -219,21 +152,12 @@ many-body relativistic theory.
 
 These observations indicate that neither coordinate time nor proper time
 possesses all the properties required for a stochastic evolution parameter.
-
 The SHP formalism resolves this difficulty by introducing an invariant
 evolution parameter
-
-\[
-\tau,
-\]
-
+\[\tau,\]
 which is independent of the space-time coordinates. The particle trajectory is
 therefore written as
-
-\[
-x^{\mu}=x^{\mu}(\tau),
-\]
-
+\[x^{\mu}=x^{\mu}(\tau),\]
 where all four coordinates are treated as dynamical variables.
 
 Unlike coordinate time, $\tau$ is invariant under Lorentz transformations.
@@ -249,26 +173,13 @@ required for the formulation of a relativistic dynamical theory.
 
 If one wishes to construct a stochastic extension of relativistic mechanics,
 it is therefore natural to replace the deterministic trajectory
-
-\[
-x^{\mu}=x^{\mu}(\tau)
-\]
-
+\[x^{\mu}=x^{\mu}(\tau)\]
 by a stochastic trajectory
-
-\[
-X^{\mu}=X^{\mu}(\tau,\omega),
-\]
-
+\[X^{\mu}=X^{\mu}(\tau,\omega),\]
 where $\omega$ labels individual realizations of the stochastic process.
-
 The remainder of this monograph is devoted to investigating whether such a
 construction can reproduce the known structure of relativistic quantum
 mechanics.
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Why Manifestly Covariant Hamiltonian Dynamics?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -281,11 +192,7 @@ would merely constitute a reparametrization of the conventional theory and
 would not provide an unconstrained Hamiltonian dynamics.
 
 The difficulty originates from the standard relativistic relation
-
-\[
-p^\mu p_\mu = m^2c^2,
-\]
-
+\[p^\mu p_\mu = m^2c^2,\]
 which is usually imposed as a constraint. The Hamiltonian of the system
 vanishes identically and the equations of motion are generated by the
 constraint itself. This formulation is entirely adequate for many classical
@@ -300,35 +207,15 @@ system whose evolution is generated by an ordinary Hamiltonian function.
 
 This is precisely the approach introduced independently by Stueckelberg and
 subsequently developed by Horwitz and Piron.
-
 The fundamental dynamical variables are
-
-\[
-x^\mu(\tau), \qquad p_\mu(\tau),
-\]
-
+\[x^\mu(\tau), \qquad p_\mu(\tau),\]
 while the evolution is generated by a Hamiltonian function
-
-\[
-K(x,p).
-\]
+\[K(x,p).\]
 
 The canonical equations assume exactly the same form as in ordinary
 Hamiltonian mechanics,
-
-\[
-\frac{dx^\mu}{d\tau}
-=
-\frac{\partial K}{\partial p_\mu},
-\]
-
-\[
-\frac{dp_\mu}{d\tau}
-=
--
-\frac{\partial K}{\partial x^\mu}.
-\]
-
+\[\frac{dx^\mu}{d\tau}=\frac{\partial K}{\partial p_\mu},\]
+\[\frac{dp_\mu}{d\tau}=-\frac{\partial K}{\partial x^\mu}.\]
 The only formal difference is that the evolution parameter is now the
 Lorentz-invariant quantity $\tau$ rather than Newtonian time.
 
@@ -340,40 +227,14 @@ minor modifications. From the standpoint of dynamics, manifest covariance is
 achieved without abandoning the familiar Hamiltonian framework.
 
 For a free particle the Hamiltonian is chosen as
-
-\[
-K_0
-=
-\frac{p^\mu p_\mu}{2M},
-\]
-
+\[K_0=\frac{p^\mu p_\mu}{2M},\]
 where $M$ is a constant parameter with the dimensions of mass. Interactions
 are introduced through an invariant potential,
-
-\[
-K
-=
-\frac{p^\mu p_\mu}{2M}
-+
-V(x).
-\]
-
+\[K=\frac{p^\mu p_\mu}{2M}+V(x).\]
 The corresponding equations of motion are
-
-\[
-\frac{dx^\mu}{d\tau}
-=
-\frac{p^\mu}{M},
-\]
-
+\[\frac{dx^\mu}{d\tau}=\frac{p^\mu}{M},\]
 and
-
-\[
-\frac{dp_\mu}{d\tau}
-=
--
-\frac{\partial V}{\partial x^\mu}.
-\]
+\[\frac{dp_\mu}{d\tau}=-\frac{\partial V}{\partial x^\mu}.\]
 
 These equations are structurally indistinguishable from Newtonian Hamiltonian
 mechanics. Consequently, every construction based upon Hamiltonian flows may,
@@ -388,16 +249,11 @@ From this perspective, the SHP formalism plays a role analogous to that of
 Newtonian mechanics in Nelson's original construction. It supplies the
 deterministic dynamics upon which stochastic fluctuations may subsequently be
 superimposed.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{From Deterministic to Stochastic Dynamics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Having established a manifestly covariant Hamiltonian dynamics, we may now
 address the central question of this monograph.
-
 How should stochastic effects be incorporated into the equations of motion?
 
 It is important to appreciate that this question differs fundamentally from
@@ -414,56 +270,20 @@ the Fokker--Planck equation describes the statistical evolution associated
 with an underlying stochastic modification of deterministic trajectories.
 
 The same philosophy will be adopted here.
-
 The deterministic motion generated by the SHP Hamiltonian will be regarded as
 the zeroth-order approximation. Stochastic dynamics should then arise as a
 systematic extension rather than as an independent postulate.
-
 Accordingly, the deterministic equations
-
-\[
-\frac{dx^\mu}{d\tau}
-=
-\frac{\partial K}{\partial p_\mu},
-\]
-
-\[
-\frac{dp_\mu}{d\tau}
-=
--
-\frac{\partial K}{\partial x^\mu},
-\]
-
+\[\frac{dx^\mu}{d\tau}=\frac{\partial K}{\partial p_\mu},\]
+\[\frac{dp_\mu}{d\tau}=-\frac{\partial K}{\partial x^\mu},\]
 will be replaced by stochastic evolution equations of the schematic form
-
-\[
-dx^\mu
-=
-\frac{\partial K}{\partial p_\mu}\,d\tau
-+
-d\xi^\mu,
-\]
-
-\[
-dp_\mu
-=
--
-\frac{\partial K}{\partial x^\mu}\,d\tau
-+
-d\eta_\mu.
-\]
+\[dx^\mu=\frac{\partial K}{\partial p_\mu}\,d\tau+d\xi^\mu,\]
+\[dp_\mu=-\frac{\partial K}{\partial x^\mu}\,d\tau+d\eta_\mu.\]
 
 At the present stage no assumptions are made concerning the statistical
 properties of the fluctuations
-
-\[
-d\xi^\mu,
-\qquad
-d\eta_\mu.
-\]
-
+\[d\xi^\mu,\qquadd\eta_\mu.\]
 In particular, they need not represent ordinary Brownian motion.
-
 Their precise mathematical structure constitutes one of the principal
 questions investigated in the subsequent chapters.
 
@@ -476,9 +296,6 @@ Consequently, every successful result obtained in deterministic SHP dynamics
 remains available. Gauge interactions, many-particle systems, canonical
 transformations and Hamilton-Jacobi theory require extension rather than
 replacement.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Origin of Stochasticity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -486,7 +303,6 @@ replacement.
 The equations proposed in the preceding section introduce random
 increments into the deterministic SHP dynamics. At this stage,
 however, the origin of these fluctuations has not been specified.
-
 This omission is intentional.
 
 The mathematical construction of stochastic dynamics does not require
@@ -526,7 +342,4 @@ dynamics and with quantum mechanics.
 
 Only after the mathematical structure has been established shall we
 return to the question of the physical origin of the fluctuations.
-
-
-
 
