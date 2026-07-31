@@ -1,0 +1,326 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Covariant Statistical Mechanics in the SHP Formalism}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+The preceding chapters established the Hamiltonian formulation of the
+Stueckelberg--Horwitz--Piron theory together with its gauge-covariant
+generalization. The dynamics of an individual particle is completely
+determined by Hamilton's equations in the extended phase space.
+
+Physical systems, however, rarely consist of a single isolated particle.
+Macroscopic phenomena arise from large ensembles whose microscopic
+states cannot be specified individually. A statistical description is
+therefore essential.
+
+The purpose of this chapter is to formulate statistical mechanics
+directly on the SHP phase space. The resulting theory differs from
+ordinary relativistic statistical mechanics in several important
+respects.
+
+First, evolution is parametrized by the invariant world time
+\(\tau\), rather than by the coordinate time \(x^0\).
+
+Second, the invariant mass is not constrained to remain constant.
+Consequently, statistical ensembles possess a distribution not only in
+space-time and momentum but also in off-shell states.
+
+Third, if internal non-Abelian charges are present, the statistical
+state must also include the corresponding color degrees of freedom.
+
+The natural microscopic state of the system is therefore specified by
+
+\[
+(x^\mu,p_\mu,Q^a),
+\]
+
+while the statistical state is described by the probability density
+
+\[
+\boxed{
+\rho(x^\mu,p_\mu,Q^a,\tau).
+}
+\]
+
+The remainder of this chapter develops the corresponding Liouville
+theorem, kinetic equations, equilibrium theory and entropy directly from
+the Hamiltonian structure established in the previous chapters.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Probability Distribution on SHP Phase Space}
+
+Consider an ensemble of identical systems.
+
+Each microscopic state corresponds to one point of the extended phase
+space
+
+\[
+\Gamma
+=
+T^*M
+\times
+{\cal O},
+\]
+
+where \({\cal O}\) denotes the internal color manifold.
+
+The statistical state of the ensemble is described by the distribution
+function
+
+\[
+\boxed{
+\rho
+=
+\rho(x^\mu,p_\mu,Q^a,\tau).
+}
+\]
+
+The probability that the system occupies an infinitesimal phase-space
+volume
+
+\[
+d\Gamma
+\]
+
+is
+
+\[
+dP
+=
+\rho\,d\Gamma.
+\]
+
+Normalization requires
+
+\[
+\boxed{
+\int_\Gamma
+\rho
+\,d\Gamma
+=
+1.
+}
+\]
+
+Unlike ordinary relativistic kinetic theory, the SHP distribution is
+defined on the complete off-shell phase space.
+
+Consequently, particles possessing different invariant masses coexist
+within the same statistical ensemble.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statistical Distribution of the Invariant Mass}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In ordinary relativistic statistical mechanics the mass shell
+
+\[
+p^\mu p_\mu = m^2
+\]
+
+is imposed as a kinematic constraint before the statistical theory is
+constructed. Consequently, the invariant mass does not constitute an
+independent statistical variable.
+
+The SHP formalism adopts a fundamentally different viewpoint. Since the
+Hamiltonian dynamics does not constrain particles to remain on a fixed
+mass shell, the invariant mass becomes a dynamical quantity whose value
+may differ from one member of the ensemble to another.
+
+It is therefore natural to regard the invariant mass as an additional
+statistical variable.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mass Distribution Function}
+
+Let
+
+\[
+\Pi_\mu
+=
+p_\mu-gA_\mu^aQ^a
+\]
+
+denote the gauge-covariant momentum.
+
+The corresponding invariant is
+
+\[
+\mu^2
+=
+\Pi^\mu\Pi_\mu .
+\]
+
+The probability density of finding a particle with invariant mass
+\(\mu\) is defined by
+
+\[
+\boxed{
+P(\mu^2,\tau)
+=
+\int_\Gamma
+\rho(x,p,Q,\tau)\,
+\delta\!\left(
+\mu^2-\Pi^\alpha\Pi_\alpha
+\right)
+d\Gamma.
+}
+\]
+
+This distribution satisfies the normalization condition
+
+\[
+\boxed{
+\int
+P(\mu^2,\tau)
+\,d\mu^2
+=
+1.
+}
+\]
+
+Thus the statistical ensemble possesses a complete spectrum of
+off-shell states.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Statistical Moments}
+
+The first statistical moment defines the mean invariant mass,
+
+\[
+\boxed{
+\langle\mu^2\rangle
+=
+\int
+\mu^2
+P(\mu^2,\tau)
+\,d\mu^2.
+}
+\]
+
+Higher moments characterize the shape of the distribution.
+
+For example,
+
+the variance is
+
+\[
+\boxed{
+\sigma_\mu^2
+=
+\langle(\mu^2)^2\rangle
+-
+\langle\mu^2\rangle^2.
+}
+\]
+
+Unlike ordinary relativistic mechanics,
+
+these quantities generally evolve with the world time.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Evolution Equation}
+
+Differentiating the definition of
+
+\[
+P(\mu^2,\tau)
+\]
+
+with respect to
+
+\[
+\tau,
+\]
+
+and using the Liouville equation,
+
+\[
+\frac{\partial\rho}{\partial\tau}
++
+\{\rho,K\}
+=
+0,
+\]
+
+one finds
+
+\[
+\frac{\partial P}{\partial\tau}
+=
+-
+\frac{\partial}{\partial\mu^2}
+J_\mu,
+\]
+
+where
+
+\[
+J_\mu
+\]
+
+is the probability current in invariant-mass space.
+
+Thus probability is conserved not only in ordinary phase space but also
+along the invariant-mass direction.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Stationary Mass Spectrum}
+
+If
+
+\[
+\frac{\partial P}{\partial\tau}=0,
+\]
+
+then
+
+\[
+J_\mu
+=
+\text{constant}.
+\]
+
+For a closed ensemble with vanishing current at the boundaries,
+
+\[
+J_\mu=0,
+\]
+
+and the mass spectrum becomes stationary.
+
+Stationarity therefore corresponds to equilibrium in invariant-mass
+space.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Physical Interpretation}
+
+The existence of the distribution
+
+\[
+P(\mu^2,\tau)
+\]
+
+is a direct consequence of off-shell dynamics.
+
+Different members of the statistical ensemble occupy different values of
+the invariant mass, and the Hamiltonian evolution continuously
+redistributes probability among these values.
+
+The mass shell of ordinary relativistic mechanics is therefore replaced
+by a dynamical mass spectrum.
+
+The invariant mass becomes a statistical observable rather than a fixed
+kinematic parameter.
+
+
+

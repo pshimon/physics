@@ -1,0 +1,532 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Physical Problem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Relativistic quantum mechanics and quantum field theory provide an extremely
+successful description of elementary particles. Nevertheless, from the
+viewpoint of dynamics they differ fundamentally from classical relativistic
+mechanics. In the latter, the state of a particle at any instant is specified
+by its position and momentum, and the subsequent evolution follows from the
+equations of motion. In quantum theory, by contrast, the state is represented
+by a wave function or a state vector, while the notion of an individual
+trajectory no longer occupies a fundamental role.
+
+An obvious question therefore arises. Is it possible that the quantum
+description is itself a statistical description of a more fundamental
+relativistic dynamics? More specifically, can the motion of a relativistic
+particle be described by a stochastic process whose statistical properties
+reproduce the equations of relativistic quantum mechanics?
+
+In the nonrelativistic domain this question was answered, at least partially,
+by the stochastic mechanics of Fényes and Nelson. Starting from a diffusion
+process in ordinary three-dimensional space, Nelson showed that under suitable
+assumptions the probability density and current satisfy equations equivalent
+to the Schrödinger equation. Whether one accepts this interpretation or not,
+it demonstrates that quantum dynamics can arise from an appropriately chosen
+stochastic process.
+
+The relativistic case is considerably more difficult. The difficulty is not
+primarily the construction of a relativistic diffusion process. Various forms
+of relativistic Brownian motion have been proposed during the past sixty
+years. Rather, the central problem is to construct a stochastic dynamics that
+simultaneously satisfies the following physical requirements:
+
+\begin{enumerate}
+
+\item
+Manifest Lorentz covariance.
+
+\item
+A well-defined Hamiltonian dynamics.
+
+\item
+Positive probability densities.
+
+\item
+Compatibility with gauge interactions.
+
+\item
+A correct nonrelativistic limit.
+
+\item
+Reduction to the experimentally verified equations of relativistic quantum
+mechanics.
+
+\end{enumerate}
+
+No presently known theory satisfies all of these requirements simultaneously.
+Some approaches possess manifest covariance but fail to reproduce quantum
+mechanics. Others reproduce the Schrödinger equation but rely on a preferred
+time coordinate and therefore lose manifest covariance. Still others introduce
+relativistic diffusion but abandon the Hamiltonian structure that underlies
+both classical mechanics and the SHP formalism.
+
+The purpose of this monograph is to investigate whether these apparently
+independent difficulties may admit a common resolution within the framework of
+manifestly covariant dynamics.
+
+To understand why this possibility deserves serious consideration, it is
+necessary to examine where the standard relativistic generalization of
+Brownian motion first encounters difficulties.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The First Obstacle: Relativistic Brownian Motion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Consider first ordinary Brownian motion in Euclidean space. During a small
+time interval $dt$, the random displacement satisfies
+
+\[
+\langle dW_i \rangle =0,
+\]
+
+and
+
+\[
+\langle dW_i\,dW_j\rangle
+=
+2D\,\delta_{ij}\,dt,
+\]
+
+where $D$ is the diffusion coefficient.
+
+The covariance matrix is positive definite, guaranteeing that the variance of
+every component is non-negative.
+
+The obvious relativistic generalization would appear to be
+
+\[
+\langle dW^\mu\rangle =0,
+\]
+
+and
+
+\[
+\langle dW^\mu dW^\nu\rangle
+=
+2D\,\eta^{\mu\nu}\,d\tau,
+\]
+
+where $\eta^{\mu\nu}$ is the Minkowski metric.
+
+This expression is manifestly Lorentz covariant. Unfortunately, it cannot
+describe an ordinary stochastic process.
+
+Indeed,
+
+\[
+\langle (dW^0)^2\rangle
+=
+2D\,d\tau,
+\]
+
+whereas
+
+\[
+\langle (dW^1)^2\rangle
+=
+-2D\,d\tau,
+\]
+
+and similarly for the remaining spatial components. The variances of the
+spatial increments are therefore negative, which is impossible for real random
+variables.
+
+This elementary observation constitutes the first and perhaps most fundamental
+difficulty of relativistic stochastic mechanics. The problem appears before
+any dynamical equation has been written and is independent of the particular
+choice of interaction or Hamiltonian. It follows directly from the indefinite
+signature of Minkowski space.
+
+Consequently, relativistic stochastic mechanics cannot be obtained by the
+simple replacement
+
+\[
+\delta_{ij}
+\longrightarrow
+\eta_{\mu\nu}.
+\]
+
+A successful relativistic theory must therefore modify the very notion of
+diffusion rather than merely rewriting the nonrelativistic equations in a
+covariant notation.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Second Obstacle: The Evolution Parameter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The failure of the naive relativistic generalization of Brownian motion
+discussed in the previous section demonstrates that relativistic stochastic
+mechanics cannot be obtained by simply replacing Euclidean geometry with
+Minkowski geometry. Before attempting to construct a relativistic diffusion
+process, one must first answer a more elementary question:
+
+\begin{center}
+\emph{With respect to which parameter should the stochastic evolution be
+defined?}
+\end{center}
+
+In nonrelativistic mechanics the answer is obvious. The trajectory of a
+particle,
+
+\[
+{\bf x}={\bf x}(t),
+\]
+
+is parametrized by the universal Newtonian time $t$. Since every observer
+agrees on the value of $t$, it provides a natural ordering of successive
+events. Consequently, the stochastic process
+
+\[
+{\bf X}(t)
+\]
+
+is defined without ambiguity.
+
+Relativistic mechanics changes this situation completely. The coordinate time
+
+\[
+x^0=ct
+\]
+
+is no longer an invariant quantity. Different inertial observers assign
+different time coordinates to the same event, related by Lorentz
+transformations,
+
+\[
+x'^{0}
+=
+\gamma(x^{0}-\beta x^{1}).
+\]
+
+Thus a stochastic process defined with respect to $x^0$ is tied to a
+particular Lorentz frame and therefore loses manifest covariance.
+
+One might attempt to replace coordinate time by the proper time
+
+\[
+ds^{2}
+=
+dx^{\mu}dx_{\mu}.
+\]
+
+Although proper time is Lorentz invariant, it is not suitable as a universal
+evolution parameter. It is defined only along timelike worldlines and depends
+upon the trajectory itself. Furthermore, interacting systems containing
+several particles possess, in general, several different proper times.
+Consequently, proper time cannot provide a common dynamical parameter for a
+many-body relativistic theory.
+
+These observations indicate that neither coordinate time nor proper time
+possesses all the properties required for a stochastic evolution parameter.
+
+The SHP formalism resolves this difficulty by introducing an invariant
+evolution parameter
+
+\[
+\tau,
+\]
+
+which is independent of the space-time coordinates. The particle trajectory is
+therefore written as
+
+\[
+x^{\mu}=x^{\mu}(\tau),
+\]
+
+where all four coordinates are treated as dynamical variables.
+
+Unlike coordinate time, $\tau$ is invariant under Lorentz transformations.
+Unlike proper time, it is independent of the particular trajectory and may be
+used simultaneously for interacting many-particle systems. It therefore
+provides a universal ordering parameter for relativistic dynamics.
+
+From the viewpoint adopted in the present monograph, this observation is of
+fundamental importance. The principal achievement of the SHP formalism is not
+merely the introduction of an additional parameter, but the identification of
+a physically meaningful invariant quantity possessing exactly those properties
+required for the formulation of a relativistic dynamical theory.
+
+If one wishes to construct a stochastic extension of relativistic mechanics,
+it is therefore natural to replace the deterministic trajectory
+
+\[
+x^{\mu}=x^{\mu}(\tau)
+\]
+
+by a stochastic trajectory
+
+\[
+X^{\mu}=X^{\mu}(\tau,\omega),
+\]
+
+where $\omega$ labels individual realizations of the stochastic process.
+
+The remainder of this monograph is devoted to investigating whether such a
+construction can reproduce the known structure of relativistic quantum
+mechanics.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why Manifestly Covariant Hamiltonian Dynamics?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The introduction of an invariant evolution parameter solves only one part of
+the problem. A complete relativistic dynamics also requires equations of
+motion. The simplest possibility would be to parameterize ordinary relativistic
+mechanics by the invariant parameter $\tau$. Such a construction, however,
+would merely constitute a reparametrization of the conventional theory and
+would not provide an unconstrained Hamiltonian dynamics.
+
+The difficulty originates from the standard relativistic relation
+
+\[
+p^\mu p_\mu = m^2c^2,
+\]
+
+which is usually imposed as a constraint. The Hamiltonian of the system
+vanishes identically and the equations of motion are generated by the
+constraint itself. This formulation is entirely adequate for many classical
+problems, but it is not well suited for the construction of a stochastic
+theory.
+
+A stochastic process requires a genuine evolution equation with respect to an
+independent parameter. If the evolution parameter itself is determined by a
+constraint, the stochastic interpretation becomes obscure. It is therefore
+desirable to formulate relativistic mechanics as an unconstrained Hamiltonian
+system whose evolution is generated by an ordinary Hamiltonian function.
+
+This is precisely the approach introduced independently by Stueckelberg and
+subsequently developed by Horwitz and Piron.
+
+The fundamental dynamical variables are
+
+\[
+x^\mu(\tau), \qquad p_\mu(\tau),
+\]
+
+while the evolution is generated by a Hamiltonian function
+
+\[
+K(x,p).
+\]
+
+The canonical equations assume exactly the same form as in ordinary
+Hamiltonian mechanics,
+
+\[
+\frac{dx^\mu}{d\tau}
+=
+\frac{\partial K}{\partial p_\mu},
+\]
+
+\[
+\frac{dp_\mu}{d\tau}
+=
+-
+\frac{\partial K}{\partial x^\mu}.
+\]
+
+The only formal difference is that the evolution parameter is now the
+Lorentz-invariant quantity $\tau$ rather than Newtonian time.
+
+This observation has far-reaching consequences. The mathematical structure of
+relativistic dynamics becomes almost identical to that of ordinary Hamiltonian
+mechanics. Canonical transformations, Poisson brackets, Liouville's theorem,
+Hamilton-Jacobi theory, and statistical mechanics all carry over with only
+minor modifications. From the standpoint of dynamics, manifest covariance is
+achieved without abandoning the familiar Hamiltonian framework.
+
+For a free particle the Hamiltonian is chosen as
+
+\[
+K_0
+=
+\frac{p^\mu p_\mu}{2M},
+\]
+
+where $M$ is a constant parameter with the dimensions of mass. Interactions
+are introduced through an invariant potential,
+
+\[
+K
+=
+\frac{p^\mu p_\mu}{2M}
++
+V(x).
+\]
+
+The corresponding equations of motion are
+
+\[
+\frac{dx^\mu}{d\tau}
+=
+\frac{p^\mu}{M},
+\]
+
+and
+
+\[
+\frac{dp_\mu}{d\tau}
+=
+-
+\frac{\partial V}{\partial x^\mu}.
+\]
+
+These equations are structurally indistinguishable from Newtonian Hamiltonian
+mechanics. Consequently, every construction based upon Hamiltonian flows may,
+at least in principle, be generalized to the relativistic domain.
+
+This observation is central to the present monograph. Our objective is not to
+construct a stochastic process directly in Minkowski space. Rather, we seek a
+stochastic extension of an already well-defined relativistic Hamiltonian
+dynamics.
+
+From this perspective, the SHP formalism plays a role analogous to that of
+Newtonian mechanics in Nelson's original construction. It supplies the
+deterministic dynamics upon which stochastic fluctuations may subsequently be
+superimposed.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{From Deterministic to Stochastic Dynamics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Having established a manifestly covariant Hamiltonian dynamics, we may now
+address the central question of this monograph.
+
+How should stochastic effects be incorporated into the equations of motion?
+
+It is important to appreciate that this question differs fundamentally from
+the construction of Brownian motion in Euclidean space. The deterministic
+dynamics already exists. The objective is therefore not to invent an entirely
+new dynamics but rather to determine how random fluctuations modify an
+existing Hamiltonian evolution.
+
+This viewpoint is familiar throughout theoretical physics. Classical kinetic
+theory begins with Newton's equations and subsequently introduces statistical
+descriptions of large ensembles. Langevin dynamics begins with Newtonian
+mechanics and supplements it by fluctuating and dissipative forces. Likewise,
+the Fokker--Planck equation describes the statistical evolution associated
+with an underlying stochastic modification of deterministic trajectories.
+
+The same philosophy will be adopted here.
+
+The deterministic motion generated by the SHP Hamiltonian will be regarded as
+the zeroth-order approximation. Stochastic dynamics should then arise as a
+systematic extension rather than as an independent postulate.
+
+Accordingly, the deterministic equations
+
+\[
+\frac{dx^\mu}{d\tau}
+=
+\frac{\partial K}{\partial p_\mu},
+\]
+
+\[
+\frac{dp_\mu}{d\tau}
+=
+-
+\frac{\partial K}{\partial x^\mu},
+\]
+
+will be replaced by stochastic evolution equations of the schematic form
+
+\[
+dx^\mu
+=
+\frac{\partial K}{\partial p_\mu}\,d\tau
++
+d\xi^\mu,
+\]
+
+\[
+dp_\mu
+=
+-
+\frac{\partial K}{\partial x^\mu}\,d\tau
++
+d\eta_\mu.
+\]
+
+At the present stage no assumptions are made concerning the statistical
+properties of the fluctuations
+
+\[
+d\xi^\mu,
+\qquad
+d\eta_\mu.
+\]
+
+In particular, they need not represent ordinary Brownian motion.
+
+Their precise mathematical structure constitutes one of the principal
+questions investigated in the subsequent chapters.
+
+The advantage of this formulation is immediately apparent. The deterministic
+Hamiltonian dynamics remains explicitly visible throughout the construction.
+Randomness appears only through additional terms describing fluctuations about
+the underlying Hamiltonian flow.
+
+Consequently, every successful result obtained in deterministic SHP dynamics
+remains available. Gauge interactions, many-particle systems, canonical
+transformations and Hamilton-Jacobi theory require extension rather than
+replacement.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Origin of Stochasticity}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The equations proposed in the preceding section introduce random
+increments into the deterministic SHP dynamics. At this stage,
+however, the origin of these fluctuations has not been specified.
+
+This omission is intentional.
+
+The mathematical construction of stochastic dynamics does not require
+an explicit microscopic model. Indeed, in classical statistical
+mechanics the Langevin equation provides an accurate description of
+Brownian motion without referring to the detailed dynamics of every
+molecule of the surrounding fluid.
+
+Nevertheless, the physical interpretation of the stochastic terms
+cannot be ignored indefinitely. A relativistic stochastic mechanics
+should eventually explain why the motion of an isolated microscopic
+particle differs from the deterministic evolution predicted by
+classical Hamiltonian mechanics.
+
+Several possibilities may be distinguished.
+
+First, the stochastic forces may represent the influence of
+unobserved microscopic degrees of freedom belonging to the physical
+vacuum.
+
+Second, they may arise from internal dynamical degrees of freedom of
+the particle itself, which have been averaged over in the effective
+description.
+
+Third, they may represent an effective description of interactions
+with additional fields not explicitly included in the Hamiltonian.
+
+Finally, stochasticity may be regarded as a purely phenomenological
+description whose justification lies entirely in its ability to
+reproduce experimentally observed quantum phenomena.
+
+The present monograph deliberately adopts the last viewpoint during
+its initial development. No specific microscopic mechanism will be
+assumed. Instead, the statistical properties of the stochastic
+increments will be determined by consistency with relativistic
+dynamics and with quantum mechanics.
+
+Only after the mathematical structure has been established shall we
+return to the question of the physical origin of the fluctuations.
+
+
+
+

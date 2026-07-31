@@ -1,0 +1,274 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Chapter 9
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Noncommutative Geometry and Minimal Length}
+
+\epigraph{
+``One should no longer assume that spacetime points are primary objects.
+Rather, they may emerge only as approximations to a deeper algebraic
+structure.''
+}{Adapted from the modern viewpoint of noncommutative geometry}
+
+\label{chap:NCG}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+The classical conception of spacetime is founded upon the notion of a smooth
+four-dimensional manifold. Every physical event is assumed to occur at a
+well-defined point
+
+\[
+x^\mu=(ct,\mathbf{x}),
+\]
+
+and every physical field is represented by a function defined on this
+continuum.
+
+This picture has been extraordinarily successful. General relativity describes
+gravitation through the geometry of a differentiable Lorentzian manifold,
+whereas quantum field theory assumes that operator-valued distributions are
+defined on the same classical spacetime.
+
+Nevertheless, there exist compelling theoretical reasons to suspect that the
+concept of an arbitrarily localized spacetime point cannot remain valid at
+sufficiently short distances.
+
+The first indication originates in ordinary quantum mechanics.
+According to the Heisenberg uncertainty relation,
+
+\begin{equation}
+\Delta x\,\Delta p
+\ge
+\frac{\hbar}{2},
+\label{eq:Heisenberg}
+\end{equation}
+
+attempting to localize an object within a region of size $\Delta x$ requires
+a momentum uncertainty
+
+\begin{equation}
+\Delta p
+\gtrsim
+\frac{\hbar}{2\Delta x}.
+\end{equation}
+
+For sufficiently small localization volumes, the corresponding energy becomes
+arbitrarily large.
+
+General relativity introduces a second and entirely independent limitation.
+The localized energy contributes to the gravitational field. If the
+concentration of energy becomes sufficiently large, the localization region
+itself undergoes gravitational collapse.
+
+Consequently, quantum mechanics and gravitation together suggest that the
+operational definition of spacetime points may fail near the Planck scale.
+
+The possibility that spacetime coordinates cease to commute,
+
+\begin{equation}
+[x^\mu,x^\nu]\neq0,
+\label{eq:NCcomm}
+\end{equation}
+
+offers one of the oldest and conceptually simplest resolutions of this
+difficulty.
+
+Instead of regarding spacetime as a manifold whose points possess definite
+coordinates, one regards the coordinate functions themselves as generators of
+a noncommutative algebra.
+
+In this framework, localization acquires an intrinsic uncertainty analogous to
+the uncertainty principle of quantum mechanics.
+
+The purpose of the present chapter is to review the principal approaches to
+noncommutative spacetime, their mathematical formulation, their physical
+motivation, and their implications for relativistic quantum theory.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Historical Development}
+
+Although noncommutative geometry became widely known through the work of
+Connes during the 1980s and 1990s, the underlying idea is considerably older.
+
+Already in the 1930s Heisenberg suggested that ultraviolet divergences of
+quantum electrodynamics might indicate the breakdown of the classical notion
+of spacetime at extremely short distances.
+
+The first explicit Lorentz-covariant model of quantized spacetime was proposed
+by Snyder in 1947. Remarkably, Snyder's construction preserved exact Lorentz
+invariance while introducing a fundamental length scale into the theory.
+
+Only a few months later Yang generalized Snyder's algebra by embedding it into
+a larger symmetry group.
+
+Interest in noncommutative spacetime declined during the development of
+renormalized quantum electrodynamics but reappeared several decades later in
+several independent contexts:
+
+\begin{enumerate}
+
+\item deformation quantization,
+
+\item Connes' noncommutative geometry,
+
+\item string theory in constant $B$-field backgrounds,
+
+\item quantum gravity,
+
+\item Doplicher--Fredenhagen--Roberts (DFR) quantum spacetime,
+
+\item matrix models,
+
+\item noncommutative gauge theories.
+
+\end{enumerate}
+
+Although these approaches differ substantially in mathematical structure, they
+share one common philosophical principle:
+
+\begin{quote}
+Classical spacetime points are not fundamental physical entities.
+\end{quote}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Why Point Localization Becomes Problematic}
+
+Before introducing noncommuting coordinates it is useful to understand why one
+might wish to abandon ordinary spacetime in the first place.
+
+Three largely independent arguments point toward the existence of a minimal
+localization scale.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Quantum-Mechanical Argument}
+
+Suppose one attempts to localize a particle inside a sphere of radius
+$\Delta x$.
+
+Equation (\ref{eq:Heisenberg}) implies
+
+\begin{equation}
+\Delta p
+\gtrsim
+\frac{\hbar}{2\Delta x}.
+\end{equation}
+
+For ultrarelativistic localization,
+
+\begin{equation}
+E
+\approx
+c\,\Delta p,
+\end{equation}
+
+and therefore
+
+\begin{equation}
+E
+\gtrsim
+\frac{\hbar c}{2\Delta x}.
+\end{equation}
+
+Thus the localization energy diverges as
+
+\[
+\Delta x\rightarrow0.
+\]
+
+Quantum mechanics alone therefore does not prohibit arbitrarily small
+distances, but it predicts that probing them requires arbitrarily large
+energies.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gravitational Argument}
+
+According to general relativity, energy acts as the source of gravitation.
+
+A concentration of energy $E$ possesses the Schwarzschild radius
+
+\begin{equation}
+R_S
+=
+\frac{2GE}{c^4}.
+\end{equation}
+
+Using the previous estimate,
+
+\begin{equation}
+R_S
+\gtrsim
+\frac{G\hbar}
+{c^3\Delta x}.
+\end{equation}
+
+If one attempts to localize beyond the point where
+
+\[
+R_S
+\approx
+\Delta x,
+\]
+
+the localization region itself lies inside its own gravitational radius.
+
+Solving for $\Delta x$ gives
+
+\begin{equation}
+\Delta x
+\sim
+\sqrt{\frac{\hbar G}{c^3}}
+\equiv
+\ell_P,
+\end{equation}
+
+where
+
+\begin{equation}
+\ell_P
+=
+1.616255\times10^{-35}\ {\rm m}
+\end{equation}
+
+is the Planck length.
+
+This argument is heuristic rather than rigorous. It assumes that classical
+general relativity remains applicable at scales approaching $\ell_P$, where a
+complete quantum theory of gravity is not yet available. Nevertheless, it
+provides a compelling indication that the classical notion of spacetime may
+break down near the Planck scale.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Relativistic Quantum Theory}
+
+The previous chapters established that relativistic quantum mechanics already
+places severe restrictions upon localization.
+
+These include
+
+\begin{itemize}
+
+\item the absence of a Lorentz-covariant position operator,
+
+\item Hegerfeldt's theorem,
+
+\item the Reeh--Schlieder theorem,
+
+\item pair creation below the Compton wavelength.
+
+\end{itemize}
+
+Although none of these results directly implies noncommuting coordinates, they
+demonstrate that the classical concept of a sharply localized particle is
+already problematic before gravitation is introduced.
+
+It is therefore natural to investigate whether the concept of a spacetime
+point itself requires modification.

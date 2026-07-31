@@ -1,0 +1,660 @@
+\chapter{Classical Extended-Particle Theories}
+
+\section{Introduction}
+
+The concept of a material point has occupied a central role in theoretical
+physics since Newtonian mechanics. In both classical mechanics and
+relativistic quantum field theory, elementary particles are commonly idealized
+as objects possessing no spatial extension. Mathematically this corresponds to
+describing matter by delta-function sources,
+
+\begin{equation}
+\rho(\mathbf x)=e\,\delta^{(3)}(\mathbf x),
+\end{equation}
+
+or, in covariant notation,
+
+\begin{equation}
+J^\mu(x)
+=
+e
+\int
+u^\mu(\tau)
+\delta^{(4)}
+(x-z(\tau))
+\,d\tau .
+\end{equation}
+
+This idealization is remarkably successful phenomenologically.
+Nevertheless, it immediately generates profound conceptual and mathematical
+difficulties.
+
+Among them are
+
+\begin{enumerate}
+\item infinite electromagnetic self-energy,
+
+\item divergent self-force,
+
+\item runaway solutions,
+
+\item preacceleration,
+
+\item ill-defined radiation reaction,
+
+\item ultraviolet divergences after quantization.
+\end{enumerate}
+
+Historically these problems were recognized long before quantum mechanics.
+Already by the beginning of the twentieth century it became clear that
+Maxwell's equations combined with point charges produce infinite field energy,
+
+\begin{equation}
+U
+=
+\frac{1}{8\pi}
+\int
+E^2\,d^3x
+=
+\infty.
+\end{equation}
+
+This observation motivated numerous attempts to replace the mathematical point
+by an object possessing finite spatial extent.
+
+Although most classical models were eventually abandoned as fundamental
+descriptions of elementary particles, many of their central ideas have
+reappeared in modern theoretical physics. Examples include nonlinear
+electrodynamics, topological solitons, string theory, bag models,
+noncommutative geometry, and string-localized quantum fields.
+
+Consequently these early theories are not merely of historical interest.
+They represent the first systematic attempts to formulate a relativistic
+theory in which elementary particles are extended rather than pointlike.
+
+The purpose of this chapter is to review these classical theories, identify
+their achievements and limitations, and explain their lasting influence on
+modern relativistic quantum theory.
+\section{The Origin of the Point-Particle Problem}
+
+The Coulomb field of a static charge is
+
+\begin{equation}
+\mathbf E
+=
+\frac{e}{r^2}\hat{\mathbf r}.
+\end{equation}
+
+The corresponding field energy equals
+
+\begin{equation}
+U
+=
+\frac1{8\pi}
+\int
+E^2
+d^3x
+=
+\frac{e^2}{2}
+\int_0^\infty
+\frac{dr}{r^2},
+\end{equation}
+
+which diverges at the origin,
+
+\begin{equation}
+U=\infty.
+\end{equation}
+
+Introducing a finite radius $a$ immediately regularizes the energy,
+
+\begin{equation}
+U
+=
+\frac{e^2}{2a}.
+\end{equation}
+
+This simple observation became the principal motivation for extended-electron
+models during the period 1900--1930.
+\section{Electromagnetic Mass}
+
+Lorentz noticed that the electrostatic energy behaves as inertia.
+
+Using
+
+\begin{equation}
+E=mc^2,
+\end{equation}
+
+one obtains
+
+\begin{equation}
+m_{\rm em}
+=
+\frac{U}{c^2}
+=
+\frac{e^2}{2ac^2}.
+\end{equation}
+
+This suggested that all of the electron mass might be electromagnetic in
+origin.
+
+The idea stimulated an extensive research program aimed at deriving inertia,
+momentum and dynamics entirely from Maxwell's equations.\section{Abraham's Rigid Electron}
+
+Max Abraham proposed one of the earliest relativistic extended-particle models.
+
+The electron was assumed to be
+
+\begin{itemize}
+\item a rigid sphere,
+
+\item possessing uniform charge density,
+
+\item maintaining constant radius during motion.
+\end{itemize}
+
+The electrostatic energy is
+
+\begin{equation}
+U
+=
+\frac35
+\frac{e^2}{a},
+\end{equation}
+
+for a uniformly charged sphere.
+
+Abraham computed the electromagnetic momentum
+
+\begin{equation}
+\mathbf P
+=
+\frac1{4\pi c}
+\int
+\mathbf E\times\mathbf B\,d^3x,
+\end{equation}
+
+and identified an effective electromagnetic mass.
+
+Although qualitatively successful, the model suffers from a fundamental
+difficulty.
+
+Rigid bodies are incompatible with special relativity since perfectly rigid
+signals would propagate faster than light.\section{Lorentz's Contracting Electron}
+
+Lorentz proposed a different picture.
+
+Instead of remaining rigid, the electron contracts according to
+
+\begin{equation}
+L
+=
+L_0
+\sqrt{1-\frac{v^2}{c^2}}.
+\end{equation}
+
+This hypothesis eventually became incorporated into Einstein's special
+relativity.
+
+The Lorentz model predicts velocity-dependent longitudinal and transverse
+electromagnetic masses,
+
+\begin{align}
+m_\parallel
+&=
+\gamma^3m_0,
+\\
+m_\perp
+&=
+\gamma m_0.
+\end{align}
+
+Although historically important, these anisotropic masses disappear naturally
+within modern relativistic dynamics based upon four-vectors.
+\section{Poincaré Stresses}
+
+Electrostatic repulsion tends to make every charged sphere explode.
+
+A stable extended electron therefore requires additional cohesive forces.
+
+Poincaré introduced hypothetical nonelectromagnetic stresses capable of
+maintaining equilibrium.
+
+Schematically,
+
+\begin{equation}
+T^{\mu\nu}
+=
+T_{\rm EM}^{\mu\nu}
++
+T_{\rm stress}^{\mu\nu}.
+\end{equation}
+
+Although successful mathematically, the physical origin of these stresses
+remained completely unknown.
+
+This represented perhaps the principal weakness of all classical extended
+electron models.\section{The 4/3 Problem}
+
+One of the deepest inconsistencies appeared in the relation between energy and
+momentum.
+
+Direct integration gives
+
+\begin{equation}
+m_{\rm em}
+=
+\frac43
+\frac{U}{c^2},
+\end{equation}
+
+instead of Einstein's expected relation
+
+\begin{equation}
+m=\frac{U}{c^2}.
+\end{equation}
+
+The discrepancy became known as the
+\emph{4/3 problem}.
+
+It was eventually understood that the missing contribution originates from
+Poincaré stresses.
+
+In modern relativistic field theory the complete stress-energy tensor satisfies
+
+\begin{equation}
+\partial_\mu T^{\mu\nu}=0,
+\end{equation}
+
+and the inconsistency disappears once all contributions are included.
+
+\section{Mie's Nonlinear Electrodynamics}
+
+Gustav Mie proposed perhaps the first nonlinear unified field theory.
+
+Instead of Maxwell's linear Lagrangian,
+
+\begin{equation}
+L
+=
+-\frac1{16\pi}
+F_{\mu\nu}F^{\mu\nu},
+\end{equation}
+
+he considered
+
+\begin{equation}
+L
+=
+L(I_1,I_2),
+\end{equation}
+
+where
+
+\begin{align}
+I_1
+&=
+F_{\mu\nu}F^{\mu\nu},
+\\
+I_2
+&=
+F_{\mu\nu}\tilde F^{\mu\nu}.
+\end{align}
+
+The hope was that nonlinearities would produce finite-energy particle-like
+solutions.
+
+Although Mie's particular theory is no longer accepted, the central idea
+survives in Born--Infeld electrodynamics and in modern nonlinear gauge
+theories.\section{Historical Assessment}
+
+Classical extended-particle theories achieved several lasting successes.
+
+\begin{enumerate}
+
+\item They identified the divergence problem of point charges.
+
+\item They introduced finite-energy field configurations.
+
+\item They emphasized the importance of the stress-energy tensor.
+
+\item They initiated the concept of electromagnetic mass.
+
+\item They inspired nonlinear electrodynamics.
+
+\item They introduced the idea that particles might be localized field
+configurations rather than primitive objects.
+
+\end{enumerate}
+
+Their principal shortcomings were equally significant.
+
+\begin{enumerate}
+
+\item The stabilizing forces were ad hoc.
+
+\item No satisfactory relativistic dynamics existed for deformable charged
+bodies.
+
+\item Radiation reaction remained unresolved.
+
+\item Spin could not be incorporated naturally.
+
+\item Quantization was unavailable.
+
+Nevertheless, many of their ideas have re-emerged in modern relativistic
+theories, often in mathematically refined form.
+\begin{thebibliography}{99}
+
+\bibitem{Lorentz1909}
+H. A. Lorentz,
+\emph{The Theory of Electrons},
+Teubner (1909).
+
+\bibitem{Abraham1905}
+M. Abraham,
+Theorie der Elektrizität,
+Vols. I--II,
+Teubner (1905).
+
+\bibitem{Poincare1906}
+H. Poincaré,
+Sur la dynamique de l'électron,
+Rendiconti del Circolo Matematico di Palermo
+\textbf{21}, 129 (1906).
+
+\bibitem{Mie1912}
+G. Mie,
+Annalen der Physik
+\textbf{342}, 511 (1912).
+
+\bibitem{Rohrlich}
+F. Rohrlich,
+Classical Charged Particles,
+3rd edition,
+World Scientific (2007).
+
+\bibitem{Yaghjian}
+A. Yaghjian,
+Relativistic Dynamics of a Charged Sphere,
+Springer (1992).
+
+\end{thebibliography}
+
+\section{Electromagnetic Self-Energy}
+
+Perhaps the oldest indication that the point-particle idealization is
+physically problematic is the divergence of the electromagnetic field energy.
+Unlike the singularity of the Coulomb potential, which may be regarded merely
+as a mathematical inconvenience, the divergence of the total field energy
+implies an infinite contribution to the inertial mass of every charged
+particle.
+
+This observation predates both quantum mechanics and special relativity.
+Already in the last years of the nineteenth century it was realized that the
+electromagnetic field itself stores energy and momentum. If the entire mass of
+the electron were electromagnetic in origin, then the total field energy
+associated with its Coulomb field should equal
+
+\begin{equation}
+U = mc^2.
+\end{equation}
+
+However, direct calculation immediately produces an ultraviolet divergence.
+
+\subsection{Energy Stored in the Electromagnetic Field}
+
+In Gaussian units the electromagnetic energy density is
+
+\begin{equation}
+u
+=
+\frac{E^2+B^2}{8\pi}.
+\end{equation}
+
+For a static charge
+
+\begin{equation}
+\mathbf B=0,
+\end{equation}
+
+and therefore
+
+\begin{equation}
+U
+=
+\frac1{8\pi}
+\int_{\mathbb R^3}
+E^2\,d^3x.
+\end{equation}
+
+Outside the source the electric field satisfies Maxwell's equations,
+
+\begin{align}
+\nabla\cdot\mathbf E &=4\pi\rho,
+\\
+\nabla\times\mathbf E &=0.
+\end{align}
+
+Hence
+
+\begin{equation}
+\mathbf E=-\nabla\phi,
+\end{equation}
+
+where the electrostatic potential obeys Poisson's equation
+
+\begin{equation}
+\nabla^2\phi
+=
+-4\pi\rho.
+\end{equation}
+
+For an ideal point charge
+
+\begin{equation}
+\rho(\mathbf r)
+=
+e\delta^{(3)}(\mathbf r),
+\end{equation}
+
+the solution is
+
+\begin{equation}
+\phi(r)
+=
+\frac{e}{r},
+\end{equation}
+
+leading to the Coulomb field
+
+\begin{equation}
+\mathbf E
+=
+\frac{e}{r^2}\hat{\mathbf r}.
+\end{equation}
+
+Substituting into the energy integral,
+
+\begin{align}
+U
+&=
+\frac1{8\pi}
+\int
+\frac{e^2}{r^4}
+\,d^3x
+\\
+&=
+\frac1{8\pi}
+\int_0^\infty
+\frac{e^2}{r^4}
+4\pi r^2dr
+\\
+&=
+\frac{e^2}{2}
+\int_0^\infty
+\frac{dr}{r^2}.
+\end{align}
+
+The integral diverges at the lower limit,
+
+\begin{equation}
+U=\infty.
+\end{equation}
+
+Notice that the divergence is entirely ultraviolet. The integral converges
+perfectly as $r\rightarrow\infty$,
+
+\begin{equation}
+\int_R^\infty
+\frac{dr}{r^2}
+=
+\frac1R,
+\end{equation}
+
+whereas
+
+\begin{equation}
+\int_0^\varepsilon
+\frac{dr}{r^2}
+=
+\infty.
+\end{equation}
+
+Consequently the infinite self-energy originates solely from the assumption
+that electric charge occupies zero volume.
+
+\subsection{Regularization by a Finite Radius}
+
+Suppose instead that the charge occupies a sphere of radius $a$.
+
+Outside the sphere the field remains Coulomb,
+
+\begin{equation}
+E(r)
+=
+\frac er^2,
+\qquad
+r>a.
+\end{equation}
+
+If one ignores the internal field for the moment, the exterior energy becomes
+
+\begin{align}
+U_{\rm ext}
+&=
+\frac{e^2}{2}
+\int_a^\infty
+\frac{dr}{r^2}
+\\
+&=
+\frac{e^2}{2a}.
+\end{align}
+
+Immediately the divergence disappears.
+
+The energy is finite for every
+
+\begin{equation}
+a>0.
+\end{equation}
+
+This elementary observation became the principal motivation for all classical
+extended-electron theories.
+
+One should notice that no modification whatsoever of Maxwell's equations has
+been required. The divergence results entirely from the singular source
+distribution.
+
+\subsection{General Charge Distribution}
+
+The previous calculation may be generalized.
+
+Let
+
+\begin{equation}
+\rho(\mathbf r)
+\end{equation}
+
+be an arbitrary smooth charge density satisfying
+
+\begin{equation}
+\int
+\rho(\mathbf r)\,
+d^3r
+=
+e.
+\end{equation}
+
+The electrostatic energy may be written in two equivalent forms.
+
+The field representation is
+
+\begin{equation}
+U
+=
+\frac1{8\pi}
+\int
+E^2\,d^3x.
+\end{equation}
+
+Using integration by parts together with Poisson's equation,
+
+\begin{equation}
+\nabla^2\phi=-4\pi\rho,
+\end{equation}
+
+one obtains
+
+\begin{align}
+U
+&=
+-\frac1{8\pi}
+\int
+\phi
+\nabla^2\phi
+\,d^3x
+\\
+&=
+\frac12
+\int
+\rho\phi
+\,d^3x.
+\end{align}
+
+Since
+
+\begin{equation}
+\phi(\mathbf r)
+=
+\int
+\frac{\rho(\mathbf r')}
+{|\mathbf r-\mathbf r'|}
+d^3r',
+\end{equation}
+
+the energy becomes
+
+\begin{equation}
+U
+=
+\frac12
+\int
+\int
+\frac{\rho(\mathbf r)
+\rho(\mathbf r')}
+{|\mathbf r-\mathbf r'|}
+d^3r\,d^3r'.
+\end{equation}
+
+This expression demonstrates immediately that every continuous charge
+distribution possesses finite self-energy provided the density remains bounded.
+
+The divergence therefore is not a property of Maxwell's equations but of the
+idealization
+
+\begin{equation}
+\rho=e\delta^{(3)}(\mathbf r).
+\end{equation}
+

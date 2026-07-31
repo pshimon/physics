@@ -1,0 +1,280 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Why Covariant Stochastic Mechanics?\\
+Historical, Physical and Mathematical Motivation}
+
+\epigraph{%
+``The important thing is not to stop questioning.''%
+}{Albert Einstein}
+
+\section{Introduction}
+
+Quantum mechanics and the theory of relativity are unquestionably among the
+greatest intellectual achievements of twentieth-century physics. Their
+predictions have been confirmed to extraordinary precision over an enormous
+range of scales, from atomic spectroscopy to high-energy particle collisions
+and from gravitational lensing to the dynamics of compact astrophysical
+objects. Nevertheless, despite these empirical successes, their conceptual
+unification remains incomplete.
+
+The difficulty is not merely technical. Quantum field theory provides a
+remarkably successful computational framework combining quantum principles
+with Lorentz invariance, yet many of the foundational questions raised during
+the first decades of quantum mechanics remain essentially unchanged.
+What is the physical meaning of the wave function? Does quantum mechanics
+describe objective physical reality or merely probabilities for observations?
+Can one construct a relativistic theory possessing well-defined particle
+trajectories? What is the precise role of time in quantum theory? Why do
+probabilities arise from complex probability amplitudes rather than ordinary
+stochastic processes?
+
+These questions acquire additional significance in relativistic physics.
+Whereas nonrelativistic quantum mechanics possesses a preferred Newtonian
+time parameter, relativistic space-time treats temporal and spatial
+coordinates on nearly equal footing. Consequently, many constructions that are
+mathematically natural in the Schrödinger theory become problematic after the
+imposition of Lorentz covariance. Examples include localization of particles,
+the definition of probability densities, and perhaps most importantly the
+definition of stochastic processes themselves.
+
+The present monograph is motivated by the hypothesis that these apparently
+independent difficulties may have a common origin. We shall investigate the
+possibility that relativistic quantum mechanics emerges from an underlying
+covariant stochastic dynamics formulated not with respect to coordinate time
+but with respect to an invariant evolution parameter. Such a formulation is
+naturally suggested by the manifestly covariant relativistic dynamics
+developed independently by Stueckelberg, Horwitz, Piron and their
+collaborators. Within that framework, evolution is parametrized by a universal
+invariant parameter, usually denoted by $\tau$, while space-time coordinates
+become dynamical variables on an equal footing.
+
+The central question investigated throughout this monograph may therefore be
+stated as follows:
+
+\begin{center}
+\fbox{
+\begin{minipage}{0.92\textwidth}
+\begin{center}
+
+\emph{Can relativistic quantum mechanics be understood as the statistical
+mechanics of covariant stochastic worldlines evolving in invariant time?}
+
+\end{center}
+\end{minipage}}
+\end{center}
+
+This question immediately separates the present work from most existing
+approaches to stochastic mechanics. Traditional stochastic formulations,
+beginning with the pioneering works of Fényes and Nelson, employ the ordinary
+Newtonian time variable as the evolution parameter of the stochastic process.
+Although remarkably successful in reproducing the Schrödinger equation, such
+formulations encounter severe conceptual difficulties when generalized to
+special relativity. The principal obstacle is that coordinate time is not a
+Lorentz-invariant quantity and therefore cannot naturally serve as the
+parameter of a covariant diffusion process.
+
+Manifestly covariant relativistic dynamics suggests a possible resolution.
+Instead of employing coordinate time, one introduces an invariant evolution
+parameter that labels successive events along the dynamical history of the
+system. The resulting formalism possesses a canonical Hamiltonian structure
+closely analogous to ordinary classical mechanics while preserving manifest
+Lorentz covariance. From the viewpoint of stochastic analysis, this invariant
+parameter appears to be a natural candidate for the role traditionally played
+by Newtonian time in diffusion theory.
+
+The purpose of the present monograph is not to advocate a particular
+interpretation of quantum mechanics from the outset. Rather, our objective is
+to examine systematically whether the mathematical structures of stochastic
+analysis and manifestly covariant Hamiltonian dynamics can be unified into a
+single coherent framework. Such a framework should satisfy several demanding
+requirements simultaneously.
+
+First, it should reproduce ordinary nonrelativistic stochastic mechanics in
+the appropriate limit.
+
+Second, it should respect manifest Lorentz covariance at every stage of the
+construction.
+
+Third, it should admit a consistent treatment of interacting many-particle
+systems.
+
+Fourth, it should provide a natural geometric setting for internal degrees of
+freedom such as spin.
+
+Finally, it should reduce to the experimentally successful predictions of
+relativistic quantum theory whenever the latter has been tested.
+
+Whether such a program can ultimately be completed remains an open question.
+Nevertheless, enough mathematical developments have accumulated during the
+past seventy years to justify a comprehensive re-examination of the problem.
+The present volume attempts to provide both a detailed review of these
+developments and the foundations upon which a more general theory may
+eventually be constructed.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why Another Foundation of Quantum Mechanics?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The extraordinary empirical success of quantum mechanics has often been
+interpreted as evidence that its conceptual foundations are essentially
+complete. From this perspective, the remaining open problems concern only
+technical extensions such as quantum gravity, strongly correlated systems, or
+the mathematical properties of quantum field theory. Such an assessment,
+however, overlooks an important distinction between predictive success and
+conceptual completeness.
+
+A physical theory may provide an extraordinarily accurate algorithm for the
+calculation of observable quantities while nevertheless leaving unanswered
+questions concerning the ontology of the systems it describes. The history of
+physics contains numerous examples. Ptolemaic astronomy successfully predicted
+planetary positions for many centuries without providing a correct dynamical
+description of the Solar System. Classical thermodynamics achieved remarkable
+accuracy long before the atomic constitution of matter became generally
+accepted. Likewise, Maxwell's electromagnetic theory preceded the microscopic
+understanding of electric charge by several decades.
+
+The existence of unresolved conceptual questions should therefore not be
+interpreted as evidence against the empirical validity of quantum mechanics.
+Rather, it motivates continued investigation into whether the present
+formalism admits a deeper dynamical explanation.
+
+Among the questions that have persisted since the birth of quantum mechanics,
+the following remain particularly significant.
+
+\begin{enumerate}
+
+\item
+Why should the fundamental object describing an individual physical system be
+a complex-valued wave function rather than ordinary classical observables?
+
+\item
+Why does the Born probability density arise as the squared modulus of the wave
+function?
+
+\item
+Can quantum probabilities be understood as emerging from an underlying
+objective stochastic dynamics?
+
+\item
+Does a relativistic particle possess a well-defined space-time trajectory
+between measurements?
+
+\item
+What is the physical meaning of quantum nonlocal correlations?
+
+\item
+What is the status of time within quantum theory?
+
+\end{enumerate}
+
+It is important to emphasize that these questions are logically independent of
+the experimental confirmation of quantum mechanics. They concern the
+interpretation and mathematical structure of the theory rather than its
+phenomenological accuracy.
+
+The present monograph adopts a deliberately conservative attitude toward these
+questions. Rather than modifying the experimentally successful predictions of
+quantum theory, we seek to determine whether they may emerge from a more
+primitive dynamical framework possessing the following properties:
+
+\begin{enumerate}
+
+\item manifest Lorentz covariance,
+
+\item Hamiltonian dynamics,
+
+\item stochastic evolution,
+
+\item objective space-time histories,
+
+\item compatibility with known quantum phenomena.
+
+\end{enumerate}
+
+The possibility that such a framework exists cannot be dismissed a priori.
+Indeed, each of these ingredients already appears separately within modern
+mathematical physics. The principal difficulty has been to combine them into a
+single coherent theory.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What Exactly Is the Problem?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The search for a relativistic stochastic formulation of quantum mechanics is
+often presented as an attempt to reconcile two successful theories:
+relativity and quantum mechanics. While this statement is historically
+accurate, it conceals a more fundamental issue. Neither theory is internally
+problematic within its own domain of applicability. Rather, the difficulty
+arises because they embody profoundly different conceptions of physical
+description.
+
+Classical mechanics is formulated in terms of individual systems. The
+fundamental dynamical object is a trajectory in configuration space or phase
+space, and the equations of motion determine how this trajectory evolves in
+time from specified initial conditions. Probabilities enter only through
+ignorance of the precise initial state or through interaction with an
+environment.
+
+Quantum mechanics adopts a different standpoint. The primary object is not a
+trajectory but a vector in a Hilbert space, or more generally a density
+operator. Observable quantities are represented by self-adjoint operators,
+while probabilities are intrinsic components of the formalism rather than
+expressions of incomplete information. Although this framework has proved
+extraordinarily successful, it leaves open the question of whether the
+Hilbert-space description is fundamental or emergent.
+
+Relativity introduces an additional conceptual shift. In Newtonian mechanics,
+time is universal and absolute. Every observer agrees on the temporal order of
+events, and every dynamical process evolves with respect to the same parameter.
+Special relativity replaces this universal temporal ordering by a four-
+dimensional space-time in which temporal and spatial coordinates transform
+under the Lorentz group. The absence of an observer-independent coordinate
+time has profound consequences for any dynamical theory based upon temporal
+evolution.
+
+The difficulty becomes particularly apparent in stochastic mechanics. A
+stochastic process is traditionally defined with respect to an increasing
+parameter possessing a natural ordering. For diffusion processes this parameter
+is interpreted as time. The mathematical construction depends fundamentally
+upon this ordering through filtrations, conditional expectations and Markov
+semigroups.
+
+In nonrelativistic physics the identification of the stochastic parameter with
+Newtonian time presents no conceptual difficulty. In relativistic physics,
+however, coordinate time depends upon the observer. Consequently, the very
+definition of a Lorentz-covariant stochastic process becomes nontrivial.
+
+This observation is frequently overlooked. The principal obstacle is not the
+construction of relativistic diffusion coefficients nor the covariance of the
+resulting differential equations. Rather, it concerns the identification of
+the parameter with respect to which stochastic evolution itself is defined.
+
+Manifestly covariant relativistic dynamics provides a remarkably elegant
+alternative. Instead of employing coordinate time as the evolution parameter,
+one introduces an invariant world parameter, conventionally denoted by
+$\tau$. Space-time coordinates then become ordinary dynamical variables,
+placing temporal and spatial coordinates on equal footing.
+
+From the perspective of stochastic analysis this change is profound. The
+parameter $\tau$ possesses precisely the mathematical properties required of
+the evolution parameter of a Markov process: it is monotonically increasing
+along every dynamical history, invariant under Lorentz transformations, and
+independent of any particular inertial observer.
+
+The existence of such a parameter suggests that the apparent incompatibility
+between stochastic dynamics and relativity may not be fundamental. Instead,
+it may arise from the historically inherited assumption that stochastic
+processes must necessarily evolve with respect to coordinate time.
+
+The central thesis explored throughout this monograph is therefore not that
+quantum mechanics should be modified, but rather that the kinematical
+framework within which stochastic dynamics is formulated may require
+reconsideration.
+
+If invariant evolution replaces coordinate time as the fundamental dynamical
+parameter, the principal conceptual obstacle that has impeded relativistic
+stochastic mechanics for more than half a century may disappear. Whether this
+expectation can be realized consistently remains one of the principal
+questions investigated in the chapters that follow.
+
+

@@ -1,0 +1,664 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Historical Development}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The possibility that quantum mechanics may arise from an underlying
+stochastic process has attracted continuous attention since the
+development of Brownian motion and modern probability theory. Although
+the mathematical foundations of stochastic calculus were established by
+Wiener, Itô and Stratonovich, the first systematic attempt to derive the
+Schrödinger equation from stochastic dynamics was made by Edward Nelson
+in the 1960s.
+
+Nelson's construction demonstrated that nonrelativistic quantum
+mechanics may be formulated as a conservative diffusion process on
+Euclidean configuration space. In this formulation, particles follow
+continuous but nondifferentiable trajectories, and the wave function
+emerges from the probability density together with the current velocity.
+
+The success of the nonrelativistic theory immediately suggested the
+possibility of extending stochastic mechanics to relativistic systems.
+This extension proved to be considerably more difficult than originally
+anticipated. The principal obstacle is that Brownian motion is naturally
+defined on spaces endowed with a positive-definite metric, whereas
+Minkowski space possesses an indefinite Lorentzian metric.
+
+Over the past six decades numerous approaches have been proposed,
+including proper-time formulations, Lorentz-invariant diffusion
+processes, stochastic differential geometry on Lorentzian manifolds,
+relativistic kinetic theory, and off-shell formulations based upon the
+Stueckelberg--Horwitz--Piron framework.
+
+Despite substantial progress, no formulation has yet achieved the same
+degree of completeness and acceptance as Nelson's original
+nonrelativistic theory. The purpose of this chapter is to review these
+developments, identify their strengths and limitations, and establish
+the foundations upon which the SHP stochastic theory developed in the
+following chapters will be constructed.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wiener Processes and the Mathematical Foundations of Diffusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The mathematical foundation of stochastic mechanics is the Wiener
+process. Before discussing relativistic stochastic dynamics, it is
+therefore necessary to review the essential properties of Brownian
+motion and the associated stochastic calculus. Throughout this chapter
+we emphasize the physical interpretation of the mathematical
+construction, while maintaining sufficient rigor for later applications.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Brownian Motion}
+
+The phenomenon of Brownian motion was first observed by Robert Brown in
+1827 during microscopic studies of pollen grains suspended in water.
+Although initially regarded as a biological phenomenon, it was later
+recognized as a universal consequence of molecular agitation.
+
+The first quantitative description was given independently by Einstein
+(1905) and Smoluchowski (1906), who demonstrated that the observed
+motion follows from the random impacts of surrounding molecules.
+Einstein's analysis established the connection between microscopic
+kinetics and macroscopic diffusion and provided one of the earliest
+quantitative confirmations of the atomic theory of matter.
+
+The modern mathematical formulation was developed by Wiener, who
+introduced a probability measure on the space of continuous paths. The
+resulting stochastic process is now known as the Wiener process.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Definition of the Wiener Process}
+
+A real stochastic process
+
+\[
+W(t),
+\qquad t\ge0,
+\]
+
+is called a Wiener process if it satisfies the following properties.
+
+\begin{enumerate}
+
+\item
+The process begins at the origin,
+
+\[
+W(0)=0.
+\]
+
+\item
+The increments are independent,
+
+\[
+W(t_2)-W(t_1)
+\]
+
+is statistically independent of
+
+\[
+W(t_4)-W(t_3)
+\]
+
+whenever
+
+\[
+t_1<t_2<t_3<t_4.
+\]
+
+\item
+The increments are stationary,
+
+\[
+W(t+\Delta t)-W(t)
+\]
+
+depends only upon
+
+\[
+\Delta t.
+\]
+
+\item
+Each increment possesses a Gaussian distribution,
+
+\[
+W(t+\Delta t)-W(t)
+\sim
+{\cal N}(0,\Delta t).
+\]
+
+\item
+With probability one, the trajectories are continuous but nowhere
+differentiable.
+
+\end{enumerate}
+
+These properties completely characterize Brownian motion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Gaussian Increments}
+
+The probability density for a finite increment is
+
+\[
+P(\Delta W)
+=
+\frac{1}
+{\sqrt{2\pi\Delta t}}
+\exp
+\left(
+-
+\frac{(\Delta W)^2}
+{2\Delta t}
+\right).
+\]
+
+Consequently,
+
+\[
+\langle\Delta W\rangle=0,
+\]
+
+and
+
+\[
+\boxed{
+\langle(\Delta W)^2\rangle
+=
+\Delta t.
+}
+\]
+
+Higher moments satisfy
+
+\[
+\langle(\Delta W)^{2n+1}\rangle=0,
+\]
+
+while
+
+\[
+\langle(\Delta W)^4\rangle
+=
+3(\Delta t)^2.
+\]
+
+These relations play a central role in the derivation of Itô's lemma.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Quadratic Variation}
+
+Unlike ordinary differentiable functions,
+
+Brownian trajectories possess finite quadratic variation.
+
+Indeed,
+
+\[
+(dW)^2
+=
+dt,
+\]
+
+while
+
+\[
+(dW)^3
+=
+0,
+\]
+
+and
+
+\[
+(dW)^4
+=
+O(dt^2).
+\]
+
+The identity
+
+\[
+\boxed{
+(dW)^2=dt
+}
+\]
+
+is the defining algebraic property of Itô calculus.
+
+It distinguishes stochastic analysis from ordinary differential
+calculus and is responsible for the appearance of second-order
+derivative terms in stochastic differential equations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Diffusion Constant}
+
+Physical Brownian motion is usually written in the form
+
+\[
+dX
+=
+b(X,t)\,dt
++
+\sqrt{2D}\,dW,
+\]
+
+where
+
+\[
+b(X,t)
+\]
+
+is the drift velocity and
+
+\[
+D
+\]
+
+is the diffusion coefficient.
+
+The statistical moments become
+
+\[
+\langle dX\rangle
+=
+b\,dt,
+\]
+
+and
+
+\[
+\boxed{
+\langle(dX)^2\rangle
+=
+2D\,dt.
+}
+\]
+
+The parameter
+
+\[
+D
+\]
+
+controls the strength of stochastic fluctuations.
+
+In Nelson's stochastic mechanics,
+
+it assumes the distinguished value
+
+\[
+\boxed{
+D=\frac{\hbar}{2m},
+}
+\]
+
+thereby establishing the connection between stochastic diffusion and
+quantum mechanics.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Markov Property}
+
+The Wiener process is Markovian.
+
+The future evolution depends only upon the present state,
+
+not upon the previous history.
+
+Consequently,
+
+\[
+P(x_3,t_3|x_2,t_2;x_1,t_1)
+=
+P(x_3,t_3|x_2,t_2).
+\]
+
+The corresponding transition probability satisfies the
+Chapman--Kolmogorov equation,
+
+\[
+P(x_3,t_3|x_1,t_1)
+=
+\int
+P(x_3,t_3|x_2,t_2)
+P(x_2,t_2|x_1,t_1)
+dx_2.
+\]
+
+This property forms the probabilistic basis of the Fokker--Planck
+equation.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Relativistic Stochastic Mechanics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Why Stochastic Mechanics?}
+
+Classical mechanics assumes that the state of a particle can be
+specified exactly by its position and momentum at every instant of
+time. Once the initial conditions are given, Hamilton's equations
+determine the future motion uniquely.
+
+This deterministic picture has proved extraordinarily successful.
+Nevertheless, it raises an obvious question. Is the deterministic
+trajectory a fundamental property of nature, or is it merely an
+effective description obtained after averaging over microscopic degrees
+of freedom that remain hidden?
+
+Brownian motion provides a familiar example in which deterministic
+mechanics ceases to be adequate. A microscopic particle suspended in a
+fluid is continually bombarded by an enormous number of surrounding
+molecules. Although every individual collision obeys Newton's laws, the
+combined effect of billions of collisions per second is effectively
+random. The detailed microscopic dynamics becomes inaccessible, while
+its statistical properties remain well defined.
+
+The natural question is therefore whether quantum phenomena might admit
+a similar description. Instead of postulating a wave function from the
+outset, one may ask whether quantum mechanics could emerge from an
+underlying stochastic dynamics.
+
+This idea has a long history and reached its most complete formulation
+in the stochastic mechanics developed by Nelson. In that theory the
+particle follows a continuous but non-differentiable trajectory, while
+the Schrödinger equation appears as the equation governing the
+probability distribution of an ensemble of such trajectories.
+
+The success of Nelson's theory immediately suggests extending the same
+program to relativistic systems. Unfortunately, this turns out to be
+far from straightforward. The difficulties are not merely technical but
+reflect fundamental differences between Euclidean probability theory and
+the geometry of Minkowski space.
+
+The purpose of this chapter is to examine these difficulties and to
+review the principal attempts to overcome them. Only after identifying
+the limitations of existing approaches shall we construct a stochastic
+theory within the SHP framework.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{What is Fluctuating?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Every stochastic theory begins with an assumption that some physical
+quantity is subject to random fluctuations. The choice of this quantity
+is not unique and determines the structure of the entire theory.
+
+In ordinary Brownian motion the answer is well known. The particle is
+continually struck by surrounding molecules. The microscopic collisions
+produce a rapidly fluctuating force, while the observed random motion of
+the particle is only the accumulated effect of these countless impacts.
+
+Thus the position is not fundamentally random. It becomes random because
+the force acting on the particle is random.
+
+The same question must be asked in any relativistic theory.
+
+What is the physical quantity that fluctuates?
+
+
+Suppose that one assumes the space-time position itself to undergo a
+Brownian motion.
+
+The world line then becomes a continuous but nowhere differentiable
+curve. This is the viewpoint adopted in Nelson's original stochastic
+mechanics.
+
+Its principal advantage is simplicity. The probability density is
+defined directly in configuration space, and the Schrödinger equation
+emerges naturally from the dynamics of the ensemble.
+
+The difficulty appears only after relativity is introduced.
+
+A Brownian process requires a positive-definite covariance matrix,
+whereas Minkowski space possesses an indefinite metric. Consequently the
+construction that works perfectly in Euclidean space cannot be
+transferred directly to space-time.
+
+
+Instead of assuming that the position fluctuates, one may regard the
+velocity as the stochastic variable.
+
+The position then remains the integral of the random velocity.
+
+This viewpoint has an important physical motivation.
+
+Random collisions change the particle's velocity directly, while the
+position changes only as a consequence of the altered velocity.
+
+Several relativistic diffusion theories are based upon this idea.
+
+The principal difficulty is that relativistic velocities cannot vary
+arbitrarily. They are constrained by the geometry of space-time and by
+the requirement that no trajectory exceed the speed of light.
+
+The stochastic process must therefore evolve on the manifold of allowed
+four-velocities rather than in an unconstrained Euclidean space.
+
+
+From the viewpoint of Hamiltonian mechanics, momentum appears to be the
+most natural quantity to fluctuate.
+
+Microscopic collisions exchange momentum between the particle and its
+environment.
+
+Hamilton's equations then determine the corresponding evolution of the
+trajectory.
+
+This viewpoint is particularly attractive because it preserves the
+Hamiltonian structure of the dynamics.
+
+Relativistic kinetic theory and Langevin equations are usually
+constructed in this manner.
+
+The price paid for this simplicity is that the momentum cannot vary
+independently of the relativistic mass-shell constraint.
+
+One must therefore decide whether the stochastic dynamics is confined to
+the mass shell or whether off-shell motion is permitted.
+
+
+An even more physical description regards neither position nor momentum
+as fundamentally stochastic.
+
+Instead, the fluctuating quantity is the force itself.
+
+This picture corresponds most closely to the microscopic origin of
+Brownian motion.
+
+Each collision produces a short impulse.
+
+The observable force is therefore the sum of an enormous number of
+rapidly fluctuating contributions.
+
+Position and momentum become stochastic only after integration over
+time.
+
+The resulting equations are known as Langevin equations.
+
+
+The SHP framework suggests yet another possibility.
+
+The Hamiltonian formulation already introduces an invariant evolution
+parameter together with a complete phase-space description.
+
+Instead of modifying the geometric structure of space-time, one may
+therefore regard the Hamiltonian evolution itself as being driven by
+microscopic fluctuations.
+
+The stochastic process then develops in the invariant parameter
+\(\tau\), while the four-dimensional covariance of the theory remains
+manifest.
+
+This viewpoint combines naturally with the Hamiltonian structure
+developed in the previous chapters and will serve as the foundation for
+the stochastic theory developed later in this monograph.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why Relativistic Brownian Motion is Difficult}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The extension of Brownian motion from Newtonian mechanics to special
+relativity appears, at first sight, to be straightforward. One might
+expect that every three-dimensional quantity should simply be replaced
+by its four-dimensional counterpart.
+
+Experience has shown that this expectation is incorrect.
+
+The difficulties encountered by relativistic stochastic mechanics are
+not technical details of probability theory but arise from the
+fundamental structure of relativistic space-time itself.
+
+In this section we discuss the physical origin of these difficulties
+before reviewing the various mathematical approaches that have been
+proposed to overcome them.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Which Time?}
+
+Every stochastic process describes the evolution of a system with
+respect to some parameter.
+
+In ordinary Brownian motion that parameter is simply the Newtonian time
+
+\[
+t.
+\]
+
+This choice is so natural that it is rarely questioned.
+
+Special relativity changes the situation completely.
+
+Different inertial observers assign different values to the coordinate
+time.
+
+Consequently there is no unique universal time with respect to which the
+random process may evolve.
+
+One may attempt to use the proper time of the particle.
+
+However, proper time is defined only after the trajectory is known,
+whereas the trajectory itself is the unknown stochastic process.
+
+Thus the evolution parameter cannot be specified independently of the
+motion.
+
+This circularity lies at the heart of many relativistic stochastic
+formulations.
+
+
+The SHP framework provides a remarkably simple resolution of this
+difficulty.
+
+Instead of using either the coordinate time or the proper time, the
+theory introduces an invariant evolution parameter
+
+\[
+\tau ,
+\]
+
+which exists independently of the particle trajectory.
+
+The stochastic process therefore evolves with respect to a parameter
+that is both Lorentz invariant and known before the trajectory is
+constructed.
+
+One of the principal motivations for combining stochastic mechanics with
+the SHP formalism is precisely the existence of this invariant
+evolution parameter.
+
+
+Ordinary relativistic mechanics describes particles whose invariant mass
+is fixed.
+
+Random interactions, however, continually exchange energy and momentum
+with the surrounding environment.
+
+One must therefore answer an important question.
+
+Does the particle remain on the same mass shell after every microscopic
+collision?
+
+If the answer is yes, an explicit constraint must accompany the
+stochastic dynamics.
+
+If the answer is no, the theory must allow the particle to evolve
+off-shell.
+
+Different relativistic stochastic theories make different choices at
+this point.
+
+The SHP formalism adopts the second viewpoint from the outset.
+
+
+Probability theory requires the covariance of the random increments to
+be positive.
+
+This condition guarantees that the mean-square fluctuation is always
+non-negative.
+
+Minkowski space possesses an indefinite metric.
+
+Consequently one cannot simply replace
+
+\[
+\delta_{ij}
+\]
+
+by
+
+\[
+\eta_{\mu\nu}
+\]
+
+in the covariance matrix of a Wiener process.
+
+This is not merely a technical inconvenience.
+
+It reflects the fundamental difference between Euclidean geometry and
+Lorentzian geometry.
+
+Nearly every relativistic stochastic theory must confront this problem
+in one form or another.
+
+
+The preceding discussion demonstrates that relativistic stochastic
+mechanics is not a single problem but a collection of interconnected
+problems.
+
+One must choose
+
+the evolution parameter,
+
+the stochastic variables,
+
+the underlying geometric manifold,
+
+the treatment of the mass shell,
+
+and the relation between the stochastic process and quantum dynamics.
+
+Different formulations make different choices and therefore answer
+different physical questions.
+
+The following sections review the principal approaches that have been
+developed during the past six decades.
+
+
+
+

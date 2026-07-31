@@ -1,0 +1,381 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Standard Relativistic Quantum Mechanics and Its Limitations}
+
+\epigraph{
+``The difficulty is not to construct relativistic wave equations.
+The difficulty is to understand what they mean.''
+}{Author's paraphrase of the historical development}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Historical Introduction and the Axioms of Relativistic Quantum Mechanics}
+
+\subsection{3.1 Historical Perspective}
+
+Relativistic quantum mechanics (RQM) arose from an attempt to reconcile the
+two most successful physical theories of the early twentieth century:
+quantum mechanics and special relativity.  The development was remarkably
+rapid. Einstein's formulation of special relativity (1905) established the
+Lorentz invariance of the laws of physics, while the matrix and wave
+formulations of quantum mechanics (1925--1926) provided a consistent
+description of microscopic phenomena. It was therefore natural to seek a
+single-particle wave equation respecting both principles.
+
+The first successful relativistic wave equation was proposed independently by
+Klein, Gordon and Fock during 1926--1927,
+
+\begin{equation}
+\left(
+\Box+\frac{m^2c^2}{\hbar^2}
+\right)\psi=0,
+\label{eq:KG}
+\end{equation}
+
+where
+
+\begin{equation}
+\Box
+=
+\frac1{c^2}\frac{\partial^2}{\partial t^2}
+-\nabla^2
+\end{equation}
+
+is the d'Alembert operator.
+
+Equation (\ref{eq:KG}) is Lorentz invariant and correctly reproduces the
+relativistic energy-momentum relation,
+
+\begin{equation}
+E^2
+=
+p^2c^2+m^2c^4.
+\label{eq:EinsteinEnergy}
+\end{equation}
+
+Nevertheless, it immediately encountered serious conceptual difficulties.
+Unlike the Schrödinger equation, it is second order in time and possesses
+solutions of both positive and negative frequency,
+
+\begin{equation}
+E=\pm\sqrt{p^2c^2+m^2c^4}.
+\end{equation}
+
+More importantly, the conserved current derived from
+(\ref{eq:KG}) cannot generally be interpreted as a probability current,
+because its temporal component is not positive definite.
+
+These problems motivated Dirac's search for a first-order relativistic wave
+equation. His celebrated equation,
+
+\begin{equation}
+(i\hbar\gamma^\mu\partial_\mu-mc)\psi=0,
+\label{eq:Dirac}
+\end{equation}
+
+introduced spin naturally, predicted the existence of antiparticles,
+and successfully explained the fine structure of hydrogen.
+
+Despite these achievements, even the Dirac equation failed to provide a fully
+satisfactory relativistic one-particle theory. The difficulties were no longer
+merely technical but conceptual.
+
+Among them are
+
+\begin{enumerate}
+
+\item absence of a covariant position operator,
+
+\item impossibility of strict localization,
+
+\item negative-energy solutions,
+
+\item pair creation,
+
+\item incompatibility of fixed particle number with relativistic interactions,
+
+\item difficulties in constructing relativistic many-body systems.
+
+\end{enumerate}
+
+These problems eventually led to quantum field theory, in which fields rather
+than particles become the fundamental dynamical variables.
+
+The purpose of the present chapter is not to present quantum field theory.
+Instead, we ask a different question.
+
+\begin{quote}
+How far can one proceed while insisting that the fundamental object is still a
+single relativistic quantum particle?
+\end{quote}
+
+Answering this question is essential for understanding why alternative
+approaches---algebraic quantum field theory, modular localization,
+string-localized fields, direct interaction theories, and
+Stueckelberg--Horwitz--Piron mechanics---adopt different notions of
+localization and particle ontology.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{3.2 The Logical Structure of Relativistic Quantum Mechanics}
+
+Ordinary quantum mechanics rests upon several mathematical assumptions that
+are largely independent of the specific Hamiltonian.  Relativistic quantum
+mechanics attempts to preserve these assumptions while replacing Galilean
+symmetry by Poincaré symmetry.
+
+The theory may therefore be formulated through the following axioms.
+
+\paragraph{Axiom I (Hilbert Space).}
+
+The physical states form a complex separable Hilbert space
+
+\begin{equation}
+\mathcal H,
+\end{equation}
+
+equipped with a positive-definite inner product
+
+\begin{equation}
+(\psi,\phi).
+\end{equation}
+
+Physical states correspond to rays in $\mathcal H$.
+
+\paragraph{Axiom II (Observables).}
+
+Every measurable quantity is represented by a self-adjoint operator acting on
+$\mathcal H$.
+
+Expectation values are
+
+\begin{equation}
+\langle A\rangle
+=
+(\psi,A\psi).
+\end{equation}
+
+\paragraph{Axiom III (Probability).}
+
+The inner product determines probabilities according to Born's rule.
+
+For every projection operator $P$,
+
+\begin{equation}
+\mathrm{Prob}(P)
+=
+(\psi,P\psi).
+\end{equation}
+
+This axiom immediately implies that probabilities must remain non-negative.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Axiom IV (Relativistic Symmetry).}
+
+The Hilbert space carries a unitary representation of the universal covering
+group of the proper orthochronous Poincaré group,
+
+\begin{equation}
+U(a,\Lambda).
+\end{equation}
+
+Its infinitesimal generators satisfy
+
+\begin{align}
+[P^\mu,P^\nu]
+&=0,
+\\
+[M^{\mu\nu},P^\rho]
+&=
+i\hbar
+(g^{\nu\rho}P^\mu-g^{\mu\rho}P^\nu),
+\\
+[M^{\mu\nu},M^{\rho\sigma}]
+&=
+i\hbar
+(
+g^{\mu\sigma}M^{\nu\rho}
++
+g^{\nu\rho}M^{\mu\sigma}
+-
+g^{\mu\rho}M^{\nu\sigma}
+-
+g^{\nu\sigma}M^{\mu\rho}
+).
+\end{align}
+
+The Casimir operators are
+
+\begin{align}
+P^\mu P_\mu &=m^2c^2,
+\\
+W^\mu W_\mu
+&=
+-m^2c^2s(s+1),
+\end{align}
+
+where
+
+\begin{equation}
+W^\mu
+=
+\frac12
+\epsilon^{\mu\nu\rho\sigma}
+P_\nu
+M_{\rho\sigma}
+\end{equation}
+
+is the Pauli--Lubanski vector.
+
+Thus mass and spin label the irreducible particle representations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Axiom V (Positive Energy).}
+
+The Hamiltonian satisfies
+
+\begin{equation}
+P^0\ge0.
+\end{equation}
+
+The vacuum is therefore stable.
+
+Although seemingly innocuous, this requirement ultimately lies behind
+Hegerfeldt's theorem, the Reeh--Schlieder theorem, and several no-go results
+discussed in the previous chapter.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Axiom VI (Localization).}
+
+One wishes to associate with every spatial region $\Omega$ a projection
+operator
+
+\begin{equation}
+E(\Omega),
+\end{equation}
+
+interpreted as localization inside $\Omega$.
+
+The existence of such projectors is automatic in nonrelativistic quantum
+mechanics.
+
+Whether they exist in relativistic quantum mechanics is one of the central
+questions of this monograph.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{3.3 Why These Axioms Are Difficult to Reconcile}
+
+Each axiom appears natural when considered separately.
+
+Together, however, they generate deep tensions.
+
+Positive energy requires the Hamiltonian
+
+\begin{equation}
+H
+=
+\sqrt{m^2c^4+c^2P^2},
+\end{equation}
+
+which is a nonlocal pseudodifferential operator.
+
+Lorentz covariance mixes space and time in a manner incompatible with the
+spectral theory of an ordinary position operator.
+
+Strict localization conflicts with analyticity properties implied by the
+positive-energy spectrum.
+
+Finally, relativistic interactions inevitably allow particle creation and
+annihilation, contradicting the assumption that the Hilbert space describes a
+fixed number of particles.
+
+Consequently, the remainder of this chapter is devoted not merely to deriving
+relativistic wave equations but to identifying precisely where these axioms
+cease to be mutually compatible.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{3.4 Roadmap of the Chapter}
+
+The discussion proceeds in the following logical order.
+
+\begin{enumerate}
+
+\item The Klein--Gordon equation is derived from the relativistic dispersion
+relation.
+
+\item Its conserved current and probability interpretation are analyzed.
+
+\item Dirac's linearization procedure is developed from first principles.
+
+\item Spinors and Clifford algebras are introduced.
+
+\item The Foldy--Wouthuysen representation is constructed.
+
+\item Localization of relativistic wave packets is examined.
+
+\item Pair creation and the Klein paradox are analyzed.
+
+\item Relativistic many-body mechanics is considered.
+
+\item The limitations of fixed-particle-number quantum mechanics are
+summarized.
+
+\end{enumerate}
+
+Only after these limitations have been established shall we proceed to quantum
+field theory and to alternative relativistic frameworks that abandon the
+assumption of point-localized particles.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quantum Field Theory and Localization}
+
+\epigraph{
+``A quantum field is not a collection of particles.
+Particles are certain states of a quantum field.''
+}{Adapted from the modern viewpoint}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+The transition from relativistic quantum mechanics to quantum field theory is
+often presented as a consequence of particle creation and annihilation.
+Although this explanation is historically accurate, it is conceptually
+incomplete.
+
+The more fundamental reason is that relativistic quantum mechanics attempts to
+associate localization with particles, whereas quantum field theory associates
+localization with fields and observables.
+
+This seemingly minor shift has profound consequences.
+
+In relativistic quantum mechanics one seeks position operators,
+
+\[
+X^i,
+\]
+
+together with localized wavefunctions.
+
+In quantum field theory one instead introduces operator-valued distributions,
+
+\[
+\phi(x),
+\]
+
+localized at spacetime points (or, more precisely, smeared over spacetime
+regions), while particles appear only as particular excitations of these
+fields.
+
+Consequently, the ontology changes completely.
+
+Particles become derived concepts.
+
+Fields become fundamental.
+
+The purpose of this chapter is to explain how this transition resolves many of
+the conceptual difficulties encountered in relativistic quantum mechanics,
+while simultaneously introducing new and equally profound questions regarding
+vacuum structure, localization, and measurement.
