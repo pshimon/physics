@@ -1,664 +1,214 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Gauge Principle and Electromagnetic Interaction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Internal Symmetries}
-
 The preceding chapters established the Hamiltonian formulation of
 manifestly covariant mechanics in the absence of interactions.
 The next step is to determine how interactions may be introduced
 without destroying the fundamental symmetry principles of the theory.
-
 Among all known interactions, electromagnetism occupies a unique
 position. Its structure is determined almost entirely by symmetry.
 Indeed, once the requirement of local phase invariance is imposed,
 the form of the interaction follows essentially uniquely.
-
 The gauge principle therefore represents one of the deepest organizing
 principles of modern theoretical physics.
-
 Although historically discovered in electrodynamics, the same idea
 underlies the weak, strong and gravitational interactions in their
 modern formulations.
-
 For this reason it is advantageous to derive the gauge principle before
 specializing to electromagnetism.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Global Gauge Symmetry}
-
 Consider first the free covariant Schrödinger equation
-
-\[
-i\frac{\partial\Psi}{\partial\tau}
-=
-K\Psi,
-\]
-
+\[i\frac{\partial\Psi}{\partial\tau}=K\Psi,\]
 where
-
-\[
-K
-=
-\frac{\hat p^\mu\hat p_\mu}{2M}.
-\]
-
+\[K=\frac{\hat p^\mu\hat p_\mu}{2M}.\]
 The wave function may be multiplied by a constant phase,
-
-\[
-\boxed{
-\Psi
-\rightarrow
-e^{i\alpha}
-\Psi,
-}
-\]
-
+\[\boxed{\Psi\rightarrow e^{i\alpha}\Psi,}\]
 without changing any observable quantity.
-
 Indeed,
-
-\[
-|\Psi|^2
-=
-\Psi^\dagger\Psi
-\]
-
+\[|\Psi|^2=\Psi^\dagger\Psi\]
 is unchanged because
-
-\[
-e^{-i\alpha}e^{i\alpha}=1.
-\]
-
+\[e^{-i\alpha}e^{i\alpha}=1.\]
 Likewise,
-
 all expectation values remain invariant.
-
 The free theory therefore possesses a continuous global symmetry.
-
 Mathematically,
-
 the symmetry group is
-
-\[
-U(1).
-\]
-
+\[U(1).\]
 According to Noether's theorem,
 this continuous symmetry implies the existence of a conserved current.
-
 At this stage no electromagnetic field has been introduced.
-
 The theory merely possesses an internal symmetry of the wave function.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Local Gauge Symmetry}
-
 Suppose now that the phase is allowed to vary over space-time,
-
-\[
-\boxed{
-\Psi(x,\tau)
-\rightarrow
-e^{ie\Lambda(x)}
-\Psi(x,\tau).
-}
-\]
-
+\[\boxed{\Psi(x,\tau)\rightarrow e^{ie\Lambda(x)}\Psi(x,\tau).}\]
 The derivative transforms as
-
-\[
-\partial_\mu\Psi
-\rightarrow
-e^{ie\Lambda}
-\left(
-\partial_\mu
-+
-ie\partial_\mu\Lambda
-\right)
-\Psi.
-\]
-
+\[\partial_\mu\Psi\rightarrow e^{ie\Lambda}\left(\partial_\mu+
+ie\partial_\mu\Lambda\right)\Psi.\]
 An additional term appears,
-
-\[
-ie(\partial_\mu\Lambda)\Psi,
-\]
-
+\[ie(\partial_\mu\Lambda)\Psi,\]
 which destroys the invariance of the Hamiltonian.
-
 Consequently,
-
 ordinary differentiation is incompatible with local phase symmetry.
-
 The free Hamiltonian therefore fails to satisfy local gauge invariance.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Necessity of a Gauge Connection}
-
 To restore local symmetry one introduces a compensating field
-
-\[
-A_\mu(x),
-\]
-
+\[A_\mu(x),\]
 and replaces the ordinary derivative by the covariant derivative
-
-\[
-\boxed{
-D_\mu
-=
-\partial_\mu
-+
-ieA_\mu.
-}
-\]
-
+\[\boxed{D_\mu=\partial_\mu+ieA_\mu.}\]
 Under the gauge transformation,
-
-\[
-\boxed{
-A_\mu
-\rightarrow
-A_\mu
--
-\partial_\mu\Lambda,
-}
-\]
-
+\[\boxed{A_\mu\rightarrow A_\mu-\partial_\mu\Lambda,}\]
 one finds
-
-\[
-D_\mu\Psi
-\rightarrow
-e^{ie\Lambda}
-D_\mu\Psi.
-\]
-
+\[D_\mu\Psi\rightarrow e^{ie\Lambda}D_\mu\Psi.\]
 Thus the covariant derivative transforms exactly as the wave function
 itself.
-
 Local symmetry is restored.
-
 This argument is remarkable because it determines the existence of the
 electromagnetic potential purely from symmetry considerations.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Gauge Principle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The electromagnetic interaction is remarkable in that its existence may
 be deduced almost entirely from symmetry considerations. Unlike most
 interactions in classical mechanics, it is not introduced by guessing a
 force law but follows from the requirement that the action remain
 invariant under local transformations of the wave function.
-
 The gauge principle is therefore one of the fundamental organizing
 principles of modern theoretical physics. Electromagnetism represents
 its simplest realization, while the weak and strong interactions arise
 from the same principle applied to more general symmetry groups.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Global Phase Symmetry}
-
 Consider the free matter field
-
-\[
-\psi(x).
-\]
-
+\[\psi(x).\]
 The free action
-
-\[
-S
-=
-\int d^4x\,
-\mathcal L(\psi,\partial_\mu\psi)
-\]
-
+\[S=\int d^4x\,\mathcal L(\psi,\partial_\mu\psi)\]
 is invariant under the global transformation
-
-\[
-\boxed{
-\psi(x)
-\rightarrow
-e^{i\alpha}\psi(x),
-}
-\]
-
+\[\boxed{\psi(x)\rightarrow e^{i\alpha}\psi(x),}\]
 where
-
-\[
-\alpha
-=
-\mathrm{constant}.
-\]
-
+\[\alpha=\mathrm{constant}.\]
 Since the phase is constant,
-
-\[
-\partial_\mu
-(e^{i\alpha}\psi)
-=
-e^{i\alpha}
-\partial_\mu\psi,
-\]
-
+\[\partial_\mu (e^{i\alpha}\psi) =e^{i\alpha}\partial_\mu\psi,\]
 and the Lagrangian remains unchanged.
-
 The symmetry group is
-
-\[
-U(1).
-\]
-
+\[U(1).\]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Noether Current}
-
 According to Noether's theorem,
 every continuous global symmetry gives rise to a conserved current.
-
 For a complex scalar field,
-
-\[
-\boxed{
-j^\mu
-=
-i
-\left(
-\psi^*\partial^\mu\psi
--
-\psi\partial^\mu\psi^*
-\right).
-}
-\]
-
+\[\boxed{j^\mu=i\left(\psi^*\partial^\mu\psi-\psi\partial^\mu\psi^*\right).}\]
 The field equations imply
-
-\[
-\boxed{
-\partial_\mu j^\mu=0.
-}
-\]
-
+\[\boxed{\partial_\mu j^\mu=0.}\]
 The conserved charge is
-
-\[
-Q
-=
-\int
-j^0\,d^3x.
-\]
-
+\[Q=\int j^0\,d^3x.\]
 At this stage no electromagnetic field has appeared.
-
 The theory merely possesses an internal symmetry.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Failure of Local Symmetry}
-
 Suppose now that
-
-\[
-\alpha
-\]
-
+\[\alpha\]
 is replaced by a function,
-
-\[
-\alpha
-=
-\alpha(x).
-\]
-
+\[\alpha=\alpha(x).\]
 The transformation becomes
-
-\[
-\boxed{
-\psi
-\rightarrow
-e^{ie\alpha(x)}
-\psi.
-}
-\]
-
+\[\boxed{\psi\rightarrow e^{ie\alpha(x)}\psi.}\]
 Differentiation now gives
-
-\[
-\partial_\mu\psi
-\rightarrow
-e^{ie\alpha}
-\left(
-\partial_\mu
-+
-ie\partial_\mu\alpha
-\right)\psi.
-\]
-
+\[\partial_\mu\psi\rightarrow e^{ie\alpha}\left(\partial_\mu+
+ie\partial_\mu\alpha \right)\psi.\]
 The additional term
-
-\[
-ie(\partial_\mu\alpha)\psi
-\]
-
+\[ie(\partial_\mu\alpha)\psi\]
 cannot be cancelled inside the free Lagrangian.
-
 Consequently,
-
 the free theory is not invariant under local phase transformations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Introduction of the Gauge Field}
-
 Local symmetry may be restored by introducing a compensating field
-
-\[
-A_\mu(x)
-\]
-
+\[A_\mu(x)\]
 and defining the covariant derivative
-
-\[
-\boxed{
-D_\mu
-=
-\partial_\mu
-+
-ieA_\mu.
-}
-\]
-
+\[\boxed{D_\mu=\partial_\mu+ieA_\mu.}\]
 The gauge field transforms as
-
-\[
-\boxed{
-A_\mu
-\rightarrow
-A_\mu
--
-\partial_\mu\alpha.
-}
-\]
-
+\[\boxed{A_\mu\rightarrow A_\mu-\partial_\mu\alpha.}\]
 One immediately verifies
-
-\[
-D_\mu\psi
-\rightarrow
-e^{ie\alpha}
-D_\mu\psi.
-\]
-
+\[D_\mu\psi\rightarrow e^{ie\alpha}D_\mu\psi.\]
 Therefore every occurrence of
-
-\[
-\partial_\mu
-\]
-
+\[\partial_\mu\]
 may be replaced by
-
-\[
-D_\mu,
-\]
-
+\[D_\mu,\]
 and the action again becomes locally gauge invariant.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Minimal Coupling}
-
 The gauge principle uniquely determines the interaction Lagrangian.
-
 For a relativistic scalar particle,
-
-\[
-\boxed{
-\mathcal L
-=
-(D_\mu\psi)^*
-(D^\mu\psi)
--
-m^2
-\psi^*\psi.
-}
-\]
-
+\[\boxed{\mathcal L=(D_\mu\psi)^*(D^\mu\psi)-m^2\psi^*\psi.}\]
 The interaction has not been added by hand.
-
 It follows directly from the requirement of local gauge invariance.
-
 This remarkable fact explains why electromagnetism possesses such a
 universal structure.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gauge Fields and Canonical Structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The principle of minimal coupling is usually introduced by replacing the
 canonical momentum according to
-
-\[
-p_\mu
-\longrightarrow
-p_\mu-eA_\mu.
-\]
-
+\[p_\mu\longrightarrow p_\mu-eA_\mu.\]
 Although this prescription is simple and effective, it conceals an
 important geometric fact.
-
 Minimal coupling is not merely an algebraic substitution in the
 Hamiltonian. It modifies the canonical one-form and therefore changes
 the symplectic structure of phase space.
-
 This viewpoint will prove particularly useful when the theory is later
 extended to stochastic dynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Canonical One-Form}
-
 The canonical action of SHP mechanics is
-
-\[
-S
-=
-\int
-\left(
-p_\mu dx^\mu
--
-K\,d\tau
-\right).
-\]
-
+\[S=\int\left(p_\mu dx^\mu-K\,d\tau\right).\]
 The corresponding canonical one-form is
-
-\[
-\boxed{
-\theta
-=
-p_\mu dx^\mu .
-}
-\]
-
+\[\boxed{\theta=p_\mu dx^\mu .}\]
 The symplectic two-form is
-
-\[
-\boxed{
-\omega
-=
-d\theta
-=
-dp_\mu
-\wedge
-dx^\mu .
-}
-\]
-
+\[\boxed{\omega=d\theta=dp_\mu\wedge dx^\mu .}\]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Gauge-Covariant One-Form}
-
 After introducing the electromagnetic interaction,
-
-\[
-\pi_\mu
-=
-p_\mu-eA_\mu(x),
-\]
-
+\[\pi_\mu=p_\mu-eA_\mu(x),\]
 the action becomes
-
-\[
-S
-=
-\int
-\left[
-(p_\mu-eA_\mu)
-dx^\mu
--
-K
-d\tau
-\right].
-\]
-
+\[S=\int\left[(p_\mu-eA_\mu)dx^\mu-K d\tau\right].\]
 Hence the canonical one-form changes into
-
-\[
-\boxed{
-\theta'
-=
-(p_\mu-eA_\mu)
-dx^\mu .
-}
-\]
-
+\[\boxed{\theta'=(p_\mu-eA_\mu)dx^\mu .}\]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Modified Symplectic Form}
-
 Taking the exterior derivative,
-
-\[
-\omega'
-=
-d\theta',
-\]
-
+\[\omega'=d\theta',\]
 gives
-
-\[
-\omega'
-=
-dp_\mu
-\wedge
-dx^\mu
--
-e
-dA_\mu
-\wedge
-dx^\mu.
-\]
-
+\[\omega'=dp_\mu\wedge dx^\mu-e dA_\mu\wedge dx^\mu.\]
 Since
-
-\[
-dA_\mu
-=
-(\partial_\nu A_\mu)
-dx^\nu,
-\]
-
+\[dA_\mu=(\partial_\nu A_\mu)dx^\nu,\]
 one obtains
-
-\[
-\boxed{
-\omega'
-=
-dp_\mu
-\wedge
-dx^\mu
-+
-\frac{e}{2}
-F_{\mu\nu}
-dx^\mu
-\wedge
-dx^\nu .
-}
-\]
-
+\[\boxed{\omega'=dp_\mu\wedge dx^\mu+\frac{e}{2}F_{\mu\nu}dx^\mu\wedge dx^\nu .}\]
 Thus the electromagnetic field appears directly as an additional
 contribution to the symplectic structure.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Hamilton Equations}
-
 The equations of motion follow from
-
-\[
-i_{X_K}\omega'
-=
-dK,
-\]
-
+\[i_{X_K}\omega'=dK,\]
 where
-
-\[
-X_K
-\]
-
+\[X_K\]
 is the Hamiltonian vector field.
-
 Using the modified symplectic form one immediately recovers
-
-\[
-\frac{dx^\mu}{d\tau}
-=
-\frac{\pi^\mu}{M},
-\]
-
+\[\frac{dx^\mu}{d\tau}=\frac{\pi^\mu}{M},\]
 and
-
-\[
-\boxed{
-M
-\frac{d^2x^\mu}{d\tau^2}
-=
-e
-F^\mu{}_\nu
-\frac{dx^\nu}{d\tau}.
-}
-\]
-
+\[\boxed{M\frac{d^2x^\mu}{d\tau^2}=eF^\mu{}_\nu\frac{dx^\nu}{d\tau}.}\]
 Thus the Lorentz force follows entirely from the modified symplectic
 geometry.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Physical Interpretation}
-
 The electromagnetic field should therefore not be viewed simply as an
 external force.
-
 Rather, it modifies the geometry of phase space itself.
-
 The particle continues to follow a Hamiltonian flow, but the underlying
 symplectic structure has changed.
-
 This geometric interpretation places the electromagnetic interaction on
 the same conceptual footing as the free dynamics and prepares the way
 for generalizations to non-Abelian gauge theories and stochastic
 mechanics.
-
-
-
