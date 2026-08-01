@@ -1,7 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Stochastic Equations }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Historical Development}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The possibility that quantum mechanics may arise from an underlying
 stochastic process has attracted continuous attention since the
 development of Brownian motion and modern probability theory. Although
@@ -15,7 +17,6 @@ mechanics may be formulated as a conservative diffusion process on
 Euclidean configuration space. In this formulation, particles follow
 continuous but nondifferentiable trajectories, and the wave function
 emerges from the probability density together with the current velocity.
-
 The success of the nonrelativistic theory immediately suggested the
 possibility of extending stochastic mechanics to relativistic systems.
 This extension proved to be considerably more difficult than originally
@@ -28,323 +29,133 @@ including proper-time formulations, Lorentz-invariant diffusion
 processes, stochastic differential geometry on Lorentzian manifolds,
 relativistic kinetic theory, and off-shell formulations based upon the
 Stueckelberg--Horwitz--Piron framework.
-
 Despite substantial progress, no formulation has yet achieved the same
 degree of completeness and acceptance as Nelson's original
 nonrelativistic theory. The purpose of this chapter is to review these
 developments, identify their strengths and limitations, and establish
 the foundations upon which the SHP stochastic theory developed in the
 following chapters will be constructed.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wiener Processes and the Mathematical Foundations of Diffusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The mathematical foundation of stochastic mechanics is the Wiener
 process. Before discussing relativistic stochastic dynamics, it is
 therefore necessary to review the essential properties of Brownian
 motion and the associated stochastic calculus. Throughout this chapter
 we emphasize the physical interpretation of the mathematical
 construction, while maintaining sufficient rigor for later applications.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Brownian Motion}
-
 The phenomenon of Brownian motion was first observed by Robert Brown in
 1827 during microscopic studies of pollen grains suspended in water.
 Although initially regarded as a biological phenomenon, it was later
 recognized as a universal consequence of molecular agitation.
-
 The first quantitative description was given independently by Einstein
 (1905) and Smoluchowski (1906), who demonstrated that the observed
 motion follows from the random impacts of surrounding molecules.
 Einstein's analysis established the connection between microscopic
 kinetics and macroscopic diffusion and provided one of the earliest
 quantitative confirmations of the atomic theory of matter.
-
 The modern mathematical formulation was developed by Wiener, who
 introduced a probability measure on the space of continuous paths. The
 resulting stochastic process is now known as the Wiener process.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Definition of the Wiener Process}
-
 A real stochastic process
-
-\[
-W(t),
-\qquad t\ge0,
-\]
-
+\[W(t),\qquad t\ge0,\]
 is called a Wiener process if it satisfies the following properties.
-
 \begin{enumerate}
-
 \item
 The process begins at the origin,
-
-\[
-W(0)=0.
-\]
-
+\[W(0)=0.\]
 \item
 The increments are independent,
-
-\[
-W(t_2)-W(t_1)
-\]
-
+\[W(t_2)-W(t_1)\]
 is statistically independent of
-
-\[
-W(t_4)-W(t_3)
-\]
-
+\[W(t_4)-W(t_3)\]
 whenever
-
-\[
-t_1<t_2<t_3<t_4.
-\]
-
+\[t_1<t_2<t_3<t_4.\]
 \item
 The increments are stationary,
-
-\[
-W(t+\Delta t)-W(t)
-\]
-
+\[W(t+\Delta t)-W(t)\]
 depends only upon
-
-\[
-\Delta t.
-\]
-
+\[\Delta t.\]
 \item
 Each increment possesses a Gaussian distribution,
-
-\[
-W(t+\Delta t)-W(t)
-\sim
-{\cal N}(0,\Delta t).
-\]
-
+\[W(t+\Delta t)-W(t)\sim{\cal N}(0,\Delta t).\]
 \item
 With probability one, the trajectories are continuous but nowhere
 differentiable.
-
 \end{enumerate}
-
 These properties completely characterize Brownian motion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Gaussian Increments}
-
 The probability density for a finite increment is
-
-\[
-P(\Delta W)
-=
-\frac{1}
-{\sqrt{2\pi\Delta t}}
-\exp
-\left(
--
-\frac{(\Delta W)^2}
-{2\Delta t}
-\right).
-\]
-
+\[P(\Delta W)=\frac{1}{\sqrt{2\pi\Delta t}}\exp\left(
+-\frac{(\Delta W)^2}{2\Delta t}\right).\]
 Consequently,
-
-\[
-\langle\Delta W\rangle=0,
-\]
-
+\[\langle\Delta W\rangle=0,\]
 and
-
-\[
-\boxed{
-\langle(\Delta W)^2\rangle
-=
-\Delta t.
-}
-\]
-
+\[\boxed{\langle(\Delta W)^2\rangle=\Delta t.}\]
 Higher moments satisfy
-
-\[
-\langle(\Delta W)^{2n+1}\rangle=0,
-\]
-
+\[\langle(\Delta W)^{2n+1}\rangle=0,\]
 while
-
-\[
-\langle(\Delta W)^4\rangle
-=
-3(\Delta t)^2.
-\]
-
+\[\langle(\Delta W)^4\rangle=3(\Delta t)^2.\]
 These relations play a central role in the derivation of Itô's lemma.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Quadratic Variation}
-
 Unlike ordinary differentiable functions,
-
 Brownian trajectories possess finite quadratic variation.
-
 Indeed,
-
-\[
-(dW)^2
-=
-dt,
-\]
-
+\[(dW)^2=dt,\]
 while
-
-\[
-(dW)^3
-=
-0,
-\]
-
+\[(dW)^3=0,\]
 and
-
-\[
-(dW)^4
-=
-O(dt^2).
-\]
-
+\[(dW)^4=O(dt^2).\]
 The identity
-
-\[
-\boxed{
-(dW)^2=dt
-}
-\]
-
+\[\boxed{(dW)^2=dt}\]
 is the defining algebraic property of Itô calculus.
-
 It distinguishes stochastic analysis from ordinary differential
 calculus and is responsible for the appearance of second-order
 derivative terms in stochastic differential equations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Diffusion Constant}
-
 Physical Brownian motion is usually written in the form
-
-\[
-dX
-=
-b(X,t)\,dt
-+
-\sqrt{2D}\,dW,
-\]
-
+\[dX=b(X,t)\,dt+\sqrt{2D}\,dW,\]
 where
-
-\[
-b(X,t)
+\[b(X,t)
 \]
-
 is the drift velocity and
-
-\[
-D
-\]
-
+\[D\]
 is the diffusion coefficient.
-
 The statistical moments become
-
-\[
-\langle dX\rangle
-=
-b\,dt,
-\]
-
+\[\langle dX\rangle=b\,dt,\]
 and
-
-\[
-\boxed{
-\langle(dX)^2\rangle
-=
-2D\,dt.
-}
-\]
-
+\[\boxed{\langle(dX)^2\rangle=2D\,dt.}\]
 The parameter
-
-\[
-D
-\]
-
+\[D\]
 controls the strength of stochastic fluctuations.
-
 In Nelson's stochastic mechanics,
-
 it assumes the distinguished value
-
-\[
-\boxed{
-D=\frac{\hbar}{2m},
-}
-\]
-
+\[\boxed{D=\frac{\hbar}{2m},}\]
 thereby establishing the connection between stochastic diffusion and
 quantum mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Markov Property}
-
 The Wiener process is Markovian.
-
 The future evolution depends only upon the present state,
-
 not upon the previous history.
-
 Consequently,
-
-\[
-P(x_3,t_3|x_2,t_2;x_1,t_1)
-=
-P(x_3,t_3|x_2,t_2).
-\]
-
+\[P(x_3,t_3|x_2,t_2;x_1,t_1)=P(x_3,t_3|x_2,t_2).\]
 The corresponding transition probability satisfies the
 Chapman--Kolmogorov equation,
-
-\[
-P(x_3,t_3|x_1,t_1)
-=
-\int
-P(x_3,t_3|x_2,t_2)
-P(x_2,t_2|x_1,t_1)
-dx_2.
-\]
-
+\[P(x_3,t_3|x_1,t_1)=\int P(x_3,t_3|x_2,t_2)P(x_2,t_2|x_1,t_1)dx_2.\]
 This property forms the probabilistic basis of the Fokker--Planck
 equation.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Relativistic Stochastic Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Why Stochastic Mechanics?}
-
 Classical mechanics assumes that the state of a particle can be
 specified exactly by its position and momentum at every instant of
 time. Once the initial conditions are given, Hamilton's equations
@@ -363,7 +174,6 @@ molecules. Although every individual collision obeys Newton's laws, the
 combined effect of billions of collisions per second is effectively
 random. The detailed microscopic dynamics becomes inaccessible, while
 its statistical properties remain well defined.
-
 The natural question is therefore whether quantum phenomena might admit
 a similar description. Instead of postulating a wave function from the
 outset, one may ask whether quantum mechanics could emerge from an
@@ -374,7 +184,6 @@ in the stochastic mechanics developed by Nelson. In that theory the
 particle follows a continuous but non-differentiable trajectory, while
 the Schrödinger equation appears as the equation governing the
 probability distribution of an ensemble of such trajectories.
-
 The success of Nelson's theory immediately suggests extending the same
 program to relativistic systems. Unfortunately, this turns out to be
 far from straightforward. The difficulties are not merely technical but
@@ -385,33 +194,23 @@ The purpose of this chapter is to examine these difficulties and to
 review the principal attempts to overcome them. Only after identifying
 the limitations of existing approaches shall we construct a stochastic
 theory within the SHP framework.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{What is Fluctuating?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Every stochastic theory begins with an assumption that some physical
 quantity is subject to random fluctuations. The choice of this quantity
 is not unique and determines the structure of the entire theory.
-
 In ordinary Brownian motion the answer is well known. The particle is
 continually struck by surrounding molecules. The microscopic collisions
 produce a rapidly fluctuating force, while the observed random motion of
 the particle is only the accumulated effect of these countless impacts.
-
 Thus the position is not fundamentally random. It becomes random because
 the force acting on the particle is random.
 
 The same question must be asked in any relativistic theory.
-
 What is the physical quantity that fluctuates?
-
-
 Suppose that one assumes the space-time position itself to undergo a
 Brownian motion.
-
 The world line then becomes a continuous but nowhere differentiable
 curve. This is the viewpoint adopted in Nelson's original stochastic
 mechanics.
@@ -419,161 +218,106 @@ mechanics.
 Its principal advantage is simplicity. The probability density is
 defined directly in configuration space, and the Schrödinger equation
 emerges naturally from the dynamics of the ensemble.
-
 The difficulty appears only after relativity is introduced.
-
 A Brownian process requires a positive-definite covariance matrix,
 whereas Minkowski space possesses an indefinite metric. Consequently the
 construction that works perfectly in Euclidean space cannot be
 transferred directly to space-time.
 
-
 Instead of assuming that the position fluctuates, one may regard the
 velocity as the stochastic variable.
-
 The position then remains the integral of the random velocity.
-
 This viewpoint has an important physical motivation.
-
 Random collisions change the particle's velocity directly, while the
 position changes only as a consequence of the altered velocity.
-
 Several relativistic diffusion theories are based upon this idea.
-
 The principal difficulty is that relativistic velocities cannot vary
 arbitrarily. They are constrained by the geometry of space-time and by
 the requirement that no trajectory exceed the speed of light.
-
 The stochastic process must therefore evolve on the manifold of allowed
 four-velocities rather than in an unconstrained Euclidean space.
-
-
 From the viewpoint of Hamiltonian mechanics, momentum appears to be the
 most natural quantity to fluctuate.
 
 Microscopic collisions exchange momentum between the particle and its
 environment.
-
 Hamilton's equations then determine the corresponding evolution of the
 trajectory.
-
 This viewpoint is particularly attractive because it preserves the
 Hamiltonian structure of the dynamics.
-
 Relativistic kinetic theory and Langevin equations are usually
 constructed in this manner.
-
 The price paid for this simplicity is that the momentum cannot vary
 independently of the relativistic mass-shell constraint.
-
 One must therefore decide whether the stochastic dynamics is confined to
 the mass shell or whether off-shell motion is permitted.
-
-
 An even more physical description regards neither position nor momentum
 as fundamentally stochastic.
 
 Instead, the fluctuating quantity is the force itself.
-
 This picture corresponds most closely to the microscopic origin of
 Brownian motion.
-
 Each collision produces a short impulse.
-
 The observable force is therefore the sum of an enormous number of
 rapidly fluctuating contributions.
-
 Position and momentum become stochastic only after integration over
 time.
 
 The resulting equations are known as Langevin equations.
-
-
 The SHP framework suggests yet another possibility.
-
 The Hamiltonian formulation already introduces an invariant evolution
 parameter together with a complete phase-space description.
-
 Instead of modifying the geometric structure of space-time, one may
 therefore regard the Hamiltonian evolution itself as being driven by
 microscopic fluctuations.
-
 The stochastic process then develops in the invariant parameter
 \(\tau\), while the four-dimensional covariance of the theory remains
 manifest.
-
 This viewpoint combines naturally with the Hamiltonian structure
 developed in the previous chapters and will serve as the foundation for
 the stochastic theory developed later in this monograph.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Why Relativistic Brownian Motion is Difficult}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The extension of Brownian motion from Newtonian mechanics to special
 relativity appears, at first sight, to be straightforward. One might
 expect that every three-dimensional quantity should simply be replaced
 by its four-dimensional counterpart.
-
 Experience has shown that this expectation is incorrect.
-
 The difficulties encountered by relativistic stochastic mechanics are
 not technical details of probability theory but arise from the
 fundamental structure of relativistic space-time itself.
-
 In this section we discuss the physical origin of these difficulties
 before reviewing the various mathematical approaches that have been
 proposed to overcome them.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Which Time?}
-
 Every stochastic process describes the evolution of a system with
 respect to some parameter.
-
 In ordinary Brownian motion that parameter is simply the Newtonian time
-
-\[
-t.
-\]
-
+\[t.\]
 This choice is so natural that it is rarely questioned.
 
 Special relativity changes the situation completely.
-
 Different inertial observers assign different values to the coordinate
 time.
 
 Consequently there is no unique universal time with respect to which the
 random process may evolve.
-
 One may attempt to use the proper time of the particle.
-
 However, proper time is defined only after the trajectory is known,
 whereas the trajectory itself is the unknown stochastic process.
-
 Thus the evolution parameter cannot be specified independently of the
 motion.
-
 This circularity lies at the heart of many relativistic stochastic
 formulations.
 
-
 The SHP framework provides a remarkably simple resolution of this
 difficulty.
-
 Instead of using either the coordinate time or the proper time, the
 theory introduces an invariant evolution parameter
-
-\[
-\tau ,
-\]
-
+\[\tau ,\]
 which exists independently of the particle trajectory.
-
 The stochastic process therefore evolves with respect to a parameter
 that is both Lorentz invariant and known before the trajectory is
 constructed.
@@ -581,97 +325,68 @@ constructed.
 One of the principal motivations for combining stochastic mechanics with
 the SHP formalism is precisely the existence of this invariant
 evolution parameter.
-
-
 Ordinary relativistic mechanics describes particles whose invariant mass
 is fixed.
-
 Random interactions, however, continually exchange energy and momentum
 with the surrounding environment.
-
 One must therefore answer an important question.
-
 Does the particle remain on the same mass shell after every microscopic
 collision?
-
 If the answer is yes, an explicit constraint must accompany the
 stochastic dynamics.
-
 If the answer is no, the theory must allow the particle to evolve
 off-shell.
 
 Different relativistic stochastic theories make different choices at
 this point.
-
 The SHP formalism adopts the second viewpoint from the outset.
-
-
 Probability theory requires the covariance of the random increments to
 be positive.
-
 This condition guarantees that the mean-square fluctuation is always
 non-negative.
-
 Minkowski space possesses an indefinite metric.
-
 Consequently one cannot simply replace
-
-\[
-\delta_{ij}
-\]
-
+\[\delta_{ij}\]
 by
-
-\[
-\eta_{\mu\nu}
-\]
-
+\[\eta_{\mu\nu}\]
 in the covariance matrix of a Wiener process.
-
 This is not merely a technical inconvenience.
-
 It reflects the fundamental difference between Euclidean geometry and
 Lorentzian geometry.
 
 Nearly every relativistic stochastic theory must confront this problem
 in one form or another.
-
-
 The preceding discussion demonstrates that relativistic stochastic
 mechanics is not a single problem but a collection of interconnected
 problems.
-
 One must choose
-
+\begin{itemize}
+   \item
 the evolution parameter,
-
+   \item
 the stochastic variables,
-
+   \item
 the underlying geometric manifold,
-
+   \item
 the treatment of the mass shell,
-
-and the relation between the stochastic process and quantum dynamics.
-
+   \item
+the relation between the stochastic process and quantum dynamics.
+\end{itemize}
 Different formulations make different choices and therefore answer
 different physical questions.
-
 The following sections review the principal approaches that have been
 developed during the past six decades.%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Nelson's Stochastic Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Nelson's stochastic mechanics occupies a unique position among attempts
 to understand the foundations of quantum mechanics. Unlike the standard
 formulation, it does not introduce the wave function as a fundamental
 object. Instead, it begins with the simple physical assumption that the
 motion of a microscopic particle is intrinsically stochastic.
-
 The central idea is remarkably economical. A particle still possesses a
 well-defined position at every instant of time, but its trajectory is no
 longer differentiable. The familiar deterministic path of classical
 mechanics is replaced by a continuous random curve.
-
 Quantum mechanics then emerges as a statistical description of an
 ensemble of such trajectories.
 
@@ -679,40 +394,26 @@ From a physical point of view, Nelson's theory differs from classical
 mechanics in only one essential respect. The deterministic motion
 generated by Hamilton's equations is supplemented by microscopic random
 fluctuations.
-
 Everything else follows from this single assumption.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Physical Picture}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Imagine observing a microscopic particle through a sufficiently powerful
 microscope.
-
 Instead of moving along a smooth trajectory, the particle executes an
 extremely irregular motion. During every short time interval it receives
 a large number of tiny random impulses.
-
 Although the individual impulses are unpredictable, their statistical
 properties are reproducible.
-
 Consequently, one no longer attempts to predict the exact trajectory.
 Instead, one predicts the probability that the particle will be found
 within a given region of space.
-
 This change of viewpoint is the essence of stochastic mechanics.
-
 The trajectory remains a useful concept, but it becomes only one member
 of an ensemble of possible trajectories.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Stochastic Differential Equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The central assumption of stochastic mechanics is that the motion of a
 microscopic particle differs from classical mechanics only by the
 presence of rapidly fluctuating microscopic forces. The detailed origin
@@ -720,1034 +421,530 @@ of these forces is left unspecified. They may represent interactions
 with unresolved degrees of freedom, a stochastic vacuum, or some deeper
 microscopic dynamics. Their physical origin is considerably less
 important than their statistical properties.
-
 If the fluctuations are sufficiently rapid, the cumulative effect during
 a short time interval $dt$ may be represented by a random displacement.
 The infinitesimal motion of the particle is then written in the form
-
 \begin{equation}
 dx^i=b^i(x,t)\,dt+dW^i ,
 \label{eq:NelsonSDE}
 \end{equation}
-
 where $b^i(x,t)$ is called the \emph{drift velocity}, while $dW^i$
 represents the random displacement.
-
 The drift velocity describes the systematic part of the motion.
 In the absence of fluctuations,
-
-\[
-dW^i=0,
-\]
-
+\[dW^i=0,\]
 Eq.~(\ref{eq:NelsonSDE}) reduces to the ordinary equation of motion
-
-\[
-\frac{dx^i}{dt}=b^i(x,t).
-\]
-
+\[\frac{dx^i}{dt}=b^i(x,t).\]
 The second term describes the cumulative effect of many microscopic
 random impulses.
 
 The random increment satisfies
-
 \begin{equation}
 \langle dW^i\rangle =0,
 \label{eq:meanW}
 \end{equation}
-
 indicating that there is no preferred direction of the fluctuations.
-
 Its covariance is
-
 \begin{equation}
-\langle dW^i dW^j\rangle
-=
-2D\,\delta^{ij}\,dt,
+\langle dW^i dW^j\rangle=2D\,\delta^{ij}\,dt,
 \label{eq:covW}
 \end{equation}
-
 where $D$ is the diffusion coefficient.
-
 Equation (\ref{eq:covW}) expresses an important physical fact.
 Although the average random displacement vanishes, its mean-square value
 is finite and increases linearly with time.
-
 Consequently,
-
-\[
-|dW|
-\sim
-\sqrt{dt},
-\]
-
+\[|dW|\sim\sqrt{dt},\]
 rather than
-
-\[
-dt.
-\]
-
+\[dt.\]
 The stochastic displacement therefore dominates the deterministic one
 for sufficiently short time intervals.
-
 This single observation explains why Brownian trajectories are
 continuous but nowhere differentiable.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Why Ordinary Calculus Fails}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Consider first an ordinary differentiable trajectory.
-
 Its displacement during a short time interval is
-
-\[
-dx=v\,dt.
-\]
-
+\[dx=v\,dt.\]
 Consequently,
-
-\[
-(dx)^2
-=
-v^2dt^2,
-\]
-
+\[(dx)^2=v^2dt^2,\]
 which is of second order in $dt$ and therefore disappears in the
 differential limit.
-
 Brownian motion behaves completely differently.
-
 Using Eq.~(\ref{eq:covW}),
-
-\[
-dx=b\,dt+dW,
-\]
-
+\[dx=b\,dt+dW,\]
 we obtain
-
-\[
-(dx)^2
-=
-b^2dt^2
-+
-2b\,dt\,dW
-+
-(dW)^2.
-\]
-
+\[(dx)^2=b^2dt^2+2b\,dt\,dW+(dW)^2.\]
 The first term is of order
-
-\[
-dt^2.
-\]
-
+\[dt^2.\]
 The mixed term is of order
-
-\[
-dt^{3/2},
-\]
-
+\[dt^{3/2},\]
 because
-
-\[
-dW\sim\sqrt{dt}.
-\]
-
+\[dW\sim\sqrt{dt}.\]
 Both therefore vanish in comparison with $dt$.
-
 The remaining contribution satisfies
-
-\[
-\boxed{
-(dW)^2
-=
-2D\,dt.
-}
-\]
-
+\[\boxed{(dW)^2=2D\,dt.}\]
 Thus
-
 \begin{equation}
-(dx)^2
-=
-2D\,dt.
+(dx)^2=2D\,dt.
 \label{eq:dx2}
 \end{equation}
-
 Equation (\ref{eq:dx2}) is the fundamental reason why stochastic
 calculus differs from ordinary differential calculus.
-
 The square of the infinitesimal displacement no longer vanishes.
 Instead, it contributes to first order in $dt$.
-
 Every distinctive feature of It\^o calculus ultimately follows from
 this simple physical observation.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Evolution of the Probability Density}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Since the particle trajectory is stochastic, the quantity of physical
 interest is no longer the trajectory itself but the probability density
-
-\[
-\rho(x,t).
-\]
-
+\[\rho(x,t).\]
 The probability of finding the particle inside a volume element $d^3x$
 is
-
-\[
-dP=\rho(x,t)\,d^3x.
-\]
-
+\[dP=\rho(x,t)\,d^3x.\]
 As the ensemble evolves, probability is neither created nor destroyed.
 The probability contained inside any moving volume can change only
 through the flow of probability across its boundary.
-
 Exactly as in fluid mechanics, this leads to a continuity equation,
-
 \begin{equation}
-\frac{\partial\rho}{\partial t}
-+
-\nabla\cdot J
-=
-0,
+\frac{\partial\rho}{\partial t}+\nabla\cdot J=0,
 \label{eq:continuity}
 \end{equation}
-
 where $J$ denotes the probability current.
-
 The form of the current is determined by the stochastic dynamics.
-
 The drift velocity transports probability exactly as in classical
 mechanics,
-
-\[
-J_{\rm drift}
-=
-\rho\,b.
-\]
-
+\[J_{\rm drift}=\rho\,b.\]
 Random fluctuations produce an additional diffusive current directed
 toward regions of lower probability,
-
-\[
-J_{\rm diff}
-=
--
-D\nabla\rho.
-\]
-
+\[J_{\rm diff}=-D\nabla\rho.\]
 The total current is therefore
-
 \begin{equation}
-J
-=
-\rho\,b
--
-D\nabla\rho.
+J=\rho\,b-D\nabla\rho.
 \label{eq:probcurrent}
 \end{equation}
-
 Substituting Eq.~(\ref{eq:probcurrent}) into the continuity equation
 gives
-
 \begin{equation}
-\boxed{
-\frac{\partial\rho}{\partial t}
-=
--
-\nabla\cdot(\rho b)
-+
-D\nabla^2\rho.
-}
+\boxed{\frac{\partial\rho}{\partial t}=-\nabla\cdot(\rho b)+D\nabla^2\rho.}
 \label{eq:FokkerPlanck}
 \end{equation}
-
 This is the Fokker--Planck equation.
-
 The first term describes deterministic transport by the drift velocity.
-
 The second represents the spreading of the probability distribution due
 to microscopic fluctuations.
-
 The entire statistical dynamics is therefore determined by two physical
 ingredients: the systematic drift and the random diffusion.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Forward and Backward Velocities}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In classical mechanics the velocity is defined by the limit
-
 \begin{equation}
-\mathbf{v}(t)
-=
-\lim_{\Delta t\rightarrow0}
-\frac{\mathbf{x}(t+\Delta t)-\mathbf{x}(t)}
-{\Delta t}.
+\mathbf{v}(t)=\lim_{\Delta t\rightarrow0}\frac{\mathbf{x}(t+\Delta t)
+    -\mathbf{x}(t)}{\Delta t}.
 \label{eq:classicalvelocity}
 \end{equation}
-
 This definition assumes that the trajectory possesses a unique tangent.
-
 Brownian trajectories do not satisfy this assumption.
 The random displacement during a short time interval is proportional to
-
-\[
-\sqrt{\Delta t},
-\]
-
+\[\sqrt{\Delta t},\]
 rather than
-
-\[
-\Delta t.
-\]
-
+\[\Delta t.\]
 Consequently,
-
-\[
-\frac{\Delta x}{\Delta t}
-\sim
-\frac{1}{\sqrt{\Delta t}},
-\]
-
+\[\frac{\Delta x}{\Delta t}\sim\frac{1}{\sqrt{\Delta t}},\]
 which diverges as
-
-\[
-\Delta t\rightarrow0.
-\]
-
+\[\Delta t\rightarrow0.\]
 The instantaneous velocity therefore does not exist.
-
 This does not imply that the motion is physically meaningless.
 It merely shows that a different definition of velocity is required.
-
 The natural idea is to average over the random fluctuations.
-
 Instead of asking for the instantaneous velocity of one particular
 trajectory, we ask for the average velocity of an ensemble of
 trajectories passing through the same point.
-
 Because the random process possesses a preferred direction in time,
 there are two possible averages.
-
 The first uses only the future evolution of the process and defines the
 \emph{forward drift velocity}
-
 \begin{equation}
-b^{i}_{+}(x,t)
-=
-\lim_{\Delta t\rightarrow0^{+}}
-\left<
-\frac{x^{i}(t+\Delta t)-x^{i}(t)}
-{\Delta t}
-\right>_{x(t)=x}.
+b^{i}_{+}(x,t)=\lim_{\Delta t\rightarrow0^{+}}
+\left<\frac{x^{i}(t+\Delta t)-x^{i}(t)}{\Delta t}\right>_{x(t)=x}.
 \label{eq:forwarddrift}
 \end{equation}
-
 The second uses only the past evolution and defines the
 \emph{backward drift velocity}
-
 \begin{equation}
-b^{i}_{-}(x,t)
-=
-\lim_{\Delta t\rightarrow0^{+}}
-\left<
-\frac{x^{i}(t)-x^{i}(t-\Delta t)}
-{\Delta t}
-\right>_{x(t)=x}.
+b^{i}_{-}(x,t)=\lim_{\Delta t\rightarrow0^{+}}
+\left<\frac{x^{i}(t)-x^{i}(t-\Delta t)}{\Delta t}\right>_{x(t)=x}.
 \label{eq:backwarddrift}
 \end{equation}
-
 For an ordinary differentiable trajectory,
-
-\[
-b_{+}=b_{-},
-\]
-
+\[b_{+}=b_{-},\]
 and both reduce to the classical velocity.
-
 For Brownian motion they are generally different.
-
 The existence of two distinct drift velocities is therefore not an
 additional hypothesis but a direct consequence of the
 non-differentiability of the stochastic trajectory.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Current and Osmotic Velocities}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The two drift velocities describe complementary aspects of the motion.
-
 The average
-
 \begin{equation}
-\boxed{
-v
-=
-\frac12
-(b_{+}+b_{-})
-}
+\boxed{v=\frac12(b_{+}+b_{-})}
 \label{eq:currentvelocity}
 \end{equation}
-
 represents the net transport of the ensemble.
-
 It is therefore called the
 \emph{current velocity}.
-
 If the random fluctuations were absent,
-
-\[
-v
-\]
-
+\[v\]
 would coincide with the ordinary classical velocity.
-
 The difference
-
 \begin{equation}
-\boxed{
-u
-=
-\frac12
-(b_{+}-b_{-})
-}
+\boxed{u=\frac12(b_{+}-b_{-})}
 \label{eq:osmoticvelocity}
 \end{equation}
-
 has an entirely different physical meaning.
-
 Suppose that the probability density is larger on one side of the
 particle than on the other.
 
 Random motion then produces a larger number of microscopic jumps from
 the high-density region toward the low-density region.
-
 This statistical imbalance generates an effective drift even when the
 average force vanishes.
-
 The quantity
-
-\[
-u
-\]
-
+\[u\]
 therefore measures the tendency of the probability distribution to
 spread.
-
 For this reason it is known as the
 \emph{osmotic velocity}.
-
 The terminology is borrowed from ordinary diffusion, where concentration
 gradients generate osmotic flow through a semipermeable membrane.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relation Between Osmotic Velocity and Probability Density}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The osmotic velocity is not an independent dynamical variable.
-
 Its form is determined by the diffusion process itself.
-
 Comparison of the forward and backward Fokker--Planck equations yields
-
 \begin{equation}
-\boxed{
-u
-=
-D\nabla\ln\rho.
-}
+\boxed{u=D\nabla\ln\rho.}
 \label{eq:osmotic}
 \end{equation}
-
 This remarkably simple equation has a transparent physical
 interpretation.
-
 If the probability density is uniform,
-
-\[
-\nabla\rho=0,
-\]
-
+\[\nabla\rho=0,\]
 there is no preferred direction for the random motion and therefore
-
-\[
-u=0.
-\]
-
+\[u=0.\]
 Whenever the probability density possesses a gradient,
-
 particles diffuse away from regions of higher probability toward regions
 of lower probability.
-
 The osmotic velocity is therefore determined entirely by the spatial
 variation of the probability density.
-
 Unlike the current velocity,
-
 which describes the average motion of the ensemble,
-
 the osmotic velocity measures the statistical tendency of the ensemble
 to spread.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mean Acceleration}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In classical mechanics the dynamics of a particle is determined by
 Newton's second law,
-
 \begin{equation}
 m\frac{d^2x}{dt^2}=F.
 \label{eq:newton}
 \end{equation}
-
 The existence of the second derivative presupposes that the trajectory
 is twice differentiable.
-
 Brownian trajectories do not satisfy this requirement.
 Neither the velocity nor the acceleration exists in the ordinary sense.
-
 The basic problem of stochastic mechanics is therefore to construct a
 quantity that plays the role of acceleration while remaining meaningful
 for non-differentiable trajectories.
-
 Nelson's solution is to introduce the forward and backward mean
 derivatives.
-
 For an arbitrary function $f(x,t)$, the forward mean derivative is
 defined by
-
 \begin{equation}
-D_{+}f
-=
-\lim_{\Delta t\rightarrow0^{+}}
-\left<
-\frac{f(x(t+\Delta t),t+\Delta t)-f(x(t),t)}
-{\Delta t}
-\right>.
+D_{+}f=\lim_{\Delta t\rightarrow0^{+}}
+\left<\frac{f(x(t+\Delta t),t+\Delta t)-f(x(t),t)}{\Delta t}\right>.
 \label{eq:Dplus}
 \end{equation}
-
 Similarly, the backward derivative is
-
 \begin{equation}
-D_{-}f
-=
-\lim_{\Delta t\rightarrow0^{+}}
-\left<
-\frac{f(x(t),t)-f(x(t-\Delta t),t-\Delta t)}
-{\Delta t}
-\right>.
+D_{-}f=\lim_{\Delta t\rightarrow0^{+}}
+\left<\frac{f(x(t),t)-f(x(t-\Delta t),t-\Delta t)}{\Delta t}\right>.
 \label{eq:Dminus}
 \end{equation}
-
 These operators reduce to the ordinary time derivative whenever the
 motion becomes differentiable.
-
-
 Using the stochastic differential equation,
-
-\[
-dx=b_{\pm}\,dt+dW,
-\]
-
+\[dx=b_{\pm}\,dt+dW,\]
 together with the fundamental relation
-
-\[
-(dW)^2=2D\,dt,
-\]
-
+\[(dW)^2=2D\,dt,\]
 one finds
-
 \begin{equation}
-\boxed{
-D_{+}
-=
-\frac{\partial}{\partial t}
-+
-b_{+}\cdot\nabla
-+
-D\nabla^2,
-}
+\boxed{D_{+}=\frac{\partial}{\partial t}+b_{+}\cdot\nabla+D\nabla^2,}
 \label{eq:Dplusoperator}
 \end{equation}
-
 while
-
 \begin{equation}
-\boxed{
-D_{-}
-=
-\frac{\partial}{\partial t}
-+
-b_{-}\cdot\nabla
--
-D\nabla^2.
-}
+\boxed{D_{-}=\frac{\partial}{\partial t}+b_{-}\cdot\nabla-D\nabla^2.}
 \label{eq:Dminusoperator}
 \end{equation}
-
 The only difference between the two operators is the sign of the
 diffusion term.
-
 This sign change reflects the fact that the diffusion process is viewed
 either forward or backward in time.
-
-
-
 The appearance of the Laplacian has a simple physical origin.
-
 In deterministic mechanics the change of a function along a trajectory
 depends only upon its first derivatives.
-
 Random motion continually samples neighboring trajectories.
-
 The average value of the function therefore depends not only upon its
 local slope but also upon its local curvature.
-
 The Laplacian measures precisely this curvature.
-
 Its appearance is therefore a direct consequence of microscopic
 fluctuations.
-
 The diffusion coefficient determines the strength with which neighboring
 trajectories influence one another.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Stochastic Newton Equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Since neither the forward nor the backward acceleration possesses a
 preferred physical status, Nelson introduced the symmetric combination
-
 \begin{equation}
-\boxed{
-a
-=
-\frac12
-\left(
-D_{+}D_{-}
-+
-D_{-}D_{+}
-\right)x.
-}
+\boxed{a=\frac12\left(D_{+}D_{-}+D_{-}D_{+}\right)x.}
 \label{eq:meanacceleration}
 \end{equation}
-
 The stochastic equation of motion is then assumed to preserve the
 Newtonian form,
-
 \begin{equation}
-\boxed{
-m\,a
-=
--\nabla V.
-}
+\boxed{m\,a=-\nabla V.}
 \label{eq:stochasticnewton}
 \end{equation}
-
 The only modification relative to classical mechanics is the
 replacement of the ordinary acceleration by the mean stochastic
 acceleration.
-
 No additional dynamical postulates are required.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{From the Stochastic Newton Equation to the Schrödinger Equation}
 \label{sec:SchrodingerDerivation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The preceding section demonstrated that Newton's second law may be
 extended to non-differentiable trajectories by replacing the ordinary
 acceleration with an appropriate stochastic mean acceleration. The
 resulting equation,
-
 \begin{equation}
-m\left(
-\frac{\partial \mathbf v}{\partial t}
-+
-(\mathbf v\cdot\nabla)\mathbf v
--
-(\mathbf u\cdot\nabla)\mathbf u
--
-D\nabla^2\mathbf u
-\right)
-=
--\nabla V,
+m\left(\frac{\partial \mathbf v}{\partial t}
++(\mathbf v\cdot\nabla)\mathbf v
+-(\mathbf u\cdot\nabla)\mathbf u
+-D\nabla^2\mathbf u\right)
+=-\nabla V,
 \label{eq:EulerStochastic}
 \end{equation}
-
 already resembles the Euler equation of ideal fluid dynamics.
 The essential difference is the appearance of two velocity fields.
 The current velocity $\mathbf v$ describes the transport of probability,
 whereas the osmotic velocity $\mathbf u$ describes diffusion driven by
 random microscopic fluctuations.
-
 The remarkable feature of Nelson's theory is that these two velocity
 fields are not independent. The osmotic velocity is completely
 determined by the probability density,
-
 \begin{equation}
-\boxed{
-\mathbf u
-=
-D\nabla\ln\rho .
-}
+\boxed{\mathbf u=D\nabla\ln\rho .}
 \label{eq:osmoticvelocity}
 \end{equation}
-
 Consequently the entire dynamics may be expressed in terms of only two
 quantities,
-
-\[
-\rho(\mathbf x,t),
-\qquad
-\mathbf v(\mathbf x,t).
-\]
-
+\[\rho(\mathbf x,t),\qquad\mathbf v(\mathbf x,t).\]
 These are precisely the variables used in the hydrodynamic formulation
 of quantum mechanics introduced independently by Madelung in 1926.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Velocity Potential}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Suppose that the current velocity is irrotational,
-
 \begin{equation}
 \nabla\times\mathbf v=0.
 \label{eq:irrotational}
 \end{equation}
-
 Then one may introduce a scalar velocity potential $S(\mathbf x,t)$,
-
 \begin{equation}
-\boxed{
-\mathbf v
-=
-\frac{1}{m}\nabla S.
-}
+\boxed{\mathbf v=\frac{1}{m}\nabla S.}
 \label{eq:VelocityPotential}
 \end{equation}
-
 The quantity $S$ has the dimensions of action.
 In the classical limit it will become Hamilton's principal function.
-
 The assumption (\ref{eq:irrotational}) deserves comment.
 It is not a fundamental requirement of stochastic mechanics.
 Rather, it corresponds to spinless systems without vortices.
 Generalizations including spin and vorticity will be discussed later in
 this monograph.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Appearance of the Quantum Potential}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Substituting Eq.~(\ref{eq:osmoticvelocity}) into the stochastic Newton
 equation requires repeated differentiation of the logarithm of the
 probability density.
-
 Although the intermediate algebra is lengthy, it involves only standard
 vector identities.
 After straightforward calculation one finds
-
 \begin{equation}
-(\mathbf u\cdot\nabla)\mathbf u
-+
-D\nabla^2\mathbf u
-=
-\nabla
-\left(
-2D^2
-\frac{\nabla^2\sqrt{\rho}}
-{\sqrt{\rho}}
-\right).
+(\mathbf u\cdot\nabla)\mathbf u+D\nabla^2\mathbf u=
+\nabla\left(2D^2\frac{\nabla^2\sqrt{\rho}}{\sqrt{\rho}}\right).
 \label{eq:Identity}
 \end{equation}
-
 The stochastic equation of motion therefore becomes
-
 \begin{equation}
-m
-\left(
-\frac{\partial\mathbf v}{\partial t}
-+
-(\mathbf v\cdot\nabla)\mathbf v
-\right)
-=
--\nabla(V+Q),
+m\left(\frac{\partial\mathbf v}{\partial t}
++(\mathbf v\cdot\nabla)\mathbf v\right)
+=-\nabla(V+Q),
 \label{eq:EulerQuantum}
 \end{equation}
-
 where
-
 \begin{equation}
-\boxed{
-Q
-=
--2mD^2
-\frac{\nabla^2\sqrt{\rho}}
-{\sqrt{\rho}}
-}
+\boxed{Q=-2mD^2\frac{\nabla^2\sqrt{\rho}}{\sqrt{\rho}}}
 \label{eq:QuantumPotential}
 \end{equation}
-
 is known as the \emph{quantum potential}.
-
 This quantity has no analogue in classical mechanics.
 It is entirely generated by the stochastic fluctuations.
 If the diffusion coefficient tends to zero,
-
-\[
-D\rightarrow0,
-\]
-
+\[D\rightarrow0,\]
 the quantum potential disappears and the ordinary Euler equation of
 classical mechanics is recovered.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Physical Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The quantum potential deserves careful interpretation.
-
 Unlike the classical potential energy, it is not determined by external
 sources.
-
 Instead, it depends on the probability distribution of the particle
 itself.
-
 Consequently, the force generated by the quantum potential reflects the
 statistical structure of the entire ensemble rather than the properties
 of an external field.
-
 This observation is common to several formulations of quantum mechanics,
 including the Madelung and de Broglie--Bohm approaches.
 In Nelson's theory, however, the quantum potential is not introduced as
 a new postulate.
 It appears naturally as the macroscopic manifestation of microscopic
 stochastic fluctuations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Hamilton--Jacobi Equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Using
-
-\[
-\mathbf v=\frac{1}{m}\nabla S,
-\]
-
+\[\mathbf v=\frac{1}{m}\nabla S,\]
 Eq.~(\ref{eq:EulerQuantum}) may be integrated once with respect to the
 spatial coordinates.
-
 The result is
-
 \begin{equation}
-\boxed{
-\frac{\partial S}{\partial t}
-+
-\frac{(\nabla S)^2}{2m}
-+
-V
-+
-Q
-=
-0.
-}
+\boxed{\frac{\partial S}{\partial t}+\frac{(\nabla S)^2}{2m}+V+Q=0.}
 \label{eq:QuantumHJ}
 \end{equation}
-
 This equation differs from the classical Hamilton--Jacobi equation only
 through the additional quantum potential.
-
 From this viewpoint quantum mechanics may be regarded as a modification
 of Hamilton--Jacobi theory produced by microscopic diffusion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Probability Conservation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The probability density satisfies the continuity equation
-
 \begin{equation}
-\boxed{
-\frac{\partial\rho}{\partial t}
-+
-\nabla\cdot
-\left(
-\rho
-\frac{\nabla S}{m}
-\right)
-=
-0.
-}
+\boxed{\frac{\partial\rho}{\partial t}+
+\nabla\cdot\left(\rho\frac{\nabla S}{m}\right)=0.}
 \label{eq:ContinuityAgain}
 \end{equation}
-
 Equations
 (\ref{eq:QuantumHJ})
 and
 (\ref{eq:ContinuityAgain})
 form a closed system for the two unknown functions
-
-\[
-\rho(\mathbf x,t),
-\qquad
-S(\mathbf x,t).
-\]
-
+\[\rho(\mathbf x,t),\qquad S(\mathbf x,t).\]
 These two equations are completely equivalent to Nelson's stochastic
 equation of motion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Emergence of the Wave Function}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The appearance of the Schrödinger equation is now almost inevitable.
-
 Introduce the complex function
-
 \begin{equation}
-\boxed{
-\psi(\mathbf x,t)
-=
-\sqrt{\rho(\mathbf x,t)}
-\exp
-\left(
-\frac{iS(\mathbf x,t)}{\hbar}
-\right).
-}
+\boxed{\psi(\mathbf x,t)=\sqrt{\rho(\mathbf x,t)}
+    \exp\left(\frac{iS(\mathbf x,t)}{\hbar}\right).}
 \label{eq:WaveFunction}
 \end{equation}
-
 This definition combines the probability density and the velocity
 potential into a single complex field.
-
 Using
-
-\[
-D=\frac{\hbar}{2m},
-\]
-
+\[D=\frac{\hbar}{2m},\]
 together with
 Eqs.~(\ref{eq:QuantumHJ})
 and
 (\ref{eq:ContinuityAgain}),
 one finds after direct calculation
-
 \begin{equation}
-\boxed{
-i\hbar
-\frac{\partial\psi}{\partial t}
-=
--
-\frac{\hbar^2}{2m}
-\nabla^2\psi
-+
-V\psi.
-}
+\boxed{i\hbar\frac{\partial\psi}{\partial t}=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi.}
 \label{eq:Schrodinger}
 \end{equation}
-
 This is precisely the Schrödinger equation.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Discussion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The derivation presented above illustrates one of the most attractive
 features of Nelson's stochastic mechanics.
-
 The Schrödinger equation is not assumed as a fundamental law.
 Instead, it emerges from three physical ingredients:
-
 \begin{enumerate}
-
 \item
 continuous but non-differentiable particle trajectories,
-
 \item
 microscopic diffusion characterized by the coefficient
-
-\[
-D=\frac{\hbar}{2m},
-\]
-
+\[D=\frac{\hbar}{2m},\]
 \item
 Newton's second law applied to the stochastic mean acceleration.
-
 \end{enumerate}
-
 Thus the wave function appears as a convenient mathematical
 representation of two real physical fields, namely the probability
 density $\rho$ and the velocity potential $S$.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Historical Remarks}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The relationship between the Hamilton--Jacobi equation, the continuity
 equation, and the Schrödinger equation was first recognized by
 Madelung, long before the development of stochastic mechanics.
 Nelson's essential contribution was to show that these equations can be
 derived from an underlying stochastic dynamics rather than introduced as
 an alternative representation of the Schrödinger equation.
-
 It should also be emphasized that the quantum potential obtained here is
 identical to that appearing in the de Broglie--Bohm formulation.
 The physical interpretation, however, is fundamentally different.
 In Bohmian mechanics the quantum potential is taken as a basic element
 of the dynamics, whereas in Nelson's theory it is an emergent quantity
 generated by stochastic fluctuations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The derivation presented here is intentionally physical rather than
 measure-theoretic.
 For the purposes of this monograph, the emphasis is placed on the
 physical mechanism by which stochastic diffusion modifies classical
 Hamilton--Jacobi dynamics.
-
 In a later appendix we shall return to the mathematical foundations,
 including It\^o calculus, martingales, filtrations, stochastic
 integrals, and the rigorous derivation of the forward and backward mean
 derivatives.
-
 At the present stage the important conclusion is simply that Nelson's
 construction provides a remarkably economical route from classical
 mechanics to the Schrödinger equation.
-
 The next question is unavoidable.
-
 Can the same physical picture be extended to relativistic systems?
-
 The remainder of this chapter is devoted to this problem.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Critical Assessment of Nelson's Stochastic Mechanics}
 \label{sec:CriticalNelson}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The derivation presented in the previous sections demonstrates that
 Nelson's stochastic mechanics provides one of the most economical routes
 from classical mechanics to the Schrödinger equation. Beginning with
@@ -1756,1310 +953,755 @@ Newton's second law in terms of a stochastic mean acceleration, the
 formalism reproduces the equations of nonrelativistic quantum
 mechanics without introducing the wave function as a fundamental
 postulate.
-
 This achievement is remarkable and explains the continuing interest in
 stochastic mechanics more than half a century after its introduction.
-
 At the same time, a complete assessment requires discussing both the
 strengths and the remaining open questions of the theory. Some of these
 are technical, others conceptual, and several continue to be the subject
 of active research.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Conceptual Strengths}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Nelson's construction possesses several attractive features.
-
 First, the theory preserves the intuitive notion of particle
 trajectories. Unlike the Copenhagen interpretation, particles are
 assumed to possess well-defined positions at every instant of time,
 although the trajectories are continuous rather than differentiable.
-
 Second, classical mechanics is not abandoned but generalized.
 The dynamical law remains Newton's second law,
-
-\[
-m\mathbf a=\mathbf F,
-\]
-
+\[m\mathbf a=\mathbf F,\]
 with the ordinary acceleration replaced by the stochastic mean
 acceleration. The transition from classical mechanics to stochastic
 mechanics is therefore conceptually much smaller than the transition to
 the axiomatic formulation of quantum mechanics.
-
 Third, the probabilistic interpretation arises naturally.
 The probability density is an intrinsic property of the ensemble of
 stochastic trajectories rather than an additional postulate attached to
 the wave function.
-
 Finally, the theory establishes a close connection between quantum
 mechanics and nonequilibrium statistical physics. The quantum potential,
 which appears somewhat mysterious in other formulations, emerges here as
 a direct consequence of microscopic diffusion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Role of the Diffusion Coefficient}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One of the central assumptions of Nelson's theory is the identification
-
-\[
-D=\frac{\hbar}{2m}.
-\]
-
+\[D=\frac{\hbar}{2m}.\]
 This relation is essential for recovering the Schrödinger equation.
-
 From a mathematical viewpoint the choice is perfectly consistent.
 From a physical viewpoint, however, an important question immediately
 arises.
-
 What determines this particular value?
-
 In ordinary Brownian motion the diffusion coefficient is determined by
 the microscopic properties of the surrounding medium, including the
 temperature, viscosity and particle size.
-
 In stochastic mechanics no comparable microscopic model is available.
-
 Consequently the value
-
-\[
-D=\frac{\hbar}{2m}
-\]
-
+\[D=\frac{\hbar}{2m}\]
 must presently be regarded as a phenomenological input rather than a
 derived quantity.
-
 A deeper microscopic explanation remains one of the outstanding problems
 of stochastic mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Wallstrom's Objection}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Perhaps the most widely discussed criticism of stochastic mechanics was
 formulated by Wallstrom.
-
 The hydrodynamic equations derived from stochastic mechanics determine
 the probability density and the velocity field,
-
-\[
-\rho(\mathbf x,t),
-\qquad
-\mathbf v(\mathbf x,t),
-\]
-
+\[\rho(\mathbf x,t),\qquad\mathbf v(\mathbf x,t),\]
 but they do not automatically imply the single-valuedness of the wave
 function.
-
 In ordinary quantum mechanics the wave function satisfies
-
-\[
-\psi(\mathbf x)=\psi(\mathbf x),
-\]
-
+\[\psi(\mathbf x)=\psi(\mathbf x),\]
 after every closed circuit in configuration space.
-
 Consequently,
-
-\[
-\oint\nabla S\cdot d\mathbf l
-=
-2\pi n\hbar,
-\qquad
-n\in\mathbb Z.
-\]
-
+\[\oint\nabla S\cdot d\mathbf l=2\pi n\hbar,\qquad n\in\mathbb Z.\]
 Within Nelson's original formulation this quantization condition does
 not follow directly from the stochastic dynamics.
-
 Instead it must either be imposed as an additional condition or derived
 from supplementary physical assumptions.
-
 Whether this represents a genuine inconsistency or merely an incomplete
 formulation remains a matter of debate.
-
 Several authors have proposed modifications intended to derive the
 required quantization condition dynamically, although no universally
 accepted resolution presently exists.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Spin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The formulation developed above describes spinless particles.
-
 Nothing in the stochastic process naturally generates the intrinsic
 angular momentum associated with spin-$1/2$ particles.
-
 Several extensions have been proposed.
-
 These include stochastic processes on spin bundles,
 internal stochastic variables,
 Grassmann degrees of freedom,
 and stochastic generalizations of the Pauli equation.
-
 Although significant progress has been achieved, none of these
 extensions has attained the same simplicity and general acceptance as
 Nelson's original spinless theory.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gauge Interactions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Electromagnetic interactions may be incorporated by replacing the
 ordinary gradient with the gauge-covariant derivative,
-
-\[
-\nabla
-\rightarrow
-\nabla-\frac{ie}{\hbar}\mathbf A,
-\]
-
+\[\nabla\rightarrow\nabla-\frac{ie}{\hbar}\mathbf A,\]
 together with the scalar potential.
-
 The resulting equations reproduce the Schrödinger equation in an
 external electromagnetic field.
-
 The situation is considerably more complicated for non-Abelian gauge
 fields.
-
 Because the stochastic particle carries internal gauge degrees of
 freedom, the diffusion process must evolve simultaneously in space-time
 and in the internal group manifold.
-
 Only partial formulations presently exist, and a generally accepted
 non-Abelian stochastic mechanics has not yet emerged.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Many-Particle Systems}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The extension to several interacting particles is conceptually
 straightforward.
-
 The stochastic process is defined on the full configuration space,
-
-\[
-\mathbb R^{3N},
-\]
-
+\[\mathbb R^{3N},\]
 and the probability density evolves according to the corresponding
 multi-particle Fokker--Planck equation.
-
 Nevertheless, the dimensionality of the configuration space grows
 rapidly with the number of particles.
-
 As in ordinary quantum mechanics, this high-dimensional configuration
 space raises important questions concerning locality and physical
 interpretation.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relativistic Generalization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The most significant unresolved problem concerns relativity.
-
 Nelson's construction relies upon three ingredients:
-
 \begin{enumerate}
-
 \item
 a universal Newtonian time,
-
 \item
 Euclidean configuration space,
-
 \item
 positive-definite diffusion.
-
 \end{enumerate}
-
 None of these assumptions survives unchanged in special relativity.
-
 There is no preferred time coordinate.
-
 The Minkowski metric is indefinite.
-
 The covariance matrix of a Wiener process cannot simply be identified
 with the Minkowski metric.
-
 Finally, the concepts of proper time, mass shell and Lorentz covariance
 introduce additional difficulties absent in the nonrelativistic theory.
-
 For these reasons a direct relativistic extension of Nelson's theory has
 proved considerably more difficult than originally anticipated.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Perspective}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Despite these open questions, Nelson's stochastic mechanics remains one
 of the most important alternative formulations of quantum mechanics.
-
 It demonstrates that the Schrödinger equation may emerge from an
 underlying stochastic dynamics while preserving much of the conceptual
 structure of classical mechanics.
-
 The remaining problems should therefore not be interpreted as failures
 of the theory but as indications of the directions in which further
 development is required.
-
 The next sections review the principal attempts to construct such a
 relativistic generalization. As will become apparent, different authors
 resolved different subsets of the difficulties discussed above. No
 single formulation simultaneously achieves Lorentz covariance, a
 physically transparent stochastic process, compatibility with quantum
 mechanics, and a fully satisfactory dynamical interpretation.
-
 One of the central motivations of the present monograph is that the
 Stueckelberg--Horwitz--Piron framework may provide the missing
 kinematical structure required for such a synthesis. Its invariant
 evolution parameter, unconstrained Hamiltonian dynamics, and natural
 off-shell formulation remove several of the fundamental obstacles that
 arise already at the level of relativistic stochastic kinematics.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The First Relativistic Diffusion:
 Dudley's Lorentz-Invariant Brownian Motion}
 \label{sec:Dudley}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The first mathematically satisfactory construction of a relativistic
 diffusion process was given by Dudley in 1965.
 Although the theory was not intended as a formulation of quantum
 mechanics, it established several fundamental principles that continue
 to underlie modern relativistic stochastic mechanics.
-
 The importance of Dudley's work cannot be overstated.
-
 Before his work, many authors attempted to construct relativistic
 Brownian motion simply by replacing three-vectors with four-vectors.
 These attempts invariably encountered contradictions with Lorentz
 covariance or with the probabilistic interpretation.
-
 Dudley showed that the difficulty does not lie in probability theory.
 Instead, it lies in the geometry of Minkowski space.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Why the Ordinary Wiener Process Cannot Be Relativistic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The ordinary Wiener process is defined by the statistical properties
-
 \begin{equation}
 \langle dW^i\rangle =0,
 \end{equation}
-
 and
-
 \begin{equation}
-\langle dW^i dW^j\rangle
-=
-2D\delta^{ij}dt.
+\langle dW^i dW^j\rangle=2D\delta^{ij}dt.
 \end{equation}
-
 The covariance matrix
-
-\[
-\delta^{ij}
-\]
-
+\[\delta^{ij}\]
 is positive definite.
-
 Consequently,
-
-\[
-\langle dW^2\rangle
-\ge0,
-\]
-
+\[\langle dW^2\rangle\ge0,\]
 for every displacement.
-
 This property guarantees that the diffusion probability remains
 positive.
-
 One might attempt to obtain a relativistic theory by replacing
-
-\[
-\delta^{ij}
-\]
-
+\[\delta^{ij}\]
 with the Minkowski metric
-
-\[
-\eta_{\mu\nu}
-=
-{\rm diag}(+,-,-,-),
-\]
-
+\[\eta_{\mu\nu}={\rm diag}(+,-,-,-),\]
 so that
-
 \begin{equation}
-\langle dW^\mu dW^\nu\rangle
-=
-2D\eta^{\mu\nu}d\tau .
+\langle dW^\mu dW^\nu\rangle=2D\eta^{\mu\nu}d\tau .
 \label{eq:NaiveRelativisticNoise}
 \end{equation}
-
 At first sight this appears to be the obvious covariant
 generalization.
-
 Unfortunately it immediately produces a contradiction.
-
 Taking the trace,
-
-\[
-\langle dW_\mu dW^\mu\rangle
-=
-2D
-\eta_{\mu\nu}\eta^{\mu\nu}
-d\tau
-=
--4Dd\tau ,
-\]
-
+\[\langle dW_\mu dW^\mu\rangle=2D\eta_{\mu\nu}\eta^{\mu\nu}d\tau=-4Dd\tau ,\]
 which is negative.
-
 More generally,
-
-the covariance matrix defined by Eq.
-(\ref{eq:NaiveRelativisticNoise})
+the covariance matrix defined by Eq.~(\ref{eq:NaiveRelativisticNoise})
 possesses both positive and negative eigenvalues.
-
 Such a matrix cannot represent the covariance of an ordinary stochastic
 process.
-
 The obstacle is therefore not algebraic but geometric.
-
 Probability theory requires a positive quadratic form,
-
 whereas Minkowski space possesses an indefinite metric.
-
 This simple observation explains why relativistic Brownian motion is far
 more difficult than might first appear.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Physical Meaning of the Difficulty}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The failure of Eq.~(\ref{eq:NaiveRelativisticNoise}) has an important
 physical interpretation.
-
 In Euclidean space every direction is equivalent.
-
 The random displacement may therefore occur with equal probability in
 all directions.
-
 Space-time possesses a completely different structure.
-
 The light cone divides every neighborhood of an event into timelike,
 null and spacelike regions.
-
 These regions are not continuously connected.
-
 A random four-dimensional step therefore cannot be chosen in an
 arbitrary direction without violating the causal structure of
 space-time.
-
 The geometry itself restricts the admissible stochastic motion.
-
 This is the central lesson of Dudley's construction.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What Should Diffuse?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Dudley's crucial insight was that the stochastic process should not be
 constructed directly in space-time.
-
 Instead, the diffusion should evolve in the space of admissible
 four-velocities.
-
 For a massive particle,
-
 the four-velocity satisfies
-
 \begin{equation}
 u^\mu u_\mu=c^2.
 \label{eq:MassShellVelocity}
 \end{equation}
-
 Equation (\ref{eq:MassShellVelocity}) defines the future unit
 hyperboloid,
-
-\[
-H^3,
-\]
-
+\[H^3,\]
 embedded in Minkowski space.
-
 Unlike Minkowski space itself,
-
 this manifold possesses a positive-definite intrinsic Riemannian
 geometry.
-
 Random motion may therefore be defined intrinsically on the hyperboloid
 without encountering the sign difficulties discussed above.
-
 The particle trajectory in space-time is then reconstructed by
 integrating the stochastic four-velocity,
-
 \begin{equation}
-\frac{dx^\mu}{d\tau}
-=
-u^\mu .
+\frac{dx^\mu}{d\tau}=u^\mu .
 \label{eq:VelocityDefinition}
 \end{equation}
-
 The stochasticity is therefore transferred from the position to the
 velocity.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Diffusion on the Velocity Hyperboloid}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stochastic evolution of the four-velocity may be written
 schematically as
-
 \begin{equation}
-du^a
-=
-A^a(u)d\tau
-+
-E^a{}_i(u)dW^i ,
+du^a=A^a(u)d\tau+E^a{}_i(u)dW^i ,
 \label{eq:DudleySDE}
 \end{equation}
-
 where the index
-
-\[
-a=1,2,3
-\]
-
+\[a=1,2,3\]
 labels intrinsic coordinates on the hyperboloid.
-
 The Wiener increments
-
-\[
-dW^i
-\]
-
+\[dW^i\]
 are now ordinary Euclidean stochastic variables satisfying
-
 \begin{equation}
-\langle dW^i dW^j\rangle
-=
-2D\delta^{ij}d\tau .
+\langle dW^i dW^j\rangle=2D\delta^{ij}d\tau .
 \end{equation}
-
 The functions
-
-\[
-E^a{}_i
-\]
-
+\[E^a{}_i\]
 play the role of a moving orthonormal frame on the hyperboloid.
-
 They transform the Euclidean noise into a stochastic motion respecting
 the Lorentz geometry.
-
 From the physical viewpoint,
-
 the random motion occurs locally in an ordinary Euclidean tangent space.
-
 The curvature of the hyperboloid determines how these local random steps
 combine into a globally Lorentz-covariant diffusion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Dudley's construction teaches an important lesson.
-
 The conflict between probability theory and special relativity does not
 arise because stochastic processes are incompatible with Lorentz
 covariance.
-
 Rather, the conflict appears only when the stochastic process is defined
 on the wrong manifold.
-
 The physically relevant manifold is not Minkowski space itself but the
 space of admissible four-velocities.
-
 The price for this elegant solution is that the particle remains
 strictly on the mass shell.
-
 The invariant mass is fixed throughout the stochastic evolution.
-
 Consequently,
-
 although Dudley's theory provides a mathematically rigorous relativistic
 diffusion,
-
 it is not yet a relativistic stochastic mechanics in Nelson's sense.
-
 No analogue of the Schrödinger equation emerges.
-
 The construction is fundamentally kinematical rather than dynamical.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Editorial Remarks}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 From the perspective of the present monograph, Dudley's theory occupies
 a unique position.
-
 It provides the first convincing demonstration that relativistic
 diffusion is possible.
-
 At the same time, it also illustrates the limitations of an approach
 based entirely on the mass-shell constraint.
-
 In later chapters we shall adopt a different viewpoint.
-
 Within the Stueckelberg--Horwitz--Piron framework the particle is not
 restricted to a fixed mass shell.
 The invariant evolution parameter $\tau$ and the unconstrained phase
 space permit a fundamentally different construction of stochastic
 dynamics.
-
 In this sense, Dudley's theory should be viewed not as a competitor to
 the SHP approach but as an essential stepping stone. It isolates the
 geometrical difficulties associated with relativistic diffusion while
 making clear which additional ingredients are required to obtain a
 relativistic theory capable of reproducing quantum mechanics.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hakim's Proper-Time Stochastic Mechanics}
 \label{sec:Hakim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Dudley's construction demonstrated that Lorentz-covariant diffusion is
 mathematically possible. Nevertheless, it left unanswered the central
 question that originally motivated stochastic mechanics.
-
 Can a relativistic stochastic process reproduce relativistic quantum
 mechanics?
-
 One of the earliest systematic attempts to answer this question was
 made by Rémi Hakim in the late 1960s.
-
 Hakim's work represents an important conceptual step beyond Dudley's
 theory.
-
 Instead of studying relativistic diffusion as an isolated mathematical
 problem, he attempted to construct a genuine relativistic dynamics based
 upon stochastic trajectories.
-
 Although the resulting theory differs substantially from Nelson's
 nonrelativistic mechanics, it introduced several ideas that continue to
 appear in modern relativistic stochastic theories.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Choice of Evolution Parameter}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The first question concerns the evolution parameter.
-
 In nonrelativistic mechanics the answer is obvious.
-
 Every stochastic trajectory evolves with respect to the universal
 Newtonian time,
-
-\[
-t.
-\]
-
+\[t.\]
 Relativity immediately destroys this simplicity.
-
 Different inertial observers assign different coordinate times to the
 same physical event.
-
 Consequently the coordinate time cannot serve as the fundamental
 parameter of a Lorentz-invariant stochastic process.
-
 Hakim therefore adopted the particle's proper time,
-
-\[
-\tau,
-\]
-
+\[\tau,\]
 defined by
-
 \begin{equation}
-d\tau^2
-=
-\frac{1}{c^2}
-dx^\mu dx_\mu .
+d\tau^2=\frac{1}{c^2}dx^\mu dx_\mu .
 \label{eq:ProperTime}
 \end{equation}
-
 Since the proper time is Lorentz invariant, it appears to provide the
 natural relativistic analogue of Newtonian time.
-
 The stochastic trajectory is therefore written as
-
-\[
-x^\mu(\tau).
-\]
-
+\[x^\mu(\tau).\]
 This was one of the first relativistic stochastic theories formulated
 explicitly in terms of invariant evolution.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Stochastic Four-Velocity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Once the evolution parameter has been chosen, the next question is the
 choice of stochastic variable.
-
 Hakim followed the physical intuition already encountered in Dudley's
 construction.
-
 Instead of assuming that the space-time position undergoes a Wiener
 process, he regarded the four-velocity as the fundamental dynamical
 variable.
-
 The particle trajectory satisfies
-
 \begin{equation}
-\frac{dx^\mu}{d\tau}
-=
-u^\mu ,
+\frac{dx^\mu}{d\tau}=u^\mu ,
 \label{eq:HakimVelocity}
 \end{equation}
-
 while the four-velocity itself evolves stochastically.
-
 The corresponding stochastic differential equation may be written
 schematically as
-
 \begin{equation}
-du^\mu
-=
-A^\mu(x,u)d\tau
-+
-d\Xi^\mu ,
+du^\mu=A^\mu(x,u)d\tau+d\Xi^\mu ,
 \label{eq:HakimNoise}
 \end{equation}
-
 where
-
-\[
-A^\mu
-\]
-
+\[A^\mu\]
 represents the deterministic force, while
-
-\[
-d\Xi^\mu
-\]
-
+\[d\Xi^\mu\]
 denotes the random increment.
-
 The precise statistical properties of the noise depend upon the chosen
 construction.
-
 Unlike the ordinary Wiener process, however, the stochastic increment
 must remain compatible with relativistic covariance and with the
 normalization of the four-velocity.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Probability in Phase Space}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 An important conceptual difference from Nelson's theory now becomes
 apparent.
-
 Nelson's probability density is defined in configuration space,
-
-\[
-\rho(\mathbf x,t).
-\]
-
+\[\rho(\mathbf x,t).\]
 Hakim instead considers a probability density in relativistic phase
 space,
-
-\[
-f(x^\mu,u^\mu,\tau).
-\]
-
+\[f(x^\mu,u^\mu,\tau).\]
 The physical meaning of this function is straightforward.
-
 Instead of asking,
-
 "What is the probability of finding the particle at a given position?"
-
 one asks,
-
 "What is the probability that the particle possesses both a given
 position and a given four-velocity?"
-
 This viewpoint is much closer to relativistic kinetic theory than to
 ordinary quantum mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relativistic Fokker--Planck Equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stochastic process induces an evolution equation for the phase-space
 probability density.
-
 Its general structure is
-
 \begin{equation}
-\frac{\partial f}{\partial\tau}
-+
-u^\mu
-\frac{\partial f}{\partial x^\mu}
-=
-\mathcal L_u f,
+\frac{\partial f}{\partial\tau}+u^\mu\frac{\partial f}{\partial x^\mu}=
+    \mathcal L_u f,
 \label{eq:RelFP}
 \end{equation}
-
 where
-
-\[
-\mathcal L_u
-\]
-
+\[\mathcal L_u\]
 is the diffusion operator acting on the velocity variables.
-
 The first term describes transport along the particle world line.
-
 The second represents the stochastic diffusion of the four-velocity.
-
 Equation (\ref{eq:RelFP}) is the relativistic analogue of the ordinary
 Fokker--Planck equation.
-
 Its interpretation is particularly transparent.
-
 As the particle moves through space-time, its velocity undergoes random
 changes, causing the probability distribution in phase space to spread.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relation to Relativistic Kinetic Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One of the most attractive features of Hakim's approach is its close
 connection with relativistic kinetic theory.
-
 The probability density
-
-\[
-f(x,u,\tau)
-\]
-
+\[f(x,u,\tau)\]
 plays essentially the same role as the one-particle distribution
 function appearing in the relativistic Boltzmann equation.
-
 The deterministic Liouville equation is recovered when the diffusion
 operator is omitted,
-
-\[
-\mathcal L_u=0.
-\]
-
+\[\mathcal L_u=0.\]
 The stochastic theory therefore appears as a natural generalization of
 classical relativistic transport theory.
-
 This relationship later proved extremely influential in the development
 of relativistic Langevin equations and stochastic models of high-energy
 particle transport.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Achievements and Limitations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Hakim's theory represented a substantial advance over earlier
 approaches.
-
 For the first time,
-
 \begin{itemize}
-
 \item the stochastic evolution parameter was Lorentz invariant,
-
 \item the stochastic dynamics respected relativistic kinematics,
-
 \item the probability density evolved according to a covariant
 Fokker--Planck equation,
-
 \item and the formalism connected naturally with relativistic kinetic
 theory.
-
 \end{itemize}
-
 Nevertheless, several important questions remained unresolved.
-
 First, the proper time is defined only for timelike trajectories.
 The treatment of massless particles therefore requires a different
 construction.
-
 Second, the stochastic dynamics remains confined to the mass shell.
-
 The invariant mass is fixed throughout the evolution.
-
 Third, although the formalism provides a consistent relativistic
 diffusion theory, it does not naturally reproduce either the
 Klein--Gordon equation or the Dirac equation.
-
 In this respect the theory remains closer to relativistic statistical
 mechanics than to a stochastic formulation of quantum mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relation to the SHP Framework}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 From the perspective adopted in this monograph, Hakim's work is of
 particular interest because it emphasizes the importance of invariant
 evolution.
-
 This idea reappears naturally in the
 Stueckelberg--Horwitz--Piron (SHP) framework.
-
 The similarity, however, should not be overstated.
-
 In Hakim's theory the evolution parameter is the proper time,
-
 which is constrained by the particle trajectory and therefore depends on
 the motion itself.
-
 In contrast, the SHP formalism introduces an independent invariant
 parameter,
-
-\[
-\tau,
-\]
-
+\[\tau,\]
 which exists prior to solving the equations of motion.
-
 This seemingly modest difference has profound consequences.
-
 The Hamiltonian dynamics is no longer restricted to a fixed mass shell,
 external interactions may change the invariant mass, and the phase space
 acquires the same unconstrained structure as in ordinary Hamiltonian
 mechanics.
-
 For these reasons the SHP framework provides considerably greater
 freedom for constructing relativistic stochastic dynamics than is
 available within proper-time formulations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Historically, Hakim's work marks the transition from purely geometric
 relativistic diffusion to genuinely dynamical stochastic theories.
-
 Conceptually, however, it also illustrates an important lesson.
-
 Choosing an invariant evolution parameter, although necessary, is not by
 itself sufficient to obtain a relativistic stochastic mechanics capable
 of reproducing quantum theory.
-
 One must also identify the appropriate dynamical variables, determine
 their stochastic evolution, and explain how the relativistic wave
 equations emerge from the resulting probability dynamics.
-
 These questions remained open after Hakim's work and motivated much of
 the subsequent development of relativistic stochastic mechanics during
 the following decades.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Relativistic Langevin Equations}
 \label{sec:RelLangevin}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stochastic theories discussed in the preceding sections were
 developed primarily with the aim of understanding the foundations of
 quantum mechanics. A rather different line of development emerged from
 statistical physics.
-
 Instead of asking whether quantum mechanics can be derived from an
 underlying stochastic process, one asks how relativistic particles move
 inside a fluctuating environment.
-
 Typical examples include
-
 \begin{itemize}
-
 \item charged particles in turbulent electromagnetic fields,
-
 \item heavy quarks propagating through a quark--gluon plasma,
-
 \item cosmic rays travelling through random magnetic fields,
-
 \item relativistic plasmas,
-
 \item particles interacting with thermal radiation.
-
 \end{itemize}
-
 In all these problems the microscopic interactions are too complicated
 to describe individually.
-
 Instead, one separates the dynamics into two parts.
-
 The first is the smooth average motion generated by external fields.
-
 The second consists of rapidly fluctuating microscopic forces whose
 detailed origin is not followed explicitly.
-
 This physical picture leads naturally to relativistic Langevin
 equations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{From Newton's Equation to the Langevin Equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The classical relativistic equation of motion may be written as
-
 \begin{equation}
-\frac{dp^\mu}{d\tau}
-=
-F^\mu ,
+\frac{dp^\mu}{d\tau}=F^\mu ,
 \label{eq:RelNewton}
 \end{equation}
-
 where
-
-\[
-p^\mu=mu^\mu
-\]
-
+\[p^\mu=mu^\mu\]
 is the four-momentum.
-
 Suppose now that the force contains both deterministic and random
 contributions,
-
 \begin{equation}
-F^\mu
-=
-F^\mu_{\rm ext}
-+
-F^\mu_{\rm fr}
-+
-\xi^\mu .
+F^\mu=F^\mu_{\rm ext}+F^\mu_{\rm fr}+\xi^\mu .
 \label{eq:ForceSplit}
 \end{equation}
-
 The first term represents external fields.
-
 The second describes dissipative effects such as friction.
-
 The third is a rapidly fluctuating random force.
-
 The equation of motion becomes
-
 \begin{equation}
-\boxed{
-\frac{dp^\mu}{d\tau}
-=
-F^\mu_{\rm ext}
-+
-F^\mu_{\rm fr}
-+
-\xi^\mu .
-}
+\boxed{\frac{dp^\mu}{d\tau}=F^\mu_{\rm ext}+F^\mu_{\rm fr}+\xi^\mu .}
 \label{eq:RelLangevin}
 \end{equation}
-
 This equation is the relativistic analogue of the ordinary Langevin
 equation.
-
 Unlike Nelson's theory, where stochasticity is introduced at the level
 of the particle trajectory, the present approach attributes randomness
 directly to the microscopic force.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Nature of the Random Force}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The fluctuating force is assumed to satisfy
-
 \begin{equation}
 \langle\xi^\mu\rangle=0,
 \label{eq:MeanNoise}
 \end{equation}
-
 so that no preferred direction exists on average.
-
 The correlation function is usually written in the schematic form
-
 \begin{equation}
-\boxed{
-\langle
-\xi^\mu(\tau)
-\xi^\nu(\tau')
-\rangle
-=
-C^{\mu\nu}
-\delta(\tau-\tau').
-}
+\boxed{\langle\xi^\mu(\tau)\xi^\nu(\tau')\rangle=C^{\mu\nu}\delta(\tau-\tau').}
 \label{eq:NoiseCorrelation}
 \end{equation}
-
 The tensor
-
-\[
-C^{\mu\nu}
-\]
-
+\[C^{\mu\nu}\]
 determines both the intensity and the anisotropy of the fluctuations.
-
 Unlike the nonrelativistic theory,
-
 the correlation tensor cannot be chosen arbitrarily.
-
 It must be compatible with Lorentz covariance and with the normalization
 of the four-momentum.
-
 Consequently,
-
 the construction of relativistic noise is considerably more subtle than
 its Newtonian counterpart.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Orthogonality Condition}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 An important consequence of relativistic kinematics is obtained by
 differentiating the invariant mass relation
-
 \begin{equation}
-p^\mu p_\mu
-=
-m^2c^2.
+p^\mu p_\mu=m^2c^2.
 \label{eq:MassShellAgain}
 \end{equation}
-
 Assuming the rest mass remains constant,
-
-\[
-m=\mathrm{const},
-\]
-
+\[m=\mathrm{const},\]
 one obtains
-
 \begin{equation}
-p_\mu
-\frac{dp^\mu}{d\tau}
-=
-0.
+p_\mu\frac{dp^\mu}{d\tau}=0.
 \label{eq:Orthogonality}
 \end{equation}
-
 The total four-force is therefore orthogonal to the four-momentum.
-
 Consequently,
-
 \begin{equation}
-\boxed{
-p_\mu\xi^\mu=0.
-}
+\boxed{p_\mu\xi^\mu=0.}
 \label{eq:NoiseOrthogonal}
 \end{equation}
-
 This simple equation has a clear physical interpretation.
-
 The random force may change the direction of the four-momentum but not
 its invariant length.
-
 Thus the stochastic motion remains confined to the mass shell.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relativistic Friction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In ordinary Brownian motion friction opposes the particle velocity.
-
 The relativistic situation is more delicate because the friction force
 must satisfy Eq.~(\ref{eq:Orthogonality}).
-
 A common phenomenological choice is
-
 \begin{equation}
-F^\mu_{\rm fr}
-=
--\nu
-P^{\mu}_{\ \nu}
-p^\nu ,
+F^\mu_{\rm fr}=-\nu P^{\mu}_{\ \nu}p^\nu ,
 \label{eq:Friction}
 \end{equation}
-
 where
-
-\[
-\nu
-\]
-
+\[\nu\]
 is the friction coefficient and
-
 \begin{equation}
-P^{\mu}_{\ \nu}
-=
-\delta^\mu_{\ \nu}
--
-\frac{u^\mu u_\nu}{c^2}
+P^{\mu}_{\ \nu}=\delta^\mu_{\ \nu}-\frac{u^\mu u_\nu}{c^2}
 \label{eq:Projector}
 \end{equation}
-
 is the projector onto the three-dimensional subspace orthogonal to the
 four-velocity.
-
 The projector guarantees that the friction force satisfies the
 orthogonality condition automatically.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Fluctuation--Dissipation Relation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Random forces continually increase the kinetic energy of the particle.
-
 Friction removes energy.
-
 Thermal equilibrium is possible only if these two mechanisms balance one
 another.
-
 This balance is expressed by the
 fluctuation--dissipation theorem.
-
 Although its explicit form depends upon the chosen relativistic model,
 its physical meaning is universal.
-
 The strength of the random force cannot be specified independently of
 the friction coefficient.
-
 Both originate from the same microscopic interactions with the
 environment.
-
 This observation represents one of the central principles of modern
 nonequilibrium statistical mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Equilibrium Distribution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The relativistic Fokker--Planck equation associated with the Langevin
 process possesses a stationary solution.
-
 For a dilute relativistic gas this equilibrium distribution is the
 Jüttner distribution,
-
 \begin{equation}
-\boxed{
-f_{\rm eq}
-(\mathbf p)
-=
-A
-\exp
-\left(
--\frac{u_\mu p^\mu}{k_{\rm B}T}
-\right),
-}
+\boxed{f_{\rm eq}(\mathbf p)=A\exp\left(-\frac{u_\mu p^\mu}{k_{\rm B}T}\right),}
 \label{eq:Juttner}
 \end{equation}
-
 where
-
-\[
-u^\mu
-\]
-
+\[u^\mu\]
 is the four-velocity of the heat bath.
-
 The Jüttner distribution reduces to the familiar Maxwell--Boltzmann
 distribution in the nonrelativistic limit,
-
-\[
-v\ll c.
-\]
-
+\[v\ll c.\]
 Thus relativistic Langevin dynamics reproduces the expected equilibrium
 thermodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical Applications}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Relativistic Langevin equations are now widely used in modern physics.
-
 One of the best known applications concerns the propagation of heavy
 quarks through the quark--gluon plasma produced in relativistic
 heavy-ion collisions.
-
 The interaction of the heavy quark with the surrounding plasma produces
 both friction and random momentum transfer.
-
 The resulting stochastic dynamics successfully describes energy loss,
 momentum broadening, and thermalization.
-
 Similar methods are used in relativistic plasma physics,
 high-energy astrophysics,
 and models of cosmic-ray transport through turbulent magnetic fields.
-
 Unlike Nelson's stochastic mechanics, these applications are directly
 connected with laboratory experiments.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Relativistic Langevin theory represents one of the great successes of
 modern relativistic statistical mechanics.
-
 Its physical assumptions are transparent.
-
 The random force has a clear microscopic origin.
-
 The theory reproduces relativistic equilibrium thermodynamics.
-
 It agrees well with numerical simulations and experimental
 observations in a wide range of systems.
-
 Nevertheless,
-
 its objectives differ fundamentally from those of Nelson's stochastic
 mechanics.
-
 The purpose of Langevin theory is to describe stochastic transport in a
 physical medium.
-
 It is not intended to derive the Schrödinger equation or the
 Klein--Gordon equation.
-
 Consequently,
-
 although the mathematical techniques developed in relativistic Langevin
 theory will prove extremely useful later in this monograph,
-
 they do not by themselves provide a stochastic foundation for quantum
 mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 From the perspective of the present work, relativistic Langevin theory
 contains two ideas of lasting importance.
-
 First, stochastic forces should possess a genuine microscopic physical
 interpretation rather than being introduced solely for mathematical
 convenience.
-
 Second, relativistic covariance is most naturally implemented in phase
 space rather than directly in configuration space.
-
 Both observations will reappear in our construction of stochastic
 dynamics within the SHP framework.
-
 The essential difference is that SHP mechanics does not require the
 motion to remain on a fixed mass shell.
 Consequently, the orthogonality constraint
@@ -3068,1633 +1710,901 @@ need not be imposed as a fundamental principle.
 Instead, the stochastic dynamics may alter the invariant mass during the
 evolution, while preserving the overall Hamiltonian structure of the
 theory.
-
 This additional freedom significantly enlarges the class of admissible
 stochastic processes and will play a central role in the relativistic
 quantum theory developed in later chapters.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Modern Covariant Stochastic Dynamics:
 The Debbasch Approach}
 \label{sec:Debbasch}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 During the 1990s and the following decades, relativistic stochastic
 mechanics underwent a significant transformation. Earlier work had been
 primarily concerned with the existence of Lorentz-covariant diffusion
 processes or with possible stochastic foundations of quantum mechanics.
 The newer developments were motivated instead by concrete physical
 applications.
-
 Examples include relativistic plasmas, heavy-ion collisions,
 astrophysical particle transport, and nonequilibrium thermodynamics.
-
 These problems require a relativistic analogue of ordinary Brownian
 motion capable of describing dissipation, diffusion, thermalization,
 and equilibration in a manifestly covariant manner.
-
 Among the principal contributors to this development were Debbasch,
 Mallick, Rivet, Dunkel, Hänggi, and several collaborators.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Brownian Motion as an Effective Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The modern viewpoint differs in an important respect from Nelson's
 stochastic mechanics.
-
 The random force is no longer regarded as a possible origin of quantum
 mechanics.
-
 Instead, it represents an effective description of unresolved
 microscopic interactions.
-
 Suppose that a relativistic particle propagates through a complicated
 environment.
-
 Examples include
-
 \begin{itemize}
-
 \item a thermal photon gas,
-
 \item an electron plasma,
-
 \item a turbulent magnetic field,
-
 \item a quark--gluon plasma,
-
 \item a stochastic gravitational background.
-
 \end{itemize}
-
 The exact microscopic forces fluctuate rapidly and are impossible to
 follow individually.
-
 The observable motion depends only upon their average statistical
 properties.
-
 Exactly as in ordinary Brownian motion, the complicated microscopic
 dynamics is replaced by an effective stochastic force.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Covariant Phase Space}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The natural arena is not configuration space but relativistic phase
 space,
-
-\[
-(x^\mu,p^\mu).
-\]
-
+\[(x^\mu,p^\mu).\]
 The deterministic equations are
-
 \begin{align}
-\frac{dx^\mu}{d\tau}
-&=
-\frac{p^\mu}{m},
-\\
-\frac{dp^\mu}{d\tau}
-&=
-F^\mu .
+\frac{dx^\mu}{d\tau}&=\frac{p^\mu}{m},\\
+\frac{dp^\mu}{d\tau}&=F^\mu .
 \end{align}
-
 Random forces modify only the second equation,
-
 \begin{equation}
-dp^\mu
-=
-F^\mu d\tau
-+
-d\Pi^\mu .
+dp^\mu=F^\mu d\tau+d\Pi^\mu .
 \label{eq:DebNoise}
 \end{equation}
-
 The stochastic increment
-
-\[
-d\Pi^\mu
-\]
-
+\[d\Pi^\mu\]
 must satisfy Lorentz covariance together with the appropriate
 thermodynamic constraints.
-
 Notice an important conceptual point.
-
 The position itself is never assumed to perform Brownian motion.
-
 Only the momentum changes randomly.
-
 The position inherits stochasticity through the dynamical equations.
-
 This picture agrees closely with the physical intuition developed in
 Chapter~1, namely that microscopic collisions produce random forces,
 not random positions.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Relativistic Fokker--Planck Equation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The corresponding probability density
-
-\[
-f(x,p,\tau)
-\]
-
+\[f(x,p,\tau)\]
 satisfies a transport equation of the form
-
 \begin{equation}
-\boxed{
-\frac{\partial f}{\partial\tau}
-+
-\frac{p^\mu}{m}
-\frac{\partial f}{\partial x^\mu}
-=
--
-\frac{\partial}{\partial p^\mu}
-(A^\mu f)
-+
-\frac12
-\frac{\partial^2}
-{\partial p^\mu\partial p^\nu}
-(B^{\mu\nu}f).
-}
+\boxed{\frac{\partial f}{\partial\tau}
++\frac{p^\mu}{m}\frac{\partial f}{\partial x^\mu}
+=-\frac{\partial}{\partial p^\mu}(A^\mu f)
++\frac12\frac{\partial^2}{\partial p^\mu\partial p^\nu}(B^{\mu\nu}f).}
 \label{eq:RelFPGeneral}
 \end{equation}
-
 This equation is the relativistic analogue of the ordinary
 Fokker--Planck equation.
-
 Its physical interpretation is identical.
-
 The left-hand side describes deterministic Hamiltonian transport.
-
 The first term on the right-hand side represents systematic drift in
 momentum space.
-
 The second term describes stochastic diffusion.
-
 Thus the complicated microscopic dynamics is replaced by two effective
 quantities:
-
-\[
-A^\mu(p),
-\qquad
-B^{\mu\nu}(p).
-\]
-
+\[A^\mu(p),\qquad B^{\mu\nu}(p). \]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Momentum Diffusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Unlike ordinary diffusion,
-
 relativistic diffusion cannot be isotropic in four-dimensional
 space-time.
-
 Instead,
-
 the diffusion tensor must project onto the physically admissible
 subspace.
-
 A frequently encountered structure is
-
 \begin{equation}
-B^{\mu\nu}
-=
-2D
-\left(
-\eta^{\mu\nu}
--
-\frac{p^\mu p^\nu}{m^2c^2}
-\right).
+B^{\mu\nu}=2D\left(\eta^{\mu\nu}-\frac{p^\mu p^\nu}{m^2c^2}\right).
 \label{eq:ProjectorDiffusion}
 \end{equation}
-
 The projector removes the component parallel to the four-momentum.
-
 Consequently,
-
 the stochastic force changes only the direction of the momentum while
 preserving its invariant magnitude.
-
 Geometrically,
-
 the diffusion takes place along the mass hyperboloid rather than through
 the surrounding Minkowski space.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Thermal Equilibrium}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One of the principal achievements of modern relativistic stochastic
 theory is the derivation of equilibrium distributions directly from the
 stochastic dynamics.
-
 The stationary solution of Eq.~(\ref{eq:RelFPGeneral}) is required to be
-
 \begin{equation}
-f_{\rm eq}
-\propto
-\exp
-\left(
--\frac{u_\mu p^\mu}{k_BT}
-\right),
+f_{\rm eq}\propto\exp\left(-\frac{u_\mu p^\mu}{k_BT}\right),
 \end{equation}
-
 namely the Jüttner distribution.
-
 This requirement places strong restrictions on the admissible drift and
 diffusion tensors.
-
 The fluctuation--dissipation relation is therefore not merely a
 thermodynamic principle.
-
 It becomes a consistency condition for the relativistic stochastic
 equations themselves.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Choice of Time Variable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 An interesting feature of the modern literature is that several
 different evolution parameters have been employed.
-
 Some authors use the proper time,
-
-\[
-\tau,
-\]
-
+\[\tau,\]
 while others formulate the stochastic process with respect to the
 coordinate time measured in the laboratory frame.
-
 Both choices possess advantages.
-
 Proper time leads naturally to Lorentz covariance.
-
 Coordinate time often simplifies comparison with laboratory
 measurements.
-
 The resulting stochastic equations are generally not identical.
-
 Instead,
-
 they describe different physical ensembles.
-
 This observation illustrates once again that the evolution parameter is
 not merely a mathematical convenience.
-
 It is part of the physical definition of the stochastic process.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Comparison with Nelson's Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Although both Nelson's theory and relativistic Langevin theory employ
 stochastic differential equations, their physical philosophies differ
 fundamentally.
-
 Nelson begins with the hypothesis that microscopic stochastic motion is
 the origin of quantum mechanics.
-
 The stochastic process is therefore fundamental.
-
 The modern Langevin approach begins with classical statistical
 mechanics.
-
 The stochastic force is an effective description obtained after
 eliminating microscopic degrees of freedom.
-
 Quantum mechanics plays no role in the construction.
-
 Consequently,
-
 the two theories should not be regarded as competitors.
-
 Rather,
-
 they answer different physical questions.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Lessons for SHP Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Several conclusions emerging from the modern covariant theory will be
 important for the remainder of this monograph.
-
 First,
-
 the stochastic process should be formulated in phase space rather than
 configuration space.
-
 Second,
-
 random forces possess a natural microscopic interpretation.
-
 Third,
-
 Hamiltonian transport and stochastic diffusion coexist naturally within
 a single kinetic equation.
-
 Finally,
-
 the mathematical structure of the relativistic Fokker--Planck equation
 is remarkably close to the Liouville equation already encountered in the
 Hamiltonian formulation of SHP mechanics.
-
 The principal difference concerns the mass-shell constraint.
-
 Modern relativistic Langevin theories usually assume
-
-\[
-p^\mu p_\mu=m^2c^2.
-\]
-
+\[p^\mu p_\mu=m^2c^2.\]
 In SHP mechanics,
-
 the invariant mass is itself a dynamical variable.
-
 Consequently,
-
 the diffusion tensor need not be confined to the tangent space of the
 mass hyperboloid.
-
 Instead,
-
 the stochastic process may explore the full eight-dimensional phase
 space.
-
 This additional freedom substantially enlarges the class of admissible
 covariant stochastic processes.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 From the viewpoint adopted in this book, the work of Debbasch and
 collaborators marks the maturation of relativistic stochastic
 mechanics.
-
 The theory is no longer an attempt to imitate Nelson's derivation of
 quantum mechanics.
-
 Instead, it has become an independent branch of relativistic
 nonequilibrium statistical physics with numerous experimental
 applications.
-
 Ironically, this development also provides precisely the mathematical
 tools needed for a future stochastic formulation of SHP mechanics.
-
 Our goal in the remaining sections is therefore not to replace these
 theories but to incorporate their successful ideas into a broader
 Hamiltonian framework capable of describing both relativistic transport
 and quantum dynamics.
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diffusion on Curved Lorentzian Manifolds}
 \label{sec:CurvedDiffusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Thus far we have considered stochastic processes either in Euclidean
 space or in flat Minkowski space. Modern developments in both
 probability theory and general relativity naturally lead to a more
 general question.
-
 Can Brownian motion be defined on an arbitrary space-time?
-
 This question is far from trivial.
-
 In Euclidean space Brownian motion is generated by the Laplace operator,
-
-\[
-\Delta=\delta^{ij}\partial_i\partial_j.
-\]
-
+\[\Delta=\delta^{ij}\partial_i\partial_j.\]
 On a Riemannian manifold the natural generalization is the
 Laplace--Beltrami operator,
-
 \begin{equation}
-\Delta_g
-=
-\frac{1}{\sqrt g}
-\partial_i
-\left(
-\sqrt g\,g^{ij}\partial_j
-\right).
+\Delta_g=\frac{1}{\sqrt g}\partial_i\left(\sqrt g\,g^{ij}\partial_j\right).
 \label{eq:LaplaceBeltrami}
 \end{equation}
-
 The corresponding stochastic process has been understood for many
 decades and forms one of the foundations of stochastic differential
 geometry.
-
 The Lorentzian case is fundamentally different.
-
 The metric possesses signature
-
-\[
-(+,-,-,-),
-\]
-
+\[(+,-,-,-),\]
 and therefore the operator
-
-\[
-g^{\mu\nu}\nabla_\mu\nabla_\nu
-\]
-
+\[g^{\mu\nu}\nabla_\mu\nabla_\nu\]
 is hyperbolic rather than elliptic.
-
 Unlike the Laplace operator,
-
 it cannot serve as the generator of an ordinary diffusion process.
-
 Consequently,
-
 Brownian motion cannot simply be obtained by replacing the Euclidean
 metric with the space-time metric.
-
 Exactly the same difficulty already appeared in our discussion of
 Dudley's theory.
-
 The difference is that the problem must now be solved on an arbitrary
 curved manifold.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Diffusion Lives in the Tangent Bundle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The essential geometric idea is remarkably simple.
-
 A Brownian particle never performs random jumps directly on the
 manifold.
-
 Instead,
-
 every infinitesimal random displacement is generated inside the tangent
 space,
-
-\[
-T_xM,
-\]
-
+\[T_xM,\]
 attached to the current space-time point.
-
 Since every tangent space is an ordinary Minkowski vector space, the
 stochastic process may be defined locally.
-
 The resulting infinitesimal displacement is then mapped back onto the
 space-time manifold by means of the exponential map,
-
 \begin{equation}
-x^\mu
-\longrightarrow
-\exp_x(v^\mu),
+x^\mu\longrightarrow\exp_x(v^\mu),
 \end{equation}
-
 where
-
-\[
-v^\mu\in T_xM.
-\]
-
+\[v^\mu\in T_xM.\]
 In this manner the stochastic motion respects the geometry of the
 manifold while remaining locally identical to ordinary Brownian motion.
-
 This construction is known as the
 \emph{stochastic development} of Brownian motion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Parallel Transport and Random Frames}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 As the particle moves through space-time, the local tangent spaces
 change continuously.
-
 Random vectors defined in different tangent spaces therefore cannot be
 compared directly.
-
 Instead,
-
 one introduces an orthonormal tetrad
-
-\[
-e_a{}^\mu(x),
-\]
-
+\[e_a{}^\mu(x),\]
 satisfying
-
-\[
-g_{\mu\nu}
-e_a{}^\mu
-e_b{}^\nu
-=
-\eta_{ab}.
-\]
-
+\[g_{\mu\nu}e_a{}^\mu e_b{}^\nu=\eta_{ab}.\]
 The tetrad provides a local inertial frame in which the random
 increments possess the familiar Euclidean covariance,
-
-\[
-\langle
-dW^a
-dW^b
-\rangle
-=
-2D\delta^{ab}dt.
-\]
-
+\[\langle dW^a dW^b \rangle=2D\delta^{ab}dt.\]
 The random displacement in space-time is then reconstructed as
-
-\[
-dx^\mu
-=
-e_a{}^\mu
-\,dW^a.
-\]
-
+\[dx^\mu=e_a{}^\mu\,dW^a.\]
 As the particle moves,
-
 the tetrad itself evolves by parallel transport,
-
-\[
-\nabla_u e_a{}^\mu=0,
-\]
-
+\[\nabla_u e_a{}^\mu=0,\]
 ensuring that the stochastic process remains compatible with the
 underlying geometry.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Franchi--Le Jan Diffusions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The most systematic construction of relativistic diffusion on general
 Lorentzian manifolds was developed by Franchi and Le Jan.
-
 Their theory combines three ingredients.
-
 First,
-
 the stochastic process evolves on the orthonormal frame bundle rather
 than directly on space-time.
-
 Second,
-
 the random motion occurs only in directions compatible with the causal
 structure.
-
 Third,
-
 the deterministic drift is generated by the geodesic flow of the
 space-time metric.
-
 The resulting process is fully covariant and exists on arbitrary
 globally hyperbolic Lorentzian manifolds.
-
 From the mathematical point of view,
-
 this construction represents one of the most elegant achievements of
 modern stochastic differential geometry.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The geometric formulation suggests an important physical picture.
-
 Space-time curvature does not produce randomness.
-
 Rather,
-
 curvature continuously rotates the local inertial frames in which the
 random motion takes place.
-
 The stochastic force remains locally identical to ordinary Brownian
 motion.
-
 Only the comparison of neighboring local frames is affected by gravity.
-
 This viewpoint is completely analogous to the equivalence principle of
 general relativity.
-
 Gravity is not interpreted as a force.
-
 Instead,
-
 it determines how local inertial frames fit together globally.
-
 The stochastic process adapts naturally to this geometric structure.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relation to Quantum Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Although these geometric diffusion theories possess considerable
 mathematical elegance, their physical objective differs from that of
 Nelson's stochastic mechanics.
-
 The principal goal is to construct Lorentz-covariant stochastic
 processes on curved manifolds.
-
 No attempt is made to derive the Klein--Gordon equation, the Dirac
 equation, or quantum field theory.
-
 Consequently,
-
 the resulting diffusion should be regarded as a geometric extension of
 relativistic statistical mechanics rather than as a complete stochastic
 formulation of quantum mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Lessons for SHP Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Several ideas developed in stochastic differential geometry will be
 important later in this monograph.
-
 The use of local orthonormal frames,
-
 parallel transport,
-
 covariant stochastic differential equations,
-
 and diffusion on fiber bundles
-
 all transfer naturally to the Hamiltonian formulation of SHP mechanics.
-
 At the same time,
-
 the SHP framework introduces one additional geometric ingredient absent
 from the theories reviewed above.
-
 The invariant evolution parameter is independent of the space-time
 metric.
-
 Consequently,
-
 the stochastic dynamics need not be tied to the causal structure of the
 space-time manifold alone.
-
 Instead,
-
 the natural configuration space becomes the extended phase space
-
-\[
-(x^\mu,p^\mu,\tau),
-\]
-
+\[(x^\mu,p^\mu,\tau),\]
 whose Hamiltonian geometry differs fundamentally from the tangent-bundle
 construction employed in relativistic Brownian motion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The geometric theories reviewed in this section represent the current
 state of the mathematical theory of relativistic diffusion.
-
 They demonstrate that stochastic differential geometry provides a
 powerful language for describing random motion in curved space-time.
-
 From the viewpoint of the present monograph, however, their greatest
 importance is methodological.
-
 They supply precisely the geometric machinery required for constructing
 covariant stochastic processes.
-
 The remaining challenge is dynamical rather than geometrical.
-
 One must still explain how quantum dynamics emerges from such
 processes.
-
 This question leads naturally to the final topic of the present review:
 stochastic electrodynamics and other attempts to derive quantum
 phenomena from classical random fields.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Diffusion, Geometry and Gravitation}
 \label{sec:DiffusionGravity}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The previous section described the mathematical construction of
 relativistic diffusion on Lorentzian manifolds.
 We now turn to the physical consequences of this construction.
-
 The combination of stochastic processes and gravitation is interesting
 for at least three independent reasons.
-
 First, every realistic stochastic process takes place in the presence of
 gravity, however weak.
 A complete relativistic theory should therefore remain meaningful on
 arbitrary curved space-times.
-
 Second, stochastic motion provides a useful probe of the local geometry.
 The spreading of probability distributions contains information about
 curvature in much the same way that geodesic deviation measures tidal
 forces.
-
 Third, several approaches to quantum gravity suggest that microscopic
 space-time itself may possess stochastic properties.
 Although such ideas remain speculative, they provide additional
 motivation for understanding diffusion in curved geometries.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Equivalence Principle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The natural starting point is Einstein's equivalence principle.
-
 In a sufficiently small neighborhood of any event one may always choose
 coordinates in which
-
 \begin{equation}
-g_{\mu\nu}(x_0)=\eta_{\mu\nu},
-\qquad
-\partial_\lambda g_{\mu\nu}(x_0)=0.
+g_{\mu\nu}(x_0)=\eta_{\mu\nu},\qquad\partial_\lambda g_{\mu\nu}(x_0)=0.
 \end{equation}
-
 Locally, therefore, the laws of physics reduce to those of special
 relativity.
-
 The same conclusion applies to stochastic motion.
-
 Within a sufficiently small freely falling laboratory the random process
 is indistinguishable from the corresponding diffusion in Minkowski
 space.
-
 Curvature becomes observable only through the comparison of neighboring
 local inertial frames.
-
 This observation immediately explains why the stochastic process is most
 naturally formulated in the tangent bundle rather than directly on the
 space-time manifold.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Curvature and the Spreading of Probability}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In flat Euclidean space the variance of Brownian motion increases
 linearly,
-
 \begin{equation}
 \langle r^2\rangle=2nDt,
 \end{equation}
-
 where $n$ denotes the spatial dimension.
-
 On a curved manifold this simple law is modified.
-
 The probability cloud no longer expands uniformly because neighboring
 geodesics either converge or diverge.
-
 Positive curvature tends to focus the probability distribution.
-
 Negative curvature causes it to spread more rapidly.
-
 The diffusion process therefore carries direct information concerning
 the underlying geometry.
-
 From this viewpoint Brownian motion becomes a probe of space-time
 curvature rather than merely a transport mechanism.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Geodesic Deviation and Stochastic Motion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The connection between diffusion and curvature becomes particularly
 transparent when compared with the equation of geodesic deviation.
-
 For neighboring geodesics separated by a vector
 $\xi^\mu$,
-
 \begin{equation}
-\frac{D^2\xi^\mu}{d\tau^2}
-=
--
-R^\mu{}_{\nu\alpha\beta}
-u^\nu
-u^\beta
-\xi^\alpha .
+\frac{D^2\xi^\mu}{d\tau^2}=-R^\mu{}_{\nu\alpha\beta}u^\nu u^\beta\xi^\alpha .
 \label{eq:GeoDeviation}
 \end{equation}
-
 The Riemann tensor governs the relative acceleration of nearby
 trajectories.
-
 A stochastic ensemble consists precisely of a large family of nearby
 trajectories.
-
 Consequently, the evolution of the probability distribution is
 necessarily influenced by the same curvature tensor.
-
 The analogy should not be taken too literally.
 Geodesic deviation describes deterministic motion, whereas diffusion is
 statistical.
 Nevertheless, both phenomena are governed by the geometry of the
 underlying manifold.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Diffusion in Schwarzschild Space-Time}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The Schwarzschild metric provides the simplest example of diffusion in a
 gravitational field.
-
 Several qualitative features are immediately apparent.
-
 Close to the event horizon, gravitational time dilation modifies the
 relation between proper time and coordinate time.
-
 The diffusion process therefore appears different to distant and local
 observers.
-
 Furthermore, tidal forces distort the probability cloud, producing
 anisotropic diffusion.
-
 Far from the gravitating body these effects disappear and the ordinary
 special-relativistic limit is recovered.
-
 Although exact analytical solutions are known only in special cases,
 numerical investigations confirm these qualitative expectations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cosmological Diffusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 An expanding universe introduces additional effects.
-
 For the Friedmann--Lemaître--Robertson--Walker metric,
-
 \begin{equation}
-ds^2
-=
-c^2dt^2
--
-a^2(t)d\Sigma_k^2,
+ds^2=c^2dt^2-a^2(t)d\Sigma_k^2,
 \end{equation}
-
 the cosmic expansion modifies both deterministic motion and stochastic
 transport.
-
 Random motion is no longer superimposed upon a static background.
-
 Instead, the geometry itself evolves with time.
-
 The probability density therefore experiences two distinct mechanisms of
 spreading:
-
 \begin{enumerate}
-
 \item microscopic diffusion,
-
 \item cosmological expansion.
-
 \end{enumerate}
-
 Depending upon the cosmological epoch, either mechanism may dominate.
-
 This problem has attracted increasing attention in modern relativistic
 kinetic theory and cosmology.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Stochastic Motion Near Black Holes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Brownian motion near compact objects has become an active field of
 research.
-
 Examples include
-
 \begin{itemize}
-
 \item accretion disks,
-
 \item relativistic plasmas,
-
 \item energetic particles near event horizons,
-
 \item stochastic acceleration in astrophysical jets.
-
 \end{itemize}
-
 In these systems the random forces originate primarily from turbulent
 electromagnetic fields rather than from quantum fluctuations.
-
 Nevertheless, the resulting mathematical description employs precisely
 the same relativistic Langevin and Fokker--Planck equations discussed in
 the previous sections.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Towards Quantum Gravity?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One frequently encounters the suggestion that microscopic space-time may
 itself possess stochastic fluctuations.
-
 Examples include
-
 \begin{itemize}
-
 \item space-time foam,
-
 \item stochastic metric fluctuations,
-
 \item causal set theory,
-
 \item random geometries,
-
 \item fluctuating gravitational backgrounds.
-
 \end{itemize}
-
 These ideas should be distinguished carefully from relativistic
 stochastic mechanics.
-
 In the theories reviewed thus far, the stochasticity belongs to the
 particle moving through space-time.
-
 In the approaches listed above, it is the geometry itself that becomes
 random.
-
 The mathematical problems are therefore entirely different.
-
 At present no generally accepted theory successfully combines stochastic
 space-time geometry with quantum mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Lessons for SHP Mechanics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The discussion above illustrates an important conceptual point.
-
 The stochastic process and the space-time geometry represent two
 independent structures.
-
 General relativity determines the geometry.
-
 Stochastic mechanics determines the statistical evolution of particle
 trajectories.
-
 Nothing requires these structures to be inseparable.
-
 This observation is particularly important for the
 Stueckelberg--Horwitz--Piron framework.
-
 Since the invariant evolution parameter exists independently of the
 space-time metric, stochastic evolution need not be tied exclusively to
 the causal structure of space-time.
-
 The Hamiltonian dynamics unfolds in an extended phase space whose
 geometry is richer than that of the underlying Lorentzian manifold.
-
 Consequently, gravitational curvature, stochastic diffusion, and
 Hamiltonian evolution become three distinct but interacting geometric
 structures.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Although diffusion in curved space-time has become a mature branch of
 stochastic differential geometry, its implications for the foundations
 of quantum mechanics remain comparatively unexplored.
-
 Most existing work focuses either on mathematical existence theorems or
 on applications to relativistic transport theory.
-
 The possibility that stochastic dynamics in curved space-time might
 provide a bridge between Hamiltonian mechanics, gravitation and quantum
 theory remains largely open.
-
 The SHP framework appears particularly well suited for investigating
 this possibility because it combines manifest covariance, Hamiltonian
 dynamics and an invariant evolution parameter without imposing the
 mass-shell constraint.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Franchi--Le Jan Theory of Relativistic Diffusion}
 \label{sec:FranchiLeJan}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The work of Franchi and Le Jan represents one of the most important
 developments in modern relativistic stochastic analysis.
 Whereas Dudley established the existence of Lorentz-covariant diffusion
 in flat space-time, Franchi and Le Jan extended these ideas to
 arbitrary Lorentzian manifolds.
-
 Their construction is remarkable for two reasons.
-
 First, it is completely intrinsic.
 No preferred coordinate system is introduced at any stage.
-
 Second, the diffusion process is formulated entirely in geometric terms,
 making it compatible with general relativity from the outset.
-
 For these reasons the Franchi--Le Jan diffusion is now regarded as the
 canonical relativistic diffusion process on Lorentzian manifolds.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Why Configuration Space Is Not Enough}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 An ordinary Brownian trajectory is specified by the particle position
-
-\[
-x^i(t).
-\]
-
+\[x^i(t).\]
 This description is sufficient in Euclidean space because every tangent
 space is naturally identified with the ambient vector space.
-
 Curved manifolds possess no such global vector space.
-
 Vectors belonging to different tangent spaces cannot be compared
 directly.
-
 Consequently,
-
 the stochastic process cannot be defined solely by the coordinates
 $x^\mu$.
-
 Additional geometric information is required.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Orthonormal Frame Bundle}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Franchi and Le Jan formulate the stochastic process on the orthonormal
 frame bundle
-
-\[
-OM.
-\]
-
+\[OM.\]
 Each point of this bundle consists of
-
-\[
-(x,e_0,e_1,e_2,e_3),
-\]
-
+\[(x,e_0,e_1,e_2,e_3),\]
 where
-
-\[
-x\in M,
-\]
-
+\[x\in M,\]
 and
-
-\[
-e_a{}^\mu
-\]
-
+\[e_a{}^\mu\]
 forms an orthonormal tetrad satisfying
-
-\[
-g_{\mu\nu}
-e_a{}^\mu
-e_b{}^\nu
-=
-\eta_{ab}.
-\]
-
+\[g_{\mu\nu}e_a{}^\mu e_b{}^\nu=\eta_{ab}.\]
 Thus,
-
 the stochastic process describes not only the particle position but
 also the local inertial frame carried by the particle.
-
 Physically,
-
 this means that the random motion always takes place in the local
 freely falling laboratory rather than in arbitrary coordinates.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Horizontal and Vertical Motion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The geometry of the frame bundle naturally separates two kinds of
 motion.
-
 Horizontal motion corresponds to deterministic transport generated by
 the Levi--Civita connection.
-
 Vertical motion changes the orientation of the local frame.
-
 The stochastic process combines these two ingredients.
-
 The deterministic part transports the particle along geodesics.
-
 The random part continually rotates the velocity inside the local
 hyperboloid of admissible timelike directions.
-
 This decomposition provides an elegant geometric interpretation of
 relativistic Brownian motion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Generator}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Instead of writing stochastic differential equations explicitly,
 Franchi and Le Jan define the diffusion by its infinitesimal generator.
-
 Schematically,
-
-\[
-L
-=
-H_0
-+
-\frac{\sigma^2}{2}
-\sum_{i=1}^{3}
-V_i^2.
-\]
-
+\[L=H_0+\frac{\sigma^2}{2}\sum_{i=1}^{3}V_i^2.\]
 The operator
-
-\[
-H_0
-\]
-
+\[H_0\]
 generates geodesic motion.
-
 The vector fields
-
-\[
-V_i
-\]
-
+\[V_i\]
 generate infinitesimal Lorentz boosts acting within the tangent space.
-
 Consequently,
-
 the deterministic evolution follows geodesics,
-
 whereas stochastic fluctuations continuously modify the local
 four-velocity.
-
 This decomposition has a particularly transparent physical
 interpretation.
-
 Gravity determines the average motion.
-
 Random microscopic interactions continually perturb the velocity away
 from the deterministic geodesic.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Preservation of Causality}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One of the principal achievements of the theory is the preservation of
 causality.
-
 Every trajectory remains timelike.
-
 The four-velocity always belongs to the future unit hyperboloid,
-
-\[
-u^\mu u_\mu=c^2,
-\qquad
-u^0>0.
-\]
-
+\[u^\mu u_\mu=c^2,\qquad u^0>0.\]
 No superluminal stochastic jumps occur.
-
 The diffusion therefore respects the causal structure imposed by general
 relativity.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The Franchi--Le Jan construction suggests a simple physical picture.
-
 Imagine attaching an ideal gyroscope and a local inertial laboratory to
 the particle.
-
 Inside this infinitesimal laboratory the stochastic force is identical
 to ordinary Brownian motion.
-
 Gravity merely determines how this laboratory rotates and accelerates
 relative to neighboring laboratories.
-
 Random motion therefore remains fundamentally local.
-
 Curvature affects only the relation between different local inertial
 frames.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Comparison with Earlier Approaches}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The progression of ideas is now easy to recognize.
-
 Nelson:
 random trajectories in Euclidean configuration space.
-
 Dudley:
 random motion on the velocity hyperboloid.
-
 Hakim:
 covariant stochastic dynamics parametrized by proper time.
-
 Debbasch:
 covariant transport in relativistic phase space.
-
 Franchi--Le Jan:
 intrinsic diffusion on arbitrary Lorentzian manifolds.
-
 Each step enlarges the geometric arena while preserving the essential
 idea of stochastic evolution.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Limitations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Despite its mathematical elegance, the theory is not intended as a
 foundation of quantum mechanics.
-
 The stochastic process describes relativistic transport.
-
 No derivation of the Klein--Gordon equation or the Dirac equation is
 attempted.
-
 Likewise,
-
 the invariant mass remains fixed,
-
 and the motion is confined to the future mass hyperboloid.
-
 These features distinguish the theory sharply from the SHP framework,
 where off-shell evolution plays a central role.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The work of Franchi and Le Jan may be viewed as the culmination of the
 geometric program initiated by Dudley.
-
 From the mathematical standpoint it provides perhaps the most elegant
 construction of relativistic Brownian motion presently available.
-
 From the standpoint of the present monograph, however, its greatest
 importance is methodological.
-
 It demonstrates that stochastic processes, differential geometry and
 general relativity can be combined into a single coherent framework.
-
 The remaining challenge is no longer geometric but dynamical:
 how such covariant stochastic processes can be incorporated into a
 Hamiltonian theory capable of reproducing relativistic quantum
 mechanics.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Stochastic Electrodynamics}
 \label{sec:SED}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Stochastic electrodynamics (SED) occupies a unique position among the
 alternative approaches to the foundations of quantum mechanics.
-
 Unlike Nelson's stochastic mechanics, SED does not postulate an
 intrinsic stochastic motion of particles.
-
 Instead, it assumes that the classical electromagnetic field itself
 possesses a universal random component, the
 \emph{classical zero-point radiation field}.
-
 Particles obey entirely classical equations of motion.
-
 Their apparently quantum behaviour arises from continual interaction
 with this stochastic electromagnetic background.
-
 The central question addressed by SED may therefore be stated very
 simply.
-
 Can ordinary classical electrodynamics, supplemented by a universal
 random radiation field, reproduce quantum phenomena?
-
 Although the answer is still controversial, SED has achieved a number of
 remarkable successes while simultaneously revealing important
 limitations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Historical Background}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The origin of stochastic electrodynamics may be traced to the work of
 Planck, Einstein and Lorentz on classical radiation theory.
-
 The modern formulation, however, began during the 1960s with the work of
-
 \begin{itemize}
-
 \item T. H. Boyer,
-
 \item T. W. Marshall,
-
 \item L. de la Peña,
-
 \item A. M. Cetto,
-
 \item F. Francia,
-
 \item and numerous collaborators.
-
 \end{itemize}
-
 Their objective was not to quantize the electromagnetic field.
-
 Instead,
-
 they asked whether Maxwell's equations themselves admit a statistically
 stationary random solution that exists even at zero temperature.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Classical Zero-Point Radiation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The fundamental postulate of SED is the existence of a homogeneous,
 isotropic random electromagnetic field satisfying Maxwell's equations.
-
 The electric and magnetic fields are expanded as
-
 \begin{align}
-\mathbf E(\mathbf x,t)
-&=
-\sum_{\lambda}
-\int
-d^3k\,
-\mathbf E_{\lambda}(\mathbf k)
-\cos(\mathbf k\cdot\mathbf x-\omega t+\phi),
-\\
-\mathbf B(\mathbf x,t)
-&=
-\sum_{\lambda}
-\int
-d^3k\,
-\mathbf B_{\lambda}(\mathbf k)
-\cos(\mathbf k\cdot\mathbf x-\omega t+\phi),
+\mathbf E(\mathbf x,t)&=\sum_{\lambda}\int d^3k\,
+\mathbf E_{\lambda}(\mathbf k)\cos(\mathbf k\cdot\mathbf x-\omega t+\phi),\\
+\mathbf B(\mathbf x,t)&=\sum_{\lambda}\int d^3k\,
+\mathbf B_{\lambda}(\mathbf k)\cos(\mathbf k\cdot\mathbf x-\omega t+\phi),
 \end{align}
-
 where the phases
-
-\[
-\phi
-\]
-
+\[\phi\]
 are independent random variables uniformly distributed over
-
-\[
-[0,2\pi).
-\]
-
+\[[0,2\pi).\]
 The ensemble average therefore satisfies
-
-\[
-\langle
-\mathbf E
-\rangle
-=
-0,
-\qquad
-\langle
-\mathbf B
-\rangle
-=
-0,
-\]
-
+\[\langle\mathbf E\rangle=0,\qquad\langle\mathbf B\rangle=0,\]
 while quadratic averages remain finite.
-
 The field is therefore random but statistically stationary.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Zero-Point Spectrum}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The essential assumption concerns the spectral energy density.
-
 SED postulates
-
 \begin{equation}
-\boxed{
-u(\omega)
-=
-\frac{\hbar\omega^3}
-{2\pi^2c^3}.
-}
+\boxed{u(\omega)=\frac{\hbar\omega^3}{2\pi^2c^3}.}
 \label{eq:ZPSpectrum}
 \end{equation}
-
-Remarkably,
-
-the constant
-
-\[
-\hbar
-\]
-
+Remarkably,the constant
+\[\hbar\]
 appears even though the theory remains entirely classical.
-
 Within SED,
-
 Planck's constant determines the intensity of the universal background
 radiation rather than the quantization of energy.
-
 This observation immediately distinguishes SED from Nelson's theory.
-
 In Nelson mechanics,
-
-\[
-\hbar
-\]
-
+\[\hbar\]
 enters through the diffusion coefficient,
-
-\[
-D=\frac{\hbar}{2m}.
-\]
-
+\[D=\frac{\hbar}{2m}.\]
 In SED,
-
 it enters through the spectrum of the stochastic electromagnetic field.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Lorentz Equation of Motion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The particle itself obeys the ordinary classical Lorentz equation,
-
 \begin{equation}
-m\frac{d^2x^\mu}{d\tau^2}
-=
-eF^{\mu\nu}u_\nu .
+m\frac{d^2x^\mu}{d\tau^2}=eF^{\mu\nu}u_\nu .
 \label{eq:LorentzSED}
 \end{equation}
-
 No modification of Newtonian or relativistic mechanics is introduced.
-
 The only novelty is that
-
-\[
-F^{\mu\nu}
-=
-F^{\mu\nu}_{\rm ext}
-+
-F^{\mu\nu}_{\rm ZP},
-\]
-
+\[F^{\mu\nu}=F^{\mu\nu}_{\rm ext}+F^{\mu\nu}_{\rm ZP},\]
 where
-
-\[
-F^{\mu\nu}_{\rm ZP}
-\]
-
+\[F^{\mu\nu}_{\rm ZP}\]
 denotes the stochastic zero-point field.
-
 Random particle motion is therefore entirely induced by random
 electromagnetic forces.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Radiation Reaction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A central role is played by radiation reaction.
-
 Accelerated charges emit electromagnetic radiation.
-
 Consequently,
-
 the equation of motion must include the self-force,
-
 \begin{equation}
-m\mathbf a
-=
-e
-(\mathbf E+\mathbf v\times\mathbf B)
-+
-\mathbf F_{\rm RR}.
+m\mathbf a=e(\mathbf E+\mathbf v\times\mathbf B)+\mathbf F_{\rm RR}.
 \end{equation}
-
 The random zero-point field continuously supplies energy.
-
 Radiation reaction continuously removes energy.
-
 Stable stationary motion results from the balance between these two
 mechanisms.
-
 This balance plays a role analogous to the
 fluctuation--dissipation theorem discussed in relativistic Langevin
 theory.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Harmonic Oscillator}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The harmonic oscillator provides the fundamental testing ground of SED.
-
 Remarkably,
-
 the stationary probability distribution obtained from the classical
 stochastic dynamics reproduces the quantum mechanical ground-state
 distribution,
-
-\[
-P(x)
-\propto
-\exp
-\left(
--\frac{m\omega x^2}{\hbar}
-\right).
-\]
-
+\[P(x)\propto\exp\left(-\frac{m\omega x^2}{\hbar}\right).\]
 Likewise,
-
 the mean oscillator energy becomes
-
-\[
-\langle E\rangle
-=
-\frac12
-\hbar\omega,
-\]
-
+\[\langle E\rangle=\frac12\hbar\omega,\]
 without introducing quantization.
-
 Historically,
-
 this result provided one of the strongest motivations for the further
 development of stochastic electrodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The conceptual picture differs fundamentally from that of Nelson.
-
 Nelson assumes
-
-\[
-\text{Particle}
-\longrightarrow
-\text{Stochastic}.
-\]
-
+\[\text{Particle}\longrightarrow\text{Stochastic}.\]
 SED assumes
-
-\[
-\text{Field}
-\longrightarrow
-\text{Stochastic}.
-\]
-
+\[\text{Field}\longrightarrow\text{Stochastic}.\]
 Particles remain completely classical.
-
 The randomness originates entirely in the universal electromagnetic
 background.
-
 Thus,
-
 the two theories attribute the origin of quantum behaviour to different
 physical entities.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 At first sight stochastic electrodynamics appears radically different
 from stochastic mechanics.
-
 Closer examination reveals several striking similarities.
-
 Both theories retain classical particle trajectories.
-
 Both derive probability distributions from stochastic dynamics.
-
 Both explain quantum behaviour without postulating wave-function
 collapse.
-
 Both identify Planck's constant with the intensity of an underlying
 stochastic process.
-
 The essential difference concerns the origin of the stochasticity.
-
 Nelson attributes randomness to the particle itself.
-
 SED attributes randomness to the electromagnetic vacuum.
-
 This distinction will become important when we compare all stochastic
 approaches in a later section.
-
-
-

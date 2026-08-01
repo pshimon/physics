@@ -1,0 +1,470 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Relativistic Diffusion Processes:
+Existing Approaches and Their Relation to SHP}
+\label{ch:RelativisticDiffusions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+The construction of a relativistic analogue of Brownian motion has been
+an active research topic for more than sixty years. Although Brownian
+motion is one of the fundamental stochastic processes in classical
+probability theory, its extension to relativistic physics is far from
+straightforward.
+
+The difficulty does not arise from stochastic calculus itself but from
+the geometric structure of spacetime. Ordinary Brownian motion is
+defined on Euclidean space with an absolute time parameter. In
+relativistic mechanics there is no preferred time coordinate, velocities
+are constrained by the speed of light, and the state space is naturally
+described by Lorentzian geometry rather than Euclidean geometry.
+
+Consequently, many apparently natural generalizations of Brownian motion
+either violate Lorentz covariance, allow superluminal propagation, or
+fail to possess satisfactory probabilistic properties.
+
+During the past several decades numerous relativistic diffusion models
+have been proposed. These approaches differ substantially in their
+mathematical formulation, physical motivation, and intended domain of
+application. Some are formulated directly on Minkowski spacetime, others
+on the mass-shell hyperboloid, while still others employ the tangent
+bundle or orthonormal frame bundle of spacetime.
+
+The objective of this chapter is not to advocate a particular model but
+to provide a systematic comparison of the principal approaches that have
+appeared in the literature. Special attention will be devoted to those
+features that are relevant for a stochastic extension of the
+Stueckelberg--Horwitz--Piron (SHP) framework developed in subsequent
+chapters.
+
+Throughout this chapter we distinguish carefully between three
+conceptually different questions:
+
+\begin{enumerate}
+
+\item
+How can one construct a Lorentz-covariant stochastic process?
+
+\item
+What is the physically appropriate state space for relativistic
+diffusion?
+
+\item
+How should the stochastic evolution be parametrized?
+
+\end{enumerate}
+
+As we shall see, different authors provide different answers to each of
+these questions.
+
+One conclusion will become apparent from the outset. There is no unique
+relativistic analogue of Brownian motion. Instead, there exists a family
+of mathematically consistent diffusion processes, each adapted to a
+particular physical interpretation. This observation suggests that the
+appropriate stochastic process for SHP should be derived from the
+structure of SHP itself rather than imported directly from
+nonrelativistic stochastic mechanics.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why Relativistic Diffusion is Difficult}
+\label{sec:WhyRelativisticDiffusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+At first sight, constructing a relativistic version of Brownian motion
+appears to be a straightforward task. One might attempt simply to
+replace the spatial coordinates of nonrelativistic diffusion by
+space-time coordinates and require Lorentz covariance of the resulting
+equations.
+
+This seemingly natural procedure fails for several fundamental reasons.
+
+The difficulties are not merely technical. They arise from the geometric
+structure of Minkowski space-time and from the conceptual foundations of
+both probability theory and relativity. In this section we examine these
+obstacles individually, since they motivate nearly every relativistic
+diffusion model discussed later in this chapter.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Brownian Motion Requires an Ordering Parameter}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The standard Wiener process
+
+\[
+W(t)
+\]
+
+is defined with respect to a monotonically increasing parameter
+\(t\), satisfying
+
+\[
+W(0)=0,
+\]
+
+together with the increment property
+
+\[
+W(t+\Delta t)-W(t)
+\sim
+N(0,\Delta t).
+\]
+
+The existence of such an ordering parameter is essential.
+
+Successive increments are defined only after the stochastic trajectory
+has been ordered.
+
+In Newtonian mechanics this causes no difficulty because absolute time
+provides a universal ordering variable.
+
+Special relativity, however, contains no preferred global time.
+Different inertial observers assign different coordinate times to the
+same physical events.
+
+Consequently, coordinate time cannot serve as a fundamental stochastic
+parameter without sacrificing manifest covariance.
+
+This is perhaps the first conceptual obstacle encountered by every
+relativistic diffusion theory.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Coordinate Time Is Observer Dependent}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Suppose one writes
+
+\begin{equation}
+dx^\mu
+=
+b^\mu dt
++
+\sigma^\mu{}_a\,dW^a(t),
+\label{eq:CoordinateTimeDiffusion}
+\end{equation}
+
+where \(t=x^0/c\).
+
+Although mathematically well defined in a chosen inertial frame,
+Equation~(\ref{eq:CoordinateTimeDiffusion}) is not manifestly Lorentz
+covariant.
+
+After a Lorentz transformation,
+
+\[
+t
+\rightarrow
+t',
+\]
+
+the Wiener process itself changes parametrization.
+
+The transformed stochastic process is generally no longer a Wiener
+process with respect to \(t'\).
+
+Therefore,
+
+ordinary Brownian motion is not preserved by Lorentz transformations.
+
+This simple observation explains why relativistic stochastic mechanics
+cannot be obtained merely by replacing spatial vectors with four-vectors.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Speed-of-Light Constraint}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A second difficulty arises from the kinematics of Brownian motion.
+
+In ordinary diffusion,
+
+increments satisfy
+
+\[
+\Delta x
+\sim
+\sqrt{\Delta t}.
+\]
+
+The corresponding instantaneous velocity behaves formally as
+
+\[
+\frac{\Delta x}{\Delta t}
+\sim
+\frac{1}{\sqrt{\Delta t}},
+\]
+
+which diverges as
+
+\[
+\Delta t
+\rightarrow
+0.
+\]
+
+Thus Brownian trajectories are almost surely nowhere differentiable.
+
+In nonrelativistic mechanics this presents no contradiction because
+there is no upper limit on velocity.
+
+In relativity,
+
+however,
+
+physical trajectories must satisfy
+
+\[
+|\mathbf v|
+<
+c.
+\]
+
+Consequently,
+
+ordinary Wiener trajectories cannot represent physical particle
+worldlines.
+
+One must either smooth the trajectories or formulate diffusion in a
+different state space.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Geometry of Velocity Space}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Relativistic velocities are not elements of Euclidean space.
+
+For massive particles,
+
+the four-velocity satisfies
+
+\begin{equation}
+u^\mu u_\mu
+=
+-c^2.
+\label{eq:MassShell}
+\end{equation}
+
+The allowed velocities therefore lie on the future hyperboloid
+
+\[
+H^3
+=
+\{
+u^\mu
+:
+u^\mu u_\mu=-c^2,
+\;
+u^0>0
+\}.
+\]
+
+This hyperboloid possesses constant negative curvature.
+
+Consequently,
+
+relativistic diffusion naturally becomes diffusion on a curved manifold
+rather than in ordinary Euclidean space.
+
+This geometric observation forms the basis of Dudley's construction and
+many later developments.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Which Variables Should Diffuse?}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In nonrelativistic mechanics,
+
+configuration-space diffusion is usually sufficient because velocity may
+be obtained by differentiation.
+
+Relativistically,
+
+this distinction becomes more subtle.
+
+Several possibilities exist.
+
+\begin{enumerate}
+
+\item
+Diffusion in space-time.
+
+\item
+Diffusion of four-velocity.
+
+\item
+Diffusion in momentum space.
+
+\item
+Diffusion on the tangent bundle.
+
+\item
+Diffusion on phase space.
+
+\item
+Diffusion on the orthonormal frame bundle.
+
+\end{enumerate}
+
+Each choice leads to a different stochastic process.
+
+Moreover,
+
+the physically appropriate choice depends upon the intended
+interpretation.
+
+For example,
+
+kinetic theory naturally favors momentum-space diffusion,
+
+whereas stochastic mechanics emphasizes trajectories in configuration
+space.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Proper Time Versus Coordinate Time}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The invariant proper time
+
+\[
+d\tau^2
+=
+dt^2
+-
+\frac{d\mathbf x^2}{c^2}
+\]
+
+appears at first sight to solve the ordering problem.
+
+Indeed,
+
+many relativistic diffusion models employ proper time as the evolution
+parameter.
+
+However,
+
+proper time itself introduces new questions.
+
+For massless particles,
+
+proper time is undefined.
+
+For interacting many-particle systems,
+
+individual particles possess different proper times.
+
+Furthermore,
+
+in quantum theory the notion of a sharply defined proper-time trajectory
+is itself problematic.
+
+The SHP framework avoids many of these difficulties by introducing an
+independent invariant evolution parameter
+
+\[
+\tau,
+\]
+
+which exists even for off-shell motion.
+
+This distinction will become increasingly important in later chapters.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Probability Density}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In Euclidean diffusion,
+
+the probability density satisfies
+
+\[
+\rho(\mathbf x,t)\ge0,
+\]
+
+together with
+
+\[
+\int
+\rho(\mathbf x,t)
+\,d^3x
+=
+1.
+\]
+
+Relativistically,
+
+the corresponding probability interpretation is much less obvious.
+
+Should one normalize over
+
+\[
+d^3x,
+\]
+
+over
+
+\[
+d^4x,
+\]
+
+over the mass shell,
+
+or over phase space?
+
+Different relativistic diffusion theories answer this question
+differently.
+
+The associated Fokker--Planck equations therefore differ as well.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Markovian Versus Non-Markovian Dynamics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Most relativistic diffusion models assume Markovian evolution,
+
+primarily because it simplifies mathematical analysis.
+
+However,
+
+as discussed in the previous chapter,
+
+both stochastic electrodynamics and generalized Langevin theory suggest
+that realistic stochastic dynamics may possess finite correlation times
+and memory effects.
+
+From this perspective,
+
+Markovian relativistic diffusion should be regarded as the simplest
+approximation rather than the most general possibility.
+
+Whether a covariant non-Markovian theory can be constructed remains an
+important open problem.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Critical Assessment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The principal obstacle in relativistic diffusion is not the definition
+of random variables but the simultaneous reconciliation of stochastic
+calculus with Lorentz geometry. The absence of a preferred time
+parameter, the boundedness of physical velocities, the hyperbolic
+geometry of the mass shell, and the ambiguity of the appropriate state
+space collectively distinguish relativistic diffusion from its
+nonrelativistic counterpart.
+
+The diversity of approaches found in the literature reflects different
+choices regarding these foundational issues rather than simple
+differences in mathematical technique. Some formulations prioritize
+manifest covariance, others emphasize kinetic theory or statistical
+mechanics, while still others are designed for stochastic mechanics or
+quantum foundations.
+
+From the standpoint of the present monograph, perhaps the most important
+observation is that the SHP framework already provides one of the key
+ingredients absent from ordinary relativistic mechanics: an invariant
+evolution parameter. This does not by itself solve the problem of
+constructing a relativistic diffusion process, but it removes one of the
+principal conceptual obstacles. As a result, SHP offers a particularly
+natural setting in which to revisit Nelson's stochastic construction.
+
+
+
