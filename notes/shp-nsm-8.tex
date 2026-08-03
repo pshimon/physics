@@ -2,18 +2,15 @@
 \chapter{Alternative Stochastic Approaches to Quantum Theory}
 \label{ch:AlternativeStochastic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The remarkable predictive success of quantum mechanics has never
 eliminated interest in the possibility that it may emerge from a deeper,
 more fundamental theory. Since the earliest days of quantum mechanics,
 many physicists have questioned whether the probabilistic character of
 the theory is truly fundamental or merely reflects our ignorance of
 underlying microscopic dynamics.
-
 One possible answer is provided by hidden-variable theories, of which
 the de Broglie--Bohm theory is the best-known example. Another,
 conceptually different, possibility is that quantum behavior arises from
@@ -21,168 +18,115 @@ an underlying stochastic process. In this picture the apparent
 indeterminacy of quantum mechanics does not originate from intrinsic
 probability, but from continual interaction with microscopic random
 degrees of freedom.
-
 The idea has appeared repeatedly during the history of physics in
 several independent forms. Although these approaches differ
 substantially in their mathematical formulation, they all attempt to
 answer essentially the same question:
-
 \begin{quote}
 \emph{Can quantum mechanics be understood as the statistical description
 of an underlying stochastic dynamics?}
 \end{quote}
-
 This question has motivated a surprisingly diverse collection of
 theories.
-
 Some authors assume that particles themselves execute Brownian motion.
 Others attribute the stochasticity to classical electromagnetic fields,
 to random space-time geometry, to non-differentiable trajectories, to
 matrix-valued microscopic dynamics, or even to stochastic evolution in
 an auxiliary mathematical time.
-
 Consequently, the term \emph{stochastic quantum theory} does not denote
 a single well-defined framework but rather an entire family of
 approaches sharing a common philosophical motivation while differing
 greatly in physical assumptions.
-
 The purpose of the present chapter is not merely to review these
 theories individually. Equally important is to compare them
 systematically, identify their common conceptual structure, and clarify
 the physical questions they attempt to answer.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{What Can Be Stochastic?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One of the principal sources of confusion in the literature is that the
 word \emph{stochastic} is used in several fundamentally different ways.
-
 The first possibility is that the particle trajectory itself is random.
 This viewpoint is adopted in Nelson's stochastic mechanics.
-
 A second possibility is that the particle remains completely classical,
 while the electromagnetic field possesses a universal stochastic
 background. This is the central hypothesis of stochastic
 electrodynamics.
-
 A third possibility is that the stochastic process takes place not in
 physical space-time but in the infinite-dimensional space of field
 configurations. This idea forms the basis of Parisi--Wu stochastic
 quantization.
-
 Other approaches attribute randomness to the geometry of space-time
 itself, to fractal properties of trajectories, or to the statistical
 mechanics of noncommuting matrices.
-
 Thus, before comparing the various theories, one must first answer a
 more fundamental question:
-
 \begin{center}
 \emph{What physical quantity is assumed to fluctuate?}
 \end{center}
-
 As we shall see, the answer to this question largely determines the
 mathematical structure and physical interpretation of each theory.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Common Objectives}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Despite their diversity, nearly all stochastic approaches pursue several
 closely related goals.
-
 These include
-
 \begin{itemize}
-
 \item explaining the origin of Planck's constant,
-
 \item deriving the Schrödinger equation from more primitive dynamical
 principles,
-
 \item understanding the physical meaning of the wave function,
-
 \item explaining quantum probabilities,
-
 \item clarifying the measurement problem,
-
 \item establishing a deeper connection between classical and quantum
 physics.
-
 \end{itemize}
-
 Not every theory attempts to solve all of these problems.
-
 For example, stochastic quantization is primarily a computational method
 for constructing quantum field theories rather than an interpretation of
 quantum mechanics.
-
 Conversely, stochastic electrodynamics explicitly seeks a classical
 physical origin of quantum phenomena.
-
 Recognizing these different objectives is essential for a fair
 comparison.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Criteria for Comparison}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Throughout this chapter we shall compare the various theories according
 to a common set of questions.
-
 For each approach we shall ask:
-
 \begin{enumerate}
-
 \item What is the fundamental stochastic variable?
-
 \item What is the evolution parameter?
-
 \item Is the theory relativistic?
-
 \item Does the theory explain the origin of Planck's constant?
-
 \item Can it derive the Schrödinger equation?
-
 \item Can it describe spin?
-
 \item Does it naturally generalize to quantum field theory?
-
 \item How are gauge interactions incorporated?
-
 \item Is gravity included?
-
 \item What are its principal successes?
-
 \item What are its most serious unresolved problems?
-
 \end{enumerate}
-
 Using identical criteria for every theory allows a meaningful comparison
 that is largely absent from the existing literature.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Organization of This Chapter}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The chapter begins with stochastic electrodynamics, the oldest and most
 extensively developed classical stochastic approach to quantum theory.
 We then review stochastic quantization, scale relativity, trace
 dynamics, and several more recent proposals.
-
 The chapter concludes with a systematic comparison of all approaches and
 a discussion of the lessons they provide for the stochastic
 Hamiltonian framework developed in the remainder of this monograph.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The diversity of stochastic approaches reviewed in this chapter should
 not be regarded as evidence of failure. Rather, it reflects the
 difficulty of the underlying problem.
-
 Quantum mechanics is extraordinarily successful experimentally, and any
 attempt to derive it from deeper principles faces exceptionally
 stringent constraints. The existence of multiple stochastic programs,
@@ -190,1416 +134,711 @@ developed largely independently over more than half a century,
 demonstrates that the possibility of an underlying stochastic dynamics
 has remained scientifically compelling despite the absence of a
 universally accepted theory.
-
 Our objective is therefore not to advocate a particular approach, but to
 understand what each contributes, where each succeeds, where each fails,
 and which ideas appear sufficiently robust to serve as ingredients of a
 more complete relativistic stochastic theory.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Historical Development of Stochastic Electrodynamics}
 \label{sec:SEDHistory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Stochastic electrodynamics (SED) is one of the oldest attempts to
 understand quantum phenomena in terms of an underlying classical
 stochastic dynamics. Unlike stochastic mechanics, where randomness is
 attributed to the motion of particles, SED assumes that the
 electromagnetic field itself possesses an intrinsic random component
 which exists even at absolute zero temperature.
-
 From this viewpoint particles always obey classical equations of motion.
 Their apparently quantum behavior results from continual interaction
 with an omnipresent stochastic electromagnetic background.
-
 The central hypothesis may therefore be summarized in a single sentence:
-
 \begin{quote}
 Quantum phenomena originate not from quantization of matter, but from
 the interaction of classical matter with a universal classical
 stochastic radiation field.
 \end{quote}
-
 This idea has a long and fascinating history extending over more than a
 century.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Origins in Classical Radiation Theory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The roots of SED lie in the crisis of classical radiation theory at the
 end of the nineteenth century.
-
 Maxwell's equations had achieved spectacular success in describing
 electromagnetic phenomena. At the same time, classical statistical
 mechanics appeared capable of explaining the thermodynamic properties of
 matter.
-
 The difficulty arose when these two theories were combined to describe
 thermal radiation.
-
 According to classical statistical mechanics, every normal mode of the
 electromagnetic field should possess the average energy
-
-\[
-\langle E\rangle=k_BT.
-\]
-
+\[\langle E\rangle=k_BT.\]
 Since the number of modes increases rapidly with frequency, the total
 energy diverges,
-
-\[
-U=\int_0^\infty u(\omega)d\omega=\infty,
-\]
-
+\[U=\int_0^\infty u(\omega)d\omega=\infty,\]
 producing the well-known ultraviolet catastrophe.
-
 Planck resolved this difficulty in 1900 by introducing energy quanta,
-
-\[
-E=n\hbar\omega.
-\]
-
+\[E=n\hbar\omega.\]
 Although enormously successful, this proposal raised a profound
 question.
-
 Is quantization truly fundamental, or does it merely provide an
 effective description of some deeper classical dynamics?
-
 This question eventually became one of the principal motivations for
 stochastic electrodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Einstein, Lorentz and Classical Fluctuations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Long before the modern formulation of SED, several pioneers had already
 recognized the importance of fluctuations in electromagnetic theory.
-
 Einstein's work on Brownian motion demonstrated that random microscopic
 forces could produce observable macroscopic phenomena.
-
 Lorentz investigated fluctuations generated by classical
 electromagnetic fields.
-
 Planck himself repeatedly reconsidered the possibility that the vacuum
 might possess an intrinsic electromagnetic energy even at zero
 temperature.
-
 Although none of these ideas constituted stochastic electrodynamics in
 its modern form, they established the conceptual foundations upon which
 the later theory was built.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Modern Beginning}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Modern stochastic electrodynamics emerged during the 1960s.
-
 The decisive step was the realization that Maxwell's equations admit a
 Lorentz-invariant random solution whose spectral density is proportional
 to
-
-\[
-\omega^3.
-\]
-
+\[\omega^3.\]
 Instead of quantizing the electromagnetic field, one assumes that this
 random radiation field exists as a classical solution of Maxwell's
 equations.
-
 Among the principal contributors were
-
 \begin{itemize}
-
 \item Timothy H. Boyer,
-
 \item Trevor W. Marshall,
-
 \item Luis de la Peña,
-
 \item Ana María Cetto,
-
 \item Francisco Francia,
-
 \item Theodore Puthoff,
-
 \item Daniel Cole,
-
 \item Yorick Savoy,
-
 \item Gerhard Hegerfeldt (critical analyses),
-
 \item and many others.
-
 \end{itemize}
-
 These authors transformed SED from an isolated idea into a coherent
 research program.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Boyer Revolution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The work of Boyer occupies a special position in the history of SED.
-
 He demonstrated that many phenomena usually regarded as intrinsically
 quantum could be reproduced by combining classical electrodynamics with
 a Lorentz-invariant stochastic zero-point radiation field.
-
 Among his best-known achievements are
-
 \begin{itemize}
-
 \item derivation of the Planck spectrum,
-
 \item blackbody radiation,
-
 \item harmonic oscillator,
-
 \item Casimir forces,
-
 \item diamagnetism,
-
 \item thermal equilibrium,
-
 \item Unruh-type phenomena.
-
 \end{itemize}
-
 Whether these results constitute a genuine derivation of quantum
 mechanics remains controversial.
-
 Nevertheless, Boyer's work demonstrated that classical physics is far
 more powerful than previously believed once stochastic vacuum radiation
 is included.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Mexican School}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A second major center of SED developed around Luis de la Peña and Ana
 María Cetto.
-
 Their approach emphasized the statistical mechanics of particles
 interacting continuously with the zero-point field.
-
 Particular attention was devoted to
-
 \begin{itemize}
-
 \item derivation of the Schrödinger equation,
-
 \item interpretation of the wave function,
-
 \item momentum fluctuations,
-
 \item diffusion processes,
-
 \item relation to Nelson's mechanics,
-
 \item foundations of quantum mechanics.
-
 \end{itemize}
-
 Their comprehensive monograph remains one of the principal references in
 the field.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Revival During the Twenty-First Century}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Interest in SED increased again after approximately 2000 for several
 reasons.
-
 First,
-
 high-precision numerical simulations became possible.
-
 Second,
-
 renewed interest in quantum foundations encouraged reconsideration of
 alternative formulations of quantum mechanics.
-
 Third,
-
 connections emerged between SED and several modern topics including
-
 \begin{itemize}
-
 \item Casimir physics,
-
 \item vacuum fluctuations,
-
 \item nonequilibrium statistical mechanics,
-
 \item quantum thermodynamics,
-
 \item relativistic stochastic dynamics.
-
 \end{itemize}
-
 Although SED remains outside the mainstream interpretation of quantum
 mechanics, it continues to generate active research.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relation to Other Stochastic Theories}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Historically, SED developed almost independently of Nelson's stochastic
 mechanics.
-
 This independence is rather surprising because both theories seek a
 classical stochastic origin of quantum behavior.
-
 The principal distinction lies in the source of stochasticity.
-
 Nelson assumes
-
-\[
-\boxed{
-\text{Particle motion}
-\longrightarrow
-\text{stochastic}.
-}
-\]
-
+\[\boxed{\text{Particle motion}\longrightarrow\text{stochastic}.}\]
 SED assumes
-
-\[
-\boxed{
-\text{Electromagnetic field}
-\longrightarrow
-\text{stochastic}.
-}
-\]
-
+\[\boxed{\text{Electromagnetic field}\longrightarrow\text{stochastic}.}\]
 This apparently simple difference has profound consequences for the
 mathematical structure of the resulting theories.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The historical development of stochastic electrodynamics illustrates an
 important lesson.
-
 SED should not be viewed merely as an unsuccessful attempt to replace
 quantum mechanics.
-
 Rather, it represents a sustained effort to determine how much of
 quantum physics can be recovered from classical electrodynamics when the
 vacuum is regarded as a genuine stochastic physical medium.
-
 Whether or not this program ultimately succeeds is less important than
 the insight it provides into the relationship between classical field
 theory, stochastic processes and quantum phenomena.
-
 From the viewpoint of the present monograph, SED constitutes one of the
 principal alternative stochastic programs that any new relativistic
 stochastic theory must carefully compare itself with.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Mathematical Foundations of Classical Zero-Point Radiation}
 \label{sec:SEDMathematical}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The defining postulate of stochastic electrodynamics is the existence of
 a classical random electromagnetic field that persists even at absolute
 zero temperature. Unlike ordinary thermal radiation, this field is
 assumed to be a permanent property of the physical vacuum.
-
 The particles themselves remain entirely classical. Their stochastic
 motion arises solely through interaction with this universal
 electromagnetic background.
-
 Consequently, the mathematical formulation of SED begins not with
 particle dynamics but with the statistical properties of solutions of
 Maxwell's equations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Free Electromagnetic Field}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In the absence of charges and currents the Maxwell equations are
-
 \begin{align}
 \nabla\cdot\mathbf E &=0,
-&
-\nabla\cdot\mathbf B &=0,
-\\
-\nabla\times\mathbf E
-&=
--\frac1c
-\frac{\partial\mathbf B}{\partial t},
-&
-\nabla\times\mathbf B
-&=
-\frac1c
-\frac{\partial\mathbf E}{\partial t}.
+    &\nabla\cdot\mathbf B &=0,\\
+\nabla\times\mathbf E&=-\frac1c\frac{\partial\mathbf B}{\partial t},
+&\nabla\times\mathbf B&=\frac1c\frac{\partial\mathbf E}{\partial t}.
 \end{align}
-
 Introducing the four-potential
-
-\[
-A^\mu=(\phi,\mathbf A),
-\]
-
+\[A^\mu=(\phi,\mathbf A),\]
 and adopting the Lorenz gauge,
-
-\[
-\partial_\mu A^\mu=0,
-\]
-
+\[\partial_\mu A^\mu=0,\]
 the field equations reduce to
-
 \begin{equation}
 \square A^\mu=0,
 \label{eq:WaveEquation}
 \end{equation}
-
 where
-
-\[
-\square
-=
-\eta^{\mu\nu}\partial_\mu\partial_\nu
-=
-\frac1{c^2}
-\frac{\partial^2}{\partial t^2}
--\nabla^2.
-\]
-
+\[\square=\eta^{\mu\nu}\partial_\mu\partial_\nu
+=\frac1{c^2}\frac{\partial^2}{\partial t^2}-\nabla^2.\]
 Equation (\ref{eq:WaveEquation}) possesses infinitely many plane-wave
 solutions.
-
 SED assumes that the physical vacuum contains a random superposition of
 all such modes.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Plane-Wave Expansion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The vector potential is expanded as
-
 \begin{equation}
-\mathbf A(\mathbf x,t)
-=
-\sum_{\lambda=1}^{2}
-\int
-\frac{d^3k}{(2\pi)^3}
-\,
-\boldsymbol{\epsilon}_{\lambda}(\mathbf k)
-\,
-a_{\lambda}(\mathbf k)
-\cos
-\left(
-\mathbf k\cdot\mathbf x
--\omega t
-+\phi_{\lambda}(\mathbf k)
-\right),
+\mathbf A(\mathbf x,t)=\sum_{\lambda=1}^{2}
+\int\frac{d^3k}{(2\pi)^3}\,
+\boldsymbol{\epsilon}_{\lambda}(\mathbf k)\,
+a_{\lambda}(\mathbf k)\cos\left(\mathbf k\cdot\mathbf x-\omega t
++\phi_{\lambda}(\mathbf k)\right),
 \label{eq:RandomExpansion}
 \end{equation}
-
 where
-
-\[
-\omega=c|\mathbf k|,
-\]
-
+\[\omega=c|\mathbf k|,\]
 and
-
-\[
-\boldsymbol{\epsilon}_{\lambda}\cdot\mathbf k=0
-\]
-
+\[\boldsymbol{\epsilon}_{\lambda}\cdot\mathbf k=0\]
 are transverse polarization vectors.
-
 The amplitudes satisfy a prescribed spectral distribution, whereas the
 phases
-
-\[
-\phi_{\lambda}(\mathbf k)
-\]
-
+\[\phi_{\lambda}(\mathbf k)\]
 are independent random variables uniformly distributed over
-
-\[
-0\le\phi<2\pi.
-\]
-
+\[0\le\phi<2\pi.\]
 This random-phase approximation is the central statistical assumption of
 SED.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Random Variables}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Ensemble averages are taken over the random phases.
-
 Immediately,
-
-\[
-\langle
-\cos(\theta+\phi)
-\rangle
-=
-0,
-\]
-
+\[\langle\cos(\theta+\phi)\rangle=0,\]
 which implies
-
 \begin{equation}
-\boxed{
-\langle\mathbf E\rangle
-=
-\langle\mathbf B\rangle
-=
-0.
-}
+\boxed{\langle\mathbf E\rangle=\langle\mathbf B\rangle=0.}
 \end{equation}
-
 The vacuum therefore contains no preferred electric or magnetic field.
-
 However,
-
 quadratic averages do not vanish.
-
 For example,
-
-\[
-\langle E_iE_j\rangle\neq0,
-\]
-
+\[\langle E_iE_j\rangle\neq0,\]
 indicating that the vacuum possesses finite electromagnetic
 fluctuations despite zero mean fields.
-
 This feature is completely analogous to ordinary Brownian motion, where
-
-\[
-\langle dW\rangle=0,
-\qquad
-\langle(dW)^2\rangle=dt.
-\]
-
+\[\langle dW\rangle=0,\qquad\langle(dW)^2\rangle=dt.\]
 Thus,
-
 the physically significant quantities are not the fields themselves but
 their correlation functions.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Two-Point Correlation Functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The statistical properties of the zero-point field are completely
 specified by the two-point correlation functions,
-
 \begin{equation}
-C_{ij}(x,x')
-=
-\left<
-E_i(x)
-E_j(x')
-\right>.
+C_{ij}(x,x')=\left<E_i(x)E_j(x')\right>.
 \end{equation}
-
 For a homogeneous and isotropic vacuum,
-
 the correlation function depends only upon the coordinate difference,
-
-\[
-x-x'.
-\]
-
+\[x-x'.\]
 Translation invariance therefore implies
-
-\[
-C_{ij}(x,x')
-=
-C_{ij}(x-x').
-\]
-
+\[C_{ij}(x,x')=C_{ij}(x-x').\]
 Similarly,
-
 rotational invariance restricts the tensor structure to combinations of
-
-\[
-\delta_{ij},
-\qquad
-k_ik_j.
-\]
-
+\[\delta_{ij},\qquad k_ik_j.\]
 Lorentz invariance places even stronger constraints and ultimately fixes
 the spectral dependence of the vacuum field.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Energy Density}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The electromagnetic energy density is
-
 \begin{equation}
-u
-=
-\frac1{8\pi}
-(E^2+B^2)
+u=\frac1{8\pi}(E^2+B^2)
 \end{equation}
-
 (in Gaussian units).
-
 Taking the ensemble average gives
-
-\[
-\langle u\rangle
-=
-\frac1{8\pi}
-\left<
-E^2+B^2
-\right>.
-\]
-
+\[\langle u\rangle=\frac1{8\pi}\left<E^2+B^2\right>.\]
 Using the plane-wave expansion yields
-
 \begin{equation}
-\langle u\rangle
-=
-\int_0^\infty
-u(\omega)
-\,d\omega,
+\langle u\rangle=\int_0^\infty u(\omega)\,d\omega,
 \end{equation}
-
 where
-
-\[
-u(\omega)
-\]
-
+\[u(\omega)\]
 is the spectral energy density.
-
 Determining this function constitutes the central problem of SED.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Why the Spectrum Is Not Arbitrary}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 At first sight one might imagine choosing any spectral density.
-
 This is impossible.
-
 The vacuum must satisfy simultaneously
-
 \begin{enumerate}
-
 \item Maxwell's equations,
-
 \item statistical homogeneity,
-
 \item isotropy,
-
 \item Lorentz invariance,
-
 \item scale invariance (at zero temperature),
-
 \item positivity of the energy density.
-
 \end{enumerate}
-
 These requirements are so restrictive that only one spectral form
 survives (up to an overall multiplicative constant).
-
 As first emphasized by Boyer,
-
 the Lorentz-invariant zero-temperature spectrum is proportional to
-
-\[
-\omega^3.
-\]
-
+\[\omega^3.\]
 The overall proportionality constant is then identified empirically with
-
-\[
-\frac{\hbar}{2\pi^2c^3},
-\]
-
+\[\frac{\hbar}{2\pi^2c^3},\]
 giving
-
 \begin{equation}
-\boxed{
-u(\omega)
-=
-\frac{\hbar\omega^3}
-{2\pi^2c^3}.
-}
+\boxed{u(\omega)=\frac{\hbar\omega^3}{2\pi^2c^3}.}
 \label{eq:BoyerSpectrum}
 \end{equation}
-
 This result is among the most remarkable aspects of SED.
-
 Planck's constant appears not because the field is quantized, but as the
 measured intensity of a classical Lorentz-invariant stochastic vacuum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Origin of Planck's Constant}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Equation (\ref{eq:BoyerSpectrum}) raises an immediate conceptual
 question.
-
 Why should a classical theory contain the quantum constant
 $\hbar$?
-
 SED answers this question differently from ordinary quantum mechanics.
-
 Quantum mechanics assumes that $\hbar$ is a fundamental constant of
 nature entering directly into the commutation relations,
-
-\[
-[x,p]=i\hbar.
-\]
-
+\[[x,p]=i\hbar.\]
 SED assumes instead that $\hbar$ merely determines the intensity of the
 classical zero-point field.
-
 From this perspective,
-
 the appearance of Planck's constant is no more mysterious than the
 appearance of the speed of light in Maxwell's equations.
-
 Both are universal constants characterizing the vacuum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The mathematical construction of the zero-point field is internally
 consistent and remarkably economical. Starting from classical Maxwell
 theory, together with assumptions of homogeneity, isotropy and Lorentz
 invariance, one is naturally led to a unique vacuum spectrum whose form
 closely resembles that suggested by quantum theory.
-
 Nevertheless, several important conceptual questions remain open.
-
 The normalization of the spectrum cannot be derived within classical
 electrodynamics alone and must be fixed empirically through the observed
 value of Planck's constant.
-
 Moreover, the total vacuum energy,
-
-\[
-\int_0^\infty
-\frac{\hbar\omega^3}
-{2\pi^2c^3}
-\,d\omega,
-\]
-
+\[\int_0^\infty\frac{\hbar\omega^3}{2\pi^2c^3}\,d\omega,\]
 diverges quartically. In practice this divergence is handled by
 considering energy differences, introducing physical cutoffs, or
 restricting attention to observable correlation functions, much as in
 quantum field theory. The physical interpretation of the absolute vacuum
 energy remains one of the major unresolved issues shared by both SED and
 conventional quantum electrodynamics.
-
 From the perspective of the present monograph, the most important lesson
 is that stochastic electrodynamics introduces randomness through the
 vacuum field rather than through particle trajectories. This alternative
 origin of stochasticity will provide an instructive point of comparison
 with Nelson's diffusion theory and, later, with the stochastic
 Hamiltonian formulation developed in the SHP framework.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Derivation of the Lorentz-Invariant Zero-Point Spectrum}
 \label{sec:LorentzInvariantSpectrum}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The cornerstone of stochastic electrodynamics is the assumption that the
 vacuum contains a homogeneous, isotropic stochastic electromagnetic
 field. Unlike ordinary thermal radiation, this field must exist even at
 zero temperature and must not single out any preferred inertial frame.
-
 These requirements are sufficiently restrictive that the spectral energy
 density is determined almost uniquely. In this section we derive the
 Lorentz-invariant spectrum following the physical arguments originally
 developed by Boyer and later refined by several authors.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{General Spectral Representation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Let
-
-\[
-u(\omega)\,d\omega
-\]
-
+\[u(\omega)\,d\omega\]
 denote the electromagnetic energy per unit volume contained in the
 frequency interval
-
-\[
-(\omega,\omega+d\omega).
-\]
-
+\[(\omega,\omega+d\omega).\]
 The total vacuum energy density is therefore
-
 \begin{equation}
-u
-=
-\int_0^\infty
-u(\omega)\,d\omega.
+u=\int_0^\infty u(\omega)\,d\omega.
 \end{equation}
-
 At this stage the function
-
-\[
-\nu(\omega)
-\]
-
+\[\nu(\omega)\]
 is completely arbitrary.
-
 Our task is to determine its form using only general physical
 principles.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dimensional Analysis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The dimensions of the spectral density are
-
-\[
-[\nu]
-=
-\frac{\mathrm{Energy}}
-{\mathrm{Volume}\times\mathrm{Frequency}}.
-\]
-
+\[[\nu]=\frac{\mathrm{Energy}}{\mathrm{Volume}\times\mathrm{Frequency}}.\]
 Using
-
-\[
-[\omega]=T^{-1},
-\qquad
-[c]=LT^{-1},
-\]
-
+\[[\omega]=T^{-1},\qquad[c]=LT^{-1},\]
 one immediately finds that the only possible Lorentz-covariant
 combination having the correct dimensions is
-
 \begin{equation}
-\nu(\omega)
-=
-C\,\omega^3,
+\nu(\omega)=C\,\omega^3,
 \end{equation}
-
 where
-
-\[
-C
-\]
-
+\[C\]
 is a universal constant having dimensions of action divided by
 \(c^3\).
-
 Dimensional analysis alone therefore already suggests a cubic spectrum.
-
 However, dimensional analysis cannot determine the constant
 \(C\), nor can it prove Lorentz invariance.
-
 A more detailed argument is required.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Lorentz Transformation of Plane Waves}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Consider a monochromatic plane wave with four-wavevector
-
-\[
-k^\mu
-=
-\left(
-\frac{\omega}{c},
-\mathbf k
-\right),
-\qquad
-k^\mu k_\mu=0.
-\]
-
+\[k^\mu=\left(\frac{\omega}{c},\mathbf k\right),\qquad k^\mu k_\mu=0.\]
 Under a Lorentz transformation,
-
-\[
-k^\mu
-\longrightarrow
-k'^\mu
-=
-\Lambda^\mu{}_\nu
-k^\nu .
-\]
-
+\[k^\mu\longrightarrow k'^\mu=\Lambda^\mu{}_\nu k^\nu .\]
 The observed frequency changes according to the Doppler formula,
-
 \begin{equation}
-\omega'
-=
-\gamma
-(1-\beta\cos\theta)\,
-\omega .
+\omega'=\gamma(1-\beta\cos\theta)\,\omega .
 \label{eq:Doppler}
 \end{equation}
-
 Consequently,
-
 both the frequency and the density of states transform under boosts.
-
 A Lorentz-invariant vacuum requires that these two effects compensate
 each other exactly.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Density of Electromagnetic Modes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In a volume
-
-\[
-V,
-\]
-
+\[V,\]
 the number of electromagnetic modes contained in the interval
-
-\[
-(\omega,\omega+d\omega)
-\]
-
+\[(\omega,\omega+d\omega)\]
 is
-
 \begin{equation}
-g(\omega)d\omega
-=
-\frac{\omega^2}
-{\pi^2c^3}
-\,d\omega,
+g(\omega)d\omega=\frac{\omega^2}{\pi^2c^3}\,d\omega,
 \label{eq:ModeDensity}
 \end{equation}
-
 including both polarization states.
-
 The spectral energy density may therefore be written as
-
 \begin{equation}
-\nu(\omega)
-=
-g(\omega)\,
-\varepsilon(\omega),
+\nu(\omega)=g(\omega)\,\varepsilon(\omega),
 \end{equation}
-
 where
-
-\[
-\varepsilon(\omega)
-\]
-
+\[\varepsilon(\omega)\]
 is the average energy carried by each mode.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Scale Invariance of the Vacuum}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 At zero temperature the vacuum contains no intrinsic frequency scale.
-
 The spectrum must therefore remain invariant under the simultaneous
 transformation
-
-\[
-\omega
-\rightarrow
-\lambda\omega .
-\]
-
+\[\omega\rightarrow\lambda\omega .\]
 Suppose
-
-\[
-\varepsilon(\omega)
-\propto
-\omega^n .
-\]
-
+\[\varepsilon(\omega)\propto\omega^n .\]
 Then
-
-\[
-\nu(\omega)
-\propto
-\omega^{n+2}.
-\]
-
+\[\nu(\omega)\propto\omega^{n+2}.\]
 Lorentz invariance of the vacuum stress-energy tensor requires
-
-\[
-n=1,
-\]
-
+\[n=1,\]
 leading immediately to
-
 \begin{equation}
-\boxed{
-\nu(\omega)
-\propto
-\omega^3.
-}
+\boxed{\nu(\omega)\propto\omega^3.}
 \end{equation}
-
 Thus the cubic spectrum is not an arbitrary assumption.
-
 It follows directly from Lorentz symmetry together with the absence of
 any preferred frequency scale.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Normalization}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The proportionality constant cannot be determined by classical
 electrodynamics.
-
 Experiment fixes it to be
-
 \begin{equation}
-\boxed{
-\nu(\omega)
-=
-\frac{\hbar\omega^3}
-{2\pi^2c^3}.
-}
+\boxed{\nu(\omega)=\frac{\hbar\omega^3}{2\pi^2c^3}.}
 \label{eq:FinalSpectrum}
 \end{equation}
-
 Equivalently,
-
 the average energy per electromagnetic normal mode becomes
-
 \begin{equation}
-\boxed{
-\varepsilon(\omega)
-=
-\frac12
-\hbar\omega.
-}
+\boxed{\varepsilon(\omega)=\frac12\hbar\omega.}
 \label{eq:HalfQuantum}
 \end{equation}
-
 This expression is numerically identical to the zero-point energy of a
 quantum harmonic oscillator.
-
 In SED, however, its interpretation is entirely different.
-
 It is regarded as the energy carried by each classical stochastic mode
 of the electromagnetic vacuum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Vacuum Correlation Functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The spectral density determines all vacuum correlation functions.
-
 For example,
-
 \begin{equation}
-\langle
-E_i(\mathbf x,t)
-E_j(\mathbf x',t')
-\rangle
-=
-\int
-d^3k\,
-P_{ij}(\mathbf k)
-\,
-\nu(\omega)
-\cos
-\left[
-\mathbf k\cdot
-(\mathbf x-\mathbf x')
--
-\omega(t-t')
-\right],
+\langle E_i(\mathbf x,t)E_j(\mathbf x',t')\rangle=
+\int d^3k\,P_{ij}(\mathbf k)\,\nu(\omega)\cos
+\left[\mathbf k\cdot(\mathbf x-\mathbf x')-\omega(t-t')\right],
 \end{equation}
-
 where
-
-\[
-P_{ij}
-=
-\delta_{ij}
--
-\frac{k_ik_j}{k^2}
-\]
-
+\[P_{ij}=\delta_{ij}-\frac{k_ik_j}{k^2}\]
 is the transverse projection operator.
-
 These correlation functions provide the stochastic forces responsible
 for all particle dynamics in stochastic electrodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Comparison with Quantum Electrodynamics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The formal similarity between Eqs.~(\ref{eq:FinalSpectrum}) and
 (\ref{eq:HalfQuantum}) and the corresponding expressions of quantum
 electrodynamics is striking.
-
 Nevertheless, the physical interpretations differ profoundly.
-
 In quantum electrodynamics,
-
-\[
-\frac12\hbar\omega
-\]
-
+\[\frac12\hbar\omega\]
 represents the ground-state energy of a quantized harmonic oscillator.
-
 In stochastic electrodynamics,
-
 the same quantity represents the average energy contained in a classical
 random electromagnetic mode.
-
 Thus identical mathematical expressions arise from two entirely
 different ontological assumptions.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The derivation above illustrates both the strength and the weakness of
 stochastic electrodynamics.
-
 On the one hand, the cubic spectrum follows naturally from very general
 symmetry arguments and reproduces one of the most characteristic
 numerical features of quantum vacuum fluctuations.
-
 On the other hand, the overall normalization remains empirical. The
 appearance of Planck's constant is not explained but assumed through the
 measured intensity of the vacuum field. Consequently, SED shifts the
 fundamental question from the quantization of matter to the origin of
 the stochastic vacuum itself.
-
 Nevertheless, the existence of a unique Lorentz-invariant classical
 vacuum spectrum remains one of the most elegant and physically
 compelling aspects of the theory.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Radiation Reaction and the Fluctuation--Dissipation Balance}
 \label{sec:RadiationReaction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The existence of a stochastic electromagnetic vacuum is not, by itself,
 sufficient to explain quantum phenomena. One must also understand how a
 charged particle responds to this fluctuating field.
-
 The dynamics of a charged particle differs fundamentally from ordinary
 Brownian motion. Besides the random force exerted by the vacuum field,
 an accelerated charge continuously emits electromagnetic radiation.
 Energy is therefore lost through radiation reaction.
-
 The motion is governed by the competition between two opposing effects:
-
-\[
-\boxed{
-\text{Vacuum fluctuations}
-\Longleftrightarrow
-\text{Radiation reaction}.
-}
-\]
-
+\[\boxed{\text{Vacuum fluctuations}\Longleftrightarrow\text{Radiation reaction}.}\]
 The former inject energy into the particle, whereas the latter removes
 it. A stationary state becomes possible only if these two processes
 balance each other.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Lorentz Force}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The relativistic equation of motion is
-
 \begin{equation}
-m\frac{du^\mu}{d\tau}
-=
-eF^{\mu\nu}u_\nu ,
+m\frac{du^\mu}{d\tau}=eF^{\mu\nu}u_\nu ,
 \label{eq:LorentzForce}
 \end{equation}
-
 where
-
-\[
-F^{\mu\nu}
-=
-F^{\mu\nu}_{\rm ext}
-+
-F^{\mu\nu}_{\rm ZP}.
-\]
-
+\[F^{\mu\nu}=F^{\mu\nu}_{\rm ext}+F^{\mu\nu}_{\rm ZP}.\]
 The second term denotes the stochastic zero-point field.
-
 Equation (\ref{eq:LorentzForce}) is entirely classical.
 Randomness enters only through the stochastic electromagnetic tensor.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Radiation Reaction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Accelerated charges radiate electromagnetic energy.
-
 Conservation of energy therefore requires a self-force acting on the
 particle.
-
 In the nonrelativistic approximation,
-
 \begin{equation}
-m\ddot x
-=
-F_{\rm ext}
-+
-m\tau_0
-\dddot x ,
+m\ddot x=F_{\rm ext}+m\tau_0\dddot x ,
 \label{eq:AbrahamLorentz}
 \end{equation}
-
 where
-
 \begin{equation}
-\tau_0
-=
-\frac{2e^2}{3mc^3}.
+\tau_0=\frac{2e^2}{3mc^3}.
 \end{equation}
-
 For an electron,
-
-\[
-\tau_0
-\simeq
-6.3\times10^{-24}\ {\rm s},
-\]
-
+\[\tau_0\simeq 6.3\times10^{-24}\ {\rm s},\]
 an extremely short time scale.
-
 The third-order derivative reflects the fact that radiation reaction
 depends upon the rate of change of acceleration.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relativistic Form}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The fully covariant Abraham--Lorentz--Dirac equation is
-
 \begin{equation}
-m\frac{du^\mu}{d\tau}
-=
-eF^{\mu\nu}u_\nu
-+
-\frac{2e^2}{3c^3}
-\left(
-\frac{d^2u^\mu}{d\tau^2}
-+
-u^\mu
-\frac{du_\nu}{d\tau}
-\frac{du^\nu}{d\tau}
-\right).
+m\frac{du^\mu}{d\tau}=eF^{\mu\nu}u_\nu+\frac{2e^2}{3c^3}
+\left(\frac{d^2u^\mu}{d\tau^2}+u^\mu\frac{du_\nu}{d\tau}\frac{du^\nu}{d\tau}\right).
 \label{eq:ALD}
 \end{equation}
-
 The second term is the radiation-reaction force.
-
 Although derived entirely within classical electrodynamics, it has
 generated considerable controversy because of its unusual mathematical
 properties.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Runaway Solutions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Equation (\ref{eq:ALD}) possesses exponentially growing solutions,
-
-\[
-a(t)
-\propto
-e^{t/\tau_0},
-\]
-
+\[a(t)\propto e^{t/\tau_0},\]
 even when no external force acts.
-
 These runaway solutions are clearly unphysical.
-
 They arise because the equation is third order in time.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Preacceleration}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A second difficulty is preacceleration.
-
 Some solutions begin to accelerate before the external force is applied,
-
-\[
-a(t)\neq0,
-\qquad
-t<t_{\rm force}.
-\]
-
+\[a(t)\neq0,\qquad t<t_{\rm force}.\]
 This apparent violation of causality has stimulated an extensive
 literature and remains one of the most discussed aspects of classical
 electrodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Landau--Lifshitz Approximation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 For slowly varying external fields one may eliminate these pathological
 solutions perturbatively.
-
 Replacing the acceleration appearing inside the radiation-reaction term
 by the Lorentz force yields the Landau--Lifshitz equation,
-
 \begin{equation}
-m\frac{du^\mu}{d\tau}
-=
-eF^{\mu\nu}u_\nu
-+
-\frac{2e^3}{3mc^3}
-\partial_\alpha F^{\mu\nu}
-u^\alpha
-u_\nu
-+\cdots .
+m\frac{du^\mu}{d\tau}=eF^{\mu\nu}u_\nu+\frac{2e^3}{3mc^3}\partial_\alpha 
+    F^{\mu\nu}u^\alpha u_\nu+\cdots .
 \end{equation}
-
 This equation is second order and avoids both runaway solutions and
 preacceleration within its domain of validity.
-
 For most practical applications it has become the preferred classical
 equation of motion.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Fluctuation--Dissipation Balance}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stochastic vacuum continuously transfers energy to the charged
 particle,
-
-\[
-\left<
-P_{\rm in}
-\right>
->0.
-\]
-
+\[\left<P_{\rm in}\right>>0.\]
 Radiation reaction removes energy,
-
-\[
-\left<
-P_{\rm out}
-\right>
->0.
-\]
-
+\[\left<P_{\rm out}\right>>0.\]
 A stationary equilibrium requires
-
 \begin{equation}
-\boxed{
-\left<
-P_{\rm in}
-\right>
-=
-\left<
-P_{\rm out}
-\right>.
-}
+\boxed{\left<P_{\rm in}\right>=\left<P_{\rm out}\right>.}
 \label{eq:FDT}
 \end{equation}
-
 This relation is the SED analogue of the fluctuation--dissipation
 theorem familiar from statistical mechanics.
-
 Unlike ordinary Brownian motion, however, both fluctuation and
 dissipation originate from classical electrodynamics itself.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relation to Brownian Motion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The analogy with Langevin dynamics is illuminating.
-
 For an ordinary Brownian particle,
-
-\[
-m\dot v
-=
--\gamma v
-+\xi(t),
-\]
-
+\[m\dot v=-\gamma v+\xi(t),\]
 where
-
-\[
-\xi(t)
-\]
-
+\[\xi(t)\]
 is the stochastic force and
-
-\[
-\gamma
-\]
-
+\[\gamma\]
 represents viscous damping.
-
 In stochastic electrodynamics,
-
-\[
-\xi(t)
-\longrightarrow
-eE_{\rm ZP}(t),
-\]
-
+\[\xi(t)\longrightarrow eE_{\rm ZP}(t),\]
 while the damping term is replaced by radiation reaction.
-
 Thus the entire mathematical structure of Brownian motion reappears in a
 purely electromagnetic context.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Conceptual Significance}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The fluctuation--dissipation balance occupies a central position in
 stochastic electrodynamics.
-
 Without radiation reaction the stochastic vacuum would continuously
 increase the particle energy.
-
 Without vacuum fluctuations the particle would radiate away all of its
 energy and eventually come to rest.
-
 Only the simultaneous presence of both mechanisms permits stable
 stationary states.
-
 This balance is responsible for many of the characteristic predictions
 of SED, including the ground-state energy of the harmonic oscillator.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The interplay between vacuum fluctuations and radiation reaction is one
 of the strongest aspects of stochastic electrodynamics because both
 ingredients arise naturally within classical electrodynamics.
-
 At the same time, radiation reaction remains one of the oldest
 conceptual problems in theoretical physics. The Abraham--Lorentz--Dirac
 equation exhibits runaway solutions and preacceleration, while the
 Landau--Lifshitz equation is an approximation rather than an exact
 theory.
-
 Consequently, the foundations of SED inherit the unresolved difficulties
 of classical radiation reaction. Whether these problems reflect a
 limitation of classical electrodynamics itself or merely indicate the
 need for a more complete microscopic description remains an open
 question.
-
 From the perspective of this monograph, an important lesson emerges:
 the stochastic force and the dissipative self-force are not independent
 ingredients but two complementary aspects of the interaction between a
@@ -1610,7 +849,6 @@ dynamics within the SHP framework.
 \section{The Harmonic Oscillator in Stochastic Electrodynamics}
 \label{sec:SEDOscillator}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The one-dimensional harmonic oscillator occupies a central position in
 both classical and quantum physics. Nearly every physical system can be
 approximated by a harmonic oscillator near a stable equilibrium.
@@ -1619,399 +857,191 @@ collection of independent harmonic oscillators. Consequently, any
 candidate stochastic foundation of quantum mechanics must reproduce the
 properties of the harmonic oscillator before more complicated systems
 can be considered.
-
 For stochastic electrodynamics, the harmonic oscillator provides the
 first decisive test of the theory.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Equation of Motion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Consider a particle of mass $m$ and charge $e$ bound in the harmonic
 potential
-
 \begin{equation}
 V(x)=\frac12 m\omega_0^2x^2.
 \end{equation}
-
 Including both the stochastic vacuum field and radiation reaction, the
 equation of motion becomes
-
 \begin{equation}
-m\ddot x
-+
-m\omega_0^2x
-=
-eE_{\rm ZP}(t)
-+
-m\tau_0\dddot x,
+m\ddot x+m\omega_0^2x=eE_{\rm ZP}(t)+m\tau_0\dddot x,
 \label{eq:SEDOscillator}
 \end{equation}
-
 where
-
-\[
-\tau_0
-=
-\frac{2e^2}{3mc^3}.
-\]
-
+\[\tau_0=\frac{2e^2}{3mc^3}.\]
 Equation (\ref{eq:SEDOscillator}) is simply the Abraham--Lorentz
 equation for a harmonically bound particle.
-
 The stochastic force originates entirely from the classical zero-point
 field.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Frequency-Domain Solution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Because the stochastic force contains all frequencies, it is convenient
 to Fourier transform Eq.~(\ref{eq:SEDOscillator}).
-
 Writing
-
-\[
-x(t)
-=
-\int_{-\infty}^{\infty}
-\tilde x(\omega)
-e^{-i\omega t}
-\,d\omega,
-\]
-
+\[x(t)=\int_{-\infty}^{\infty}\tilde x(\omega)e^{-i\omega t}\,d\omega,\]
 one obtains
-
 \begin{equation}
-\left(
-\omega_0^2
--
-\omega^2
--
-i\tau_0\omega^3
-\right)
-\tilde x(\omega)
-=
-\frac{e}{m}
-\tilde E(\omega).
+\left(\omega_0^2-\omega^2-i\tau_0\omega^3\right)\tilde x(\omega)=
+\frac{e}{m}\tilde E(\omega).
 \end{equation}
-
 Hence,
-
 \begin{equation}
-\boxed{
-\tilde x(\omega)
-=
-\frac{e/m}
-{\omega_0^2-\omega^2-i\tau_0\omega^3}
-\,
-\tilde E(\omega).
-}
+\boxed{\tilde x(\omega)=
+\frac{e/m}{\omega_0^2-\omega^2-i\tau_0\omega^3}\,\tilde E(\omega).}
 \label{eq:ResponseFunction}
 \end{equation}
-
 The denominator is the linear response function of the oscillator.
-
 The imaginary part represents energy dissipation through radiation
 reaction.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Power Spectrum}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The displacement spectrum follows immediately,
-
 \begin{equation}
-S_x(\omega)
-=
-\left|
-\frac{e/m}
-{\omega_0^2-\omega^2-i\tau_0\omega^3}
-\right|^2
-S_E(\omega),
+S_x(\omega)=\left|\frac{e/m}{\omega_0^2-\omega^2-i\tau_0\omega^3}\right|^2 
+    S_E(\omega),
 \label{eq:PowerSpectrum}
 \end{equation}
-
 where
-
-\[
-S_E(\omega)
-\]
-
+\[S_E(\omega)\]
 is the spectral density of the zero-point field.
-
 Using the Lorentz-invariant spectrum derived in the previous section,
-
 \begin{equation}
-S_E(\omega)
-\propto
-\hbar\omega^3.
+S_E(\omega)\propto\hbar\omega^3.
 \end{equation}
-
 Thus every normal mode of the vacuum contributes to the oscillator
 motion, although the resonance at
-
-\[
-\omega=\omega_0
-\]
-
+\[\omega=\omega_0\]
 dominates because of the response function.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mean-Square Displacement}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The variance of the position is
-
 \begin{equation}
-\langle x^2\rangle
-=
-\int_0^\infty
-S_x(\omega)
-\,d\omega.
+\langle x^2\rangle=\int_0^\infty S_x(\omega)\,d\omega.
 \label{eq:XVarianceIntegral}
 \end{equation}
-
 The integral is sharply peaked near the resonance frequency.
-
 Since
-
-\[
-\tau_0\omega_0\ll1,
-\]
-
+\[\tau_0\omega_0\ll1,\]
 one may evaluate the integral using the narrow-resonance approximation.
-
 Expanding about
-
-\[
-\omega=\omega_0,
-\]
-
+\[\omega=\omega_0,\]
 and retaining the leading contribution yields
-
 \begin{equation}
-\boxed{
-\langle x^2\rangle
-=
-\frac{\hbar}
-{2m\omega_0}.
-}
+\boxed{\langle x^2\rangle=\frac{\hbar}{2m\omega_0}.}
 \label{eq:GroundVariance}
 \end{equation}
-
 Remarkably, this is exactly the quantum-mechanical ground-state
 expectation value.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Momentum Fluctuations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Since
-
-\[
-p=m\dot x,
-\]
-
+\[p=m\dot x,\]
 the momentum variance becomes
-
 \begin{equation}
-\langle p^2\rangle
-=
-m^2
-\int_0^\infty
-\omega^2
-S_x(\omega)
-\,d\omega.
+\langle p^2\rangle=m^2\int_0^\infty\omega^2 S_x(\omega)\,d\omega.
 \end{equation}
-
 The same approximation gives
-
 \begin{equation}
-\boxed{
-\langle p^2\rangle
-=
-\frac12
-m\hbar\omega_0.
-}
+\boxed{\langle p^2\rangle=\frac12 m\hbar\omega_0.}
 \label{eq:MomentumVariance}
 \end{equation}
-
 Consequently,
-
 \begin{equation}
-\Delta x
-\Delta p
-=
-\frac{\hbar}{2},
+\Delta x \Delta p=\frac{\hbar}{2},
 \end{equation}
-
 which coincides with the minimum uncertainty relation of quantum
 mechanics.
-
 Within SED this relation emerges from stochastic dynamics rather than
 from operator commutation relations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mean Energy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The average oscillator energy is
-
 \begin{equation}
-\langle E\rangle
-=
-\frac{\langle p^2\rangle}{2m}
-+
-\frac12
-m\omega_0^2
-\langle x^2\rangle .
+\langle E\rangle=\frac{\langle p^2\rangle}{2m}+\frac12 m\omega_0^2
+    \langle x^2\rangle .
 \end{equation}
-
 Using Eqs.~(\ref{eq:GroundVariance}) and
 (\ref{eq:MomentumVariance}) gives
-
 \begin{equation}
-\boxed{
-\langle E\rangle
-=
-\frac12
-\hbar\omega_0.
-}
+\boxed{\langle E\rangle=\frac12\hbar\omega_0.}
 \label{eq:GroundEnergy}
 \end{equation}
-
 Thus the classical stochastic oscillator possesses precisely the same
 average ground-state energy as the quantum oscillator.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Probability Distribution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stochastic force is Gaussian.
-
 Because the oscillator responds linearly, the stationary probability
 distribution of the displacement is also Gaussian,
-
 \begin{equation}
-P(x)
-=
-\frac1{\sqrt{2\pi\langle x^2\rangle}}
-\exp
-\left(
--\frac{x^2}
-{2\langle x^2\rangle}
-\right).
+P(x)=\frac1{\sqrt{2\pi\langle x^2\rangle}}
+\exp\left(-\frac{x^2}{2\langle x^2\rangle}\right).
 \end{equation}
-
 Substituting Eq.~(\ref{eq:GroundVariance}) yields
-
 \begin{equation}
-\boxed{
-P(x)
-=
-\left(
-\frac{m\omega_0}
-{\pi\hbar}
-\right)^{1/2}
-\exp
-\left(
--\frac{m\omega_0x^2}{\hbar}
-\right),
-}
+\boxed{P(x)=\left(\frac{m\omega_0}{\pi\hbar}\right)^{1/2}
+\exp\left(-\frac{m\omega_0x^2}{\hbar}\right),}
 \label{eq:GaussianSED}
 \end{equation}
-
 which is identical to the probability density obtained from the quantum
 ground-state wave function,
-
-\[
-|\psi_0(x)|^2.
-\]
-
+\[|\psi_0(x)|^2.\]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Correlation Functions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stationary two-time correlation function is
-
 \begin{equation}
-C(\tau)
-=
-\langle
-x(t)x(t+\tau)
-\rangle .
+C(\tau)=\langle x(t)x(t+\tau)\rangle .
 \end{equation}
-
 Using the Wiener--Khinchin theorem,
-
 \begin{equation}
-C(\tau)
-=
-\int_0^\infty
-S_x(\omega)
-\cos(\omega\tau)
-\,d\omega.
+C(\tau)=\int_0^\infty S_x(\omega)\cos(\omega\tau)\,d\omega.
 \end{equation}
-
 Near resonance,
-
 \begin{equation}
-C(\tau)
-\simeq
-\frac{\hbar}
-{2m\omega_0}
-\cos(\omega_0\tau)
-e^{-\Gamma|\tau|},
+C(\tau)\simeq\frac{\hbar}{2m\omega_0}\cos(\omega_0\tau)e^{-\Gamma|\tau|},
 \end{equation}
-
 where
-
-\[
-\Gamma
-=
-\frac12
-\tau_0\omega_0^2
-\]
-
+\[\Gamma=\frac12\tau_0\omega_0^2\]
 is the radiative damping rate.
-
 Thus the stochastic oscillator possesses a finite coherence time,
 determined by radiation reaction.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Physical Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The agreement with the quantum ground state is one of the principal
 achievements of stochastic electrodynamics.
-
 No quantization has been imposed.
-
 The oscillator obeys a purely classical equation of motion driven by a
 classical stochastic electromagnetic field.
-
 The quantities usually interpreted as consequences of canonical
 commutation relations arise here from the statistical equilibrium
 between vacuum fluctuations and radiative damping.
-
 From the SED perspective, the ground-state energy is not the zero-point
 energy of a quantized oscillator but the equilibrium energy of a
 classical oscillator immersed in the universal zero-point radiation
 field.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The harmonic oscillator constitutes the strongest single success of
 stochastic electrodynamics. The agreement with the quantum-mechanical
 ground state extends beyond the average energy to include the position
 variance, momentum variance, Gaussian probability distribution, and
 minimum uncertainty product.
-
 Nevertheless, several qualifications are necessary.
-
 First, the derivation relies on the assumed Lorentz-invariant
 zero-point spectrum introduced earlier; the normalization of that
 spectrum remains an empirical input. Second, the calculation describes
@@ -2020,492 +1050,287 @@ states and strongly nonlinear systems is considerably more difficult.
 Finally, the analysis is based on classical radiation reaction, whose
 foundations remain controversial because of the Abraham–Lorentz–Dirac
 pathologies discussed in the previous section.
-
 Despite these limitations, the harmonic oscillator remains compelling
 evidence that a classical stochastic field can reproduce certain
 characteristic features traditionally regarded as uniquely quantum.
 Whether this agreement reflects a deep physical mechanism or a
 remarkable mathematical coincidence is one of the central questions
 addressed by the subsequent development of stochastic electrodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Hydrogen Atom}
 \label{sec:SEDHydrogen}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The hydrogen atom has always occupied a central position in the
 development of atomic physics. Historically, one of the principal
 motivations for quantum mechanics was the apparent inability of
 classical electrodynamics to explain the stability of atomic matter.
-
 For this reason the hydrogen atom provides the most stringent test of
 stochastic electrodynamics. Unlike the harmonic oscillator, whose
 equations are linear, the Coulomb problem is nonlinear, non-compact, and
 contains trajectories with arbitrarily high eccentricity. Moreover, the
 electron continuously accelerates in the Coulomb field and therefore
 radiates according to classical electrodynamics.
-
 The central question addressed by stochastic electrodynamics may be
 stated as follows:
-
 \begin{quote}
 Can the interaction between a classical electron and the stochastic
 electromagnetic vacuum prevent the classical radiative collapse of the
 hydrogen atom?
 \end{quote}
-
 Unlike the harmonic oscillator, this question has not yet received a
 universally accepted answer.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Classical Collapse Problem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Consider an electron of mass $m$ and charge $-e$ moving in the Coulomb
 potential
-
 \begin{equation}
-V(r)
-=
--\frac{e^2}{r},
+V(r)=-\frac{e^2}{r},
 \end{equation}
-
 (Gaussian units).
-
 Ignoring radiation reaction, Newton's equation is
-
 \begin{equation}
-m\ddot{\mathbf r}
-=
--\frac{e^2}{r^3}\mathbf r.
+m\ddot{\mathbf r}=-\frac{e^2}{r^3}\mathbf r.
 \label{eq:CoulombNewton}
 \end{equation}
-
 Its solutions are the familiar Kepler ellipses,
-
-\[
-E
-=
--\frac{e^2}{2a},
-\]
-
+\[E=-\frac{e^2}{2a},\]
 where $a$ denotes the semi-major axis.
-
 Within purely mechanical classical physics these orbits are perfectly
 stable.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Instability Due to Radiation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The situation changes once Maxwell's equations are included.
-
 Since the electron accelerates continuously, it radiates energy
 according to the Larmor formula,
-
 \begin{equation}
-P
-=
-\frac{2e^2}{3c^3}a^2.
+P=\frac{2e^2}{3c^3}a^2.
 \label{eq:Larmor}
 \end{equation}
-
 The orbital energy therefore decreases,
-
-\[
-\frac{dE}{dt}
-=
--P,
-\]
-
+\[\frac{dE}{dt}=-P,\]
 causing the orbit to shrink.
-
 A simple estimate predicts that a classical hydrogen atom would collapse
 into the nucleus in approximately
-
-\[
-10^{-11}\ {\rm s},
-\]
-
+\[10^{-11}\ {\rm s},\]
 far shorter than any observed atomic lifetime.
-
 This classical catastrophe was one of the principal motivations for the
 development of quantum mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{SED Perspective}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Stochastic electrodynamics modifies this picture in a fundamental way.
-
 The electron no longer evolves in the Coulomb field alone.
-
 Instead,
-
 \begin{equation}
-m\ddot{\mathbf r}
-=
--\frac{e^2}{r^3}\mathbf r
-+
-e\mathbf E_{\rm ZP}(t)
-+
-\mathbf F_{\rm RR},
+m\ddot{\mathbf r}=-\frac{e^2}{r^3}\mathbf r+e\mathbf E_{\rm ZP}(t)+
+    \mathbf F_{\rm RR},
 \label{eq:HydrogenSED}
 \end{equation}
-
 where
-
-\[
-\mathbf E_{\rm ZP}
-\]
-
+\[\mathbf E_{\rm ZP}\]
 is the stochastic zero-point field and
-
-\[
-\mathbf F_{\rm RR}
-\]
-
+\[\mathbf F_{\rm RR}\]
 denotes radiation reaction.
-
 The dynamics now contains two competing mechanisms.
-
 Radiation reaction continuously removes orbital energy,
-
 while stochastic vacuum fluctuations continuously replenish it.
-
 The fundamental issue is whether these two processes admit a stationary
 statistical equilibrium.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dimensionless Parameters}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Several characteristic scales govern the problem.
-
 The Bohr radius,
-
 \begin{equation}
-a_0
-=
-\frac{\hbar^2}{me^2},
+a_0=\frac{\hbar^2}{me^2},
 \end{equation}
-
 sets the natural length scale.
-
 The corresponding energy is
-
 \begin{equation}
-E_{\rm B}
-=
--\frac{me^4}{2\hbar^2},
+E_{\rm B}=-\frac{me^4}{2\hbar^2},
 \end{equation}
-
 while the orbital frequency is approximately
-
 \begin{equation}
-\omega_{\rm B}
-=
-\frac{me^4}{\hbar^3}.
+\omega_{\rm B}=\frac{me^4}{\hbar^3}.
 \end{equation}
-
 Although these quantities contain Planck's constant, SED interprets
 $\hbar$ merely as the normalization of the zero-point spectrum.
-
 Consequently, the appearance of atomic scales is viewed as emerging from
 the interaction between classical Coulomb dynamics and the stochastic
 vacuum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mathematical Difficulties}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Compared with the harmonic oscillator, the hydrogen atom introduces
 several new mathematical complications.
-
 \begin{enumerate}
-
 \item
 The Coulomb force is nonlinear.
-
 \item
 The orbital frequency is not constant but depends on the instantaneous
 trajectory.
-
 \item
 Highly eccentric orbits contain many Fourier harmonics.
-
 \item
 Radiation reaction becomes strongly trajectory dependent.
-
 \item
 The stochastic force excites infinitely many resonances.
-
 \item
 Close encounters with the nucleus generate very large accelerations.
-
 \end{enumerate}
-
 These difficulties prevent an exact analytical solution.
-
 Consequently, nearly all investigations rely either on perturbation
 theory or on extensive numerical simulations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Central Physical Question}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The harmonic oscillator possesses a unique stable equilibrium.
-
 The Coulomb problem is fundamentally different.
-
 Instead of asking whether the particle fluctuates about a fixed point,
 one must determine whether the probability distribution in phase space
 approaches a stationary measure.
-
 In modern language the problem becomes one of stochastic dynamics on the
 Kepler phase space.
-
 Does there exist an invariant probability measure
-
-\[
-\rho(\mathbf r,\mathbf p)
-\]
-
+\[\rho(\mathbf r,\mathbf p)\]
 satisfying
-
-\[
-\frac{\partial\rho}{\partial t}
-=
-0?
-\]
-
+\[\frac{\partial\rho}{\partial t}=0?\]
 If such a measure exists, one may compare it directly with the quantum
 ground-state distribution of hydrogen.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Editorial Comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Historically, discussions of SED often begin immediately with numerical
 simulations or with particular analytical models. We believe that this
 obscures the essential physical issue.
-
 The hydrogen atom is fundamentally a problem of dynamical balance
 between two competing mechanisms: deterministic radiative energy loss
 and stochastic energy injection from the electromagnetic vacuum. The
 existence, uniqueness, and stability of the resulting statistical
 equilibrium constitute the central mathematical questions.
-
 From this perspective the hydrogen atom is not merely another example of
 SED but rather the decisive test of the entire research programme.
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Analytical Approaches: Puthoff's Energy-Balance Model}
 \label{sec:Puthoff}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The first widely discussed analytical explanation of atomic stability
 within stochastic electrodynamics was proposed by Theodore Puthoff in
 1987. Rather than attempting to solve the complete stochastic equations
 of motion, Puthoff considered the average balance between radiative
 energy loss and energy absorbed from the classical zero-point field.
-
 The basic hypothesis is simple.
-
 A stationary atomic orbit is possible if the average power radiated by
 the electron equals the average power absorbed from the stochastic
 vacuum,
-
 \begin{equation}
-\boxed{
-\left\langle P_{\rm rad}\right\rangle
-=
-\left\langle P_{\rm abs}\right\rangle .
-}
+\boxed{\left\langle P_{\rm rad}\right\rangle=
+\left\langle P_{\rm abs}\right\rangle .}
 \label{eq:EnergyBalance}
 \end{equation}
-
 This condition is analogous to thermal equilibrium in statistical
 physics and represents the central physical idea of Puthoff's model.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Radiated Power}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 For a nonrelativistic charge moving with acceleration
 $\mathbf a$, the Larmor formula gives
-
 \begin{equation}
-P_{\rm rad}
-=
-\frac{2e^2}{3c^3}a^2.
+P_{\rm rad}=\frac{2e^2}{3c^3}a^2.
 \label{eq:LarmorAgain}
 \end{equation}
-
 For a circular Coulomb orbit,
-
 \begin{equation}
-\frac{mv^2}{r}
-=
-\frac{e^2}{r^2},
+\frac{mv^2}{r}=\frac{e^2}{r^2},
 \end{equation}
-
 so that
-
 \begin{equation}
-a
-=
-\frac{v^2}{r}
-=
-\frac{e^2}{mr^2}.
+a=\frac{v^2}{r}=\frac{e^2}{mr^2}.
 \end{equation}
-
 Substitution into Eq.~(\ref{eq:LarmorAgain}) yields
-
 \begin{equation}
-P_{\rm rad}
-=
-\frac{2e^6}
-{3m^2c^3r^4}.
+P_{\rm rad}=\frac{2e^6}{3m^2c^3r^4}.
 \label{eq:PRadCircular}
 \end{equation}
-
 Thus radiative losses increase rapidly as the orbital radius decreases.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Energy Absorption}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The interaction with the stochastic vacuum continuously transfers energy
 to the orbiting electron.
-
 Puthoff estimated the average absorbed power by treating the electron as
 a resonant system coupled to the zero-point field. The calculation
 employs the Lorentz-invariant spectral density
-
 \begin{equation}
-u(\omega)
-=
-\frac{\hbar\omega^3}{2\pi^2c^3},
+u(\omega)=\frac{\hbar\omega^3}{2\pi^2c^3},
 \end{equation}
-
 together with the dipole coupling between the electron and the
 electromagnetic field.
-
 The resulting absorbed power may be written schematically as
-
 \begin{equation}
-P_{\rm abs}
-=
-\frac{e^2\hbar\omega^3}
-{2mc^3},
+P_{\rm abs}=\frac{e^2\hbar\omega^3}{2mc^3},
 \label{eq:PAbs}
 \end{equation}
-
 where $\omega$ is the orbital frequency. A more careful derivation,
 including angular averaging and polarization sums, leads to the same
 functional dependence.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Orbital Frequency}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 For a circular Kepler orbit,
-
 \begin{equation}
-m\omega^2r
-=
-\frac{e^2}{r^2},
+m\omega^2r=\frac{e^2}{r^2},
 \end{equation}
-
 which implies
-
 \begin{equation}
-\omega
-=
-\sqrt{\frac{e^2}{mr^3}}.
+\omega=\sqrt{\frac{e^2}{mr^3}}.
 \label{eq:KeplerFrequency}
 \end{equation}
-
 The absorbed power therefore scales as
-
 \begin{equation}
-P_{\rm abs}
-\propto
-\frac{e^5\hbar}
-{m^{5/2}c^3r^{9/2}}.
+P_{\rm abs}\propto\frac{e^5\hbar}{m^{5/2}c^3r^{9/2}}.
 \end{equation}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Stationary Radius}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The equilibrium condition,
-
-\[
-P_{\rm rad}
-=
-P_{\rm abs},
-\]
-
+\[P_{\rm rad}=P_{\rm abs},\]
 determines a characteristic orbital radius.
-
 Carrying out the algebra gives
-
 \begin{equation}
-r
-\sim
-\frac{\hbar^2}
-{me^2},
+r\sim\frac{\hbar^2}{me^2},
 \end{equation}
-
 which is precisely the Bohr radius,
-
 \begin{equation}
-\boxed{
-a_0
-=
-\frac{\hbar^2}{me^2}.
-}
+\boxed{a_0=\frac{\hbar^2}{me^2}.}
 \end{equation}
-
 Within SED this result is interpreted not as a consequence of angular
 momentum quantization but as the radius at which energy loss through
 radiation is exactly compensated by energy gained from the stochastic
 vacuum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The significance of Puthoff's calculation lies less in the numerical
 value of the Bohr radius than in the underlying physical picture.
-
 In the Bohr model, the stationary orbit is postulated.
-
 In Schrödinger's theory, the ground state is obtained as an eigenstate
 of the Hamiltonian.
-
 In stochastic electrodynamics, the characteristic atomic scale is
 interpreted as a nonequilibrium steady state maintained by the continual
 exchange of energy between the electron and the vacuum field.
-
 The atom is therefore viewed as a dynamical system rather than a static
 bound state.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Puthoff's model represented an important milestone because it showed
 that the observed atomic length scale can emerge from a balance between
 classical radiation reaction and stochastic vacuum fluctuations.
 Nevertheless, the derivation relies on a number of simplifying
 assumptions.
-
 First, the analysis assumes circular orbits, whereas the Coulomb problem
 admits a continuous family of elliptical trajectories with varying
 eccentricities. Second, the absorbed power is obtained using approximate
@@ -2513,751 +1338,453 @@ response functions rather than from an exact solution of the stochastic
 equations of motion. Third, the equilibrium condition is imposed on
 ensemble-averaged powers and does not by itself establish the existence
 or stability of a stationary probability distribution in phase space.
-
 Consequently, Puthoff's calculation should be regarded as an important
 consistency argument rather than as a complete derivation of the
 hydrogen ground state.
-
 From a modern perspective, the principal contribution of this work is
 conceptual: it demonstrated that the characteristic atomic scales of
 hydrogen are not obviously incompatible with a classical stochastic
 vacuum and thereby motivated the more sophisticated numerical
 investigations discussed in the following sections.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{A Modern Dynamical Systems Formulation}
 \label{sec:SEDModern}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The analytical models discussed in the previous section provide valuable
 physical insight but leave unanswered an important mathematical
 question. An equilibrium condition based on the average balance between
 absorbed and radiated power does not, by itself, establish the existence
 of a statistically stationary atomic state.
-
 From the viewpoint of modern stochastic dynamics, the central question
 is different.
-
 Rather than asking whether the average energy remains constant, one asks
 whether the stochastic evolution possesses an invariant probability
 measure on phase space.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Phase-Space Dynamics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Let
-
-\[
-X(t)=({\bf r}(t),{\bf p}(t))
-\]
-
+\[X(t)=({\bf r}(t),{\bf p}(t))\]
 denote the six-dimensional phase-space point of the electron.
-
 The deterministic Coulomb dynamics is generated by the Hamiltonian
-
 \begin{equation}
-H({\bf r},{\bf p})
-=
-\frac{{\bf p}^2}{2m}
--
-\frac{e^2}{r}.
+H({\bf r},{\bf p})=\frac{{\bf p}^2}{2m}-\frac{e^2}{r}.
 \end{equation}
-
 In stochastic electrodynamics the equations of motion become
-
 \begin{align}
-\dot{\bf r}
-&=
-\frac{\partial H}{\partial{\bf p}},
-\\
-\dot{\bf p}
-&=
--
-\frac{\partial H}{\partial{\bf r}}
-+
-{\bf F}_{\rm RR}
-+
-e{\bf E}_{\rm ZP}(t),
+\dot{\bf r}&=\frac{\partial H}{\partial{\bf p}},\\
+\dot{\bf p}&=-\frac{\partial H}{\partial{\bf r}}+
+{\bf F}_{\rm RR}+e{\bf E}_{\rm ZP}(t),
 \label{eq:SEDPhaseSpace}
 \end{align}
-
 where
-
-\[
-{\bf F}_{\rm RR}
-\]
-
+\[{\bf F}_{\rm RR}\]
 is the radiation-reaction force and
-
-\[
-{\bf E}_{\rm ZP}(t)
-\]
-
+\[{\bf E}_{\rm ZP}(t)\]
 is the stochastic zero-point field.
-
 The deterministic Hamiltonian flow is therefore replaced by a random
 flow on phase space.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Non-Markovian Character}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Unlike Nelson's stochastic mechanics, the random force is not assumed to
 be white noise.
-
 Instead,
-
-\[
-\langle
-E_i(t)
-E_j(t')
-\rangle
-=
-C_{ij}(t-t'),
-\]
-
+\[\langle E_i(t)E_j(t')\rangle=C_{ij}(t-t'),\]
 where the correlation function is determined by the zero-point spectrum.
-
 The stochastic forcing therefore possesses memory.
-
 Consequently,
-
 the electron dynamics is generally non-Markovian.
-
 This observation has important mathematical consequences.
-
 Many standard results concerning diffusion processes, Fokker--Planck
 equations and invariant measures cannot be applied directly.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Extended Markov Description}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A common strategy in stochastic dynamics is to enlarge the state space.
-
 Instead of considering only
-
-\[
-({\bf r},{\bf p}),
-\]
-
+\[({\bf r},{\bf p}),\]
 one introduces additional variables describing the stochastic field.
-
 The enlarged process
-
-\[
-({\bf r},{\bf p},{\bf E}_{\rm ZP})
-\]
-
+\[({\bf r},{\bf p},{\bf E}_{\rm ZP})\]
 is then Markovian even though the reduced particle dynamics is not.
-
 This construction is widely used in the theory of colored-noise
 processes and generalized Langevin equations.
-
 It provides a natural mathematical framework for stochastic
 electrodynamics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Invariant Probability Measure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The principal mathematical problem may now be formulated precisely.
-
 Does there exist a probability density
-
-\[
-\rho({\bf r},{\bf p})
-\]
-
+\[\rho({\bf r},{\bf p})\]
 such that
-
 \begin{equation}
 \frac{\partial\rho}{\partial t}=0
 \end{equation}
-
 under the stochastic dynamics generated by
 Eq.~(\ref{eq:SEDPhaseSpace})?
-
 If such a measure exists, several further questions arise.
-
 \begin{itemize}
-
 \item
 Is it unique?
-
 \item
 Is it normalizable?
-
 \item
 Is it stable against perturbations?
-
 \item
 Is it ergodic?
-
 \item
 Does it coincide with the quantum ground-state distribution?
-
 \end{itemize}
-
 These questions are considerably stronger than the simple energy-balance
 condition discussed previously.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Generator of the Stochastic Dynamics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 If the stochastic process were Markovian, its evolution would be
 generated by an operator
-
-\[
-L,
-\]
-
+\[L,\]
 acting on smooth functions of phase space,
-
-\[
-\frac{d}{dt}
-\langle f\rangle
-=
-\langle
-Lf
-\rangle.
-\]
-
+\[\frac{d}{dt}\langle f\rangle=\langle Lf\rangle.\]
 The invariant distribution would satisfy
-
 \begin{equation}
 L^*\rho=0,
 \end{equation}
-
 where
-
-\[
-L^*
-\]
-
+\[L^*\]
 is the adjoint generator.
-
 For white-noise processes this reduces to the familiar
 Fokker--Planck equation.
-
 For SED, however, the colored nature of the zero-point field generally
 leads to generalized kinetic equations containing memory kernels.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Relation to Energy Balance}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The energy-balance condition may now be interpreted as a necessary but
 not sufficient condition for stationarity.
-
 Indeed,
-
 if a stationary probability distribution exists,
-
-\[
-\frac{d}{dt}
-\langle H\rangle
-=
-0.
-\]
-
+\[\frac{d}{dt}\langle H\rangle=0.\]
 Therefore,
-
-\[
-\left<
-P_{\rm abs}
-\right>
-=
-\left<
-P_{\rm rad}
-\right>.
-\]
-
+\[\left<P_{\rm abs}\right>=\left<P_{\rm rad}\right>.\]
 The converse implication does not necessarily hold.
-
 Equality of average powers does not guarantee the existence,
 uniqueness, or stability of an invariant probability measure.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Reformulating stochastic electrodynamics in terms of stochastic
 dynamical systems clarifies several conceptual issues. It distinguishes
 between local energy balance and global statistical equilibrium and
 provides a natural framework for comparing SED with other stochastic
 approaches discussed in this monograph.
-
 At the same time, the reformulation exposes a major mathematical
 challenge. Because the zero-point field possesses long-range temporal
 correlations, the particle dynamics is generally non-Markovian.
 Rigorous existence and uniqueness theorems for invariant measures are
 therefore considerably more difficult to establish than for ordinary
 diffusion processes.
-
 This observation suggests that future developments of SED may benefit
 from modern techniques in the theory of generalized Langevin equations,
 hypoelliptic diffusions, random dynamical systems, and stochastic
 Hamiltonian mechanics. Such methods have matured substantially since the
 original formulation of SED and may provide new insight into the
 question of atomic stability.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerical Simulations: The Work of Cole and Zou}
 \label{sec:ColeZou}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The analytical models discussed in the previous sections rely on various
 approximations concerning the interaction between the electron and the
 stochastic vacuum field. Because of the complexity of the full
 stochastic equations, an important alternative is direct numerical
 integration.
-
 The first widely discussed numerical investigation was carried out by
 Cole and Zou in 2003. Their objective was straightforward: integrate the
 classical equations of motion of an electron in the Coulomb field,
 including both radiation reaction and the stochastic zero-point
 electromagnetic field, and determine whether the long-time statistical
 behavior resembles the quantum-mechanical ground state.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Equations of Motion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The electron dynamics was modeled by
-
 \begin{equation}
-m\ddot{\mathbf r}
-=
--
-\frac{e^2}{r^3}{\mathbf r}
-+
-e{\mathbf E}_{\rm ZP}(t)
-+
-{\mathbf F}_{\rm RR},
+m\ddot{\mathbf r}=-\frac{e^2}{r^3}{\mathbf r}+e{\mathbf E}_{\rm ZP}(t)
+    +{\mathbf F}_{\rm RR},
 \label{eq:ColeZouEq}
 \end{equation}
-
 where
-
 \begin{itemize}
-
 \item the first term is the Coulomb force,
-
 \item the second term represents the stochastic zero-point field,
-
 \item the third term accounts for radiation reaction.
-
 \end{itemize}
-
 The stochastic field was represented by a finite but very large sum of
 plane-wave modes,
-
 \begin{equation}
-{\mathbf E}_{\rm ZP}(t)
-=
-\sum_{n=1}^{N}
-{\mathbf E}_n
-\cos(\omega_nt+\phi_n),
+{\mathbf E}_{\rm ZP}(t)=\sum_{n=1}^{N}{\mathbf E}_n\cos(\omega_nt+\phi_n),
 \end{equation}
-
 where the random phases
-
-\[
-\phi_n
-\]
-
+\[\phi_n\]
 were chosen independently and uniformly on
-
-\[
-[0,2\pi),
-\]
-
+\[[0,2\pi),\]
 while the amplitudes were adjusted to reproduce the Lorentz-invariant
 zero-point spectrum discussed earlier.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Finite Mode Representation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 An exact realization of the zero-point field requires infinitely many
 electromagnetic modes. Numerical simulations necessarily replace this by
 a finite expansion,
-
-\[
-N<\infty.
-\]
-
+\[N<\infty.\]
 This approximation introduces two artificial scales:
-
 \begin{itemize}
-
 \item a lowest represented frequency,
-
 \item a highest represented frequency.
-
+\end{itemize}
 Consequently, every simulation implicitly introduces infrared and
 ultraviolet cutoffs.
-
 The dependence of the numerical results upon these cutoffs is therefore
 an important issue.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Integration Algorithm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The equations of motion were integrated over many orbital periods using
 high-order adaptive numerical methods.
-
 Because the stochastic force contains frequencies extending far above
 the orbital frequency, extremely small time steps are required in order
 to avoid numerical instability.
-
 Long integration times are essential since the objective is not a single
 trajectory but the stationary statistical distribution obtained after
 transients have decayed.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Observed Probability Distribution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The principal observable is the radial probability density,
-
-\[
-P(r).
-\]
-
+\[P(r).\]
 Cole and Zou reported that the numerically obtained distribution
 approaches a form close to the quantum-mechanical ground-state density,
-
 \begin{equation}
-P_{\rm QM}(r)
-=
-\frac{4r^2}{a_0^3}
-e^{-2r/a_0},
+P_{\rm QM}(r)=\frac{4r^2}{a_0^3}e^{-2r/a_0},
 \end{equation}
-
 where
-
-\[
-a_0
-=
-\frac{\hbar^2}{me^2}
-\]
-
+\[a_0=\frac{\hbar^2}{me^2}\]
 is the Bohr radius.
-
 Although the agreement was not exact, the qualitative similarity was
 remarkable given that the underlying dynamics remained entirely
 classical.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Energy Distribution}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The simulations also indicated that the orbital energy fluctuates
 continuously around the ground-state value rather than remaining fixed.
-
 This behavior differs from the stationary quantum eigenstate, whose
 energy is sharply defined in the absence of measurement.
-
 Within SED, however, continuous stochastic exchange of energy with the
 vacuum field is expected.
-
 Consequently, fluctuations of the instantaneous orbital energy are a
 natural feature of the theory.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The numerical results suggest the existence of a long-lived statistical
 equilibrium maintained by the balance between stochastic excitation and
 radiative damping.
-
 The atom is therefore interpreted as a nonequilibrium steady state.
-
 Individual trajectories remain highly irregular, but the ensemble of
 trajectories approaches an approximately stationary probability
 distribution.
-
 This interpretation differs fundamentally from the quantum-mechanical
 picture, where the ground state is an energy eigenstate described by a
 stationary wave function.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Numerical Limitations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Several numerical approximations should be kept in mind.
-
 \begin{enumerate}
-
 \item
 The stochastic vacuum was represented by finitely many modes.
-
 \item
 Finite integration time may prevent complete equilibration.
-
 \item
 Radiation reaction was treated approximately.
-
 \item
 Very high frequencies could not be included explicitly.
-
 \item
 The calculations were restricted primarily to the ground state.
-
 \end{enumerate}
-
 These limitations are common to virtually all large-scale SED
 simulations and should not be interpreted as shortcomings specific to
 the work of Cole and Zou.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The simulations of Cole and Zou constitute one of the most significant
 computational achievements in the history of stochastic
 electrodynamics. They demonstrated that direct numerical integration of
 the classical stochastic equations can produce probability
 distributions resembling those of the quantum-mechanical hydrogen ground
 state.
-
 At the same time, the conclusions must be interpreted with appropriate
 caution. The simulations employed finite spectral representations of
 the vacuum field, finite integration times, and approximate treatments
 of radiation reaction. Moreover, agreement with the ground-state radial
 distribution does not automatically imply agreement with all quantum
 observables.
-
 Nevertheless, the work changed the direction of research. Before 2003,
 the discussion of atomic stability within SED was dominated primarily by
 analytical arguments. After Cole and Zou, the emphasis shifted toward
 large-scale numerical investigations, opening the possibility of
 testing the theory quantitatively rather than relying solely on
 heuristic reasoning.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Large-Scale Numerical Investigations:
 Nieuwenhuizen and Liska}
 \label{sec:Nieuwenhuizen}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Following the pioneering work of Cole and Zou, substantially larger and
 more accurate numerical investigations were undertaken by Theo M.
 Nieuwenhuizen, Richard Liska and collaborators. Their objective was not
 merely to reproduce earlier simulations but to determine whether the
 hydrogen atom remains statistically stable over integration times and
 spectral resolutions far exceeding those previously considered.
-
 These investigations constitute the most extensive numerical study of
 stochastic electrodynamics performed to date and have significantly
 clarified both the strengths and the limitations of the theory.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Motivation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The calculations of Cole and Zou demonstrated encouraging agreement
 with the quantum-mechanical ground-state distribution. However, several
 questions remained unanswered.
-
 \begin{itemize}
-
 \item
 Does the apparent equilibrium persist over much longer times?
-
 \item
 Is the stationary distribution independent of the numerical
 discretization?
-
 \item
 How sensitive are the results to the ultraviolet cutoff?
-
 \item
 Does the stochastic dynamics eventually produce self-ionization?
-
 \item
 Are the observed probability distributions genuinely stationary?
-
 \end{itemize}
-
 Answering these questions requires simulations extending over many more
 orbital periods and involving significantly larger numbers of
 electromagnetic modes.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Numerical Improvements}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Compared with earlier work, Nieuwenhuizen and Liska introduced several
 important improvements.
-
 These include
-
 \begin{itemize}
-
 \item
 larger spectral representations of the zero-point field,
-
 \item
 improved treatment of orbital eccentricity,
-
 \item
 adaptive numerical integration,
-
 \item
 longer simulation times,
-
 \item
 careful monitoring of conserved quantities,
-
 \item
 statistical averaging over many independent realizations.
-
 \end{itemize}
-
 The resulting computations required computational resources
 substantially exceeding those available for the original Cole--Zou
 study.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Observed Dynamics}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 During the early stages of the simulations the electron generally
 approaches a statistical state whose radial distribution resembles the
 quantum-mechanical ground state.
-
 However, over sufficiently long integration times a qualitatively
 different behavior may emerge.
-
 Rare but large stochastic fluctuations can transfer sufficient energy
 to the electron to drive it into highly eccentric trajectories. Under
 certain conditions these excursions are followed by complete
 self-ionization, after which the electron escapes permanently from the
 Coulomb potential.
-
 The occurrence of such events depends sensitively on the numerical
 implementation and the representation of the stochastic vacuum.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Metastability Versus Stability}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The simulations suggest an important distinction between two concepts
 that are often conflated.
-
 A system may possess a long-lived metastable distribution without
 possessing a strictly stationary invariant measure.
-
 From the perspective of stochastic dynamics, the relevant question is
 therefore whether the hydrogen atom in SED is
-
 \begin{enumerate}
-
 \item
 strictly stationary,
-
 \item
 metastable with an extremely long lifetime,
-
 \item
 or ultimately unstable.
-
 \end{enumerate}
-
 The available numerical evidence has not yet produced a universally
 accepted answer.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Role of High-Frequency Modes}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 One of the principal lessons of the large-scale simulations concerns the
 importance of the ultraviolet portion of the zero-point spectrum.
-
 Because the spectral density grows as
-
-\[
-u(\omega)\propto\omega^3,
-\]
-
+\[u(\omega)\propto\omega^3,\]
 high-frequency modes carry an increasingly large amount of energy.
-
 Although their direct coupling to the orbital motion is weak, nonlinear
 interactions and harmonic generation can transfer energy across widely
 separated frequency scales.
-
 Consequently, numerical truncation of the spectrum may influence the
 long-time dynamics in subtle ways.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Numerical Convergence}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A recurring difficulty concerns the notion of convergence.
-
 Increasing the number of electromagnetic modes changes not only the
 accuracy of the stochastic field but also the physical fluctuations
 experienced by the electron.
-
 Unlike ordinary discretization errors, spectral refinement therefore
 modifies the effective stochastic dynamics itself.
-
 Demonstrating convergence requires showing that observable probability
 distributions become independent of
-
 \begin{itemize}
-
 \item
 spectral resolution,
-
 \item
 time step,
-
 \item
 integration algorithm,
-
 \item
 simulation duration,
-
 \item
 initial conditions.
-
 \end{itemize}
-
 Establishing all of these properties simultaneously remains a demanding
 computational problem.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Interpretation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The work of Nieuwenhuizen and Liska shifted the discussion of SED away
 from the simple question
-
 \begin{quote}
 ``Does the hydrogen atom remain stable?''
 \end{quote}
-
 toward a more refined set of mathematical questions concerning
 stochastic stability, invariant measures, escape probabilities and
 rare-event statistics.
-
 This change of viewpoint represents an important conceptual advance.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The numerical investigations of Nieuwenhuizen and Liska constitute the
 most thorough computational examination of the hydrogen atom within
 stochastic electrodynamics currently available. Their work confirmed
@@ -3265,944 +1792,523 @@ that the stochastic dynamics can reproduce many qualitative features of
 the quantum ground state over extended periods while simultaneously
 revealing previously unrecognized challenges associated with long-time
 evolution and ultraviolet fluctuations.
-
 Perhaps the most significant contribution of these studies is not a
 definitive answer regarding atomic stability but rather a clearer
 formulation of the problem itself. The question is no longer whether
 short numerical trajectories resemble quantum mechanics; instead, it is
 whether the stochastic dynamics admits a robust invariant probability
 measure under systematic refinement of the numerical model.
-
 From the perspective of modern stochastic dynamics, this reformulation
 is arguably the most important outcome of the large-scale simulations.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Numerical Reliability and Verification of SED Simulations}
 \label{sec:NumericalReliability}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The numerical investigation of stochastic electrodynamics presents
 challenges that differ substantially from those encountered in ordinary
 deterministic dynamical systems. The objective is not merely to compute
 individual trajectories but to determine statistical properties of a
 high-dimensional stochastic dynamical system over extremely long time
 intervals.
-
 Consequently, numerical accuracy alone is insufficient. One must also
 establish statistical convergence, robustness with respect to numerical
 parameters, and independence of arbitrary approximations introduced in
 the representation of the stochastic vacuum.
-
 This section summarizes the principal numerical issues that must be
 addressed before conclusions concerning atomic stability can be regarded
 as reliable.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Representation of the Stochastic Vacuum}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The Lorentz-invariant zero-point field formally contains infinitely many
 electromagnetic modes,
-
 \begin{equation}
-{\bf E}({\bf r},t)
-=
-\sum_{\lambda=1}^{2}
-\int
-d^3k\,
-{\bf e}_\lambda({\bf k})
-A_\lambda({\bf k})
+{\bf E}({\bf r},t)=\sum_{\lambda=1}^{2}\int d^3k\,
+{\bf e}_\lambda({\bf k})A_\lambda({\bf k})
 \cos({\bf k}\cdot{\bf r}-\omega t+\phi_\lambda).
 \label{eq:InfiniteField}
 \end{equation}
-
 Direct numerical evaluation of this expression is impossible.
-
 Every simulation therefore replaces the continuum by a finite expansion,
-
 \begin{equation}
-{\bf E}_N({\bf r},t)
-=
-\sum_{n=1}^{N}
-{\bf E}_n
-\cos(\omega_nt+\phi_n).
+{\bf E}_N({\bf r},t)=\sum_{n=1}^{N}{\bf E}_n\cos(\omega_nt+\phi_n).
 \label{eq:FiniteExpansion}
 \end{equation}
-
 The first numerical question is therefore obvious:
-
 \begin{quote}
 How large must $N$ be before observable quantities become independent
 of further increases?
 \end{quote}
-
 Unlike ordinary Fourier approximations, increasing $N$ changes the
 physical stochastic forcing itself.
-
 Consequently, convergence cannot be inferred solely from pointwise field
 errors.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ultraviolet and Infrared Cutoffs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Every finite representation introduces frequency limits
-
-\[
-\omega_{\min},
-\qquad
-\omega_{\max}.
-\]
-
+\[\omega_{\min},\qquad\omega_{\max}.\]
 These cutoffs have direct physical consequences.
-
 The infrared cutoff determines the longest temporal correlations present
 in the stochastic field.
-
 The ultraviolet cutoff limits the shortest fluctuations and suppresses
 rapid stochastic kicks.
-
 Because the zero-point spectrum satisfies
-
-\[
-u(\omega)
-\propto
-\omega^3,
-\]
-
+\[u(\omega)\propto\omega^3,\]
 the total energy above frequency $\Omega$ grows as
-
 \begin{equation}
-\int^\Omega
-\omega^3\,d\omega
-\propto
-\Omega^4.
+\int^\Omega\omega^3\,d\omega\propto\Omega^4.
 \end{equation}
-
 Therefore,
-
 high-frequency truncation removes a substantial fraction of the total
 vacuum energy.
-
 Whether this omission materially influences atomic dynamics remains one
 of the principal open numerical questions.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Choice of Spectral Sampling}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The frequencies
-
-\[
-\{\omega_n\}
-\]
-
+\[\{\omega_n\}\]
 may be selected in several different ways.
-
 Typical choices include
-
 \begin{itemize}
-
 \item
 uniform spacing,
-
 \item
 logarithmic spacing,
-
 \item
 importance sampling,
-
 \item
 random frequency selection,
-
 \item
 quasi-random low-discrepancy sequences.
-
 \end{itemize}
-
 Each strategy introduces different statistical properties.
-
 Uniform sampling provides systematic convergence but becomes expensive
 at high frequencies.
-
 Logarithmic sampling better resolves multiple frequency decades.
-
 Importance sampling concentrates computational effort where the electron
 responds most strongly.
-
 Determining the optimal sampling strategy remains an active numerical
 problem.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Random Phases}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The stochastic character of the zero-point field is generated through
 the random phases
-
-\[
-\phi_n.
-\]
-
+\[\phi_n.\]
 Ideally,
-
-\[
-\phi_n
-\sim
-U(0,2\pi),
-\]
-
+\[\phi_n\sim U(0,2\pi),\]
 independently for every mode.
-
 Poor-quality pseudorandom generators may introduce long-range
 correlations that imitate physical effects.
-
 Consequently,
-
 modern simulations should employ statistically tested generators such
 as
-
 \begin{itemize}
-
 \item
 Mersenne Twister,
-
 \item
 PCG,
-
 \item
 xoshiro,
-
 \item
 counter-based generators suitable for parallel computation.
-
 \end{itemize}
-
 Independent simulations using different random generators provide an
 important verification procedure.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The numerical representation of the stochastic vacuum is not merely a
 technical detail. It defines the stochastic process driving the electron
 dynamics and therefore influences every computed observable.
-
 For deterministic ordinary differential equations, refinement of the
 time step alone is usually sufficient to establish convergence. In
 stochastic electrodynamics this is not the case. Spectral refinement,
 random-number quality, frequency sampling, and cutoff dependence all
 alter the effective forcing experienced by the particle.
-
 Accordingly, convincing numerical evidence requires simultaneous
 convergence with respect to all of these parameters rather than any
 single numerical approximation.
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Time Integration Algorithms for SED}
 \label{sec:TimeIntegration}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The equations of stochastic electrodynamics are considerably more
 difficult to integrate numerically than either ordinary Hamiltonian
 systems or standard stochastic differential equations.
-
 Three distinct features contribute to this complexity.
-
 First,
-
 the Coulomb force produces highly nonlinear motion, particularly during
 close approaches to the nucleus.
-
 Second,
-
 the stochastic zero-point field contains a broad range of frequencies,
 extending many orders of magnitude above the characteristic orbital
 frequency.
-
 Third,
-
 radiation reaction introduces weak dissipation together with additional
 high-order derivatives or their reduced-order approximations.
-
 The resulting system is neither purely Hamiltonian nor a standard
 Markovian stochastic differential equation.
-
 Consequently, numerical methods developed for any one of these classes
 cannot automatically be assumed appropriate.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Mathematical Structure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Ignoring radiation reaction for the moment, the equations may be written
-
 \begin{align}
-\dot{\mathbf r}
-&=
-\frac{\mathbf p}{m},
-\\
-\dot{\mathbf p}
-&=
--
-\nabla V(\mathbf r)
-+
-e\mathbf E_{\rm ZP}(t).
+\dot{\mathbf r}&=\frac{\mathbf p}{m},\\
+\dot{\mathbf p}&=-\nabla V(\mathbf r)+e\mathbf E_{\rm ZP}(t).
 \end{align}
-
 Unlike Langevin equations,
-
 the stochastic force
-
-\[
-\mathbf E_{\rm ZP}(t)
-\]
-
+\[\mathbf E_{\rm ZP}(t)\]
 is a differentiable random function possessing finite temporal
 correlations.
-
 Thus the equations remain ordinary differential equations with random
 coefficients rather than stochastic differential equations driven by
 white noise.
-
 This distinction is important because standard Itô and Stratonovich
 integration methods are generally unnecessary unless additional white
 noise approximations are introduced.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Characteristic Time Scales}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A successful numerical algorithm must resolve several widely separated
 time scales.
-
 Among them are
-
 \begin{itemize}
-
 \item
 the orbital period,
-
 \item
 the shortest represented vacuum wavelength,
-
 \item
 the radiation-reaction time
-
-\[
-\tau_0
-=
-\frac{2e^2}{3mc^3},
-\]
-
+\[\tau_0=\frac{2e^2}{3mc^3},\]
 \item
 the longest vacuum correlation time,
-
 \item
 the total simulation time required to establish stationarity.
-
 \end{itemize}
-
 The ratio between the largest and smallest of these scales may exceed
 many orders of magnitude.
-
 The problem is therefore potentially stiff.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Explicit Runge--Kutta Methods}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Most early SED simulations employed explicit Runge--Kutta schemes.
-
 The advantages are well known.
-
 \begin{itemize}
-
 \item
 Simple implementation.
-
 \item
 High local accuracy.
-
 \item
 Adaptive step-size control.
-
 \item
 Excellent performance for smooth trajectories.
-
 \end{itemize}
-
 However,
-
 Runge--Kutta methods possess an important limitation.
-
 They do not preserve the geometric structure of Hamiltonian dynamics.
-
 Consequently,
-
 small local errors may accumulate into significant long-term drift of
 energy or angular momentum even in conservative systems.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Symplectic Integrators}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 For purely Hamiltonian systems,
-
 symplectic methods preserve the canonical two-form,
-
-\[
-\omega
-=
-dp_i
-\wedge
-dq^i.
-\]
-
+\[\omega=dp_i\wedge dq^i.\]
 Instead of exactly conserving energy,
-
 they conserve a nearby modified Hamiltonian over exponentially long
 times.
-
 This remarkable property makes them the preferred methods for
-
 \begin{itemize}
-
 \item
 planetary dynamics,
-
 \item
 molecular dynamics,
-
 \item
 accelerator physics,
-
 \item
 long-term celestial mechanics.
-
 \end{itemize}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Can Symplectic Methods Be Used in SED?}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The answer is subtle.
-
 If radiation reaction is neglected,
-
 the equations remain Hamiltonian with an explicitly time-dependent
 forcing.
-
 Symplectic integrators can then be generalized using extended phase
 space or splitting methods.
-
 Once radiation reaction is included,
-
 strict symplecticity is lost because dissipation contracts phase-space
 volume.
-
 Nevertheless,
-
 geometric integrators often continue to outperform conventional methods
 by preserving the Hamiltonian part of the dynamics more faithfully.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Operator Splitting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 A particularly attractive strategy is operator splitting.
-
 The dynamics may be decomposed into three components,
-
-\[
-L
-=
-L_{\rm Ham}
-+
-L_{\rm ZP}
-+
-L_{\rm RR},
-\]
-
+\[L=L_{\rm Ham}+L_{\rm ZP}+L_{\rm RR},\]
 corresponding respectively to
-
 \begin{itemize}
-
 \item
 Hamiltonian motion,
-
 \item
 interaction with the stochastic field,
-
 \item
 radiation reaction.
-
 \end{itemize}
-
 Each component can be integrated separately,
-
 after which the partial solutions are combined using symmetric
 composition formulas,
-
 for example
-
-\[
-e^{hL}
-\approx
-e^{hL_{\rm RR}/2}
-e^{hL_{\rm ZP}/2}
-e^{hL_{\rm Ham}}
-e^{hL_{\rm ZP}/2}
-e^{hL_{\rm RR}/2}.
-\]
-
+\[e^{hL}\approx e^{hL_{\rm RR}/2}e^{hL_{\rm ZP}/2}e^{hL_{\rm Ham}}
+e^{hL_{\rm ZP}/2}e^{hL_{\rm RR}/2}.\]
 Such methods preserve many geometric properties while incorporating weak
 dissipation in a controlled manner.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Adaptive Time Stepping}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Highly eccentric trajectories require locally refined time steps.
-
 Near periapsis,
-
 the Coulomb force varies rapidly,
-
 whereas much larger steps become possible near aphelion.
-
 Adaptive integration therefore offers substantial computational
 advantages.
-
 However,
-
 changing the time step modifies the sampling of the stochastic field.
-
 Interpolation of the zero-point field must therefore be performed with
 care to avoid introducing artificial correlations.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Parallel Computation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The evaluation of thousands or millions of electromagnetic modes
 dominates the computational cost.
-
 Fortunately,
-
 different modes contribute independently,
-
 making the field evaluation naturally parallel.
-
 Modern implementations may exploit
-
 \begin{itemize}
-
 \item
 multicore processors,
-
 \item
 vector instructions,
-
 \item
 graphics processing units,
-
 \item
 distributed-memory clusters.
-
 \end{itemize}
-
 The stochastic trajectories themselves are likewise embarrassingly
 parallel, since independent realizations require minimal communication.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Verification Strategy}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Reliable numerical conclusions require more than agreement between two
 runs.
-
 At a minimum,
-
 one should demonstrate convergence with respect to
-
 \begin{enumerate}
-
 \item
 time-step refinement,
-
 \item
 spectral resolution,
-
 \item
 frequency cutoffs,
-
 \item
 integration algorithm,
-
 \item
 random-number generator,
-
 \item
 ensemble size,
-
 \item
 simulation duration.
-
 \end{enumerate}
-
 Only after all these tests have been passed can numerical agreement with
 quantum mechanics be regarded as convincing.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 From the perspective of computational mechanics, stochastic
 electrodynamics remains an exceptionally demanding numerical problem.
 The coexistence of Hamiltonian motion, colored stochastic forcing, and
 weak dissipation places it outside the scope of most standard numerical
 analysis.
-
 This observation also suggests a promising direction for future
 research. During the past three decades, substantial advances have been
 made in geometric numerical integration, structure-preserving
 algorithms, exponential integrators, and high-performance stochastic
 simulation. Relatively few of these developments have yet been applied
 systematically to stochastic electrodynamics.
-
 Consequently, it remains possible that improvements in numerical
 methodology may prove as important as further analytical developments
 for assessing the long-term stability of the SED hydrogen atom.
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Stochastic Electrodynamics as an Open Hamiltonian System}
 \label{ch:OpenHamiltonianSED}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The traditional presentation of stochastic electrodynamics introduces the
 zero-point electromagnetic field as an externally prescribed stochastic
 background acting upon charged particles. Although this viewpoint has
 proved useful in practical calculations, it tends to obscure the fact
 that the electromagnetic field is itself a dynamical system obeying
 Maxwell's equations.
-
 From a modern perspective it is more natural to regard stochastic
 electrodynamics as an open Hamiltonian system obtained by eliminating
 part of a larger deterministic dynamical system.
-
 This point of view places stochastic electrodynamics within the general
 framework of statistical mechanics, generalized Langevin equations,
 projection-operator techniques, and open-system dynamics.
-
 It also provides a direct conceptual bridge to stochastic Hamiltonian
 mechanics and to the SHP framework developed later in this monograph.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The Complete Particle--Field System}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The fundamental dynamical variables are
-
-\[
-({\bf r},{\bf p}),
-\]
-
+\[({\bf r},{\bf p}),\]
 for the particle and
-
-\[
-(A^\mu,\Pi^\mu)
-\]
-
+\[(A^\mu,\Pi^\mu)\]
 for the electromagnetic field.
-
 The complete state therefore belongs to the infinite-dimensional phase
 space
-
 \begin{equation}
-\Gamma
-=
-\Gamma_{\rm particle}
-\times
-\Gamma_{\rm field}.
+\Gamma=\Gamma_{\rm particle}\times\Gamma_{\rm field}.
 \end{equation}
-
 The total Hamiltonian is
-
 \begin{equation}
-H
-=
-H_{\rm particle}
-+
-H_{\rm field}
-+
-H_{\rm interaction}.
+H=H_{\rm particle}+H_{\rm field}+H_{\rm interaction}.
 \label{eq:TotalHamiltonian}
 \end{equation}
-
 Here
-
 \begin{align}
-H_{\rm particle}
-&=
-\frac{1}{2m}
-\left(
-{\bf p}
--
-\frac{e}{c}{\bf A}
-\right)^2
-+
-e\phi,
-\\
-H_{\rm field}
-&=
-\frac{1}{8\pi}
-\int
-(E^2+B^2)\,d^3x,
-\\
-H_{\rm interaction}
-&=
--\frac{1}{c}
-\int
-J^\mu
-A_\mu
-\,d^3x.
+H_{\rm particle}&=\frac{1}{2m}\left({\bf p}-\frac{e}{c}{\bf A}\right)^2+e\phi,\\
+H_{\rm field}&=\frac{1}{8\pi}\int(E^2+B^2)\,d^3x,\\
+H_{\rm interaction}&=-\frac{1}{c}\int J^\mu A_\mu \,d^3x.
 \end{align}
-
 No stochastic assumptions have yet been introduced.
-
 The dynamics is completely deterministic.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hamilton's Equations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 The evolution is generated by Hamilton's equations,
-
 \begin{align}
-\dot q^i
-&=
-\frac{\partial H}{\partial p_i},
-\\
-\dot p_i
-&=
--
-\frac{\partial H}{\partial q^i},
+\dot q^i&=\frac{\partial H}{\partial p_i},\\
+\dot p_i&=-\frac{\partial H}{\partial q^i},
 \end{align}
-
 together with the corresponding functional Hamilton equations for the
 field variables,
-
 \begin{align}
-\dot A^\mu
-&=
-\frac{\delta H}
-{\delta\Pi_\mu},
-\\
-\dot\Pi_\mu
-&=
--
-\frac{\delta H}
-{\delta A^\mu}.
+\dot A^\mu&=\frac{\delta H}{\delta\Pi_\mu},\\
+\dot\Pi_\mu&=-\frac{\delta H}{\delta A^\mu}.
 \end{align}
-
 These equations are equivalent to Maxwell's equations coupled to the
 Lorentz force.
-
 The complete particle--field dynamics is therefore an ordinary
 Hamiltonian flow on an infinite-dimensional phase space.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Projection onto Particle Variables}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Suppose that only the particle variables
-
-\[
-({\bf r},{\bf p})
-\]
-
+\[({\bf r},{\bf p})\]
 are observed.
-
 The field variables remain unobserved.
-
 The observable state is therefore obtained by projecting
-
-\[
-\Gamma
-\rightarrow
-\Gamma_{\rm particle}.
-\]
-
+\[\Gamma\rightarrow\Gamma_{\rm particle}.\]
 After projection,
-
 the particle no longer evolves autonomously.
-
 Instead,
-
 its dynamics depends upon the unresolved field degrees of freedom.
-
 The resulting equations are generally nonlocal in time and contain memory
 effects.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Statistical Initial Conditions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Deterministic equations alone do not generate stochastic behavior.
-
 Randomness enters through uncertainty concerning the initial state of
 the electromagnetic field.
-
 Instead of specifying
-
-\[
-(A^\mu,\Pi^\mu)
-\]
-
+\[(A^\mu,\Pi^\mu)\]
 exactly,
-
 one assumes a probability measure
-
-\[
-\mu(A,\Pi).
-\]
-
+\[\mu(A,\Pi).\]
 Particle observables are then obtained by averaging over this ensemble,
-
 \begin{equation}
-\langle O\rangle
-=
-\int
-O({\bf r},{\bf p};A,\Pi)
-\,d\mu(A,\Pi).
+\langle O\rangle=\int O({\bf r},{\bf p};A,\Pi)\,d\mu(A,\Pi).
 \end{equation}
-
 Thus stochasticity originates in the ensemble of field initial
 conditions rather than in the fundamental equations themselves.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Emergence of Memory}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Eliminating the field variables generates an effective particle equation
-
 \begin{equation}
-m\ddot{\bf r}(t)
-=
-{\bf F}_{\rm C}
-+
-\int_0^t
-K(t-s)\,
-{\bf r}(s)\,ds
-+
-{\boldsymbol\xi}(t),
+m\ddot{\bf r}(t)={\bf F}_{\rm C}+\int_0^tK(t-s)\,{\bf r}(s)\,ds+{\boldsymbol\xi}(t),
 \label{eq:GeneralizedLangevin}
 \end{equation}
-
 where
-
-\[
-K(t)
-\]
-
+\[K(t)\]
 is a memory kernel,
-
 while
-
-\[
-{\boldsymbol\xi}(t)
-\]
-
+\[{\boldsymbol\xi}(t)\]
 is the fluctuating force generated by the unknown initial field.
-
 Equation
 (\ref{eq:GeneralizedLangevin})
-
 is a generalized Langevin equation.
-
 Its structure is therefore identical to that encountered throughout
 modern nonequilibrium statistical mechanics.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fluctuation--Dissipation Relation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Because both the fluctuating force and the memory kernel originate from
 the same eliminated field variables, they cannot be chosen
 independently.
-
 Their statistical properties satisfy a fluctuation--dissipation
 relation,
-
 \begin{equation}
-\langle
-\xi_i(t)
-\xi_j(t')
-\rangle
-=
-k_BT
-K_{ij}(t-t')
+\langle\xi_i(t)\xi_j(t')\rangle=k_BT K_{ij}(t-t')
 \end{equation}
-
 for thermal environments.
-
 In stochastic electrodynamics the temperature is replaced by the
 Lorentz-invariant zero-point spectrum.
-
 Thus,
-
 radiation reaction and vacuum fluctuations become two manifestations of
 the same underlying electromagnetic field.
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conceptual Consequences}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 This reformulation changes the interpretation of stochastic
 electrodynamics in several important respects.
-
 \begin{enumerate}
-
 \item
 The complete theory remains deterministic.
-
 \item
 The stochastic equations describe only the reduced particle dynamics.
-
 \item
 Memory effects arise naturally.
-
 \item
 Radiation reaction and fluctuations possess a common origin.
-
 \item
 Invariant probability measures become the central mathematical objects.
-
 \item
 Modern methods of open-system theory become directly applicable.
-
 \end{enumerate}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Critical Assessment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 Viewing stochastic electrodynamics as an open Hamiltonian system
 clarifies many conceptual questions that have historically been treated
 independently. In particular, it explains why stochastic forcing,
 radiation reaction, and temporal memory appear simultaneously after the
 electromagnetic field degrees of freedom are eliminated.
-
 At the same time, this reformulation raises important mathematical
 questions. The rigorous derivation of the effective particle dynamics
 from the full Maxwell--Lorentz system remains highly nontrivial because
@@ -4210,13 +2316,9 @@ of self-interaction, gauge constraints, and the infinite number of field
 degrees of freedom. Establishing the precise conditions under which the
 reduced dynamics admits a generalized Langevin description is therefore
 an important open problem.
-
 Nevertheless, this perspective places stochastic electrodynamics within
 the broader framework of modern nonequilibrium statistical mechanics,
 where powerful analytical and numerical tools have been developed over
 the past several decades. It also provides a natural bridge to the
 stochastic Hamiltonian formulations discussed in the subsequent chapters
 of this monograph.
-
-
-
