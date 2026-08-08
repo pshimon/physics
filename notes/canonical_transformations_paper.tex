@@ -1,0 +1,210 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{fact}{Fact}
+
+\newcommand{\dd}{\mathrm{d}}
+
+\title{Canonical Transformations and the Roll-Back Criterion:\\
+Why Action--Angle Variables Are Not Always Physical}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Canonical transformations are among the most powerful computational tools in mechanics: a well-chosen change of phase-space coordinates can turn an intractable Hamiltonian into a trivial one, and action--angle variables in particular underlie Hamilton--Jacobi theory, adiabatic invariance, and canonical perturbation theory. But canonicity --- preservation of the symplectic form, or equivalently of the Poisson-bracket structure --- is a purely formal property, and by itself it guarantees only that a transformation is \emph{locally} invertible near points where a mild non-degeneracy condition holds. It says nothing about whether the transformation is globally defined, single-valued, or, when constructed perturbatively as a formal series, convergent at all. We propose that a set of canonically transformed variables carries physical meaning as a description of a system's own state exactly to the extent that it can be \emph{rolled back}: mapped, exactly or with controlled approximation, back to the system's actual positions and velocities. We examine where this holds and where it fails. For a single degree of freedom, action--angle variables roll back essentially perfectly, modulo an ordinary coordinate degeneracy at equilibrium and the need for separate charts across a separatrix; for several degrees of freedom, complete integrability can still obstruct a single \emph{global} choice of action--angle variables for a purely topological reason (Hamiltonian monodromy). Most importantly, for generic near-integrable systems we derive explicitly the small-divisor terms that appear in canonical perturbation theory and explain, following Poincar\'e, Kolmogorov--Arnold--Moser, and Nekhoroshev, why the transformation to action--angle-like variables generically fails to converge at all: what survives is not an exact roll-back but a controlled, finite-order approximation, valid up to quantifiable and typically exponentially small error over long but finite times. We close with a structurally identical obstruction in quantum mechanics --- the non-existence of a global phase operator canonically conjugate to the number operator --- and relate the whole discussion to a companion analysis of what further data, beyond bare Hamiltonian structure, is required for mathematical formalism to carry physical content.
+\end{abstract}
+
+\section{Introduction}
+
+Much of the power of Hamiltonian mechanics comes from the freedom to change coordinates. A canonical transformation --- one that preserves the symplectic form $\dd q\wedge \dd p$, or equivalently the canonical Poisson brackets --- leaves Hamilton's equations in their canonical form no matter how violently it scrambles $q$ and $p$ together. This freedom is what makes Hamilton--Jacobi theory, adiabatic invariants, and canonical perturbation theory possible: one looks for the canonical transformation that makes the new Hamiltonian as simple as possible, ideally a function of the new momenta alone, so that the new coordinates evolve trivially. Action--angle variables are the paradigm case: for an integrable system they turn the dynamics into uniform rotation on a torus, $\dot\theta_i=\omega_i(J)=\text{const}$, $\dot J_i=0$, and the actions $J_i$ acquire the status of conserved quantities with an almost thermodynamic flavor --- they survive slow (adiabatic) changes in the Hamiltonian, they quantize cleanly in the old quantum theory, and they organize the whole theory of nearly integrable systems.
+
+It is tempting, given how much work these new variables do, to treat them as themselves physical: to say that the system \emph{is}, in some direct sense, at action $J$ and phase $\theta$, the way one would say a particle \emph{is} at position $q$ with velocity $\dot q$. But canonicity, on its own, does not license this. Canonicity is a structural property --- it says the new variables are \emph{legitimate coordinates on the same phase space}, nothing more. Whether those coordinates correspond to anything one could, even in principle, read off the system's actual motion is a separate question, and it is the question this note takes up. We propose a simple criterion: a canonically transformed variable earns physical standing exactly to the extent that the transformation that produced it can be \emph{rolled back} --- inverted, exactly or with controlled approximation, to recover the system's physical coordinates and velocities. Where roll-back holds, the new variables are not just convenient bookkeeping; they are legitimate redescriptions of the same physical facts. Where it fails, the new variables may still solve Hamilton's equations formally and generate correct approximations, but the physical claims one is tempted to make in terms of them --- ``the action is conserved,'' ``the system has phase $\theta$'' --- need independent justification, and generically only survive in an approximate, time-limited form.
+
+This is a companion question to one addressed elsewhere: there, the issue was whether a bare configuration space and Hamiltonian, on their own, fix what physical system is being described at all.\footnote{We refer to this only descriptively, as a companion analysis of the same general theme, rather than as a citable published source.} Here we hold the physical system fixed and ask a narrower question: given that $(q,p)$ already denote an actual system's position and momentum, when does a further canonical transformation $(q,p)\mapsto(Q,P)$ preserve that physical standing? The two questions share a moral --- that mathematical structure preserved by a transformation (symplectic form, Hamiltonian form-invariance) is weaker than physical content preserved by it --- applied to two different steps of the same formalism.
+
+Section~2 recalls what canonicity does and does not guarantee. Section~3 states the roll-back criterion precisely. Section~4 works through the good case, single-degree-of-freedom action--angle variables, and shows that even there some care is needed once one asks for a single \emph{global} description. Section~5 is the technical core: we derive the small-divisor obstruction in canonical perturbation theory explicitly, and explain why it generically prevents exact roll-back for near-integrable systems with two or more degrees of freedom. Section~6 discusses two further instances of the same obstruction, in adiabatic invariance and in quantum optics. Section~7 concludes.
+
+\section{Canonical Transformations: What Canonicity Guarantees, and What It Does Not}
+
+We take the physical state of a system with $n$ degrees of freedom to be its actual, in-principle-measurable positions and velocities, $(q,\dot q)\in TQ$. Given a regular Lagrangian $L(q,\dot q)$ --- meaning $\det\!\big(\partial^2 L/\partial \dot q_i\partial \dot q_j\big)\neq0$ --- the Legendre transform $p_i=\partial L/\partial \dot q_i$ is itself invertible for $\dot q$ at fixed $q$, by the implicit function theorem. This is worth flagging explicitly because it is the first, usually invisible, instance of the theme of this note: $(q,p)$ and $(q,\dot q)$ carry exactly the same physical information only because this particular transformation happens to be invertible.\footnote{It can fail: for a singular (degenerate) Lagrangian, as in gauge theories or systems with constraints, the Legendre transform is not invertible and the passage to Hamiltonian mechanics requires the separate machinery of constrained (Dirac--Bergmann) Hamiltonian dynamics. We set this aside here and assume a regular Lagrangian throughout.} We take $(q,p)$, so obtained, as already \emph{physical} in the relevant sense: they are the given, dressed, measurable coordinates of the system, and the question of this note is what happens to that status under a further, generic canonical transformation.
+
+\begin{definition}[Canonical transformation]
+A map $\Phi:(q,p)\mapsto(Q,P)$ is \emph{canonical} if it preserves the canonical symplectic form, $\dd Q\wedge\dd P=\dd q\wedge \dd p$ (summed over degrees of freedom), equivalently if $\{Q_i,P_j\}_{q,p}=\delta_{ij}$, $\{Q_i,Q_j\}_{q,p}=\{P_i,P_j\}_{q,p}=0$. Such a $\Phi$ leaves Hamilton's equations in canonical form for any Hamiltonian: if $H(q,p)$ generates the dynamics of $(q,p)$, then $H(q(Q,P),p(Q,P))$ generates the same dynamics, expressed in $(Q,P)$, again in canonical form.
+\end{definition}
+
+Canonical transformations are standardly constructed from generating functions --- $F_1(q,Q)$, $F_2(q,P)$, $F_3(p,Q)$, or $F_4(p,P)$ --- via relations such as $p=\partial F_2/\partial q$, $Q=\partial F_2/\partial P$. Given such an $F_2$, the implicit function theorem guarantees that the equations $p=\partial F_2/\partial q(q,P)$ can be solved locally for $P$ in terms of $(q,p)$ wherever the Hessian $\partial^2F_2/\partial q\,\partial P$ is non-degenerate, and that the resulting $\Phi$ is, near such a point, a local diffeomorphism with a well-defined local inverse.
+
+This is the entirety of what canonicity, on its own, hands you: local invertibility near non-degenerate points. It hands you nothing about:
+\begin{itemize}
+\item \textbf{Global invertibility.} A local diffeomorphism need not be injective globally; the same $(Q,P)$ can, in principle, correspond to several different $(q,p)$, or the domain of validity can fail to cover the region of phase space one actually cares about.
+\item \textbf{Explicit invertibility.} Even where a genuine global inverse exists, it need not be expressible in closed form; it may require solving a transcendental equation.
+\item \textbf{Convergence, when $\Phi$ is constructed as a formal series.} This is the case that matters most for what follows. In canonical perturbation theory one typically builds $F_2=qP+\epsilon F_2^{(1)}(q,P)+\epsilon^2F_2^{(2)}(q,P)+\cdots$ order by order in a small parameter, so as to simplify $H$ order by order. Each \emph{finite truncation} of this series is an honest generating function, defining an honest, locally canonical, locally invertible transformation. But canonicity of every finite truncation implies nothing whatsoever about whether the full, infinite series converges to an actual transformation at all. A formal power series that is ``canonical order by order'' can still fail to define any map.
+\end{itemize}
+
+This last point is the crux of Section~5. It is easy to build a sequence of perfectly good canonical transformations, each one closer to eliminating some unwanted feature of the Hamiltonian, without the sequence converging to a well-defined transformation in the limit --- in which case the ``variables'' one would obtain in that limit are a formal fiction, however useful the finite approximations to them may be.
+
+\section{The Roll-Back Criterion for Physical Sense}
+
+\begin{definition}[Roll-back]
+Let $(q,p)$ be given, physically dressed coordinates of a system, and let $\Phi:(q,p)\mapsto(Q,P)$ be a canonical transformation. We say $(Q,P)$ \emph{rolls back} on a domain $\mathcal U$ of phase space if $\Phi$ restricted to $\mathcal U$ is invertible and its inverse $\Phi^{-1}$ is available --- exactly, or as a controlled approximation with quantified error over a quantified domain or time interval --- so that $(q,p)$ can be recovered from $(Q,P)$ on $\mathcal U$.
+\end{definition}
+
+\begin{proposition}[Roll-back criterion]
+$(Q,P)$ have physical sense as descriptors of the system's own actual state, on $\mathcal U$, if and only if $(Q,P)$ roll back on $\mathcal U$.
+\end{proposition}
+
+As stated this is close to definitional --- ``physical sense'' just means being able to recover the physically dressed quantities --- and the content of the note lies not in the definition but in showing how often, and how instructively, this fails for variables that are nonetheless in constant practical use. It is useful to distinguish grades of roll-back, since they carry different physical weight:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Exact and global}: an inverse exists and is single-valued over the whole domain of physical interest. Physical quantities computed from $(Q,P)$ (their conservation, their value, their rate of change) are then exactly physical quantities.
+\item \emph{Exact but only chart-wise}: the domain must be covered by several patches, each with its own transformation and its own inverse, glued together at their boundaries (possibly with a nontrivial transition rule). Physical sense holds patch by patch, but a single global formula for ``the'' action or angle may not exist.
+\item \emph{Approximate, with controlled error}: only a finite truncation of a formal transformation is used; the inverse recovers $(q,p)$ up to a quantified error, valid for a quantified range of the small parameter or a quantified time interval. Physical statements made in terms of $(Q,P)$ --- e.g., ``this action is conserved'' --- inherit exactly that qualification: approximately true, with a stated and generically non-removable error.
+\item \emph{No roll-back}: the transformation is only formal, and does not converge to any map at all. $(Q,P)$ remain useful for organizing a calculation, but carry no independent physical content; in particular, nothing licenses treating a formally ``conserved'' quantity built this way as actually conserved.
+\end{enumerate}
+Sections~4 and~5 work through examples of each grade.
+
+\section{The Good Case, and Its Hidden Subtleties}
+
+\subsection{One degree of freedom}
+
+Let $H(q,p)$ have closed level curves $H(q,p)=E$ for $E$ ranging over some open interval, and define the action
+\begin{equation}
+J(E)=\frac{1}{2\pi}\oint_{H=E} p\,\dd q .
+\label{eq:actiondef}
+\end{equation}
+On any interval where the corresponding period, equivalently the frequency $\omega(E)=\dd H/\dd J$, is finite and nonzero, $J(E)$ is a smooth, strictly monotonic function of $E$ and is therefore invertible, $E=E(J)$. Hamilton's characteristic function $W(q,J)=\int^q p\big(q',E(J)\big)\,\dd q'$, with the correct sign of $p$ chosen on each half of the orbit, generates the transformation via $p=\partial W/\partial q$, $\theta=\partial W/\partial J$; inverting the second relation for $q$ at fixed $J$ is guaranteed locally by the implicit function theorem wherever $\partial p/\partial J\neq0$.
+
+For the harmonic oscillator, $H=p^2/2m+\tfrac12 m\omega^2q^2$, the enclosed phase-space area is that of an ellipse with semi-axes $\sqrt{2E/(m\omega^2)}$ and $\sqrt{2mE}$, giving $J=E/\omega$, i.e.\ $E=\omega J$, and the transformation can be written explicitly and in closed form:
+\begin{equation}
+q(J,\theta)=\sqrt{\frac{2J}{m\omega}}\sin\theta,\qquad p(J,\theta)=\sqrt{2Jm\omega}\cos\theta .
+\label{eq:hoexplicit}
+\end{equation}
+One checks directly that $p^2/2m+\tfrac12m\omega^2q^2=J\omega(\cos^2\theta+\sin^2\theta)=\omega J$, confirming $H=\omega J$, and that $\{q,p\}=1$, confirming canonicity. Equation~\eqref{eq:hoexplicit} \emph{is} the roll-back map, and it is defined, single-valued, and smooth on the whole domain $J\ge0$, $\theta\in[0,2\pi)$: given any $(J,\theta)$ one reads off a definite $(q,p)$. It degenerates in only one place, at $J=0$, where every value of $\theta$ maps to the same point $(q,p)=(0,0)$ --- the ordinary, entirely benign coordinate degeneracy familiar from polar coordinates at the origin, and one with a clean physical reading: a system at rest at equilibrium has no well-defined phase of oscillation to speak of. It is the \emph{opposite} direction, computing $\theta$ from a given $(q,p)$, that is genuinely ill-defined at that single point; the roll-back direction that this note is concerned with is, for the harmonic oscillator, essentially perfect.
+
+\subsection{Charts, not an atlas, for free: separatrices}
+
+The good behavior of Section~4.1 used that $H=E$ has closed level curves throughout the range of interest. Many systems of interest --- the pendulum being the canonical example --- have both closed orbits (libration, for energies below that of the unstable equilibrium) and open, unbounded-in-angle orbits (rotation, for energies above it), separated by a separatrix at the critical energy itself. The definition~\eqref{eq:actiondef} needs a different topological cycle on each side --- integrate over the bounded libration range on one side, over a full $2\pi$ period of $q$ on the other --- and each choice generates its own, separately well-behaved action--angle chart, with roll-back exactly as good as in Section~4.1 within its own domain. But the two charts do not merge into one: as the energy approaches the separatrix from either side, the frequency $\omega(E)\to0$ (the period diverges, logarithmically, as the orbit spends ever longer asymptotically approaching the unstable equilibrium), and the map to $(J,\theta)$ becomes singular there; the separatrix itself supports no action--angle description at all. Even in the unambiguously ``good'' case of one degree of freedom, then, roll-back is generically available only chart by chart, in the sense of grade~(b) above, not as a single global formula --- an elementary illustration that even benign cases carry a caveat worth stating explicitly.
+
+\subsection{A purely topological obstruction: Hamiltonian monodromy}
+
+A sharper and less well known version of the same caveat survives even complete integrability with several degrees of freedom. The Arnold--Liouville theorem \cite{Arnold1989} guarantees that, near any regular compact invariant torus of an integrable system with $n$ commuting integrals in involution, action--angle variables exist and roll back exactly, exactly as in Section~4.1. One might expect these local charts to always patch together into a single global set of action variables over the whole region foliated by such tori. Duistermaat showed that this expectation can fail for a purely topological reason he called \emph{monodromy} \cite{Duistermaat1980}: transporting the local action--angle chart around a closed loop in the space of tori that encircles a certain kind of singular fiber (a ``focus--focus'' point) can return a chart related to the original one by a nontrivial integer linear transformation, rather than the identity. When this happens, no single-valued, globally consistent choice of action variables exists over the punctured region, even though every individual torus in it carries a perfectly good local action--angle description that rolls back exactly. The spherical pendulum --- a mass constrained to a sphere in a uniform gravitational field, an utterly integrable, textbook system with no small denominators anywhere in sight --- is the paradigm example of this phenomenon, worked out in detail, including its manifestation in the quantum spectrum, by Cushman and Duistermaat \cite{CushmanDuistermaat1988}. It is a useful corrective to any temptation to think that the obstructions to roll-back discussed in this note are all, at bottom, a matter of insufficient convergence in a perturbative expansion: here there is no perturbation at all, only global topology.
+
+\section{The Bad Case: Small Divisors and the Failure of Roll-Back in Perturbation Theory}
+
+We now turn to the paper's central example: an integrable system with $n\ge2$ degrees of freedom, subjected to a generic small perturbation. Let $\theta=(\theta_1,\dots,\theta_n)\in\mathbb T^n$, $J=(J_1,\dots,J_n)$ be action--angle variables for the unperturbed, integrable Hamiltonian $H_0(J)$, and consider
+\begin{equation}
+H(J,\theta;\epsilon)=H_0(J)+\epsilon H_1(J,\theta),\qquad H_1(J,\theta)=\sum_{k\in\mathbb Z^n}H_{1,k}(J)\,e^{ik\cdot\theta} ,
+\label{eq:pertH}
+\end{equation}
+with $H_1$ real and periodic in each $\theta_i$, hence expandable in a Fourier series with $H_{1,-k}=\overline{H_{1,k}}$. Write $\omega(J)=\partial H_0/\partial J$ for the unperturbed frequency vector. We seek a near-identity canonical transformation $(J,\theta)\mapsto(J',\theta')$, generated by
+\begin{equation}
+S(\theta,J';\epsilon)=\theta\cdot J'+\epsilon S_1(\theta,J')+O(\epsilon^2),\qquad J=\frac{\partial S}{\partial\theta},\quad \theta'=\frac{\partial S}{\partial J'},
+\label{eq:genfn}
+\end{equation}
+chosen so as to remove the $\theta$-dependence of the Hamiltonian at order $\epsilon$: $H'(J')=H_0(J')+\epsilon\overline{H}_1(J')+O(\epsilon^2)$, with $\overline H_1(J')\equiv H_{1,0}(J')$ the angle-average of $H_1$.
+
+\begin{proposition}[The homological equation and the small divisor]
+To first order in $\epsilon$, the generating function in~\eqref{eq:genfn} must satisfy
+\begin{equation}
+\omega(J')\cdot\frac{\partial S_1}{\partial\theta}(\theta,J')=\overline H_1(J')-H_1(J',\theta) .
+\label{eq:homological}
+\end{equation}
+Writing $S_1(\theta,J')=\sum_{k\neq0}S_{1,k}(J')\,e^{ik\cdot\theta}$ (the $k=0$ term may be dropped without loss of generality, as it is physically inert), the unique solution is
+\begin{equation}
+S_{1,k}(J')=\frac{i\,H_{1,k}(J')}{\omega(J')\cdot k},\qquad k\in\mathbb Z^n\setminus\{0\}.
+\label{eq:smalldivisor}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+From~\eqref{eq:genfn}, $J=J'+\epsilon\,\partial_\theta S_1(\theta,J')+O(\epsilon^2)$. Substituting into~\eqref{eq:pertH} and Taylor-expanding $H_0$ about $J'$,
+\[
+H(J,\theta)=H_0(J')+\epsilon\,\omega(J')\cdot\partial_\theta S_1(\theta,J')+\epsilon H_1(J',\theta)+O(\epsilon^2).
+\]
+Demanding that this equal $H_0(J')+\epsilon\overline H_1(J')+O(\epsilon^2)$, independent of $\theta$, gives~\eqref{eq:homological}. Expanding both sides in Fourier modes $e^{ik\cdot\theta}$: the $k=0$ mode gives $\overline H_1=H_{1,0}$, consistent by definition; for $k\neq0$, $\partial_\theta S_1=\sum_{k\neq0}ik\,S_{1,k}\,e^{ik\cdot\theta}$, so matching coefficients gives $i\,(\omega(J')\cdot k)\,S_{1,k}(J')=-H_{1,k}(J')$, which is~\eqref{eq:smalldivisor}.
+\end{proof}
+
+Equation~\eqref{eq:smalldivisor} is the small-divisor problem in its simplest, first-order form: the generating function that removes the $\theta$-dependence of $H$ to $O(\epsilon)$ requires dividing each Fourier component of the perturbation by $\omega(J')\cdot k$, and this quantity can be made arbitrarily small (or exactly zero) by choosing $J'$ near a resonance, $\omega(J')\cdot k\approx0$. For $n\ge2$, the resonant hypersurfaces $\{\omega(J')\cdot k=0\}$, one for each nonzero $k\in\mathbb Z^n$, form a countable union of hypersurfaces that is \emph{dense} in action space (though of Lebesgue measure zero) --- exactly as the rationals are dense in the reals. So for essentially any $J'$ one cares about, there are Fourier modes $k$ for which $\omega(J')\cdot k$ is arbitrarily small, and whenever the corresponding $H_{1,k}(J')$ does not vanish there too (the generic case), the series $S_1=\sum_k S_{1,k}e^{ik\cdot\theta}$ either fails to converge outright or, if $H_1$ is a trigonometric polynomial with only finitely many nonzero $H_{1,k}$, is well-defined at first order but only on the complement of finitely many resonant hypersurfaces --- already an obstruction to a single global chart, and one that compounds severely at higher orders.
+
+This is, in essence, the discovery Poincar\'e made in his study of the three-body problem: he showed that the formal series one would need to construct a convergent transformation to action--angle-like variables for a generic perturbed integrable system --- equivalently, to exhibit a second, independent conserved quantity beyond energy --- generically fails to converge, precisely because of the accumulation of ever-smaller divisors at ever-higher orders in $\epsilon$ \cite{Poincare1892}. In modern language: a generic near-integrable Hamiltonian system with two or more degrees of freedom is \emph{not} integrable, and the formal ``action--angle variables to all orders'' that canonical perturbation theory tries to construct do not, in general, exist as an honest canonical transformation at all. Grade (d) of Section~3 is the generic situation, not a pathological exception.
+
+What survives this negative result is two-fold, and both parts matter for how one should actually think about the physical status of near-integrable ``actions.''
+
+\paragraph{Kolmogorov--Arnold--Moser (KAM).} If $H_1$ is sufficiently smooth (real-analytic is the classical hypothesis) and $H_0$ is non-degenerate ($\det(\partial^2H_0/\partial J^2)\neq0$, so that $\omega$ is a genuine local diffeomorphism of $J$-space), then for those $J'$ whose frequency vector satisfies a Diophantine condition,
+\begin{equation}
+|\omega(J')\cdot k|\ \ge\ \frac{\gamma}{|k|^{\tau}}\qquad\text{for all }k\in\mathbb Z^n\setminus\{0\},
+\label{eq:diophantine}
+\end{equation}
+for some $\gamma>0$ and $\tau>n-1$, the small denominators in~\eqref{eq:smalldivisor} and its higher-order analogues are controlled well enough, order by order, that the full transformation converges after all, for $\epsilon$ small enough. This is the Kolmogorov--Arnold--Moser theorem \cite{Kolmogorov1954,Arnold1963,Moser1962}: the invariant tori with sufficiently irrational frequencies survive the perturbation, carrying genuine, exactly rolled-back action--angle variables (grade (a)/(b) of Section~3, restricted to this torus), while the resonant and near-resonant tori --- dense in the unperturbed action space, though of shrinking total measure as $\epsilon\to0$ --- are generically destroyed. The set of surviving tori is a Cantor set: positive measure, but nowhere dense, for any fixed $\epsilon>0$. So even the positive part of the resolution is not a blanket rescue of action--angle variables; it identifies a fractal subset of phase space on which they happen to still make exact physical sense.
+
+\paragraph{Nekhoroshev.} Away from that Cantor set --- which is to say, for the ``rest'' of phase space, including all of it once $\epsilon$ is not small enough for KAM's asymptotic hypotheses to bite --- one can still salvage grade (c) roll-back. Truncate the generating function at some finite order $N$ in $\epsilon$: $S=\theta\cdot J'+\epsilon S_1+\cdots+\epsilon^N S_N$. This is a finite sum, hence perfectly well-defined (no convergence question arises for a finite sum), and it defines an honest, exactly invertible canonical transformation, valid away from the finitely many resonances that appear up to order $N$. The new Hamiltonian is $H'(J')=H_0(J')+O(\epsilon^{N+1})$: not independent of $\theta'$ exactly, only up to a residual term of order $\epsilon^{N+1}$, so $J'$ is not exactly conserved, only approximately so. Nekhoroshev's theorem makes this quantitative: for $H_0$ satisfying a mild geometric condition (convexity or ``steepness''), the order $N$ can be optimized as a function of $\epsilon$ so that
+\begin{equation}
+\big\|J'(t)-J'(0)\big\|\ \le\ C\,\epsilon^{b}\qquad\text{for all }|t|\ \le\ T(\epsilon)=\exp\!\big(c/\epsilon^{a}\big),
+\label{eq:nekhoroshev}
+\end{equation}
+for suitable positive constants $a,b,c$ depending on $n$ and on $H_0$ \cite{Nekhoroshev1977}; see \cite{Neishtadt1981} for closely related, sharp estimates on the accuracy of adiabatic invariants in this same setting. This is the honest final status of ``the action'' for a generic near-integrable system: not an exactly conserved quantity (Poincar\'e's result forbids that, generically), and not merely a useless formal symbol either, but a grade-(c) approximately-rolled-back quantity, drifting by an amount that is smaller than any power of $\epsilon$ and stays small for a time longer than any power of $1/\epsilon$ --- for all practical purposes constant, without actually being so.
+
+The moral of this section, stated in the language of Section~3: canonicity at any finite order is free --- truncated perturbation theory always defines an honest, exactly-invertible transformation --- but the thing one actually wants, a convergent transformation to genuinely conserved action variables, is a strictly stronger, generically false condition. What one gets instead, generically, sits precisely at grade~(c): a controlled, quantitatively excellent, but not exact roll-back.
+
+\section{Further Instances of the Same Structure}
+
+\paragraph{Adiabatic invariants.} The same construction --- a near-identity canonical transformation built as a formal series in a small parameter, convergent nowhere in general but truncatable to give an excellent finite-order approximation --- underlies the classical theory of adiabatic invariants for a Hamiltonian that depends on time through a slowly varying external parameter, rather than through an autonomous perturbation. There too the relevant action is conserved not exactly but up to an error that is smaller than any power of the slowness parameter (and, under further regularity assumptions, exponentially small in it) \cite{Neishtadt1981}; this is the mathematical fact underlying, for instance, the practical near-conservation of the magnetic moment of a charged particle gyrating in a slowly varying magnetic field, a cornerstone of plasma confinement theory. The physical status of such an adiabatic invariant is exactly grade~(c): extremely good, quantitatively controlled, and not exact.
+
+\paragraph{Quantum phase.} It is natural to ask whether quantum mechanics, where canonical transformations become unitary transformations, escapes this whole family of difficulties. It does not; it simply presents its own, cleaner-to-state version of the same obstruction. Passing formally from the number operator $\hat N$ of a harmonic oscillator (the quantum shadow of the action $J$) to a canonically conjugate ``phase'' operator $\hat\phi$ (the quantum shadow of $\theta$), satisfying $[\hat N,\hat\phi]=i$, runs into an immediate difficulty: $\hat N$ has a discrete spectrum bounded below by zero, and no self-adjoint operator can satisfy that commutation relation with an operator of bounded-below spectrum. Susskind and Glogower's resolution was to give up self-adjointness and construct a non-unitary exponential-phase operator $e^{i\hat\phi}=\sum_{n\ge0}|n\rangle\langle n+1|$ instead \cite{SusskindGlogower1964}; Pegg and Barnett's was to construct a genuine Hermitian phase operator on a truncated, finite-dimensional Hilbert space and take a limit only at the end of a calculation, after computing the quantities of interest \cite{PeggBarnett1988}. Both are, in the language of this note, grade-(c)-or-worse constructions: usable, physically motivated stand-ins for a roll-back map (here, to a self-adjoint operator canonically conjugate to $\hat N$) that simply does not exist in the naive, exact, grade-(a) sense one might have hoped for.
+
+\section{Conclusion}
+
+Canonicity is cheap: it is preserved by composition, by formal power series manipulation order by order, and it guarantees, at best, local invertibility near non-degenerate points. None of this is the same as physical meaningfulness. We have proposed that a canonically transformed variable earns the latter exactly when it can be rolled back --- mapped back to the system's actual, physically dressed positions and velocities, exactly or with quantified approximation. Action--angle variables for a single degree of freedom very nearly achieve the strongest grade of this, modulo an entirely benign coordinate degeneracy at equilibrium and the mild inconvenience of needing separate charts across a separatrix. Beyond one degree of freedom, two independent obstructions appear, of quite different character: a purely topological one, Hamiltonian monodromy, which can prevent a single global choice of action--angle variables even for an exactly integrable system with no small divisors anywhere; and an analytic one, the small-divisor problem of canonical perturbation theory, which generically prevents a convergent transformation to action--angle variables for a perturbed integrable system at all, leaving only the approximate, finite-order, but remarkably good roll-back captured by KAM and Nekhoroshev theory. In every case, the lesson is the same one that motivated this inquiry: a transformation's preserving the formal structure of mechanics does not by itself transport physical meaning through it. That transport is a further, checkable condition, and checking it is what tells you whether the elegant new variables you have constructed describe your system, or merely compute it.
+
+\begin{thebibliography}{99}
+
+\bibitem{Arnold1963}
+V.~I.~Arnold, ``Proof of a Theorem of A.~N.~Kolmogorov on the Preservation of Conditionally Periodic Motions under a Small Perturbation of the Hamiltonian,'' \emph{Uspehi Matematicheskikh Nauk} \textbf{18} (5), 13--40 (1963); English translation, \emph{Russian Mathematical Surveys} \textbf{18} (5), 9--36 (1963).
+
+\bibitem{Arnold1989}
+V.~I.~Arnold, \emph{Mathematical Methods of Classical Mechanics}, 2nd ed. (Springer, New York, 1989).
+
+\bibitem{CushmanDuistermaat1988}
+R.~H.~Cushman and J.~J.~Duistermaat, ``The Quantum Mechanical Spherical Pendulum,'' \emph{Bulletin of the American Mathematical Society (N.S.)} \textbf{19}, 475--479 (1988).
+
+\bibitem{Duistermaat1980}
+J.~J.~Duistermaat, ``On Global Action--Angle Coordinates,'' \emph{Communications on Pure and Applied Mathematics} \textbf{33}, 687--706 (1980).
+
+\bibitem{GoldsteinPooleSafko}
+H.~Goldstein, C.~Poole, and J.~Safko, \emph{Classical Mechanics}, 3rd ed. (Addison Wesley, San Francisco, 2002).
+
+\bibitem{Kolmogorov1954}
+A.~N.~Kolmogorov, ``On Conservation of Conditionally Periodic Motions for a Small Change in Hamilton's Function,'' \emph{Doklady Akademii Nauk SSSR} \textbf{98}, 527--530 (1954).
+
+\bibitem{Moser1962}
+J.~Moser, ``On Invariant Curves of Area-Preserving Mappings of an Annulus,'' \emph{Nachrichten der Akademie der Wissenschaften in G\"ottingen, Math.-Phys.\ Kl.\ II}, 1--20 (1962).
+
+\bibitem{Neishtadt1981}
+A.~I.~Neishtadt, ``Estimates in the Kolmogorov Theorem on Conservation of Conditionally Periodic Motions,'' \emph{Journal of Applied Mathematics and Mechanics} \textbf{45}, 1016--1025 (1981).
+
+\bibitem{Nekhoroshev1977}
+N.~N.~Nekhoroshev, ``An Exponential Estimate of the Time of Stability of Nearly-Integrable Hamiltonian Systems,'' \emph{Russian Mathematical Surveys} \textbf{32} (6), 1--65 (1977).
+
+\bibitem{PeggBarnett1988}
+D.~T.~Pegg and S.~M.~Barnett, ``Unitary Phase Operator in Quantum Mechanics,'' \emph{Europhysics Letters} \textbf{6}, 483--487 (1988).
+
+\bibitem{Poincare1892}
+H.~Poincar\'e, \emph{Les M\'ethodes Nouvelles de la M\'ecanique C\'eleste}, Tome~I (Gauthier-Villars, Paris, 1892).
+
+\bibitem{SusskindGlogower1964}
+L.~Susskind and J.~Glogower, ``Quantum Mechanical Phase and Time Operator,'' \emph{Physics} \textbf{1}, 49--61 (1964).
+
+\end{thebibliography}
+
+\end{document}
