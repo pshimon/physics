@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{fact}{Fact}
+
+\title{On the Physical Content of Configuration Space:\\
+The Planar Oscillator and Two Distant Oscillators as a Case Study}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+The two-dimensional isotropic harmonic oscillator and two identical, spatially distant, non-interacting one-dimensional oscillators have exactly the same configuration space, $\mathbb{R}^2$, and, once the two one-dimensional coordinates are laid side by side, exactly the same Hamiltonian. This coincidence might seem to threaten the idea that configuration space carries direct physical meaning: if the bare pair $(Q,H)$ cannot distinguish ``one particle moving in a plane'' from ``two particles moving on separate, distant lines,'' in what sense does configuration space represent physical positions at all? We examine this coincidence carefully, show that it persists at every level of structure computable from $(Q,H)$ alone --- classical trajectories, the symplectic structure, the quantum spectrum and its degeneracies --- and then identify precisely what additional data is needed to tell the two systems apart: (i) an embedding of $Q$ into physical space together with the action of the spatial isometry group, which is geometrically realized in one case and merely accidental in the other; (ii) statistics and particle-content data, which matter only when exchange effects are actually observable; and (iii) the algebra of interactions that locality in physical space picks out as natural, which governs how each system couples to a generic environment. We package this as the \emph{physical dressing} of a bare Hamiltonian system and argue that configuration space, taken on its own, is best understood as a representation-dependent bookkeeping device rather than a self-standing arena of physical positions: its physical reading requires this further data as an independent postulate, not something read off the space itself.
+\end{abstract}
+
+\section{Introduction}
+
+In elementary treatments of analytical mechanics, configuration space is often introduced as though it simply \emph{were} the space of physical positions of a system: a point $q\in Q$ is ``where the system is,'' and the Hamiltonian $H:T^*Q\to\mathbb{R}$ tells us how that point moves. This picture is useful and, for the simplest systems, harmless. But it invites a stronger reading on which the pair $(Q,H)$ is taken to \emph{fix} the physical system being described --- as if knowing the configuration manifold and the Hamiltonian function on it were enough to know what kind of physical situation one is dealing with.
+
+A simple example shows this stronger reading to be false. Consider, on the one hand, a single particle of mass $m$ moving in a plane under an isotropic harmonic restoring force (the two-dimensional isotropic oscillator), and, on the other hand, two particles of equal mass $m$, held very far apart, each independently oscillating along its own line under a harmonic force of the same strength. Written in the natural coordinates for each case, the two systems have configuration space $Q=\mathbb{R}^2$ and Hamiltonian
+\[
+H(q_1,q_2,p_1,p_2)=\frac{p_1^2+p_2^2}{2m}+\frac{1}{2}m\omega^2\left(q_1^2+q_2^2\right)
+\]
+\emph{identically}. There is no sense in which the bare mathematical data $(Q,H)$ --- or, equivalently, the classical trajectories it generates, the associated Schr\"odinger equation, or the energy spectrum obtained by quantizing it --- differs between the two cases. Yet no one would say that a single particle vibrating in a plane and two distant, independent oscillators are ``the same physical system.'' Something is being smuggled in from outside $(Q,H)$ whenever we say what the system \emph{is}.
+
+The purpose of this note is to make that ``something'' explicit. We first state the coincidence precisely and trace its consequences through the classical and quantum formalism (Section~2), to establish that it really is exact and not an artifact of sloppy bookkeeping. We then identify three independent kinds of structure --- geometric embedding and symmetry realization, locality of coupling to an environment, and particle statistics --- whose specification is what actually distinguishes the two systems, and show why each one is invisible to $(Q,H)$ alone (Section~3). We collect this into a general schema for what a \emph{physically interpreted} Hamiltonian system requires beyond its bare dynamical data (Section~4), and close with related examples from classical and quantum physics, and a remark on the philosophical literature on configuration space and on analogous underdetermination arguments elsewhere in physics (Section~5).
+
+None of this impugns the ordinary practical use of configuration space, and none of it is really in tension with anything in the standard formalism of mechanics --- once one is precise about it, the resolution is straightforward. But the example is a useful corrective against a casual habit, common in both physics pedagogy and in some philosophical discussions of quantum theory, of treating configuration space as though it were self-interpreting.
+
+\section{The Coincidence: Two Systems, One Hamiltonian}
+
+\paragraph{System A (the planar oscillator).} A single particle of mass $m$ moves in a plane, subject to an isotropic harmonic potential centered on a fixed equilibrium point. Writing $(q_1,q_2)$ for Cartesian coordinates of its position relative to equilibrium, the configuration space is $Q_A=\mathbb{R}^2$ and the Hamiltonian is
+\begin{equation}
+H_A(q_1,q_2,p_1,p_2)=\frac{p_1^2+p_2^2}{2m}+\frac{1}{2}m\omega^2\left(q_1^2+q_2^2\right).
+\label{eq:HA}
+\end{equation}
+
+\paragraph{System B (two distant oscillators).} Two particles, each of mass $m$, sit at fixed, well-separated base points in physical space and each oscillates, independently and without interaction, along its own fixed axis under a harmonic restoring force of the same strength $\omega$. Writing $q_1,q_2$ for the (signed, one-dimensional) displacements of particle~1 and particle~2 from their respective equilibria, the configuration space is $Q_B=\mathbb{R}\times\mathbb{R}\cong\mathbb{R}^2$ and the Hamiltonian is
+\begin{equation}
+H_B(q_1,q_2,p_1,p_2)=\frac{p_1^2+p_2^2}{2m}+\frac{1}{2}m\omega^2\left(q_1^2+q_2^2\right).
+\label{eq:HB}
+\end{equation}
+
+\begin{proposition}[Bare dynamical equivalence]
+The map $\iota:T^*Q_A\to T^*Q_B$ given by the identity on coordinates, $(q_1,q_2,p_1,p_2)\mapsto(q_1,q_2,p_1,p_2)$, is a symplectomorphism satisfying $H_B\circ\iota = H_A$. Consequently the two bare Hamiltonian systems $(Q_A,H_A)$ and $(Q_B,H_B)$ are indistinguishable by any invariant constructed from the Hamiltonian and the canonical symplectic structure alone.
+\end{proposition}
+
+The proof is immediate: \eqref{eq:HA} and \eqref{eq:HB} are literally the same function of the same symbols, so the identity map trivially intertwines them and preserves $dq_1\wedge dp_1+dq_2\wedge dp_2$. The content of the proposition is not the (trivial) verification but the list of things it entails. Every quantity computable purely from $(Q,H)$ agrees between the two systems:
+
+\begin{itemize}
+\item \textbf{Classical trajectories.} Hamilton's equations give $q_i(t)=A_i\cos(\omega t+\varphi_i)$, $i=1,2$, with the same relation between amplitudes, phases, and initial data in both cases.
+\item \textbf{Conserved quantities.} $H$ itself, and, since \eqref{eq:HA}--\eqref{eq:HB} are isotropic in $(q_1,q_2)$, the quantity $L\equiv q_1p_2-q_2p_1$ Poisson-commutes with $H$ in both cases and generates the one-parameter family of canonical transformations $R_\theta:(q_1,q_2)\mapsto(q_1\cos\theta-q_2\sin\theta,\ q_1\sin\theta+q_2\cos\theta)$, together with the analogous action on momenta, under which $H$ is invariant in both cases.
+\item \textbf{Quantization.} Canonical quantization $q_i\mapsto \hat q_i$, $p_i\mapsto-i\hbar\partial_{q_i}$ produces the identical partial differential operator, hence the identical time-dependent Schr\"odinger equation for a wavefunction $\psi(q_1,q_2,t)$, in both cases.
+\item \textbf{Spectrum.} The energy eigenvalues are $E_{n_1n_2}=\hbar\omega(n_1+n_2+1)$, $n_1,n_2=0,1,2,\dots$, with the same $(n+1)$-fold degeneracy of the level $E_n=\hbar\omega(n+1)$, in both cases.
+\item \textbf{Statistical mechanics.} The classical and quantum partition functions, and every thermodynamic quantity derived from them, agree.
+\end{itemize}
+
+In short, the coincidence is not superficial: it survives quantization, survives the identification of conserved quantities and dynamical symmetries, and survives the passage to statistical mechanics. Any account of what distinguishes the two systems must therefore appeal to something that is not a function of $(Q,H)$ alone.
+
+\section{Where the Coincidence Breaks Down}
+
+We identify three independent sources of physical structure that are not visible in $(Q,H)$, each of which distinguishes System A from System B once made explicit.
+
+\subsection{Embedding in physical space and the status of the rotational symmetry}
+
+The transformation $R_\theta$ identified above is, as a transformation of the abstract manifold $Q=\mathbb{R}^2$, a symmetry of $H$ in \emph{both} systems. But this bare fact does not tell us whether $R_\theta$ corresponds to anything happening in physical space. To ask that question we must specify an embedding of $Q$ into physical space $\Sigma$ (taken here to be $\mathbb{R}^3$, or a plane within it) that says what each coordinate \emph{is}.
+
+For System A, the natural embedding sends the single particle's configuration to its actual position,
+\[
+\iota_A(q_1,q_2)=\mathbf{X}^{(0)}+q_1\hat{e}_1+q_2\hat{e}_2 \ \in\ \Sigma,
+\]
+and $R_\theta$ is exactly the pushforward, under $\iota_A$, of a genuine rotation of physical space about the fixed point $\mathbf{X}^{(0)}$: rotating the lab by angle $\theta$ carries the particle from $\iota_A(q_1,q_2)$ to $\iota_A(R_\theta(q_1,q_2))$. The symmetry is \emph{geometric}: it is implemented by an isometry of $\Sigma$, it corresponds to a real conserved angular momentum exchangeable with other systems via torque, and it is what makes $L=q_1p_2-q_2p_1$ deserve the name ``angular momentum'' rather than being merely a conserved combination of phase-space coordinates.
+
+For System B, the natural embedding sends the pair of independent one-dimensional configurations to the positions of two separate particles,
+\[
+\iota_B(q_1,q_2)=\Big(\mathbf{X}_1^{(0)}+q_1\hat{n}_1,\ \ \mathbf{X}_2^{(0)}+q_2\hat{n}_2\Big)\ \in\ \Sigma\times\Sigma,
+\]
+with $\mathbf{X}_1^{(0)}\neq\mathbf{X}_2^{(0)}$ (this is what ``distant'' means). Here $R_\theta$ cannot be the pushforward of \emph{any} isometry of $\Sigma$.
+
+\begin{proposition}[Non-transfer of the rotational symmetry]
+For $\mathbf{X}_1^{(0)}\neq\mathbf{X}_2^{(0)}$, there is no isometry $\rho$ of $\Sigma$ such that $\iota_B\circ R_\theta=(\rho,\rho)\circ\iota_B$ holds for all $\theta$ (other than $\theta\in\pi\mathbb{Z}$).
+\end{proposition}
+
+\begin{proof}
+An isometry $\rho$ of physical space acts \emph{pointwise}: the image $\rho(\mathbf{y})$ of a point $\mathbf{y}\in\Sigma$ depends only on $\mathbf{y}$ itself. In particular, the would-be image of particle 2's position, $\rho\big(\mathbf{X}_2^{(0)}+q_2\hat n_2\big)$, can depend only on $q_2$ --- it cannot depend on $q_1$, since particle~1's displacement plays no role in specifying the point $\mathbf{X}_2^{(0)}+q_2\hat{n}_2$ that $\rho$ is asked to act on. But the second component of $\iota_B(R_\theta(q_1,q_2))$ is $\mathbf{X}_2^{(0)}+(q_1\sin\theta+q_2\cos\theta)\hat n_2$, which for $\sin\theta\neq 0$ depends non-trivially on $q_1$. No pointwise map can reproduce this dependence, so no single isometry $\rho$ can serve as $\iota_B\circ R_\theta=(\rho,\rho)\circ\iota_B$ for such $\theta$.
+\end{proof}
+
+The obstruction is not a matter of fine-tuning $\mathbf{X}_1^{(0)},\mathbf{X}_2^{(0)},\hat n_1,\hat n_2$; it holds however these are chosen, and it fails only in the degenerate limit $\mathbf{X}_1^{(0)}=\mathbf{X}_2^{(0)}$ --- precisely the limit in which System B stops being ``two distant oscillators'' and coincides with System A. So $R_\theta$ is, for System B, a symmetry of the Hamiltonian with no geometric referent: it mixes the coordinates of two causally and spatially independent objects in a way that no rotation, translation, or reflection of the physical world could ever do. It is what is sometimes called a \emph{hidden}, \emph{accidental}, or purely \emph{dynamical} symmetry --- real as a statement about the equations of motion, but carrying none of the physical content (conservation via Noether's theorem applied to an actual spacetime symmetry, exchangeability of angular momentum with other systems, appearance in a Wigner-Eckart-type selection rule tied to real rotations) that the same-looking symmetry carries in System A.
+
+\begin{remark}
+This is not special to the isotropic case $\omega_1=\omega_2$. If the two frequencies differ, $H=\frac{p_1^2+p_2^2}{2m}+\frac12 m(\omega_1^2q_1^2+\omega_2^2q_2^2)$ still describes, term for term, both ``one particle in an anisotropic planar potential'' and ``two distant, differently-tuned oscillators,'' and the argument of Section~2 goes through unchanged. The isotropic case is simply the sharpest illustration, because there the enhanced symmetry make the geometric/accidental distinction most conspicuous.
+\end{remark}
+
+\subsection{Locality and the coupling to a generic environment}
+
+A second, complementary way to separate the two systems is to ask not about their isolated dynamics but about how they couple to the rest of the world. Isolation is always an idealization; a real oscillator sits in some environment (radiation field, phonon bath, measuring apparatus), and it is a basic fact about physical interactions that they are \emph{local}: an environmental degree of freedom that is spatially near one object couples appreciably to that object and negligibly to a second object located far away.
+
+For System B this has an immediate and specific consequence. Because particle~1 and particle~2 occupy distant regions of space, generic environmental influences factorize: to good approximation, particle~1 couples to a bath $B_1$ associated with its own neighborhood and particle~2 couples to an independent bath $B_2$ associated with its neighborhood,
+\begin{equation}
+H_{SE}\ \approx\ q_1\otimes \hat B_1 \ +\ q_2\otimes \hat B_2 ,
+\label{eq:localcoupling}
+\end{equation}
+with $\hat B_1,\hat B_2$ statistically independent (uncorrelated) environmental operators. This is simply the statement that two distant systems have independent noise sources --- an instance of what is often called cluster decomposition. Standard decoherence arguments \cite{Zurek2003} then predict that a coupling of the form \eqref{eq:localcoupling} drives the joint state toward one that is (to a good approximation) diagonal in a basis built separately out of $q_1$ and $q_2$ --- an emergent ``which-oscillator'' pointer basis that tracks the pre-existing particle structure.
+
+For System A, by contrast, there is only one particle, occupying one region of space, and a generic local environmental influence acts at that single location. Such an influence couples to some particular direction $\hat n\cdot(q_1,q_2)$ in configuration space determined by the geometry of the perturbation (e.g.\ the direction of a stray field at the particle's location), not separately and independently to $q_1$ and $q_2$; arranging two independent environments that couple exclusively along the $q_1$-axis and the $q_2$-axis respectively, at one and the same spatial point, is not something locality delivers for free, the way \eqref{eq:localcoupling} is delivered for free in System B --- it would need to be imposed by hand. There is consequently no generic physical reason for a local environment to single out the particular coordinate split $(q_1,q_2)$, as opposed to any rotated pair $(q_1',q_2')=R_\theta(q_1,q_2)$, as the one relevant to decoherence.
+
+\begin{remark}
+This argument is offered as a physical heuristic, not a theorem: it says what is \emph{generic} given locality, not what is strictly forced by $(Q,H)$ (which, after all, says nothing at all about any environment). That is exactly the point --- the distinction it draws on is additional structure, namely a specification of which couplings to the wider world are ``local''/``natural'' for the system in question. This is close in spirit to the observation, developed rigorously by Zanardi, Lidar, and Lloyd \cite{ZanardiLidarLloyd2004}, that a tensor-product (subsystem) decomposition of a quantum state space is not read off the Hilbert space or the Hamiltonian in isolation but is induced by the algebra of operationally accessible interactions and measurements. Here the analogous claim is made already at the level of which classical/environmental couplings are physically natural.
+\end{remark}
+
+\subsection{Statistics and the configuration space of identical particles}
+
+A third consideration concerns particle content and exchange statistics, and it is worth being precise about exactly when it does, and does not, resolve the coincidence.
+
+If the two oscillators of System B are quantum-mechanically identical particles \emph{and} the physical situation is one in which exchange effects are actually observable, then the classical configuration space appropriate to the pair is not $\mathbb{R}^2$ but the quotient $\mathbb{R}^2/\mathbb{Z}_2$ obtained by identifying $(q_1,q_2)\sim(q_2,q_1)$ --- a space that is genuinely different, as a manifold (it has boundary, corresponding to the coincidence locus $q_1=q_2$), from the configuration space $\mathbb{R}^2$ of System A. This is the classical configuration-space counterpart of the requirement that the quantum wavefunction be (anti)symmetrized, and it is the starting point of the classic analysis of configuration spaces of identical particles by Leinaas and Myrheim \cite{LeinaasMyrheim1977}, later central to the theory of anyons \cite{Wilczek1982}. On this route, the puzzle is dissolved already at the level of $Q$: System A and a genuinely exchange-symmetric System B simply do not have the same configuration space once the manifold is defined correctly, as the space of \emph{physically distinct} configurations rather than of coordinate pairs.
+
+But this resolution requires exchange effects to be observable, and ``distant,'' taken seriously, is precisely the regime in which they are not: if the two particles' wavefunctions never overlap, no observable is sensitive to (anti)symmetrization, the coincidence locus $q_1=q_2$ is never explored, and $\mathbb{R}^2/\mathbb{Z}_2$ and $\mathbb{R}^2$ are observationally indistinguishable restricted to the relevant region of configuration space. In that regime --- and equally, trivially, if the two oscillators are simply not identical particles to begin with (different species, different traps) --- statistics does no work, $Q_B\cong\mathbb{R}^2$ stands as given, and the coincidence with System A is exactly as sharp as in Section~2. So this route resolves the puzzle only conditionally, and precisely when it does, what is doing the resolving is not the bare Hamiltonian but a further fact: a decision about particle identity together with a fact about whether the dynamics in question ever probes the exchange-sensitive region of configuration space. That further fact is, again, exactly the kind of data invisible to $(Q,H)$ alone.
+
+\section{The Physical Dressing of a Hamiltonian System}
+
+The three considerations above are independent of one another --- a system can have the wrong embedding, the wrong locality structure, or the wrong statistics without touching the other two --- but they share a common moral, which we now state more systematically.
+
+\begin{definition}[Bare Hamiltonian system]
+A \emph{bare Hamiltonian system} is a triple $(Q,\omega_{\mathrm{can}},H)$: a configuration manifold $Q$, the canonical symplectic form on $T^*Q$, and a Hamiltonian function $H$. Two bare systems are \emph{dynamically equivalent} if related by a symplectomorphism intertwining their Hamiltonians.
+\end{definition}
+
+\begin{definition}[Physical dressing]
+A \emph{physical dressing} of a bare Hamiltonian system $(Q,\omega_{\mathrm{can}},H)$ is a tuple $\mathcal{D}=(\Sigma,G,\iota,\Pi,\mathcal{A})$, where: $\Sigma$ is an ambient physical space(time) with isometry (or, relativistically, symmetry) group $G$; $\iota:Q\to\Sigma^N$ is an embedding assigning to each configuration the positions of $N$ constituent objects, with $N$ itself part of the specification (the \emph{particle content}); $\Pi$ is a choice of exchange-symmetrization data on any repeated factors of $\Sigma^N$ corresponding to identical constituents (the \emph{statistics}); and $\mathcal{A}$ is a distinguished algebra of ``local''/operationally accessible observables and couplings, determined by $\iota$ together with the locality structure of $\Sigma$, that fixes which perturbations and environmental interactions count as physically generic for the system. A \emph{physically interpreted Hamiltonian system} is a pair $\big((Q,\omega_{\mathrm{can}},H),\ \mathcal{D}\big)$.
+\end{definition}
+
+The content of Sections 2--3 can then be summarized as: System A and System B are dynamically equivalent bare Hamiltonian systems ($N=1$ vs.\ $N=2$; $\iota_A$ vs.\ $\iota_B$; $\Pi$ trivial in A, potentially non-trivial and empirically inert in the distant-particle regime of B; $\mathcal{A}$ geometric-rotation-compatible in A, factorized/local in B) with strictly inequivalent dressings. Dynamical equivalence of $(Q,H)$ places no constraint whatsoever on $\mathcal{D}$, and conversely no amount of scrutiny of $(Q,H)$ alone can recover $\mathcal{D}$: it is external data, supplied by whoever is applying the formalism to a physical situation, and it is precisely this data that answers questions like ``how many particles are there,'' ``does rotating the coordinates correspond to rotating anything in the lab,'' and ``what does this system look like once coupled to a thermometer.''
+
+This is, in effect, an elementary illustration of a point familiar from elsewhere in the foundations of physics: mathematical structure that is invariant under all automorphisms of a formalism can fail to fix physical content, and conversely, seemingly different mathematical presentations can hide the same physical content, or vice versa. The general-relativistic hole argument \cite{EarmanNorton1987} is the best-known instance of the latter phenomenon (a bare manifold-plus-metric under-determines ``which point is which'' without further, non-dynamical identification); our example is closer to the former --- here two \emph{physically distinct} situations happen to share \emph{all} of their bare dynamical content, and only the dressing tells them apart. In both cases the lesson is the same: read off only what the invariant mathematical structure actually supports, and be explicit about what further interpretive data is being assumed.
+
+\section{Further Illustrations and Connections}
+
+\paragraph{Normal modes.} The same moral appears, in a sense running the other way, in the theory of coupled oscillators. A collection of masses connected by springs, in general spatially local and physically coupled, has a Hamiltonian that, after diagonalization in terms of normal-mode coordinates, takes exactly the form of a set of \emph{decoupled} one-dimensional oscillators, $H=\sum_k \big(P_k^2/2+\frac12\Omega_k^2 Q_k^2\big)$. If one only looked at this final, diagonal $(Q,H)$, one might be tempted to read it as describing independent, uncoupled particles. But the normal-mode coordinates $Q_k$ are collective variables, each typically a linear combination of every original particle's displacement; a perturbation local to one physical mass is, in normal-mode space, generically \emph{non-local}, spreading across many or all of the $Q_k$. This is the mirror image of Section 3.2: there, an abstractly ``local-looking'' coordinate split ($q_1,q_2$) failed to be the physically local one for System A; here, an abstractly decoupled-looking Hamiltonian hides a physically coupled, spatially local system. Both cases show that reading physical locality or particle-independence directly off the form of $H$ in a given coordinate system is unreliable without independent knowledge of the embedding.
+
+\paragraph{Two-level systems.} A structurally similar warning applies to quantum two-level systems. A spin-$\tfrac12$ degree of freedom and the two lowest energy levels of an anharmonic trap are both described, abstractly, by the Hilbert space $\mathbb{C}^2$ and can be given identical effective Hamiltonians; yet only in the spin case does the $SU(2)$ that acts on this $\mathbb{C}^2$ correspond to actual rotations of physical space, with the attendant consequences (e.g.\ magnetic dipole coupling, Wigner--Eckart selection rules) that this geometric meaning brings. The bare qubit Hamiltonian does not know which case it is in; the physical dressing does.
+
+\paragraph{Configuration-space realism.} Our example also bears on a debate in the foundations of quantum mechanics over how literally to take configuration space --- especially the $3N$-dimensional configuration space of an $N$-particle wavefunction --- as the fundamental arena in which physics takes place \cite{Albert1996,Lewis2004,Monton2006}. Whatever the merits of that view, the present example shows that configuration space by itself does not even fix \emph{how many particles} are being described, let alone where they are: the same $\mathbb{R}^2$ is the configuration space of a one-particle and of a two-particle system, and only the particle-content and embedding data --- the dressing $\mathcal{D}$, in the terminology of Section~4 --- decides which. Any view that takes configuration space to be physically fundamental has to build this data into the fundamental posit; it cannot be recovered from the space itself.
+
+\paragraph{A closing remark.} Because configuration space is used so widely --- including, in some approaches to relativistic dynamics, as a stand-in for spacetime itself, with an event or particle's spacetime location treated formally as a configuration-space coordinate evolving in an external parameter --- it is worth keeping the moral of this note in view whenever that move is made: an isotropic-looking or symmetric-looking Hamiltonian on such a space does not, by itself, certify that the associated symmetry is geometrically real, or that a particular coordinate split corresponds to a physically meaningful partition of the system, any more than it does for the two oscillators of this note. That certification is always an additional physical commitment.
+
+\section{Conclusion}
+
+The exact coincidence between the two-dimensional isotropic oscillator and two distant, independent one-dimensional oscillators is real, and it survives every construction --- classical, symplectic, or quantum --- that can be built from the bare pair $(Q,H)$ alone. It is not, however, a paradox, and it does not show that configuration space is physically meaningless. What it shows is that $(Q,H)$ under-determines the physical system: the same bare Hamiltonian data admits inequivalent \emph{physical dressings} --- inequivalent choices of how many constituents there are, how the configuration coordinates are embedded in physical space, whether a mathematical symmetry of $H$ corresponds to an actual spatial symmetry, and which couplings to a wider environment count as physically natural. Configuration space, on this view, is best treated as a coordinatization adapted to, and only meaningful relative to, a prior specification of what the system is --- a representation of the space of instantaneous states, not a self-standing arena whose points carry physical meaning independently of that specification. Making this dressing explicit, rather than leaving it implicit, is cheap in the cases treated here; the value of the exercise is in showing precisely what is being assumed whenever it is left out.
+
+\begin{thebibliography}{9}
+
+\bibitem{Albert1996}
+D.~Z.~Albert, ``Elementary Quantum Metaphysics,'' in J.~T.~Cushing, A.~Fine, and S.~Goldstein (eds.), \emph{Bohmian Mechanics and Quantum Theory: An Appraisal}, Boston Studies in the Philosophy of Science, vol.~184 (Kluwer, Dordrecht, 1996), pp.~277--284.
+
+\bibitem{EarmanNorton1987}
+J.~Earman and J.~D.~Norton, ``What Price Spacetime Substantivalism? The Hole Story,'' \emph{British Journal for the Philosophy of Science} \textbf{38}, 515--525 (1987).
+
+\bibitem{LeinaasMyrheim1977}
+J.~M.~Leinaas and J.~Myrheim, ``On the Theory of Identical Particles,'' \emph{Il Nuovo Cimento B} \textbf{37}, 1--23 (1977).
+
+\bibitem{Lewis2004}
+P.~J.~Lewis, ``Life in Configuration Space,'' \emph{British Journal for the Philosophy of Science} \textbf{55}, 713--729 (2004).
+
+\bibitem{Monton2006}
+B.~Monton, ``Quantum Mechanics and 3N-Dimensional Space,'' \emph{Philosophy of Science} \textbf{73}, 778--789 (2006).
+
+\bibitem{Wilczek1982}
+F.~Wilczek, ``Quantum Mechanics of Fractional-Spin Particles,'' \emph{Physical Review Letters} \textbf{49}, 957--959 (1982).
+
+\bibitem{ZanardiLidarLloyd2004}
+P.~Zanardi, D.~A.~Lidar, and S.~Lloyd, ``Quantum Tensor Product Structures Are Observable Induced,'' \emph{Physical Review Letters} \textbf{92}, 060402 (2004).
+
+\bibitem{Zurek2003}
+W.~H.~Zurek, ``Decoherence, Einselection, and the Quantum Origins of the Classical,'' \emph{Reviews of Modern Physics} \textbf{75}, 715--775 (2003).
+
+\end{thebibliography}
+
+\end{document}
