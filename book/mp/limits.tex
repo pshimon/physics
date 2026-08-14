@@ -1,0 +1,703 @@
+\chapter{Limits }
+\label{limits}
+Idealizations and limiting procedures are among the most powerful tools in
+theoretical physics. Point particles, rigid bodies, continua, perfectly
+conducting surfaces, infinite systems, monochromatic waves, zero-temperature
+states, and thermodynamic limits all arise as limiting descriptions of systems
+with finite size, finite particle number, finite stiffness, finite wavelength,
+or finite observation time. Their extraordinary success may obscure a
+fundamental mathematical and physical fact: limits involving several
+parameters need not commute.
+
+The question is not merely technical. The result obtained by first taking one
+parameter to its ideal limit and then another may differ qualitatively from
+that obtained by reversing the order, or from that obtained by approaching the
+limiting point along a correlated path. Such phenomena occur in elementary
+mechanics, elasticity, electrodynamics, statistical mechanics, quantum theory,
+continuum mechanics, and general relativity.
+
+Limits should be taken with care. A number of theorems describe 
+when we can change order of limits and when we can not, how
+we can approach to the limit and all that.
+Imagine a bucket with small hall at the bottom (in Ideal world),
+so we can say that the hole is so small that for all times the bucket remains practically full.
+On the other hand we can say that the bucket will be empty if we wait long enough.
+
+Here we discuss  interchangeable and
+non-interchangeable limits in physics. We begin with the elementary
+mathematical structure of multiple limits and singular perturbations. We then
+examine physical examples, including statically indeterminate structures such
+as a beam supported by three pillars, the rigid-body and point-particle limits,
+the continuum and thermodynamic limits, the limits $c \to \infty$, $\hbar \to 0$,
+and $N \to \infty$, and the subtle relation between vanishing size and divergent
+self-energy in classical electrodynamics. Special attention is given to the
+historical ``point electron'' problem associated with Abraham--Lorentz--Dirac
+theory and related analyses of extended charged particles, where the
+zero-radius limit is entangled with mass renormalization, stability, and
+radiation reaction.
+
+Successful physical idealizations are not justified by the existence of an
+abstract formal limit alone. Their legitimacy depends on the existence of a
+suitable \emph{asymptotic regime}, on the robustness of observable predictions
+under changes of limiting procedure, and on the identification of the
+dimensionless parameters that control the approximation. Noncommuting limits
+are therefore not pathological exceptions but a central diagnostic of the
+domain of validity of physical theories.
+
+Physics is built upon ideal objects.
+A particle is often treated as a point.
+A solid body is treated as perfectly rigid,$E\rightarrow\infty,$
+where $E$ is an elastic modulus. A fluid is treated as a continuum even though it consists of molecules,
+$\ell_{\rm micro}/L\rightarrow 0.$
+Statistical mechanics invokes the thermodynamic limit
+$ N\rightarrow\infty,\qquad V\rightarrow\infty,\qquad N/V=\mathrm{const}.$
+Classical mechanics is often regarded as emerging from quantum mechanics in a limit involving
+$\hbar\rightarrow0$ 
+while Newtonian mechanics emerges from relativity through
+$c\rightarrow\infty.$
+
+These procedures are so familiar that one may be tempted to regard an
+idealization simply as the substitution of an extreme value into the equations.
+But this intuition is often misleading.
+Suppose a physical system depends on two parameters $a$ and $b$, and an observable is represented by
+$F(a,b).$ There are immediately several distinct questions:
+\[
+\lim_{a\to0}\lim_{b\to0}F(a,b),
+\]
+\[
+\lim_{b\to0}\lim_{a\to0}F(a,b),
+\]
+and
+\[
+\lim_{(a,b)\to(0,0)}F(a,b).
+\]
+There is no general reason for these quantities to agree.
+Indeed, the two iterated limits may exist and be different, while the joint
+limit does not exist. Even when all limits coincide, convergence may be
+nonuniform, so that an approximation apparently justified for fixed $a$ becomes
+invalid when $b$ is simultaneously taken to an extreme value.
+
+This simple mathematical observation has profound physical consequences.
+For example, two smooth curve may coincide as sets of points, but have
+different lengths. Let $ y_n= \sin(n x)/n $ on the  interval $ 0\le x \le 2 \pi $. 
+Calculation of length of sinusoidal curve is a simple exercise in elliptic integrals:
+\begin{equation}
+   \label {sin-length}
+   \begin{split}
+       l_n=\int_0^{2 \pi}\sqrt{1+\cos^2(nx)}dx\\
+       =\int_0^{2 n \pi}\sqrt{1+\cos^2(z)}dz/n\\
+       =\int_0^{2 \pi}\sqrt{1+\cos^2(z)}dz\quad \text{does not depend on n}  \\
+       =4 \sqrt{2} \int_0^{\pi/2}\sqrt{1-\frac{1}{2} \sin^2(z)}dz\\
+       =4 \sqrt{2} E(\frac{1}{\sqrt{2}}) \approx 1.351
+   \end{split}
+\end{equation}  
+and ratio of its length to that of segment is $ \approx 1.22 $ independent of $ n $.
+On the other hand maximal distance between the curve and straight segment $ d_n=1/n $ 
+vanishes for $ n\rightarrow \infty $.
+
+The point-particle approximation may be valid at fixed wavelength but fail when
+the wavelength is also taken to zero. A rigid-body approximation may be
+excellent for finite frequencies but fail when the frequency approaches an
+elastic resonance. The thermodynamic limit may produce phase transitions that
+disappear at every finite $N$. The classical limit may depend on whether a
+semiclassical approximation is taken before or after a long-time limit. The
+zero-size limit of a charged body may require a simultaneous renormalization of
+its bare mass.
+
+An ideal physical object is not characterized merely by a limiting value of a
+parameter. It is characterized by a limiting regime, and in a multiparameter
+problem the regime includes the relative manner in which different limits are
+taken.
+The familiar success of point particles, rigid bodies, continua, and thermodynamic systems does not contradict this principle. On the contrary, their success usually reflects the existence of broad asymptotic domains in which different microscopic realizations become observationally indistinguishable.
+The difficult cases are those in which no such uniform asymptotic domain exists.
+
+\section{Mathematical preliminaries}
+For a single parameter $x$, the notation
+\[
+\lim_{x\to x_0}f(x)=L
+\]
+has a precise meaning. For every $\epsilon>0$, there exists a $\delta>0$ such that
+\[|x-x_0|<\delta \quad\Longrightarrow\quad |f(x)-L|<\epsilon.\]
+The physical interpretation is usually that sufficiently close to the limiting regime, the observable becomes insensitive to the remaining details of the parameter.
+For example, if the radius $R$ of a spherical body is much smaller than the observation distance $r$,
+$\epsilon_R=\frac{R}{r}\ll 1,$
+then its external gravitational or electrostatic field may be approximated by that of a point source.
+The point-particle approximation is therefore not fundamentally the statement $R=0$. 
+It is the asymptotic statement $\frac{R}{r}\ll 1$.
+This distinction becomes essential when another scale enters the problem.
+For two variables,$f(x,y)$,one may form
+\[L_1=\lim_{x\to x_0}\left[\lim_{y\to y_0}f(x,y)\right],\]
+and
+\[L_2=\lim_{y\to y_0}\left[\lim_{x\to x_0}f(x,y)\right].\]
+Equality,$L_1=L_2$ is not guaranteed.
+A simple example is
+\[
+f(x,y)=\frac{x}{x+y}.
+\]
+Then
+\[\lim_{x\to0}\lim_{y\to0}\frac{x}{x+y}=1,\]
+whereas
+\[\lim_{y\to0}\lim_{x\to0}\frac{x}{x+y}=0.\]
+The joint limit does not exist.
+The result depends on the path. For $y=\lambda x$ we obtain
+\[f(x,\lambda x)=\frac{1}{1+\lambda}.\]
+Thus the limiting point $(0,0)$ does not determine a unique physical result. The ratio
+\[\lambda=\frac{y}{x}\]
+survives the limiting process.
+This elementary observation is the prototype for a large class of physical problems. What appears to be 
+a two-parameter limit may actually retain a hidden dimensionless parameter.
+\subsection{ Uniform and nonuniform convergence}
+Suppose
+\[f_\epsilon(x)\rightarrow f_0(x)\qquad(\epsilon\rightarrow0).\]
+If convergence is uniform on a domain $D$, then
+\[\sup_{x\in D}|f_\epsilon(x)-f_0(x)|\rightarrow0.\]
+Uniform convergence often allows limits to be interchanged with other
+operations such as integration or differentiation, subject to suitable
+additional conditions.
+
+But physical singular limits are frequently nonuniform.
+Consider
+\[f_\epsilon(x)=\frac{x}{x+\epsilon}.\]
+For every fixed $x>0$,
+\[\lim_{\epsilon\to0}f_\epsilon(x)=1.\]
+However, at $x=0$,$f_\epsilon(0)=0$.
+Thus the convergence is not uniform near $x=0$. If a second physical limit simultaneously 
+drives $x$ toward zero, replacing $f_\epsilon$ by its pointwise limit  may produce an incorrect result.
+Many paradoxes involving \emph{taking an ideal limit} are ultimately manifestations 
+of this elementary structure.
+
+\section{ Singular perturbations and distinguished limits}
+A useful general form of a multiparameter problem is
+$F(\epsilon,\delta)$,with $\epsilon\ll 1,\qquad\delta\ll 1$.
+The naive procedure is to expand independently in both parameters. But frequently the physically relevant quantity depends instead on a combination such as
+\[\frac{\delta}{\epsilon},\qquad\frac{\delta}{\epsilon^2},\qquad\epsilon\log\delta,\]
+or another composite parameter.
+The asymptotic behavior then depends on the relative scaling.
+For example, consider
+\[F(\epsilon,\delta)=\frac{\epsilon}{\epsilon+\delta}.\]
+Three regimes exist:
+\[\delta\ll\epsilon\quad\Longrightarrow\quad F\simeq 1,\]
+\[\epsilon\ll\delta\quad\Longrightarrow\quad F\simeq 0,\]
+and
+\[\delta\sim\epsilon\quad\Longrightarrow\quad F=O(1).\]
+Thus there is no single approximation valid throughout the corner
+\[(\epsilon,\delta)\rightarrow(0,0).\]
+The appropriate concept is that of a \emph{distinguished limit}: a correlated limiting procedure in which two or more nominally small parameters remain in a fixed asymptotic relation.
+This idea is fundamental in fluid mechanics, boundary-layer theory, plasma physics, kinetic theory, and many-body theory.
+
+\section{ The beam on three pillars}
+
+Contrary to common belief not every properly set problem in
+classical mechanics has unique solution. Let's take for example
+a (rigid) beam on three (rigid) pillars (see fig.\ref{beam3}).
+\begin{figure}[h]
+\begin{tikzpicture}
+%\draw[thin,dotted] (-3,-3) grid (3,1);
+\draw[->] (0,0) -- (0,1);
+\node at (0.2,0.7)  {y};
+\draw[very thick] (-3,0) -- (3,0);
+\draw[very thick] (-3,-3) -- (-3,0);
+\draw[very thick] (3,-3) -- (3,0);
+\draw[very thick] (0,-3) -- (0,0);
+\draw (1.1,-0.1) -- (1.1,0.1);
+\node at (1.1,0.2) {x};
+\node at (-2.8,-2.9) {1};
+\node at (0.2,-2.9) {0};
+\node at (2.8,-2.9) {2};
+\end{tikzpicture}
+\caption{Beam on 3 pillars}
+\label {beam3}
+\end{figure}
+Let the weight of the beam be $W$ and length $2 L$.
+Balance of forces gives:
+\begin{equation}
+        F_0+F_1+F_2=W \label {bf}
+\end{equation}
+Balance of torques gives:
+\begin{equation}
+        F_1 L=F_2 L \label {bt}
+\end{equation}
+   So we have only two equations for three
+unknown forces. From the symmetry we can get that $F_1=F_2$. 
+(We know that this already from balance of torques.)
+{\em First solution}:
+All pillars and beam are absolutely rigid. Then
+if we pull out the middle pillar nothing will change.
+So $F_0=0$ and $F_1=F_2=W/2$.
+{\em Second solution}
+All pillars and beam are absolutely rigid. Then
+we can cat beam at the center and will have two
+beams laying on two pillars each.
+So $F_0=W/2$ and $F_1=F_2=W/4$.
+{\em Third solution}
+Beam is absolutely rigid, pillars are very hard springs.
+Since beam is horizontal, small change in length is 
+equal to all pillars so $F_0=F_1=F_2=w/3$
+{\em Fourth solution}
+Pillars are rigid, beam is elastic. This case needs
+some calculations, well known in elasticity theory
+(see e.g \cite {Landau-Lifshitz-7}).
+The results is $F_0=5 W/8$ and $F_1=F_2=3 W/16$.
+It is clear that all these solutions (and more can be
+produced) are limiting cases of standard elasticity 
+problem when elasticity coefficients go to infinity.
+So generally we can't simply neglect elastic deformations,
+we should be more careful.
+
+\section{ The rigid-body limit}
+A perfectly rigid body is often defined by the condition that distances between material points remain fixed:$|\mathbf{x}_A-\mathbf{x}_B|=\mathrm{const}$.
+Real solids satisfy this only approximately.
+For an elastic body, deformation is controlled by elastic moduli, density, geometry, loading rate, and boundary conditions. A naive rigid-body limit might be written $E\rightarrow\infty$.
+But another relevant quantity is the elastic wave speed 
+\[c_s\sim\sqrt{\frac{E}{\rho}}.\]
+Thus $E\rightarrow\infty$ typically implies $c_s\rightarrow\infty$
+if density is held fixed.
+Consequently, the rigid-body limit simultaneously contains an assumption of infinitely rapid 
+propagation of stress.
+If the characteristic time of observation is $T$ and the body size is $L$, 
+then the important parameter is
+\[\epsilon=\frac{L/c_s}{T}.\]
+The rigid approximation corresponds to $\epsilon\ll 1$.
+But this can be achieved in different ways:
+\[c_s\rightarrow\infty\quad\text{at fixed }L,T,\]
+or
+\[T\rightarrow\infty\quad\text{at fixed }c_s,L,\]
+or through correlated scalings.
+These limits need not be equivalent in dynamical problems.
+
+Relativity introduces an additional obstruction. No physical disturbance can propagate faster than
+$c$.
+A strictly rigid relativistic body in the Newtonian sense would require
+instantaneous transmission of constraints and is therefore incompatible with
+relativistic causality.
+The successful rigid-body approximation is consequently an asymptotic regime:
+\[\frac{L}{c_s T}\ll 1,\]
+with $c_s<c$.
+Thus the nonrelativistic rigid body is not literally a material object of infinite stiffness. It is an effective description valid when elastic transients are irrelevant to the phenomena being studied.
+The distinction between an exact ideal object and a controlled asymptotic approximation is crucial.
+
+\section{ The point-particle limit}
+A finite charge distribution of characteristic radius (R) generates an external potential
+\[\Phi(\mathbf r)=\int\frac{\rho(\mathbf r')}{|\mathbf r-\mathbf r'|}d^3r'.\]
+At distances $r\gg R$,a multipole expansion gives
+\[\Phi(\mathbf r)=\frac{Q}{r}+\frac{\mathbf p\cdot\mathbf r}{r^3}+\cdots.\]
+The point-charge approximation is controlled by
+\[\epsilon_R=\frac{R}{r}.\]
+In this domain, replacing the finite distribution by a point charge is extraordinarily successful.
+There is no paradox here.
+The approximation is not based on the metaphysical claim that the electron
+\emph{really has zero radius}. It is based on the empirical and theoretical fact
+that sufficiently long-distance observables are insensitive to internal
+structure.
+
+The situation changes if the system is probed by radiation of wavelength $\lambda$.
+Now the relevant parameter is
+\[kR=\frac{2\pi R}{\lambda}.\]
+The point-particle approximation requires
+$kR\ll 1$. Consider simultaneously $R\rightarrow 0$ and $\lambda\rightarrow 0$.
+If
+\[\frac{R}{\lambda}\rightarrow 0,\]
+the object remains pointlike to the probe.
+If
+\[\frac{R}{\lambda}\rightarrow\infty,\]
+the internal structure becomes increasingly resolved.
+If
+\[\frac{R}{\lambda}\rightarrow\alpha,\]
+finite-size effects survive.
+Therefore $R\rightarrow 0$ and $\lambda\rightarrow 0$ are generally non-interchangeable limits.
+
+\section{ The classical electron and the zero-radius problem}
+
+One of the most famous examples of a singular physical limit arises in classical electrodynamics.
+Consider a charged body of radius $R$. Its electrostatic self-energy behaves schematically as
+\[U_{\rm em}\sim\frac{e^2}{R},\]
+up to a numerical factor depending on the charge distribution and unit convention.
+Therefore,$R\rightarrow 0$ implies $U_{\rm em}\rightarrow\infty$.
+If one attempts to identify the inertial mass entirely or partly with electromagnetic field energy, a corresponding electromagnetic contribution to mass diverges.
+The point-particle limit is therefore not a regular limit of the extended-particle theory.
+
+Suppose the observed mass is written schematically as $m_{\rm phys}=m_{\rm bare}(R)+m_{\rm em}(R)$,
+where 
+\[m_{\rm em}(R)\sim\frac{e^2}{Rc^2}.\]
+To keep $m_{\rm phys}$ finite as $R\rightarrow 0$, one must simultaneously adjust
+$m_{\rm bare}(R)$.
+Thus the limit is not simply $R\rightarrow 0$.
+It is a correlated procedure:
+\[R\rightarrow0,\qquad m_{\rm bare}(R)\rightarrow-\infty\]
+in such a manner that
+\[m_{\rm bare}(R)+m_{\rm em}(R)\rightarrow m_{\rm phys}.\]
+
+Whether such a procedure is physically satisfactory is a separate question. The important point here is methodological.
+ The point-particle limit does not exist as an ordinary fixed-parameter limit. 
+ It exists, if at all, only after specifying a simultaneous limiting prescription.
+This is precisely the type of issue hidden by the phrase \emph{take the point-particle limit.}
+\subsection{Radiation reaction}
+For an extended charged body, the electromagnetic field generated by the charge acts back on the body.
+At sufficiently low frequencies and small size, one obtains an effective expansion involving terms such as $m_{\rm em}\dot{\mathbf v}$,
+and, after renormalization and further limiting procedures, the familiar radiation-reaction term
+\[\mathbf F_{\rm RR}=\frac{2e^2}{3c^3}\ddot{\mathbf v}\]
+in Gaussian units, in the nonrelativistic Abraham--Lorentz approximation.
+The appearance of higher derivatives,$\ddot{\mathbf v}$,
+and the associated runaway and preacceleration problems should not automatically be 
+interpreted as properties of every finite charged body.
+They arise within a particular asymptotic procedure.
+
+The relevant hierarchy includes at least:
+\[R,\qquad\frac{e^2}{mc^2},\qquad\frac{c}{\omega},\]
+together with the time scale of the external force.
+Changing the relative order in which $R\rightarrow 0$,
+the low-frequency approximation is taken, and mass renormalization is imposed can change the resulting effective equation.
+Thus the point-electron problem is an archetype of non-interchangeable physical limits.
+
+\subsection{Frenkel-type point-particle idealizations}
+A broader class of problems, often associated historically with attempts to
+construct relativistic classical particles carrying internal degrees of
+freedom, illustrates a related difficulty.
+Suppose a particle is assigned quantities such as
+\[x^\mu(\tau),\qquad u^\mu=\frac{dx^\mu}{d\tau},\]
+together with intrinsic angular momentum or spin variables.
+One may ask whether the object should be understood as:
+\begin{itemize}
+   \item
+ a strictly geometrical point endowed with internal variables;
+   \item
+ the zero-size limit of an extended rotating body;
+   \item
+ an effective degree of freedom obtained after eliminating internal modes.
+\end{itemize}
+These constructions need not be equivalent.
+
+For an extended body, angular momentum is schematically
+\[\mathbf S=\int\mathbf r\times\mathbf p(\mathbf r) d^3r.\]
+If the characteristic radius tends to zero,
+$R\rightarrow 0$, while the spin remains finite, $S\neq0$,
+then some internal quantities must scale nontrivially.
+For a classical rotating body,
+$S\sim I\omega$. Since $I\sim m R^2$, maintaining finite $S$ as
+$R\rightarrow 0$ may require $\omega\rightarrow\infty$,
+unless other parameters scale simultaneously.
+But relativistic constraints imply $v_{\rm tangential}\sim R\omega<c$.
+Thus a naive simultaneous requirement of
+\[R\rightarrow0,\qquad S=\mathrm{const},\qquad m=\mathrm{const}\]
+can be incompatible with a simple classical extended-body interpretation.
+The formal \emph{spinning point particle} is therefore not automatically the same 
+thing as the small-radius limit of an ordinary rotating solid.
+Again, one must specify what is held fixed.
+
+\section{Continuum limit versus point-particle limit}
+At first sight, the point-particle limit and the continuum limit appear opposite.
+The point-particle limit removes internal spatial structure:
+$R/L\rightarrow 0$. The continuum limit removes microscopic granularity:
+$\ell_{\rm micro}/L\rightarrow 0$.
+But both are examples of scale separation.
+
+Suppose a system contains
+$\ell_{\rm micro}\ll R \ll L$.
+Then one may first construct a continuum description of an extended object,
+$\ell_{\rm micro}/R\rightarrow 0$,
+and subsequently approximate that object as pointlike,
+$R/L\rightarrow 0$.
+
+These operations may be interchangeable only if there exists an overlap region satisfying
+$\ell_{\rm micro}\ll R \ll L$.
+If this hierarchy collapses, the two approximations can interfere.
+For example, if $R\rightarrow 0$ is taken so rapidly that $R\sim\ell_{\rm micro}$,
+then the continuum description loses validity before the point-particle approximation is reached.
+Thus
+\[\text{continuum limit}\quad\text{followed by}\quad\text{point limit}\]
+need not equal the reverse procedure.
+The existence of a useful intermediate scale is often what makes successive idealizations legitimate.
+
+\section{Thermodynamic and long-time limits}
+The thermodynamic limit is another central example.
+For a finite system,$N<\infty$,
+the partition function is generally analytic under ordinary conditions. Sharp phase 
+transitions emerge only in an infinite-system limit.
+Schematically,$\lim_{N\rightarrow\infty}$
+may produce nonanalytic behavior that is absent for every finite $N$.
+Now introduce the long-time limit, $t\rightarrow\infty$.
+The two limits $N\rightarrow\infty$ and $t\rightarrow\infty$
+can be highly nontrivial.
+
+For finite $N$, a Hamiltonian system may exhibit recurrences on sufficiently
+long times. If the thermodynamic limit is taken first, recurrence times may
+diverge and irreversible behavior can emerge at the level of effective
+descriptions.
+Thus one encounters the conceptual contrast
+$\lim_{t\to\infty}\lim_{N\to\infty}$ versus $\lim_{N\to\infty}\lim_{t\to\infty}$.
+The relation between these procedures is central to the foundations of statistical mechanics and the emergence of irreversibility.
+The phrase \emph{take the thermodynamic limit} therefore conceals assumptions 
+concerning observation time, coarse graining, boundary conditions, and the 
+class of states being considered.
+
+\section{Zero temperature and infinite volume}
+Quantum and statistical systems often involve the pair
+$T\rightarrow 0,\qquad V\rightarrow\infty$.
+At finite volume, energy levels are generally discrete. In the infinite-volume limit, 
+spectra may become continuous or dense.
+The ground-state structure can therefore depend subtly on the order of limits.
+Similarly, spontaneous symmetry breaking is sharply formulated only after an
+infinite-volume or thermodynamic limit is invoked. For finite systems,
+symmetry-related states can tunnel into one another, and exact eigenstates may
+retain the symmetry of the Hamiltonian.
+
+The usual conceptual sequence is often
+$V\rightarrow\infty$,
+followed by the removal of an infinitesimal symmetry-breaking source,
+$h\rightarrow 0$.
+The order
+\[\lim_{h\to0}\lim_{V\to\infty}\]
+can differ from
+\[\lim_{V\to\infty}\lim_{h\to0}.\]
+
+This is not a mathematical curiosity. It expresses the physical distinction between:
+ first selecting a macroscopic phase and then removing the external bias;
+ first removing the bias in a finite symmetric system and only then increasing the size.
+Thus spontaneous symmetry breaking itself provides a paradigmatic example of noncommuting limits.
+
+\section{The classical limit: $\hbar\to 0$ is not a universal procedure}
+The statement that classical mechanics is obtained by taking
+$\hbar\rightarrow 0$ is useful but incomplete.
+The physically relevant semiclassical parameter is typically an action ratio,
+\[\epsilon_{\rm sc}=\frac{\hbar}{S_{\rm cl}}.\]
+Thus the classical regime may be reached through large actions rather than a literal variation of Planck's constant.
+Moreover, another parameter may be time.
+Semiclassical approximations are frequently valid only over restricted time scales. In chaotic systems, small quantum corrections may grow under classical instability.
+Thus $\hbar\rightarrow 0$ and $t\rightarrow\infty$ may not commute.
+For fixed finite $t$, $\lim_{\hbar\to0}$ 
+may reproduce classical dynamics.
+But if $t$ increases simultaneously with decreasing $\hbar$, 
+interference and quantum corrections can become important.
+The appropriate question is therefore not simply
+"$\hbar\rightarrow 0$?" but rather "$\frac{\hbar}{S}\rightarrow 0 \quad\text{with what scaling of }t$?"
+
+This illustrates a general principle:
+ A limiting theory may be valid at every fixed value of a second variable and nevertheless fail to be uniformly valid as that second variable also approaches an extreme regime.
+
+\section{ The Newtonian limit and weak-field limit}
+Relativity provides another multiparameter example.
+A nonrelativistic weak-field regime may involve
+$\frac{v}{c}\ll 1,\qquad \frac{GM}{rc^2}\ll 1$.
+It is tempting to regard these as independent.
+However, different physical systems can approach the joint Newtonian regime along very different paths.
+A system may have $v/c\ll 1$ but still experience strong gravitational fields, or conversely 
+have weak gravity while containing ultrarelativistic particles.
+Thus $c\rightarrow\infty$ and $G\rightarrow 0$
+are not conceptually identical limiting procedures.
+One may define different contractions or scaling limits depending on which combinations of parameters are held fixed.
+
+Similarly, the limits $c\rightarrow\infty,\qquad\hbar\rightarrow 0$
+raise a further question:
+\[\text{Does classical mechanics arise before or after the nonrelativistic limit?}\]
+In ordinary regimes the resulting descriptions overlap and agree. But the mathematical limiting structures need not be identical, especially when spin, antiparticles, constraints, or quantum fields are involved.
+
+\section{Infinite systems and the paradoxes of infinity}
+Physics uses infinity in at least three distinct ways.
+Actual mathematical infinity
+Examples include $N=\infty,\qquad V=\infty, \qquad t=\infty$.
+These are properties of the mathematical model.
+
+One may instead mean $N\gg 1,\qquad L\gg\ell,\qquad t\gg\tau$.
+Here infinity is shorthand for a scale hierarchy.
+
+A calculation may produce $\infty-\infty$,
+or a divergent integral, even though observable quantities remain finite after 
+cancellation, subtraction, or renormalization.
+
+These three uses should not be confused.
+Many apparent paradoxes arise when a limit is interpreted as if it described an actual physical
+process of reaching infinity.
+For example, the thermodynamic limit is rarely a claim that a laboratory sample
+literally contains infinitely many particles. It is an assertion that
+finite-size corrections are negligible for the observables of interest.
+Thus the meaningful question is not:
+ Is $N=\infty$ physically real?
+but rather:
+ Does there exist a range of finite $N$ for which the infinite-system theory is experimentally indistinguishable from the finite system at the required precision?
+
+\section{ When are limits interchangeable?}
+The preceding examples suggest several practical criteria.
+Uniformity:suppose $F(\epsilon,x)\rightarrow F_0(x)$ as $\epsilon\rightarrow 0$.
+If convergence is uniform over the relevant range of $x$, then subsequent limiting operations 
+are much more likely to be legitimate.
+Nonuniform convergence is a warning sign.
+
+Scale separation: a physical idealization is often controlled by a dimensionless ratio,
+$\epsilon=\frac{\ell_{\rm small}}{\ell_{\rm large}}$.
+The approximation is robust if there exists a substantial interval
+$\ell_{\rm small}\ll\ell\ll\ell_{\rm large}$.
+Such an intermediate asymptotic region protects the effective theory from microscopic and macroscopic details.
+
+Stability under regularization: suppose an ideal theory is obtained by introducing a regulator 
+$\epsilon$ and taking $\epsilon\rightarrow 0$.
+A physically robust prediction should ideally be independent of the detailed regularization procedure.
+If different smooth approximations yield different limiting observables, then the idealization is incomplete unless additional physical information selects one regularization.
+This is precisely the issue encountered in many point-particle and singular-source problems.
+Universality: the strongest justification for an ideal limit is universality.
+Suppose a large class of microscopic models $M_\alpha$ all yield the same effective observable
+$O_{\rm eff}$ in a common scaling regime.
+Then the limiting theory is not merely convenient; it captures information insensitive to microscopic details.
+This is the deep reason why continuum mechanics, thermodynamics, hydrodynamics, and many effective field theories can be extraordinarily successful despite their idealizations.
+
+\section{A taxonomy of physical limits}
+It is useful to distinguish several classes.
+\begin{description}
+    \item [ Regular interchangeable limits]
+The joint limit exists and is independent of path:
+$\lim_{(a,b)\to(a_0,b_0)}F(a,b)=L$.
+These are the safest idealizations.
+    \item [ Nonuniform but physically harmless limits]
+The mathematical convergence is nonuniform, but the physically accessible domain excludes the problematic region.
+For example, a point-particle approximation may fail at distances $r\sim R$,
+while all relevant observations satisfy $r\gg R$.
+    \item [ Distinguished-limit problems]
+The limiting result depends on a ratio such as $\lambda=\frac{a}{b^p}$.
+The physical model requires specification of the correlated scaling.
+    \item [ Singular limits requiring renormalization]
+Individual quantities diverge,$F_{\rm bare}\rightarrow\infty$,
+but suitable combinations remain finite.
+The limiting procedure includes a parameter redefinition.
+The classical and quantum point-particle problems belong to this class.
+    \item [ Emergent singularities]
+The limiting system possesses qualitatively new structures absent at finite parameter values.
+Examples include:$N\rightarrow\infty$ and phase transitions,or $V\rightarrow\infty$
+and spontaneous symmetry breaking.
+    \item [ Ill-defined or incomplete limits]
+Different regularizations or limiting paths produce different physical
+predictions, with no independent principle selecting one.
+Such cases signal that the idealized model has lost essential information.
+\end{description}
+\section{ Effective theories and the reinterpretation of ideal objects}
+Modern effective-theory reasoning provides a natural conceptual framework.
+An ideal object should not necessarily be regarded as the literal endpoint of a physical process. Instead, it is an effective representation valid over a specified range of scales.
+A point particle represents a localized object when $k R\ll 1$.
+A rigid body represents an elastic system when $\omega L/c_s\ll 1$.
+A continuum represents a molecular system when $\ell_{\rm micro}/L\ll 1$.
+A thermodynamic system represents a finite many-body system when finite-size corrections satisfy
+$|\Delta O|\ll \Delta O_{\rm experimental}$.
+The same mathematical symbol,
+\[\rightarrow 0 \quad\text{or}\quad \rightarrow\infty,\]
+may therefore conceal very different physical meanings.
+The central object is not the limiting value itself but the asymptotic hierarchy of scales.
+
+\section{ A proposed principle: physical limits as equivalence classes of scaling paths}
+The preceding discussion suggests a more precise viewpoint.
+Consider a family of theories or systems
+${\cal T}(\lambda_1,\lambda_2,\ldots,\lambda_n)$.
+A conventional limit specifies
+$\lambda_i\rightarrow\lambda_i^{(0)}$.
+But in multiparameter problems, this does not uniquely specify an asymptotic regime.
+Instead, one should consider equivalence classes of scaling paths
+\[\gamma:\epsilon\mapsto\left(\lambda_1(\epsilon),\ldots,\lambda_n(\epsilon)\right),
+\qquad\epsilon\rightarrow 0.\]
+Two paths should be regarded as physically equivalent if all observables in the intended domain satisfy
+\[O_\gamma-O_{\gamma'}\rightarrow 0.\]
+A physically meaningful idealization is then not necessarily a single mathematical point in parameter space. It may be an equivalence class of asymptotic paths.
+This formulation explains both the success and the failures of idealization.
+When many paths belong to the same equivalence class, the ideal theory is robust.
+When different paths produce different limiting theories, the phrase ``take the limit'' is incomplete.
+
+\section{Relation to singular perturbation theory}
+The mathematical theory of singular perturbations provides a systematic language for these issues.
+A perturbation is regular if the highest qualitative structure of the equations remains unchanged as
+$\epsilon\rightarrow 0$.
+A singular perturbation changes the character or order of the equations.
+For example,$\epsilon \ddot{x}+\dot{x}+x=0$ has a different differential order at
+$\epsilon=0$: $\dot{x}+x=0$.
+One initial condition is lost in the reduced equation.
+The limit therefore cannot reproduce arbitrary solutions of the original system uniformly.
+This structure is physically analogous to many idealizations:
+\begin{itemize}
+   \item
+ internal elastic modes disappear in the rigid limit;
+   \item
+ internal multipole degrees of freedom disappear in the point limit;
+   \item
+ microscopic fluctuations disappear in the thermodynamic description;
+   \item
+ boundary layers may survive even when viscosity tends to zero.
+\end{itemize}
+The limiting theory can therefore possess fewer degrees of freedom than the original theory.
+This loss of information is one of the principal mechanisms behind noncommuting limits.
+
+\section{ The inviscid limit as a warning}
+Fluid mechanics provides a particularly clear example.
+The Navier--Stokes equations depend on viscosity $\nu$. One may formally take
+$\nu\rightarrow 0$ and obtain the Euler equations.
+But the limit can be singular because viscous boundary layers may have vanishing thickness while retaining finite dynamical influence.
+Thus the procedure $\nu\rightarrow 0$ 
+cannot always be performed by simply deleting the viscous term.
+The boundary geometry, Reynolds number, observation time, and spatial resolution may all enter the limiting process.
+
+This example demonstrates a general rule:
+ A term that is asymptotically small in the bulk need not be asymptotically small everywhere.
+The same phenomenon appears in quantum boundary layers, electromagnetic self-fields, elastic supports, and gravitational singular perturbations.
+
+\section{ Limits, observations, and experimental resolution}
+There is also an operational aspect.
+Suppose an observable depends on a small parameter:
+$O(\epsilon)=O_0+\epsilon O_1+\cdots$.
+If the experimental uncertainty is
+$\Delta O_{\rm exp}$,
+then the idealized description is justified whenever
+$|\epsilon O_1|\ll\Delta O_{\rm exp}$.
+
+From this perspective, the ideal limit need never be physically attained.
+A point particle need not have zero size. A rigid body need not have infinite stiffness. An infinite system need not contain infinitely many particles.
+What matters is whether the discarded corrections are smaller than the relevant theoretical or experimental accuracy.
+This viewpoint also explains why several mathematically distinct limits may be physically indistinguishable.
+\section{ A practical procedure for multiparameter limits}
+When confronted with a proposed physical limit, the following procedure is useful.
+\begin{enumerate}
+   \item List all independent dimensional scales
+   \item Construct dimensionless parameters
+   \item Determine the singular surfaces
+Identify regions where denominators vanish, derivatives become large, spectra change character, or degrees of freedom disappear.
+   \item Examine iterated limits
+   \item Search for distinguished scalings
+The surviving combination may identify the correct effective theory.
+   \item Check robustness
+Repeat the analysis using different regularizations or microscopic models.
+If the same result is obtained, the idealization has strong physical support.
+   \item Specify the domain of validity
+A physical approximation without its validity conditions is incomplete.
+\end{enumerate}
+\section{ Conclusions}
+The use of limits in physics is both indispensable and potentially deceptive.
+Point particles, rigid bodies, continua, thermodynamic systems, classical
+trajectories, and infinite-volume states are among the most successful
+conceptual constructions in science. Their success, however, does not imply
+that every formal limiting procedure is physically meaningful.
+The central lesson is that a limit involving several parameters must be
+regarded as a statement about a region or path in parameter space.
+The limits
+do not necessarily define a unique physical regime.
+The crucial questions are:
+\[\text{What is held fixed?}\]
+\[\text{Which dimensionless ratios survive?}\]
+\[\text{Is convergence uniform?}\]
+\[\text{Do different regularizations produce the same result?}\]
+\[\text{Does the limiting theory lose degrees of freedom?}\]
+The beam supported by three pillars demonstrates that even elementary
+mechanical idealizations may retain a memory of the route by which rigidity is
+approached. The point-particle problem shows that shrinking spatial size can be
+inseparable from mass renormalization and internal time scales. Spinning
+point-particle models illustrate that zero size with finite intrinsic angular
+momentum is not automatically the limit of an ordinary rotating body.
+Thermodynamic and infinite-volume limits can create qualitatively new
+phenomena, including phase transitions and spontaneous symmetry breaking. The
+classical and nonrelativistic limits involve additional scales, such as time
+and action, whose correlated behavior may determine the outcome.
+Thus the apparent paradox is resolved.
+
+Physics can successfully use point particles, rigid bodies, infinite systems,
+and other idealizations precisely when the relevant observables are
+\emph{asymptotically insensitive} to the details removed by the idealization.
+The problem begins when this insensitivity fails.
+The distinction may be summarized as follows:
+\[\boxed{\text{A successful ideal limit is an asymptotically stable reduction.}}\]
+whereas
+\[\boxed{\text{A non-interchangeable limit signals hidden scale dependence,
+lost information, or a singular reduction.}}\]
+The study of noncommuting limits is therefore not a peripheral mathematical subtlety. It is a general method for determining when an ideal physical concept is genuinely universal, when it requires additional physical structure, and when an apparently innocent passage to an extreme regime has changed the theory itself.
+
