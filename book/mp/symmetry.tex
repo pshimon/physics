@@ -1,1844 +1,605 @@
+\chapter{Symmetry in Physics}
+\label{symmetry}
+% --- convenience macros ---
+%\newcommand{\dd}{\mathrm{d}}
+%\newcommand{\ii}{\mathrm{i}}
+%\newcommand{\mathcal{L}}{\mathcal{L}}
+%\newcommand{\mathcal{H}}{\mathcal{H}}
+%\newcommand{\Real}{\mathbb{R}}
+%\newcommand{\Complex}{\mathbb{C}}
+%\newcommand{\pdv}[2]{\dfrac{\partial #1}{\partial #2}}
+%\newcommand{\dv}[2]{\dfrac{\dd #1}{\dd #2}}
+%\newcommand{\epsilon}{\varepsilon}
+%\newcommand{\GEOM}{G_{\mathrm{EOM}}}
+%\newcommand{\GL}{G_{L}}
+%\newcommand{\Stab}{\mathrm{Stab}}
+%\newcommand{\dslash}{\mathrm{d}\!\!\!/}
 
-# Symmetry in Physics: Equations, Actions, States, Boundary Conditions, and Spontaneous Symmetry Breaking
+Symmetry enters classical and quantum physics at several logically distinct
+levels, and it is a common source of confusion to treat them as one. The
+symmetry group of a Lagrangian (or action) is, in general, only a
+\emph{subgroup} of the symmetry group of the equations of motion (EOM) that it
+generates; and the symmetry group respected by a \emph{particular} solution is,
+in general, only a subgroup of the symmetry group of the EOM themselves, once
+initial or boundary conditions are imposed. This paper gives a systematic
+account of this three-tier hierarchy $G_L \subseteq G_{EOM}$ and
+$G_{sol}\subseteq G_{EOM}$, illustrates each inclusion with worked
+examples (hidden/dynamical symmetries, integrable systems, electromagnetic
+duality; central-force orbits, diffusion with asymmetric data), and then turns
+to the qualitatively different phenomenon of \emph{spontaneous symmetry
+breaking} (SSB), in which the narrowing from $G_{EOM}$ down to the symmetry of
+the physically realized state occurs \emph{without} any explicit asymmetric
+input in the Lagrangian, Hamiltonian, or boundary data. We develop the
+Goldstone-theorem structure of continuous SSB, its discrete analogue, the
+Landau free-energy viewpoint, the subtleties of gauge-symmetry ``breaking''
+(Elitzur's theorem, unitary gauge, the Higgs mechanism), and the role of the
+thermodynamic/infinite-volume limit in making SSB robust in a way that ordinary
+initial-condition selection is not. A unifying table and closing synthesis
+relate all three phenomena within a single logical skeleton.
 
-## Abstract
+\section{Introduction}
 
-Symmetry is one of the central organizing principles of modern physics, but the statement that a physical system ``has a symmetry'' is intrinsically ambiguous unless one specifies *what* is being transformed.  The symmetry group of a Lagrangian need not coincide with that of the equations of motion; the symmetry of a particular solution can be smaller than that of the differential equations it satisfies; and fixed initial or boundary conditions may explicitly reduce the symmetry of the corresponding physical problem without modifying either the Lagrangian or the local field equations.  Conversely, physically relevant states may fail to share symmetries of the equations even when the latter and the action remain exactly invariant, leading to spontaneous symmetry breaking (SSB).
+Symmetry is often introduced to students as a single, monolithic idea: ``the
+Lagrangian is invariant under such-and-such transformation, therefore there is
+a conserved quantity, therefore the system respects the symmetry.'' In
+practice, the situation is considerably richer, and the richness is not a
+technicality but the source of some of the deepest phenomena in physics, from
+the accidental degeneracies of the Kepler problem to the existence of the
+electron mass and the pion.
 
-This paper develops a systematic hierarchy of symmetry concepts in classical mechanics, field theory, statistical physics, and quantum theory.  Particular attention is given to the distinction between invariance of the action, invariance of the Euler--Lagrange equations, covariance versus invariance, symmetries of solution spaces versus symmetries of individual solutions, and the role of initial and boundary data.  We discuss accidental and on-shell symmetries, quasi-symmetries of the Lagrangian, gauge symmetries, dynamical symmetries, and the enlargement or reduction of symmetry under singular limits and constraints.  Spontaneous symmetry breaking is analyzed from the classical, statistical-mechanical, and quantum-field-theoretic points of view, including the distinction between explicit and spontaneous breaking, order parameters, degenerate vacua, the thermodynamic limit, Goldstone modes, the Higgs mechanism, and the special status of gauge ``symmetry breaking.''
-
-A central conclusion is that there is no single object called *the symmetry of a physical system*.  Rather, one encounters a hierarchy
-[
-G_{\rm action},\qquad
-G_{\rm equations},\qquad
-G_{\rm admissible\ configurations},\qquad
-G_{\rm boundary/initial\ data},\qquad
-G_{\rm state},
-]
-whose members may differ substantially.  Confusion between these distinct levels is responsible for many apparent paradoxes concerning symmetry breaking and physical equivalence.
-
----
-
-## 1. Introduction
-
-The importance of symmetry in physics can hardly be overstated.  Conservation laws, selection rules, degeneracies of spectra, classifications of elementary particles, phase transitions, and the structure of fundamental interactions are all deeply connected with invariance properties.
-
-Nevertheless, the apparently simple statement
-
-[
-\text{``the system possesses symmetry }G\text{''}
-]
-
-conceals several logically different assertions.
-
-One may mean that:
-
+It is useful to keep three distinct objects in view:
 \begin{enumerate}
-\item the action is invariant under $G$;
-\item the Lagrangian is invariant, perhaps only up to a total derivative;
-\item the Euler--Lagrange equations are invariant or covariant under $G$;
-\item the set of admissible configurations is invariant;
-\item the initial or boundary value problem is invariant;
-\item the complete set of solutions is mapped into itself;
-\item a particular solution is invariant;
-\item the vacuum or equilibrium state is invariant;
-\item the observable algebra, rather than the underlying variables, is invariant.
+\item the \textbf{Lagrangian} (or action, or Hamiltonian) that \emph{defines} the dynamics;
+\item the \textbf{equations of motion} (EOM) that it \emph{generates}; and
+\item an actual \textbf{solution} of those equations, singled out by initial or boundary data, or, in a many-body/field-theoretic setting, the state that is actually realized as the ground state or equilibrium configuration of the system.
 \end{enumerate}
+Each of these objects has its own symmetry group, and the three groups need not
+coincide. Two inclusions organize the entire subject:
+\begin{itemize}
+    \item $G_L \subseteq G_{EOM}$: \emph{every symmetry of the Lagrangian is a
+        symmetry of the equations of motion, but the equations of motion can
+        admit strictly more symmetry than is manifest in the Lagrangian one
+        wrote down.} This is the subject of Section~\ref{sec:LvsEOM}.
+    \item $G_{sol} \subseteq G_{EOM}$: \emph{a particular solution, or a
+        particular physically realized state, generally respects only a
+        subgroup of the symmetry of the equations that produced it.} There are
+        two logically distinct mechanisms for this narrowing, and
+        distinguishing them is the central conceptual payoff of this paper:
+\begin{itemize}
+\item \emph{Explicit (extrinsic) narrowing}, discussed in
+    Section~\ref{sec:explicit}, in which the asymmetry is put in by hand
+        through the choice of initial or boundary data. This is contingent:
+        choosing symmetric data restores a symmetric solution, and averaging
+        over the group orbit of solutions restores the full symmetry at the
+        ensemble level.
+\item \emph{Spontaneous narrowing}, discussed at length in
+    Section~\ref{sec:SSB}, in which the Lagrangian, the equations of motion,
+        \emph{and} the boundary conditions are all fully symmetric, and yet the
+        stable, physically realized solution is not. This is not contingent: it
+        is a structural consequence of the existence of a degenerate manifold
+        of energy-minimizing (or free-energy-minimizing) configurations,
+        together with an instability of the symmetric configuration and, in the
+        case of a genuine phase transition, the thermodynamic (infinite-volume)
+        limit.
+\end{itemize}
+\end{itemize}
+
+Section~\ref{sec:synthesis} assembles the two inclusions and the two mechanisms
+of narrowing into a single table and discusses precisely why spontaneous
+symmetry breaking is \emph{not} simply a special case of ``asymmetric boundary
+conditions,'' even though both phenomena produce a solution less symmetric than
+the equations that govern it.
+
+\section{Symmetry of the Lagrangian versus Symmetry of the Equations of Motion}
+\label{sec:LvsEOM}
+
+\subsection{Setup and definitions}
+
+Let $q^a(t)$, $a=1,\dots,n$, be generalized coordinates on a configuration
+space $Q$, with Lagrangian $L(q,\dot q,t)$ and action
+\[
+S[q] = \int_{t_1}^{t_2} L(q(t),\dot q(t),t)\,dt .
+\]
+The Euler--Lagrange (EL) operator acting on $L$ is
+\[
+[L]_a = \frac{\partial L}{\partial q^a} - \frac{d}{dt}\frac{\partial L}{\partial \dot q^a}
+\]
+and the equations of motion are $[L]_a=0$.
+
+\begin{definition}[Variational / Noether symmetry]
+An infinitesimal transformation $\delta q^a = \epsilon X^a(q,\dot q,t)$ is a \emph{variational symmetry} of $L$ if there exists a function $F(q,\dot q,t)$ such that, \emph{identically in $q(t)$} (not only on solutions), $ \delta L=\epsilon \tfrac{dF}{dt}$.
+Equivalently, the action changes only by a boundary term, $\delta S = \epsilon\big[F\big]_{t_1}^{t_2}$, for arbitrary paths, not just extremal ones.
+\end{definition}
+
+\begin{definition}[Symmetry of the equations of motion]
+A transformation $g$ (finite or infinitesimal) is a \emph{symmetry of the EOM}, or a \emph{dynamical symmetry}, if it maps every solution of $[L]_a=0$ to another solution of the \emph{same} equations, i.e. it maps the solution set to itself. No reference to the action or to boundary terms is required by this definition.
+\end{definition}
+
+\subsection{Noether's theorem and the forward inclusion}
+
+\begin{proposition}
+\label{prop:noether-forward}
+Every variational symmetry of $L$ is a symmetry of the equations of motion. In
+    symbols, $G_L \subseteq G_{EOM}$.
+\end{proposition}
+
+\begin{proof}[Proof (standard, physicist's level)]
+Two facts are needed.
+\emph{(a) The EL operator annihilates total time derivatives.} identically in $q(t)$ — not merely on shell.
+
+\emph{(b) A change of path is a change of path, regardless of whether it is a symmetry.} 
+    Consider the one-parameter family of paths $q_\epsilon(t) = q(t) + \epsilon X(q(t),\dot q(t),t) + O( \epsilon^2)$, for \emph{arbitrary} $q(t)$, not necessarily a solution. By hypothesis,
+\[
+L(q_\epsilon,\dot q_\epsilon,t) = L(q,\dot q,t) + \epsilon\, \frac{dF}{dt} + O(\epsilon^2)
+\]
+identically in $q(t)$. Hence the action evaluated on $q_\epsilon$ differs from
+    the action evaluated on $q$ only by the boundary term
+    $\epsilon[F]_{t_1}^{t_2}$, \emph{for every path, not only extremal ones}.
+    Consequently $q(t)$ is a stationary point of $S$ under variations that
+    vanish at the endpoints if and only if $q_\epsilon(t)$ is — because the two
+    actions differ by a term that does not depend on the interior of the path
+    at all. Since ``being a solution of $[L]_a=0$'' is exactly the statement of
+    being such a stationary point, $q(t)$ solves the EOM iff $q_\epsilon(t)$
+    does, to first order in $\epsilon$. Thus the transformation maps solutions
+    to solutions: it is a symmetry of the EOM.
+\end{proof}
+
+The familiar conserved charge follows from the same computation kept on shell:
+\[
+Q = \frac{\partial L}{\partial \dot q^a} X^a - F, \qquad \frac{dQ}{dt}\Big|_{\text{on shell}} = 0 .
+\]
+
+\subsection{Why the inclusion can be strict: hidden and dynamical symmetries}
+\label{sec:hidden}
+
+The converse of Proposition~\ref{prop:noether-forward} fails in general: the
+equations of motion routinely admit more symmetry than is manifest in the
+Lagrangian one starts from. It is useful to separate \emph{manifest point
+symmetries} of $L$ (transformations of $q$ and $t$ alone, geometrically visible
+in the way $L$ is written), from \emph{generalized (dynamical) variational
+symmetries}, which are allowed to depend on velocities or momenta and need not
+correspond to any simple geometric transformation of configuration space, from
+the full group $G_{EOM}g$ of symmetries of the equations of motion:
+\[
+G_L^{\text{point}} \;\subseteq\; G_L^{\text{gen}} \;\subseteq\; G_{EOM}g .
+\]
+It is a subtle question, belonging to the \emph{inverse problem of the calculus
+of variations}, exactly when the second inclusion is an equality; under
+favorable regularity assumptions many symmetries of a regular,
+finite-dimensional Lagrangian system's EOM can indeed be exhibited as
+\emph{generalized} variational symmetries (possibly of a Lagrangian differing
+from the original by a boundary term), but this is not automatic, and in field
+theory and in degenerate (constrained) systems it can fail outright. What
+matters for the point of this paper is the \emph{first} inclusion: it is very
+often strict, i.e., there is real, physically important symmetry of the EOM
+that is simply invisible if one only stares at the naive, manifest symmetry of
+$L$.
+
+\begin{example}[Free particle: hidden $SL(2,mathbf R)$]
+The Lagrangian $L=\tfrac12 m\dot x^2$ manifestly has the Galilei symmetry
+    (translations, boosts) plus time translation. But the equation of motion
+    $\ddot x=0$ has straight lines as its general solution, and the space of
+    straight lines is left invariant by the larger, one-dimensional-time
+    conformal (``Schr\"odinger/M\"obius'') group acting projectively on $t$,
+\[
+t \;\longmapsto\; \frac{\alpha t+\beta}{\gamma t+\delta}, \qquad \alpha\delta-\beta\gamma=1,
+\]
+together with a compensating rescaling of $x$. This $SL(2,mathbf R)$ ``dynamical''
+    symmetry (closely related to the conformal/Schr\"odinger symmetry of the
+    free Schr\"odinger equation, and to the Ermakov--Lewis invariant of the
+    time-dependent oscillator) is not visible as a point symmetry of
+    $L=\tfrac12 m\dot x^2$ written in the ordinary way, yet it is a genuine
+    symmetry of $\ddot x=0$.
+\end{example}
+
+\begin{example}[Kepler problem: hidden $SO(4)$]
+For $L = \tfrac12 m\dot{\bm r}^2 + k/r$, the manifest symmetry is $SO(3)$ (rotations) plus time translation. The equations of motion, however, admit the additional conserved Laplace--Runge--Lenz vector
+\[
+\bm A = \bm p \times \bm L - mk\,\hat{\bm r},
+\]
+whose associated transformations close, together with angular momentum, into an
+    $SO(4)$ algebra (for bound orbits). This hidden symmetry is responsible for
+    the non-precession of Kepler ellipses and for the accidental $n^2$
+    degeneracy of the hydrogen spectrum; it is a symmetry of the dynamics, not
+    a geometrically manifest symmetry of the Lagrangian's potential term.
+\end{example}
+
+\begin{example}[Integrable systems: toroidal symmetry from action-angle variables]
+More generally, for a Liouville-integrable Hamiltonian system with $n$ degrees
+    of freedom, one can pass to action-angle variables $(I_i,\theta^i)$ in
+    which $\mathcal{H} = \mathcal{H}(I)$ depends only on the actions. The flow generated by
+    $\mathcal{H}$ is then, trivially, an ($n$-torus of) simultaneous phase shifts
+    $\theta^i \to \theta^i+c^i$, an abelian $U(1)^n$ symmetry group of the
+    equations of motion. This symmetry is exact and completely general for
+    integrable systems, yet it is essentially never visible as a point symmetry
+    of the Lagrangian written in the original coordinates; the free-particle
+    $SL(2,mathbf R)$ and the Kepler $SO(4)$ above are, in this sense, special
+    cases of the general toroidal symmetry structure of integrable systems,
+    made visible only after a nontrivial (often nonlocal, momentum-dependent)
+    change of variables.
+\end{example}
+
+\begin{example}[Electromagnetic duality]
+Source-free Maxwell's equations,
+\[
+\nabla\!\cdot\!\bm E=0,\quad \nabla\!\cdot\!\bm B=0,\quad \nabla\times \bm E=-\dot{\bm B},\quad \nabla\times\bm B=\dot{\bm E},
+\]
+are invariant under the duality rotation $(\bm E,\bm B)\to(\bm E\cos\theta+\bm
+    B\sin\theta,\ -\bm E\sin\theta+\bm B\cos\theta)$. This is a genuine
+    one-parameter (in fact $U(1)$) symmetry of the equations of motion. It is
+    not a manifest symmetry of the standard vector-potential Lagrangian
+    $\mathcal{L}=-\tfrac14 F_{\mu\nu}F^{\mu\nu}$, because a general duality-rotated
+    field strength cannot be written as $\dd A$ for a single, ordinary gauge
+    potential $A_\mu$ without enlarging the field content (e.g., introducing a
+    second, dual potential, at the cost of manifest locality or manifest
+    Lorentz covariance). Here the extra symmetry of the field equations is, in
+    a precise sense, obstructed from being manifest at the level of the
+    conventional action.
+\end{example}
+
+\begin{remark}[Noether's second theorem: the opposite phenomenon]
+For completeness we note the converse-flavoured phenomenon that occurs for
+    \emph{local} (gauge) symmetries, governed by Noether's \emph{second}
+    theorem: an infinite-dimensional, spacetime-dependent symmetry of the
+    Lagrangian (e.g., $A_\mu\to A_\mu+\partial_\mu\lambda(x)$) does not produce
+    a conservation law of the usual kind but instead an off-shell
+    identity/constraint among the equations of motion themselves (e.g. the
+    Bianchi identity $\partial_{[\mu}F_{\nu\rho]}=0$, or the contracted Bianchi
+    identity $\nabla^\mu G_{\mu\nu}\equiv0$ in general relativity). This shows
+    that the relationship between Lagrangian symmetry and EOM structure is
+    genuinely two-sided: global symmetries of $L$ can be smaller than
+    symmetries of the EOM (this section's main theme), while local symmetries
+    of $L$ manifest themselves as identities/constraints on the EOM rather than
+    as extra conserved charges.
+\end{remark}
+
+\section{From Equations of Motion to a Particular Solution: Explicit Narrowing by Data}
+\label{sec:explicit}
+
+\subsection{The stabilizer of a solution}
+
+Suppose $G_{EOM}g$ acts on the solution space $\mathcal S$ of $[L]_a=0$
+(Section~\ref{sec:LvsEOM} guarantees this action is well defined at least for
+$g\in G_L$, and by definition for all of $G_{EOM}g$). A single solution
+$q(t)\in\mathcal S$, picked out by initial data $(q(t_0),\dot q(t_0))$ or by
+boundary data, need not be a fixed point of this action. Its symmetry is the
+\emph{stabilizer subgroup}
+\[
+    G_{sol}=\mathrm{Stab}_{G_{EOM}g}(q) = \{ g\in G_{EOM}g : g\cdot q = q \} \subseteq G_{EOM} .
+\]
+Generically $G_{sol} \subsetneq G_{EOM}g$: the group moves the given
+solution to a \emph{different} member of $\mathcal S$ (still a valid solution —
+the equations do not care — but a different trajectory), rather than mapping it
+to itself.
+
+\subsection{Examples}
+
+\begin{example}[Central force problem]
+The Kepler/central-force EOM has full $SO(3)$ symmetry
+    (Section~\ref{sec:hidden} showed it is in fact larger still). A single
+    orbit, however, has a definite, fixed angular momentum vector $\bm L = \bm
+    r\times\bm p\neq 0$, determined by the initial position and velocity, and
+    lies entirely in the plane orthogonal to $\bm L$. The stabilizer of this
+    orbit inside $SO(3)$ is only the $SO(2)$ subgroup of rotations about the
+    $\bm L$ axis (together with, for a closed orbit, possibly a discrete
+    reflection). The other two rotational generators move the orbital plane to
+    a different plane, i.e. map this solution to a genuinely different
+    solution. Nothing is wrong with the dynamics; the reduction from $SO(3)$ to
+    $SO(2)$ is entirely a consequence of the choice of initial data.
+\end{example}
+
+\begin{example}[Free particle]
+$\ddot x=0$ is invariant under all spatial translations and Galilean boosts. A
+    single trajectory $x(t)=x_0+v_0t$ is left invariant only by time
+    translations (and, trivially, the identity among boosts/translations); a
+    spatial translation or a boost maps it to a different straight line.
+    Symmetric \emph{initial data} — e.g. $x_0=0,\,v_0=0$, the particle
+    permanently at rest at the origin — is the unique choice whose stabilizer
+    is the full translation-and-boost group; any other data breaks it
+    explicitly.
+\end{example}
+
+\begin{example}[Diffusion equation]
+The heat equation $\partial_t u = D\,\partial_x^2 u$ on $mathbf R$ is invariant
+    under spatial translations, parity, and the parabolic scaling $x\to\lambda
+    x,\ t\to\lambda^2 t$. An initial condition concentrated at the origin and
+    even, $u(x,0)=\delta(x)$, yields a solution $u(x,t)$ that remains even in
+    $x$ and self-similar under the parabolic scaling for all $t>0$ — the full
+    symmetry \emph{compatible with an initial time slice} is preserved. A
+    generic asymmetric initial condition (say, a delta function centered at
+    $x=1$) produces a solution with no residual translation or parity symmetry
+    at any later time. In both cases the equation itself is untouched; only the
+    realized solution's symmetry depends on the data.
+\end{example}
+
+\subsection{The contingent character of this narrowing}
+
+Two features distinguish this mechanism, and both will be denied in Section~\ref{sec:SSB}:
+\begin{itemize}
+\item \textbf{Removability.} Choosing symmetric data (when the symmetric
+    configuration is dynamically consistent and stable) restores a symmetric
+        solution. There is no obstruction internal to the dynamics.
+\item \textbf{Restorability under averaging.} The full orbit $G_{EOM}g \cdot q
+    = \{g\cdot q: g\in G_{EOM}g\}$ of all data-related solutions is, as a
+        \emph{set} (or as a statistical ensemble/moduli space), fully
+        $G_{EOM}$-symmetric. The asymmetry lives only in the choice of \emph{one
+        representative}, not in the dynamics.
+\end{itemize}
+
+\section{Spontaneous Symmetry Breaking}
+\label{sec:SSB}
+
+\subsection{What is qualitatively different}
+
+Spontaneous symmetry breaking (SSB) is often first described using the same
+language as Section~\ref{sec:explicit} — ``the equations are symmetric but the
+solution is not'' — and this can obscure the fact that SSB is mechanistically a
+different phenomenon. In SSB, the asymmetry does \emph{not} need to be supplied
+through the boundary or initial data: even fully symmetric data typically
+\emph{fails} to select the symmetric configuration, because that configuration,
+although it does solve the equations of motion and does respect the full
+symmetry, is \emph{dynamically or thermodynamically unstable} — it is a local
+maximum or saddle point of the energy (or free energy) rather than a minimum.
+The system is driven — by an arbitrarily small perturbation, by quantum or
+thermal fluctuations, or simply by the requirement of stability — onto one
+member of a continuous or discrete \emph{degenerate family of asymmetric
+minima}, and, in a system with infinitely many degrees of freedom, is unable to
+tunnel or fluctuate back out of it.
+
+\subsection{The prototype: complex scalar field with a Mexican-hat potential}
+
+Consider a complex scalar field $\phi(x)$ with Lagrangian density
+\[
+\mathcal{L} = \partial_\mu\phi^*\partial^\mu\phi - V(|\phi|), \qquad
+V(|\phi|) = -\mu^2|\phi|^2 + \lambda|\phi|^4, \qquad \mu^2,\lambda>0 .
+\]
+$\mathcal{L}$ (and the resulting field equations) is manifestly invariant under the
+global phase rotation $\phi\to e^{i\alpha}\phi$, a $U(1)$ symmetry. Static,
+spatially uniform, minimum-energy configurations minimize $V$; setting 
+$dV/d|\phi|=0$ gives
+\[
+|\phi| = v \equiv \sqrt{\mu^2/2\lambda}, \qquad \arg\phi \ \text{arbitrary}.
+\]
+The minimum is degenerate along a circle $|\phi|=v$ — the \emph{vacuum
+manifold} $\mathcal M \cong U(1)$. The symmetric configuration $\phi=0$ is a
+solution of the field equations and is $U(1)$-invariant, but it sits at a
+\emph{local maximum} of $V$ (since $\mu^2>0$), so it is unstable: any
+infinitesimal perturbation grows and drives the field to the circle of minima.
+Whichever point of the circle the system settles on, say $\phi = v$ (real,
+$\theta_0=0$), that particular vacuum is left invariant by \emph{no} continuous
+subgroup of $U(1)$ (other than the identity) — the symmetry is completely,
+spontaneously broken.
+
+\begin{definition}[Spontaneous symmetry breaking]
+Let a theory have exact symmetry group $G$ (of the Lagrangian and hence the
+    EOM). The theory exhibits SSB down to $H\subseteq G$ if the stable,
+    physically realized ground state(s)/vacuum manifold $\mathcal M$ has
+    stabilizer $H = \mathrm{Stab}_G(\phi_{\text{vac}}) \subsetneq G$ for a generic
+    point $\phi_{\text{vac}}\in\mathcal M$, with the degenerate vacua
+    parametrized by the coset space $G/H \cong \mathcal M$.
+\end{definition}
+
+This should be contrasted with \emph{explicit} breaking, in which a term that
+is not $G$-invariant is added directly to $\mathcal{L}$ itself (e.g.
+$\epsilon(\phi+\phi^*)$ above): there $G$ is not even a symmetry of the
+equations of motion to begin with, the minimum is generically unique, and there
+is nothing ``spontaneous'' about the resulting asymmetry.
+
+\subsection{Goldstone's theorem}
+
+Write $\phi = (v+\rho)\,e^{i\theta/v}$ near the chosen vacuum, with $\rho,\theta$ real fields. Expanding $V$,
+\[
+V = \mu^2\rho^2 + O(\rho^3), 
+\]
+with \emph{no} potential-energy dependence on $\theta$ at all (moving along the
+vacuum circle costs zero energy, by construction, since $\mathcal M$ is a
+manifold of degenerate minima). Consequently $\rho$ is a massive mode
+($m_\rho^2\propto\mu^2$), while $\theta$ is an exactly massless mode: a
+\emph{Nambu--Goldstone boson}. This is the content of Goldstone's theorem:
+
+\begin{theorem}[Goldstone, 1961; Nambu, 1960]
+When a continuous global symmetry group $G$ is spontaneously broken to a
+    subgroup $H$, there appears one massless (Nambu--)Goldstone mode for each
+    broken generator, i.e. $\dim(G/H)$ massless modes, corresponding to the
+    flat directions of the potential tangent to the degenerate vacuum manifold
+    $\mathcal M \cong G/H$.
+\end{theorem}
+
+\subsection{Examples of continuous SSB}
+
+\begin{itemize}
+\item \textbf{Ferromagnetism.} The Heisenberg Hamiltonian $\mathcal{H} =
+    -J\sum_{\langle ij\rangle}\bm S_i\!\cdot\!\bm S_j$ ($J>0$) is exactly
+        $O(3)$-invariant (global spin rotations). Below the Curie temperature
+        the equilibrium state carries a spontaneous magnetization $\bm M\neq0$
+        pointing in some (spontaneously chosen) direction, breaking $O(3)\to
+        O(2)$. The Goldstone modes are spin waves (magnons), gapless in the
+        isotropic limit.
+
+\item \textbf{Crystallization.} A liquid's Hamiltonian is invariant under the
+    full continuous Euclidean group (translations and rotations). A crystal's
+        density is periodically modulated, breaking continuous translations
+        down to a discrete lattice subgroup and continuous rotations down to
+        the crystal's point group. The Goldstone modes are the acoustic phonon
+        branches.
+
+\item \textbf{Superfluidity / Bose--Einstein condensation.} The $U(1)$ symmetry
+    associated with particle-number phase, $\hat\psi \to
+        e^{i\alpha}\hat\psi$, is spontaneously broken by a nonzero condensate
+        order parameter $\langle\hat\psi\rangle\neq0$. The Goldstone mode is
+        the phonon (Bogoliubov) excitation.
+
+\item \textbf{Chiral symmetry breaking in QCD.} In the limit of massless up and
+    down quarks, the QCD Lagrangian has an (approximate) chiral $SU(2)_L\times
+        SU(2)_R$ symmetry. The quark condensate $\langle\bar q q\rangle\neq0$
+        spontaneously breaks this to the diagonal (vector) $SU(2)_V$ (isospin).
+        The pions are the corresponding (pseudo-)Goldstone bosons; because the
+        quark masses are small but not exactly zero, chiral symmetry is also
+        \emph{explicitly} broken a little, giving the pions their small but
+        nonzero mass — a clean illustration of explicit and spontaneous
+        breaking operating together.
+\end{itemize}
+
+\subsection{Discrete symmetry breaking}
+
+Not every symmetry is continuous. The Ising Hamiltonian $\mathcal{H}=-J\sum_{\langle
+ij\rangle}s_is_j$ is invariant under the global $\mathbb Z_2$ symmetry $s_i\to
+-s_i$ for all $i$. Below the critical temperature, two degenerate,
+symmetry-related equilibrium states exist (magnetization up or down); the
+system spontaneously selects one. Since $G/H$ is now a two-point discrete set
+rather than a continuous manifold, there is no Goldstone boson (Goldstone's
+theorem applies only to continuous symmetries); instead, the relevant
+excitations are domain walls (kinks), topological defects interpolating between
+the two degenerate vacua.
+
+\subsection{The Landau free-energy viewpoint}
+
+The same structure appears in Landau's mean-field theory of phase transitions.
+One posits a free energy $F(m,T)$ for an order parameter $m$, constrained by
+the symmetry $G$ of the underlying Hamiltonian to be a $G$-invariant function
+of $m$ (e.g. $F(m)=F(-m)$ for Ising-type order parameters, or $F$ a function of
+$|\phi|$ alone for a $U(1)$ order parameter). A standard truncated expansion,
+\[
+F(m,T) = a(T)\,m^2 + b\,m^4 + \cdots, \qquad b>0,
+\]
+with $a(T)$ changing sign at the critical temperature $T_c$, reproduces exactly
+the structure of Section~4.2: for $a(T)>0$ ($T>T_c$) the unique, symmetric
+minimum $m=0$ is stable; for $a(T)<0$ ($T<T_c$) it becomes unstable and the
+true minima sit at $m=\pm\sqrt{-a/2b}\neq0$ (or on a circle/sphere for a
+continuous order parameter), even though $F$ itself is fully $G$-invariant at
+every temperature.
+
+\subsection{Gauge symmetry: a genuine subtlety}
+
+When the broken symmetry is \emph{local} (gauged) rather than global, the naive Goldstone-theorem story requires care.
+
+\begin{itemize}
+\item \textbf{Elitzur's theorem.} A strictly local gauge symmetry cannot be
+    spontaneously broken in the operational sense above: in a properly
+        gauge-fixed path integral (compact gauge group), the expectation value
+        of any gauge-\emph{variant} local operator vanishes exactly, order by
+        order, so there is no gauge-invariant sense in which
+        ``$\langle\phi\rangle\neq0$'' by itself signals broken gauge symmetry.
+        What is physical is not the value of $\phi$ in some gauge, but
+        gauge-invariant data: the mass spectrum, gauge-invariant correlators,
+        and the pattern of unbroken global symmetries.
+\item \textbf{The Higgs mechanism.} The colloquial statement ``the gauge
+    symmetry is spontaneously broken'' is best understood operationally through
+        the \emph{unitary gauge} construction. Take the abelian Higgs model,
+\[
+\mathcal{L} = -\tfrac14 F_{\mu\nu}F^{\mu\nu} + |D_\mu\phi|^2 - V(|\phi|), \qquad D_\mu = \partial_\mu - i e A_\mu ,
+\]
+with $V$ as above. Writing $\phi=(v+\rho)e^{i\theta/v}$ and using the gauge
+        freedom to set $\theta=0$ (unitary gauge), the covariant derivative
+        term produces
+\[
+|D_\mu\phi|^2 \supset e^2v^2 A_\mu A^\mu ,
+\]
+a mass term for the gauge field, $m_A = ev$. The would-be Goldstone mode
+        $\theta$ has disappeared from the physical spectrum; its single degree
+        of freedom reappears as the new longitudinal polarization of the
+        now-massive vector field (2 transverse $\to$ 3 polarizations), so the
+        total count of propagating degrees of freedom is unchanged. The
+        gauge-invariant statement of what happened is: \emph{the gauge boson
+        acquires a mass and a longitudinal polarization, and the physical
+        spectrum contains one massive scalar ($\rho$) instead of a massless
+        scalar plus a massless gauge boson.}
+\item \textbf{Electroweak symmetry breaking} follows the same pattern with
+    $SU(2)_L\times U(1)_Y \to U(1)_{\text{em}}$: three of the four gauge
+        generators are ``broken'' in this operational sense (their Goldstone
+        partners are eaten by $W^\pm,Z^0$, which become massive), while the
+        combination corresponding to electric charge remains an exact, unbroken
+        gauge symmetry, leaving the photon massless.
+\end{itemize}
+
+\subsection{The necessity of the thermodynamic/infinite-volume limit}
+
+For a system with \emph{finitely many} degrees of freedom, true SSB does not
+occur, even when the potential has the double-well/Mexican-hat shape. A single
+quantum particle in a symmetric double-well potential does not spontaneously
+localize in one well: quantum tunneling mixes the two classically degenerate
+configurations, and the true ground state is the symmetric (or antisymmetric)
+combination, restoring the symmetry exactly. SSB in the strict sense requires
+the \emph{thermodynamic limit} (infinite volume, or infinitely many degrees of
+freedom): only then does the tunneling amplitude between distinct vacua vanish
+(formally, the distinct vacua generate unitarily inequivalent representations
+of the canonical (anti)commutation relations — distinct superselection
+sectors), so that a system prepared in one vacuum stays there. This is also the
+content of the statement, familiar from statistical mechanics, that a genuine
+phase transition (a non-analyticity of the free energy) can only occur in the
+thermodynamic limit.
+
+Equivalently, in the language of ergodic theory: below the transition, the
+dynamics undergoes \emph{ergodicity breaking} — the accessible phase space (or
+Hilbert space) splits into disjoint sectors, each respecting only $H\subsetneq
+G$, and time (or ensemble) averages taken within a single sector do not
+reproduce the fully $G$-symmetric answer, even though the underlying dynamics
+is exactly $G$-symmetric.
+
+\section{Synthesis: Two Inclusions, Two Mechanisms of Narrowing}
+The essential logical point, worth stating explicitly, is this: \textbf{one can
+always choose perfectly symmetric initial or boundary data, and the symmetric
+field configuration ($\phi=0$ in the scalar example, $m=0$ in the Landau
+example, $\bm M=0$ in the ferromagnet) is genuinely a solution of the equations
+of motion, respecting the full symmetry.} What distinguishes SSB from the
+phenomenon of Section~\ref{sec:explicit} is that this symmetric solution is
+\emph{dynamically unstable} (a local maximum or saddle of the energy/free
+energy rather than a minimum), so it is not the state that is physically
+realized or thermodynamically stable; the system is driven onto one of a
+continuous or discrete family of degenerate, asymmetric, stable configurations,
+and — crucially, only in the presence of infinitely many degrees of freedom —
+cannot fluctuate or tunnel back to a symmetric superposition.
+Section~\ref{sec:explicit}'s narrowing is about \emph{which member of an
+already-degenerate family of equally good, equally stable solutions you
+happened to pick by fixing data}; Section~\ref{sec:SSB}'s narrowing is about
+the fact that \emph{the symmetric configuration was never a viable stable state
+to begin with}, so no choice of symmetric data could have preserved it.
+
+\section{Worked Appendix: Full Mass Spectrum Near a Broken Vacuum}
+
+To make the Goldstone counting fully explicit, return to $V(\phi) =
+-\mu^2|\phi|^2+\lambda|\phi|^4$ and write $\phi = \phi_1+i\phi_2$ in real
+components. The Hessian of $V$ at the symmetric point $\phi=0$ is
+\[
+\frac{\partial^2 V}{\partial\phi_i\partial\phi_j}\Big|_{0} = -2\mu^2\,\delta_{ij},
+\]
+negative definite: $\phi=0$ is a maximum in every direction, confirming its
+instability directly (not merely along one special direction). At the true
+vacuum $\phi_1=v,\ \phi_2=0$,
+\[
+\frac{\partial^2V}{\partial\phi_1^2}\Big|_{\text{vac}} = 8\lambda v^2 = 4\mu^2 \;(\text{massive, } \rho \text{ direction}), \qquad
+\frac{\partial^2V}{\partial\phi_2^2}\Big|_{\text{vac}} = 0 \;(\text{massless, Goldstone direction}),
+\]
+with vanishing off-diagonal term. This is the same content as the
+polar-coordinate computation of Section~5.3, presented in Cartesian form:
+exactly one flat (massless) direction for the one broken generator of the
+one-dimensional group $U(1)$, consistent with $\dim(G/H) = \dim U(1) -
+\dim\{e\} = 1$.
+
+For a general theory with symmetry group $G$ spontaneously broken to $H$, the
+same computation — the Hessian of the potential restricted to the tangent space
+of the vacuum manifold $\mathcal M \cong G/H$ vanishing identically, because
+$\mathcal M$ is by definition a manifold of degenerate minima — gives the
+general Goldstone count $\dim G - \dim H$, matching the theorem of Section~5.3.
+
+\section{Concluding Remarks}
+
+The statement that ``symmetry of the equations of motion may be wider than that
+of the Lagrangian, and symmetry of a solution may be narrower than that of the
+equations, due to fixed initial and/or boundary conditions'' packages two
+independent facts, both traced to first principles above: the forward direction
+of Noether's theorem does not have an automatic converse at the level of
+manifest, geometric symmetry (Section~\ref{sec:LvsEOM}), and any group action
+on a solution space generically has nontrivial-but-proper stabilizers once a
+particular orbit is singled out by data (Section~\ref{sec:explicit}).
+Spontaneous symmetry breaking sharpens this second point into something much
+stronger and more physically consequential: a narrowing of symmetry that
+survives even the most symmetric possible choice of data, rooted instead in the
+instability of the symmetric extremum and, for genuine phase transitions, in
+the thermodynamic limit (Section~\ref{sec:SSB}). Keeping these three levels —
+Lagrangian, equations of motion, realized state — and the two distinct
+mechanisms of narrowing conceptually separate is what allows one to correctly
+diagnose, in any given physical system, \emph{why} a symmetry that is
+manifestly present in the dynamics fails to be manifest in what is actually
+observed.
 
-These statements are related but not equivalent.
-
-A particularly elementary example is provided by Newtonian mechanics.  The equations for a free particle,
-[
-m\ddot{\mathbf{x}}=0,
-]
-are invariant under spatial rotations.  But the solution
-[
-\mathbf{x}(t)=\mathbf{x}_0+\mathbf{v}_0t
-]
-is not generally rotationally invariant.  The equations possess $SO(3)$ symmetry, whereas a solution with specified nonzero velocity selects a preferred direction.
-
-The situation becomes even clearer when initial conditions are regarded as part of the physical problem:
-[
-\mathbf{x}(0)=\mathbf{x}_0,\qquad
-\dot{\mathbf{x}}(0)=\mathbf{v}_0.
-]
-Unless $\mathbf{x}_0$ and $\mathbf{v}_0$ themselves are invariant under a rotation, the initial value problem has a smaller symmetry group than the differential equation.
-
-Conversely, the equations of motion may possess symmetries which are not manifest in a chosen Lagrangian formulation.  Different Lagrangians may generate identical Euler--Lagrange equations, and an equation can possess accidental or dynamical symmetries not apparent as point transformations of a particular Lagrangian.
-
-The purpose of this paper is to construct a coherent framework for these distinctions.
-
----
-
-# 2. What Is a Symmetry?
-
-Let $\mathcal{C}$ denote a space of configurations and let a group $G$ act on it:
-[
-\Phi\mapsto g\cdot\Phi,\qquad g\in G.
-]
-
-The precise meaning of $\Phi$ depends on the problem.  It may be a particle trajectory, a field configuration, a point in phase space, a quantum state, or an element of some more abstract state space.
-
-A symmetry is not an intrinsic property of $G$ alone.  It is a property of the triple
-[
-(G,\mathcal{O},\mathcal{A}),
-]
-where $\mathcal{O}$ is the object under consideration and $\mathcal{A}$ specifies how $G$ acts on it.
-
-The object $\mathcal{O}$ may be:
-
-[
-\begin{array}{c}
-\text{Lagrangian}
-[1mm]
-\downarrow\
-\text{action}
-[1mm]
-\downarrow\
-\text{equations of motion}
-[1mm]
-\downarrow\
-\text{solution space}
-[1mm]
-\downarrow\
-\text{particular solution}
-[1mm]
-\downarrow\
-\text{initial/boundary-value problem}.
-\end{array}
-]
-
-At each level, the relevant symmetry group may change.
-
-It is therefore useful to introduce the notation
-[
-G_L,\qquad G_S,\qquad G_E,\qquad G_{\rm Sol},\qquad
-G_{\rm BC},\qquad G_\Phi,
-]
-for the symmetry groups of the Lagrangian, action, equations, boundary conditions, and a particular configuration $\Phi$, respectively.
-
-No universal equality among these groups exists.
-
----
-
-# 3. Symmetry of the Lagrangian and Symmetry of the Action
-
-Consider a classical system with generalized coordinates $q^i(t)$ and Lagrangian
-[
-L(q,\dot q,t).
-]
-
-A transformation
-[
-q^i\longrightarrow q^{\prime i}
-]
-is often called a symmetry of the Lagrangian if
-[
-L(q',\dot q',t')=L(q,\dot q,t).
-]
-
-This definition is, however, unnecessarily restrictive.
-
-The physically relevant object in the variational principle is the action
-[
-S[q]=\int_{t_1}^{t_2}L(q,\dot q,t),dt.
-]
-
-If under an infinitesimal transformation
-[
-\delta q^i=\epsilon X^i(q,t),
-]
-the Lagrangian changes by a total derivative,
-[
-\delta L=\epsilon\frac{dF}{dt},
-]
-then
-[
-\delta S
-========
-
-\epsilon\left[F(t_2)-F(t_1)\right].
-]
-
-For fixed endpoints, or under suitable boundary conditions, the variational equations are unchanged.
-
-Thus the fundamental condition for a variational symmetry is generally
-[
-\boxed{\delta L=\frac{dF}{dt}}.
-]
-
-This is the setting of Noether's theorem.
-
-For example, under a Galilean boost,
-[
-\mathbf{x}\rightarrow\mathbf{x}+\mathbf{v}t,
-]
-the free-particle Lagrangian
-[
-L=\frac{m}{2}\dot{\mathbf{x}}^2
-]
-changes as
-[
-L\rightarrow
-L+m\mathbf{v}\cdot\dot{\mathbf{x}}
-+\frac{m}{2}\mathbf{v}^2,
-]
-or
-[
-\delta L
-========
-
-\frac{d}{dt}
-\left(
-m\mathbf{v}\cdot\mathbf{x}
-+\frac{m}{2}\mathbf{v}^2t
-\right).
-]
-
-Therefore the action is quasi-invariant even though the Lagrangian is not strictly invariant.
-
-This elementary example already shows that
-[
-G_L\subseteq G_S
-]
-if $G_L$ denotes strict invariance of the chosen Lagrangian while $G_S$ denotes invariance of the action up to boundary terms.
-
----
-
-# 4. Symmetry of the Euler--Lagrange Equations
-
-The Euler--Lagrange equations are
-[
-\frac{d}{dt}
-\frac{\partial L}{\partial\dot q^i}
------------------------------------
-
-\frac{\partial L}{\partial q^i}=0.
-]
-
-Let us denote them abstractly by
-[
-E_i[q]=0.
-]
-
-A transformation is a symmetry of the equations if
-[
-E[q]=0
-\quad\Longrightarrow\quad
-E[g\cdot q]=0.
-]
-
-Equivalently, the transformation maps solutions into solutions.
-
-The equation symmetry group may be larger than the symmetry group of a particular Lagrangian representation:
-[
-G_L\subseteq G_E,
-]
-although the precise relation depends upon the definitions adopted.
-
-There are several reasons for this enlargement.
-
-## 4.1 Total derivatives and equivalent Lagrangians
-
-If
-[
-L'=L+\frac{dF}{dt},
-]
-then
-[
-E_i[L']=E_i[L].
-]
-
-Thus a symmetry may be hidden by one representative of an equivalence class of Lagrangians and manifest in another.
-
-The physically relevant object is therefore often not a single Lagrangian but an equivalence class
-[
-[L]
-===
-
-\left{
-L+\frac{dF}{dt}
-\right}.
-]
-
----
-
-## 4.2 Multiplication of equations
-
-The equations
-[
-E(q)=0
-]
-and
-[
-M(q,\dot q,t)E(q)=0,
-]
-where $M\neq0$, have the same solution set.
-
-Their transformation properties may nevertheless appear different.
-
-This illustrates an important general principle:
-
-> The symmetry of a differential expression need not be identical to the symmetry of its zero set.
-
-In physical applications one must therefore distinguish the symmetry of the equation as an algebraic or differential operator from the symmetry of the set of solutions.
-
----
-
-## 4.3 Accidental symmetries
-
-A particular equation may possess symmetries not shared by a more general theory.
-
-The isotropic harmonic oscillator,
-[
-m\ddot{\mathbf{x}}+m\omega^2\mathbf{x}=0,
-]
-has the obvious rotational symmetry $SO(3)$ in three dimensions.  But its degeneracy structure is larger than one might infer from spatial rotations alone.  The oscillator possesses hidden dynamical symmetry associated with $U(3)$ in the quantum problem.
-
-Similarly, the Kepler problem has the conserved Runge--Lenz vector,
-[
-\mathbf{A}
-==========
-
-\mathbf{p}\times\mathbf{L}
--mk\frac{\mathbf{r}}{r},
-]
-which leads for bound states to the enlarged dynamical symmetry
-[
-SO(4).
-]
-
-These are not ordinary geometric symmetries of physical space.  They are examples of dynamical symmetries acting naturally on phase space or on the solution space.
-
----
-
-# 5. Lie Symmetries of Differential Equations
-
-The difference between Lagrangian and equation symmetries becomes particularly transparent in Lie's theory of differential equations.
-
-Consider
-[
-F\left(
-x,u,u_x,u_{xx},\ldots
-\right)=0.
-]
-
-An infinitesimal transformation
-[
-x^\mu\rightarrow x^\mu+\epsilon\xi^\mu,
-\qquad
-u^a\rightarrow u^a+\epsilon\eta^a
-]
-is generated by
-[
-X
-=
-
-\xi^\mu\frac{\partial}{\partial x^\mu}
-+
-\eta^a\frac{\partial}{\partial u^a}.
-]
-
-The transformation is a Lie symmetry if its appropriate prolongation satisfies
-[
-\operatorname{pr}^{(n)}X(F)\big|_{F=0}=0.
-]
-
-This criterion concerns the differential equation directly.  It makes no reference to the existence of a Lagrangian.
-
-Thus there exist:
-
-\begin{enumerate}
-\item equations with no conventional Lagrangian formulation but with large Lie symmetry groups;
-\item Lagrangian symmetries;
-\item non-Noether equation symmetries;
-\item generalized and higher symmetries;
-\item nonlocal symmetries.
-\end{enumerate}
-
-The inverse problem of the calculus of variations asks whether a given system of differential equations can be derived from a variational principle.  The answer is nontrivial and is governed by the Helmholtz conditions.
-
-Therefore
-
-[
-\boxed{
-\text{equation symmetry is conceptually more general than variational symmetry}.
-}
-]
-
----
-
-# 6. Symmetry of the Solution Space and Symmetry of an Individual Solution
-
-Suppose the equations of motion possess a group $G$:
-[
-E[\Phi]=0
-\quad\Rightarrow\quad
-E[g\Phi]=0.
-]
-
-Then $G$ acts on the solution space $\mathcal{S}$.
-
-A particular solution $\Phi$ need not be invariant under $G$.
-
-Its symmetry group is the stabilizer subgroup
-[
-G_\Phi
-======
-
-{g\in G\mid g\Phi=\Phi}.
-]
-
-Usually,
-[
-G_\Phi\subset G.
-]
-
-For example, the Laplace equation
-[
-\nabla^2\phi=0
-]
-in $\mathbb{R}^3$ is rotationally invariant.
-
-The solution
-[
-\phi=\frac{q}{r}
-]
-is also rotationally invariant.
-
-But the dipole solution
-[
-\phi=
-\frac{\mathbf{p}\cdot\mathbf{r}}{r^3}
-]
-is invariant only under rotations about the axis defined by $\mathbf{p}$.
-
-The equation has symmetry
-[
-SO(3),
-]
-while the generic dipole solution has only
-[
-SO(2).
-]
-
-The reduction of symmetry occurs because the solution itself contains additional structure.
-
-This observation can be formulated geometrically.  The solution space is decomposed into group orbits:
-[
-\mathcal{O}_\Phi
-================
-
-{g\Phi\mid g\in G}.
-]
-
-The orbit is isomorphic, under suitable assumptions, to
-[
-\mathcal{O}*\Phi\simeq G/G*\Phi.
-]
-
-Thus the pattern of broken symmetry is encoded in the quotient space
-[
-G/H,
-]
-where
-[
-H=G_\Phi
-]
-is the subgroup preserved by the solution.
-
-This construction later becomes central in spontaneous symmetry breaking.
-
----
-
-# 7. Initial Conditions as Symmetry Breaking Data
-
-Consider a dynamical equation
-[
-\ddot{\mathbf{x}}=0.
-]
-
-The equation is invariant under translations, rotations, Galilean boosts, and time translations.
-
-Now impose
-[
-\mathbf{x}(0)=\mathbf{x}_0,
-\qquad
-\dot{\mathbf{x}}(0)=\mathbf{v}_0.
-]
-
-The solution is
-[
-\mathbf{x}(t)
-=============
-
-\mathbf{x}_0+\mathbf{v}_0t.
-]
-
-The symmetry of the initial value problem is the subgroup of transformations preserving the initial data.
-
-If
-[
-\mathbf{x}_0=0,\qquad
-\mathbf{v}_0=0,
-]
-the solution is rotationally invariant.
-
-If
-[
-\mathbf{v}_0\neq0,
-]
-the vector $\mathbf{v}_0$ defines a preferred direction, reducing
-[
-SO(3)\rightarrow SO(2).
-]
-
-If both $\mathbf{x}_0$ and $\mathbf{v}_0$ are generic and nonparallel, the residual continuous rotational symmetry may disappear altogether.
-
-The important point is that nothing has happened to the dynamical law:
-[
-m\ddot{\mathbf{x}}=0.
-]
-
-The reduction is entirely due to the choice of data.
-
-Hence one must distinguish
-
-[
-\boxed{
-\text{symmetry breaking by conditions}
-}
-]
-from
-[
-\boxed{
-\text{symmetry breaking of the dynamical law}.
-}
-]
-
-The former is not normally called spontaneous symmetry breaking in the strict field-theoretic sense, although the mathematical structure may be similar.
-
----
-
-# 8. Boundary Conditions and the Symmetry of Physical Problems
-
-Boundary conditions are frequently treated as secondary details.  From the point of view of symmetry, however, they are part of the definition of the physical problem.
-
-Suppose
-[
-\nabla^2\phi=0
-]
-in a domain $\Omega$.
-
-The equation may possess the Euclidean symmetry group $E(3)$, but the boundary-value problem depends on
-
-[
-\Omega
-]
-and on
-[
-\phi|_{\partial\Omega}.
-]
-
-A spherical domain with constant boundary value preserves rotational symmetry.
-
-A rectangular domain does not.
-
-The local equation is unchanged:
-[
-\nabla^2\phi=0.
-]
-
-But the physical boundary-value problem has changed.
-
-Thus
-[
-G_{\rm problem}
-===============
-
-G_E\cap G_\Omega\cap G_{\rm BC}.
-]
-
-This is a useful general formula.
-
-For a field theory one may similarly write schematically
-[
-G_{\rm physical}
-================
-
-G_{\rm equations}
-\cap
-G_{\rm manifold}
-\cap
-G_{\rm topology}
-\cap
-G_{\rm boundary}
-\cap
-G_{\rm state}.
-]
-
-The symmetry actually realized in an experiment may therefore be much smaller than the symmetry suggested by the local equations alone.
-
----
-
-# 9. A Simple Example: The Wave Equation in a Cavity
-
-Consider
-[
-\frac{\partial^2 u}{\partial t^2}
--c^2\nabla^2u=0.
-]
-
-In infinite space this equation is invariant under spatial translations and rotations.
-
-Now place the system in a rectangular cavity,
-[
-0<x<L_x,\qquad
-0<y<L_y,\qquad
-0<z<L_z,
-]
-with
-[
-u|_{\partial\Omega}=0.
-]
-
-Translations are no longer symmetries because they do not preserve the domain.
-
-If
-[
-L_x\neq L_y\neq L_z,
-]
-most rotations are also eliminated.
-
-The normal modes become
-[
-u_{n_xn_yn_z}
-=============
-
-A
-\sin\frac{n_x\pi x}{L_x}
-\sin\frac{n_y\pi y}{L_y}
-\sin\frac{n_z\pi z}{L_z}
-\cos(\omega t+\delta),
-]
-where
-[
-\omega^2
-========
-
-c^2\pi^2
-\left(
-\frac{n_x^2}{L_x^2}
-+
-\frac{n_y^2}{L_y^2}
-+
-\frac{n_z^2}{L_z^2}
-\right).
-]
-
-Thus the spectrum reflects the symmetry of the complete boundary-value problem rather than merely the local differential equation.
-
-This principle is fundamental in condensed matter physics, cavity quantum electrodynamics, finite-volume quantum field theory, and general relativity.
-
----
-
-# 10. Explicit, Induced, and Spontaneous Symmetry Reduction
-
-It is useful to distinguish at least three mechanisms.
-
-## 10.1 Explicit symmetry breaking
-
-The equations or action themselves fail to possess the symmetry.
-
-For example,
-[
-L
-=
-
-## \frac{1}{2}(\partial_\mu\phi)^2
-
-\frac{1}{2}m^2\phi^2
--h\phi
-]
-is not invariant under
-[
-\phi\rightarrow-\phi
-]
-when
-[
-h\neq0.
-]
-
-The symmetry is explicitly broken by the term $h\phi$.
-
----
-
-## 10.2 Symmetry reduction by external conditions
-
-Suppose the equations are invariant, but the boundary or initial data are not.
-
-Then
-[
-G_{\rm equations}\supset G_{\rm problem}.
-]
-
-This is common in ordinary mechanics.
-
-A uniform gravitational field provides another example.  The free-space equations of Newtonian mechanics may be rotationally invariant, but the vector
-[
-\mathbf{g}
-]
-selects a direction.
-
-One may regard $\mathbf{g}$ either as an external background or as part of a larger dynamical system.  The interpretation of symmetry reduction depends on which degrees of freedom are included.
-
----
-
-## 10.3 Spontaneous symmetry breaking
-
-In spontaneous symmetry breaking, the fundamental dynamical laws remain invariant, and the relevant boundary conditions are, in an appropriate sense, not explicitly symmetry-breaking, but the physically realized state is not invariant.
-
-Schematically,
-[
-G_{\rm action}=G_{\rm equations}=G,
-]
-while
-[
-G_{\rm vacuum}=H\subset G.
-]
-
-The vacuum selects one of several degenerate possibilities.
-
-This distinction is conceptually crucial.
-
----
-
-# 11. Classical Prototype of Spontaneous Symmetry Breaking
-
-Consider a particle in two dimensions with potential
-[
-V(r)
-====
-
-\lambda(r^2-v^2)^2,
-\qquad
-\lambda>0.
-]
-
-The Lagrangian is
-[
-L
-=
-
-## \frac{m}{2}\dot{\mathbf{x}}^2
-
-\lambda(\mathbf{x}^2-v^2)^2.
-]
-
-It is invariant under
-[
-SO(2):
-\qquad
-\mathbf{x}\rightarrow R\mathbf{x}.
-]
-
-The minima satisfy
-[
-\mathbf{x}^2=v^2.
-]
-
-Thus the ground states form a circle:
-[
-\mathcal{M}_{\rm vac}
-=====================
-
-S^1.
-]
-
-Choosing
-[
-\mathbf{x}_0=(v,0)
-]
-selects one vacuum.
-
-The original symmetry
-[
-SO(2)
-]
-is not a symmetry of this particular ground state.
-
-The equations are unchanged; the potential remains rotationally invariant.
-
-The degeneracy of the ground state permits a symmetry-breaking choice.
-
-Mathematically,
-[
-G=SO(2),
-\qquad
-H={e},
-]
-and
-[
-\mathcal{M}_{\rm vac}\simeq G/H.
-]
-
-This is the simplest geometrical picture of spontaneous symmetry breaking.
-
----
-
-# 12. The Mexican-Hat Potential
-
-The standard relativistic field-theoretic example is
-[
-\mathcal{L}
-===========
-
-## \partial_\mu\Phi^\dagger\partial^\mu\Phi
-
-V(\Phi),
-]
-with
-[
-V(\Phi)
-=======
-
--\mu^2\Phi^\dagger\Phi
-+
-\lambda(\Phi^\dagger\Phi)^2,
-\qquad
-\mu^2>0,\quad\lambda>0.
-]
-
-The theory is invariant under
-[
-U(1):
-\qquad
-\Phi(x)\rightarrow e^{i\alpha}\Phi(x).
-]
-
-The minima satisfy
-[
-\Phi^\dagger\Phi
-================
-
-\frac{\mu^2}{2\lambda}
-]
-up to conventions.
-
-Thus the vacuum manifold is a circle.
-
-Choosing a particular vacuum expectation value,
-[
-\langle0|\Phi|0\rangle
-======================
-
-\frac{v}{\sqrt2},
-]
-appears to break the $U(1)$ symmetry.
-
-Writing
-[
-\Phi(x)
-=======
-
-\frac{1}{\sqrt2}
-[v+h(x)+i\pi(x)],
-]
-one finds a massive radial mode $h$ and, for a global continuous symmetry, a massless Goldstone mode $\pi$.
-
-The original Lagrangian remains exactly invariant.  What has changed is the state about which the theory is expanded.
-
----
-
-# 13. Goldstone's Theorem
-
-Goldstone's theorem, in its relativistic form, states roughly that if a continuous global symmetry is spontaneously broken, then massless excitations must appear.
-
-Let
-[
-Q^a
-]
-be the conserved charge associated with a continuous symmetry, and let an order parameter $\Phi$ satisfy
-[
-\langle0|[Q^a,\Phi]|0\rangle\neq0.
-]
-
-Then the symmetry generated by $Q^a$ does not leave the vacuum invariant.
-
-Under suitable assumptions, the spectrum contains a massless mode.
-
-The number of Goldstone bosons is, in the simplest relativistic case, related to the number of broken generators:
-[
-N_{\rm Goldstone}
-=================
-
-\dim G-\dim H.
-]
-
-This formula requires qualifications in nonrelativistic systems, where pairs of broken generators can give rise to fewer Goldstone modes.
-
-Thus the symmetry-breaking pattern
-[
-G\longrightarrow H
-]
-contains physical information beyond the mere statement that ``symmetry is broken.''
-
----
-
-# 14. Why Initial Conditions Are Not Automatically Spontaneous Symmetry Breaking
-
-The phrase ``the equations are symmetric but the solution is not'' is necessary but not sufficient to characterize spontaneous symmetry breaking.
-
-Suppose
-[
-\ddot{x}=0
-]
-and choose
-[
-x(0)=0,\qquad
-\dot{x}(0)=v.
-]
-
-The equation may possess a symmetry under
-[
-x\rightarrow-x,
-]
-but for
-[
-v\neq0
-]
-the solution
-[
-x(t)=vt
-]
-is not invariant.
-
-This does not usually constitute spontaneous symmetry breaking.
-
-Why?
-
-Because the initial condition is an explicitly supplied asymmetry.  It selects the solution from outside the dynamical description.
-
-In genuine SSB, by contrast, one usually requires:
-
-\begin{enumerate}
-\item symmetric fundamental dynamics;
-\item a degenerate family of physically equivalent ground states;
-\item selection of one state from this family;
-\item an appropriate limiting procedure or physical mechanism permitting the broken state to become stable.
-\end{enumerate}
-
-The distinction becomes particularly important in finite systems and quantum mechanics.
-
----
-
-# 15. Finite Systems and the Problem of Spontaneous Symmetry Breaking
-
-For a finite quantum system with Hamiltonian $H$ commuting with a symmetry group,
-[
-[H,U(g)]=0,
-]
-the ground state is often unique and therefore invariant, up to a phase, under the symmetry.
-
-True spontaneous symmetry breaking generally becomes sharp only in an infinite-volume or thermodynamic limit.
-
-Consider a ferromagnet.
-
-The Hamiltonian may be rotationally invariant:
-[
-H
-=
-
--J\sum_{\langle ij\rangle}
-\mathbf{S}_i\cdot\mathbf{S}_j.
-]
-
-At low temperature, however, an infinite system may develop
-[
-\langle\mathbf{M}\rangle\neq0.
-]
-
-The magnetization chooses a direction:
-[
-SO(3)\rightarrow SO(2).
-]
-
-For a finite isolated system, however, the exact symmetric ground state may be a superposition of differently oriented magnetization states.
-
-The thermodynamic limit
-[
-N\rightarrow\infty
-]
-changes the situation qualitatively.
-
-This is one reason why SSB is often described as a singular limit.
-
----
-
-# 16. The Order of Limits
-
-Symmetry breaking frequently involves noncommuting limits.
-
-Consider an external symmetry-breaking field $h$ and system volume $V$.
-
-The order parameter may satisfy
-[
-\lim_{h\rightarrow0}
-\lim_{V\rightarrow\infty}
-\langle M\rangle_{h,V}
-\neq
-\lim_{V\rightarrow\infty}
-\lim_{h\rightarrow0}
-\langle M\rangle_{h,V}.
-]
-
-The first procedure may yield a symmetry-broken state:
-[
-\lim_{h\to0^+}
-\lim_{V\to\infty}
-\langle M\rangle
-================
-
-M_0\neq0,
-]
-whereas removing the external field before taking the infinite-volume limit may restore the symmetric expectation value.
-
-This provides a deep connection between symmetry breaking and the broader problem of non-interchangeable limits.
-
-The idealization
-[
-V\rightarrow\infty
-]
-may produce new sectors of the theory which are not continuously equivalent to those of every finite system.
-
-Thus spontaneous symmetry breaking is not merely a matter of ``choosing a solution.''  In many physically important cases it is associated with a singular limiting structure.
-
----
-
-# 17. Spontaneous Symmetry Breaking and Boundary Conditions
-
-Boundary conditions play a subtle role in SSB.
-
-One often introduces a tiny symmetry-breaking field or asymmetric boundary condition in order to select a pure phase:
-[
-h\rightarrow0^\pm.
-]
-
-After the thermodynamic limit, the external asymmetry can be removed:
-[
-\lim_{h\to0}
-\lim_{V\to\infty}.
-]
-
-The final state may retain a nonzero order parameter even though the explicit source has disappeared.
-
-This procedure shows the difference between:
-
-[
-\text{a symmetry-breaking field}
-]
-and
-[
-\text{a symmetry-broken phase}.
-]
-
-The field is a mathematical or physical device for selecting one among degenerate sectors.  The broken phase remains after the field is removed in the appropriate infinite-system limit.
-
----
-
-# 18. Symmetry Restoration by Averaging
-
-Suppose a theory has degenerate solutions
-[
-\Phi_\alpha
-===========
-
-g_\alpha\Phi_0.
-]
-
-One may form a formally symmetric average
-[
-\overline{\Phi}
-===============
-
-\int_G dg,g\Phi_0.
-]
-
-The resulting object may be invariant even though every individual configuration in the ensemble is symmetry-breaking.
-
-This raises an important distinction between:
-
-\begin{enumerate}
-\item pure states;
-\item mixed states;
-\item ensemble averages;
-\item individual realizations.
-\end{enumerate}
-
-For example, an ensemble of magnets pointing in random directions can have
-[
-\langle\mathbf{M}\rangle=0
-]
-even though every individual macroscopic sample possesses
-[
-|\mathbf{M}|=M_0.
-]
-
-Thus the vanishing of an averaged order parameter does not necessarily imply the absence of broken-symmetry states.
-
----
-
-# 19. Gauge Symmetry and the Meaning of ``Gauge Symmetry Breaking''
-
-Gauge symmetry requires special care.
-
-A gauge transformation does not generally map one physically distinct state into another.  Rather, gauge-related configurations represent the same physical state.
-
-Therefore local gauge symmetry differs conceptually from global symmetry.
-
-In a gauge theory, an expression such as
-[
-\langle\phi\rangle\neq0
-]
-may depend on gauge choice.
-
-Elitzur's theorem states, roughly, that a local gauge symmetry cannot be spontaneously broken in the same straightforward sense as a global symmetry by a local gauge-noninvariant order parameter.
-
-The conventional phrase
-[
-\text{``spontaneous breaking of gauge symmetry''}
-]
-is therefore partly heuristic.
-
-In the Higgs mechanism, the gauge redundancy is not literally destroyed.  Instead, the physical spectrum reorganizes: gauge fields acquire mass, the would-be Goldstone degrees of freedom become longitudinal polarization modes, and the observable content changes.
-
-For an Abelian Higgs model,
-[
-\mathcal{L}
-===========
-
--\frac14F_{\mu\nu}F^{\mu\nu}
-+
-(D_\mu\Phi)^\dagger D^\mu\Phi
------------------------------
-
-V(\Phi),
-]
-with
-[
-D_\mu
-=====
-
-\partial_\mu-ieA_\mu,
-]
-one may choose unitary gauge and write
-[
-\Phi
-====
-
-\frac{1}{\sqrt2}(v+h).
-]
-
-Then
-[
-|D_\mu\Phi|^2
-\supset
-\frac12e^2v^2A_\mu A^\mu,
-]
-so that
-[
-m_A=ev.
-]
-
-The original gauge-invariant formulation contains no physical violation of gauge redundancy.
-
-Thus
-
-[
-\boxed{
-\text{global SSB and the Higgs mechanism should not be conceptually identified}.
-}
-]
-
----
-
-# 20. Covariance Versus Invariance
-
-Another common source of confusion is the distinction between covariance and invariance.
-
-Consider Maxwell's equations,
-[
-\partial_\mu F^{\mu\nu}
-=======================
-
-\frac{4\pi}{c}J^\nu,
-\qquad
-\partial_{[\lambda}F_{\mu\nu]}=0.
-]
-
-These equations are Lorentz covariant.
-
-If the electromagnetic field transforms as
-[
-F^{\mu\nu}(x)
-\rightarrow
-\Lambda^\mu{}*\alpha
-\Lambda^\nu{}*\beta
-F^{\alpha\beta}(\Lambda^{-1}x),
-]
-then transformed fields satisfy equations of the same form.
-
-But a particular field configuration is generally not Lorentz invariant.
-
-For example, a purely electrostatic Coulomb field in the rest frame of a charge transforms into a field with both electric and magnetic components in a boosted frame.
-
-Thus:
-
-[
-\text{covariance of the law}
-\neq
-\text{invariance of a particular solution}.
-]
-
-The same distinction occurs in general relativity.
-
-Einstein's equations are generally covariant:
-[
-G_{\mu\nu}+\Lambda g_{\mu\nu}
-=============================
-
-8\pi G T_{\mu\nu}.
-]
-
-A particular spacetime solution may possess no nontrivial Killing vectors.
-
-Therefore general covariance does not imply that every physical spacetime is highly symmetric.
-
----
-
-# 21. Symmetry of Equations Versus Symmetry of the Background
-
-A field equation may formally possess a large symmetry group when written on a variable background, while a specific background reduces the realized symmetry.
-
-For example, a scalar field on Minkowski space satisfies
-[
-(\Box+m^2)\phi=0,
-]
-which is Poincar'e invariant.
-
-On a curved spacetime,
-[
-(\Box_g+m^2+\xi R)\phi=0,
-]
-the symmetries depend on the metric $g_{\mu\nu}$.
-
-The symmetry group of the equation is then related to the isometry group of the background:
-[
-\mathcal{L}*\xi g*{\mu\nu}=0.
-]
-
-A generic spacetime has no continuous Killing vectors.
-
-Thus a generally covariant formulation can coexist with a highly asymmetric physical background.
-
-This distinction is especially important in cosmology, where the fundamental field equations may possess a broad invariance structure while a cosmological solution selects a preferred congruence or time slicing.
-
----
-
-# 22. Symmetry Breaking and Reference Frames
-
-A physical state may select a preferred frame without the fundamental laws containing an explicitly preferred frame.
-
-Consider a relativistic medium with four-velocity
-[
-u^\mu.
-]
-
-The fundamental theory may be Lorentz invariant, while the state satisfies
-[
-\langle U^\mu\rangle=u^\mu.
-]
-
-The nonzero timelike vector selects a rest frame.
-
-The symmetry-breaking pattern is schematically
-[
-SO(1,3)\rightarrow SO(3).
-]
-
-The Lorentz symmetry of the laws remains intact; the state is not invariant under the full Lorentz group.
-
-This is analogous to spontaneous symmetry breaking in other contexts.
-
-A cosmological state with a distinguished comoving four-velocity provides an important example of a state with reduced symmetry without necessarily implying that the underlying laws violate Lorentz invariance.
-
-One must therefore distinguish:
-
-[
-\text{preferred laws}
-]
-from
-[
-\text{preferred state}.
-]
-
-The former represents explicit breaking of the fundamental symmetry; the latter may represent symmetry realization in a particular sector.
-
----
-
-# 23. Symmetry and Constraints
-
-Constraints may also reduce or alter the apparent symmetry group.
-
-Suppose the unconstrained configuration space is $\mathcal{C}$ and the equations are invariant under $G$.
-
-Now impose
-[
-C_a(q,\dot q)=0.
-]
-
-The physically admissible space becomes
-[
-\mathcal{C}_{\rm phys}
-======================
-
-{q\in\mathcal{C}\mid C_a=0}.
-]
-
-Only transformations satisfying
-[
-g\mathcal{C}_{\rm phys}
-=======================
-
-\mathcal{C}_{\rm phys}
-]
-remain symmetries of the constrained system.
-
-A constraint can therefore:
-
-\begin{enumerate}
-\item reduce symmetry;
-\item reveal hidden symmetry;
-\item convert a global symmetry into a gauge redundancy;
-\item produce singular symmetry enhancement in a limiting case.
-\end{enumerate}
-
-For example, the motion of a particle constrained to a sphere has a different configuration-space geometry and symmetry realization from unconstrained motion in $\mathbb{R}^3$.
-
----
-
-# 24. Singular Limits and Symmetry Enhancement
-
-An important phenomenon is the *increase* of symmetry in an idealized limit.
-
-Consider an anisotropic oscillator:
-[
-H
-=
-
-\frac{p_x^2+p_y^2}{2m}
-+
-\frac{m}{2}
-(\omega_x^2x^2+\omega_y^2y^2).
-]
-
-For
-[
-\omega_x\neq\omega_y,
-]
-rotational symmetry is absent.
-
-In the limit
-[
-\omega_x\rightarrow\omega_y,
-]
-the Hamiltonian becomes
-[
-H
-=
-
-\frac{\mathbf{p}^2}{2m}
-+
-\frac12m\omega^2\mathbf{r}^2,
-]
-and rotational symmetry emerges.
-
-Thus
-[
-G_{\omega_x\neq\omega_y}
-\subset
-G_{\omega_x=\omega_y}.
-]
-
-The limiting theory may have a larger symmetry group than every nearby member of the family.
-
-This illustrates a general warning:
-
-[
-\boxed{
-\lim_{\epsilon\to0}G_\epsilon
-\quad\text{need not coincide in a naive sense with}\quad
-G_{\epsilon=0}.
-}
-]
-
-The limiting theory may possess qualitatively new degeneracies, conserved quantities, or sectors.
-
-This is closely related to singular limits in mechanics, thermodynamics, field theory, and continuum approximations.
-
----
-
-# 25. Noether's Theorem and Its Limits
-
-For a continuous variational symmetry,
-[
-\delta L=\frac{dF}{dt},
-]
-Noether's theorem yields a conserved quantity
-[
-Q
-=
-
-\frac{\partial L}{\partial\dot q^i}\delta q^i-F.
-]
-
-However, several qualifications are important.
-
-First, not every equation symmetry is a variational symmetry, and therefore not every symmetry of the equations gives a standard Noether charge.
-
-Second, conserved quantities can arise from hidden or dynamical symmetries.
-
-Third, gauge symmetries lead to Noether identities rather than independent physical conservation laws in the same sense as global symmetries.
-
-Fourth, boundary terms and asymptotic conditions may modify the definition of conserved charges.
-
-Thus the schematic implication
-[
-\text{symmetry}\Longrightarrow\text{conservation law}
-]
-must always be interpreted with the relevant level of symmetry specified.
-
----
-
-# 26. Quantum Theory: Symmetry of the Hamiltonian and Symmetry of States
-
-In quantum mechanics, a symmetry transformation is represented, according to Wigner's theorem, by a unitary or antiunitary transformation $U$ preserving transition probabilities.
-
-If
-[
-UHU^{-1}=H,
-]
-then the Hamiltonian is symmetric.
-
-But an energy eigenstate need not be invariant under $U$.
-
-If
-[
-H|\psi\rangle=E|\psi\rangle
-]
-and the energy level is degenerate, then
-[
-U|\psi\rangle
-]
-is another state in the same eigenspace.
-
-A particular vector in that eigenspace may break the symmetry.
-
-For example, if
-[
-H
-]
-is rotationally invariant,
-[
-[H,\mathbf{J}]=0,
-]
-then one may choose simultaneous eigenstates
-[
-|j,m\rangle.
-]
-
-The Hamiltonian possesses full rotational symmetry, but a state with definite $m$ is not invariant under arbitrary rotations.
-
-The symmetry acts on the multiplet of states.
-
-Again:
-
-[
-\boxed{
-\text{symmetry of the Hamiltonian}
-\neq
-\text{symmetry of every quantum state}.
-}
-]
-
----
-
-# 27. Degeneracy and Symmetry
-
-Symmetry often produces degeneracy, but the relation is not one-to-one.
-
-Suppose
-[
-[H,U(g)]=0.
-]
-
-The Hilbert space decomposes into irreducible representations:
-[
-\mathcal{H}
-===========
-
-\bigoplus_\alpha
-\mathcal{H}_\alpha.
-]
-
-States within a nontrivial irreducible representation may be degenerate due to symmetry.
-
-However:
-
-\begin{enumerate}
-\item accidental degeneracies may occur without an obvious geometric symmetry;
-\item dynamical symmetries can explain unexpected degeneracies;
-\item boundary conditions may remove degeneracy;
-\item spontaneous symmetry breaking may reorganize the spectrum.
-\end{enumerate}
-
-The hydrogen atom provides the classic example.  Its bound-state degeneracy is associated not merely with spatial rotation $SO(3)$ but with a larger dynamical symmetry related to $SO(4)$.
-
----
-
-# 28. The Hierarchy of Symmetry Groups
-
-The preceding discussion suggests the following hierarchy:
-
-[
-\boxed{
-G_{\rm Lagrangian}
-;\longrightarrow;
-G_{\rm action}
-;\longrightarrow;
-G_{\rm equations}
-;\longrightarrow;
-G_{\rm solution\ space}
-}
-]
-
-followed by restrictions due to physical specification:
-
-[
-G_{\rm physical\ problem}
-=========================
-
-G_{\rm equations}
-\cap
-G_{\rm domain}
-\cap
-G_{\rm topology}
-\cap
-G_{\rm constraints}
-\cap
-G_{\rm initial/boundary}.
-]
-
-Finally, for a particular solution $\Phi$,
-[
-G_\Phi
-======
-
-\operatorname{Stab}_G(\Phi).
-]
-
-Typically,
-[
-G_\Phi\subseteq G_{\rm physical\ problem}
-\subseteq G_{\rm equations}.
-]
-
-But these relations should not be regarded as rigid universal subgroup chains.  Different definitions of equivalence, gauge redundancy, action invariance, and generalized symmetries may alter the precise relations.
-
-The essential point is conceptual:
-
-[
-\boxed{
-\text{one must always specify the object whose symmetry is being discussed}.
-}
-]
-
----
-
-# 29. A Unified Classification
-
-The various situations may be summarized as follows.
-
-\begin{center}
-\begin{tabular}{p{0.25\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}}
-\hline
-Mechanism & What remains symmetric? & What loses symmetry?\
-\hline
-Explicit breaking &
-Possibly nothing at the level of the broken group &
-Action and/or equations\
-\hline
-Boundary-induced reduction &
-Local action and equations &
-Physical boundary-value problem\
-\hline
-Initial-data reduction &
-Equations and solution space &
-Chosen solution and initial-value problem\
-\hline
-Ordinary asymmetric solution &
-Equations and solution space &
-Individual solution\
-\hline
-Spontaneous symmetry breaking &
-Action and equations &
-Vacuum or equilibrium state\
-\hline
-Gauge fixing &
-Gauge-invariant theory &
-Particular mathematical representation\
-\hline
-Symmetry enhancement &
-Limiting theory &
-Nearby finite-parameter theories have smaller symmetry\
-\hline
-\end{tabular}
-\end{center}
-
-This table makes clear why the phrase ``symmetry is broken'' is incomplete unless its precise mechanism is specified.
-
----
-
-# 30. Conceptual Interpretation
-
-There is a useful philosophical lesson here.
-
-Physical laws usually define a space of possibilities rather than a single physical history.
-
-Symmetry of the law means that these possibilities are organized into equivalence classes or group orbits.
-
-A particular physical realization may occupy one point in this space.
-
-Thus
-
-[
-\text{symmetry of law}
-]
-describes the structure of possibilities, whereas
-[
-\text{symmetry of state}
-]
-describes the structure of an actual realization.
-
-The latter can be narrower without contradicting the former.
-
-In this sense, symmetry breaking is not necessarily the destruction of a symmetry.  Often the symmetry survives as a transformation relating different physically possible states.
-
-For spontaneous symmetry breaking, the different vacua
-[
-\Phi,\quad g\Phi,\quad g'\Phi,\ldots
-]
-are related by the original symmetry even though no single chosen vacuum is invariant under the full group.
-
-The symmetry therefore continues to exist at the level of the theory and the space of possible states.
-
----
-
-# 31. Conclusions
-
-The concept of symmetry in physics is intrinsically hierarchical.
-
-The following objects must be carefully distinguished:
-
-[
-\begin{aligned}
-&\text{Lagrangian},\
-&\text{action},\
-&\text{Euler--Lagrange equations},\
-&\text{solution space},\
-&\text{constraints},\
-&\text{domain and topology},\
-&\text{initial and boundary conditions},\
-&\text{particular solutions},\
-&\text{vacuum or equilibrium state},\
-&\text{observable algebra}.
-\end{aligned}
-]
-
-Their symmetry groups need not coincide.
-
-In particular:
-
-\begin{enumerate}
-\item A Lagrangian may fail to be strictly invariant while the action is invariant up to a boundary term.
-
-\item The equations of motion may possess symmetries not manifest in a particular Lagrangian representation.
-
-\item The complete solution space may be symmetric while individual solutions possess only a stabilizer subgroup.
-
-\item Initial conditions and boundary conditions may reduce the symmetry of the physical problem without altering the local dynamical equations.
-
-\item Genuine spontaneous symmetry breaking occurs when symmetric dynamics admit physically stable degenerate states that are not individually invariant under the full symmetry group.
-
-\item In infinite systems, spontaneous symmetry breaking is often associated with singular limits and non-interchangeable orders of limits.
-
-\item Gauge symmetry requires special treatment because gauge transformations are redundancies of description rather than ordinary transformations between distinct physical states.
-
-\item Covariance of equations does not imply invariance of every solution or physical state.
-
-\item Singular limits may enlarge symmetry, producing theories whose symmetry structure is qualitatively different from that of nearby theories.
-\end{enumerate}
-
-The general moral can be summarized in one formula:
-[
-\boxed{
-\text{Symmetry is always symmetry of something.}
-}
-]
-
-A complete physical analysis should therefore ask not merely
-
-[
-\text{``What is the symmetry group?''}
-]
-
-but rather
-
-[
-\boxed{
-\text{``What object is invariant, under what transformations, and subject to what conditions?''}
-}
-]
-
-Only after distinguishing the symmetry of laws, equations, admissible configurations, boundary data, states, and observables can one properly formulate questions concerning explicit symmetry breaking, spontaneous symmetry breaking, hidden symmetry, emergent symmetry, and symmetry enhancement.
-
----
-
-# References
-
-\begin{thebibliography}{99}
-
-\bibitem{Noether}
-E.~Noether,
-``Invariante Variationsprobleme,''
-\emph{Nachrichten von der Gesellschaft der Wissenschaften zu G"ottingen,
-Mathematisch-Physikalische Klasse},
-235--257 (1918).
-English translations and modern discussions are widely available.
-
-\bibitem{Goldstein}
-H.~Goldstein, C.~Poole, and J.~Safko,
-\emph{Classical Mechanics},
-3rd ed.,
-Addison-Wesley (2002).
-
-\bibitem{Arnold}
-V.~I.~Arnold,
-\emph{Mathematical Methods of Classical Mechanics},
-2nd ed.,
-Springer (1989).
-
-\bibitem{Olver}
-P.~J.~Olver,
-\emph{Applications of Lie Groups to Differential Equations},
-2nd ed.,
-Springer (1993).
-
-\bibitem{Ibragimov}
-N.~H.~Ibragimov,
-\emph{Transformation Groups Applied to Mathematical Physics},
-Reidel (1985).
-
-\bibitem{Anderson}
-I.~M.~Anderson,
-``The Variational Bicomplex,''
-in \emph{Mathematical Aspects of Classical Field Theory},
-Contemporary Mathematics \textbf{132},
-American Mathematical Society (1992).
-
-\bibitem{Goldstone}
-J.~Goldstone,
-``Field Theories with Superconductor Solutions,''
-\emph{Nuovo Cimento} \textbf{19}, 154--164 (1961).
-
-\bibitem{GoldstoneSalamWeinberg}
-J.~Goldstone, A.~Salam, and S.~Weinberg,
-``Broken Symmetries,''
-\emph{Physical Review} \textbf{127}, 965--970 (1962).
-
-\bibitem{Higgs}
-P.~W.~Higgs,
-``Broken Symmetries and the Masses of Gauge Bosons,''
-\emph{Physical Review Letters} \textbf{13}, 508--509 (1964).
-
-\bibitem{EnglertBrout}
-F.~Englert and R.~Brout,
-``Broken Symmetry and the Mass of Gauge Vector Mesons,''
-\emph{Physical Review Letters} \textbf{13}, 321--323 (1964).
-
-\bibitem{AndersonHiggs}
-P.~W.~Anderson,
-``Plasmons, Gauge Invariance, and Mass,''
-\emph{Physical Review} \textbf{130}, 439--442 (1963).
-
-\bibitem{Elitzur}
-S.~Elitzur,
-``Impossibility of Spontaneously Breaking Local Symmetries,''
-\emph{Physical Review D} \textbf{12}, 3978--3982 (1975).
-
-\bibitem{Coleman}
-S.~Coleman,
-\emph{Aspects of Symmetry},
-Cambridge University Press (1985).
-
-\bibitem{WeinbergQFT2}
-S.~Weinberg,
-\emph{The Quantum Theory of Fields, Vol.~II:
-Modern Applications},
-Cambridge University Press (1996).
-
-\bibitem{Peskin}
-M.~E.~Peskin and D.~V.~Schroeder,
-\emph{An Introduction to Quantum Field Theory},
-Westview Press (1995).
-
-\bibitem{AndersonMore}
-P.~W.~Anderson,
-\emph{Basic Notions of Condensed Matter Physics},
-Benjamin/Cummings (1984).
-
-\bibitem{Strocchi}
-F.~Strocchi,
-\emph{Symmetry Breaking},
-2nd ed.,
-Springer (2008).
-
-\bibitem{Haag}
-R.~Haag,
-\emph{Local Quantum Physics},
-2nd ed.,
-Springer (1996).
-
-\bibitem{Wigner}
-E.~P.~Wigner,
-\emph{Group Theory and Its Application to the Quantum Mechanics of Atomic Spectra},
-Academic Press (1959).
-
-\bibitem{WeinbergQM}
-S.~Weinberg,
-\emph{The Quantum Theory of Fields, Vol.~I:
-Foundations},
-Cambridge University Press (1995).
-
-\bibitem{Nakahara}
-M.~Nakahara,
-\emph{Geometry, Topology and Physics},
-2nd ed.,
-Taylor & Francis (2003).
-
-\bibitem{AndersonTR}
-P.~W.~Anderson,
-``More Is Different,''
-\emph{Science} \textbf{177}, 393--396 (1972).
-
-\end{thebibliography}
