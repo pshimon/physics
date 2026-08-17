@@ -1,0 +1,1954 @@
+
+\documentclass[11pt]{book}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+
+\geometry{margin=1in}
+
+\title{Quantization as State-Space Deformation\\
+\large Convex Geometry, Symplectic Reduction, and the Structural Failure of Canonical Functoriality}
+
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+%===========================================================
+\chapter{Classical Mechanics as Commutative Probability}
+%===========================================================
+
+\section{Symplectic Phase Space}
+
+Let $(M,\omega)$ be a connected symplectic manifold.
+The algebra of classical observables is
+\[
+\mathcal{A}_{cl} = C_0(M)
+\]
+with Poisson bracket
+\[
+\{f,g\} = \omega(X_f,X_g).
+\]
+
+\section{States as Probability Measures}
+
+\begin{definition}
+A classical state is a Borel probability measure
+\[
+\mu : C_0(M) \to \mathbb{C}
+\]
+given by
+\[
+\mu(f) = \int_M f \, d\mu.
+\]
+\end{definition}
+
+\begin{theorem}
+The classical state space $\mathcal{S}_{cl}$
+is a Choquet simplex.
+\end{theorem}
+
+\begin{proof}
+Extreme points are Dirac measures $\delta_x$.
+Every $\mu \in \mathcal{S}_{cl}$ admits a unique
+barycentric decomposition
+\[
+\mu = \int_M \delta_x \, d\mu(x).
+\]
+Uniqueness follows from the uniqueness of measure disintegration.
+\end{proof}
+
+\section{Gelfand Duality}
+
+\begin{theorem}[Gelfand]
+Every commutative unital $C^*$-algebra
+is isometrically $*$-isomorphic to $C(X)$
+for a compact Hausdorff space $X$.
+\end{theorem}
+
+Thus:
+
+\[
+\text{Commutative algebra}
+\quad \Longleftrightarrow \quad
+\text{Underlying space}.
+\]
+
+This equivalence fails in quantum theory.
+
+%===========================================================
+\chapter{Quantum Mechanics as Noncommutative Probability}
+%===========================================================
+
+\section{Operator Algebra}
+
+Let $\mathcal{H}$ be separable.
+Define
+\[
+\mathcal{A}_{qm} = \mathcal{B}(\mathcal{H}).
+\]
+
+\section{States}
+
+\begin{definition}
+A quantum state is a positive trace-class operator
+$\rho$ with $\mathrm{Tr}(\rho)=1$.
+\end{definition}
+
+\begin{theorem}
+The quantum state space is convex but not a simplex.
+\end{theorem}
+
+\begin{proof}
+Consider a two-dimensional Hilbert space.
+The maximally mixed state
+\[
+\rho = \frac12 I
+\]
+admits infinitely many decompositions
+into rank-one projectors.
+Thus uniqueness fails.
+\end{proof}
+
+\section{Kadison Duality}
+
+\begin{theorem}[Kadison]
+A $C^*$-algebra is determined by its state space
+as a compact convex set.
+\end{theorem}
+
+Thus algebra and convex geometry are dual structures.
+
+\bigskip
+
+%===========================================================
+\chapter{Geometric Quantization in Full Technical Detail}
+%===========================================================
+
+\section{Integrality and Prequantization Line Bundle}
+
+Let $(M,\omega)$ be a connected symplectic manifold.
+
+\begin{definition}
+The symplectic form satisfies the \emph{integrality condition} if
+\[
+\left[ \frac{\omega}{2\pi\hbar} \right] \in H^2(M,\mathbb{Z}).
+\]
+\end{definition}
+
+\begin{theorem}[Weil Integrality Criterion]
+There exists a Hermitian line bundle $L \to M$
+with connection $\nabla$
+such that
+\[
+\mathrm{curv}(\nabla) = -\frac{i}{\hbar}\omega
+\]
+if and only if the integrality condition holds.
+\end{theorem}
+
+\begin{proof}
+Isomorphism classes of Hermitian line bundles with connection
+are classified by their first Chern class
+\[
+c_1(L) \in H^2(M,\mathbb{Z}).
+\]
+
+The curvature form satisfies
+\[
+\frac{i}{2\pi} \mathrm{curv}(\nabla)
+=
+c_1(L)
+\]
+in de Rham cohomology.
+
+Thus
+\[
+\frac{\omega}{2\pi\hbar}
+=
+c_1(L)
+\]
+in $H^2(M,\mathbb{R})$.
+
+Existence holds iff the cohomology class is integral.
+\end{proof}
+
+\begin{remark}
+Prequantization already imposes a global topological constraint
+absent in classical mechanics.
+\end{remark}
+
+%-----------------------------------------------------------
+\section{The Prequantum Hilbert Space}
+%-----------------------------------------------------------
+
+Define the prequantum Hilbert space:
+
+\[
+\mathcal{H}_{pre} := L^2(M, L).
+\]
+
+Define the Kostant--Souriau operator:
+
+\begin{definition}
+For $f \in C^\infty(M)$ define
+\[
+\hat f := -i\hbar \nabla_{X_f} + f.
+\]
+\end{definition}
+
+\begin{theorem}
+The map $f \mapsto \hat f$ satisfies
+\[
+[\hat f, \hat g]
+=
+i\hbar \widehat{\{f,g\}}.
+\]
+\end{theorem}
+
+\begin{proof}
+Compute:
+
+\[
+[\nabla_{X_f}, \nabla_{X_g}]
+=
+\nabla_{[X_f,X_g]} - \frac{i}{\hbar}\omega(X_f,X_g).
+\]
+
+Using
+\[
+[X_f,X_g] = X_{\{f,g\}},
+\]
+
+and curvature identity,
+the result follows after cancellation.
+\end{proof}
+
+Thus prequantization gives an exact Lie representation.
+
+\begin{remark}
+Prequantization preserves the full Poisson algebra,
+but the resulting Hilbert space is too large.
+\end{remark}
+
+%-----------------------------------------------------------
+\section{Polarization}
+%-----------------------------------------------------------
+
+\begin{definition}
+A polarization is an integrable Lagrangian distribution
+\[
+\mathcal{P} \subset TM_\mathbb{C}
+\]
+such that
+\[
+\omega|_{\mathcal{P}} = 0.
+\]
+\end{definition}
+
+\subsection{Real Polarization}
+
+Example:
+\[
+\mathcal{P} = \mathrm{span}\left\{ \frac{\partial}{\partial p_i} \right\}.
+\]
+
+Then polarized sections depend only on $q$.
+
+\subsection{Kähler Polarization}
+
+If $(M,\omega,J)$ is Kähler,
+take
+\[
+\mathcal{P} = T^{0,1}M.
+\]
+
+Polarized sections are holomorphic sections.
+
+\begin{theorem}
+The polarized Hilbert space is
+\[
+\mathcal{H}_{pol}
+=
+\{ s \in \mathcal{H}_{pre} \mid \nabla_X s = 0
+\text{ for all } X \in \mathcal{P} \}.
+\]
+\end{theorem}
+
+\begin{remark}
+Polarization reduces degrees of freedom by half.
+\end{remark}
+
+%-----------------------------------------------------------
+\section{Metaplectic Correction}
+%-----------------------------------------------------------
+
+The naive polarization often yields incorrect spectra.
+
+Introduce half-form bundle $\delta^{1/2}$.
+
+Define corrected Hilbert space:
+
+\[
+\mathcal{H}
+=
+\Gamma_{hol}(L \otimes \delta^{1/2}).
+\]
+
+\begin{theorem}
+Metaplectic correction restores correct energy levels
+for harmonic oscillator.
+\end{theorem}
+
+\begin{proof}[Sketch]
+The half-form contributes an extra $\frac12 \hbar \omega$
+to energy operator, shifting spectrum appropriately.
+\end{proof}
+
+%-----------------------------------------------------------
+\section{Failure of Canonical Covariance}
+%-----------------------------------------------------------
+
+Let $\phi: M \to M$ be a symplectomorphism.
+
+Prequantization lifts $\phi$ to bundle automorphism
+iff it preserves Chern class.
+
+However:
+
+\begin{theorem}
+Generic nonlinear symplectomorphisms
+do not preserve a chosen polarization.
+\end{theorem}
+
+\begin{proof}
+A polarization is an integrable Lagrangian distribution.
+Generic symplectic maps do not preserve such distributions.
+Thus
+\[
+\phi_* \mathcal{P} \neq \mathcal{P}.
+\]
+\end{proof}
+
+Hence geometric quantization
+is not functorial under all canonical transformations.
+
+%-----------------------------------------------------------
+\section{Relation to Convex State-Space Deformation}
+%-----------------------------------------------------------
+
+Prequantization preserves classical geometry.
+
+Polarization alters the structure of admissible states.
+
+Metaplectic correction modifies spectral properties.
+
+\begin{proposition}
+Geometric quantization changes the convex geometry
+of admissible states from simplex to non-simplex.
+\end{proposition}
+
+\begin{proof}
+After polarization, pure states correspond to rays
+in $\mathcal{H}_{pol}$.
+Convex combinations become non-unique,
+as in standard quantum theory.
+\end{proof}
+
+Thus geometric quantization realizes explicitly
+the structural transition:
+
+\[
+\text{Phase-space probability}
+\quad \longrightarrow \quad
+\text{Hilbert convex geometry}.
+\]
+
+The failure of canonical covariance
+reflects incompatibility between
+classical simplex geometry
+and quantum non-simplex geometry.
+\textbf{Conclusion:}
+Changing convex state geometry necessarily changes algebra.%===========================================================
+\chapter{Symplectic Reduction and Dirac Brackets}
+%===========================================================
+
+\section{Hamiltonian Group Actions}
+
+Let $(M,\omega)$ be symplectic.
+Let $G$ be a Lie group acting smoothly on $M$:
+
+\[
+\Phi: G \times M \to M.
+\]
+
+\begin{definition}
+The action is symplectic if
+\[
+\Phi_g^* \omega = \omega
+\quad \forall g \in G.
+\]
+\end{definition}
+
+Let $\mathfrak{g}$ be the Lie algebra of $G$.
+For $\xi \in \mathfrak{g}$ define the fundamental vector field:
+
+\[
+\xi_M(x) = \frac{d}{dt}\Big|_{t=0}
+\exp(t\xi)\cdot x.
+\]
+
+\section{Moment Map}
+
+\begin{definition}
+A moment map is a map
+\[
+\mu: M \to \mathfrak{g}^*
+\]
+such that
+\[
+d\langle \mu, \xi \rangle = \iota_{\xi_M}\omega
+\quad \forall \xi \in \mathfrak{g}.
+\]
+\end{definition}
+
+\begin{theorem}
+If $H^1(M)=0$, any symplectic action
+admits a moment map.
+\end{theorem}
+
+\begin{proof}
+Closed 1-forms
+\[
+\iota_{\xi_M}\omega
+\]
+are exact when $H^1(M)=0$.
+Define Hamiltonians $\mu^\xi$.
+Assemble into $\mu$.
+\end{proof}
+
+\subsection{Equivariance}
+
+\begin{definition}
+The moment map is equivariant if
+\[
+\mu(g\cdot x) = \mathrm{Ad}^*_{g^{-1}}\mu(x).
+\]
+\end{definition}
+
+Equivariance ensures Poisson bracket structure:
+
+\[
+\{ \mu^\xi, \mu^\eta \}
+=
+\mu^{[\xi,\eta]}.
+\]
+
+%-----------------------------------------------------------
+\section{Marsden--Weinstein Reduction}
+%-----------------------------------------------------------
+
+Fix $\xi \in \mathfrak{g}^*$.
+
+Define level set:
+
+\[
+C := \mu^{-1}(\xi).
+\]
+
+Assume:
+
+\begin{itemize}
+\item $\xi$ is regular value
+\item $G_\xi$ acts freely and properly
+\end{itemize}
+
+\begin{definition}
+The reduced space is
+\[
+M_\xi := C / G_\xi.
+\]
+\end{definition}
+
+\begin{theorem}[Marsden--Weinstein]
+$M_\xi$ is a symplectic manifold
+with symplectic form uniquely defined by
+\[
+\pi^*\omega_\xi = \iota^*\omega.
+\]
+\end{theorem}
+
+\begin{proof}[Sketch]
+$\iota^*\omega$ is basic relative to $G_\xi$ action.
+Descends uniquely to quotient.
+Nondegeneracy follows from regularity condition.
+\end{proof}
+
+Thus reduction produces new phase space.
+
+%-----------------------------------------------------------
+\section{First and Second Class Constraints}
+%-----------------------------------------------------------
+
+Let constraints be functions $\phi_a$.
+
+\begin{definition}
+Constraints are first class if
+\[
+\{\phi_a,\phi_b\}
+\approx 0
+\]
+on constraint surface.
+\end{definition}
+
+Second class if matrix
+\[
+C_{ab} = \{\phi_a,\phi_b\}
+\]
+is invertible.
+
+%-----------------------------------------------------------
+\section{Dirac Bracket}
+%-----------------------------------------------------------
+
+Assume second class constraints.
+
+Define inverse matrix $C^{ab}$.
+
+\begin{definition}
+The Dirac bracket is
+\[
+\{f,g\}_D
+=
+\{f,g\}
+-
+\{f,\phi_a\}
+C^{ab}
+\{\phi_b,g\}.
+\]
+\end{definition}
+
+\begin{theorem}
+The Dirac bracket satisfies:
+\begin{enumerate}
+\item Jacobi identity
+\item $\{f,\phi_a\}_D = 0$
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Direct computation using antisymmetry of $C^{ab}$
+and Jacobi identity for original bracket.
+\end{proof}
+
+Thus Dirac bracket implements reduction algebraically.
+
+%-----------------------------------------------------------
+\section{Relation Between Dirac Bracket and Reduction}
+%-----------------------------------------------------------
+
+\begin{theorem}
+The Dirac bracket coincides with the Poisson bracket
+on the reduced phase space.
+\end{theorem}
+
+\begin{proof}
+Restriction of functions to constraint surface
+followed by quotient identifies bracket structures.
+Standard calculation.
+\end{proof}
+
+Thus algebraic reduction equals geometric reduction.
+
+%-----------------------------------------------------------
+\section{Quantization and Reduction}
+%-----------------------------------------------------------
+
+Two procedures:
+
+\[
+\textbf{(A)}\quad
+\text{Reduce then quantize}
+\]
+
+\[
+\textbf{(B)}\quad
+\text{Quantize then reduce}
+\]
+
+The Guillemin--Sternberg conjecture:
+
+\[
+[Q,R]=0.
+\]
+
+\begin{theorem}[Guillemin--Sternberg]
+Under suitable compactness and integrality assumptions,
+quantization commutes with reduction.
+\end{theorem}
+
+\begin{proof}[Idea]
+Multiplicity of irreducible representation
+equals dimension of reduced quantization space.
+Uses equivariant index theory.
+\end{proof}
+
+%-----------------------------------------------------------
+\section{Convex-Geometric Interpretation}
+%-----------------------------------------------------------
+
+Classically:
+
+Reduction restricts state space:
+
+\[
+\mathcal{S}_{cl}
+\to
+\mathcal{S}_{cl}^{red}
+=
+\mathcal{P}(M_\xi).
+\]
+
+Quantum mechanically:
+
+Reduction corresponds to projection onto invariant subspace:
+
+\[
+\mathcal{H}
+\to
+\mathcal{H}_{phys}.
+\]
+
+\begin{proposition}
+Symplectic reduction corresponds to selecting
+a convex face of quantum state space.
+\end{proposition}
+
+Thus both reduction and quantization
+act at the level of state geometry.
+
+\section{Structural Significance}
+
+Dirac bracket attempts to preserve algebraic structure
+under constraints.
+
+However, if quantization is viewed as state-space deformation,
+then:
+
+\begin{itemize}
+\item Reduction modifies classical simplex
+\item Quantization destroys simplex structure
+\item Order of operations affects convex geometry
+\end{itemize}
+
+Compatibility occurs only when geometric conditions align.
+
+\bigskip
+
+This completes the reduction chapter.
+%===========================================================
+\chapter{Deformation Quantization and the Geometry of the Classical Limit}
+%===========================================================
+
+\section{Motivation and Conceptual Framework}
+
+Canonical quantization attempts to construct a map
+\[
+Q: C^\infty(M) \to \mathcal{B}(\mathcal{H})
+\]
+preserving Poisson brackets:
+\[
+Q(\{f,g\}) = \frac{1}{i\hbar}[Q(f),Q(g)].
+\]
+
+The Groenewold--Van Hove theorem shows that such a map cannot exist globally for general symplectic manifolds.
+
+Deformation quantization replaces this impossible requirement by a weaker one:
+
+\medskip
+\noindent
+\textbf{Idea:} Keep the classical vector space $C^\infty(M)$, but deform its commutative product.
+
+Instead of mapping observables to operators, we deform the algebra itself.
+
+\section{Formal Star Products}
+
+Let $(M,\omega)$ be symplectic.
+
+\begin{definition}
+A \emph{star product} on $C^\infty(M)[[\hbar]]$ is an associative $\mathbb{C}[[\hbar]]$-bilinear product
+\[
+f \star g = \sum_{k=0}^\infty \hbar^k C_k(f,g)
+\]
+such that:
+\begin{enumerate}
+\item $C_0(f,g) = fg$,
+\item $C_1(f,g) - C_1(g,f) = i\{f,g\}$,
+\item Each $C_k$ is a bidifferential operator.
+\end{enumerate}
+\end{definition}
+
+Associativity imposes infinite constraints:
+
+\[
+(f \star g) \star h = f \star (g \star h).
+\]
+
+These conditions generate cohomological equations in Hochschild cohomology.
+
+\section{Existence and Classification (Symplectic Case)}
+
+\begin{theorem}[Fedosov]
+Every symplectic manifold admits a star product.
+\end{theorem}
+
+\begin{proof}[Idea]
+Construct Weyl algebra bundle over $M$.
+Introduce flat Fedosov connection:
+\[
+D = -\delta + \nabla + \frac{1}{\hbar}[r,\cdot]
+\]
+with curvature condition ensuring $D^2=0$.
+Flat sections correspond to star algebra.
+\end{proof}
+
+\begin{theorem}
+Equivalence classes of star products on $(M,\omega)$ are classified by
+\[
+\frac{1}{i\hbar}[\omega] + H^2(M,\mathbb{C})[[\hbar]].
+\]
+\end{theorem}
+
+Thus deformation is controlled by second de Rham cohomology.
+
+\section{Kontsevich Formality (Poisson Case)}
+
+For general Poisson manifolds:
+
+\begin{theorem}[Kontsevich]
+Every Poisson manifold admits a deformation quantization.
+\end{theorem}
+
+The construction uses:
+
+- Graph complexes
+- Formality quasi-isomorphism
+- Explicit weighted sums over oriented graphs
+
+Associativity follows from formality theorem of the differential graded Lie algebra of polyvector fields.
+
+\section{Moyal--Weyl Product}
+
+For $M = \mathbb{R}^{2n}$ with constant symplectic form:
+
+\[
+(f \star g)(x)
+=
+\exp\!\left(
+\frac{i\hbar}{2}\omega^{ij}\partial_i^x \partial_j^y
+\right)
+f(x)g(y)\big|_{y=x}.
+\]
+
+Explicitly:
+
+\[
+f \star g
+=
+fg
++
+\frac{i\hbar}{2}\{f,g\}
+-
+\frac{\hbar^2}{8}\omega^{ij}\omega^{kl}
+\partial_i\partial_k f
+\partial_j\partial_l g
++\cdots
+\]
+
+This reproduces Weyl quantization.
+
+\section{Strict Deformation Quantization}
+
+Formal power series do not produce Hilbert spaces.
+
+Rieffel introduced strict deformation quantization:
+
+\begin{definition}
+A strict deformation quantization is a continuous field of $C^*$-algebras
+\[
+\{A_\hbar\}_{\hbar \ge 0}
+\]
+such that:
+\begin{itemize}
+\item $A_0 = C_0(M)$,
+\item For $\hbar>0$, $A_\hbar$ noncommutative,
+\item Commutator limit reproduces Poisson bracket.
+\end{itemize}
+\end{definition}
+
+This provides analytic control of classical limit.
+
+\section{Berezin--Toeplitz Quantization}
+
+For compact Kähler manifold $(M,\omega)$ satisfying integrality:
+
+Construct prequantum line bundle $L$ with curvature
+\[
+F_\nabla = -i\omega.
+\]
+
+Define Hilbert spaces
+\[
+\mathcal{H}_k = H^0(M, L^k).
+\]
+
+Toeplitz operator:
+
+\[
+T_f^{(k)} = \Pi_k \circ M_f
+\]
+
+where $\Pi_k$ is orthogonal projection.
+
+\begin{theorem}
+\[
+[T_f^{(k)},T_g^{(k)}]
+=
+\frac{i}{k} T_{\{f,g\}}^{(k)} + O(k^{-2}).
+\]
+\end{theorem}
+
+Thus $1/k$ plays role of $\hbar$.
+
+\section{Semiclassical Limit and States}
+
+Let $\rho_\hbar$ be quantum states.
+
+Classical limit corresponds to weak-* convergence:
+
+\[
+\rho_\hbar \to \mu
+\]
+
+if
+
+\[
+\lim_{\hbar\to0} \mathrm{Tr}(\rho_\hbar Q_\hbar(f))
+=
+\int_M f d\mu.
+\]
+
+Thus classical limit is convergence of convex state spaces:
+
+\[
+\mathcal{D}(\mathcal{H}_\hbar)
+\to
+\mathcal{P}(M).
+\]
+
+\section{Convex-Geometric Interpretation}
+
+Deformation quantization deforms:
+
+\[
+\textbf{Algebra product}
+\quad \Longleftrightarrow \quad
+\textbf{State space geometry}.
+\]
+
+As $\hbar\to0$:
+
+\begin{itemize}
+\item Non-simplex quantum state space
+\item Converges to simplex of classical measures
+\end{itemize}
+
+Thus classical limit is restoration of simplex structure.
+
+\section{Failure of Canonical Covariance Revisited}
+
+Deformation quantization shows:
+
+\[
+C^\infty(M) \text{ remains as vector space}
+\]
+
+but product changes.
+
+However:
+
+State space dual to deformed algebra is no longer probability measures.
+
+Therefore:
+
+Dirac’s obstruction arises because
+one cannot maintain classical state geometry
+under deformation of product.
+
+\section{Relation to Geometric Quantization}
+
+Geometric quantization constructs:
+
+\[
+\mathcal{H}
+=
+\Gamma_{hol}(L)
+\]
+
+Deformation quantization constructs:
+
+\[
+(C^\infty(M)[[\hbar]],\star)
+\]
+
+Berezin--Toeplitz bridges them:
+
+Toeplitz operators give explicit star product.
+
+Thus geometric quantization provides representation
+of deformation quantization.
+
+\section{Structural Conclusion}
+
+Deformation quantization confirms:
+
+\begin{enumerate}
+\item Quantization is deformation of algebra.
+\item Deformation alters dual state space.
+\item Classical limit is geometric degeneration.
+\item No observable map is fundamental.
+\end{enumerate}
+
+Thus quantization is better understood as:
+
+\[
+\textbf{Deformation of probability geometry.}
+\]
+
+\bigskip
+
+This completes the deformation quantization chapter.%===========================================================
+\chapter{Quantization on Bounded Configuration Spaces and Compact Phase Spaces}
+%===========================================================
+
+\section{Introduction and Structural Motivation}
+
+Standard canonical quantization assumes:
+
+\[
+q \in \mathbb{R}^n,
+\qquad
+p \in \mathbb{R}^n.
+\]
+
+Both are unbounded operators with continuous spectra.
+
+However, many physically and geometrically natural systems possess:
+
+\begin{itemize}
+\item Compact configuration spaces (e.g., $S^1$, compact manifolds)
+\item Bounded position operators (particle in box)
+\item Compact phase spaces (coadjoint orbits, tori)
+\end{itemize}
+
+In such cases:
+
+\begin{enumerate}
+\item The classical state space is already compact.
+\item Fourier duality between $q$ and $p$ fails globally.
+\item Canonical commutation relations cannot be represented in standard form.
+\end{enumerate}
+
+Thus boundedness forces structural modifications of quantization.
+
+\section{Particle on a Compact Configuration Space}
+
+Let configuration space be $Q = S^1$.
+
+Then phase space:
+
+\[
+M = T^*S^1 \cong S^1 \times \mathbb{R}.
+\]
+
+Coordinates:
+
+\[
+\theta \in [0,2\pi),
+\qquad
+p \in \mathbb{R}.
+\]
+
+Poisson bracket:
+
+\[
+\{\theta,p\}=1.
+\]
+
+However:
+
+There exists no globally defined self-adjoint operator $\hat{\theta}$ satisfying
+
+\[
+[\hat{\theta},\hat{p}] = i\hbar.
+\]
+
+\subsection{Weyl Formulation}
+
+Instead define unitary operators:
+
+\[
+U = e^{i\hat{\theta}},
+\qquad
+V = e^{i a \hat{p}/\hbar}.
+\]
+
+They satisfy:
+
+\[
+UV = e^{ia}VU.
+\]
+
+This is the Weyl form of CCR.
+
+Thus position operator does not exist globally —
+only its exponentials do.
+
+\section{Self-Adjoint Extensions and Boundary Conditions}
+
+Consider particle on interval $[0,L]$.
+
+Hamiltonian:
+
+\[
+H = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2}.
+\]
+
+Self-adjoint extensions correspond to boundary conditions:
+
+\[
+\psi(L) = e^{i\alpha}\psi(0),
+\qquad
+\psi'(L)=e^{i\alpha}\psi'(0).
+\]
+
+Parameter $\alpha \in U(1)$.
+
+Thus quantization depends on:
+
+\[
+\textbf{Choice of boundary condition}.
+\]
+
+This is absent in $\mathbb{R}$ case.
+
+Therefore quantization is not unique —
+even for fixed classical phase space.
+
+\section{Compact Phase Spaces}
+
+Let $M$ be compact symplectic manifold.
+
+Example:
+
+\[
+M = T^2.
+\]
+
+Quantization requires integrality condition:
+
+\[
+\frac{1}{2\pi\hbar}[\omega] \in H^2(M,\mathbb{Z}).
+\]
+
+Hilbert space becomes finite-dimensional:
+
+\[
+\dim \mathcal{H} = \frac{1}{(2\pi\hbar)^n}\int_M \omega^n.
+\]
+
+Thus:
+
+\[
+\textbf{Compact phase space implies finite-dimensional quantum theory}.
+\]
+
+This drastically alters convex state geometry.
+
+\section{Modified Uncertainty Relations}
+
+Standard Heisenberg relation:
+
+\[
+\Delta q \Delta p \ge \frac{\hbar}{2}.
+\]
+
+But if $q$ bounded:
+
+\[
+\Delta q \le \frac{L}{2}.
+\]
+
+Thus uncertainty relation must adapt.
+
+For $S^1$ one uses:
+
+\[
+\Delta(\sin\theta)\Delta p
+\ge
+\frac{\hbar}{2}
+|\langle \cos\theta\rangle|.
+\]
+
+Thus uncertainty depends on state and geometry.
+
+Hence:
+
+Uncertainty relations are geometry-dependent,
+not universal.
+
+\section{Failure of Fourier Duality}
+
+On $\mathbb{R}$:
+
+\[
+\mathcal{F}: L^2(\mathbb{R}) \to L^2(\mathbb{R}).
+\]
+
+On interval:
+
+Momentum spectrum discrete.
+
+On compact phase space:
+
+No global Fourier transform exists.
+
+Thus canonical symmetry between $q$ and $p$ breaks.
+
+This explains why Dirac’s canonical covariance fails even more severely here.
+
+\section{Constraint Quantization vs Confining Potential}
+
+Two procedures:
+
+\subsection*{(A) Strict Constraint}
+
+Impose:
+
+\[
+x \in [0,L]
+\]
+
+at classical level,
+then quantize reduced space.
+
+\subsection*{(B) Confining Potential}
+
+Add steep potential
+\[
+V(x) \to \infty
+\]
+outside interval,
+then quantize full $\mathbb{R}$.
+
+These procedures produce inequivalent quantum theories in general.
+
+Thus:
+
+Quantization and reduction do not commute automatically.
+
+\section{Convex-Geometric Perspective}
+
+Classical state space:
+
+\[
+\mathcal{P}(M)
+\]
+
+already compact when $M$ compact.
+
+Quantum state space:
+
+\[
+\mathcal{D}(\mathcal{H})
+\]
+
+finite-dimensional convex body.
+
+In compact case:
+
+\begin{itemize}
+\item No infinite-dimensional non-simplex.
+\item Geometry resembles finite convex polytope-like structure.
+\end{itemize}
+
+Thus deformation picture changes qualitatively.
+
+\section{Anti-Ray Ontology and Compactness}
+
+In unbounded case:
+
+Pure states = rays in infinite-dimensional Hilbert space.
+
+In compact phase case:
+
+Finite-dimensional projective space:
+
+\[
+\mathbb{CP}^{N-1}.
+\]
+
+Thus:
+
+State manifold compact.
+
+No "plane wave" non-normalizable states.
+
+Rigged Hilbert space unnecessary.
+
+Hence bounded configuration eliminates distributional eigenstates.
+
+\section{Semiclassical Limit for Compact Phase Spaces}
+
+Let $\hbar \to 0$.
+
+Dimension grows:
+
+\[
+\dim \mathcal{H}_\hbar \sim \frac{\mathrm{Vol}(M)}{(2\pi\hbar)^n}.
+\]
+
+Thus classical limit corresponds to:
+
+\[
+\mathbb{CP}^{N-1}
+\to
+\mathcal{P}(M).
+\]
+
+This is geometric convergence of convex bodies.
+
+\section{Structural Implications for Quantization}
+
+Bounded configuration spaces show:
+
+\begin{enumerate}
+\item CCR cannot hold globally.
+\item Self-adjoint extensions introduce topological parameters.
+\item Quantization is not unique.
+\item Canonical covariance is obstructed by topology.
+\item State geometry changes qualitatively.
+\end{enumerate}
+
+Thus Dirac's program fails even at basic level.
+
+\section{Conclusion}
+
+Quantization on bounded or compact spaces reveals:
+
+\begin{itemize}
+\item Quantization depends on topology.
+\item Operator domains encode geometry.
+\item Convex state space deformation depends on volume scaling.
+\item Classical limit is geometric blow-up of projective spaces.
+\end{itemize}
+
+Hence quantization is:
+
+\[
+\textbf{Topological and geometric deformation of probability space,}
+\]
+
+not merely algebraic replacement of brackets.%===========================================================
+\chapter{Toward a Structural Reformulation of Quantum Mechanics}
+%===========================================================
+
+\section{Introduction}
+
+The traditional formulation of quantum mechanics rests upon three pillars:
+
+\begin{enumerate}
+\item Hilbert space of states,
+\item Self-adjoint operators as observables,
+\item Canonical commutation relations.
+\end{enumerate}
+
+Historically, quantization was conceived as a map from classical observables to operators preserving Poisson brackets.
+
+However, we have seen:
+
+\begin{itemize}
+\item Groenewold--Van Hove obstruction forbids global canonical quantization.
+\item Symplectic reduction shows algebraic constraints reflect geometric reduction.
+\item Deformation quantization alters dual state geometry.
+\item Compact phase spaces invalidate global CCR.
+\item Bounded configuration spaces destroy canonical covariance.
+\end{itemize}
+
+These results collectively suggest:
+
+\medskip
+\noindent
+\textbf{Quantization is not a map of observables.}
+
+Instead, it is a structural replacement of state space.
+
+\section{Classical Mechanics as Commutative Probability Geometry}
+
+Let $M$ be phase space.
+
+State space:
+
+\[
+\mathcal{S}_{cl} = \mathcal{P}(M)
+\]
+
+the convex simplex of probability measures.
+
+Key properties:
+
+\begin{enumerate}
+\item It is a Choquet simplex.
+\item Pure states are points of $M$.
+\item Decomposition of mixed states is unique.
+\item Observables are affine functionals:
+\[
+f \mapsto \left(\mu \mapsto \int f\,d\mu\right).
+\]
+\end{enumerate}
+
+Thus classical mechanics is commutative probability theory over a global event space.
+
+\section{Quantum Mechanics as Non-Simplex Convex Geometry}
+
+Quantum state space:
+
+\[
+\mathcal{S}_q = \mathcal{D}(\mathcal{H}).
+\]
+
+Properties:
+
+\begin{enumerate}
+\item Convex but not simplex.
+\item Pure states are rays in $\mathcal{H}$.
+\item Mixed state decomposition non-unique.
+\item Observables are affine functionals:
+\[
+A \mapsto (\rho \mapsto \mathrm{Tr}(\rho A)).
+\]
+\end{enumerate}
+
+Thus:
+
+\[
+\textbf{Quantum mechanics is noncommutative probability theory}.
+\]
+
+The algebra is secondary; the convex state space is primary.
+
+\section{Quantization as State-Space Deformation}
+
+We may now define:
+
+\begin{definition}
+Quantization is a deformation of the classical simplex state space
+\[
+\mathcal{P}(M)
+\]
+into a non-simplex convex state space
+\[
+\mathcal{D}(\mathcal{H}_\hbar)
+\]
+such that:
+\begin{enumerate}
+\item $\hbar \to 0$ restores simplex geometry,
+\item Commutator brackets approximate Poisson brackets,
+\item Pure states converge to Dirac measures.
+\end{enumerate}
+\end{definition}
+
+The observable algebra is reconstructed as:
+
+\[
+\text{Affine functionals on } \mathcal{S}_q.
+\]
+
+Thus observables are derived objects.
+
+\section{Loss of Global Event Space}
+
+In classical mechanics:
+
+All observables are functions on same $M$.
+
+In quantum mechanics:
+
+Each maximal commuting algebra defines its own spectral measure space.
+
+No global event space exists.
+
+This is formalized by:
+
+\begin{itemize}
+\item Non-Boolean projection lattice,
+\item Kochen--Specker obstruction,
+\item Contextuality of measurements.
+\end{itemize}
+
+Hence quantization entails:
+
+\[
+\textbf{Destruction of global measurable structure}.
+\]
+
+\section{Geometric Quantization Reinterpreted}
+
+Geometric quantization constructs Hilbert spaces from:
+
+\[
+(M,\omega)
+\to
+(\mathcal{H}, L, \text{polarization}).
+\]
+
+But from state-space perspective:
+
+\begin{itemize}
+\item Prequantum line bundle encodes curvature deformation.
+\item Polarization selects submanifold of states.
+\item Resulting projective Hilbert space replaces phase space.
+\end{itemize}
+
+Thus geometric quantization implements:
+
+\[
+\textbf{Replacement of base manifold by projective manifold}.
+\]
+
+\section{Reduction and Quantization}
+
+Reduction modifies classical state space:
+
+\[
+\mathcal{P}(M)
+\to
+\mathcal{P}(M_\xi).
+\]
+
+Quantization modifies convex geometry.
+
+Compatibility of operations requires:
+
+\[
+[Q,R]=0.
+\]
+
+But generically convex structures differ unless integrality and symmetry conditions hold.
+
+\section{Compact Phase Spaces and Finite Quantum Geometry}
+
+When $M$ compact:
+
+\[
+\dim \mathcal{H}_\hbar < \infty.
+\]
+
+Then:
+
+\[
+\mathcal{S}_q \subset \mathbb{R}^{N^2-1}
+\]
+
+finite-dimensional convex body.
+
+Classical limit corresponds to:
+
+\[
+\mathbb{CP}^{N-1}
+\to
+\mathcal{P}(M)
+\]
+
+as $N\to\infty$.
+
+Thus classical mechanics emerges as convex-geometric blow-up.
+
+\section{Canonical Commutation Relations Revisited}
+
+CCR:
+
+\[
+[\hat q, \hat p] = i\hbar.
+\]
+
+This is not fundamental.
+
+Fundamental object:
+
+\[
+\text{Non-simplex convex geometry}.
+\]
+
+CCR are one representation of tangent structure of that geometry.
+
+In compact settings CCR cannot hold globally.
+
+Thus CCR are local approximations, not axioms.
+
+\section{Rigged Hilbert Space and Boundary Effects}
+
+In noncompact systems:
+
+Generalized eigenvectors required.
+
+In compact systems:
+
+No distributional states.
+
+Thus rigged Hilbert space reflects noncompactness of classical phase space.
+
+Hence analytic complications encode topology of underlying classical geometry.
+
+\section{Classical Limit as Convex Collapse}
+
+Let $\mathcal{S}_\hbar$ be quantum state space.
+
+As $\hbar \to 0$:
+
+\begin{itemize}
+\item Non-unique decompositions become unique.
+\item Interference terms vanish.
+\item Off-diagonal density components suppressed.
+\item Convex body approaches simplex.
+\end{itemize}
+
+Thus classical limit is:
+
+\[
+\textbf{Restoration of simplex property}.
+\]
+
+\section{Structural Axioms (Proposed Reformulation)}
+
+We may propose the following axioms:
+
+\begin{enumerate}
+\item A physical system is defined by a compact convex state space $\mathcal{S}$.
+\item Observables are continuous affine functionals on $\mathcal{S}$.
+\item Classical systems are those for which $\mathcal{S}$ is a simplex.
+\item Quantum systems are those for which $\mathcal{S}$ is non-simplex and homogeneous.
+\item Quantization is a deformation $\mathcal{S}_{cl} \to \mathcal{S}_q$ parameterized by $\hbar$.
+\end{enumerate}
+
+This formulation eliminates need for canonical observable map.
+
+\section{Resolution of Dirac Obstruction}
+
+Dirac sought:
+
+\[
+C^\infty(M) \to \mathcal{B}(\mathcal{H}).
+\]
+
+But if quantization is state deformation:
+
+\[
+\mathcal{P}(M)
+\to
+\mathcal{D}(\mathcal{H}),
+\]
+
+no algebra homomorphism is required.
+
+The obstruction vanishes because wrong problem is removed.
+
+\section{Outlook}
+
+This structural reformulation suggests:
+
+\begin{itemize}
+\item Quantum theory is geometry of non-simplex convex bodies.
+\item Classical mechanics is limiting simplex case.
+\item Observables are dual objects.
+\item CCR are local artifacts.
+\item Quantization is geometric deformation.
+\end{itemize}
+
+Future directions include:
+
+\begin{itemize}
+\item Noncommutative probability reconstruction,
+\item Information-theoretic derivations,
+\item Connections to operator algebras,
+\item Extension to quantum field theory.
+\end{itemize}
+
+\bigskip
+
+\noindent
+\textbf{Conclusion.}
+
+Quantization is not a rule assigning operators to functions.
+
+It is the replacement of a commutative probability geometry by a noncommutative one.
+
+The classical world is the singular limit in which convex geometry regains the simplex property.
+
+\bigskip
+
+This completes the structural reformulation.
+%===========================================================
+\chapter{Toward a Structural Reformulation of Quantum Mechanics}
+%===========================================================
+
+\section{Introduction}
+
+The traditional formulation of quantum mechanics rests upon three pillars:
+
+\begin{enumerate}
+\item Hilbert space of states,
+\item Self-adjoint operators as observables,
+\item Canonical commutation relations.
+\end{enumerate}
+
+Historically, quantization was conceived as a map from classical observables to operators preserving Poisson brackets.
+
+However, we have seen:
+
+\begin{itemize}
+\item Groenewold--Van Hove obstruction forbids global canonical quantization.
+\item Symplectic reduction shows algebraic constraints reflect geometric reduction.
+\item Deformation quantization alters dual state geometry.
+\item Compact phase spaces invalidate global CCR.
+\item Bounded configuration spaces destroy canonical covariance.
+\end{itemize}
+
+These results collectively suggest:
+
+\medskip
+\noindent
+\textbf{Quantization is not a map of observables.}
+
+Instead, it is a structural replacement of state space.
+
+\section{Classical Mechanics as Commutative Probability Geometry}
+
+Let $M$ be phase space.
+
+State space:
+
+\[
+\mathcal{S}_{cl} = \mathcal{P}(M)
+\]
+
+the convex simplex of probability measures.
+
+Key properties:
+
+\begin{enumerate}
+\item It is a Choquet simplex.
+\item Pure states are points of $M$.
+\item Decomposition of mixed states is unique.
+\item Observables are affine functionals:
+\[
+f \mapsto \left(\mu \mapsto \int f\,d\mu\right).
+\]
+\end{enumerate}
+
+Thus classical mechanics is commutative probability theory over a global event space.
+
+\section{Quantum Mechanics as Non-Simplex Convex Geometry}
+
+Quantum state space:
+
+\[
+\mathcal{S}_q = \mathcal{D}(\mathcal{H}).
+\]
+
+Properties:
+
+\begin{enumerate}
+\item Convex but not simplex.
+\item Pure states are rays in $\mathcal{H}$.
+\item Mixed state decomposition non-unique.
+\item Observables are affine functionals:
+\[
+A \mapsto (\rho \mapsto \mathrm{Tr}(\rho A)).
+\]
+\end{enumerate}
+
+Thus:
+
+\[
+\textbf{Quantum mechanics is noncommutative probability theory}.
+\]
+
+The algebra is secondary; the convex state space is primary.
+
+\section{Quantization as State-Space Deformation}
+
+We may now define:
+
+\begin{definition}
+Quantization is a deformation of the classical simplex state space
+\[
+\mathcal{P}(M)
+\]
+into a non-simplex convex state space
+\[
+\mathcal{D}(\mathcal{H}_\hbar)
+\]
+such that:
+\begin{enumerate}
+\item $\hbar \to 0$ restores simplex geometry,
+\item Commutator brackets approximate Poisson brackets,
+\item Pure states converge to Dirac measures.
+\end{enumerate}
+\end{definition}
+
+The observable algebra is reconstructed as:
+
+\[
+\text{Affine functionals on } \mathcal{S}_q.
+\]
+
+Thus observables are derived objects.
+
+\section{Loss of Global Event Space}
+
+In classical mechanics:
+
+All observables are functions on same $M$.
+
+In quantum mechanics:
+
+Each maximal commuting algebra defines its own spectral measure space.
+
+No global event space exists.
+
+This is formalized by:
+
+\begin{itemize}
+\item Non-Boolean projection lattice,
+\item Kochen--Specker obstruction,
+\item Contextuality of measurements.
+\end{itemize}
+
+Hence quantization entails:
+
+\[
+\textbf{Destruction of global measurable structure}.
+\]
+
+\section{Geometric Quantization Reinterpreted}
+
+Geometric quantization constructs Hilbert spaces from:
+
+\[
+(M,\omega)
+\to
+(\mathcal{H}, L, \text{polarization}).
+\]
+
+But from state-space perspective:
+
+\begin{itemize}
+\item Prequantum line bundle encodes curvature deformation.
+\item Polarization selects submanifold of states.
+\item Resulting projective Hilbert space replaces phase space.
+\end{itemize}
+
+Thus geometric quantization implements:
+
+\[
+\textbf{Replacement of base manifold by projective manifold}.
+\]
+
+\section{Reduction and Quantization}
+
+Reduction modifies classical state space:
+
+\[
+\mathcal{P}(M)
+\to
+\mathcal{P}(M_\xi).
+\]
+
+Quantization modifies convex geometry.
+
+Compatibility of operations requires:
+
+\[
+[Q,R]=0.
+\]
+
+But generically convex structures differ unless integrality and symmetry conditions hold.
+
+\section{Compact Phase Spaces and Finite Quantum Geometry}
+
+When $M$ compact:
+
+\[
+\dim \mathcal{H}_\hbar < \infty.
+\]
+
+Then:
+
+\[
+\mathcal{S}_q \subset \mathbb{R}^{N^2-1}
+\]
+
+finite-dimensional convex body.
+
+Classical limit corresponds to:
+
+\[
+\mathbb{CP}^{N-1}
+\to
+\mathcal{P}(M)
+\]
+
+as $N\to\infty$.
+
+Thus classical mechanics emerges as convex-geometric blow-up.
+
+\section{Canonical Commutation Relations Revisited}
+
+CCR:
+
+\[
+[\hat q, \hat p] = i\hbar.
+\]
+
+This is not fundamental.
+
+Fundamental object:
+
+\[
+\text{Non-simplex convex geometry}.
+\]
+
+CCR are one representation of tangent structure of that geometry.
+
+In compact settings CCR cannot hold globally.
+
+Thus CCR are local approximations, not axioms.
+
+\section{Rigged Hilbert Space and Boundary Effects}
+
+In noncompact systems:
+
+Generalized eigenvectors required.
+
+In compact systems:
+
+No distributional states.
+
+Thus rigged Hilbert space reflects noncompactness of classical phase space.
+
+Hence analytic complications encode topology of underlying classical geometry.
+
+\section{Classical Limit as Convex Collapse}
+
+Let $\mathcal{S}_\hbar$ be quantum state space.
+
+As $\hbar \to 0$:
+
+\begin{itemize}
+\item Non-unique decompositions become unique.
+\item Interference terms vanish.
+\item Off-diagonal density components suppressed.
+\item Convex body approaches simplex.
+\end{itemize}
+
+Thus classical limit is:
+
+\[
+\textbf{Restoration of simplex property}.
+\]
+
+\section{Structural Axioms (Proposed Reformulation)}
+
+We may propose the following axioms:
+
+\begin{enumerate}
+\item A physical system is defined by a compact convex state space $\mathcal{S}$.
+\item Observables are continuous affine functionals on $\mathcal{S}$.
+\item Classical systems are those for which $\mathcal{S}$ is a simplex.
+\item Quantum systems are those for which $\mathcal{S}$ is non-simplex and homogeneous.
+\item Quantization is a deformation $\mathcal{S}_{cl} \to \mathcal{S}_q$ parameterized by $\hbar$.
+\end{enumerate}
+
+This formulation eliminates need for canonical observable map.
+
+\section{Resolution of Dirac Obstruction}
+
+Dirac sought:
+
+\[
+C^\infty(M) \to \mathcal{B}(\mathcal{H}).
+\]
+
+But if quantization is state deformation:
+
+\[
+\mathcal{P}(M)
+\to
+\mathcal{D}(\mathcal{H}),
+\]
+
+no algebra homomorphism is required.
+
+The obstruction vanishes because wrong problem is removed.
+
+\section{Outlook}
+
+This structural reformulation suggests:
+
+\begin{itemize}
+\item Quantum theory is geometry of non-simplex convex bodies.
+\item Classical mechanics is limiting simplex case.
+\item Observables are dual objects.
+\item CCR are local artifacts.
+\item Quantization is geometric deformation.
+\end{itemize}
+
+Future directions include:
+
+\begin{itemize}
+\item Noncommutative probability reconstruction,
+\item Information-theoretic derivations,
+\item Connections to operator algebras,
+\item Extension to quantum field theory.
+\end{itemize}
+
+\bigskip
+
+\noindent
+\textbf{Conclusion.}
+
+Quantization is not a rule assigning operators to functions.
+
+It is the replacement of a commutative probability geometry by a noncommutative one.
+
+The classical world is the singular limit in which convex geometry regains the simplex property.
+
+\bigskip
+
+This completes the structural reformulation.
+\end{document}

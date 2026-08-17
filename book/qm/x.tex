@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{bm}
+\title{Coordinate Eigenstates and Position Measurement}
+\author{Shimon Panfil}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Axiomatic Setting}
+
+\begin{axiom}[Quantum kinematics]
+A quantum system is described by a complex separable Hilbert space $\mathcal H$.
+Physical observables are represented by normalized positive operator--valued measures (POVMs) on $\mathcal H$.
+\end{axiom}
+
+\begin{axiom}[Configuration space]
+The configuration space of a nonrelativistic particle is a measurable space $(\Omega,\mathcal B(\Omega))$,
+where $\Omega \subseteq \mathbb R^d$ may be unbounded or bounded.
+\end{axiom}
+
+\begin{axiom}[Position observable]
+The position observable is represented by the POVM
+\[
+E_X(\Delta)\psi(x) = \chi_\Delta(x)\psi(x),
+\quad \Delta \in \mathcal B(\Omega),
+\]
+acting on $\mathcal H = L^2(\Omega)$.
+When $\Omega \subseteq \mathbb R^d$, this POVM is a projection-valued measure (PVM).
+\end{axiom}
+
+---
+
+\section{The Position Operator}
+
+\begin{definition}[Position operator]
+For each coordinate $i=1,\dots,d$, define
+\[
+(\hat x^i \psi)(x) = x^i \psi(x)
+\]
+with maximal domain
+\[
+D(\hat x^i)=\{\psi\in L^2(\Omega)\mid x^i\psi(x)\in L^2(\Omega)\}.
+\]
+\end{definition}
+
+\begin{proposition}
+Each $\hat x^i$ is a self-adjoint multiplication operator with spectrum
+\[
+\sigma(\hat x^i)=\overline{\{x^i:x\in\Omega\}}.
+\]
+\end{proposition}
+
+---
+
+\section{Generalized Coordinate Eigenstates}
+
+\begin{definition}[Coordinate eigenstate]
+A coordinate eigenstate at $x_0\in\Omega$ is a distribution
+$|x_0\rangle \in \Phi^\times$ such that
+\[
+\hat x^i |x_0\rangle = x_0^i |x_0\rangle
+\quad \forall i.
+\]
+\end{definition}
+
+\begin{theorem}[Existence and form]
+For each $x_0\in\Omega$ there exists a generalized eigenstate $|x_0\rangle$ satisfying
+\[
+\langle x|x_0\rangle = \delta(x-x_0),
+\]
+where $\delta$ is the Dirac distribution restricted to $\Omega$.
+\end{theorem}
+
+\begin{proof}
+Let $\Phi\subset L^2(\Omega)$ be a dense test space (e.g.\ $C_c^\infty(\Omega)$).
+Define the functional
+\[
+\langle x_0|\phi\rangle := \phi(x_0).
+\]
+This functional is continuous on $\Phi$ and satisfies the eigenvalue equation in the distributional sense.
+\end{proof}
+
+\begin{corollary}
+No coordinate eigenstate belongs to $\mathcal H$.
+\end{corollary}
+
+---
+
+\section{Rigged Hilbert Space Structure}
+
+\begin{definition}[Gelfand triple]
+A rigged Hilbert space is a triple
+\[
+\Phi \subset \mathcal H \subset \Phi^\times
+\]
+where $\Phi$ is a dense nuclear space and $\Phi^\times$ its continuous dual.
+\end{definition}
+
+\begin{proposition}
+Coordinate eigenstates $|x\rangle$ belong to $\Phi^\times$ and not to $\mathcal H$.
+\end{proposition}
+
+This construction formalizes the distributional calculus introduced by
+\emph{:contentReference[oaicite:0]{index=0}}.
+
+---
+
+\section{Resolution of the Identity}
+
+\begin{theorem}[Completeness]
+The family $\{|x\rangle\}_{x\in\Omega}$ satisfies
+\[
+\int_\Omega |x\rangle\langle x|\,dx = \mathbb I
+\]
+in the weak operator sense.
+\end{theorem}
+
+\begin{corollary}
+For any $\psi\in\mathcal H$,
+\[
+\psi(x) = \langle x|\psi\rangle .
+\]
+\end{corollary}
+
+---
+
+\section{Bounded Configuration Spaces}
+
+\begin{theorem}[Position on bounded domains]
+Let $\Omega\subset\mathbb R^d$ be bounded.
+Then:
+\begin{enumerate}
+\item The position POVM remains a PVM.
+\item The spectrum of $\hat x$ is $\Omega$.
+\item Coordinate eigenstates exist as distributions.
+\item No self-adjointness obstruction arises.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+This sharply contrasts with momentum observables, whose generators generally fail
+to be self-adjoint on bounded domains.
+\end{remark}
+
+---
+
+\section{Dual Structure: Momentum Eigenstates}
+
+\begin{theorem}[Momentum on $\mathbb R^d$]
+On $\mathcal H=L^2(\mathbb R^d)$, the operator
+\[
+\hat p=-i\hbar\nabla
+\]
+admits generalized eigenstates $|p\rangle$ with
+\[
+\langle x|p\rangle=(2\pi\hbar)^{-d/2}e^{ip\cdot x/\hbar}.
+\]
+\end{theorem}
+
+\begin{remark}
+On bounded $\Omega$, no such eigenstates exist in general; momentum measurements must
+be described by POVMs rather than PVMs.
+\end{remark}
+
+---
+
+\section{Measurement and Collapse}
+
+\begin{axiom}[Operational measurement]
+A position measurement with finite resolution $\Delta$ updates the state $\rho$ by
+\[
+\rho \mapsto \frac{E_X(\Delta)\rho E_X(\Delta)}{\mathrm{Tr}(\rho E_X(\Delta))}.
+\]
+\end{axiom}
+
+\begin{theorem}[No exact collapse]
+No physical measurement produces a coordinate eigenstate.
+Exact localization corresponds to a singular limit outside $\mathcal H$.
+\end{theorem}
+
+\begin{proof}
+$E_X(\Delta)$ maps $\mathcal H$ into itself for all measurable $\Delta$.
+The limit $\Delta\to\{x_0\}$ is distributional and exits $\mathcal H$.
+\end{proof}
+
+---
+
+\section{Physical Interpretation}
+
+\begin{proposition}
+Coordinate eigenstates do not represent physical states but idealized measurement outcomes.
+\end{proposition}
+
+\begin{remark}
+Collapse is not a dynamical process in Hilbert space but an operational conditioning
+arising from system--apparatus entanglement and decoherence.
+\end{remark}
+
+---
+
+\section{Summary}
+
+\begin{itemize}
+\item Coordinate eigenstates are generalized vectors.
+\item They define the position observable but are not realizable states.
+\item Position remains well-defined on bounded domains.
+\item Collapse to a point is a mathematical idealization.
+\end{itemize}
+\end{document}

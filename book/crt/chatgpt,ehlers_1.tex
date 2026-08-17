@@ -1,0 +1,240 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,hyperref,geometry}
+\geometry{margin=1in}
+
+\title{\bf Ehlers Frame Theory and the Newtonian Limit of Relativistic Gravitation}
+\author{ }
+\date{ }
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Ehlers frame theory provides a unified, covariant framework that treats
+general relativity and Newton–Cartan gravity as members of a single
+one-parameter family of spacetime theories. 
+Contrary to common simplifications, the non-relativistic limit of general
+relativity cannot be obtained by any naive procedure such as $c \to \infty$.
+Instead, Newtonian gravity appears as a geometric limit of a family of 
+Lorentzian spacetimes only under strict structural and topological conditions.
+This article presents a modern, detailed exposition of Ehlers frame theory,
+its mathematical axioms, limiting procedures, and implications for the
+structure of classical mechanics in the absence of global time.
+We further discuss connections to ADM theory, global hyperbolicity, and the 
+geometry of temporal and spatial metric structures.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+The problem of understanding the Newtonian limit of general relativity is
+conceptually subtle.
+Newtonian gravity is formulated on a manifold equipped with a degenerate pair
+of temporal and spatial metric structures, $(t_a, h^{ab})$, whereas general
+relativity uses a non-degenerate Lorentzian metric $g_{ab}$.
+The two theories live on geometrically incompatible structures, and therefore
+one cannot obtain Newton–Cartan theory through a simple limit $c\to\infty$.
+
+Ehlers frame theory, introduced by J.~Ehlers in a series of investigations on
+the structure of gravitation, provides an elegant solution: construct a
+one-parameter family of geometric structures $(t_{ab}(\lambda),
+h^{ab}(\lambda),\nabla(\lambda))$, $\lambda \ge 0$, such that for $\lambda>0$
+these fields describe a relativistic spacetime with Lorentzian metric, while
+as $\lambda \to 0$ one obtains a Newton–Cartan spacetime.
+This approach allows for precise, covariant statements about when a Newtonian
+limit exists, what geometric structures survive the limit, and how matter and
+gravitational fields must scale in the non-relativistic regime.
+
+In addition to clarifying the classical limit, frame theory also offers
+insight into why classical mechanics fails when no global time function exists.
+In relativistic theory, foliations into spatial hypersurfaces are not generally
+available, so notions such as rigid body, global simultaneity, or canonical
+phase space structures may fail to exist. 
+Newtonian physics is recovered only when the temporal metric structure becomes
+integrable in the $\lambda\to 0$ regime.
+
+This paper aims to present a long, journal-style exposition of the frame theory
+framework, suitable for readers familiar with differential geometry,
+relativistic field theory, and Newton–Cartan geometry.
+
+\section{The Structural Axioms of Frame Theory}
+
+A \emph{frame theory} consists of the following data on a smooth, connected
+four-dimensional manifold $M$.
+
+\begin{enumerate}
+\item A parameter $\lambda \ge 0$, called the \emph{causality parameter}.
+\item A symmetric covariant tensor $t_{ab}(\lambda)$ (temporal metric).
+\item A symmetric contravariant tensor $h^{ab}(\lambda)$ (spatial metric).
+\item A torsion-free affine connection $\nabla(\lambda)$.
+\item Matter fields described by an EFT stress-energy tensor $T^{ab}(\lambda)$.
+\end{enumerate}
+
+These fields satisfy the fundamental \emph{orthogonality relation}
+\begin{equation}
+  t_{ab}(\lambda) \, h^{bc}(\lambda) = - \lambda \, \delta_a^c.
+  \label{orth}
+\end{equation}
+The parameter $\lambda$ controls the causal structure. 
+For $\lambda>0$, $t_{ab}$ and $h^{ab}$ combine into a non-degenerate metric.
+For $\lambda=0$, the right-hand side vanishes and $t_{ab}h^{bc}=0$, which
+forces both tensors to be degenerate and orthogonal, as in Newton–Cartan
+geometry.
+
+The connection is compatible with these structures:
+\begin{equation}
+  \nabla_a t_{bc} = 0, \qquad 
+  \nabla_a h^{bc} = 0.
+  \label{compat}
+\end{equation}
+These conditions generalize the Levi--Civita compatibility conditions.
+When $\lambda>0$, the orthogonality relation ensures that the combined metric
+\begin{equation}
+  g_{ab}(\lambda) 
+    := t_{ab}(\lambda) + \frac{1}{\lambda} h_{ab}(\lambda),
+  \label{metric}
+\end{equation}
+where $h_{ab}$ is the inverse of $h^{ab}$ on the spatial subspace,
+is a Lorentzian metric, and \eqref{compat} ensures that
+$\nabla(\lambda)$ is its Levi--Civita connection.
+
+Thus for every positive $\lambda$ the theory reduces to ordinary general
+relativity, provided one also imposes the Einstein field equations
+\begin{equation}
+  G_{ab}(g) = 8\pi T_{ab}.
+\end{equation}
+
+\section{The Limit $\lambda\to 0$ and Newton--Cartan Geometry}
+
+The key insight of Ehlers is that Newtonian gravity emerges only when one
+considers a \emph{family} of relativistic spacetimes whose temporal and spatial
+metrics scale such that \eqref{orth} has a smooth limit.
+
+As $\lambda\to 0$, the tensors become degenerate:
+\[
+\mathrm{rank}( t_{ab}(0) ) = 1, 
+\qquad 
+\mathrm{rank}( h^{ab}(0) ) = 3.
+\]
+Their null spaces define spatial and temporal subspaces.
+
+Let $t_a := t_{ab}(0)$ denote the absolute time one-form, uniquely defined up
+to scale if integrability conditions hold.
+The spatial metric $h^{ab}(0)$ is the inverse of the three-dimensional spatial
+metric on the fibers of $\ker t_a$.
+
+The limiting connection $\nabla(0)$ is not Levi--Civita, since no non-degenerate
+metric exists.
+Instead, it is a Newton--Cartan connection, satisfying
+\[
+\nabla_a t_b = 0, \qquad \nabla_a h^{bc} = 0,
+\]
+and having curvature components associated with the Newtonian gravitational
+field.
+When matter is included, the temporal-temporal curvature reproduces Poisson
+gravity,
+\begin{equation}
+  h^{ij} R_{i0j0} = \nabla^2 \Phi,
+\end{equation}
+with $\Phi$ the Newtonian potential.
+Thus Newtonian gravity is not simply a special case of relativity but the
+geometric limit of a specific class of relativistic spacetimes.
+
+\section{Existence and Obstructions of the Newtonian Limit}
+
+Not every relativistic spacetime can appear as part of a frame theory
+approaching a Newton--Cartan structure.
+
+\subsection{Topological and global requirements}
+
+A necessary condition is the existence of a global time function 
+$\tau: M \to \mathbb{R}$ whose level sets are spacelike.
+Spacetimes without a global foliation by spacelike hypersurfaces—such as Gödel
+spacetime or general rotating cosmologies—do not admit a Newtonian limit in the
+Ehlers sense.
+This demonstrates that Newtonian theory implicitly assumes strong global
+structure: absolute simultaneity requires integrability of the temporal 
+one-form $t_a$.
+
+\subsection{Curvature scaling}
+
+Curvature must scale in a controlled way:
+\[
+|R^a{}_{bcd}(\lambda)| < C
+\]
+with $\lambda$-dependent contractions respecting the scaling of $t_{ab}$ and
+$h^{ab}$.
+For example, one requires that the ``spatial'' curvature components remain
+finite, while ``mixed'' components scale appropriately to produce the
+Newtonian tidal field.
+
+\section{Relation to ADM Splitting and Temporal Functions}
+
+ADM theory provides a foliation-based decomposition of Lorentzian spacetimes
+into space-plus-time.
+However, ADM requires a global time function whose level sets are spacelike.
+Ehlers frame theory clarifies which aspects of ADM survive in the 
+$\lambda\to 0$ limit.
+
+If $(M,g_{ab})$ admits a global time function $t$ with timelike gradient, one
+can express the metric as
+\[
+g_{ab} = -N^2 t_a t_b + h_{ab},
+\]
+where $h_{ab}$ is the spatial metric induced on slices $t=\mathrm{const}$.
+In the frame theory scaling, the lapse $N$ corresponds to the clock metric
+encoded in $t_{ab}(\lambda)$.
+As $\lambda\to 0$, the spatial metric $h_{ab}$ becomes the inverse of
+$h^{ab}(0)$, and the extrinsic curvature components converge to the spatial
+connection of Newton--Cartan theory.
+
+\section{Implications for Classical Mechanics and Rigid Bodies}
+
+Classical mechanics requires:
+\begin{itemize}
+\item a global time,
+\item spatial slices that define positions of bodies at each instant,
+\item a tangent bundle splitting into temporal and spatial directions.
+\end{itemize}
+
+Frame theory shows that these structures exist only when
+$t_{ab}(\lambda)$ becomes integrable as $\lambda\to0$.
+If a relativistic spacetime does not admit a global time function,
+Newtonian mechanics cannot be recovered.
+
+This explains the non-existence of rigid bodies and holonomic constraints in
+relativistic physics: spatial simultaneity and rigid spatial distances require
+a foliation and spatial metric independent of temporal structure, both of which
+are lost in general relativity unless special symmetries exist.
+
+\section{Matter Coupling in Frame Theory}
+
+Matter is described by a tensor $T^{ab}(\lambda)$ satisfying
+\[
+\nabla_a T^{ab} = 0.
+\]
+The Newtonian limit imposes scaling conditions, such as:
+\[
+T^{00}(\lambda) \sim O(1), \quad 
+T^{0i}(\lambda) \sim O(\sqrt{\lambda}), \quad
+T^{ij}(\lambda) \sim O(\lambda).
+\]
+These scalings ensure the emergence of Newtonian mass density and momentum
+current, and eliminate relativistic stresses when $\lambda=0$.
+
+\section{Conclusions}
+
+Ehlers frame theory provides a mathematically rigorous bridge between general
+relativity and Newtonian gravity.
+It clarifies that Newtonian theory is not simply a low-velocity approximation
+but a singular geometric limit requiring strong global assumptions, including
+the existence of a global time function and appropriate curvature scaling.
+The theory offers insight into the deep structural incompatibilities between
+classical and relativistic mechanics, and gives a natural home for
+post-Newtonian approximations, ADM initial-value formulations, and the geometry
+of absolute time.
+
+\end{document}
+

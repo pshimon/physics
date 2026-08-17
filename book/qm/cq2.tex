@@ -1,0 +1,284 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+
+\geometry{margin=1in}
+
+\title{Quantization as a Deformation of State Space:\\
+Convex Geometry, Noncommutativity, and the Failure of Canonical Functoriality}
+
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Canonical quantization is traditionally formulated as a homomorphism
+from classical observables equipped with a Poisson bracket
+to noncommuting operators satisfying canonical commutation relations.
+It is well known that such a homomorphism cannot exist globally.
+We argue that this obstruction is structural rather than technical.
+Quantization is not a deformation of observables alone,
+but a deformation of the convex geometry of states.
+Classical mechanics is commutative probability on a simplex,
+whereas quantum mechanics is noncommutative probability on a non-simplex convex set.
+Noncommutativity, contextuality, and the failure of canonical covariance
+follow directly from this geometric transition.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Let $(M,\omega)$ be a classical phase space.
+Canonical quantization is commonly expressed as a rule
+\begin{equation}
+\{f,g\} \longmapsto \frac{1}{i\hbar}[Q(f),Q(g)],
+\end{equation}
+where $\{\cdot,\cdot\}$ denotes the Poisson bracket.
+
+It is known that no quantization map
+\[
+Q: C^\infty(M) \to \mathcal{B}(\mathcal{H})
+\]
+can preserve the Poisson structure, multiplicative structure,
+and canonical covariance simultaneously for all observables.
+
+Rather than treating this as an algebraic anomaly,
+we propose a structural reformulation:
+
+\begin{center}
+\textbf{Quantization is a change of state space geometry.}
+\end{center}
+
+Observable algebras are secondary; state spaces are primary.
+
+\section{Classical Mechanics as Commutative Probability}
+
+\subsection{Algebraic structure}
+
+Let
+\[
+\mathcal{A}_{\mathrm{cl}} = C_0(M)
+\]
+with pointwise multiplication.
+
+States are positive normalized linear functionals:
+\[
+\mu(f) = \int_M f\, d\mu.
+\]
+
+\subsection{Convex structure}
+
+The classical state space is
+\[
+\mathcal{S}_{\mathrm{cl}} = \mathcal{P}(M).
+\]
+
+\begin{proposition}
+$\mathcal{S}_{\mathrm{cl}}$ is a Choquet simplex.
+\end{proposition}
+
+\begin{proof}
+Extreme points are Dirac measures $\delta_x$.
+Every probability measure admits a unique barycentric decomposition
+in terms of these extreme points.
+\end{proof}
+
+\begin{remark}
+The uniqueness of decomposition characterizes classical probability.
+\end{remark}
+
+Thus classical mechanics is equivalently:
+
+\[
+\text{Commutative } C^*\text{-algebra}
+\quad \Longleftrightarrow \quad
+\text{Simplex state space}.
+\]
+
+\section{Quantum Mechanics as Noncommutative Probability}
+
+\subsection{Algebraic structure}
+
+Let $\mathcal{H}$ be a Hilbert space.
+Observables are elements of a noncommutative $C^*$-algebra
+$\mathcal{A}_{\mathrm{qm}} \subset \mathcal{B}(\mathcal{H})$.
+
+States are density operators:
+\[
+\mathcal{S}_{\mathrm{qm}} =
+\{ \rho \ge 0 \mid \mathrm{Tr}(\rho)=1 \}.
+\]
+
+\subsection{Convex geometry}
+
+\begin{proposition}
+$\mathcal{S}_{\mathrm{qm}}$ is convex but not a simplex.
+\end{proposition}
+
+\begin{proof}
+Mixed states admit infinitely many decompositions into pure states.
+Uniqueness fails; hence not a simplex.
+\end{proof}
+
+\begin{remark}
+Non-uniqueness of decomposition is equivalent to quantum interference.
+\end{remark}
+
+\section{Duality Between Observables and States}
+
+For any $C^*$-algebra $\mathcal{A}$,
+states are positive normalized linear functionals on $\mathcal{A}$.
+
+Conversely, affine functionals on the state space reconstruct observables.
+
+Thus:
+
+\begin{center}
+Changing the state space necessarily changes the observable algebra.
+\end{center}
+
+One cannot preserve classical state geometry while deforming
+only the multiplication law.
+
+\section{Quantization as Convex Deformation}
+
+\begin{definition}
+Quantization is the replacement
+\[
+\mathcal{S}_{\mathrm{cl}} = \mathcal{P}(M)
+\quad \longrightarrow \quad
+\mathcal{S}_{\mathrm{qm}} = \mathcal{D}(\mathcal{H}),
+\]
+where a simplex state space is replaced by a non-simplex convex set.
+\end{definition}
+
+Observables are then reconstructed as affine functionals
+on the new state space.
+
+\section{Geometric Obstruction to Canonical Quantization}
+
+Assume a quantization map $Q$ preserving Lie structure.
+Dualizing, one obtains an affine embedding of
+$\mathcal{S}_{\mathrm{qm}}$ into $\mathcal{S}_{\mathrm{cl}}$.
+
+\begin{theorem}
+There is no affine isomorphism between a simplex and a non-simplex convex set.
+\end{theorem}
+
+\begin{proof}
+The simplex property is invariant under affine isomorphism.
+Quantum state space violates uniqueness of decomposition.
+\end{proof}
+
+\begin{corollary}
+A global Poisson-to-commutator homomorphism cannot exist.
+\end{corollary}
+
+The obstruction is therefore geometric.
+
+\section{Symmetries and Canonical Transformations}
+
+Classically, a canonical transformation
+\[
+\phi: M \to M
+\]
+acts by pushforward on states:
+\[
+\mu \mapsto \phi_*\mu.
+\]
+
+Quantum mechanically, symmetries are automorphisms of the operator algebra,
+implemented (when possible) by unitary operators.
+
+Since the state space has changed,
+there is no reason for every classical canonical transformation
+to lift to a quantum symmetry.
+
+Functoriality fails because the underlying convex geometry differs.
+
+\section{Contextuality and Loss of Global Sample Space}
+
+In classical theory:
+
+\begin{itemize}
+\item All observables are functions on one space $M$.
+\item A single global event space exists.
+\end{itemize}
+
+In quantum theory:
+
+\begin{itemize}
+\item Only commuting observables admit joint spectra.
+\item No single global sample space exists.
+\end{itemize}
+
+Quantization therefore represents the loss of a global Kolmogorovian event space.
+
+\section{Relation to Deformation Quantization}
+
+Deformation quantization replaces pointwise multiplication by
+a star-product:
+\[
+f \star g = fg + \frac{i\hbar}{2}\{f,g\} + O(\hbar^2).
+\]
+
+However, even this formal deformation implicitly changes
+the dual state space structure.
+
+The obstruction to global canonical quantization
+manifests as nontrivial higher-order terms in $\hbar$.
+
+\section{Semiclassical Limit}
+
+As $\hbar \to 0$:
+
+\begin{itemize}
+\item Commutators approximate Poisson brackets.
+\item Quantum states concentrate toward measures.
+\end{itemize}
+
+The simplex structure is recovered only in the limit.
+Thus classical mechanics appears as a singular convex-geometric limit.
+
+\section{Conclusion}
+
+Quantization is not a homomorphism of algebras.
+It is a transformation of probability geometry:
+
+\[
+\text{Simplex state space}
+\quad \longrightarrow \quad
+\text{Non-simplex state space}.
+\]
+
+Noncommutativity,
+contextuality,
+and the failure of canonical covariance
+follow naturally from this geometric shift.
+
+The traditional quantization problem is unsolvable
+because it attempts to preserve classical convex structure
+while deforming algebraic relations.
+
+The correct perspective is therefore:
+
+\begin{center}
+\textbf{Quantization is a deformation of state space,
+not a map of observables.}
+\end{center}
+
+\end{document}

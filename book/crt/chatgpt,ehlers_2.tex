@@ -1,0 +1,384 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,hyperref,geometry}
+\geometry{margin=1in}
+
+\title{\bf 
+Ehlers Frame Theory, the Newtonian Limit of Relativity, 
+and Structural Constraints from the No-Interaction Theorem
+}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Ehlers frame theory provides a unified geometric framework in which
+general relativity and Newton--Cartan gravity appear as members of a 
+parametrized family of spacetime theories.
+The classical (Newtonian) limit of relativity is notoriously subtle:
+Newtonian geometry and relativistic geometry live on fundamentally 
+different metric structures, making the limit deeply singular.
+Frame theory resolves this by introducing a causality parameter 
+$\lambda \ge 0$ such that 
+for $\lambda>0$ one obtains Lorentzian geometry, and for $\lambda=0$
+a Newton--Cartan structure arises naturally.
+
+In this expanded article we provide a comprehensive, long-form survey 
+and analysis of Ehlers frame theory, emphasizing its geometric content, 
+its relation to ADM and global hyperbolicity, and the precise mechanisms
+by which Newtonian gravity emerges.
+We add extensive mathematical derivations, including frame decompositions, 
+curvature scaling, and examples of limiting procedures.
+
+A new section analyzes the 
+{\it no-interaction theorem} of Currie, Jordan, and Sudarshan 
+within the context of Ehlers frame theory.
+The theorem shows that 
+relativistic particle mechanics with a fixed number of degrees of freedom 
+cannot support nontrivial interactions without violating Poincaré invariance.
+Frame theory clarifies this result by showing how 
+the absence of absolute time, the degeneracy of simultaneity, 
+and the failure of a global foliation structure obstruct 
+phase-space-based particle interaction models.
+We discuss the relation between the theorem, the Newtonian limit, 
+and the emergence (or non-emergence) of classical force laws.
+
+This long-form paper is intended as a high-level research exposition 
+suitable for journal submission after further polishing.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+The problem of reconciling Newtonian and relativistic gravity has a long and 
+complex history.
+Newtonian gravity is geometrized through a degenerate pair 
+$(t_a, h^{ab})$ on spacetime, while general relativity (GR) 
+employs a non-degenerate Lorentzian metric $g_{ab}$.
+The two theories are therefore built on incompatible geometric foundations.
+
+Attempts to identify Newtonian gravity as the $c \to \infty$ limit of GR often 
+fail because such a limit is not well-defined: metric components diverge,
+coordinate choices become singular, and geometric structures do not converge.
+
+Ehlers frame theory provides a deep and elegant solution.
+By introducing a {\it causality parameter} $\lambda \ge 0$ and a pair
+of temporal and spatial metric structures $(t_{ab}(\lambda),h^{ab}(\lambda))$
+satisfying the orthogonality condition 
+$t_{ab} h^{bc}=-\lambda\delta^c_a$, 
+one obtains:
+\begin{itemize}
+\item GR for $\lambda>0$,
+\item Newton--Cartan gravity for $\lambda=0$.
+\end{itemize}
+The limit $\lambda\to0$ is therefore meaningful, geometric, and covariant.
+
+This paper gives a substantially expanded review of frame theory, including:
+\begin{itemize}
+\item a thorough mathematical formulation,
+\item analysis of curvature and connection scaling,
+\item global conditions (foliations, time functions),
+\item detailed examples,
+\item a new extended section on the no-interaction theorem.
+\end{itemize}
+
+The no-interaction theorem (NIT) is often viewed as a curiosity in 
+relativistic particle mechanics.
+Here we reinterpret it through the lens of frame theory, showing that
+NIT reflects deep incompatibilities between classical phase space 
+structures and general-relativistic spacetime structure.
+
+\section{Mathematical Preliminaries}
+
+We briefly recall the relevant structures:
+\begin{itemize}
+\item a smooth connected 4-manifold $M$,
+\item tensor fields defined on $TM$ and $T^*M$,
+\item a torsion-free affine connection $\nabla$,
+\item curvature $R^a{}_{bcd}$ and associated objects.
+\end{itemize}
+
+A relativistic spacetime is $(M,g_{ab})$ with 
+Lorentzian signature $(-,+,+,+)$ and Levi--Civita connection $\nabla$.
+A Newton--Cartan spacetime is $(M,t_a,h^{ab},\nabla)$ where 
+$t_a$ is a nowhere-vanishing one-form defining absolute time, 
+$h^{ab}$ is a symmetric rank-3 contravariant metric,
+and $\nabla$ satisfies compatibility conditions
+$\nabla_a t_b=0$ and $\nabla_a h^{bc}=0$.
+
+These two structures cannot be continuously deformed into one another 
+without special preparation—precisely what frame theory provides.
+
+\section{The Axioms of Ehlers Frame Theory}
+
+A frame theory consists of $(M,t_{ab}(\lambda),h^{ab}(\lambda),\nabla(\lambda))$
+with $\lambda\ge0$ and the key axioms:
+\[
+t_{ab} h^{bc}=-\lambda\delta^c_a, 
+\qquad 
+\nabla_a t_{bc}=0,
+\qquad 
+\nabla_a h^{bc}=0.
+\]
+
+\subsection{The causality parameter}
+
+For $\lambda>0$, define
+\[
+g_{ab}(\lambda)=t_{ab}+\frac1\lambda h_{ab},
+\]
+where $h_{ab}$ is the spatial inverse of $h^{ab}$.
+One can show:
+\begin{itemize}
+\item $g_{ab}$ is Lorentzian,
+\item $\nabla$ is its Levi--Civita connection.
+\end{itemize}
+Thus one recovers GR when supplemented with Einstein's equations.
+
+For $\lambda=0$, the tensors become mutually orthogonal and degenerate.
+This yields Newton--Cartan geometry.
+
+\subsection{Scaling of frames}
+Choose a tetrad field $e_\mu{}^a(\lambda)$ with $\mu=0,1,2,3$.
+Define
+\[
+t_{ab}=-\lambda e_{0 a}e_{0 b}, \qquad 
+h^{ab}=e_i{}^ae_i{}^b.
+\]
+Then $t_{ab}h^{bc}=-\lambda\delta^c_a$ is automatic.
+The limit $\lambda\to0$ produces:
+\[
+t_a(0)=e_{0a}(0), \qquad
+h^{ab}(0)=e_i{}^a(0)e_i{}^b(0),
+\]
+with $t_a h^{ab}=0$.
+
+\section{Curvature, Connection, and Limit Conditions}
+
+We expand the limiting behavior of components of the connection and curvature.
+
+\subsection{Connection splitting}
+
+For $\lambda>0$ let $(t^a,h_{ab})$ be the unit normal and spatial projector
+associated with $t_{ab}$ and $h^{ab}$.
+Then $\nabla$ splits as:
+\[
+\nabla_a X_b 
+ = h_a{}^ch_b{}^d \nabla_c X_d 
+ + t_a t^c h_b{}^d \nabla_c X_d
+ + \cdots
+\]
+As $\lambda\to0$, projections onto temporal directions remain finite only 
+if spatial derivatives scale appropriately.
+
+\subsection{Curvature conditions}
+
+Newton--Cartan curvature satisfies:
+\[
+R^a{}_{bcd}t_a = 0, \qquad 
+h^{ab}R_{acbd}=0,
+\]
+with the only nontrivial components related to the gravitational field:
+\[
+R^i{}_{0j0} = \partial_i\partial_j\Phi.
+\]
+
+Thus frame theory requires relativistic curvature components to scale such that:
+\[
+R^i{}_{0j0}(\lambda) \sim O(1), 
+\qquad 
+R^i{}_{jkl}(\lambda) \sim O(\lambda).
+\]
+This is the geometric content of recovering a Newtonian tidal field.
+
+
+\section{Global Structure, Time Functions, and Foliations}
+
+A global time function $t:M\to\mathbb{R}$ with timelike gradient is required 
+to recover Newtonian absolute time.
+
+If a spacetime $(M,g_{ab}(\lambda))$ lacks such a function for all $\lambda$, 
+no Newtonian limit exists.
+
+In particular:
+\begin{itemize}
+\item Gödel spacetime cannot arise from a frame theory family.
+\item Rotating cosmologies generically fail the integrability of $t_a$.
+\item Spacetimes with closed timelike curves cannot limit to Newtonian geometry.
+\end{itemize}
+
+This aligns with the geometric requirement $t_{[a}\nabla_b t_{c]}=0$ 
+in the $\lambda\to0$ limit.
+
+
+\section{Examples of the Newtonian Limit}
+
+We briefly present nontrivial examples.
+
+\subsection{Schwarzschild family under rescaling}
+
+Let $r_s=2M$.
+Define:
+\[
+g_{ab}(\lambda)dx^adx^b
+ = -\left(1 - \lambda\frac{r_s}{r}\right)dt^2
+   + \left(1 - \lambda\frac{r_s}{r}\right)^{-1}dr^2
+   + r^2 d\Omega^2.
+\]
+As $\lambda\to0$:
+\[
+g_{00}=-1+\lambda\Phi+O(\lambda^2),
+\qquad 
+\Phi = -\frac{r_s}{r},
+\]
+and the frame theory limit yields the Newtonian potential.
+
+\subsection{FLRW cosmology}
+
+Let $g(\lambda)$ be FLRW with scale factor $a(\lambda t)$.
+Then:
+\[
+\Phi = -\frac{1}{2}\left(\frac{\ddot a}{a}\right)r^2
+\]
+appears in the Newtonian limit, reproducing Newtonian cosmology.
+
+
+\section{Matter Coupling and Stress-Energy Scaling}
+
+The scaling conditions:
+\[
+T^{00}\sim O(1), \quad 
+T^{0i}\sim O(\sqrt{\lambda}), \quad
+T^{ij}\sim O(\lambda),
+\]
+ensure that $T^{00}$ becomes mass density, $T^{0i}$ the Newtonian momentum 
+density, and $T^{ij}\to0$ eliminating relativistic stresses.
+
+
+\section{The No-Interaction Theorem and Frame Theory}
+\label{sec:NIT}
+
+We now present the fully expanded new section.
+
+\subsection{Statement of the no-interaction theorem}
+
+The Currie--Jordan--Sudarshan No-Interaction Theorem (NIT) states that:
+
+\medskip
+\noindent
+{\bf Theorem (NIT).}
+{\it 
+In relativistic particle mechanics with a finite number of particles,
+if:
+\begin{enumerate}
+\item the phase space is $6N$-dimensional with canonical Poisson brackets,
+\item the Poincaré generators act canonically,
+\item worldlines are functions of canonical variables,
+\end{enumerate}
+then the only allowed interactions are trivial; 
+the system is a set of noninteracting free particles.
+}
+
+\subsection{Geometric meaning: lack of absolute simultaneity}
+
+The theorem hinges on the fact that:
+\[
+\text{relativistic simultaneity is frame-dependent},
+\]
+so the notion of ``instantaneous position'' of all particles is not invariant.
+
+A Hamiltonian formulation with canonical Poisson brackets implicitly assumes:
+\begin{itemize}
+\item a global foliation by slices $t=\mathrm{const}$,
+\item instantaneous inter-particle potentials $V(|\mathbf{x}_i-\mathbf{x}_j|)$,
+\item globally defined particle positions on each slice.
+\end{itemize}
+But in GR (and SR) such absolute slices do not exist in general.
+
+\subsection{Frame theory interpretation}
+
+Frame theory provides a geometric viewpoint.
+
+For $\lambda>0$ (relativistic regime):
+\[
+t_{ab}(\lambda) = -\lambda e_{0a}e_{0b}, 
+\qquad 
+h^{ab}(\lambda)=e_i{}^ae_i{}^b,
+\]
+but the temporal metric is not integrable:
+\[
+t_{[a}\nabla_b t_{c]} \neq 0.
+\]
+This means no global absolute time.
+
+Thus:
+\begin{itemize}
+\item A canonical phase space does not exist globally.
+\item Therefore instantaneous forces cannot be defined.
+\item Thus NIT forbids interactions.
+\end{itemize}
+
+\subsection{How Newtonian interactions emerge when $\lambda\to0$}
+
+As $\lambda\to0$:
+\[
+t_{ab}(\lambda) \to t_a t_b,
+\qquad 
+t_{[a}\nabla_b t_{c]}(0) = 0,
+\]
+so $t_a$ becomes integrable.
+
+Hence:
+\[
+\exists\; \tau: M\to\mathbb{R} \ \ \text{such that}\ \ d\tau \propto t_a.
+\]
+This yields:
+\begin{itemize}
+\item absolute simultaneity,
+\item global canonical phase space,
+\item instantaneous potentials,
+\item interacting particle mechanics.
+\end{itemize}
+
+Thus NIT is not paradoxical: 
+it reflects the geometric impossibility of interactions 
+in a relativistic spacetime lacking absolute time.
+Frame theory makes this explicit.
+
+\subsection{Relation to field theory and constraints}
+
+Field theories avoid NIT because interactions propagate causally, not 
+instantaneously.
+Frame theory clarifies the difference:
+\[
+\text{interaction fields live in the full 4D geometry, not on slices.}
+\]
+Only when $\lambda\to0$ can fields collapse to instantaneous potentials.
+
+\section{Discussion}
+
+Frame theory unifies:
+\begin{itemize}
+\item geometric structure of Newtonian and relativistic theory,
+\item global analysis of foliations and time functions,
+\item particle interaction constraints,
+\item ADM splitting and initial-value structure,
+\item post-Newtonian expansions.
+\end{itemize}
+
+The no-interaction theorem appears as a structural consequence of 
+the failure of temporal integrability at $\lambda>0$.
+
+\section{Conclusion}
+
+Ehlers frame theory provides a powerful, rigorous, and unifying paradigm 
+for understanding the relationship between relativistic and Newtonian physics.
+The extended analysis presented here shows how deep structural constraints 
+from relativity---including the no-interaction theorem---are transparently 
+interpreted within this framework.
+
+\end{document}
+

@@ -1,0 +1,251 @@
+
+\documentclass[12pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{tensor}
+
+\geometry{margin=1in}
+
+\title{Geometrical Optics as the High-Frequency Limit of Maxwell Theory}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a comprehensive derivation of geometrical optics as the short-wavelength limit of Maxwell’s equations in curved spacetime. Using a covariant WKB expansion, we derive the eikonal equation, transport equations, polarization dynamics, and the emergence of null geodesics. The theory is formulated in Hamiltonian and symplectic terms, revealing its equivalence to constrained massless particle dynamics. We further analyze the structure of ray congruences, caustics, and the breakdown of the geometrical optics approximation via microlocal analysis. Connections with Yang--Mills theory, gauge invariance, and semiclassical quantization are emphasized.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Geometrical optics historically predates Maxwell’s equations, yet it emerges naturally as their high-frequency limit. From a modern viewpoint, geometrical optics is a singular asymptotic regime of a hyperbolic gauge field theory. This limit exhibits rich geometric and Hamiltonian structure, linking classical optics, general relativity, and semiclassical quantum mechanics.
+
+We adopt metric signature $(+,-,-,-)$ and Gaussian units throughout.
+
+---
+
+\section{Maxwell Theory in Covariant Form}
+
+Let $(M,g_{\mu\nu})$ be a four-dimensional Lorentzian manifold. The electromagnetic field is the curvature of a $U(1)$ connection:
+\[
+F = dA, \qquad F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu.
+\]
+
+Maxwell’s equations are:
+\begin{align}
+\nabla_\mu F^{\mu\nu} &= 4\pi J^\nu, \\
+\nabla_{[\lambda} F_{\mu\nu]} &= 0.
+\end{align}
+
+In vacuum:
+\[
+\nabla_\mu F^{\mu\nu} = 0.
+\]
+
+Imposing the Lorenz gauge,
+\[
+\nabla_\mu A^\mu = 0,
+\]
+we obtain:
+\[
+\nabla^\alpha \nabla_\alpha A_\mu - R_{\mu}^{\ \nu} A_\nu = 0.
+\]
+
+---
+
+\section{Eikonal Ansatz and Asymptotic Expansion}
+
+Introduce a rapidly varying phase:
+\[
+A_\mu(x) = \Re\left\{ a_\mu(x) e^{i S(x)/\varepsilon} \right\},
+\quad \varepsilon \to 0.
+\]
+
+Define the wave covector:
+\[
+k_\mu = \partial_\mu S.
+\]
+
+Substituting into the wave equation and collecting powers of $\varepsilon$ yields a hierarchy of equations.
+
+---
+
+\section{Eikonal Equation and Null Structure}
+
+At order $\varepsilon^{-2}$:
+\[
+k^\mu k_\mu = 0.
+\]
+
+Thus wavefronts are null hypersurfaces. The bicharacteristics satisfy:
+\[
+k^\nu \nabla_\nu k_\mu = 0,
+\]
+i.e. null geodesics.
+
+Hence:
+
+\begin{quote}
+\textit{Geometrical optics propagates along null geodesics of spacetime.}
+\end{quote}
+
+---
+
+\section{Transport Equations and Polarization}
+
+At order $\varepsilon^{-1}$:
+\[
+k^\nu \nabla_\nu a_\mu + \frac{1}{2} a_\mu \nabla_\nu k^\nu = 0,
+\quad
+k^\mu a_\mu = 0.
+\]
+
+Defining intensity:
+\[
+I = a_\mu a^\mu,
+\]
+we obtain conservation:
+\[
+\nabla_\mu (I k^\mu) = 0.
+\]
+
+Polarization is parallel transported along rays modulo gauge freedom:
+\[
+a_\mu \sim a_\mu + \alpha k_\mu.
+\]
+
+---
+
+\section{Ray Congruences and Optical Scalars}
+
+Define the expansion tensor:
+\[
+B_{\mu\nu} = \nabla_\nu k_\mu.
+\]
+
+Decompose:
+\[
+B_{\mu\nu} = \frac{1}{2}\theta h_{\mu\nu} + \sigma_{\mu\nu} + \omega_{\mu\nu},
+\]
+where:
+- $\theta$ is expansion,
+- $\sigma_{\mu\nu}$ shear,
+- $\omega_{\mu\nu}$ twist.
+
+Raychaudhuri equation for null congruences:
+\[
+\frac{d\theta}{d\lambda}
+= -\frac{1}{2}\theta^2 - \sigma_{\mu\nu}\sigma^{\mu\nu}
++ \omega_{\mu\nu}\omega^{\mu\nu} - R_{\mu\nu}k^\mu k^\nu.
+\]
+
+Caustics form when $\theta \to -\infty$.
+
+---
+
+\section{Hamiltonian and Symplectic Structure}
+
+Define phase space $T^*M$ with canonical symplectic form:
+\[
+\omega = dk_\mu \wedge dx^\mu.
+\]
+
+Hamiltonian:
+\[
+H(x,k) = \frac{1}{2} g^{\mu\nu} k_\mu k_\nu.
+\]
+
+Hamilton’s equations:
+\[
+\dot{x}^\mu = \frac{\partial H}{\partial k_\mu}, \quad
+\dot{k}_\mu = -\frac{\partial H}{\partial x^\mu}.
+\]
+
+Constraint:
+\[
+H = 0.
+\]
+
+Thus geometrical optics is a constrained Hamiltonian system equivalent to a massless relativistic particle.
+
+---
+
+\section{Relation to Yang--Mills Theory}
+
+For non-Abelian gauge fields:
+\[
+F^a_{\mu\nu} = \partial_\mu A^a_\nu - \partial_\nu A^a_\mu + f^{abc} A^b_\mu A^c_\nu,
+\]
+the eikonal limit yields:
+\[
+k^\mu k_\mu = 0,
+\quad
+k^\mu D_\mu a^a_\nu = 0,
+\]
+with color parallel transport.
+
+Thus classical color charge undergoes Wong’s equations, generalizing light rays to non-Abelian backgrounds.
+
+---
+
+\section{Microlocal Analysis and Caustics}
+
+The WKB expansion fails at caustics where the projection:
+\[
+\pi : \Lambda \subset T^*M \to M
+\]
+ceases to be injective.
+
+Wavefields must then be described using:
+- Fourier integral operators,
+- Maslov indices,
+- Lagrangian submanifolds.
+
+The phase acquires corrections:
+\[
+\psi \sim e^{i(S/\varepsilon + \mu \pi/2)}.
+\]
+
+---
+
+\section{Relation to Quantum Mechanics}
+
+The eikonal equation is the Hamilton–Jacobi equation for a massless particle:
+\[
+g^{\mu\nu} \partial_\mu S \partial_\nu S = 0.
+\]
+
+Thus:
+\[
+\text{Geometrical optics} \leftrightarrow \text{Classical limit of QED}.
+\]
+
+Photons emerge as semiclassical excitations of the Maxwell field.
+
+---
+
+\section{Conclusion}
+
+Geometrical optics is not merely an approximation but a geometric reduction of Maxwell theory. It encodes null geodesic motion, Hamiltonian dynamics, gauge symmetry, and microlocal structure. Its breakdown reveals the deep topology of wave propagation and connects classical electromagnetism to quantum field theory.
+
+---
+
+\section*{References}
+
+\begin{enumerate}
+\item J. D. Jackson, \textit{Classical Electrodynamics}.
+\item R. Wald, \textit{General Relativity}.
+\item V. I. Arnold, \textit{Mathematical Methods of Classical Mechanics}.
+\item M. Born and E. Wolf, \textit{Principles of Optics}.
+\item L. Hörmander, \textit{Analysis of Linear Partial Differential Operators}.
+\item G. B. Whitham, \textit{Linear and Nonlinear Waves}.
+\end{enumerate}
+
+\end{document}

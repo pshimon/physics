@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{physics}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{bm}
+\title{Coordinate Eigenstates as Distributional Sections}
+\begin{document}
+\maketitle
+
+
+\section{Geometric Kinematics}
+
+\begin{axiom}[Configuration manifold]
+The configuration space of a nonrelativistic particle is a smooth manifold
+$\Omega$ (possibly with boundary), equipped with its Borel $\sigma$-algebra.
+\end{axiom}
+
+\begin{axiom}[State bundle]
+Associated to $\Omega$ is a complex Hermitian line bundle
+\[
+\pi : \mathcal L \to \Omega ,
+\]
+called the \emph{state bundle}.
+\end{axiom}
+
+\begin{axiom}[Physical states]
+Physical states are square-integrable sections
+\[
+\psi \in \Gamma_{L^2}(\mathcal L),
+\]
+defined up to no equivalence relation (states are vectors, not rays).
+\end{axiom}
+
+\begin{remark}
+The usual Hilbert space $L^2(\Omega)$ arises only after trivializing
+$\mathcal L$. All geometric statements below are trivialization-independent.
+\end{remark}
+
+---
+
+\section{Position as a Base-Space Observable}
+
+\begin{axiom}[Position observable]
+The position observable is the canonical projection
+\[
+X : \mathcal L \to \Omega ,
+\]
+acting on sections by pullback along evaluation.
+\end{axiom}
+
+\begin{definition}[Position POVM]
+For any measurable $\Delta \subset \Omega$, define
+\[
+(E_X(\Delta)\psi)(x) = \chi_\Delta(x)\psi(x),
+\]
+where $\chi_\Delta$ is the indicator function on the base manifold.
+\end{definition}
+
+\begin{proposition}
+$E_X$ is a projection-valued measure depending only on the base-space structure
+of $\mathcal L$.
+\end{proposition}
+
+---
+
+\section{Distributional Sections}
+
+\begin{definition}[Test section space]
+Let $\Phi \subset \Gamma_{L^2}(\mathcal L)$ be a dense space of smooth,
+compactly supported sections.
+\end{definition}
+
+\begin{definition}[Distributional section]
+A distributional section is a continuous linear functional
+\[
+T : \Phi \to \mathbb C.
+\]
+The space of such sections is denoted $\Gamma'(\mathcal L)$.
+\end{definition}
+
+\begin{remark}
+$\Gamma'(\mathcal L)$ is the geometric analogue of the dual space
+$\Phi^\times$ in rigged Hilbert space theory.
+\end{remark}
+
+---
+
+\section{Coordinate Eigenstates as Delta Sections}
+
+\begin{definition}[Coordinate eigensection]
+For any point $x_0 \in \Omega$, the coordinate eigenstate is the
+distributional section $\delta_{x_0} \in \Gamma'(\mathcal L)$ defined by
+\[
+\langle \delta_{x_0}, \psi \rangle := \psi(x_0).
+\]
+\end{definition}
+
+\begin{theorem}[Eigenvalue property]
+For all smooth functions $f$ on $\Omega$,
+\[
+f(X)\,\delta_{x_0} = f(x_0)\,\delta_{x_0}
+\]
+in the distributional sense.
+\end{theorem}
+
+\begin{corollary}
+Coordinate eigenstates are eigenvectors of all position observables
+but belong to $\Gamma'(\mathcal L)\setminus\Gamma_{L^2}(\mathcal L)$.
+\end{corollary}
+
+---
+
+\section{Local Trivializations and Dirac Notation}
+
+In any local trivialization of $\mathcal L$, one may write
+\[
+\langle x | x_0 \rangle = \delta(x-x_0),
+\]
+recovering the familiar Dirac formalism introduced by
+\emph{:contentReference[oaicite:0]{index=0}}.
+
+\begin{remark}
+The delta function is not a function on $\Omega$ but a section-valued
+distribution supported on a single base point.
+\end{remark}
+
+---
+
+\section{Resolution of the Identity}
+
+\begin{theorem}[Geometric completeness]
+For any $\psi \in \Gamma_{L^2}(\mathcal L)$,
+\[
+\psi = \int_\Omega \delta_x \, \psi(x)\, dx,
+\]
+where the integral is understood weakly as a reconstruction of sections.
+\end{theorem}
+
+\begin{corollary}
+The family $\{\delta_x\}_{x\in\Omega}$ provides a continuous geometric frame
+for $\Gamma_{L^2}(\mathcal L)$.
+\end{corollary}
+
+---
+
+\section{Bounded Configuration Spaces}
+
+\begin{theorem}[Bounded base manifolds]
+Let $\Omega$ be compact or bounded with boundary.
+Then:
+\begin{enumerate}
+\item The state bundle $\mathcal L$ remains well-defined.
+\item Delta sections $\delta_x$ exist for all $x\in\Omega$.
+\item The position observable remains sharply defined.
+\item No boundary conditions are required for position.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+This sharply contrasts with momentum observables, which require additional
+bundle connections and boundary conditions and may fail to exist globally.
+\end{remark}
+
+---
+
+\section{Momentum as a Connection-Dependent Observable}
+
+\begin{axiom}[Connection]
+Momentum observables arise from a Hermitian connection
+\[
+\nabla : \Gamma(\mathcal L) \to \Gamma(T^*\Omega \otimes \mathcal L).
+\]
+\end{axiom}
+
+\begin{proposition}
+Momentum eigenstates exist only when $\nabla$ admits global parallel sections.
+\end{proposition}
+
+\begin{corollary}
+On bounded $\Omega$, momentum eigenstates generally do not exist as
+distributional sections.
+\end{corollary}
+
+---
+
+\section{Measurement and Collapse}
+
+\begin{axiom}[Operational localization]
+A finite-resolution position measurement corresponds to restricting a section
+to a measurable region $\Delta\subset\Omega$.
+\end{axiom}
+
+\begin{theorem}[No geometric collapse]
+No physical process produces a delta section $\delta_x$.
+Exact localization corresponds to a singular limit in $\Gamma'(\mathcal L)$.
+\end{theorem}
+
+\begin{remark}
+Collapse is not a geometric flow on $\mathcal L$ but an update of information
+conditioned on a base-space event.
+\end{remark}
+
+---
+
+\section{Interpretive Summary}
+
+\begin{itemize}
+\item Coordinate eigenstates are delta-supported sections of the state bundle.
+\item They are geometrically well-defined but physically unrealizable.
+\item Position is a base-manifold observable, not a generator of motion.
+\item The bundle formalism makes the asymmetry between position and momentum
+structural rather than interpretive.
+\end{itemize}
+\end{document}

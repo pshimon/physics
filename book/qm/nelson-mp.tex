@@ -1,0 +1,277 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,physics,geometry}
+\usepackage{bm}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\title{Interacting Particle Systems in Nelson Stochastic Mechanics:\\
+Configuration-Space Diffusions, Entanglement, and Gauge Coupling}
+
+\author{}
+\date{}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We develop a complete formulation of interacting quantum particle systems within Nelson stochastic mechanics. The fundamental object is a diffusion process on configuration space $\mathbb{R}^{3N}$ whose drift structure encodes both interaction and entanglement. We derive the multi-particle Schr\"odinger equation from stochastic dynamics, analyze the role of non-factorizable densities, establish the emergence of quantum potential and nonlocal correlations, and extend the formalism to electromagnetic gauge interactions. We further discuss existence issues for singular potentials, identical particles, and conditional subsystem dynamics. The formulation clarifies that interaction is not an additional structure but is intrinsic to the geometry of the joint diffusion process.
+\end{abstract}
+
+\section{Introduction}
+
+Nelson stochastic mechanics provides a probabilistic formulation of non-relativistic quantum mechanics in which particle trajectories are modeled as diffusion processes. While the single-particle case is well understood, the extension to interacting systems raises foundational and technical questions:
+
+\begin{itemize}
+\item How are interactions encoded in the stochastic process?
+\item What is the stochastic origin of entanglement?
+\item How do gauge fields enter the diffusion structure?
+\end{itemize}
+
+The key insight developed in this paper is:
+
+\medskip
+
+\noindent
+\textbf{Interacting quantum systems correspond to a single diffusion process on configuration space $\mathbb{R}^{3N}$, rather than independent particle processes with added forces.}
+
+\medskip
+
+\section{Configuration-Space Diffusion}
+
+Let $X(t) = (X_1(t), \dots, X_N(t)) \in \mathbb{R}^{3N}$.
+
+\subsection{Forward and backward dynamics}
+
+Each component satisfies:
+\begin{equation}
+dX_i(t) = b_i(X,t)\, dt + \sqrt{\frac{\hbar}{m_i}}\, dW_i(t),
+\end{equation}
+where:
+\begin{itemize}
+\item $W_i(t)$ are independent Wiener processes,
+\item $b_i(x_1,\dots,x_N,t)$ is the forward drift.
+\end{itemize}
+
+Backward dynamics:
+\begin{equation}
+dX_i(t) = b_i^*(X,t)\, dt + \sqrt{\frac{\hbar}{m_i}}\, dW_i^*(t).
+\end{equation}
+
+\subsection{Velocities}
+
+Define:
+\begin{align}
+v_i &= \frac{1}{2}(b_i + b_i^*), \\
+u_i &= \frac{1}{2}(b_i - b_i^*) = \frac{\hbar}{2m_i} \nabla_i \ln \rho.
+\end{align}
+
+Here $\rho(x,t)$ is the joint density on $\mathbb{R}^{3N}$.
+
+\section{Continuity Equation}
+
+The density satisfies:
+\begin{equation}
+\partial_t \rho + \sum_{i=1}^N \nabla_i \cdot (\rho v_i) = 0.
+\end{equation}
+
+\section{Stochastic Dynamics}
+
+Define mean derivatives:
+\begin{align}
+D &= \partial_t + \sum_i b_i \cdot \nabla_i + \sum_i \frac{\hbar}{2m_i} \nabla_i^2, \\
+D^* &= \partial_t + \sum_i b_i^* \cdot \nabla_i - \sum_i \frac{\hbar}{2m_i} \nabla_i^2.
+\end{align}
+
+Stochastic acceleration:
+\begin{equation}
+a_i = \frac{1}{2}(D D^* + D^* D) X_i.
+\end{equation}
+
+\subsection{Dynamical Postulate}
+
+We impose:
+\begin{equation}
+m_i a_i = - \nabla_i V(x_1,\dots,x_N,t).
+\end{equation}
+
+\section{Hamilton--Jacobi Structure}
+
+Introduce a scalar function $S$ such that:
+\begin{equation}
+v_i = \frac{1}{m_i} \nabla_i S.
+\end{equation}
+
+Then one derives:
+\begin{equation}
+\partial_t S + \sum_i \frac{(\nabla_i S)^2}{2m_i} + V + Q = 0,
+\end{equation}
+where the quantum potential is:
+\begin{equation}
+Q = -\sum_i \frac{\hbar^2}{2m_i} \frac{\nabla_i^2 \sqrt{\rho}}{\sqrt{\rho}}.
+\end{equation}
+
+\section{Emergence of Schr\"odinger Equation}
+
+Define:
+\begin{equation}
+\psi = \sqrt{\rho}\, e^{iS/\hbar}.
+\end{equation}
+
+Then:
+\begin{theorem}
+The pair $(\rho,S)$ satisfies the continuity and Hamilton--Jacobi equations if and only if $\psi$ satisfies:
+\begin{equation}
+i\hbar \partial_t \psi =
+\left[
+-\sum_i \frac{\hbar^2}{2m_i} \nabla_i^2 + V
+\right] \psi.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Standard substitution and separation into real and imaginary parts.
+\end{proof}
+
+\section{Structure of Interaction}
+
+Interaction enters through:
+
+\subsection{Potential coupling}
+\begin{equation}
+V(x_1,\dots,x_N) \neq \sum_i V_i(x_i).
+\end{equation}
+
+\subsection{Drift coupling}
+
+\begin{equation}
+b_i = \frac{1}{m_i} \nabla_i S + \frac{\hbar}{2m_i} \nabla_i \ln \rho.
+\end{equation}
+
+\subsection{Non-factorization}
+
+\begin{equation}
+\rho \neq \prod_i \rho_i(x_i).
+\end{equation}
+
+\section{Entanglement}
+
+\begin{definition}
+A state is entangled if $\psi(x_1,\dots,x_N)$ is not factorizable.
+\end{definition}
+
+Then:
+
+\begin{proposition}
+Entanglement implies nonlocal osmotic velocity:
+\begin{equation}
+u_i = \frac{\hbar}{2m_i} \nabla_i \ln \rho(x_1,\dots,x_N).
+\end{equation}
+\end{proposition}
+
+\section{Gauge Interaction}
+
+Introduce vector potential $A(x_i)$ and charge $q_i$.
+
+Modify velocity:
+\begin{equation}
+v_i = \frac{1}{m_i}(\nabla_i S - q_i A(x_i)).
+\end{equation}
+
+Then:
+\begin{theorem}
+The stochastic dynamics yields:
+\begin{equation}
+i\hbar \partial_t \psi =
+\sum_i \frac{1}{2m_i}(-i\hbar\nabla_i - q_i A)^2 \psi + V\psi.
+\end{equation}
+\end{theorem}
+
+\section{Singular Potentials}
+
+For Coulomb interaction:
+\begin{equation}
+V = \sum_{i<j} \frac{q_i q_j}{|x_i - x_j|},
+\end{equation}
+the drift becomes singular.
+
+\subsection{Issue}
+The diffusion may fail to be globally defined.
+
+\subsection{Resolution}
+\begin{itemize}
+\item Reflecting boundary conditions
+\item Renormalized generators
+\item Dirichlet form techniques
+\end{itemize}
+
+\section{Identical Particles}
+
+Symmetry condition:
+\begin{equation}
+\psi(\dots,x_i,\dots,x_j,\dots) = \pm \psi(\dots,x_j,\dots,x_i,\dots).
+\end{equation}
+
+This induces:
+\begin{itemize}
+\item nodal constraints
+\item topology of configuration space quotient
+\end{itemize}
+
+\section{Conditional Dynamics}
+
+Define conditional density:
+\begin{equation}
+\rho_i(x_i | x_j) = \frac{\rho(x_1,\dots,x_N)}{\rho_j(x_j)}.
+\end{equation}
+
+This induces a conditional drift:
+\begin{equation}
+b_i^{\text{cond}} = \mathbb{E}[b_i | X_j].
+\end{equation}
+
+\section{Conceptual Conclusion}
+
+Interaction in Nelson mechanics is:
+
+\begin{itemize}
+\item not a force between particles,
+\item but a geometric property of the joint diffusion,
+\item encoded in $(\rho,S)$ on configuration space.
+\end{itemize}
+
+\section{Outlook}
+
+Future directions include:
+\begin{itemize}
+\item spin and Pauli equation
+\item relativistic extensions
+\item stochastic bundle formulations
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{Nelson1966}
+E. Nelson,
+\textit{Derivation of the Schr\"odinger Equation from Newtonian Mechanics},
+Phys. Rev. 150 (1966).
+
+\bibitem{Nelson1985}
+E. Nelson,
+\textit{Quantum Fluctuations},
+Princeton University Press.
+
+\bibitem{GuerraMorato}
+F. Guerra, L. Morato,
+\textit{Quantization of Dynamical Systems and Stochastic Control Theory},
+Phys. Rev. D (1983).
+
+\end{thebibliography}
+
+\end{document}

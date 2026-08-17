@@ -1,0 +1,386 @@
+\documentclass[11pt,oneside]{book}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{tensor}
+\usepackage{mathtools}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Classical and Quantum Behavior of the Double Pendulum\\
+\large Geometry, Chaos, and Semiclassical Analysis}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+The double pendulum is one of the simplest mechanical systems exhibiting
+nonlinearity, non-integrability, and deterministic chaos.
+Despite its apparent simplicity, it connects:
+
+\begin{itemize}
+\item Riemannian geometry,
+\item Hamiltonian mechanics,
+\item symplectic topology,
+\item nonlinear dynamics,
+\item spectral theory,
+\item quantum chaos.
+\end{itemize}
+
+The goal of this monograph is to present a complete treatment
+from classical foundations to semiclassical quantization.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Configuration Manifold and Kinematics}
+
+\section{Physical Model}
+
+Two point masses $m_1,m_2$ are connected by rigid rods
+$\ell_1,\ell_2$ constrained to a plane.
+
+Generalized coordinates:
+\[
+q=(\theta_1,\theta_2), \quad \theta_i\in S^1.
+\]
+
+\section{Configuration Space}
+
+\[
+Q=S^1\times S^1 = T^2.
+\]
+
+\section{Phase Space}
+
+\[
+M=T^*Q.
+\]
+
+Canonical coordinates:
+\[
+(\theta_1,\theta_2,p_1,p_2).
+\]
+
+Symplectic form:
+\[
+\omega=d\theta_1\wedge dp_1+d\theta_2\wedge dp_2.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Lagrangian and Hamiltonian Structure}
+
+\section{Kinetic Energy}
+
+\[
+T=\frac12 m_1 \ell_1^2 \dot\theta_1^2
++\frac12 m_2(\ell_1^2\dot\theta_1^2
++\ell_2^2\dot\theta_2^2
++2\ell_1\ell_2\dot\theta_1\dot\theta_2\cos\Delta),
+\]
+where $\Delta=\theta_1-\theta_2$.
+
+\section{Potential}
+
+\[
+V=-(m_1+m_2)g\ell_1\cos\theta_1
+-m_2 g\ell_2\cos\theta_2.
+\]
+
+\section{Metric Form}
+
+Define:
+
+\[
+g_{ij}=
+\begin{pmatrix}
+A & B\cos\Delta\\
+B\cos\Delta & C
+\end{pmatrix}
+\]
+
+where
+\[
+A=(m_1+m_2)\ell_1^2,
+\quad
+B=m_2\ell_1\ell_2,
+\quad
+C=m_2\ell_2^2.
+\]
+
+Hamiltonian:
+\[
+H=\frac12 g^{ij}p_i p_j + V(\theta).
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Curvature of the Configuration Metric}
+
+\section{Determinant}
+
+\[
+|g|=AC-B^2\cos^2\Delta.
+\]
+
+\section{Gaussian Curvature}
+
+\begin{theorem}
+The Gaussian curvature of the configuration metric is
+\[
+K(\Delta)
+=
+\frac{B^2 \sin^2\Delta
+(AC+B^2\cos^2\Delta)}
+{2(AC-B^2\cos^2\Delta)^2}.
+\]
+\end{theorem}
+
+\begin{proof}
+Compute Christoffel symbols via
+\[
+\Gamma^k_{ij}=\frac12 g^{kl}
+(\partial_i g_{jl}
++\partial_j g_{il}
+-\partial_l g_{ij}),
+\]
+observe dependence only on $\Delta$,
+and substitute into standard 2D curvature formula.
+\end{proof}
+
+\begin{remark}
+Curvature vanishes at $\Delta=0,\pi$ and is maximal at $\Delta=\pi/2$.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Linear and Nonlinear Dynamics}
+
+\section{Small Oscillations}
+
+Linearization yields matrix equation:
+
+\[
+M\ddot{\Theta}+K\Theta=0.
+\]
+
+Normal mode frequencies follow from:
+
+\[
+\det(K-\omega^2 M)=0.
+\]
+
+\section{Energy Surfaces}
+
+Energy hypersurfaces:
+
+\[
+H(\theta,p)=E.
+\]
+
+Topology changes with $E$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Chaos and Lyapunov Exponents}
+
+\section{Tangent Flow}
+
+\[
+\dot{\delta z}=DX_H(z)\delta z.
+\]
+
+Largest Lyapunov exponent:
+
+\[
+\lambda=\lim_{t\to\infty}
+\frac1t\ln\frac{\|\delta z(t)\|}{\|\delta z(0)\|}.
+\]
+
+\section{Poincar\'e Sections}
+
+Fix $\theta_2=0$, $p_2>0$.
+Resulting 2D map reveals invariant curves and chaotic regions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Symplectic Numerical Integration}
+
+\section{Implicit Midpoint Rule}
+
+\[
+\frac{z_{n+1}-z_n}{h}
+=
+X_H\left(\frac{z_{n+1}+z_n}{2}\right).
+\]
+
+Second-order, symplectic, time-reversible.
+
+\section{Composition to Fourth Order}
+
+\[
+\Phi_h^{(4)}
+=
+\Phi_{\alpha h}^{(2)}
+\circ
+\Phi_{\beta h}^{(2)}
+\circ
+\Phi_{\alpha h}^{(2)},
+\]
+
+\[
+\alpha=\frac1{2-2^{1/3}}, \quad
+\beta=1-2\alpha.
+\]
+
+\section{Lyapunov Algorithm}
+
+Renormalize tangent vector periodically:
+\[
+\lambda\approx \frac1{T}
+\sum_k \ln \frac{\|\delta z_k\|}{\|\delta z_{k-1}\|}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quantum Double Pendulum}
+
+\section{Hilbert Space}
+
+\[
+\mathcal H=L^2(T^2).
+\]
+
+\section{Hamiltonian Operator}
+
+\[
+\hat H=-\frac{\hbar^2}{2}\Delta_g+V.
+\]
+
+\begin{theorem}
+On compact $T^2$, $\hat H$ is essentially self-adjoint.
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Semiclassical Analysis}
+
+\section{Van Vleck Propagator}
+
+\[
+K\sim
+\sum_{\text{cl paths}}
+D^{1/2}
+e^{iS/\hbar - i\mu\pi/2}.
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Gutzwiller Trace Formula}
+
+\section{Density of States}
+
+\[
+\rho(E)=\sum_n \delta(E-E_n).
+\]
+
+\section{Fourier Representation}
+
+\[
+\rho(E)
+=
+\frac1{2\pi\hbar}
+\int e^{iEt/\hbar}
+\text{Tr }U(t)dt.
+\]
+
+\section{Periodic Orbit Contribution}
+
+\begin{theorem}[Gutzwiller Trace Formula]
+\[
+\rho(E)
+=
+\bar\rho(E)
++
+\frac1{\pi\hbar}
+\sum_\gamma
+\frac{T_\gamma}
+{\sqrt{|\det(M_\gamma-I)|}}
+\cos\left(
+\frac{S_\gamma(E)}{\hbar}
+-
+\frac{\pi\mu_\gamma}{2}
+\right).
+\]
+\end{theorem}
+
+\begin{proof}
+Insert semiclassical propagator,
+evaluate trace by stationary phase,
+select periodic orbits,
+Fourier transform in time.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quantum Chaos}
+
+Level spacing distribution transitions:
+
+\begin{itemize}
+\item Poisson (integrable regime)
+\item Wigner--Dyson (chaotic regime)
+\end{itemize}
+
+Periodic orbit proliferation explains spectral rigidity.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Outlook}
+
+The double pendulum provides a unified framework linking:
+
+\[
+\text{Riemannian Geometry}
+\rightarrow
+\text{Hamiltonian Chaos}
+\rightarrow
+\text{Spectral Theory}
+\rightarrow
+\text{Quantum Chaos}.
+\]
+
+Future directions:
+
+\begin{itemize}
+\item Floquet driving
+\item Microlocal analysis
+\item Numerical periodic orbit theory
+\item Experimental realizations
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+\chapter*{Bibliographical Notes}
+
+Classical mechanics: Arnold.  
+Symplectic integration: Hairer, Lubich, Wanner.  
+Quantum chaos: Gutzwiller.  
+
+\end{document}

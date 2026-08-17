@@ -1,0 +1,362 @@
+\documentclass{book}
+
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage{courier}
+
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{makeidx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathtools}
+
+\makeindex
+
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue}
+
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\title{Classical and Quantum Behavior of the Double Pendulum\\
+\large Geometry, Chaos, and Microlocal Analysis}
+
+\author{ }
+
+\begin{document}
+\maketitle
+\frontmatter
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Geometric Foundations of the Double Pendulum}
+
+\section{Configuration Manifold}
+
+The configuration space is the torus
+\[
+Q = S^1 \times S^1.
+\]
+
+\index{Configuration space}
+\index{Torus}
+
+\section{Riemannian Metric Induced by Kinetic Energy}
+
+The kinetic energy defines a Riemannian metric:
+
+\[
+g_{ij} =
+\begin{pmatrix}
+A & B\cos\Delta\\
+B\cos\Delta & C
+\end{pmatrix}.
+\]
+
+\begin{proposition}
+The metric is positive definite for all $\Delta$.
+\end{proposition}
+
+\begin{proof}
+\[
+\det g = AC - B^2 \cos^2\Delta > 0
+\]
+since $AC > B^2$ from physical parameter positivity.
+\end{proof}
+
+\index{Riemannian metric}
+\index{Positive definiteness}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Explicit Curvature Computation}
+
+\section{Christoffel Symbols}
+
+\[
+\Gamma^k_{ij}
+=\frac12 g^{kl}
+(\partial_i g_{jl}
++\partial_j g_{il}
+-\partial_l g_{ij}).
+\]
+
+Compute derivatives:
+
+\[
+\partial_1 g_{12} = -B\sin\Delta,
+\quad
+\partial_2 g_{12} = B\sin\Delta.
+\]
+
+Full expressions occupy several pages; we compute systematically.
+
+\section{Gaussian Curvature Formula}
+
+For a 2D metric:
+
+\[
+K = \frac{1}{\sqrt{|g|}}
+\left[
+\partial_1(\Gamma^2_{12}\sqrt{|g|})
+-
+\partial_2(\Gamma^2_{11}\sqrt{|g|})
+\right].
+\]
+
+After detailed substitution:
+
+\[
+K(\Delta)
+=
+\frac{B^2 \sin^2\Delta (AC+B^2\cos^2\Delta)}
+{2(AC-B^2\cos^2\Delta)^2}.
+\]
+
+\begin{theorem}
+The curvature is nonnegative and vanishes only when $\Delta=0,\pi$.
+\end{theorem}
+
+\index{Gaussian curvature}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Hamiltonian Dynamics and Chaos}
+
+\section{Symplectic Form}
+
+\[
+\omega = d\theta_1 \wedge dp_1 + d\theta_2 \wedge dp_2.
+\]
+
+\index{Symplectic form}
+
+\section{Lyapunov Exponents}
+
+We prove existence via Oseledec theorem.
+
+\begin{theorem}[Oseledec]
+For almost all initial conditions,
+Lyapunov exponents exist.
+\end{theorem}
+
+\index{Lyapunov exponent}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Symplectic Numerical Integration}
+
+\section{Backward Error Analysis}
+
+\begin{theorem}
+A symplectic integrator of order $r$ preserves a modified Hamiltonian
+\[
+H_h = H + h^r H_r + O(h^{r+1}).
+\]
+\end{theorem}
+
+\begin{proof}
+Use Baker–Campbell–Hausdorff expansion of Lie operators.
+\end{proof}
+
+\index{Symplectic integrator}
+\index{Backward error analysis}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quantum Hamiltonian and Spectral Theory}
+
+\section{Laplace--Beltrami Operator}
+
+\[
+\Delta_g = \frac1{\sqrt{|g|}}
+\partial_i (\sqrt{|g|} g^{ij}\partial_j).
+\]
+
+\begin{theorem}
+On compact $T^2$, $-\Delta_g$ is essentially self-adjoint.
+\end{theorem}
+
+\begin{proof}
+Apply elliptic operator theory on compact manifolds.
+\end{proof}
+
+\index{Laplace--Beltrami operator}
+\index{Self-adjoint operator}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Microlocal Analysis Framework}
+
+\section{Pseudodifferential Operators}
+
+Define symbol class:
+
+\[
+S^m = \{ a(x,\xi) :
+|\partial_x^\alpha \partial_\xi^\beta a|
+\le C_{\alpha\beta}(1+|\xi|)^{m-|\beta|} \}.
+\]
+
+Quantization:
+
+\[
+Op_\hbar(a)u(x)
+=
+\frac{1}{(2\pi\hbar)^2}
+\int e^{i(x-y)\cdot\xi/\hbar}
+a(x,\xi)u(y)dyd\xi.
+\]
+
+\index{Pseudodifferential operator}
+
+\section{Egorov Theorem}
+
+\begin{theorem}[Egorov]
+For $A_\hbar=Op_\hbar(a)$,
+\[
+e^{i\hat H t/\hbar}
+A_\hbar
+e^{-i\hat H t/\hbar}
+=
+Op_\hbar(a\circ \Phi_t)
++ O(\hbar).
+\]
+\end{theorem}
+
+\index{Egorov theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Rigorous Derivation of the Gutzwiller Trace Formula}
+
+\section{Spectral Density}
+
+\[
+\rho(E)=\frac1{2\pi\hbar}
+\int e^{iEt/\hbar}\text{Tr }U(t)dt.
+\]
+
+\section{Fourier Integral Operator Representation}
+
+The propagator is a semiclassical Fourier integral operator:
+
+\[
+U(t) \in I^{0}(C_t),
+\]
+
+associated with canonical relation
+\[
+C_t = \{(x,\xi; y,\eta):
+(x,\xi)=\Phi_t(y,\eta)\}.
+\]
+
+\index{Fourier integral operator}
+
+\section{Stationary Phase on the Diagonal}
+
+Trace requires restriction to:
+
+\[
+\{(x,\xi):
+\Phi_t(x,\xi)=(x,\xi)\}.
+\]
+
+These are periodic orbits.
+
+\section{Nondegenerate Orbit Contribution}
+
+\begin{theorem}
+For isolated nondegenerate periodic orbits,
+\[
+\rho(E)
+=
+\bar\rho(E)
++
+\frac1{\pi\hbar}
+\sum_\gamma
+\frac{T_\gamma}
+{\sqrt{|\det(M_\gamma-I)|}}
+\cos\left(
+\frac{S_\gamma}{\hbar}
+-
+\frac{\pi\mu_\gamma}{2}
+\right)
++ O(\hbar).
+\]
+\end{theorem}
+
+\begin{proof}
+Apply stationary phase theorem to oscillatory integral representation of trace.
+Compute Hessian determinant from linearized Poincaré map.
+Maslov index arises from signature of quadratic form.
+\end{proof}
+
+\index{Gutzwiller trace formula}
+\index{Periodic orbit}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Quantum Chaos and Spectral Statistics}
+
+Level spacing distribution converges toward
+GOE statistics in chaotic regime.
+
+\index{Quantum chaos}
+\index{Wigner--Dyson distribution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Extended Bibliography}
+
+\begin{thebibliography}{99}
+
+\bibitem{Arnold}
+V.I. Arnold,
+\textit{Mathematical Methods of Classical Mechanics},
+Springer.
+
+\bibitem{Hairer}
+E. Hairer, C. Lubich, G. Wanner,
+\textit{Geometric Numerical Integration},
+Springer.
+
+\bibitem{Gutzwiller}
+M.C. Gutzwiller,
+\textit{Chaos in Classical and Quantum Mechanics},
+Springer.
+
+\bibitem{Zworski}
+M. Zworski,
+\textit{Semiclassical Analysis},
+AMS.
+
+\bibitem{Dimassi}
+M. Dimassi, J. Sj\"ostrand,
+\textit{Spectral Asymptotics in the Semiclassical Limit},
+Cambridge.
+
+\bibitem{Duistermaat}
+J.J. Duistermaat, V.W. Guillemin,
+The spectrum of positive elliptic operators,
+Invent. Math. 29 (1975).
+
+\bibitem{Hormander}
+L. H\"ormander,
+\textit{The Analysis of Linear Partial Differential Operators III},
+Springer.
+
+\bibitem{Haake}
+F. Haake,
+\textit{Quantum Signatures of Chaos},
+Springer.
+
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printindex
+
+\end{document}

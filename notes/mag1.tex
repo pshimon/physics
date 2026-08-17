@@ -1,0 +1,261 @@
+
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{physics}
+\usepackage{bm}
+\usepackage{mathrsfs}
+
+\geometry{margin=1in}
+
+\title{\textbf{On the Impossibility of Diamagnetism and Paramagnetism\
+in Classical Electrodynamics}}
+\author{ }
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+It is a fundamental but often misunderstood result that classical electrodynamics, even when combined with classical statistical mechanics, predicts the complete absence of both diamagnetism and paramagnetism in thermal equilibrium. This paper presents a comprehensive analysis of this fact, known as the Bohr--van Leeuwen theorem, from dynamical, statistical, geometric, and conceptual viewpoints. We demonstrate that the absence of magnetism is not a technical limitation but a structural consequence of the canonical phase space of classical mechanics. We further show that semiclassical corrections fail to restore magnetism, and we relate the result to the no--interaction theorem and the geometric nature of gauge coupling. Magnetism is shown to be intrinsically quantum, not merely a small correction to classical physics.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Magnetism is among the most empirically robust phenomena in physics, yet it is entirely absent from classical statistical mechanics. This absence is not a defect of particular models but a theorem: classical systems of charged particles in thermal equilibrium exhibit zero magnetization.
+
+This result contradicts naive intuition based on Lorentz forces and circulating charges and historically motivated deep investigations into the foundations of statistical mechanics. The resolution ultimately reveals that magnetism is not suppressed by dynamics but excluded by the structure of classical phase space itself.
+
+In this paper we give a unified account of this result and situate it within modern geometric and conceptual frameworks.
+
+---
+
+\section{Classical Hamiltonian with Electromagnetic Fields}
+
+Consider $N$ classical charged particles with masses $m_i$ and charges $q_i$. The Hamiltonian in an external electromagnetic field is
+
+\begin{equation}
+H = \sum_{i=1}^{N} \frac{1}{2m_i}
+\left( \mathbf{p}_i - \frac{q_i}{c}\mathbf{A}(\mathbf{r}_i) \right)^2
++ V(\mathbf{r}_1,\ldots,\mathbf{r}_N).
+  \end{equation}
+
+The magnetic field is given by
+\[
+\mathbf{B} = \nabla \times \mathbf{A}.
+\]
+
+The magnetic moment of the system is
+\[
+\mathbf{m} = \frac{1}{2c} \sum_i q_i, \mathbf{r}_i \times \mathbf{v}_i.
+\]
+
+The thermodynamic magnetization is defined as
+\[
+\mathbf{M} = -\frac{\partial F}{\partial \mathbf{B}},
+\quad
+F = -k_B T \ln Z.
+\]
+
+---
+
+\section{The Bohr--van Leeuwen Theorem}
+
+\subsection{Statement}
+
+\textbf{Theorem (Bohr–van Leeuwen).}
+In classical statistical mechanics, the equilibrium magnetization of any system of charged particles vanishes identically:
+\[
+\mathbf{M} = 0.
+\]
+
+This result holds for arbitrary interactions, external potentials, and boundary conditions.
+
+---
+
+\subsection{Proof via Phase Space Measure}
+
+The classical partition function is
+\[
+Z = \int \prod_i d^3 r_i , d^3 p_i ,
+\exp\left[-\beta H(\mathbf{r},\mathbf{p})\right].
+\]
+
+Perform the canonical transformation:
+\[
+\mathbf{p}_i' = \mathbf{p}_i - \frac{q_i}{c} \mathbf{A}(\mathbf{r}_i).
+\]
+
+The Jacobian is unity:
+\[
+d^3 p_i = d^3 p_i'.
+\]
+
+Hence
+\[
+Z = \int \prod_i d^3 r_i , d^3 p_i'
+\exp\left[
+-\beta \sum_i \frac{(\mathbf{p}_i')^2}{2m_i}
+- \beta V(\mathbf{r})
+  \right],
+ \]
+  which is independent of $\mathbf{A}$ and therefore of $\mathbf{B}$.
+
+Thus,
+\[
+\frac{\partial F}{\partial \mathbf{B}} = 0,
+\quad \Rightarrow \quad \mathbf{M} = 0.
+\]
+
+---
+
+\section{Geometric Interpretation}
+
+\subsection{Symplectic Structure}
+
+The classical phase space $(\Gamma,\omega)$ carries the symplectic form
+\[
+\omega = \sum_i d\mathbf{p}_i \wedge d\mathbf{r}_i.
+\]
+
+Minimal coupling corresponds to a change of canonical coordinates:
+\[
+\mathbf{p}_i \mapsto \mathbf{p}_i - \frac{q_i}{c}\mathbf{A}.
+\]
+
+This is a symplectomorphism: the symplectic form is preserved.
+
+Therefore, the Liouville measure
+\[
+\Omega = \omega^{3N}
+\]
+is invariant.
+
+Thermodynamics depends only on this measure — hence no magnetic response is possible.
+
+---
+
+\subsection{Gauge Fields as Flat Connections}
+
+In classical mechanics, the electromagnetic vector potential defines a connection on a trivial fiber bundle, but without curvature in phase space.
+
+By contrast, quantum mechanics promotes the connection to a nontrivial holonomy structure acting on wavefunctions, enabling topological effects.
+
+---
+
+\section{Why Diamagnetism Fails}
+
+Diamagnetism is often explained as induced currents opposing an applied field. Classically:
+
+\begin{itemize}
+\item The Lorentz force does no work.
+\item Orbits are deformed but not energetically biased.
+\item Time-reversed trajectories exist with equal weight.
+\end{itemize}
+
+Hence all orbital currents cancel statistically.
+
+No restoring force or energy minimum exists that would favor current loops.
+
+---
+
+\section{Why Paramagnetism Fails}
+
+Paramagnetism requires permanent magnetic moments and a coupling term
+\[
+H_{\text{int}} = -\mathbf{m} \cdot \mathbf{B}.
+\]
+
+In classical physics:
+\begin{itemize}
+\item There is no intrinsic spin.
+\item Orbital magnetic moments are not independent degrees of freedom.
+\item No Zeeman splitting occurs.
+\end{itemize}
+
+Hence no alignment mechanism exists.
+
+---
+
+\section{Relation to the No--Interaction Theorem}
+
+The Currie--Jordan--Sudarshan no-interaction theorem states that relativistic particle systems with canonical variables and Poincaré invariance cannot support nontrivial interactions.
+
+Magnetism would require velocity-dependent interactions violating this structure.
+
+Thus the absence of magnetism is consistent with the deeper obstruction to interaction in relativistic classical mechanics.
+
+---
+
+\section{Failure of Semiclassical Attempts}
+
+Bohr--Sommerfeld quantization modifies action integrals:
+\[
+\oint p , dq = n h.
+\]
+
+However:
+\begin{itemize}
+\item It still treats phase space classically.
+\item Gauge fields remain removable by canonical transformation.
+\item No intrinsic spin appears.
+\end{itemize}
+
+As a result, semiclassical models fail to reproduce true magnetism except by ad hoc assumptions.
+
+---
+
+\section{Quantum Resolution}
+
+Quantum mechanics changes the structure fundamentally:
+
+\begin{itemize}
+\item Noncommutativity: $[x_i,p_j]=i\hbar\delta_{ij}$
+\item Discrete Landau levels
+\item Intrinsic spin and Pauli coupling
+\item Topological phases (Aharonov--Bohm effect)
+\end{itemize}
+
+The magnetic field alters the spectrum itself, not merely trajectories.
+
+Hence magnetization emerges naturally.
+
+---
+
+\section{Conceptual Implications}
+
+\begin{itemize}
+\item Magnetism is not a perturbation of classical physics.
+\item Classical electrodynamics is incomplete as a theory of matter.
+\item Quantum mechanics introduces new kinematic structures, not just new dynamics.
+\end{itemize}
+
+Magnetism belongs to the same conceptual class as atomic stability and blackbody radiation.
+
+---
+
+\section{Conclusion}
+
+We have shown that the absence of diamagnetism and paramagnetism in classical electrodynamics is a structural theorem, not a limitation of approximation. The phase space geometry of classical mechanics forbids magnetic response in equilibrium. Only quantum theory, through noncommutativity and intrinsic spin, allows magnetism to exist.
+
+Thus magnetism is not weakly quantum—it is essentially quantum.
+
+---
+
+\section*{References}
+
+\begin{enumerate}
+\item N. Bohr, \textit{Studier over Metallernes Elektrontheori}, Copenhagen (1911).
+\item J. H. van Leeuwen, J. Phys. Radium \textbf{2}, 361 (1921).
+\item L. D. Landau and E. M. Lifshitz, \textit{Statistical Physics}.
+\item H. Goldstein, C. Poole, J. Safko, \textit{Classical Mechanics}.
+\item R. Kubo, \textit{Statistical Mechanics}.
+\item M. Stone, \textit{The Physics of Quantum Fields}.
+\end{enumerate}
+
+\end{document}

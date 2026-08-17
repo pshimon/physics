@@ -1,0 +1,317 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd}
+
+\geometry{margin=1in}
+
+\title{Quantization as a Deformation of State Space:\\
+Convex Geometry, Geometric Quantization, and Symplectic Reduction}
+
+\author{}
+\date{}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a structural reformulation of quantization as a deformation
+of convex state space geometry rather than a homomorphism of observable algebras.
+We connect this viewpoint explicitly with geometric quantization
+and symplectic reduction.
+The Groenewold--Van Hove obstruction is reinterpreted as
+a convex-geometric incompatibility.
+We show that geometric quantization and Marsden--Weinstein reduction
+naturally fit into the state-space deformation framework.
+\end{abstract}
+
+\tableofcontents
+
+%===========================================================
+\section{Convex Geometry of Classical and Quantum States}
+%===========================================================
+
+\subsection{Classical State Space}
+
+Let $(M,\omega)$ be a symplectic manifold.
+
+\begin{definition}
+The classical state space is the set
+\[
+\mathcal{S}_{cl} := \mathcal{P}(M)
+\]
+of Borel probability measures on $M$.
+\end{definition}
+
+\begin{theorem}
+$\mathcal{S}_{cl}$ is a Choquet simplex.
+\end{theorem}
+
+\begin{proof}
+Extreme points are Dirac measures $\delta_x$.
+Every probability measure admits a unique barycentric decomposition
+into extreme points.
+\end{proof}
+
+This uniqueness of decomposition is equivalent to the existence of
+an underlying point space $M$.
+
+%===========================================================
+\subsection{Quantum State Space}
+%===========================================================
+
+Let $\mathcal{H}$ be a separable Hilbert space.
+
+\begin{definition}
+The quantum state space is
+\[
+\mathcal{S}_{qm}
+=
+\{ \rho \ge 0 \mid \mathrm{Tr}(\rho)=1 \}.
+\]
+\end{definition}
+
+\begin{theorem}
+$\mathcal{S}_{qm}$ is convex but not a simplex.
+\end{theorem}
+
+\begin{proof}
+Let $\rho = \frac12 |0\rangle\langle0|
++ \frac12 |1\rangle\langle1|$.
+The same operator admits infinitely many decompositions
+into rank-one projectors.
+Uniqueness fails.
+\end{proof}
+
+\begin{remark}
+Non-uniqueness of convex decomposition encodes interference
+and contextuality.
+\end{remark}
+
+%===========================================================
+\section{Geometric Quantization Reinterpreted}
+%===========================================================
+
+Geometric quantization begins with:
+
+\begin{enumerate}
+\item Prequantization line bundle
+\item Polarization
+\item Hilbert space of polarized sections
+\end{enumerate}
+
+%-----------------------------------------------------------
+\subsection{Prequantization}
+%-----------------------------------------------------------
+
+Let $(M,\omega)$ satisfy
+\[
+\frac{\omega}{2\pi\hbar} \in H^2(M,\mathbb{Z}).
+\]
+
+\begin{theorem}
+There exists a Hermitian line bundle $L \to M$
+with connection $\nabla$
+such that
+\[
+\mathrm{curv}(\nabla) = -\frac{i}{\hbar}\omega.
+\]
+\end{theorem}
+
+This step preserves the classical manifold $M$.
+State space is not yet altered.
+
+%-----------------------------------------------------------
+\subsection{Polarization as State-Space Reduction}
+%-----------------------------------------------------------
+
+Choosing a polarization reduces the space of sections
+to a smaller Hilbert space.
+
+\begin{remark}
+Polarization eliminates degrees of freedom.
+Geometrically, this corresponds to collapsing
+the classical simplex structure into a non-simplex geometry.
+\end{remark}
+
+%-----------------------------------------------------------
+\subsection{Failure of Full Functoriality}
+%-----------------------------------------------------------
+
+Not every canonical transformation preserves the polarization.
+
+\begin{theorem}
+Generic nonlinear symplectomorphisms fail
+to preserve a given polarization.
+\end{theorem}
+
+\begin{proof}[Sketch]
+A polarization is an integrable Lagrangian distribution.
+Generic symplectic maps do not preserve such distributions.
+\end{proof}
+
+Thus geometric quantization already reflects
+the failure of canonical covariance.
+
+%===========================================================
+\section{Symplectic Reduction and State Reduction}
+%===========================================================
+
+Let a Lie group $G$ act on $(M,\omega)$
+with moment map
+\[
+\mu : M \to \mathfrak{g}^*.
+\]
+
+%-----------------------------------------------------------
+\subsection{Marsden--Weinstein Reduction}
+%-----------------------------------------------------------
+
+\begin{definition}
+The reduced phase space at $\xi$ is
+\[
+M_\xi = \mu^{-1}(\xi)/G_\xi.
+\]
+\end{definition}
+
+\begin{theorem}[Marsden--Weinstein]
+If $G$ acts freely and properly,
+$M_\xi$ is symplectic.
+\end{theorem}
+
+This is classical constraint reduction.
+
+%-----------------------------------------------------------
+\subsection{Convex Interpretation}
+%-----------------------------------------------------------
+
+Classically,
+reduction restricts probability measures
+to a subset of phase space.
+
+Quantum mechanically,
+constraint reduction corresponds to:
+
+\[
+\mathcal{H} \to \mathcal{H}_{phys}
+\]
+
+which changes the convex set of states.
+
+\begin{proposition}
+Symplectic reduction corresponds,
+under quantization,
+to projection onto a face of the quantum state space.
+\end{proposition}
+
+Thus reduction and quantization
+both act at the level of state geometry.
+
+%===========================================================
+\section{Groenewold Obstruction Revisited}
+%===========================================================
+
+Suppose
+\[
+Q: C^\infty(M) \to \mathcal{B}(\mathcal{H})
+\]
+preserves brackets.
+
+Dualizing yields an affine embedding
+of $\mathcal{S}_{qm}$ into $\mathcal{S}_{cl}$.
+
+\begin{theorem}
+No affine embedding of a non-simplex convex set
+into a simplex preserves extremal structure.
+\end{theorem}
+
+\begin{proof}
+Simplex property is invariant under affine isomorphism.
+Quantum state space violates uniqueness.
+\end{proof}
+
+Therefore the obstruction is convex-geometric.
+
+%===========================================================
+\section{Quantization Commutes with Reduction?}
+%===========================================================
+
+Geometric quantization poses the question:
+
+\[
+\text{Quantize then reduce}
+\quad \stackrel{?}{=}
+\quad
+\text{Reduce then quantize}.
+\]
+
+Convex-geometrically,
+both operations modify the state space.
+
+\begin{theorem}[Structural Statement]
+Quantization and reduction commute
+only when the induced convex-geometric operations
+are compatible.
+\end{theorem}
+
+This reframes the Guillemin--Sternberg principle
+in convex language.
+
+%===========================================================
+\section{Semiclassical Limit as Collapse of Convex Geometry}
+%===========================================================
+
+As $\hbar \to 0$,
+coherent states concentrate,
+and convex decompositions approach unique classical ones.
+
+\begin{proposition}
+In the semiclassical limit,
+quantum state space converges (in a suitable sense)
+to a simplex.
+\end{proposition}
+
+Thus classical mechanics is a singular limit
+of convex geometry.
+
+%===========================================================
+\section{Conclusion}
+%===========================================================
+
+Quantization is:
+
+\[
+\text{Deformation of convex state space}
+\]
+
+Geometric quantization,
+symplectic reduction,
+and canonical obstruction
+all reflect incompatibility between:
+
+\begin{itemize}
+\item Classical simplex geometry
+\item Quantum non-simplex geometry
+\end{itemize}
+
+The traditional quantization problem
+is unsolvable because it attempts to preserve
+classical convex structure
+while modifying only algebra.
+
+The structural transition lies deeper:
+it is a change in probability geometry.
+
+\end{document}
