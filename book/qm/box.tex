@@ -1,0 +1,82 @@
+\section{Quantum Dynamics of a Wave Packet in a Square Well}
+
+Consider a particle confined to a one-dimensional infinite square well of width $L$,
+\begin{equation}
+V(x) = 
+\begin{cases}
+0, & 0 < x < L,\\
+\infty, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+\subsection{Wave Packet Construction}
+
+A \emph{wave packet} is a superposition of stationary states,
+\begin{equation}
+\Psi(x,0) = \sum_{n=1}^{\infty} c_n \, \phi_n(x), 
+\qquad
+\phi_n(x) = \sqrt{\frac{2}{L}} \sin \frac{n \pi x}{L},
+\end{equation}
+where the coefficients $c_n$ encode the initial localization and momentum distribution of the particle.  
+Time evolution follows from the Schr\"odinger equation,
+\begin{equation}
+\Psi(x,t) = \sum_{n=1}^{\infty} c_n \, \phi_n(x) \, e^{-i E_n t/\hbar}, 
+\qquad
+E_n = \frac{n^2 \pi^2 \hbar^2}{2 m L^2}.
+\end{equation}
+The quadratic energy spectrum is responsible for the characteristic quantum features described below.
+
+\subsection{Short-Time Dynamics: Quasi-Classical Motion}
+
+For a wave packet narrowly localized in both position and momentum (centered around a large $n_0$):
+\begin{itemize}
+    \item The packet moves approximately according to the classical trajectory,
+    \begin{equation}
+    x_{\mathrm{cl}}(t) = x_0 + v t,
+    \end{equation}
+    reflecting elastically at the walls.
+    \item Ehrenfest's theorem ensures that the expectation values of position and momentum follow classical equations of motion at short times.
+\end{itemize}
+
+\subsection{Dispersion and Collapse}
+
+Due to the quadratic spectrum $E_n \sim n^2$, different stationary components acquire phases at different rates.  
+Consequences include:
+\begin{itemize}
+    \item Spreading (dispersion) of the wave packet.
+    \item Destruction of the initial localization by interference.
+    \item A characteristic \emph{collapse time} after which the probability density appears irregular.
+\end{itemize}
+The evolution remains fully unitary; no energy loss or dissipation occurs.
+
+\subsection{Long-Time Dynamics: Revivals}
+
+The exact quadratic spectrum leads to wave packet \emph{revivals}:
+\begin{equation}
+T_{\mathrm{rev}} = \frac{4 m L^2}{\pi \hbar}.
+\end{equation}
+At $t = T_{\mathrm{rev}}$, the wave packet reconstructs itself up to a global phase,
+\begin{equation}
+\Psi(x,T_{\mathrm{rev}}) = e^{i \theta} \Psi(x,0),
+\end{equation}
+while at rational fractions $t = \frac{p}{q} T_{\mathrm{rev}}$, \emph{fractional revivals} occur, splitting the packet into $q$ localized copies.
+
+\subsection{Momentum and Boundary Effects}
+
+Inside the infinite well:
+\begin{itemize}
+    \item A self-adjoint momentum operator compatible with the boundary conditions does not exist.
+    \item Operationally, momentum must be described via a POVM, not a PVM.
+    \item The packet behaves as if momentum reverses sign at the walls, producing strong interference near the boundaries.
+\end{itemize}
+
+\subsection{Summary}
+
+The dynamics of a wave packet in a square well illustrate:
+\begin{enumerate}
+    \item \textbf{Short-time classical motion:} The packet moves and reflects approximately like a classical particle.
+    \item \textbf{Quantum dispersion:} Interference between stationary components spreads the packet.
+    \item \textbf{Exact revivals:} The wave packet periodically reconstructs itself due to the quadratic spectrum.
+    \item \textbf{Unitary boundary-induced interference:} Reflections at the walls generate characteristic oscillations without dissipation.
+\end{enumerate}
+This system exemplifies the interplay between classical intuition and fundamentally quantum effects.

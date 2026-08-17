@@ -1,0 +1,145 @@
+\chapter{From Two-Point Classical Action to Hamilton--Jacobi and Madelung
+Theory:\\ Hidden Boundary Data, Caustics, and the Breakdown of Gradient
+Velocity Fields} The Hamilton--Jacobi equation is usually presented as a
+nonlinear first-order partial differential equation for a scalar field
+$S(q,t)$. However, the fundamental object of classical mechanics is not a
+one-point function but the two-point classical action $S(q_0,t_0;q,t)$, defined
+as the extremal action between endpoints. The apparent reduction from a
+two-point object to a one-point field hides essential geometric and dynamical
+information. In particular, the Hamilton--Jacobi formulation is valid only
+while the evolving Lagrangian manifold remains a graph over configuration
+space. After caustic formation, the velocity field ceases to be globally
+representable as a gradient, and the single-valued phase function breaks down.
+We analyze the implications of this fact for Hamilton--Jacobi theory, Madelung
+hydrodynamics, and stochastic formulations of quantum mechanics.
+
+\section{Introduction}
+
+The Hamilton--Jacobi (HJ) equation occupies a central place in classical
+mechanics, geometrical optics, semiclassical quantum mechanics, and stochastic
+formulations of quantum theory. It is usually written as
+\begin{equation}
+\partial_t S + H(q,\nabla S,t)=0,
+\label{HJ}
+\end{equation}
+where $S(q,t)$ is interpreted as a scalar field on configuration spacetime.
+
+This formulation suggests that the theory is an ordinary initial value problem
+for a scalar field. However, this interpretation is misleading. The fundamental
+classical object is not the one-point function $S(q,t)$ but the two-point
+action $S(q_0,t_0;q,t)$, defined as the extremal value of the action functional
+between fixed endpoints.
+
+The purpose of this article is to clarify:
+\begin{enumerate}
+\item how the HJ equation emerges from the two-point action;
+\item why the apparent one-point formulation hides essential boundary
+    information;
+\item why the velocity field ceases to be globally representable as a gradient
+    after caustic formation;
+\item why Madelung hydrodynamics and related stochastic formulations inherit
+    these difficulties.
+\end{enumerate}
+
+\section{The Classical Action as a Two-Point Function}
+
+Consider a classical system with Lagrangian
+$L(q,\dot q,t)$.
+The Hamilton principal function is defined by
+\begin{equation}
+S(q_0,t_0;q,t)=\operatorname*{ext}_{q(\tau)}
+\int_{t_0}^{t} L(q,\dot q,\tau)\,d\tau,
+\label{principal}
+\end{equation}
+where the extremization is performed over all paths satisfying
+$q(t_0)=q_0$, $q(t)=q$.
+Thus the classical action is naturally a two-point function on configuration spacetime.
+
+The endpoint variation formulas yield
+\begin{equation}
+p_i(t)=\frac{\partial S}{\partial q^i},
+\qquad
+p_i(t_0)=-\frac{\partial S}{\partial q_0^i}.
+\label{endpoint}
+\end{equation}
+Hence the two-point action generates the classical canonical transformation.
+
+\section{Emergence of the Hamilton--Jacobi Equation}
+
+Fix the initial endpoint $(q_0,t_0)$ and define
+$\mathcal S(q,t):=S(q_0,t_0;q,t)$.
+Now vary only the final endpoint. A small variation gives
+$\delta S=p_i\,\delta q^i - H\,\delta t$.
+Therefore,
+$dS = p_i\,dq^i - H\,dt$.
+Identifying $p_i=\frac{\partial S}{\partial q^i}$,
+one obtains $\frac{\partial S}{\partial t}+
+H\left(q,\frac{\partial S}{\partial q},t\right)=0$.
+Thus the HJ equation appears only after one endpoint has been frozen.
+
+\section{Hidden Boundary Data}
+
+The reduction from the two-point action to the one-point field hides the
+initial endpoint inside the boundary conditions.
+Indeed, $S(q,t)=S(q_0,t_0;q,t)$
+must satisfy singular initial data:
+\begin{equation}
+S(q,t_0)=
+\begin{cases}
+0, & q=q_0,\\
++\infty, & q\neq q_0.
+\end{cases}
+\end{equation}
+Therefore the HJ equation alone does not define the dynamics. The choice of
+admissible solutions depends on hidden global information inherited from the
+original two-point action.
+
+\section{Lagrangian Manifolds}
+
+The geometric meaning of the HJ equation becomes clearer in phase space.
+Given a function $S(q,t)$, define $p=\nabla S(q,t)$.
+This determines a submanifold $\Lambda_t=\{(q,p):p=\nabla S(q,t)\}\subset T^*Q$.
+
+Initially, one has a graph $\Lambda_0=\{(q,\nabla S_0(q))\}$.
+Hamiltonian evolution transports this manifold: $\Lambda_t=\Phi_t(\Lambda_0)$,
+where $\Phi_t$ is the Hamiltonian flow.The HJ formulation remains valid only 
+while $\Lambda_t$ remains a graph over configuration space.
+
+\section{Caustics and Breakdown of the Gradient Representation}
+
+As the Hamiltonian flow evolves, the Lagrangian manifold generically folds in
+phase space. The projection $\pi:\Lambda_t\to Q$ eventually ceases to be
+one-to-one. At such points:
+\begin{itemize}
+\item several classical trajectories reach the same configuration point;
+\item several momenta correspond to the same position;
+\item the action becomes multivalued;
+\item no single velocity field exists.
+\end{itemize}
+Instead of a single branch $p=\nabla S(q,t)$,
+one obtains several branches: $p_1(q,t),\quad p_2(q,t),\quad \dots$
+Each branch may locally be represented as a gradient,
+$p_i=\nabla S_i$, but globally no single-valued $S(q,t)$ exists.
+
+\subsection{Physical Interpretation}
+
+Suppose particles initially move to the right. A sufficiently strong potential
+may reverse some trajectories in finite time. Then at later times a single
+position may simultaneously contain:
+\begin{itemize}
+\item trajectories moving left;
+\item trajectories moving right.
+\end{itemize}
+Therefore the velocity field is no longer single-valued.
+This phenomenon is generic and corresponds mathematically to the intersection
+of characteristics in first-order PDE theory.
+
+\section{Relation to Burgers Equation}
+
+The HJ equation is closely related to Burgers-type equations.
+For the free particle Hamiltonian $H=\frac{p^2}{2m}$,
+one has $\partial_t S + \frac{(\nabla S)^2}{2m}=0$.
+Defining $v=\frac{\nabla S}{m}$, gives $\partial_t v + (v\cdot\nabla)v=0$.
+This equation develops shocks through characteristic crossing. Thus the
+breakdown of the gradient representation is not exceptional but generic.
+

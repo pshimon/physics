@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+\title{Modern Review: Bayesian vs Frequentist Statistics}
+\author{ ChatGPT }
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Core Philosophical Differences}
+
+\textbf{Frequentist:}
+\begin{itemize}
+    \item Probability is defined as long-run frequency of repeatable experiments.
+    \item Parameters are fixed but unknown; probability applies only to data.
+    \item Inference uses estimates, \textit{p-values}, and confidence intervals.
+    \item Hypothesis tests evaluate whether data are unlikely under a null model.
+\end{itemize}
+
+\textbf{Bayesian:}
+\begin{itemize}
+    \item Probability is a degree of belief about hypotheses and parameters.
+    \item Parameters are random variables with prior distributions; data updates beliefs via Bayes' theorem.
+    \item Produces posterior distributions, direct probabilities for hypotheses, and credible intervals.
+\end{itemize}
+
+\section{Practical Differences in Modern Use}
+
+\subsection{Interpretation}
+\begin{itemize}
+    \item Bayesian credible interval: 95\% probability the parameter lies in the interval.
+    \item Frequentist confidence interval: in repeated experiments, 95\% of intervals contain the true parameter.
+\end{itemize}
+
+\subsection{Hypothesis Testing}
+\begin{itemize}
+    \item Frequentist: relies on p-values and reject/accept decisions.
+    \item Bayesian: uses Bayes factors or posterior odds to compare models/hypotheses.
+\end{itemize}
+
+\section{Computational and Modeling Trends}
+
+\subsection{Computation}
+\begin{itemize}
+    \item Bayesian methods: historically intensive; modern MCMC, HMC, and Variational Inference make complex models practical.
+    \item Frequentist methods: often analytic and computationally efficient.
+\end{itemize}
+
+\subsection{Model Flexibility}
+\begin{itemize}
+    \item Bayesian hierarchical models express complex dependency structures and multi-level uncertainty.
+    \item Frequentist models can handle complexity but may require heavier assumptions.
+\end{itemize}
+
+\section{Strengths and Limitations}
+
+\begin{tabular}{|l|l|l|}
+\hline
+Aspect & Bayesian & Frequentist \\
+\hline
+Interpretation of uncertainty & Direct probability statements & Long-run frequency interpretation \\
+Use of prior knowledge & Explicit & Does not use prior info \\
+Adaptive/sequential analysis & Natural updating & Requires careful design \\
+Small sample performance & Often superior with good priors & Can perform poorly \\
+Computational cost & Intensive for complex models & Efficient \\
+Community adoption & Growing in ML, AI, adaptive trials & Dominant in traditional stats/regulatory \\
+\hline
+\end{tabular}
+
+\section{Modern Trends and Hybrid Approaches}
+\begin{itemize}
+    \item Empirical Bayes: frequentist estimation of prior hyperparameters, then Bayesian inference.
+    \item Bayesian optimization in machine learning for hyperparameter tuning.
+    \item Bayesian methods provide uncertainty estimates; frequentist models give point estimates.
+\end{itemize}
+
+\section{When to Choose Which}
+
+\textbf{Bayesian preferred when:}
+\begin{itemize}
+    \item Prior information exists.
+    \item Sequential updating is needed.
+    \item Rich uncertainty quantification required.
+    \item Complex hierarchical/latent structures.
+\end{itemize}
+
+\textbf{Frequentist preferred when:}
+\begin{itemize}
+    \item Objective tests without subjective input.
+    \item Computing simplicity and tradition matter.
+    \item Regulatory or classical scientific standards require standard tests.
+\end{itemize}
+
+\section{Key Textbooks and Resources}
+
+\subsection{Comparison-Focused}
+\begin{itemize}
+    \item \textit{A Comparison of the Bayesian and Frequentist Approaches to Estimation} --- Francisco J. Samaniego
+    \item \textit{Bayesians Versus Frequentists: A Philosophical Debate on Statistical Reasoning} --- Jordi Vallverd\'u
+    \item \textit{Bayesian and Frequentist Regression Methods} --- Jon Wakefield
+\end{itemize}
+
+\subsection{Core Bayesian Texts}
+\begin{itemize}
+    \item \textit{Statistical Rethinking} --- Richard McElreath
+    \item \textit{Bayesian Statistical Methods} --- Brian J. Reich \& Sujit K. Ghosh
+\end{itemize}
+
+\subsection{Classic References}
+\begin{itemize}
+    \item \textit{Bayesian Data Analysis} --- Andrew Gelman et al.
+    \item \textit{Doing Bayesian Data Analysis} --- John K. Kruschke
+    \item \textit{All of Statistics} --- Larry Wasserman
+\end{itemize}
+
+\subsection{Free PDFs and Open Resources}
+\begin{itemize}
+    \item Bayesian Data Analysis PDF (Columbia site) --- \url{https://sites.stat.columbia.edu/gelman/book/}
+    \item OpenIntro Statistics (free PDF) --- \url{https://www.openintro.org}
+    \item Free Bayesian lecture notes and tutorials online.
+\end{itemize}
+
+\end{document}
