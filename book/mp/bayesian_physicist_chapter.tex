@@ -1,0 +1,92 @@
+\documentclass[11pt]{book}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{plain}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+\chapter{The Physicist as Intuitive Bayesian}
+
+\section{Thesis}
+
+A physicist does not confront data from a position of ignorance. Before a single measurement is taken, she has already restricted attention to a family of models $\{M_\theta : \theta \in \Theta\}$ --- Newton's law with an unknown spring constant, a resonance of unknown mass and width, a cosmological model with unknown $\Omega_\Lambda$. This restriction is not neutral. It is an act of assigning prior plausibility zero to the overwhelming majority of functions that could in principle be fit to any given data set, and non-negligible plausibility to a small, structured subset selected by symmetry, renormalizability, dimensional analysis, or simply what has worked before. This is the content of a Bayesian prior, whether or not it is ever written as $\pi(\theta)$. The thesis of this chapter is that physics, as actually practiced, is Bayesian inference over a self-imposed model space --- even when, and especially when, the explicit statistical vocabulary used to report the result is frequentist.
+
+\section{Model space as an implicit prior}
+
+\begin{definition}
+A \emph{model space} $\mathcal{M}$ is the set of hypotheses a physicist is willing to entertain prior to seeing the data at hand, together with a measure $\pi$ of relative plausibility over that set --- possibly only ordinal, and rarely written explicitly.
+\end{definition}
+
+Formally, inference within a chosen model proceeds by
+\begin{equation}
+P(\theta \mid D, M) \;=\; \frac{P(D \mid \theta, M)\,\pi(\theta \mid M)}{\displaystyle\int_{\Theta} P(D \mid \theta', M)\,\pi(\theta' \mid M)\, d\theta'}\,, \qquad \theta \in \Theta_M,
+\end{equation}
+but the physicist's real act of judgment happens one level up, in the choice of $M$ itself from the space of all conceivable models $\mathcal{M}$. Requiring Lorentz invariance, gauge invariance, renormalizability, or simply a low-order polynomial in the fields are all instances of setting $\pi(M') = 0$ for models $M'$ outside the chosen family --- an extremely informative prior, imposed before any likelihood is ever evaluated, and rarely defended in the probabilistic language it deserves.
+
+\begin{remark}
+Occam's razor, as actually practiced in theoretical physics --- preferring the model with fewer free parameters, absent a specific reason to prefer otherwise --- is not a separate methodological principle standing outside probability theory. It is a description of a prior that penalizes model complexity, and it has a standard formal counterpart in Bayesian model comparison: the automatic Occam penalty carried by the marginal likelihood
+\begin{equation}
+P(D \mid M) \;=\; \int_{\Theta} P(D \mid \theta, M)\,\pi(\theta \mid M)\, d\theta,
+\end{equation}
+which is suppressed for models whose parameter space wastes prior mass on regions the data rule out.
+\end{remark}
+
+\section{Sequential updating across experiments}
+
+The history of confidence in General Relativity is not well described as a sequence of independent frequentist tests, each beginning from total ignorance and returning a verdict discarded once the next experiment starts. Each successive test --- Mercury's perihelion, light bending, gravitational redshift, binary-pulsar timing, the direct detection of gravitational waves --- is treated as tightening an already substantial body of belief, and a single anomalous result is weighed \emph{against}, not substituted for, everything already established. This is posterior-to-prior updating,
+\begin{equation}
+\pi_n(\theta) \;\propto\; P(D_n \mid \theta)\,\pi_{n-1}(\theta),
+\end{equation}
+carried out informally, paper by paper, over decades, whether or not any individual paper ever computes a posterior.
+
+\section{Confidence intervals: frequentist construction, Bayesian use}
+
+A frequentist $100(1-\alpha)\%$ confidence interval $I(D)$ is defined by the coverage property
+\begin{equation}
+P_\theta\big(\theta \in I(D)\big) = 1-\alpha \qquad \text{for every fixed } \theta,
+\end{equation}
+a statement about the behavior of the \emph{procedure} across a hypothetical ensemble of repetitions of the experiment at the same true $\theta$. By construction it makes no probabilistic statement about whether the true value lies in the one particular interval actually obtained from the one experiment that was run.
+
+\begin{remark}
+This is almost never how such an interval is read once quoted. ``The top-quark mass is $172.5 \pm 0.7\ \mathrm{GeV}$'' is universally understood, including by the physicists reporting it, as licensing something close to ``there is roughly a 68\% chance the true mass lies in this range'' --- a statement about degree of belief in a fixed but unknown constant, conditioned on the one data set actually obtained. That is a Bayesian credible interval, not the frequentist object formally computed. The two coincide numerically under a flat prior in a wide class of problems, which is precisely why the conflation goes unnoticed.
+\end{remark}
+
+\section{Systematic uncertainty as a nuisance-parameter prior}
+
+A detector's calibration constant, an integrated luminosity, a background normalization --- these are not resampled across hypothetical repetitions of the universe; they are fixed, unknown quantities specific to the one apparatus and the one run at hand. Assigning them an error distribution and marginalizing,
+\begin{equation}
+P(\theta \mid D) \;=\; \int P(\theta \mid D, \lambda)\,\pi(\lambda)\, d\lambda,
+\end{equation}
+over a nuisance parameter $\lambda$ --- calibration, background rate, theoretical cross-section uncertainty --- is exactly Bayesian nuisance-parameter marginalization. There is no frequentist repeated-sampling story under which ``the calibration constant of this detector, on this day, has a 90\% confidence interval'' is a meaningful statement: there is only one calibration constant, and one day. Experimental physicists carry out this marginalization routinely, correctly, and almost never under that name.
+
+\section{Case study: the $5\sigma$ threshold and the Higgs boson}
+
+The 2012 discovery announcement was couched entirely in frequentist terms: a local significance in excess of $5\sigma$, i.e.\ a $p$-value under the background-only null hypothesis below roughly $3\times10^{-7}$. This is, by construction, \emph{not} a posterior probability that the Higgs boson exists, and not a statement about $P(\text{Higgs} \mid D)$ at all --- a point statisticians raised at the time and which physicists mostly reasoned past rather than through.
+
+\begin{remark}
+What made the announcement compelling was never the $p$-value in isolation. It was the $p$-value combined with decades of prior theoretical commitment --- electroweak precision fits, unitarity arguments against a Higgsless Standard Model, a mass window already narrowed by indirect constraints --- that gave the community a strong prior concentrated near the observed mass before ATLAS and CMS reported anything. The frequentist significance functioned, in practice, as a likelihood-ratio-like ingredient fed into an unstated Bayesian update, not as a free-standing verdict evaluated against a flat prior over ``a new particle exists somewhere in an otherwise unconstrained parameter space.'' A $5\sigma$ excess with no such prior theoretical support is treated far more skeptically by the same community, appropriately --- itself evidence that the underlying reasoning is Bayesian even while the reported statistic is not.
+\end{remark}
+
+\section{Real-world content versus ideal-world ensembles}
+
+This chapter's thesis connects directly to the real-world/ideal-world distinction developed earlier in this book. The frequentist confidence interval is defined via an ensemble of hypothetical repetitions of the experiment that were never run, and, for a one-off cosmological measurement or a unique collider run at a given energy, could not in principle be run again identically. That ensemble is precisely the kind of ideal-world construct examined in the chapter on numerical calculation: a formally well-defined object, useful for calibrating a procedure, that does not itself denote anything that has happened in the real world. The Bayesian posterior, by contrast, is a degree of belief about the one already-realized data set and the one fixed constant of nature the physicist actually cares about --- real-world content, in this book's sense, with no further translation step required to make contact with it.
+
+\begin{corollary}
+A physicist who reports a frequentist interval but reasons, updates confidence, and makes decisions as though it were a posterior is not committing an error of arithmetic; she is correctly tracking real-world content while mislabeling the ideal-world formalism used to obtain it --- the same species of world-mixing diagnosed, from the opposite direction, in the chapter on Euclidean lattice calculation.
+\end{corollary}
+
+\section{Closing}
+
+None of this is an argument that frequentist tools are dispensable. Profile likelihoods, $p$-values, and coverage guarantees remain the disciplined machinery by which a model survives contact with data without the analyst's prior smuggling in the desired answer unexamined. The claim is narrower, and, the author hopes, more interesting: the physicist's actual epistemic practice --- restricting the hypothesis space before data arrives, updating confidence across a lifetime of experiments rather than resetting it with each one, treating fixed unknowns as objects that can bear probability --- is Bayesian in structure, regardless of which formal statistical vocabulary is used to report the result.
+
+\end{document}
