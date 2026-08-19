@@ -1,0 +1,413 @@
+\chapter{Physics Is Not Data Science}
+\label{physics-is-not-data-science}
+\epigraph{Not being able to define a thing precisely is not the same failure 
+as not understanding it.}{ R. Feynman}
+ Physics survives without precise definitions because it replaces them with
+ measurement procedures. This chapter argues that measurement procedures are
+ the \emph{floor} of physics, not its ceiling --- and that the gap between the
+ floor and the ceiling is exactly what separates a physicist from a
+ curve-fitting algorithm.
+
+The claim in the epigraph above rests on two sentences Feynman actually said,
+in different lectures, about different things -- and they are routinely
+collapsed into one. They should not be.
+
+``We cannot define anything precisely'' was said about ordinary words like
+\emph{motion} -- a confession that physics does not wait for philosophical
+certainty about what a thing \emph{is} before it starts measuring it precisely.
+That is an epistemic strategy: start with measurement, because measurement is
+checkable and definition-by-essence is not.
+
+``I think I can safely say that nobody understands quantum mechanics'' was said
+in a completely different spirit.  Feynman had just finished pointing out that
+although newspapers once claimed only twelve people understood relativity, that
+was never really true --- once Einstein's paper was published, plenty of people
+came to understand it, in the ordinary sense of being able to picture what it
+says. Quantum mechanics, he then says, is different: nobody has ever been able
+to reduce it to a picture built out of everyday experience, the way you can
+eventually picture curved spacetime with enough effort. That is not a statement
+that physicists cannot use quantum mechanics, predict with it, or reason about
+it --- they do all three, correctly, every day, and Feynman himself spent the
+rest of that same lecture doing exactly that. It is a much narrower claim: no
+one has found a \emph{classical, intuitive mechanism} underneath it.
+Understanding, in that specific and demanding sense, is missing. Understanding
+in the working sense --- knowing the structure, deriving its consequences,
+trusting it enough to build a transistor or a laser on top of it --- is not.
+
+This chapter is about the difference between those two kinds of understanding,
+and about a claim worth taking seriously: that pure operationalism, on its own,
+cannot tell them apart. If all that mattered were successful measurement and
+prediction, there would be no principled way to say that a physicist
+understands gravity more deeply than a weather-prediction algorithm understands
+rain. Physics needs, and has, a further standard.
+
+Return to  account of measurement. An operational definition says: a quantity
+is whatever a specified procedure outputs. This is enough to make a concept
+scientific --- checkable, shareable, free of unfalsifiable metaphysics. It is
+not enough, on its own, to distinguish two very different kinds of success.
+\begin{enumerate}
+\item A theory that predicts a measurement because it encodes something
+    structural about how the world is put together: a small number of
+        principles from which the measured value can be \emph{derived}.
+\item A model that predicts a measurement because it has been fitted, with
+    enough free parameters, to enough past instances of that same measurement,
+        with no claim about structure at all.
+\end{enumerate}
+
+Both can satisfy the operationalist's only stated requirement: the output
+matches what the ruler, clock, or detector reads. Bridgman's operationalism,
+taken as a complete philosophy of physics rather than as a starting discipline,
+has no vocabulary for preferring one over the other. Yet every working
+physicist does prefer one over the other, strongly and immediately. The rest of
+this chapter tries to say, precisely, why.
+
+The clearest demonstration Feynman ever gave of this distinction was not a
+slogan; it was a worked example.He points out that Newton's law of gravitation
+can be written in at least three completely different-looking forms.
+
+\begin{description}
+\item[Action at a distance.] Each mass reaches out across empty space and pulls
+    on every other mass directly:
+\[
+  F = \frac{G m_1 m_2}{r^2}.
+\]
+\item[The field method.] Every mass creates a field filling all of space; a
+    second mass simply responds to the local field value at its own location,
+        with no need to reach anywhere:
+\[
+  \nabla^2 \phi = 4\pi G \rho, \qquad \vec F = -m\,\nabla \phi.
+\]
+\item[The principle of least action.] Of all the conceivable paths a particle
+    could take between two points, nature selects the one that makes a
+        particular quantity, the action $S$, stationary:
+\[
+  \delta S = \delta\!\int (T - V)\, dt = 0.
+\]
+\end{description}
+
+For every experiment classical mechanics can perform, these three formulations
+issue identical predictions. Bridgman's yardstick sees no difference between
+them at all: same measurement in, same number out, for all three, always. And
+yet, as Feynman insists, they are not the same idea wearing different clothes.
+They organize your intuition differently, suggest different questions, and ---
+this is the decisive part --- they are not equally good starting points for the
+\emph{next} theory.
+
+When physics moved from classical to quantum mechanics, the
+action-at-a-distance picture and the field-at-a-point picture both had to be
+abandoned or radically reworked. The least-action formulation, by contrast,
+generalized almost gracefully: Feynman's own path-integral formulation of
+quantum mechanics, developed in 1948, is built by summing a phase
+$e^{iS/\hbar}$ over every conceivable path, weighting the classical path of
+least action as the one that survives in the limit $\hbar \to 0$. Three
+formulations, operationally indistinguishable in 1687 and still operationally
+indistinguishable today for any classical experiment --- but only one of them
+was carrying the structure that quantum mechanics needed. Operational
+equivalence in the old domain said nothing at all about generative power in the
+new one.
+
+That gap is what \emph{understanding} means in physics. It is not merely
+getting today's number right. It is possessing a formulation with enough
+internal structure that it tells you, in a principled way, what to try next.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[every node/.style={font=\footnotesize}, >=stealth]
+  \node[draw, rounded corners,  minimum width=2.7cm, minimum height=0.85cm, align=center] (center)
+    {Same predictions:\\ classical gravitation};
+
+  \node[draw, rounded corners, minimum width=2.1cm, minimum height=0.75cm, align=center, above left=0.9cm and 0.1cm of center] (force) {Action at\\ a distance};
+  \node[draw, rounded corners, minimum width=2.1cm, minimum height=0.75cm, align=center, above right=0.9cm and 0.1cm of center] (field) {Field\\ method};
+  \node[draw, rounded corners, minimum width=2.1cm, minimum height=0.75cm, align=center, below=1.0cm of center] (action) {Principle of\\ least action};
+
+  \draw[<->, thick] (force) -- (center);
+  \draw[<->, thick] (field) -- (center);
+  \draw[<->, thick] (action) -- (center);
+
+  \node[draw, dashed, rounded corners, minimum width=2.1cm, minimum height=0.65cm, align=center, left=0.7cm of force, yshift=-0.25cm] (deadforce) {no natural\\ generalization};
+  \node[draw, dashed, rounded corners, minimum width=2.1cm, minimum height=0.65cm, align=center, right=0.7cm of field, yshift=-0.25cm] (deadfield) {no natural\\ generalization};
+  \node[draw, rounded corners,  minimum width=2.9cm, minimum height=0.85cm, align=center, below=1.0cm of action] (qm) {Quantum mechanics\\ via path integrals (1948)};
+
+  \draw[->, thick] (force) -- (deadforce);
+  \draw[->, thick] (field) -- (deadfield);
+  \draw[->, thick] (action) -- (qm);
+\end{tikzpicture}
+\caption{Three formulations of Newton's law of gravitation, operationally
+    identical for every classical measurement --- yet only the least-action
+    formulation carried the structure needed to generalize to quantum
+    mechanics. Operational equivalence in one domain does not imply equal
+    understanding, or equal reach.}
+\label{fig:three-ways}
+\end{figure}
+
+The philosopher and computer scientist Judea Pearl has proposed a useful
+vocabulary for the same distinction, developed for a very different purpose:
+distinguishing statistical, correlational reasoning from causal reasoning. He
+describes three rungs of a ladder.
+
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{4.6cm} >{\raggedright\arraybackslash}p{4.6cm}@{}}
+\textbf{Rung} & \textbf{Typical question} & \textbf{What answers it} \\
+Association & What does a value of $X$ tell me about $Y$? & A fit to past data; correlation \\
+Intervention & What happens to $Y$ if I \emph{change} $X$? & A causal / mechanistic model \\
+Counterfactual & What would $Y$ have been, had $X$ been different? & A model
+    that supports reasoning beyond any data actually collected \\
+\end{tabular}
+\end{center}
+
+A purely operational, purely data-fitted model can climb no higher than the
+first rung by construction: it was built to reproduce association between
+measurement and measurement, and nothing in its construction licenses a claim
+about what would happen under conditions it has never seen. A physical theory
+with real structure --- Newton's law derived from a principle, not merely
+fitted to Tycho Brahe's tables --- operates on the second and third rungs
+almost as a matter of course. It tells you what happens if you double the mass
+of the Sun, a question no data set has ever answered, because the answer is
+derivable rather than looked up.
+
+History supplies the record of this pay-off. The existence and orbit of Neptune
+were predicted, in 1846, from irregularities in Uranus's orbit, before anyone
+pointed a telescope at the right patch of sky. The positron was predicted by
+Dirac's equation in 1928, purely from requiring the equation to be consistent,
+four years before one was observed in a cloud chamber. Gravitational waves were
+predicted in 1916 and detected almost exactly a century later, in 2015, with
+the detected waveform matching the theoretical prediction for two merging black
+holes to remarkable precision. None of these were interpolations inside a
+training set. Each was an extrapolation, licensed by structure, into territory
+no measurement had ever visited --- exactly the kind of claim Pearl's first
+rung cannot support, and exactly what physicists mean when they say they
+\emph{understand} gravity, or the electron, rather than merely being able to
+predict its next measured value.
+
+\section{Physics and Data Science}
+
+This is the precise place where physics and data science part ways, and it is
+worth stating the comparison without exaggerating it in either direction.
+
+Train a sufficiently flexible statistical model on centuries of recorded
+planetary positions and it will predict tomorrow's positions beautifully ---
+quite possibly to a precision rivaling Newton's own equations, for exactly the
+regime it was trained on. It has, in the fullest operational sense, learned to
+measure and predict planetary motion. What it has not done is acquire a reason
+to trust its own output the moment the situation changes: a new comet on a
+hyperbolic orbit, a spacecraft under active thrust, a binary star system where
+the gravitational field is far stronger than anything in the training data. A
+model built on correlation has no internal signal that it has left its depth
+--- it will output a confident number regardless. Newton's law, by contrast,
+comes with a built-in, structural account of exactly where and why it should be
+expected to fail: at speeds approaching $c$, or fields strong enough that
+spacetime curvature can no longer be neglected. Knowing your own boundary of
+validity is itself a form of understanding, and it is precisely what falls out
+of having a mechanism rather than a fit.
+
+None of this makes data-driven methods unscientific, and it would be a mistake
+to read this chapter that way. Statistical inference is indispensable precisely
+where no mechanistic theory yet exists, and some of the most interesting
+current work in physics itself uses machine learning as a tool for discovery
+--- to search for patterns in particle-collider data, or in gravitational-wave
+signals, that a human physicist might not think to look for. Tellingly, though,
+the most physically successful of these tools are increasingly built to encode
+known structure directly --- conservation laws, symmetries, the least-action
+principle itself --- rather than learning everything from scratch. That design
+choice is itself an admission of this chapter's argument: bare correlation
+extrapolates badly, and the fix physicists reach for is always the same one
+Feynman reached for in 1948 --- find the formulation that carries structure,
+not just the one that fits the numbers.
+
+
+Chapter~\ref{reality-and-models} ended with a motto built from three of
+Feynman's remarks: physics
+does not need to know what space, time, or motion \emph{are}, only how to
+measure them. That motto is correct as far as it goes, and it is where physics
+has to start. This chapter has argued that it is not where physics is content
+to stop.
+
+A physicist who has only an operational definition and an accurate prediction
+has done real, indispensable work --- exactly the work 
+Chapter~\ref{reality-and-models} celebrated. A
+physicist who additionally has a structure --- a small set of principles from
+which that prediction, and a thousand others never yet measured, can all be
+derived --- has done something further, and it is that further thing which
+earns the word \emph{understand}. The motto of this chapter is the necessary
+second half of the first:
+
+\emph{We measure a thing before we understand it. We understand it once our
+account of it lets us predict what we have never measured at all.}
+
+\section{The Physicist as Intuitive Bayesian}
+
+A physicist does not confront data from a position of ignorance. Before a
+single measurement is taken, she has already restricted attention to a family
+of models $\{M_\theta : \theta \in \Theta\}$ --- Newton's law with an unknown
+spring constant, a resonance of unknown mass and width, a cosmological model
+with unknown $\Omega_\Lambda$. This restriction is not neutral. It is an act of
+assigning prior plausibility zero to the overwhelming majority of functions
+that could in principle be fit to any given data set, and non-negligible
+plausibility to a small, structured subset selected by symmetry,
+renormalizability, dimensional analysis, or simply what has worked before. This
+is the content of a Bayesian prior, whether or not it is ever written as
+$\pi(\theta)$. The thesis of this section is that physics, as actually
+practiced, is Bayesian inference over a self-imposed model space --- even when,
+and especially when, the explicit statistical vocabulary used to report the
+result is frequentist.
+
+\subsection{Model space as an implicit prior}
+
+\begin{definition}
+A \emph{model space} $\mathcal{M}$ is the set of hypotheses a physicist is
+    willing to entertain prior to seeing the data at hand, together with a
+    measure $\pi$ of relative plausibility over that set --- possibly only
+    ordinal, and rarely written explicitly.
+\end{definition}
+
+Formally, inference within a chosen model proceeds by
+\begin{equation}
+P(\theta \mid D, M) \;=\; \frac{P(D \mid \theta, M)\,\pi(\theta \mid M)}
+    {\displaystyle\int_{\Theta} P(D \mid \theta', M)\,\pi(\theta' \mid M)\, d\theta'}
+    \,, \qquad \theta \in \Theta_M,
+\end{equation}
+but the physicist's real act of judgment happens one level up, in the choice of
+$M$ itself from the space of all conceivable models $\mathcal{M}$. Requiring
+Lorentz invariance, gauge invariance, renormalizability, or simply a low-order
+polynomial in the fields are all instances of setting $\pi(M') = 0$ for models
+$M'$ outside the chosen family --- an extremely informative prior, imposed
+before any likelihood is ever evaluated, and rarely defended in the
+probabilistic language it deserves.
+
+\begin{remark}
+Occam's razor, as actually practiced in theoretical physics --- preferring the
+    model with fewer free parameters, absent a specific reason to prefer
+    otherwise --- is not a separate methodological principle standing outside
+    probability theory. It is a description of a prior that penalizes model
+    complexity, and it has a standard formal counterpart in Bayesian model
+    comparison: the automatic Occam penalty carried by the marginal likelihood
+\begin{equation}
+P(D \mid M) \;=\; \int_{\Theta} P(D \mid \theta, M)\,\pi(\theta \mid M)\, d\theta,
+\end{equation}
+which is suppressed for models whose parameter space wastes prior mass on
+    regions the data rule out.
+\end{remark}
+
+\subsection{Sequential updating across experiments}
+
+The history of confidence in General Relativity is not well described as a
+sequence of independent frequentist tests, each beginning from total ignorance
+and returning a verdict discarded once the next experiment starts. Each
+successive test --- Mercury's perihelion, light bending, gravitational
+redshift, binary-pulsar timing, the direct detection of gravitational waves ---
+is treated as tightening an already substantial body of belief, and a single
+anomalous result is weighed \emph{against}, not substituted for, everything
+already established. This is posterior-to-prior updating,
+\begin{equation}
+\pi_n(\theta) \;\propto\; P(D_n \mid \theta)\,\pi_{n-1}(\theta),
+\end{equation}
+carried out informally, paper by paper, over decades, whether or not any
+individual paper ever computes a posterior.
+
+\subsection{Confidence intervals: frequentist construction, Bayesian use}
+
+A frequentist $100(1-\alpha)\%$ confidence interval $I(D)$ is defined by the
+coverage property
+\begin{equation}
+P_\theta\big(\theta \in I(D)\big) = 1-\alpha \qquad \text{for every fixed } \theta,
+\end{equation}
+a statement about the behavior of the \emph{procedure} across a hypothetical
+ensemble of repetitions of the experiment at the same true $\theta$. By
+construction it makes no probabilistic statement about whether the true value
+lies in the one particular interval actually obtained from the one experiment
+that was run.
+
+\begin{remark}
+This is almost never how such an interval is read once quoted. ``The top-quark
+    mass is $172.5 \pm 0.7\ \mathrm{GeV}$'' is universally understood,
+    including by the physicists reporting it, as licensing something close to
+    ``there is roughly a 68\% chance the true mass lies in this range'' --- a
+    statement about degree of belief in a fixed but unknown constant,
+    conditioned on the one data set actually obtained. That is a Bayesian
+    credible interval, not the frequentist object formally computed. The two
+    coincide numerically under a flat prior in a wide class of problems, which
+    is precisely why the conflation goes unnoticed.
+\end{remark}
+
+\subsection{Systematic uncertainty as a nuisance-parameter prior}
+
+A detector's calibration constant, an integrated luminosity, a background
+normalization --- these are not resampled across hypothetical repetitions of
+the universe; they are fixed, unknown quantities specific to the one apparatus
+and the one run at hand. Assigning them an error distribution and
+marginalizing,
+\begin{equation}
+P(\theta \mid D) \;=\; \int P(\theta \mid D, \lambda)\,\pi(\lambda)\, d\lambda,
+\end{equation}
+over a nuisance parameter $\lambda$ --- calibration, background rate,
+theoretical cross-subsection uncertainty --- is exactly Bayesian
+nuisance-parameter marginalization. There is no frequentist repeated-sampling
+story under which ``the calibration constant of this detector, on this day, has
+a 90\% confidence interval'' is a meaningful statement: there is only one
+calibration constant, and one day. Experimental physicists carry out this
+marginalization routinely, correctly, and almost never under that name.
+
+\subsection{Case study: the $5\sigma$ threshold and the Higgs boson}
+
+The 2012 discovery announcement was couched entirely in frequentist terms: a
+local significance in excess of $5\sigma$, i.e.\ a $p$-value under the
+background-only null hypothesis below roughly $3\times10^{-7}$. This is, by
+construction, \emph{not} a posterior probability that the Higgs boson exists,
+and not a statement about $P(\text{Higgs} \mid D)$ at all --- a point
+statisticians raised at the time and which physicists mostly reasoned past
+rather than through.
+
+\begin{remark}
+What made the announcement compelling was never the $p$-value in isolation. It
+    was the $p$-value combined with decades of prior theoretical commitment ---
+    electroweak precision fits, unitarity arguments against a Higgsless
+    Standard Model, a mass window already narrowed by indirect constraints ---
+    that gave the community a strong prior concentrated near the observed mass
+    before ATLAS and CMS reported anything. The frequentist significance
+    functioned, in practice, as a likelihood-ratio-like ingredient fed into an
+    unstated Bayesian update, not as a free-standing verdict evaluated against
+    a flat prior over ``a new particle exists somewhere in an otherwise
+    unconstrained parameter space.'' A $5\sigma$ excess with no such prior
+    theoretical support is treated far more skeptically by the same community,
+    appropriately --- itself evidence that the underlying reasoning is Bayesian
+    even while the reported statistic is not.
+\end{remark}
+
+\subsection{Real-world content versus ideal-world ensembles}
+
+This section's thesis connects directly to the real-world/ideal-world
+distinction developed earlier in this book. The frequentist confidence interval
+is defined via an ensemble of hypothetical repetitions of the experiment that
+were never run, and, for a one-off cosmological measurement or a unique
+collider run at a given energy, could not in principle be run again
+identically. That ensemble is precisely the kind of ideal-world construct
+examined in the chapter on numerical calculation: a formally well-defined
+object, useful for calibrating a procedure, that does not itself denote
+anything that has happened in the real world. The Bayesian posterior, by
+contrast, is a degree of belief about the one already-realized data set and the
+one fixed constant of nature the physicist actually cares about --- real-world
+content, in this book's sense, with no further translation step required to
+make contact with it.
+
+\begin{corollary}
+A physicist who reports a frequentist interval but reasons, updates confidence,
+    and makes decisions as though it were a posterior is not committing an
+    error of arithmetic; she is correctly tracking real-world content while
+    mislabeling the ideal-world formalism used to obtain it --- the same
+    species of world-mixing diagnosed, from the opposite direction, in the
+    chapter on Euclidean lattice calculation.
+\end{corollary}
+
+\subsection{Closing}
+
+None of this is an argument that frequentist tools are dispensable. Profile
+likelihoods, $p$-values, and coverage guarantees remain the disciplined
+machinery by which a model survives contact with data without the analyst's
+prior smuggling in the desired answer unexamined. The claim is narrower, and,
+the author hopes, more interesting: the physicist's actual epistemic practice
+--- restricting the hypothesis space before data arrives, updating confidence
+across a lifetime of experiments rather than resetting it with each one,
+treating fixed unknowns as objects that can bear probability --- is Bayesian in
+structure, regardless of which formal statistical vocabulary is used to report
+the result.
+

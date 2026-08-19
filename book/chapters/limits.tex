@@ -30,8 +30,6 @@ diagnostic, rooted in the classical theory of singular
 perturbations, for telling in advance which limits are
 dangerous.
 
-\section{Introduction}
-
 Physics is, in large part, a science of controlled idealization.
 We compute planetary orbits by treating planets as point masses;
 we compute the deflection of a loaded shelf by treating steel as
@@ -69,7 +67,7 @@ resolve. Get the order wrong, and the model quietly answers a
 different question than the one being asked.
 
 \section{The mathematics of non-commuting limits}
-\label{limits:math}
+
 The phenomenon  already appears in
 single-variable calculus applied to two variables. Consider
 \begin{equation}
@@ -129,11 +127,136 @@ under-determined problem -- that signals a dangerous limit. All
 three case studies below exhibit this same signature, dressed in
 different physical clothing.
 
+\section{The staircase paradox}
+\label{limits:staircase}
+Take a right triangle with legs (catheti) of length $a$ and $b$, and hypotenuse
+$c$. Place the right angle at the origin, so the legs run along the axes:
+$$(0,0),\qquad (a,0),\qquad (0,b),$$
+with the hypotenuse joining $(a,0)$ and $(0,b)$. By Pythagoras,
+$c=\sqrt{a^2+b^2}$. For concreteness take $a=b=6$, so $c = 6\sqrt2 \approx 8.485$.
+
+Instead of the straight hypotenuse, approximate it by a staircase: replace the
+diagonal with a path that alternates horizontal and vertical steps, starting
+at $(a,0)$ and ending at $(0,b)$. With $k$ steps, each horizontal segment has
+length $a/k$ and each vertical segment has length $b/k$. Figure~\ref{stairs}
+shows this staircase for $k = 1,2,4,8,16$, all overlaid on the same triangle,
+together with the true hypotenuse in bold.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=0.9]
+\definecolor{tealA}{HTML}{9FE1CB}
+\definecolor{tealB}{HTML}{5DCAA5}
+\definecolor{tealC}{HTML}{1D9E75}
+\definecolor{tealD}{HTML}{0F6E56}
+\definecolor{tealE}{HTML}{085041}
+\definecolor{coral}{HTML}{D85A30}
+
+\newcommand{\staircase}[2]{%
+  \pgfmathtruncatemacro{\kmax}{#1-1}
+  \foreach \i in {0,...,\kmax} {
+    \pgfmathsetmacro{\xa}{6*(1-\i/#1)}
+    \pgfmathsetmacro{\ya}{6*\i/#1}
+    \pgfmathsetmacro{\xb}{6*(1-(\i+1)/#1)}
+    \pgfmathsetmacro{\yb}{6*(\i+1)/#1}
+    \draw[#2, line width=0.9pt] (\xa,\ya) -- (\xb,\ya) -- (\xb,\yb);
+  }
+}
+  % triangle
+  \draw[gray, line width=0.8pt] (0,0) -- (6,0);
+  \draw[gray, line width=0.8pt] (0,0) -- (0,6);
+  \draw[gray, line width=0.6pt] (0.25,0) -- (0.25,0.25) -- (0,0.25);
+  \node[below] at (3,0) {$a$};
+  \node[left] at (0,3) {$b$};
+
+  % staircases, coarsest to finest
+  \staircase{1}{tealA}
+  \staircase{2}{tealB}
+  \staircase{4}{tealC}
+  \staircase{8}{tealD}
+  \staircase{16}{tealE}
+
+  % true hypotenuse
+  \draw[coral, line width=1.6pt] (6,0) -- (0,6);
+  \node[coral, above right] at (3.3,3.3) {$c$};
+
+  % legend
+  \begin{scope}[shift={(0,-1.4)}]
+    \draw[tealA, line width=0.9pt] (0,0) -- (0.5,0); \node[right, font=\footnotesize] at (0.55,0) {$k=1$};
+    \draw[tealB, line width=0.9pt] (1.6,0) -- (2.1,0); \node[right, font=\footnotesize] at (2.15,0) {$k=2$};
+    \draw[tealC, line width=0.9pt] (3.2,0) -- (3.7,0); \node[right, font=\footnotesize] at (3.75,0) {$k=4$};
+    \draw[tealD, line width=0.9pt] (4.8,0) -- (5.3,0); \node[right, font=\footnotesize] at (5.35,0) {$k=8$};
+    \draw[tealE, line width=0.9pt] (6.4,0) -- (6.9,0); \node[right, font=\footnotesize] at (6.95,0) {$k=16$};
+  \end{scope}
+  \begin{scope}[shift={(0,-1.9)}]
+    \draw[coral, line width=1.6pt] (0,0) -- (0.5,0); \node[right, font=\footnotesize] at (0.55,0) {hypotenuse $c$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Staircases with $k=1,2,4,8,16$ steps between $(a,0)$ and $(0,b)$,
+overlaid with the true hypotenuse (coral). As $k$ grows the staircase hugs
+the diagonal ever more closely.}
+\label{stairs}
+\end{figure}
+
+For every $k$, the horizontal segments of the staircase sum to exactly $a$
+(they partition the base), and the vertical segments sum to exactly $b$.
+So the total length of the $k$-step staircase is
+$$L_k = a + b,$$
+independent of $k$. As $k\to\infty$, the staircase converges pointwise to the
+hypotenuse -- every point on it gets arbitrarily close to the diagonal line,
+and the maximum distance between the staircase and the line is at most
+$\max(a,b)/k \to 0$. Since the staircases ``become'' the hypotenuse in the
+limit, and each one has length $a+b$, it seems to follow that
+$$c = a+b.$$
+For $a=b=6$ this claims $c=12$, in place of the true value $6\sqrt2\approx
+8.485$.
+
+
+The flaw is the assumption that if a sequence of curves converges to a limit
+curve (as point sets, or uniformly), then their lengths converge to the
+length of the limit. That assumption is false, and this staircase is the
+standard counterexample.
+
+\paragraph{An L1/L2 mismatch.} Every staircase, at any resolution, is a
+\emph{taxicab} (L1) path from $(a,0)$ to $(0,b)$: it only ever moves parallel
+to the axes. The L1 distance between those two points is exactly $a+b$, and
+that number has nothing to do with $k$ -- refining the staircase just
+subdivides the same L1 path into smaller axis-aligned pieces, it never turns
+it into a diagonal one. The hypotenuse, by contrast, is the L2 (Euclidean)
+distance $\sqrt{a^2+b^2}$. No amount of subdividing a taxicab path turns it
+into a straight line; you would need to actually tilt the segments, not just
+shrink them.
+
+\paragraph{Length is only lower semicontinuous.} What \emph{is} true in
+general is
+$$\liminf_{k\to\infty} L_k \;\ge\; L(\text{limit curve}),$$
+i.e.\ length can jump \emph{up} in the limit but never down -- consistent with
+$a+b \ge c$ here (the triangle inequality, with equality only in the
+degenerate case $a=0$ or $b=0$). Uniform convergence of curves guarantees
+this inequality, not equality. Equality needs more: the curves must converge
+together with their \emph{tangent directions} (e.g.\ $C^1$ convergence), so
+that each small piece of the approximating curve is not just close to the
+limit in position but is pointing the right way. The staircase fails this
+badly -- every one of its segments points either due east or due north, never
+along the $45^\circ$ direction of the hypotenuse, no matter how small the
+steps get.
+
+The correct statement is Pythagoras' theorem, $c=\sqrt{a^2+b^2}$, not
+$c=a+b$. The staircase is a legitimate example of curves that coincide in the
+limit as point sets -- the Hausdorff distance between the $k$-step staircase
+and the hypotenuse goes to $0$ -- while their lengths stay apart forever,
+off by a constant factor of $\dfrac{a+b}{\sqrt{a^2+b^2}}$ (here
+$\dfrac{12}{6\sqrt2}=\sqrt2$). It is the same phenomenon as the zig-zag
+triangle construction: pointwise or uniform convergence of a sequence of
+curves does not, on its own, imply convergence of their lengths.
+
 \section{The length of the curve}
 \label{limits:curve-length}
-Important example: two smooth curve may coincide as sets of points, but have
-different lengths. Let $ y_n= \sin(n x)/n $ on the  interval $ 0\le x \le 2 \pi $. 
-Calculation of length of sinusoidal curve is a simple exercise in elliptic integrals:
+One can think that paradox described in section~\ref{limits:staircase} can
+not occur for smooth curves, however two smooth curve may coincide as sets of 
+points, but have different lengths. Let $ y_n= \sin(n x)/n $ on the  
+interval $ 0\le x \le 2 \pi $. Calculation of length of sinusoidal curve 
+is a simple exercise in elliptic integrals:
 \begin{equation}
    \label {sin-length}
    \begin{split}
@@ -144,33 +267,144 @@ Calculation of length of sinusoidal curve is a simple exercise in elliptic integ
        =4 \sqrt{2} E(\frac{1}{\sqrt{2}}) \approx 1.351
    \end{split}
 \end{equation}  
-and ratio of its length to that of segment is $ \approx 1.22 $ independent of $ n $.
-On the other hand maximal distance between the curve and straight segment $ d_n=1/n $ 
-vanishes for $ n\rightarrow \infty $.
+and ratio of its length to that of segment is $ \approx 1.22 $ independent of $
+n $. On the other hand maximal distance between the curve and straight segment
+$ d_n=1/n $ vanishes for $ n\rightarrow \infty $.
+
+\section{Wigner--In\"on\"u Contractions}
+\label{limits:wigner}
+The Wigner--In\"on\"u contraction is a systematic procedure that produces one Lie
+algebra as a singular limit of another.  Originally introduced by Wigner and
+In\"on\"u, the method explains how nonrelativistic or
+flat--space symmetry groups arise algebraically from relativistic or curved
+ones.  The contraction operates entirely at the level of Lie algebras and does
+not in general correspond to an isomorphism; it is a degeneration that reduces
+the structure constants and typically turns a semisimple algebra into a
+non-semisimple one.
+
+Let $\mathfrak{g}$ be a Lie algebra with basis $\{X_i\}$ and commutation
+relations
+\begin{equation}
+   [X_i,X_j] = f_{ij}{}^{k} X_k ,
+\end{equation}
+with constant structure coefficients $f_{ij}{}^{k}$.  A
+Wigner--In\"on\"u contraction of $\mathfrak{g}$ is defined as follows:
+\begin{enumerate}
+\item Introduce a one--parameter family of invertible linear transformations
+      $X_i \mapsto X_i(\varepsilon)$ for $\varepsilon \neq 0$.
+\item Express the commutators in the $\varepsilon$--dependent basis:
+\begin{equation}
+    [X_i(\varepsilon),X_j(\varepsilon)]
+        = f_{ij}{}^{k}(\varepsilon) \, X_k(\varepsilon).
+\end{equation}
+\item Take the limit $\varepsilon \to 0$, assuming it exists:
+\begin{equation}
+    \lim_{\varepsilon\to 0} f_{ij}{}^{k}(\varepsilon)
+        = f^{(0)}_{ij}{}^{k}.
+\end{equation}
+\end{enumerate}
+The algebra determined by $f^{(0)}_{ij}{}^{k}$ is called the
+\emph{contracted Lie algebra} and is denoted $\mathfrak{g}_0$.
+
+In the original formulation, $\mathfrak{g}$ is assumed to decompose as a vector
+space into a direct sum
+\begin{equation}
+    \mathfrak{g} = \mathfrak{h} \oplus \mathfrak{p},
+\end{equation}
+where $\mathfrak{h}$ is a subalgebra.  One then rescales only the generators in
+$\mathfrak{p}$:
+\begin{equation}
+   X_h' = X_h, \qquad
+   X_p' = \varepsilon\, X_p,
+\end{equation}
+with $X_h \in \mathfrak{h}$ and $X_p \in \mathfrak{p}$.
+Taking $\varepsilon \to 0$ yields the contracted algebra.
+
+\paragraph{Example: Poincar\'e \texorpdfstring{$\to$}{→} Galilei}
+Let $J_i$ be spatial rotations, $K_i$ Lorentz boosts, $P_i$ spatial momenta,
+and $H$ the energy operator of the Poincar\'e algebra.  The characteristic
+relativistic commutators are
+\begin{equation}
+   [K_i,K_j] = - \frac{1}{c^2} \epsilon_{ijk} J_k,
+   \qquad
+   [K_i,P_j] = \frac{1}{c^2} \delta_{ij} H.
+\end{equation}
+Define rescaled generators
+\begin{equation}
+    K_i' = c\, K_i, \qquad H' = H.
+\end{equation}
+Then
+\begin{equation}
+   [K_i',K_j'] = - c^2 \frac{1}{c^2} \epsilon_{ijk} J_k
+      \xrightarrow[c\to\infty]{} 0, 
+   \qquad
+   [K_i',P_j] = c \frac{1}{c^2} \delta_{ij} H
+      \xrightarrow[c\to\infty]{} 0 .
+\end{equation}
+The resulting commutation relations coincide with those of the Galilei algebra,
+showing that the Galilean symmetry arises as the singular limit $c\to\infty$
+of the Poincar\'e symmetry.
+
+\paragraph{Example: \texorpdfstring{$\mathfrak{so}(3) \to \mathfrak{e}(2)$}{so(3)→e(2)}}
+Let $J_x,J_y,J_z$ generate $\mathfrak{so}(3)$.  Define
+\begin{equation}
+    P_x = \varepsilon J_x, \qquad
+    P_y = \varepsilon J_y, \qquad
+    J = J_z.
+\end{equation}
+Then
+\begin{align}
+    [P_x,P_y] &= \varepsilon^2 J_z \xrightarrow{\varepsilon\to 0} 0, \\
+    [J,P_x] &= P_y, \qquad [J,P_y] = - P_x.
+\end{align}
+This is precisely the Lie algebra $\mathfrak{e}(2)$ of the Euclidean group
+$E(2)$ in two dimensions.  Geometrically, this corresponds to the limit in
+which a sphere of radius $R = 1/\varepsilon$ becomes flat as $R\to\infty$.
+
+The simple contraction may be generalized by assigning distinct scaling
+exponents to different generators:
+\begin{equation}
+    X_i' = \varepsilon^{n_i} X_i ,
+\end{equation}
+with nonnegative integers $n_i$.  This includes all graded contractions and
+produces a wide variety of non-isomorphic limit algebras.  Such generalized
+contractions underlie the classification of kinematical Lie algebras by Bacry
+and L\'evy-Leblond.
+
+Contractions correspond to well-defined physical limits: the
+nonrelativistic limit $c\to\infty$, flat-space limits $R\to\infty$ of curved
+spacetimes, ultra-relativistic limits leading to Carroll algebras, and
+weak-coupling or large-mass limits in field theory.  In all cases, the
+contraction captures the algebraic residue of a theory after certain dynamical
+effects have been suppressed.
+
 
 \section{ The beam on three pillars}
 \label{limits:beam}
 Contrary to common belief not every properly set problem in
 classical mechanics has unique solution. Let's take for example
 a (rigid) beam on three (rigid) pillars (see fig.\ref{beam3}).
-\begin{figure}[h]
-\begin{tikzpicture}
-%\draw[thin,dotted] (-3,-3) grid (3,1);
-\draw[->] (0,0) -- (0,1);
-\node at (0.2,0.7)  {y};
-\draw[very thick] (-3,0) -- (3,0);
-\draw[very thick] (-3,-3) -- (-3,0);
-\draw[very thick] (3,-3) -- (3,0);
-\draw[very thick] (0,-3) -- (0,0);
-\draw (1.1,-0.1) -- (1.1,0.1);
-\node at (1.1,0.2) {x};
-\node at (-2.8,-2.9) {1};
-\node at (0.2,-2.9) {0};
-\node at (2.8,-2.9) {2};
-\end{tikzpicture}
-\caption{Beam on 3 pillars}
-\label {beam3}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[scale=1]
+        % Beam
+        \draw[fill=gray!20, thick] (0,3) rectangle (11,3.6);
+        % Pillars
+        \foreach \x in {1, 5, 9} {
+            \draw[fill=gray!40, thick] (\x,0) rectangle (\x+1,3);
+        }
+        % Ground line
+        \draw[thick] (-0.5,0) -- (11.5,0);
+        % Ground hatching
+        \foreach \x in {-0.4,-0.1,...,11.4} {
+            \draw (\x,0) -- (\x+0.3,-0.3);
+        }
+    \end{tikzpicture}
+    \caption{Beam resting on three pillars.}
+    \label{beam3}
 \end{figure}
+
 Let the weight of the beam be $W$ and length $2 L$.
 Balance of forces gives:
 \begin{equation}
@@ -183,20 +417,20 @@ Balance of torques gives:
    So we have only two equations for three
 unknown forces. From the symmetry we can get that $F_1=F_2$. 
 (We know that this already from balance of torques.)
-{\em First solution}:
+\paragraph{ First solution}
 All pillars and beam are absolutely rigid. Then
 if we pull out the middle pillar nothing will change.
 So $F_0=0$ and $F_1=F_2=W/2$.
-{\em Second solution}
+\paragraph{ Second solution}
 All pillars and beam are absolutely rigid. Then
 we can cat beam at the center and will have two
 beams laying on two pillars each.
 So $F_0=W/2$ and $F_1=F_2=W/4$.
-{\em Third solution}
+\paragraph{ Third solution}
 Beam is absolutely rigid, pillars are very hard springs.
 Since beam is horizontal, small change in length is 
 equal to all pillars so $F_0=F_1=F_2=w/3$
-{\em Fourth solution}
+\paragraph{ Fourth solution}
 Pillars are rigid, beam is elastic. This case needs
 some calculations, well known in elasticity theory
 (see e.g \cite {Landau-Lifshitz-7}).
@@ -249,7 +483,7 @@ approximation is crucial.
 
 \section{Frenkel's point electron}
 \label{limits:frenkel}
-\subsection{Self-energy and the point limit}
+\paragraph{Self-energy and the point limit}
 
 Model the electron classically as a charge $e$ spread over a
 sphere of radius $r_0$. The electrostatic self-energy is
@@ -273,13 +507,13 @@ resolved (Poincar\'e) by recognizing that a charge distribution
 held together against its own Coulomb repulsion needs a
 non-electromagnetic cohesive stress, and that stress's own
 energy and momentum supply exactly the missing $-\tfrac13$,
-restoring $m_{\rm total}=E_{\rm total}/c^2$. The lesson for the
-present paper is direct: ``send $r_0\to0$'' is not, by itself, a
+restoring $m_{\rm total}=E_{\rm total}/c^2$. The lesson is direct:
+``send $r_0\to0$'' is not, by itself, a
 well-defined instruction until one has also decided how the
 (divergent) self-energy is to be renormalized against a second,
 independently divergent quantity -- here, the binding stress.
 
-\subsection{Mass renormalization: two divergences, one limit}
+\paragraph{Mass renormalization: two divergences, one limit}
 
 The point-particle idealization becomes fully explicit, and fully
 double-parametered, once we ask for the electron's \emph{total} inertial mass.
@@ -302,7 +536,7 @@ defined. Once again, the naive single-parameter idealization
 (``the electron is a point'') silently presupposes a highly
 specific joint limit in a second, hidden parameter.
 
-\subsection{Radiation reaction}
+\paragraph{Radiation reaction}
 
 Expanding the retarded self-force on a small but finite charged sphere in
 powers of $r_0$ and taking $r_0\to0$ together with the mass renormalization
@@ -412,7 +646,8 @@ one broken-symmetry state at a time, not in a symmetric
 superposition of both.
 
 \section{Continuum limit versus point-particle limit}
-At first sight, the point-particle limit and the continuum limit appear opposite.
+At first sight, the point-particle limit and the continuum limit appear
+opposite.
 The point-particle limit removes internal spatial structure:
 $R/L\rightarrow 0$. The continuum limit removes microscopic granularity:
 $\ell_{\rm micro}/L\rightarrow 0$.
@@ -425,7 +660,8 @@ $\ell_{\rm micro}/R\rightarrow 0$,
 and subsequently approximate that object as pointlike,
 $R/L\rightarrow 0$.
 
-These operations may be interchangeable only if there exists an overlap region satisfying
+These operations may be interchangeable only if there exists an overlap region
+satisfying
 $\ell_{\rm micro}\ll R \ll L$.
 If this hierarchy collapses, the two approximations can interfere.
 For example, if $R\rightarrow 0$ is taken so rapidly that $R\sim\ell_{\rm micro}$,
@@ -450,7 +686,8 @@ diverge and irreversible behavior can emerge at the level of effective
 descriptions.
 Thus one encounters the conceptual contrast
 $\lim_{t\to\infty}\lim_{N\to\infty}$ versus $\lim_{N\to\infty}\lim_{t\to\infty}$.
-The relation between these procedures is central to the foundations of statistical mechanics and the emergence of irreversibility.
+The relation between these procedures is central to the foundations of
+statistical mechanics and the emergence of irreversibility.
 The phrase \emph{take the thermodynamic limit} therefore conceals assumptions 
 concerning observation time, coarse graining, boundary conditions, and the 
 class of states being considered.
@@ -514,10 +751,13 @@ One may define different contractions or scaling limits depending on which combi
 Similarly, the limits $c\rightarrow\infty,\qquad\hbar\rightarrow 0$
 raise a further question:
 \[\text{Does classical mechanics arise before or after the nonrelativistic limit?}\]
-In ordinary regimes the resulting descriptions overlap and agree. But the mathematical limiting structures need not be identical, especially when spin, antiparticles, constraints, or quantum fields are involved.
+In ordinary regimes the resulting descriptions overlap and agree. But the
+mathematical limiting structures need not be identical, especially when spin,
+antiparticles, constraints, or quantum fields are involved.
+
 \section{Why some limits are safe}
 \label{limits:safe}
-The three case studies above should not be read as an indictment
+The case studies above should not be read as an indictment
 of point-particle or rigid-body idealizations in general -- both
 are used successfully, constantly, throughout physics. What
 distinguishes a safe use from a dangerous one is not the
@@ -553,69 +793,17 @@ is handled.
 \begin{principle}
 A limiting idealization is dangerous when the discarded
     parameter is doing one of three jobs in the finite theory:
-    (i) resolving a redundancy or degeneracy (a statically
+    \begin{enumerate}
+       \item resolving a redundancy or degeneracy (a statically
     indeterminate structure, a degenerate ground-state
-    manifold); (ii) regularizing a formally divergent,
-    self-referential quantity (a self-energy, a self-force); or
-    (iii) selecting among multiple locally stable branches or
+    manifold);
+       \item regularizing a formally divergent,
+    self-referential quantity (a self-energy, a self-force);
+       \item selecting among multiple locally stable branches or
     vacua (spontaneous symmetry breaking, runaway versus
     physical solutions of an equation of motion).
+    \end{enumerate}
 \end{principle}
-
-All three case studies above instantiate exactly one of these
-three roles: the beam's redundancy (i), the point electron's
-self-energy and self-force (ii), and the ferromagnet's broken
-symmetry (iii).
-
-\section{A diagnostic for dangerous limits}
-\label{limits:danger}
-The discussion above suggests a short, practical checklist for
-deciding, in advance, whether a proposed idealization is likely
-to be safe.
-
-\begin{enumerate}
-\item \textbf{Count the constraints.} If the idealized (e.g.\
-    rigid, point-like) description leaves more unknowns than
-        equations -- a redundancy -- some discarded compliance
-        is doing essential work, and the idealization must be
-        taken only after that compliance has fixed the
-        redundancy.
-\item \textbf{Look for self-reference.} If the quantity of
-    interest involves a source acting on its own field, or any
-        other quantity that diverges as the idealization is
-        approached, expect a second, compensating divergence (a
-        bare mass, a counterterm, a binding stress) that must be
-        tracked through the same limit.
-\item \textbf{Look for a symmetry that would force a trivial
-    answer.} If an exact symmetry of the un-idealized, finite
-        system would make the naive order of limits give zero
-        (or some other symmetric, ``un-broken'' value) by fiat,
-        check whether the physically relevant answer instead
-        requires the symmetry-breaking parameter to be removed
-        only \emph{after} the idealizing limit.
-\item \textbf{Check whether the discarded parameter multiplies
-    the highest derivative} in the governing equation (as $EI$
-        does in the beam equation, or as the internal structure
-        of a charge does in the retarded self-force). If so, the
-        limit is a singular perturbation, and a boundary layer,
-        runaway mode, or other qualitative change in the
-        solution set should be expected.
-\item \textbf{When in doubt, compute along more than one path.}
-    If a two-(or more)-parameter idealization gives different
-        answers along different paths to the same nominal limit
-        (as in the toy example of Section~2), the safe procedure
-        is to keep the physically relevant ratio of the two
-        parameters fixed at its true, finite value, rather than
-        sending either parameter to infinity ``first.''
-\end{enumerate}
-
-None of this is a reason to distrust idealization as a method;
-it is, if anything, a reason to trust it more, because it turns
-an occasional embarrassing paradox (a beam problem with no
-unique answer, an electron with infinite self-energy, a
-symmetric theory that somehow predicts a magnet) into a routine
-calculation once the second, hidden parameter is identified and
-tracked through the limit alongside the first.
 
 \section{Conclusion}
 \label{limits:conclusion}
@@ -623,15 +811,19 @@ Idealized limits are indispensable, and in the great majority of
 their uses they are also perfectly safe: the point particle, the
 rigid body, the continuum, and the thermodynamic limit each work
 because the physics they discard enters only as a small, smooth
-correction. But whenever an idealizing parameter is secretly
+correction. 
+
+But whenever an idealizing parameter is secretly
 doing double duty -- resolving a redundancy, regularizing a
 self-interaction, or selecting a symmetry-broken branch -- the
 limit becomes a genuine two-(or more-)parameter limit in the
-technical sense of Section~2, and the order in which the
+technical sense, and the order in which the
 idealizations are imposed is no longer a matter of convenience
 but a physical assumption in its own right, one that must be
 justified by the actual mechanism operating in the un-idealized
-system. The beam on three pillars, the point electron, and the
+system. 
+
+The beam on three pillars, the point electron, and the
 thermodynamic limit of a ferromagnet each illustrate a different
 flavor of this same structure -- static redundancy,
 field-theoretic self-reference, and spontaneous symmetry
@@ -642,8 +834,8 @@ mechanics; mass renormalization in classical and later quantum
 field theory; the Lee--Yang theory of phase transitions in
 statistical mechanics) precisely in order to tame it.
 Recognizing the common mathematical skeleton beneath these
-episodes -- non-commuting iterated limits, in the elementary
-sense of Section~2 -- is a useful piece of general-purpose
+episodes --- non-commuting iterated limits, --- is a useful 
+piece of general-purpose
 intuition for noticing, before the paradox appears, when an
 idealization needs a second parameter kept on a leash.
 
