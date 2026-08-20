@@ -1,6 +1,5 @@
-% contents of the chapter Classical mechanics
 \chapter{Classical Mechanics}
-\label{class-mech}
+\label{classical-mechanics}
 {
 \setlength\epigraphwidth{0.6\textwidth}
 \epigraph {
@@ -48,11 +47,10 @@ There is a great number of books about classical mechanics
 (see e.g\cite{Arnold-cm},\cite{Landau-Lifshitz-1},
 \cite{Lanczos},\cite{Goldstein}). 
 
-Let philosophers discuss what is time, space and matter in Real world. 
-In Ideal world space is three-dimensional  and euclidean $\mathbb{R}^3$,
-mass is real number and time is one-dimensional $\mathbb{T}$.
-
+In Ideal world of classical mechanics space is three-dimensional  and euclidean
+$\mathbb{R}^3$, mass is real number and time is one-dimensional $\mathbb{T}$.
 So universe of classical mechanics is $\mathbb{T} \times \mathbb{R}^3$. 
+
  The  group of galilean transformations acts on universe \cite{Arnold-cm}. 
 Every galilean transformation can be written in a unique way as the composition of a rotation, a translation,
 and a uniform motion ($g = g_1 \circ g_2 \circ g_3$), where
@@ -126,45 +124,53 @@ important cases, anyway functions $\vec x_j(t)$ should be continuous, $\vec v_j(
 have finite jumps as a results of strong force acting for very short time (e.g. 
 elastic collision).
 
-Note that initial conditions have nothing to do with causality. Causality makes sense in Real world only,
-in Ideal world we are free to set final conditions or fix $\vec x_j(t_1)$ and $\vec v_j(t_1)$ for
-some intermediate time $t_1$. In many cases we are 
-interested in solution of equation \eqref{newtoneq} with fixed initial velocities and final
-coordinates  (aiming) or fixed coordinates on both ends (variational problem). Anyway when
-conditions are set at two different times  solution may be not unique (unless force is changing relatively slow)
-\footnote {I discovered this fact around 1980 and was very proud of myself until I found papers \cite{Maslov-1} and 
-\cite{Maslov-2}.}.
+Note that initial conditions have nothing to do with causality. Causality makes
+sense in Real world only, in Ideal world we are free to set final conditions or
+fix $\vec x_j(t_1)$ and $\vec v_j(t_1)$ for some intermediate time $t_1$. In
+many cases we are interested in solution of equation \eqref{newtoneq} with
+fixed initial velocities and final coordinates  (aiming) or fixed coordinates
+on both ends (variational problem). Anyway when conditions are set at two
+different times  solution may be not unique (unless force is changing
+relatively slow) \footnote {I discovered this fact around 1980 and was very
+proud of myself until I found papers \cite{Maslov-1} and \cite{Maslov-2}.}.
 
-        \subsection{Constraints}
-In addition to Newton's equations the motion of the system may be restricted by additional equations or inequalities.
-Constraints introduce two types of difficulties in the solution of mechanical
-problems. First, the coordinates $\vec x_j$ are no longer all independent, since they are
-connected by the equations of constraint; hence the equations of motion  
-are not all independent. Second, the forces of constraint  are not furnished a priori. 
-They are among the unknowns of the problem and must be obtained from the
-solution we seek. Indeed, imposing constraints on the system  is simply another
-method of stating that there are forces present in the problem that cannot be specified 
-directly but are known rather in terms of their effect on the motion of the system.
-There is no general method of solving (even numerically) these problems, they are tackled on case by case basis.
-To advance we should restrict ourselves with so called holonomic constraints which have the form:
+\subsection{Constraints} 
+
+In addition to Newton's equations the motion of the system may be restricted by
+additional equations or inequalities. Constraints introduce two types of
+difficulties in the solution of mechanical problems. First, the coordinates
+$\vec x_j$ are no longer all independent, since they are connected by the
+equations of constraint; hence the equations of motion  are not all
+independent. Second, the forces of constraint  are not furnished a priori. They
+are among the unknowns of the problem and must be obtained from the solution we
+seek. Indeed, imposing constraints on the system  is simply another method of
+stating that there are forces present in the problem that cannot be specified
+directly but are known rather in terms of their effect on the motion of the
+system. There is no general method of solving (even numerically) these
+problems, they are tackled on case by case basis.
+
+For the moment we should restrict ourselves with so called holonomic
+constraints which have the form:
 \begin{equation}
         f(\vec x_j,t)=0 \label {hol-const}
 \end{equation}
 
 \subsection{Numerical solution}
-Generally Newton's equations are to be solved numerically which is a difficult task. 
-Two large class of methods are in use:
-\begin{enumerate}
-        \item "Usual" one-time integrators when differential equations are replaced with finite difference
-ones defining snapshots at discrete time steps. These integrators allow accurate description of standard problem:
-initial conditions, finite time interval.
-\item Geometric integrators which are less accurate for any single trajectory but accurately present qualitative 
-        picture for large set of initial data and long times. Such integrators may calculate  coordinates and 
-                momenta at different times
+
+Generally Newton's equations are to be solved numerically which is a difficult
+task. Two large class of methods are in use: 
+\begin{enumerate} 
+    \item "Usual" one-time integrators when differential equations are replaced
+        with finite difference ones defining snapshots at discrete time steps.
+        These integrators allow accurate description of standard problem:
+        initial conditions, finite time interval. 
+
+\item Geometric integrators which are less accurate for any single trajectory
+    but accurately present qualitative picture for large set of initial data
+        and long times. Such integrators may calculate  coordinates and momenta
+        at different times
 \end{enumerate}
 One can look for details in \cite{Hairer-Lubich-Wanner} for example. 
-
-\section{Lagrangian mechanics}
 
 If we allow only potential forces i.e. 
 \begin{equation}
@@ -185,7 +191,10 @@ where
         L(\vec x_k,\vec v_k,t)=\Sigma_1^n \frac{m_k}{2} \vec v_k \cdot \vec v_k-U(\vec x_k,t) 
 \end{equation}
 
-If we can solve the equation \[ \vec p_j=\frac{\partial L(\vec x_k,\vec v_k,t)}{\partial \vec v_j} \] for $ \vec v_j $
+If we can solve the equation 
+\[ \vec p_j=\frac{\partial L(\vec x_k,\vec v_k,t)}
+{\partial \vec v_j} \] 
+for $ \vec v_j $
 which of course is not always possible, we can write the equations \eqref{lagr}
 in more symmetrical way:
 \begin{equation}
