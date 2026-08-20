@@ -1,5 +1,6 @@
 \chapter{Numerical methods}
-\label{numeric}
+\label{nm}
+
 The development of theoretical physics has traditionally been associated with
 the search for exact equations, analytical solutions, and general mathematical
 structures. Yet an increasing fraction of quantitative physics is accessible
@@ -36,6 +37,8 @@ computation reveals new structure, and the resulting structure stimulates
 further mathematical analysis.
 
 \section{ Introduction}
+\label{nm:in}
+
 A characteristic aspiration of theoretical physics is to understand nature
 through equations. Ideally, one writes down a sufficiently general mathematical
 model, solves it, and derives observable consequences. In the most successful
@@ -77,6 +80,8 @@ general laws, while analytical work may produce specific numbers. Nevertheless,
 the distinction captures an important difference in epistemological function.
 
 \section{ What Is Meant by an Analytical Result?}
+\label{nm:an}
+
 The expression ``analytical solution'' is often used too loosely. Several
 different notions should be distinguished.
 
@@ -122,6 +127,8 @@ The central difficulty, however, is that limits need not commute, %ref to limits
 so numerical calculations and asymptotic analysis must often be combined carefully.
 
 \section{ The Numerical Turn in Physics}
+\label{nm:tp}
+
 Numerical calculation is not fundamentally new. Astronomical tables, numerical 
 quadratures, and hand calculations have accompanied physics for centuries.
 What is new is the scale.
@@ -181,6 +188,8 @@ This principle has led to geometric integration, symplectic integrators,
 gauge-invariant lattice formulations, and conservative numerical schemes.
 
 \section{ Nonlinear Dynamics: Where Exact Solutions Become Exceptional}
+\label{nm:nd}
+
 Linear equations possess the superposition principle.
 This mathematical property underlies much of traditional analytical physics.
 Nonlinear equations generally lack this structure.
@@ -201,6 +210,8 @@ The numerical calculation must distinguish between:
 Analytical stability theory and numerical simulation are therefore mutually dependent.
 
 \section{ Many-Body Physics and the Curse of Dimensionality}
+\label{nm:mb}
+
 The tension between exact formulation and computational accessibility is
 particularly clear in quantum many-body theory.
 A quantum state of $N$ two-level systems belongs to a Hilbert space of dimension
@@ -232,6 +243,8 @@ The computational method succeeds because theory identifies which degrees of
 freedom are physically important.
 
 \section{ Lattice Field Theory}
+\label{nm:lft}
+
 Quantum field theory provides one of the clearest examples.
 The continuum partition function may be written formally as
 \[Z=\int\mathcal{D}\phi e^{iS[\phi]/\hbar}.\]
@@ -254,6 +267,8 @@ This is an excellent example of the principle that numerical computation is not
 independent of mathematical analysis.
 
 \section{ Numerical Relativity}
+\label{nm:rel}
+
 General relativity presents another instructive example.
 Einstein's equations,$G_{\mu\nu}=\frac{8\pi G}{c^4}T_{\mu\nu}$,
 are geometrically elegant but analytically difficult.
@@ -283,6 +298,8 @@ The lesson is clear:
 analytically before solving them numerically.}
 
 \section{ Turbulence and the Limits of Direct Calculation}
+\label{nm:trb}
+
 The Navier--Stokes equation is known:
 \[\rho\left(\frac{\partial\mathbf{v}}{\partial t}+
 (\mathbf{v}\cdot\nabla)\mathbf{v}\right)=-\nabla p+
@@ -304,6 +321,8 @@ This distinction is essential.
 Thus the numerical data must again be subjected to mathematical analysis.
 
 \section{ Numerical Experiments}
+\label{nm:ne}
+
 The phrase ``numerical experiment'' is now common, but its meaning deserves examination.
 A numerical experiment differs from a laboratory experiment.
 In a laboratory experiment, one studies a physical system.
@@ -317,6 +336,8 @@ Conversely, an excellent physical model can be badly represented by a numerical
 algorithm.
 
 \section{ Numerical Discovery and the Role of Computation in Theory Formation}
+\label{nm:rc}
+
 Computation is not merely a method for evaluating previously known formulas.
 Numerical work can discover new phenomena.
 Examples include:
@@ -356,6 +377,8 @@ and only later identify the mathematical reason.
 Thus numerical computation can function as a source of mathematical conjectures.
 
 \section{ Exact Results as Anchors for Numerical Physics}
+\label{nm:er}
+
 Exact solutions retain a central role even when they describe only exceptional systems.
 They serve as:
 \begin{enumerate}
@@ -377,6 +400,8 @@ $\rightarrow$ new conjecture $\rightarrow$ new analytical result.
 This cycle is one of the principal engines of modern theoretical physics.
 
 \section{Singular Limits and Numerical Difficulty}
+\label{nm:sl}
+
 The most interesting physical limits are often singular.
 Consider
 \[\epsilon\frac{d^2x}{dt^2}+\frac{dx}{dt}=f(t).\]
@@ -403,6 +428,8 @@ In general,\emph{analytical understanding of limiting processes is often
 necessary before a numerical result can be interpreted.}
 
 \section{ Renormalization and the Problem of Resolution}
+\label{nm:rn}
+
 Numerical calculations always involve finite resolution.
 Suppose a field contains modes
 \[\phi(\mathbf{x})=\sum_{\mathbf{k}}\phi_{\mathbf{k}}e^{i\mathbf{k}\cdot\mathbf{x}}.\]
@@ -422,6 +449,8 @@ This suggests a deeper interpretation:\emph{Numerical physics is
 inherently an effective theory of finite resolution.}
 
 \section{Inverse Problems: When Numerical Methods Become Central}
+\label{nm:ip}
+
 In many areas of modern physics, the fundamental task is not solving
 $\mathcal{L}u=f$,but reconstructing an unknown cause from observed consequences:
 \[\text{data}\rightarrow\text{model parameters}.\]
@@ -439,6 +468,8 @@ Inverse problems demonstrate particularly clearly that computation cannot be
 separated from interpretation.
 
 \section{ Computer-Assisted Mathematics}
+\label{nm:cm}
+
 The boundary between analytical and numerical work is also becoming increasingly blurred.
 Computer-assisted proofs combine rigorous mathematics with computation.
 A typical procedure is:
@@ -468,6 +499,8 @@ A simulation may reliably predict an observable without revealing why the
 result has the value it does.
 
 \section{ Symbolic Computation}
+\label{nm:sc}
+
 Symbolic algebra systems occupy an intermediate position between analysis and numerics.
 They can:
 \begin{itemize}
@@ -489,6 +522,8 @@ It changes the location of human responsibility:
 \[\text{from calculation}\rightarrow\text{to formulation and interpretation}.\]
 
 \section{ Machine Learning and the New Computational Regime}
+\label{nm:ml}
+
 Machine learning introduces a further transformation.
 Traditional numerical algorithms are usually based on explicit mathematical principles. One specifies:
 \[\text{equations}+\text{algorithm}\rightarrow\text{result}.\]
@@ -515,6 +550,8 @@ The strongest future approach may combine machine learning with explicit physica
 This is another form of analytical--numerical synthesis.
 
 \section{ Numerical Results and Reproducibility}
+\label{nm:res}
+
 An analytical derivation can usually be communicated through a finite sequence
 of equations.
 A numerical result is more difficult to reproduce completely.
@@ -536,6 +573,8 @@ This represents a methodological change in theoretical physics.
 The distinction between theoretical and computational work becomes increasingly artificial.
 
 \section{ When Numerical Results Replace Analytical Solutions}
+\label{nm:wnr}
+
 There are domains in which numerical methods are likely to remain the principal
 source of quantitative predictions.
 Examples include:
@@ -557,6 +596,8 @@ The question is not whether a result can be written in closed form, but whether
 its domain of validity and uncertainty are understood.
 
 \section{ Toward a Philosophy of Computational Theoretical Physics}
+\label{nm:ctp}
+
 The increasing role of computation suggests that theoretical physics should no
 longer be divided simply into
 \emph{analytical theory} and \emph{experiment}.
@@ -590,6 +631,8 @@ Experimental physics provides:
 None can replace the others.
 
 \section{ Conclusion}
+\label{nm:co}
+
 The historical image of theoretical physics as a discipline in which progress
 consists primarily of finding exact analytical formulas is no longer adequate.
 Modern physics often confronts systems for which the equations are known but
