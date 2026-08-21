@@ -1,0 +1,129 @@
+\chapter{Nonholonomic Constraints}
+\label{nh}
+
+\section{Holonomic versus nonholonomic}
+
+A constraint of the form $f(q,t)=0$, where $q=(q^1,\dots,q^n)$ are
+generalized coordinates, is called \emph{holonomic}: it can be
+solved, at least locally, to eliminate one coordinate outright, and
+it reduces the dimension of the configuration space itself. A more
+general class of constraints is linear in the velocities,
+\begin{equation}
+  \sum_{i=1}^n a_i(q,t)\,\dot q^i + a_t(q,t) \;=\;0,
+  \label{pfaffian}
+\end{equation}
+a so-called Pfaffian constraint. If the left-hand side of
+\eqref{pfaffian} happens to be the total time derivative of some
+function $f(q,t)$, the constraint is secretly holonomic in disguise.
+If it is not --- if no such $f$ exists --- the constraint is called
+\emph{nonholonomic}: it restricts the \emph{velocities} available at
+each point of $Q$, without restricting which \emph{configurations}
+are reachable.
+
+The canonical example is a coin (or disk) of radius $R$ rolling
+without slipping on a plane, with contact point $(x,y)$, heading
+angle $\phi$, and roll angle $\theta$ as coordinates. The
+rolling condition reads
+\begin{equation}
+  \dot x = R\,\dot\theta\cos\phi ,\qquad
+  \dot y = R\,\dot\theta\sin\phi ,
+  \label{eq:rolling-coin}
+\end{equation}
+which is not integrable: it constrains the instantaneous velocity to
+a two-dimensional subspace of the four-dimensional tangent space at
+each point, and yet, by alternating steering and rolling, the coin
+can be driven from \emph{any} configuration $(x,y,\phi)$ to any
+other. The instantaneous constraint is genuine, but it places no
+restriction whatsoever on the reachable set of configurations --- an
+instance of what control theorists call bracket-generating, or
+Chow--Rashevski\u{i}, controllability. This already runs against a
+piece of intuition carried over uncritically from the holonomic
+case, where a nontrivial velocity constraint always shrinks the
+accessible configuration space too.
+
+A second standard example, the \emph{Chaplygin sleigh}, makes an
+even sharper point. It is a rigid body sliding frictionlessly on a
+plane, with a knife edge that permits motion only along its own
+length (no sideways slip). The system conserves energy exactly ---
+there is no friction anywhere in the model --- and yet its reduced
+dynamics on the velocity variables is attracted to a fixed
+equilibrium: left alone, the sleigh asymptotically settles into
+straight-line motion with no rotation, knife edge trailing the
+center of mass~\cite{chaplygin}. This
+happens because the reduced equations of motion on the nonholonomic
+constraint surface, unlike those of an ordinary holonomic mechanical
+system, do not in general preserve phase-space (Liouville) volume,
+even though they do preserve energy. A perfectly conservative
+mechanical system can therefore display genuinely dissipative-looking
+long-time behaviour --- attracting fixed points, basins of
+attraction --- with no friction anywhere in the equations. Energy
+conservation, by itself, is not enough to rule out the qualitative
+signatures usually associated with dissipation once constraints stop
+being holonomic.
+
+\section{Two variational principles, two different theories}
+
+For holonomic constraints, two routes to the equations of motion ---
+D'Alembert's principle (constraint forces do no virtual work, for
+virtual displacements compatible with the instantaneous constraint)
+and Hamilton's principle (the true path extremizes the action among
+\emph{all} paths satisfying the constraint) --- are provably
+equivalent. For nonholonomic (non-integrable, velocity-linear)
+constraints, this equivalence simply fails, and the failure is not a
+minor technicality.
+
+There are two natural-looking ways to generalize the variational
+treatment to a system with a nonholonomic constraint of the
+form~\eqref{pfaffian}.
+
+\begin{description}
+  \item[Nonholonomic (Lagrange--d'Alembert, or Chetaev) mechanics.]
+  Impose the constraint directly on virtual displacements at each
+  instant, exactly as in the holonomic case, and only afterwards
+  derive equations of motion:
+  \begin{equation}
+    \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
+    - \frac{\partial L}{\partial q^i}
+    \;=\; \sum_a \lambda_a\, a_i^a(q),
+    \qquad
+    \sum_i a_i^a(q)\,\dot q^i + a_t^a(q) = 0 .
+    \label{lagrange-dalembert}
+  \end{equation}
+  \item[Vakonomic mechanics.] (The name --- "variational axiomatic
+  kind" --- was coined by Kozlov~\cite{kozlov}.)
+  Instead, treat the nonholonomic constraint as a genuine constraint
+  on the space of \emph{paths} from the outset, as one would an
+  isoperimetric constraint in the calculus of variations, and only
+  then extremize the action over that constrained set of paths.
+\end{description}
+
+For holonomic constraints these two prescriptions coincide. For
+genuinely nonholonomic constraints they generically do not: it has
+been shown, for instance, that for the rolling coin on an inclined
+plane no nontrivial vakonomic solution reproduces the
+Lagrange--d'Alembert solution at
+all~\cite{zampieri}. This is not merely a
+mathematical curiosity to be settled by taste: Lewis and Murray
+built and instrumented a physical system --- a ball rolling without
+slipping on a rotating table --- specifically to adjudicate between
+the two theories, and found that the observed motion matches the
+Lagrange--d'Alembert (nonholonomic) prediction; they were unable to
+produce vakonomic simulations resembling the experimental data at
+all~\cite{lewis+murray}. The variational principle that looks like
+the most direct generalization of Hamilton's principle to velocity
+constraints is, for constraints realized by an actual rolling or
+sliding contact, simply the wrong physical theory.
+
+This does not make vakonomic mechanics useless --- it correctly
+describes optimal-control and sub-Riemannian-geodesic problems, where
+the "constraint" genuinely is a restriction on the class of paths
+being optimized over, rather than a constraint enforced
+instant-by-instant by a physical reaction force. The moral is
+subtler and more interesting than "one theory is right and the other
+wrong": the bare constraint equation~\eqref{pfaffian}, by itself,
+does not determine the dynamics. The correct equations of motion
+depend on how the constraint is physically \emph{realized} ---
+information that is invisible at the level of the constraint
+equation alone, and that a first course in mechanics, built entirely
+on holonomic examples where this ambiguity cannot arise, gives no
+reason to expect.

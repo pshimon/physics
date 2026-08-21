@@ -1,0 +1,95 @@
+\chapter{Bodies That Change Shape}
+\label{shape}
+
+\section{The falling cat}
+
+Drop a cat, upside down, from rest. In free fall there is no
+external torque about the center of mass, so angular momentum is
+conserved --- and it starts, and remains, at zero. Naive intuition
+says that a body with identically zero angular momentum cannot
+rotate. And yet the cat lands on its feet, having reoriented itself
+by roughly $180^\circ$. The naive inference silently assumes a
+\emph{rigid} body; it simply does not apply to a body that can
+deform itself internally, and the cat's righting maneuver --- a
+sequence of twists of its front and back halves relative to one
+another --- is a real, controlled deformation, not a violation of
+any conservation law.
+
+\section{Shape space and the gauge structure of deformation}
+
+The clean way to see why this works, due to Shapere and
+Wilczek~\cite{shapere+wilczek} and to Montgomery's later "gauge
+theory of the falling cat"~\cite{montgomery}, is to separate a
+deformable body's configuration into its \emph{shape} $s$ (the
+internal, orientation-independent degrees of freedom --- relative
+joint angles, say) and an overall orientation $R\in SO(3)$ that fixes
+that shape in space. Locally, the full configuration space is a
+principal fiber bundle with structure group $SO(3)$ over shape space,
+and the requirement that total angular momentum stay identically
+zero throughout the motion is a linear relation between the shape
+velocity $\dot s$ and the angular velocity $\omega$ of the body,
+\begin{equation}
+  \omega \;=\; -\,\mathcal A(s)\,\dot s ,
+  \label{connection}
+\end{equation}
+where $\mathcal A(s)$ is built from the shape-dependent inertia
+tensor and its couplings. This is precisely the data of a connection
+(a gauge potential) on the bundle: given any path $s(t)$ in shape
+space, \eqref{connection} lifts it uniquely to a path in the full
+configuration space, exactly as a connection lifts a path in the
+base of a fiber bundle to a horizontal path upstairs.
+
+The consequence that matters here is that if the shape returns
+exactly to where it started after a closed loop in shape space,
+$s(T) = s(0)$, the orientation need \emph{not} return to where it
+started. The net rotation accumulated around the loop is the
+\emph{holonomy} of the connection~\eqref{connection}, and for a
+small loop enclosing area $\Sigma$ it is governed, Stokes'-theorem
+style, by the curvature $\mathcal F = d\mathcal A + \mathcal
+A\wedge\mathcal A$ of that connection:
+\begin{equation}
+  \Delta R \;\approx\; \exp\!\left[\oint_{\partial\Sigma}\mathcal
+  A\right] \;\approx\; \exp\!\left[\int_{\Sigma}\mathcal F\right].
+  \label{holonomy}
+\end{equation}
+This is exactly the structure of a non-Abelian geometric (Berry,
+Wilczek--Zee) phase from quantum mechanics, and of Aharonov--Bohm
+holonomy in gauge theory --- reproduced in full by an entirely
+classical, entirely mechanical system. It is also, viewed from the
+vantage point of Section~\ref{cm:nh}, nothing but another
+instance of a nonholonomic constraint: "total angular momentum
+$\equiv 0$" is a Pfaffian relation between $\dot s$ and $\omega$ that
+fails to be integrable to any function of shape and orientation
+alone \emph{exactly when} the connection~\eqref{connection} has
+nonzero curvature. The falling-cat effect and the rolling coin are,
+formally, the same phenomenon in different clothing.
+
+\section{Swimming without pushing}
+
+The same structure governs self-propulsion in a highly viscous
+fluid, where inertia is negligible and net displacement over one
+cycle of body deformation is possible only if the cycle of shapes is
+genuinely non-reciprocal. This is Purcell's scallop theorem: a
+scallop that opens and closes through the \emph{same} sequence of
+shapes, forwards then backwards, achieves zero net displacement,
+because time-reversing the (inertia-free) equations of motion
+exactly reverses the trajectory. Net swimming is again a
+holonomy/geometric-phase effect in an appropriately defined shape
+bundle~\cite{shapere+wilczek-swim}.
+
+Perhaps the most striking illustration of the underlying idea is Jack
+Wisdom's result that a quasi-rigid body executing a cyclic sequence
+of internal shape changes in a curved \emph{spacetime} --- as
+prescribed by general relativity --- can achieve a net translation
+even in complete vacuum, with nothing to push against at
+all~\cite{wisdom}. The effect scales with the local spacetime
+curvature and with the extent of the body's internal motion; it is
+minuscule for any realistic body and is not a practical propulsion
+mechanism, but as a matter of principle it is "swimming" through
+spacetime using exactly the same holonomy mechanism as the falling
+cat, now realized by the genuine nonlinearity of general relativity
+rather than by a gauge potential on a shape bundle constructed by
+hand. Once again, an outcome that sounds like it must violate
+momentum conservation turns out to be perfectly consistent with
+conservation laws, provided one tracks correctly what "conservation"
+does and does not forbid for a body that is allowed to change shape.

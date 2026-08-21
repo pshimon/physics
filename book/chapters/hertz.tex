@@ -1,0 +1,137 @@
+\chapter{Hertz's Mechanics Without Force}
+\label{hm}
+
+By the 1890s, several physicists --- Kirchhoff and Mach among them
+--- had grown uneasy with the status of \emph{force} as a
+fundamental concept of mechanics. Force is defined operationally
+through $F=ma$, but that same equation is routinely used to
+\emph{introduce} force, which makes the law read uncomfortably like
+a definition dressed up as an empirical statement. In his
+posthumously published \emph{Die Prinzipien der Mechanik in neuem
+Zusammenhange dargestellt} (1894), Heinrich Hertz proposed to remove
+the discomfort by removing force altogether: he set out to build the
+whole of mechanics from just three primitive notions --- space,
+time, and mass --- with no independent concept of force at
+all~\cite{hertz}.
+
+\section{The principle of the straightest path}
+
+Consider $N$ mass points with positions $\mathbf x_i\in\mathbb R^3$
+and masses $m_i$, and equip the $3N$-dimensional configuration space
+$Q$ with the natural mass-weighted (kinetic-energy) metric,
+\begin{equation}
+  ds^2 \;=\; \sum_{i=1}^N m_i\, d\mathbf x_i\cdot d\mathbf x_i,
+  \qquad
+  T \;=\; \frac12\left(\frac{ds}{dt}\right)^{\!2}.
+  \label{hertz-metric}
+\end{equation}
+Hertz's masses are never free in the naive sense: they are always
+tied together by \emph{rigid, workless connections} (idealized
+mechanical linkages that transmit force but do no work), which
+restrict the accessible configurations to some submanifold
+$\mathcal C\subset Q$. His fundamental postulate --- the
+\emph{principle of the straightest path}
+--- is then simply:
+
+\begin{quote}
+\emph{A system free of "force" moves along the straightest possible
+path compatible with its constraints, at constant speed.}
+\end{quote}
+
+"Straightest possible" is to be read literally, in the geometric
+sense: the representative point traces a \emph{geodesic} of the
+metric~\eqref{hertz-metric} restricted to $\mathcal C$, i.e.\ a
+curve whose acceleration (in the induced metric) is purely normal to
+$\mathcal C$ and is entirely accounted for by the constraint
+reaction. Formally, if the constraints are written $g_a(\mathbf
+x)=0$, $a=1,\dots,k$, the equations of motion are
+\begin{equation}
+  m_i\,\ddot{\mathbf x}_i \;=\; \sum_a \lambda_a\,
+  \frac{\partial g_a}{\partial \mathbf x_i},
+  \label{hertz-eom}
+\end{equation}
+with the multipliers $\lambda_a$ fixed by demanding $g_a(\mathbf
+x(t))\equiv 0$. There is nothing on the right-hand side of
+\eqref{hertz-eom} except constraint reactions: no applied-force
+term appears anywhere, by construction. Constant speed
+($|ds/dt|=\mathrm{const}$, i.e.\ constant kinetic energy) follows
+automatically, since ideal constraints do no work.
+
+\section{Hidden masses, or where "force" goes}
+
+Of course, ordinary bodies \emph{do} appear to exert forces on one
+another --- gravity, contact forces, and so on all look like genuine
+interactions between visible masses that are not rigidly connected
+to anything. Hertz's resolution was to posit \emph{hidden masses}:
+invisible mass points, rigidly linked to the visible ones (and, in
+his more speculative moments, identified with a mechanical
+aether), whose only role is to curve the constraint submanifold
+$\mathcal C$ in just the right way. If the full configuration space
+splits as $Q = Q_{\mathrm{vis}}\times Q_{\mathrm{hid}}$ and the
+\emph{complete} system --- visible plus hidden --- moves along a
+geodesic of $\mathcal C$, then projecting that geodesic motion down
+onto $Q_{\mathrm{vis}}$ alone generically produces a curve that is
+\emph{not} geodesic in the visible sector by itself: extra terms
+appear in its equation of motion that are, from the point of view of
+an observer with access only to $Q_{\mathrm{vis}}$, indistinguishable
+from the effect of an applied force~\cite{hertz}.
+
+This is a genuinely striking claim: on Hertz's account, force is not
+absent from experience, only absent from the fundamental ontology.
+Every observed force law would, in principle, be explained by some
+specific (if permanently unobservable) arrangement of hidden mass
+and rigid linkage. The same basic move --- explain an apparent force
+as the shadow, on a submanifold, of pure geometric (geodesic) motion
+in a larger space --- reappears twice in twentieth-century physics
+in far more successful forms: in Kaluza--Klein theory, where the
+electromagnetic force on a charged particle is recovered as geodesic
+motion in a five-dimensional space, and, far more importantly, in
+general relativity, where gravity itself --- which Newton had to
+treat as a force acting at a distance --- becomes geodesic motion of
+a free particle through curved four-dimensional spacetime, with no
+"force" required at all. Hertz did not anticipate curved spacetime;
+his geometry is Euclidean and the curvature is manufactured entirely
+by hidden extra coordinates. But the structural resemblance to
+Einstein's later, physically successful geometrization of gravity is
+close enough that Hertz's book is still read today chiefly for that
+reason, rather than as a working theory in its own
+right.
+
+\section{A second, more conservative geometrization}
+
+It is worth noting that ordinary, force-\emph{having} mechanics can
+also be written as a geodesic principle, without any hidden masses
+at all, via Jacobi's form of the principle of least action. For a
+conservative system with potential $V(\mathbf x)$ and fixed total
+energy $E$, the true trajectories are exactly the geodesics of the
+\emph{Jacobi metric}
+\begin{equation}
+  ds_J^2 \;=\; 2\bigl(E-V(\mathbf x)\bigr)\, ds^2 ,
+  \label{jacobi-metric}
+\end{equation}
+a conformal rescaling of the mass metric~\eqref{hertz-metric} by
+the local kinetic energy. So there are, in the end, two quite
+different ways to eliminate force from the description of a system
+governed by a potential: enlarge the configuration space with hidden
+coordinates and keep the metric flat (Hertz), or keep the visible
+configuration space as it is and let the metric itself become curved
+and energy-dependent (Jacobi). Both reproduce exactly the same
+observable trajectories. Neither is more "true" than the other; they
+are, in Hertz's own vocabulary, different \emph{images} of the same
+phenomena. That a concept as apparently basic as force can be made
+to evaporate --- twice over, in two structurally different ways ---
+without changing a single observable prediction is the real content
+of this section: it shows "force" to be a feature of a chosen
+representation of mechanics, not a fact about the world that every
+correct representation must contain.
+
+Hertz's own programme did not survive contact with its critics.
+Almost every contemporary reviewer, Boltzmann included, objected
+that positing a fresh, permanently unobservable mechanism of hidden
+masses for every distinct force law (gravitation, electromagnetism,
+\ldots) bought elegance at the price of testability, and the
+research programme was essentially abandoned within a generation. It
+survives today less as working physics than as an early, and
+unusually explicit, demonstration that mechanics has more than one
+internally consistent axiomatic foundation --- a lesson later put to
+far more productive use.

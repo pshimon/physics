@@ -1,0 +1,139 @@
+\chapter{Open Systems}
+\label{open}
+
+\section{Variable mass and the Meshchersky equation}
+
+Ordinary Newtonian mechanics implicitly assumes a fixed set of
+particles. Rockets, raindrops growing by accretion, chains lifted
+off a pile, and avalanches all violate that assumption: the mass $m$
+of the body under study is itself a function of time. The correct
+generalization of Newton's second law to such an \emph{open system}
+--- worked out around the turn of the twentieth century by
+I.\,V.\ Meshchersky --- is
+\begin{equation}
+  m\,\frac{d\mathbf v}{dt} \;=\; \mathbf F_{\mathrm{ext}}
+  + \mathbf u\,\frac{dm}{dt} ,
+  \label{meshchersky}
+\end{equation}
+where $\mathbf u$ is the velocity of the incoming or outgoing mass
+\emph{relative to the body itself}, not relative to the lab frame.
+Setting $\mathbf F_{\mathrm{ext}}=0$ and integrating
+\eqref{meshchersky} with $\mathbf u$ constant and antiparallel to
+the direction of travel yields the Tsiolkovsky rocket equation,
+\begin{equation}
+  v(t) - v(0) \;=\; u\,\ln\frac{m(0)}{m(t)} .
+  \label{tsiolkovsky}
+\end{equation}
+The resemblance to Section~\ref{cm:hertz} is not superficial. The
+term $\mathbf u\,\dot m$ in \eqref{meshchersky} looks, from the
+point of view of the rocket body alone, exactly like an applied
+force --- "thrust" --- and is routinely called one. But viewed as
+part of the larger \emph{closed} system consisting of the rocket
+\emph{together with} every parcel of exhaust it has ever ejected,
+whose total momentum is exactly conserved, there is no force there
+at all: only the ordinary transfer of momentum between two pieces of
+one conserved whole. What looks like a force is, once again, an
+artifact of insisting on an equation of motion for part of a system
+rather than for the whole of it.
+
+This is also a genuine pedagogical trap, worth flagging explicitly.
+It is tempting to write $\mathbf F = d(m\mathbf v)/dt = m\dot{\mathbf
+v} + \mathbf v\,\dot m$ and treat this directly as the equation of
+motion of the open body. That expression is correct as a statement
+about the rate of change of the momentum of the body \emph{alone},
+but it is not, in general, equivalent to \eqref{meshchersky} and
+gives the wrong dynamics unless the accreted or ejected mass happens
+to leave (or join) with zero velocity relative to the body, i.e.\
+$\mathbf u \equiv \mathbf v$ --- a special case, not the generic one,
+and not the one realized by a rocket engine, whose whole purpose is
+to eject mass at high relative velocity.
+
+\section{Dissipative systems: putting friction back into a
+  variational principle}
+
+A second, quite different kind of "openness" arises whenever a
+system exchanges energy with an environment that is not explicitly
+modelled --- friction, drag, radiation reaction. None of these
+forces derive from a potential in the ordinary sense, so the
+Lagrangian and Hamiltonian formalisms, built for closed and
+energy-conserving systems, do not apply directly. Two classical
+devices repair this.
+
+The first is Rayleigh's dissipation function $\mathcal
+F_{\mathrm{diss}}(\dot q)$, quadratic in the generalized velocities
+for linear damping, which modifies the Euler--Lagrange equations to
+\begin{equation}
+  \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
+  - \frac{\partial L}{\partial q^i}
+  \;=\; -\,\frac{\partial \mathcal F_{\mathrm{diss}}}{\partial \dot
+  q^i}.
+  \label{rayleigh}
+\end{equation}
+This correctly reproduces the (irreversible) equations of motion,
+but it is a hybrid: $\mathcal F_{\mathrm{diss}}$ is not itself part
+of a genuine, self-contained stationary-action principle for $L$
+alone.
+
+The second, due to Bateman (1931), is more radical and more
+illuminating: a fully conservative, symplectic Lagrangian \emph{can}
+be written for a damped oscillator, but only at the price of
+doubling the number of degrees of freedom. Introduce an auxiliary
+"mirror" coordinate $y$ alongside the physical coordinate $x$,
+\begin{equation}
+  L_{\mathrm{dual}}(x,\dot x,y,\dot y) \;=\;
+  m\,\dot x\,\dot y \;+\; \frac{\gamma}{2}\bigl(x\dot y - \dot x
+  y\bigr) \;-\; k\,xy ,
+  \label{bateman}
+\end{equation}
+whose Euler--Lagrange equations are precisely the damped oscillator,
+$\ddot x + (\gamma/m)\dot x + \omega_0^2 x = 0$, for the physical
+coordinate $x$, paired with a time-reversed, exponentially
+\emph{amplified} equation for $y$. The energy the
+physical oscillator loses is exactly the energy its mirror partner
+gains, so the doubled system is conservative even though either half
+alone is not. This is a small, entirely classical and elementary
+demonstration of an idea that later became central to the theory of
+open quantum systems: dissipation and irreversibility in a subsystem
+are not exceptions to an underlying conservative dynamics, but the
+generic appearance of a conservative dynamics once part of the full
+system --- here, quite literally, the mirror half --- has been
+discarded from the description.
+
+\section{When "open" turns pathological: radiation reaction}
+
+Not every attempt to write a closed-looking equation for an open
+system ends benignly. An accelerating point charge radiates, and by
+momentum conservation it must experience a recoil, or self-force, in
+consequence. Treating the charge \emph{in isolation} --- an open
+system in the strict sense, since the charge together with its own
+radiated field is really a system with infinitely many degrees of
+freedom, formally "integrated out" down to a single effective force
+term --- leads to the (nonrelativistic) Abraham--Lorentz equation,
+\begin{equation}
+  m\,\ddot{\mathbf x} \;=\; \mathbf F_{\mathrm{ext}} \;+\;
+  m\tau\,\dddot{\mathbf x} ,
+  \qquad
+  \tau \;=\; \frac{q^2}{6\pi\varepsilon_0\,m\,c^3}
+  \;=\; \frac{2}{3}\,\frac{r_e}{c},
+  \label{abraham-lorentz}
+\end{equation}
+where $r_e$ is the classical electron radius. Because
+\eqref{abraham-lorentz} is third order in position, it requires
+more initial data than position and velocity to determine a unique
+solution, and generic initial data produce \emph{runaway} solutions
+in which the self-acceleration grows without bound even with
+$\mathbf F_{\mathrm{ext}}=0$. Suppressing the runaway by hand forces
+the opposite pathology: the charge must begin accelerating
+\emph{before} an external force is switched on --- a small, short-lived,
+but genuinely acausal-looking pre-acceleration. (In practice, both
+pathologies signal that \eqref{abraham-lorentz} is being pushed
+outside its domain of validity, on timescales comparable to $\tau
+\sim 10^{-24}\,\mathrm s$; treated properly, as an effective equation
+valid only for slowly varying external forces --- via, e.g., the
+Landau--Lifshitz reduction of order --- the pathologies disappear.)
+The lesson is a cautionary complement to the rest of this section:
+"integrating out" the unmodelled part of an open system is not
+always harmless bookkeeping. Sometimes it is, as with the Meshchersky
+equation; sometimes, as here, it produces an equation that is simply
+malformed unless handled with real care.
+
