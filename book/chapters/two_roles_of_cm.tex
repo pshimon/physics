@@ -1,0 +1,249 @@
+\chapter{The Two Roles of Classical Mechanics}
+\label{tr}
+
+\section{Introduction}
+
+Classical mechanics occupies a peculiar position among physical theories. It is,
+first, a complete and self-contained subject: a body of concepts, equations, and
+results describing the motion of bodies under forces, valid and useful on its own
+terms, with no reference whatsoever to the Planck constant $\hbar$ or the speed of
+light $c$. Celestial mechanics, rigid-body dynamics, the theory of small
+oscillations, continuum mechanics, and the modern theory of dynamical systems and
+chaos are all classical mechanics pursued for its own sake, and none of them is
+waiting to be corrected by a more fundamental theory in order to be meaningful.
+
+Second, and for the purposes of this book more importantly, classical mechanics is
+the \emph{base} on which relativistic and quantum mechanics are built. Special and
+general relativity are commonly introduced as corrections to Newtonian mechanics
+that become significant when velocities approach $c$ or fields become strong;
+quantum mechanics is commonly introduced as a modification that becomes significant
+at the scale of $\hbar$. In both cases, the classical theory is treated as a known,
+well-understood limit --- the solid ground from which the generalization departs
+and to which it must reduce.
+
+It is tempting to think that once this second, subordinate role is granted, nothing
+further needs to be said about classical mechanics: its job is simply to sit still
+and be a limit. The purpose of this chapter, and of the chapters immediately
+following it, is to argue that this is false in two related ways.
+
+\begin{enumerate}
+  \item[(a)] Even restricted to the narrow task of serving as the base for
+  relativistic and quantum generalization, classical mechanics is not a settled,
+  transparent starting point. Producing the structure that gets generalized ---
+  a well-defined phase space, a Hamiltonian, a consistent variational principle
+  --- is itself a nontrivial achievement that fails, or becomes ambiguous, for
+  entire classes of ordinary classical systems.
+  \item[(b)] Several phenomena that are routinely presented as characteristically
+  relativistic or characteristically quantum-mechanical --- an underdetermination
+  of physical ontology by the observable facts, an ambiguity in the passage from
+  classical description to quantized theory, a geometric ``phase'' with no
+  classical counterpart, an apparent conflict between microscopic reversibility
+  and macroscopic causal, dissipative behavior --- already occur inside classical
+  mechanics, before relativity or $\hbar$ ever enter the discussion. When such a
+  paradox survives the excision of everything relativistic or quantum, its source
+  cannot honestly be attributed to relativity or to quantum theory.
+\end{enumerate}
+
+Section~\ref{tr:st} says a brief word about the first, standalone role
+of classical mechanics before setting it aside. Section~\ref{tr:ba} examines
+what is actually required of classical mechanics for it to serve as a base for
+generalization, and where that requirement is met only imperfectly.
+Section~\ref{tr:pa} works through four examples --- Hertz's forceless
+mechanics, nonholonomic constraints, shape-changing bodies, and open dissipative
+systems --- each of which is treated at length, in its own right, later in this
+book; here they are introduced specifically to show that a paradox usually filed
+under ``quantum'' or ``relativistic'' foundations already has a classical
+instance.
+
+\section{Classical Mechanics as a Subject in Its Own Right}
+\label{tr:st}
+
+It is worth pausing on the first role only long enough to insist that it is real.
+The three-body problem, the precession of orbits, the stability of the solar
+system, the dynamics of rigid bodies and gyroscopes, the propagation of waves in
+elastic media, the onset of turbulence, and the sensitive dependence on initial
+conditions studied by dynamical-systems theory are all substantial, still
+partially open, areas of physics conducted entirely within the classical
+framework. None of this material is a mere warm-up exercise for quantum mechanics,
+and a physicist could spend a full career inside it without ever needing $\hbar$.
+This book is not about that role. It is mentioned here only to make clear that
+when the rest of this book treats classical mechanics as a base to be generalized,
+it is not thereby claiming that this exhausts what classical mechanics is.
+
+\section{Classical Mechanics as the Base of Generalization}
+\label{tr:ba}
+
+The textbook picture of generalization is familiar. Quantization is presented as
+a recipe applied to a classical Hamiltonian system: promote canonical coordinates
+$(q,p)$ to operators $(\hat q,\hat p)$, and promote the Poisson bracket to the
+commutator,
+\begin{equation}
+  \{f,g\} \;\longmapsto\; \frac{1}{i\hbar}\,[\hat f,\hat g] \, .
+\end{equation}
+The inverse limit, $\hbar \to 0$, recovers classical mechanics via the WKB
+approximation and Ehrenfest's theorem. Similarly, special relativity is presented
+as reducing to Newtonian mechanics for $v \ll c$, and general relativity as
+reducing to Newtonian gravitation in the weak-field, slow-motion limit.
+
+Both halves of this picture presuppose that classical mechanics has already
+delivered, for the system in question, a specific and unambiguous piece of
+structure: a phase space with a well-defined symplectic (or Poisson) structure,
+a Hamiltonian generating the correct equations of motion, and a family of
+observables closed under the bracket. Only given that structure does
+``quantize it'' or ``take the classical limit'' pick out a definite theory.
+
+For a mass point moving under a potential, or for a system subject only to
+holonomic constraints, this presupposition is satisfied and the textbook picture
+is accurate. But it is easy to overstate how general this good case is. As soon
+as one leaves it --- constraints that cannot be integrated to relations among
+coordinates alone, systems that exchange energy or momentum with an unmodeled
+environment, systems whose configuration space itself is not fixed once and for
+all --- the classical structure needed as input to generalization becomes
+ambiguous, multiple, or simply unavailable in closed form. In those cases the
+question ``what is the classical mechanics of this system'', asked with no
+reference to $\hbar$ or $c$ at all, already has more than one defensible answer.
+That is the sense in which classical mechanics, even in its purely subordinate
+role as a base, is \emph{far from trivial}: the base itself has to be constructed,
+and the construction is not always unique.
+
+\section{Paradoxes with Classical Roots}
+\label{tr:pa}
+
+The four cases below are developed fully in later chapters of this book. They
+are introduced here, briefly and together, because their common moral is best
+seen by contrast: in each case, a feature usually advertised as a signature of
+quantum theory or of relativity turns out to have an exact, or near-exact,
+analogue that requires nothing beyond Newton, Lagrange, and Hamilton.
+
+\subsection{Hertz's forceless mechanics and the underdetermination of ontology}
+
+In his \emph{Principles of Mechanics}, Heinrich Hertz reformulated dynamics
+without the concept of force at all. Observable bodies are treated as coupled to
+unobservable ``hidden masses'' through rigid, holonomic constraints, and the
+combined system moves along a geodesic of a metric built from the mass
+distribution on an enlarged configuration space. Suitably arranged, Hertz's
+constrained geodesic motion reproduces the trajectories that Newtonian mechanics
+attributes to the action of a force. The two formulations are empirically
+equivalent: no experiment performed on the observable bodies alone can decide
+between ``a force is acting'' and ``a constraint is enforcing geodesic motion in
+a larger space.''
+
+This is a case of underdetermination of theory --- indeed of ontology --- by
+observation, arising entirely within classical mechanics. It is normally quantum
+mechanics that is credited with forcing physicists to confront multiple,
+empirically indistinguishable accounts of what is ``really'' happening beneath
+the observed statistics: Bohmian trajectories, Everettian branches, and
+epistemic and objective-collapse readings of the wavefunction are all consistent
+with the same experimental record. Hertz shows that the same structural
+situation --- one set of observations, several inequivalent stories about the
+underlying ontology --- already existed in nineteenth-century particle mechanics,
+with no probability amplitude in sight.
+
+\subsection{Nonholonomic constraints and the ill-posedness of quantization}
+
+A constraint of the Pfaffian form
+\begin{equation}
+  \sum_i a_i(q)\,\dot q_i = 0
+\end{equation}
+is \emph{nonholonomic} when it is not integrable to a relation $f(q)=0$ among the
+coordinates alone --- the standard example being a disk or coin rolling without
+slipping on a plane. Such systems present a genuine fork in the road. Applying
+d'Alembert's principle directly, with the constraint enforced at the level of
+virtual displacements, yields the correct equations of motion, confirmed by
+experiment. Applying Hamilton's variational principle instead --- extremizing the
+action with the constraint imposed by a Lagrange multiplier, as one legitimately
+may for holonomic constraints --- yields a different, and physically incorrect,
+set of equations. This is the long-standing nonholonomic-versus-vakonomic
+controversy: two superficially reasonable derivations from the same starting
+Lagrangian and the same constraint disagree about the dynamics, and only one of
+them is right.
+
+One consequence is that nonholonomic systems generically fail to admit a
+straightforward canonical Hamiltonian formulation on the naive phase space:
+the constrained bracket structure one is forced to use is not the canonical
+Poisson bracket, and which reduced structure is the correct one to use is itself
+a nontrivial derivation, system by system. This matters directly for the
+generalization picture of Section~\ref{tr:ba}: canonical quantization
+needs a Poisson bracket to promote to a commutator, and here the classical
+bracket is already ambiguous before any promotion is attempted. The
+operator-ordering problem --- the fact that a classical observable such as $qp$
+does not determine a unique quantum operator, since $\hat q\hat p$, $\hat p\hat
+q$, and $\tfrac12(\hat q\hat p+\hat p\hat q)$ all reduce to it as $\hbar\to0$
+--- is usually presented as an intrinsically quantum indeterminacy. In the
+nonholonomic case the indeterminacy has already begun classically, in the
+disagreement over what the correct pre-quantization bracket even is.
+
+\subsection{Shape-changing bodies and classical geometric phase}
+
+A body that changes its own shape --- the paradigm case is a cat, initially
+oriented feet-up, that reorients itself in mid-air with zero net angular
+momentum by cyclically changing its shape --- cannot be treated by rigid-body
+mechanics. One instead works on a \emph{shape space} $\mathcal S$ (the space of
+internal configurations, with rigid motions quotiented out) and finds that the
+conservation of angular momentum, together with the equations of motion,
+defines a connection on a principal bundle over $\mathcal S$ with structure
+group $SO(3)$. A closed loop in shape space --- the cat returns to its initial
+shape --- need not be a closed loop in the full configuration space: the body
+can acquire a net rotation purely as a holonomy of this connection, with no
+external torque and no change in angular momentum at any instant. The same
+mechanism governs low-Reynolds-number swimmers and, more generally, any system
+in which a periodic change of internal, ``slow'' variables produces a net shift
+in an external, cyclic variable; the resulting angle is called the Hannay angle.
+
+The geometric or Berry phase acquired by a quantum system whose Hamiltonian is
+slowly and cyclically varied is frequently introduced as a paradigmatically
+quantum-mechanical effect, precisely because it has no counterpart in the naive
+classical picture of a particle following a trajectory. The falling cat and the
+Hannay angle show that this is too strong a claim about geometric phases in
+general: the underlying mechanism --- holonomy of a connection around a loop in
+parameter or shape space, decoupled from the local dynamics along the way --- is
+already fully present, and was fully worked out, in ordinary classical
+mechanics. What is genuinely new in the quantum case is the specific bundle and
+connection defined by the adiabatic theorem applied to a Hilbert space of
+states; the geometric phenomenon of holonomy itself is not new.
+
+\subsection{Open systems, radiation reaction, and the arrow of time}
+
+Two classical difficulties are worth setting side by side. The first is
+statistical: Boltzmann's $H$-theorem derives macroscopic irreversibility from
+microscopically time-reversible mechanics, and was met immediately by
+Loschmidt's reversibility objection (reversing all velocities should reverse
+the approach to equilibrium) and Zermelo's recurrence objection (Poincar\'e
+recurrence guarantees a return arbitrarily close to any earlier state). Both
+objections are correct as stated, and reconciling them with the observed arrow
+of time is a genuinely hard, and still actively discussed, problem --- entirely
+classical, with no reference to measurement or wavefunction collapse.
+
+The second is dynamical: an accelerating point charge radiates, and Newton's
+second law must be supplemented by the Abraham--Lorentz self-force,
+\begin{equation}
+  m\dot v = F_{\text{ext}} + \frac{2}{3}\frac{e^2}{c^3}\,\dot a \, ,
+\end{equation}
+a third-order correction proportional to the derivative of the acceleration.
+This equation admits runaway solutions, in which the particle self-accelerates
+exponentially with no external force at all; demanding that solutions remain
+bounded, instead, forces the particle to begin accelerating \emph{before} the
+external force is applied --- a pre-acceleration that appears to violate
+causality, entirely within classical electrodynamics.
+
+Both irreversibility and an apparent tension with causal, deterministic
+evolution are frequently treated as problems that quantum theory introduces
+--- through the measurement postulate, decoherence, or the collapse of the
+wavefunction --- or that relativity introduces, through its reworking of
+simultaneity. Loschmidt, Zermelo, and Abraham--Lorentz show that a purely
+classical system, governed by Newton's laws and Maxwell's equations and nothing
+else, already exhibits dissipative, apparently irreversible, and apparently
+acausal behavior that has never been fully tamed.
+
+\section{Looking Ahead}
+
+Each of the four cases above is the subject of a full chapter later in this
+book, where the mathematics is developed in detail and the historical debate is
+traced more carefully. The point of gathering them here, in outline, is
+methodological: before a ``paradox'' encountered in relativity or in quantum
+mechanics is attributed to relativity or to quantum mechanics as such, it is
+worth checking whether classical mechanics, unaided, already contains a version
+of it. Where it does, what is new in the generalization is not the paradox but,
+at most, its dressing --- and the genuinely new content of the generalization
+has to be located elsewhere.
+

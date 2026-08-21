@@ -1,5 +1,6 @@
 \chapter{Classical Mechanics}
-\label{classical-mechanics}
+\label{cm}
+
 {
 \setlength\epigraphwidth{0.6\textwidth}
 \epigraph {
@@ -14,6 +15,9 @@ Day after day the Sun walks up and down,\\
 And yet the stubborn Galilei was right.
 } {A.S. Pushkin, Translated by D. Broytman }
 }
+
+\section{Introduction}
+\label{cm:in}
 
 One of the most important models in physics is mechanics.
 Until the end of the 19th century, mechanics was considered as direct and the only
@@ -87,7 +91,7 @@ velocities of its points at some moment of time) uniquely determines all of
 its motion. In particular, the initial positions and velocities determine the accelerations.
 This is called `Newton's principle of determinacy'.
 
-\section{Newtonian mechanics}
+\subsection{Newtonian mechanics}
 \label{newt-mech}
 
 Let us consider the mechanical system consisting of $n$ particles 
@@ -116,7 +120,6 @@ practically such systems occur in celestial mechanics. In most other cases the s
 considered is not isolated and forces of general kind \eqref{newtoneq} appear as a result 
 of interaction with environment.
 
-
 Mathematics of  Cauchy problem (\ref{newtoneq},\ref{newtonic}) 
 one can find in e.g. \cite{Arnold-ode}. Generally the unique solution exists if
 all functions are smooth enough. However smoothness may be violated in physically
@@ -134,7 +137,7 @@ different times  solution may be not unique (unless force is changing
 relatively slow) \footnote {I discovered this fact around 1980 and was very
 proud of myself until I found papers \cite{Maslov-1} and \cite{Maslov-2}.}.
 
-\subsection{Constraints} 
+\subsubsection{Constraints} 
 
 In addition to Newton's equations the motion of the system may be restricted by
 additional equations or inequalities. Constraints introduce two types of
@@ -155,7 +158,7 @@ constraints which have the form:
         f(\vec x_j,t)=0 \label {hol-const}
 \end{equation}
 
-\subsection{Numerical solution}
+\subsubsection{Numerical solutions}
 
 Generally Newton's equations are to be solved numerically which is a difficult
 task. Two large class of methods are in use: 
@@ -215,7 +218,7 @@ Note that functions $L$ (Lagrangian) and $H$ (Hamiltonian) are connected by Lege
 \end{equation}
 
 
-\section{Principle of least action}
+\subsection{Principle of least action}
 \label{least-action}
 \begin{definition}
         The equation
@@ -246,6 +249,25 @@ It is easy to see that equation of motion (\ref{lagr}) are actually  Euler-Lagra
 for lagrangian \eqref{lagr3}. 
 So we have  Hamilton's principle of least action.
 
+\section{Deeper Insight}
+\label{cm:di}
+
+Classical mechanics is usually presented as the most settled part of
+physics: three laws, a variational principle, and a semester of
+worked examples. By the time a student reaches quantum theory or
+general relativity, mechanics has already receded into the
+background as a body of technique rather than a live subject. This
+impression is not wrong, exactly, but it is incomplete. If one
+presses on a few of the concepts that the standard course treats as
+self-evident --- \emph{force}, \emph{constraint}, \emph{system} ---
+the apparatus turns out to rest on assumptions that are easy to
+state and easy to violate. What happens is instructive: relaxing a
+single tacit assumption does not merely complicate the bookkeeping,
+it can change the physics outright, produce equations that look
+paradoxical on first encounter, or reveal that two "obviously
+equivalent" formulations of mechanics are not equivalent at all.
+
+
 I believe that least action principle  is nothing but (powerful) heuristic. Indeed, to compute 
 action functional we should define explicitly {\em all} curves connecting given pair of points.
 This seems to be impossible or at least very difficult problem. Fortunately we do not need it.
@@ -259,7 +281,10 @@ function which never becomes zero. This new system may correspond to another Lag
 the difference between new and old one need not come down to total derivative. Most probably
 new system will not be Lagrangian at all.
 
-Let us look at simple example --- two-dimensional harmonic oscillator.
+Let us look at two-dimensional harmonic oscillator
+\footnote{This is a simple example of difference between the
+symmetry of equations and that of Lagrangian, see \ref{sp:eq} }.
+
 Usual Lagrangian is
 \begin{equation}
    \label {ho1}
@@ -297,7 +322,7 @@ and
 are not even positive definite!
 
 \section{Gauge invariance} 
-\label{gauge-invariance}
+\label{cm:gi}
 
 From now on we shall use generalized coordinates $ q=\{q_j, j=1\ldots n\} $, where $ n $ is the number of
 degrees of freedom. These coordinates may have or have not physical meaning.
@@ -323,7 +348,7 @@ mechanics.
 I skip the  discussion of standard things like Poisson brackets, integrals of motion and all that.
 
 \section{"Spin" in constant magnetic field}
-\label{mag-mom}
+\label{cm:mm}
 We used to natural systems where hamiltonian is quadratic form over momenta,
 but there are physical systems with hamiltonians linear over momenta.
 So lagrangian does not exist. Let us consider 
@@ -380,3 +405,511 @@ no trajectory passable for given time. Variation problem simply can not be posed
  Hamiltonian $ H=p \Omega $ looks like that for harmonic oscillator in action-angle variables
 and so we can  transform it to usual quadratic form, but the condition $  -S\le p \le S$
 makes this transformation pure formal.
+
+\section{Hertz's Mechanics Without Force}
+\label{cm:hertz}
+
+\subsection{The problem Hertz set himself}
+
+By the 1890s, several physicists --- Kirchhoff and Mach among them
+--- had grown uneasy with the status of \emph{force} as a
+fundamental concept of mechanics. Force is defined operationally
+through $F=ma$, but that same equation is routinely used to
+\emph{introduce} force, which makes the law read uncomfortably like
+a definition dressed up as an empirical statement. In his
+posthumously published \emph{Die Prinzipien der Mechanik in neuem
+Zusammenhange dargestellt} (1894), Heinrich Hertz proposed to remove
+the discomfort by removing force altogether: he set out to build the
+whole of mechanics from just three primitive notions --- space,
+time, and mass --- with no independent concept of force at
+all~\cite{hertz}.
+
+\subsection{The principle of the straightest path}
+
+Consider $N$ mass points with positions $\mathbf x_i\in\mathbb R^3$
+and masses $m_i$, and equip the $3N$-dimensional configuration space
+$Q$ with the natural mass-weighted (kinetic-energy) metric,
+\begin{equation}
+  ds^2 \;=\; \sum_{i=1}^N m_i\, d\mathbf x_i\cdot d\mathbf x_i,
+  \qquad
+  T \;=\; \frac12\left(\frac{ds}{dt}\right)^{\!2}.
+  \label{hertz-metric}
+\end{equation}
+Hertz's masses are never free in the naive sense: they are always
+tied together by \emph{rigid, workless connections} (idealized
+mechanical linkages that transmit force but do no work), which
+restrict the accessible configurations to some submanifold
+$\mathcal C\subset Q$. His fundamental postulate --- the
+\emph{principle of the straightest path}
+--- is then simply:
+
+\begin{quote}
+\emph{A system free of "force" moves along the straightest possible
+path compatible with its constraints, at constant speed.}
+\end{quote}
+
+"Straightest possible" is to be read literally, in the geometric
+sense: the representative point traces a \emph{geodesic} of the
+metric~\eqref{hertz-metric} restricted to $\mathcal C$, i.e.\ a
+curve whose acceleration (in the induced metric) is purely normal to
+$\mathcal C$ and is entirely accounted for by the constraint
+reaction. Formally, if the constraints are written $g_a(\mathbf
+x)=0$, $a=1,\dots,k$, the equations of motion are
+\begin{equation}
+  m_i\,\ddot{\mathbf x}_i \;=\; \sum_a \lambda_a\,
+  \frac{\partial g_a}{\partial \mathbf x_i},
+  \label{hertz-eom}
+\end{equation}
+with the multipliers $\lambda_a$ fixed by demanding $g_a(\mathbf
+x(t))\equiv 0$. There is nothing on the right-hand side of
+\eqref{hertz-eom} except constraint reactions: no applied-force
+term appears anywhere, by construction. Constant speed
+($|ds/dt|=\mathrm{const}$, i.e.\ constant kinetic energy) follows
+automatically, since ideal constraints do no work.
+
+\subsection{Hidden masses, or where "force" goes}
+
+Of course, ordinary bodies \emph{do} appear to exert forces on one
+another --- gravity, contact forces, and so on all look like genuine
+interactions between visible masses that are not rigidly connected
+to anything. Hertz's resolution was to posit \emph{hidden masses}:
+invisible mass points, rigidly linked to the visible ones (and, in
+his more speculative moments, identified with a mechanical
+aether), whose only role is to curve the constraint submanifold
+$\mathcal C$ in just the right way. If the full configuration space
+splits as $Q = Q_{\mathrm{vis}}\times Q_{\mathrm{hid}}$ and the
+\emph{complete} system --- visible plus hidden --- moves along a
+geodesic of $\mathcal C$, then projecting that geodesic motion down
+onto $Q_{\mathrm{vis}}$ alone generically produces a curve that is
+\emph{not} geodesic in the visible sector by itself: extra terms
+appear in its equation of motion that are, from the point of view of
+an observer with access only to $Q_{\mathrm{vis}}$, indistinguishable
+from the effect of an applied force~\cite{hertz}.
+
+This is a genuinely striking claim: on Hertz's account, force is not
+absent from experience, only absent from the fundamental ontology.
+Every observed force law would, in principle, be explained by some
+specific (if permanently unobservable) arrangement of hidden mass
+and rigid linkage. The same basic move --- explain an apparent force
+as the shadow, on a submanifold, of pure geometric (geodesic) motion
+in a larger space --- reappears twice in twentieth-century physics
+in far more successful forms: in Kaluza--Klein theory, where the
+electromagnetic force on a charged particle is recovered as geodesic
+motion in a five-dimensional space, and, far more importantly, in
+general relativity, where gravity itself --- which Newton had to
+treat as a force acting at a distance --- becomes geodesic motion of
+a free particle through curved four-dimensional spacetime, with no
+"force" required at all. Hertz did not anticipate curved spacetime;
+his geometry is Euclidean and the curvature is manufactured entirely
+by hidden extra coordinates. But the structural resemblance to
+Einstein's later, physically successful geometrization of gravity is
+close enough that Hertz's book is still read today chiefly for that
+reason, rather than as a working theory in its own
+right.
+
+\subsection{A second, more conservative geometrization}
+
+It is worth noting that ordinary, force-\emph{having} mechanics can
+also be written as a geodesic principle, without any hidden masses
+at all, via Jacobi's form of the principle of least action. For a
+conservative system with potential $V(\mathbf x)$ and fixed total
+energy $E$, the true trajectories are exactly the geodesics of the
+\emph{Jacobi metric}
+\begin{equation}
+  ds_J^2 \;=\; 2\bigl(E-V(\mathbf x)\bigr)\, ds^2 ,
+  \label{jacobi-metric}
+\end{equation}
+a conformal rescaling of the mass metric~\eqref{hertz-metric} by
+the local kinetic energy. So there are, in the end, two quite
+different ways to eliminate force from the description of a system
+governed by a potential: enlarge the configuration space with hidden
+coordinates and keep the metric flat (Hertz), or keep the visible
+configuration space as it is and let the metric itself become curved
+and energy-dependent (Jacobi). Both reproduce exactly the same
+observable trajectories. Neither is more "true" than the other; they
+are, in Hertz's own vocabulary, different \emph{images} of the same
+phenomena. That a concept as apparently basic as force can be made
+to evaporate --- twice over, in two structurally different ways ---
+without changing a single observable prediction is the real content
+of this section: it shows "force" to be a feature of a chosen
+representation of mechanics, not a fact about the world that every
+correct representation must contain.
+
+Hertz's own programme did not survive contact with its critics.
+Almost every contemporary reviewer, Boltzmann included, objected
+that positing a fresh, permanently unobservable mechanism of hidden
+masses for every distinct force law (gravitation, electromagnetism,
+\ldots) bought elegance at the price of testability, and the
+research programme was essentially abandoned within a generation. It
+survives today less as working physics than as an early, and
+unusually explicit, demonstration that mechanics has more than one
+internally consistent axiomatic foundation --- a lesson later put to
+far more productive use.
+
+\section{Nonholonomic Constraints: When Differentials Refuse to
+  Integrate}
+\label{cm:nh}
+
+\subsection{Holonomic versus nonholonomic}
+
+A constraint of the form $f(q,t)=0$, where $q=(q^1,\dots,q^n)$ are
+generalized coordinates, is called \emph{holonomic}: it can be
+solved, at least locally, to eliminate one coordinate outright, and
+it reduces the dimension of the configuration space itself. A more
+general class of constraints is linear in the velocities,
+\begin{equation}
+  \sum_{i=1}^n a_i(q,t)\,\dot q^i + a_t(q,t) \;=\;0,
+  \label{pfaffian}
+\end{equation}
+a so-called Pfaffian constraint. If the left-hand side of
+\eqref{pfaffian} happens to be the total time derivative of some
+function $f(q,t)$, the constraint is secretly holonomic in disguise.
+If it is not --- if no such $f$ exists --- the constraint is called
+\emph{nonholonomic}: it restricts the \emph{velocities} available at
+each point of $Q$, without restricting which \emph{configurations}
+are reachable.
+
+The canonical example is a coin (or disk) of radius $R$ rolling
+without slipping on a plane, with contact point $(x,y)$, heading
+angle $\phi$, and roll angle $\theta$ as coordinates. The
+rolling condition reads
+\begin{equation}
+  \dot x = R\,\dot\theta\cos\phi ,\qquad
+  \dot y = R\,\dot\theta\sin\phi ,
+  \label{eq:rolling-coin}
+\end{equation}
+which is not integrable: it constrains the instantaneous velocity to
+a two-dimensional subspace of the four-dimensional tangent space at
+each point, and yet, by alternating steering and rolling, the coin
+can be driven from \emph{any} configuration $(x,y,\phi)$ to any
+other. The instantaneous constraint is genuine, but it places no
+restriction whatsoever on the reachable set of configurations --- an
+instance of what control theorists call bracket-generating, or
+Chow--Rashevski\u{i}, controllability. This already runs against a
+piece of intuition carried over uncritically from the holonomic
+case, where a nontrivial velocity constraint always shrinks the
+accessible configuration space too.
+
+A second standard example, the \emph{Chaplygin sleigh}, makes an
+even sharper point. It is a rigid body sliding frictionlessly on a
+plane, with a knife edge that permits motion only along its own
+length (no sideways slip). The system conserves energy exactly ---
+there is no friction anywhere in the model --- and yet its reduced
+dynamics on the velocity variables is attracted to a fixed
+equilibrium: left alone, the sleigh asymptotically settles into
+straight-line motion with no rotation, knife edge trailing the
+center of mass~\cite{chaplygin}. This
+happens because the reduced equations of motion on the nonholonomic
+constraint surface, unlike those of an ordinary holonomic mechanical
+system, do not in general preserve phase-space (Liouville) volume,
+even though they do preserve energy. A perfectly conservative
+mechanical system can therefore display genuinely dissipative-looking
+long-time behaviour --- attracting fixed points, basins of
+attraction --- with no friction anywhere in the equations. Energy
+conservation, by itself, is not enough to rule out the qualitative
+signatures usually associated with dissipation once constraints stop
+being holonomic.
+
+\subsection{Two variational principles, two different theories}
+
+For holonomic constraints, two routes to the equations of motion ---
+D'Alembert's principle (constraint forces do no virtual work, for
+virtual displacements compatible with the instantaneous constraint)
+and Hamilton's principle (the true path extremizes the action among
+\emph{all} paths satisfying the constraint) --- are provably
+equivalent. For nonholonomic (non-integrable, velocity-linear)
+constraints, this equivalence simply fails, and the failure is not a
+minor technicality.
+
+There are two natural-looking ways to generalize the variational
+treatment to a system with a nonholonomic constraint of the
+form~\eqref{pfaffian}.
+
+\begin{description}
+  \item[Nonholonomic (Lagrange--d'Alembert, or Chetaev) mechanics.]
+  Impose the constraint directly on virtual displacements at each
+  instant, exactly as in the holonomic case, and only afterwards
+  derive equations of motion:
+  \begin{equation}
+    \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
+    - \frac{\partial L}{\partial q^i}
+    \;=\; \sum_a \lambda_a\, a_i^a(q),
+    \qquad
+    \sum_i a_i^a(q)\,\dot q^i + a_t^a(q) = 0 .
+    \label{lagrange-dalembert}
+  \end{equation}
+  \item[Vakonomic mechanics.] (The name --- "variational axiomatic
+  kind" --- was coined by Kozlov~\cite{kozlov}.)
+  Instead, treat the nonholonomic constraint as a genuine constraint
+  on the space of \emph{paths} from the outset, as one would an
+  isoperimetric constraint in the calculus of variations, and only
+  then extremize the action over that constrained set of paths.
+\end{description}
+
+For holonomic constraints these two prescriptions coincide. For
+genuinely nonholonomic constraints they generically do not: it has
+been shown, for instance, that for the rolling coin on an inclined
+plane no nontrivial vakonomic solution reproduces the
+Lagrange--d'Alembert solution at
+all~\cite{zampieri}. This is not merely a
+mathematical curiosity to be settled by taste: Lewis and Murray
+built and instrumented a physical system --- a ball rolling without
+slipping on a rotating table --- specifically to adjudicate between
+the two theories, and found that the observed motion matches the
+Lagrange--d'Alembert (nonholonomic) prediction; they were unable to
+produce vakonomic simulations resembling the experimental data at
+all~\cite{lewis+murray}. The variational principle that looks like
+the most direct generalization of Hamilton's principle to velocity
+constraints is, for constraints realized by an actual rolling or
+sliding contact, simply the wrong physical theory.
+
+This does not make vakonomic mechanics useless --- it correctly
+describes optimal-control and sub-Riemannian-geodesic problems, where
+the "constraint" genuinely is a restriction on the class of paths
+being optimized over, rather than a constraint enforced
+instant-by-instant by a physical reaction force. The moral is
+subtler and more interesting than "one theory is right and the other
+wrong": the bare constraint equation~\eqref{pfaffian}, by itself,
+does not determine the dynamics. The correct equations of motion
+depend on how the constraint is physically \emph{realized} ---
+information that is invisible at the level of the constraint
+equation alone, and that a first course in mechanics, built entirely
+on holonomic examples where this ambiguity cannot arise, gives no
+reason to expect.
+
+\section{Bodies That Change Shape: Locomotion Without Anything to
+  Push Against}
+\label{cm:shape}
+
+\subsection{The falling cat}
+
+Drop a cat, upside down, from rest. In free fall there is no
+external torque about the center of mass, so angular momentum is
+conserved --- and it starts, and remains, at zero. Naive intuition
+says that a body with identically zero angular momentum cannot
+rotate. And yet the cat lands on its feet, having reoriented itself
+by roughly $180^\circ$. The naive inference silently assumes a
+\emph{rigid} body; it simply does not apply to a body that can
+deform itself internally, and the cat's righting maneuver --- a
+sequence of twists of its front and back halves relative to one
+another --- is a real, controlled deformation, not a violation of
+any conservation law.
+
+\subsection{Shape space and the gauge structure of deformation}
+
+The clean way to see why this works, due to Shapere and
+Wilczek~\cite{shapere+wilczek} and to Montgomery's later "gauge
+theory of the falling cat"~\cite{montgomery}, is to separate a
+deformable body's configuration into its \emph{shape} $s$ (the
+internal, orientation-independent degrees of freedom --- relative
+joint angles, say) and an overall orientation $R\in SO(3)$ that fixes
+that shape in space. Locally, the full configuration space is a
+principal fiber bundle with structure group $SO(3)$ over shape space,
+and the requirement that total angular momentum stay identically
+zero throughout the motion is a linear relation between the shape
+velocity $\dot s$ and the angular velocity $\omega$ of the body,
+\begin{equation}
+  \omega \;=\; -\,\mathcal A(s)\,\dot s ,
+  \label{connection}
+\end{equation}
+where $\mathcal A(s)$ is built from the shape-dependent inertia
+tensor and its couplings. This is precisely the data of a connection
+(a gauge potential) on the bundle: given any path $s(t)$ in shape
+space, \eqref{connection} lifts it uniquely to a path in the full
+configuration space, exactly as a connection lifts a path in the
+base of a fiber bundle to a horizontal path upstairs.
+
+The consequence that matters here is that if the shape returns
+exactly to where it started after a closed loop in shape space,
+$s(T) = s(0)$, the orientation need \emph{not} return to where it
+started. The net rotation accumulated around the loop is the
+\emph{holonomy} of the connection~\eqref{connection}, and for a
+small loop enclosing area $\Sigma$ it is governed, Stokes'-theorem
+style, by the curvature $\mathcal F = d\mathcal A + \mathcal
+A\wedge\mathcal A$ of that connection:
+\begin{equation}
+  \Delta R \;\approx\; \exp\!\left[\oint_{\partial\Sigma}\mathcal
+  A\right] \;\approx\; \exp\!\left[\int_{\Sigma}\mathcal F\right].
+  \label{holonomy}
+\end{equation}
+This is exactly the structure of a non-Abelian geometric (Berry,
+Wilczek--Zee) phase from quantum mechanics, and of Aharonov--Bohm
+holonomy in gauge theory --- reproduced in full by an entirely
+classical, entirely mechanical system. It is also, viewed from the
+vantage point of Section~\ref{cm:nh}, nothing but another
+instance of a nonholonomic constraint: "total angular momentum
+$\equiv 0$" is a Pfaffian relation between $\dot s$ and $\omega$ that
+fails to be integrable to any function of shape and orientation
+alone \emph{exactly when} the connection~\eqref{connection} has
+nonzero curvature. The falling-cat effect and the rolling coin are,
+formally, the same phenomenon in different clothing.
+
+\subsection{Swimming without pushing}
+
+The same structure governs self-propulsion in a highly viscous
+fluid, where inertia is negligible and net displacement over one
+cycle of body deformation is possible only if the cycle of shapes is
+genuinely non-reciprocal. This is Purcell's scallop theorem: a
+scallop that opens and closes through the \emph{same} sequence of
+shapes, forwards then backwards, achieves zero net displacement,
+because time-reversing the (inertia-free) equations of motion
+exactly reverses the trajectory. Net swimming is again a
+holonomy/geometric-phase effect in an appropriately defined shape
+bundle~\cite{shapere+wilczek-swim}.
+
+Perhaps the most striking illustration of the underlying idea is Jack
+Wisdom's result that a quasi-rigid body executing a cyclic sequence
+of internal shape changes in a curved \emph{spacetime} --- as
+prescribed by general relativity --- can achieve a net translation
+even in complete vacuum, with nothing to push against at
+all~\cite{wisdom}. The effect scales with the local spacetime
+curvature and with the extent of the body's internal motion; it is
+minuscule for any realistic body and is not a practical propulsion
+mechanism, but as a matter of principle it is "swimming" through
+spacetime using exactly the same holonomy mechanism as the falling
+cat, now realized by the genuine nonlinearity of general relativity
+rather than by a gauge potential on a shape bundle constructed by
+hand. Once again, an outcome that sounds like it must violate
+momentum conservation turns out to be perfectly consistent with
+conservation laws, provided one tracks correctly what "conservation"
+does and does not forbid for a body that is allowed to change shape.
+
+\section{Open Systems: Mechanics Without a Fixed Body of Matter}
+\label{cm:open}
+
+\subsection{Variable mass and the Meshchersky equation}
+
+Ordinary Newtonian mechanics implicitly assumes a fixed set of
+particles. Rockets, raindrops growing by accretion, chains lifted
+off a pile, and avalanches all violate that assumption: the mass $m$
+of the body under study is itself a function of time. The correct
+generalization of Newton's second law to such an \emph{open system}
+--- worked out around the turn of the twentieth century by
+I.\,V.\ Meshchersky --- is
+\begin{equation}
+  m\,\frac{d\mathbf v}{dt} \;=\; \mathbf F_{\mathrm{ext}}
+  + \mathbf u\,\frac{dm}{dt} ,
+  \label{meshchersky}
+\end{equation}
+where $\mathbf u$ is the velocity of the incoming or outgoing mass
+\emph{relative to the body itself}, not relative to the lab frame.
+Setting $\mathbf F_{\mathrm{ext}}=0$ and integrating
+\eqref{meshchersky} with $\mathbf u$ constant and antiparallel to
+the direction of travel yields the Tsiolkovsky rocket equation,
+\begin{equation}
+  v(t) - v(0) \;=\; u\,\ln\frac{m(0)}{m(t)} .
+  \label{tsiolkovsky}
+\end{equation}
+The resemblance to Section~\ref{cm:hertz} is not superficial. The
+term $\mathbf u\,\dot m$ in \eqref{meshchersky} looks, from the
+point of view of the rocket body alone, exactly like an applied
+force --- "thrust" --- and is routinely called one. But viewed as
+part of the larger \emph{closed} system consisting of the rocket
+\emph{together with} every parcel of exhaust it has ever ejected,
+whose total momentum is exactly conserved, there is no force there
+at all: only the ordinary transfer of momentum between two pieces of
+one conserved whole. What looks like a force is, once again, an
+artifact of insisting on an equation of motion for part of a system
+rather than for the whole of it.
+
+This is also a genuine pedagogical trap, worth flagging explicitly.
+It is tempting to write $\mathbf F = d(m\mathbf v)/dt = m\dot{\mathbf
+v} + \mathbf v\,\dot m$ and treat this directly as the equation of
+motion of the open body. That expression is correct as a statement
+about the rate of change of the momentum of the body \emph{alone},
+but it is not, in general, equivalent to \eqref{meshchersky} and
+gives the wrong dynamics unless the accreted or ejected mass happens
+to leave (or join) with zero velocity relative to the body, i.e.\
+$\mathbf u \equiv \mathbf v$ --- a special case, not the generic one,
+and not the one realized by a rocket engine, whose whole purpose is
+to eject mass at high relative velocity.
+
+\subsection{Dissipative systems: putting friction back into a
+  variational principle}
+
+A second, quite different kind of "openness" arises whenever a
+system exchanges energy with an environment that is not explicitly
+modelled --- friction, drag, radiation reaction. None of these
+forces derive from a potential in the ordinary sense, so the
+Lagrangian and Hamiltonian formalisms, built for closed and
+energy-conserving systems, do not apply directly. Two classical
+devices repair this.
+
+The first is Rayleigh's dissipation function $\mathcal
+F_{\mathrm{diss}}(\dot q)$, quadratic in the generalized velocities
+for linear damping, which modifies the Euler--Lagrange equations to
+\begin{equation}
+  \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
+  - \frac{\partial L}{\partial q^i}
+  \;=\; -\,\frac{\partial \mathcal F_{\mathrm{diss}}}{\partial \dot
+  q^i}.
+  \label{rayleigh}
+\end{equation}
+This correctly reproduces the (irreversible) equations of motion,
+but it is a hybrid: $\mathcal F_{\mathrm{diss}}$ is not itself part
+of a genuine, self-contained stationary-action principle for $L$
+alone.
+
+The second, due to Bateman (1931), is more radical and more
+illuminating: a fully conservative, symplectic Lagrangian \emph{can}
+be written for a damped oscillator, but only at the price of
+doubling the number of degrees of freedom. Introduce an auxiliary
+"mirror" coordinate $y$ alongside the physical coordinate $x$,
+\begin{equation}
+  L_{\mathrm{dual}}(x,\dot x,y,\dot y) \;=\;
+  m\,\dot x\,\dot y \;+\; \frac{\gamma}{2}\bigl(x\dot y - \dot x
+  y\bigr) \;-\; k\,xy ,
+  \label{bateman}
+\end{equation}
+whose Euler--Lagrange equations are precisely the damped oscillator,
+$\ddot x + (\gamma/m)\dot x + \omega_0^2 x = 0$, for the physical
+coordinate $x$, paired with a time-reversed, exponentially
+\emph{amplified} equation for $y$. The energy the
+physical oscillator loses is exactly the energy its mirror partner
+gains, so the doubled system is conservative even though either half
+alone is not. This is a small, entirely classical and elementary
+demonstration of an idea that later became central to the theory of
+open quantum systems: dissipation and irreversibility in a subsystem
+are not exceptions to an underlying conservative dynamics, but the
+generic appearance of a conservative dynamics once part of the full
+system --- here, quite literally, the mirror half --- has been
+discarded from the description.
+
+\subsection{When "open" turns pathological: radiation reaction}
+
+Not every attempt to write a closed-looking equation for an open
+system ends benignly. An accelerating point charge radiates, and by
+momentum conservation it must experience a recoil, or self-force, in
+consequence. Treating the charge \emph{in isolation} --- an open
+system in the strict sense, since the charge together with its own
+radiated field is really a system with infinitely many degrees of
+freedom, formally "integrated out" down to a single effective force
+term --- leads to the (nonrelativistic) Abraham--Lorentz equation,
+\begin{equation}
+  m\,\ddot{\mathbf x} \;=\; \mathbf F_{\mathrm{ext}} \;+\;
+  m\tau\,\dddot{\mathbf x} ,
+  \qquad
+  \tau \;=\; \frac{q^2}{6\pi\varepsilon_0\,m\,c^3}
+  \;=\; \frac{2}{3}\,\frac{r_e}{c},
+  \label{abraham-lorentz}
+\end{equation}
+where $r_e$ is the classical electron radius. Because
+\eqref{abraham-lorentz} is third order in position, it requires
+more initial data than position and velocity to determine a unique
+solution, and generic initial data produce \emph{runaway} solutions
+in which the self-acceleration grows without bound even with
+$\mathbf F_{\mathrm{ext}}=0$. Suppressing the runaway by hand forces
+the opposite pathology: the charge must begin accelerating
+\emph{before} an external force is switched on --- a small, short-lived,
+but genuinely acausal-looking pre-acceleration. (In practice, both
+pathologies signal that \eqref{abraham-lorentz} is being pushed
+outside its domain of validity, on timescales comparable to $\tau
+\sim 10^{-24}\,\mathrm s$; treated properly, as an effective equation
+valid only for slowly varying external forces --- via, e.g., the
+Landau--Lifshitz reduction of order --- the pathologies disappear.)
+The lesson is a cautionary complement to the rest of this section:
+"integrating out" the unmodelled part of an open system is not
+always harmless bookkeeping. Sometimes it is, as with the Meshchersky
+equation; sometimes, as here, it produces an equation that is simply
+malformed unless handled with real care.
+
