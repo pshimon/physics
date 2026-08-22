@@ -1,6 +1,5 @@
-\chapter{From Two-Point Classical Action to Hamilton--Jacobi and Madelung
-Theory:\\ Hidden Boundary Data, Caustics, and the Breakdown of Gradient
-Velocity Fields} The Hamilton--Jacobi equation is usually presented as a
+\section{Hamilton--Jacobi and Madelung Theory}
+The Hamilton--Jacobi equation is usually presented as a
 nonlinear first-order partial differential equation for a scalar field
 $S(q,t)$. However, the fundamental object of classical mechanics is not a
 one-point function but the two-point classical action $S(q_0,t_0;q,t)$, defined
@@ -13,7 +12,7 @@ representable as a gradient, and the single-valued phase function breaks down.
 We analyze the implications of this fact for Hamilton--Jacobi theory, Madelung
 hydrodynamics, and stochastic formulations of quantum mechanics.
 
-\section{Introduction}
+\subsection{Introduction}
 
 The Hamilton--Jacobi (HJ) equation occupies a central place in classical
 mechanics, geometrical optics, semiclassical quantum mechanics, and stochastic
@@ -41,7 +40,7 @@ The purpose of this article is to clarify:
     these difficulties.
 \end{enumerate}
 
-\section{The Classical Action as a Two-Point Function}
+\subsection{The Classical Action as a Two-Point Function}
 
 Consider a classical system with Lagrangian
 $L(q,\dot q,t)$.
@@ -64,7 +63,7 @@ p_i(t_0)=-\frac{\partial S}{\partial q_0^i}.
 \end{equation}
 Hence the two-point action generates the classical canonical transformation.
 
-\section{Emergence of the Hamilton--Jacobi Equation}
+\subsection{Emergence of the Hamilton--Jacobi Equation}
 
 Fix the initial endpoint $(q_0,t_0)$ and define
 $\mathcal S(q,t):=S(q_0,t_0;q,t)$.
@@ -77,7 +76,7 @@ one obtains $\frac{\partial S}{\partial t}+
 H\left(q,\frac{\partial S}{\partial q},t\right)=0$.
 Thus the HJ equation appears only after one endpoint has been frozen.
 
-\section{Hidden Boundary Data}
+\subsection{Hidden Boundary Data}
 
 The reduction from the two-point action to the one-point field hides the
 initial endpoint inside the boundary conditions.
@@ -94,7 +93,7 @@ Therefore the HJ equation alone does not define the dynamics. The choice of
 admissible solutions depends on hidden global information inherited from the
 original two-point action.
 
-\section{Lagrangian Manifolds}
+\subsection{Lagrangian Manifolds}
 
 The geometric meaning of the HJ equation becomes clearer in phase space.
 Given a function $S(q,t)$, define $p=\nabla S(q,t)$.
@@ -105,7 +104,7 @@ Hamiltonian evolution transports this manifold: $\Lambda_t=\Phi_t(\Lambda_0)$,
 where $\Phi_t$ is the Hamiltonian flow.The HJ formulation remains valid only 
 while $\Lambda_t$ remains a graph over configuration space.
 
-\section{Caustics and Breakdown of the Gradient Representation}
+\subsection{Caustics and Breakdown of the Gradient Representation}
 
 As the Hamiltonian flow evolves, the Lagrangian manifold generically folds in
 phase space. The projection $\pi:\Lambda_t\to Q$ eventually ceases to be
@@ -121,7 +120,7 @@ one obtains several branches: $p_1(q,t),\quad p_2(q,t),\quad \dots$
 Each branch may locally be represented as a gradient,
 $p_i=\nabla S_i$, but globally no single-valued $S(q,t)$ exists.
 
-\subsection{Physical Interpretation}
+\subsubsection{Physical Interpretation}
 
 Suppose particles initially move to the right. A sufficiently strong potential
 may reverse some trajectories in finite time. Then at later times a single
@@ -134,7 +133,7 @@ Therefore the velocity field is no longer single-valued.
 This phenomenon is generic and corresponds mathematically to the intersection
 of characteristics in first-order PDE theory.
 
-\section{Relation to Burgers Equation}
+\subsection{Relation to Burgers Equation}
 
 The HJ equation is closely related to Burgers-type equations.
 For the free particle Hamiltonian $H=\frac{p^2}{2m}$,
