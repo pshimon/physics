@@ -1,0 +1,196 @@
+% ------------------------------------------------------------------
+% Standalone chapter. If you are inserting this into an existing
+% book, keep everything from \chapter{...} to the final \endinput
+% marker and drop the preamble / \begin{document} / \end{document}.
+% ------------------------------------------------------------------
+\documentclass[11pt]{book}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{xcolor}
+
+\title{Scientific Computing Languages}
+\author{}
+\date{}
+
+\begin{document}
+
+\chapter{Why Fortran Endures in Scientific Computing}
+\label{chap:fortran-scicomp}
+
+\section{Introduction}
+
+Fortran is the oldest high-level programming language still in production use, and it is also, by a wide margin, the language most identified with ``scientific computing'' as a discipline. Every serious discussion of numerical linear algebra, climate modelling, computational fluid dynamics, or quantum chemistry eventually runs into a piece of code written in Fortran, often decades old, often untouched since. This chapter makes the case for why that persistence is not mere inertia but reflects real technical properties of the language, and then subjects that case to the comparisons it deserves against C, C++, Python, and Julia. The honest answer, defended at the end of the chapter, is that Fortran is still the best tool for a specific and economically important slice of scientific computing --- not for the field as a whole, which has diversified far beyond what any single language now covers.
+
+\section{The Case for Fortran}
+
+\subsection{Array Semantics and the Aliasing Problem}
+
+Fortran was designed around numerical arrays from its first specification in 1957, and this shows in ways that are easy to underestimate. A modern Fortran program can add, multiply, or reduce entire arrays with a single statement:
+
+\paragraph{Fortran (whole-array syntax):}
+\begin{verbatim}
+real :: a(1000), b(1000), c(1000)
+c = a + 2.0 * b
+\end{verbatim}
+
+\paragraph{C (explicit loop; vectorization is not guaranteed):}
+\begin{verbatim}
+for (int i = 0; i < 1000; i++) {
+    c[i] = a[i] + 2.0 * b[i];
+}
+\end{verbatim}
+
+\paragraph{Python (NumPy, itself calling compiled Fortran/C beneath the interface):}
+\begin{verbatim}
+c = a + 2.0 * b
+\end{verbatim}
+
+\paragraph{Julia (native broadcasting, compiled just-in-time to machine code):}
+\begin{verbatim}
+c = a .+ 2.0 .* b
+\end{verbatim}
+
+The Fortran and Julia versions read almost identically, and NumPy borrows the same idea at the library level. The deeper advantage, however, is not the notation but what it licenses the compiler to assume. The Fortran standard forbids two arguments passed to the same procedure from aliasing the same memory unless they are explicitly declared \texttt{target} or \texttt{pointer}. A compiler is therefore free, by default, to vectorize and reorder array operations without proving the absence of aliasing --- a proof that is often impossible in C, where any two pointers might refer to overlapping memory unless the programmer adds the \texttt{restrict} qualifier (and many programmers do not). This single rule is a large part of why Fortran compilers have historically auto-vectorized plain numerical loops more aggressively and more reliably than C compilers working on equivalent code.
+
+\subsection{Complex Numbers as a Native Type}
+
+Fortran has treated complex numbers as a built-in intrinsic type since its very first standard in 1966, with the same declaration and whole-array syntax as real numbers, a full set of dedicated intrinsics (\texttt{CONJG}, \texttt{AIMAG}, \texttt{CABS}, \texttt{CMPLX}), and no dependence on any library or optimizer pass to make complex arithmetic fast: it has simply always compiled to efficient machine code, on every conforming compiler. This matters more than it might seem for a field where complex numbers are not a curiosity but the natural unit of computation --- quantum mechanics, electromagnetics, signal processing, and control theory are all written in complex arithmetic from the ground up.
+
+The other four languages arrived at native complex support later and by different routes. C only gained a language-level complex type (\verb|_Complex|, exposed via \verb|<complex.h>|) with the C99 standard, and support has been uneven ever since: Microsoft's compiler has never fully implemented it, so portable C code often avoids it. C++ has no complex primitive at all; \verb|std::complex<T>| is a library template, and its performance depends on the compiler successfully inlining and optimizing away the abstraction --- usually true in practice, but an optimizer outcome rather than a language guarantee. Python's \texttt{complex} type is a genuine built-in with clean literal syntax (\verb|3+4j|), but it inherits the interpreter's general performance ceiling. Julia comes closest to Fortran's convenience: \verb|Complex{T}| lives in the standard library, and because the global constant \texttt{im} is bound to $\sqrt{-1}$ and Julia allows numeric-literal juxtaposition, an expression like \verb|1+2im| reads exactly like ordinary mathematical notation --- but this, too, is a library type riding on the general dispatch and JIT machinery rather than a dedicated compiler primitive.
+
+\subsection{Column-Major Layout and the BLAS/LAPACK Legacy}
+
+Fortran stores multidimensional arrays in column-major order. This is not an aesthetic choice; it is the layout that the reference implementations of BLAS (Basic Linear Algebra Subprograms) and LAPACK (Linear Algebra Package) were written around, and those two libraries are still the computational core underneath most of numerical computing. NumPy's linear algebra, MATLAB, R, and Julia's standard library all eventually call into BLAS/LAPACK, and a great deal of that code is, to this day, the original Fortran. When people say Fortran ``is still used everywhere,'' this is usually the concrete mechanism: not that scientists are writing new Fortran day to day, but that almost every other language's fast numerical path bottoms out in Fortran or in C ported line-for-line from it.
+
+\subsection{Six Decades of Compiler Optimization}
+
+Fortran's restricted, array-oriented feature set has made it an unusually tractable target for optimizing compilers. Vendor compilers (Intel's \texttt{ifx}, NVIDIA's \texttt{nvfortran}, Cray's compiler) have spent decades tuning code generation specifically for the patterns Fortran encourages: dense loops over contiguous arrays with no aliasing and no dynamic dispatch. \texttt{do concurrent} loops, standardized in Fortran 2008 and extended since, give the compiler an explicit, portable signal that iterations are independent, which NVIDIA's compiler already uses to offload loops to a GPU with no directive syntax at all.
+
+\subsection{Stability and the Weight of Legacy Code}
+
+A Fortran 77 program will, with minor adjustments, still compile today. This is not true of C++ (where the standard changes substantially every three years and idiomatic style shifts with it), nor of Python (where the 2-to-3 transition broke a large fraction of the ecosystem for the better part of a decade), nor of Julia (which underwent real breaking changes before reaching its 1.0 release). Large government and academic codebases --- weather and climate models, reactor simulations, quantum chemistry packages such as those built on decades-old Fortran cores --- represent tens of millions of lines of validated, trusted numerical logic. Rewriting that logic is not merely expensive; it reintroduces the risk of silently changing results that took years to validate against experiment. Stability of this kind is a scientific asset, not just an engineering convenience.
+
+\subsection{Modern Fortran Is Not 1977 Fortran}
+
+A common and outdated objection is that Fortran is a relic with clunky fixed-form syntax and no modern features. Fortran 90, 2003, 2008, 2018, and 2023 have added free-form source, derived types with type-bound procedures, generic programming via \texttt{select type} and interfaces, native C interoperability through the \texttt{iso\_c\_binding} module, submodules for separate compilation, and coarrays for a partitioned global address space (PGAS) parallel programming model built into the language itself, without needing an external library such as MPI for many common patterns.
+
+\section{Fortran Compared}
+
+\subsection{Fortran vs.\ C}
+
+C offers direct hardware control, an enormous ecosystem, and near-universal portability, but it has no built-in array abstraction: multidimensional arrays are simulated with pointer arithmetic, bounds are never checked, and the compiler cannot assume the no-aliasing rule Fortran gets for free. In exchange, C is closer to the operating system and to embedded and systems-level work, and its ubiquity makes it the lingua franca for interoperability --- Fortran, Python, Julia, and C++ all routinely bind to (or through) C interfaces.
+
+\subsection{Fortran vs.\ C++}
+
+Modern C++ is the most serious performance competitor Fortran has. Template metaprogramming and expression templates (as used in Eigen, Blaze, and Armadillo) allow C++ to express array algebra almost as tersely as Fortran while giving the compiler similar optimization opportunities, and libraries built for exascale portability --- Kokkos and RAJA, developed under the U.S. Department of Energy's Exascale Computing Project --- are written in C++ specifically because it can target NVIDIA, AMD, and Intel GPUs from a single codebase more maturely today than Fortran can. The cost is complexity: C++'s feature surface is vast, compile times are long, undefined behavior is easy to trigger even with modern smart pointers and RAII, and ABI compatibility across compiler versions remains fragile. Where Fortran gives good performance by default on straightforward numerical code, C++ can match or exceed it but generally demands more expertise to do so safely.
+
+There is a sharper version of this trade-off worth stating plainly: good C++ numerical performance is not the default outcome of writing idiomatic C++, it is the result of deliberately writing against several of the language's most natural idioms. A straightforward object-oriented design --- an abstract base class with virtual methods for different numerical kernels, \verb|std::vector<std::unique_ptr<Base>>| for a polymorphic collection, operator overloading on a naively written matrix class --- is exactly what C++ makes easy to write, and exactly what tends to perform badly. Compilers routinely fail to inline virtual calls even when they could, in principle, resolve them statically, which silently forecloses further vectorization; naively operator-overloaded array types generate temporary objects on every operation; and classic expression templates, while excellent for simple vector-vector kernels, are documented to degrade badly on matrix-matrix and sparse operations unless deliberately rebuilt as ``smart'' expression templates that recognize whole-loop patterns rather than individual element accesses. Getting Fortran-comparable performance out of C++ means choosing templates over inheritance, value types over shared pointers, and flat contiguous arrays over convenient nested containers --- a discipline that Eigen, Kokkos, and Blaze all follow, but one that has to be chosen on purpose, in a language whose everyday idioms point the other way.
+
+\subsection{Fortran vs.\ Python}
+
+Python is not a competitor to Fortran so much as a front end for it. Pure interpreted Python is far too slow for numerically intensive kernels, which is precisely why NumPy, SciPy, and most of the scientific Python stack are thin wrappers around compiled Fortran and C. Python wins decisively on prototyping speed, readability, the size of its community, and its dominance of machine learning workflows (which now make up a large share of what gets called ``scientific computing''). Tools such as Numba and Cython narrow the performance gap for specific functions, but idiomatic pure Python remains one to two orders of magnitude slower than compiled Fortran for tight numerical loops.
+
+\subsection{Fortran vs.\ Julia}
+
+Julia is the most direct philosophical challenge to Fortran's role, because it was designed explicitly to solve what its creators called the ``two-language problem'': the pattern of prototyping in a slow, expressive language and rewriting the hot path in a fast, unfriendly one. Julia compiles via LLVM at first call and can approach C/Fortran performance while keeping high-level syntax, native broadcasting, and multiple dispatch, which makes generic numerical code (the same algorithm working correctly over different numeric types) far more natural to write than in Fortran. Its numerical ecosystem (DifferentialEquations.jl, JuMP.jl, Flux.jl) is younger but growing quickly, and it calls Fortran and C directly with essentially no overhead, so it can sit on top of the same LAPACK/BLAS core rather than replacing it. What it does not yet have is Fortran's decades of validated legacy code or the same depth of tooling for very large multi-node HPC deployments, though this gap has narrowed rather than widened over the last several years.
+
+\section{Syntactic Safety: Where Looks Can Deceive}
+
+Performance and libraries are not the only axis worth comparing. How easy it is for source code to be misread --- by a compiler, or by a human reviewing it --- also varies across these five languages, and two specific issues deserve to be named directly.
+
+\subsection{Python: When Indentation Silently Redefines Scope}
+
+Python's block structure is defined entirely by indentation: there is no closing token analogous to \texttt{end do}, \texttt{end if}, or a closing brace. This means a single indentation level is the \emph{only} record of which block a statement belongs to --- there is no second, independent signal a linter, a diff tool, or a reviewer can check it against. To be precise about where the real danger sits: CPython does catch indentation that is internally inconsistent, mixing tabs and spaces ambiguously, or a level that matches no enclosing block at all, immediately, as a \texttt{TabError} or \texttt{IndentationError}. What it cannot catch, because there is nothing left for it to check against, is indentation that is perfectly consistent but wrong --- a level that is entirely valid because it matches some \emph{other} block already present in the same function, just not the one the author meant. That produces no error at all, only a different, fully legal program. Consider:
+
+\begin{verbatim}
+def process(items):
+    for item in items:
+        do_something(item)
+    log("done")
+\end{verbatim}
+
+\noindent versus
+
+\begin{verbatim}
+def process(items):
+    for item in items:
+        do_something(item)
+        log("done")
+\end{verbatim}
+
+Both parse without complaint. In the first, \texttt{log("done")} runs once, after the loop finishes; indented one level deeper in the second, it runs on every iteration instead. The same failure mode applies to closing a loop, an \texttt{if}, or a \texttt{try} block one level too early or too late, and it is exactly the kind of slip that creeps in while refactoring a nested block by hand or resolving a merge conflict. In a delimiter-based language --- C, C++, Julia, or Fortran's \texttt{end do}/\texttt{end if} --- the actual grouping is fixed by the delimiter regardless of how the code happens to be indented, so a stray whitespace change is cosmetic and a formatter can repair it automatically; in Python, indentation is not a cosmetic layer sitting on top of the real structure, it \emph{is} the real structure, so there is nothing left over to cross-check it against.
+
+It is fair to note the argument on the other side, because delimiter-based languages have their own version of this failure, just inverted. The canonical example is Apple's 2014 \texttt{goto fail} bug in C (CVE-2014-1266), where a duplicated line visually appeared, by its indentation, to belong inside an \texttt{if} block, but --- because that block had no braces --- was in fact unconditional, and a critical certificate check was silently skipped every time. There, indentation \emph{lied} about the real structure, which is exactly the class of bug that enforced-indentation advocates argue Python's design rules out by construction. What Python trades away is not safety in general but redundancy: a brace or an \texttt{end} keyword can disagree with the indentation drawn around it, and that disagreement is itself a warning sign; in Python, indentation cannot disagree with itself, so the same kind of slip that would surface as a mismatch elsewhere here surfaces as nothing at all.
+
+The same underlying property --- that whitespace alone carries semantic weight, with no redundant token to check it against --- is also the structural reason the following, more adversarial issue lands especially cleanly on Python. In 2021, University of Cambridge researchers Nicholas Boucher and Ross Anderson disclosed a class of vulnerabilities named ``Trojan Source'' (CVE-2021-42574 and CVE-2021-42694), in which Unicode bidirectional-override control characters or homoglyph identifiers are embedded inside comments or string literals. These characters do not change the actual byte sequence the interpreter tokenizes, only the order in which a bidi-aware editor \emph{displays} them --- so a reviewer can be shown code that visually appears to be commented out, or a variable that looks identical to another, while the interpreter executes something different from what was shown. This affects essentially every language that permits Unicode source files, not Python alone, but the response has differed: Rust's compiler detects these code points and refuses to compile by default, whereas CPython's security team explicitly decided the problem belongs to editors, diff viewers, and code-review tools rather than the language itself. The practical upshot is not that Python source is more exploitable in principle than C++ or Java source, but that it already asks the reader to trust an indentation level rather than an explicit token, and it takes very little more to make that trust misplaced.
+
+\subsection{Julia: Numeric-Literal Juxtaposition}
+
+Julia's convenience feature of writing \verb|2a| for \verb|2*a| is real, and is exactly what makes its complex-number and polynomial-style syntax so readable. It comes with a genuine sharp edge. The juxtaposition only fires when the numeral comes first and touches the identifier with no intervening space: \verb|2a| is \verb|2*a|, but \verb|a2| is parsed as a single, distinct identifier --- not as \verb|a*2|, and not as anything related to \verb|a| at all. This is consistent and documented, but it means a habit carried over from mathematical notation, naming a variable \verb|a2| to mean ``the second $a$'' in subscript style, silently produces an ordinary unrelated identifier rather than a parse error, so this kind of typo is not caught. The precedence rules compound the surprise: literal-coefficient multiplication binds tighter than any other binary operator, except that it binds \emph{looser} than \verb|^| when the coefficient sits to the left of the exponent, so \verb|2^3x| parses as \verb|2^(3x)| and not \verb|(2^3)*x|. Julia's own community discussion forum has recurring threads of experienced users re-deriving this rule from scratch, which is a reasonable sign that it is not fully intuitive even for people who know it exists.
+
+\bigskip
+\noindent It is worth being fair in the other direction: Fortran is not free of its own inherited footguns. Historically, an undeclared variable beginning with the letters \texttt{I} through \texttt{N} is silently typed as an integer and any other letter as real, under the \texttt{IMPLICIT} typing rule inherited from Fortran~66 --- a well-known source of bugs from simple typos, and the reason virtually every modern style guide insists on \texttt{implicit none} at the top of every unit. No language on this list has fully escaped the tension between terse notation and safe parsing; each has simply chosen a different place to carry the risk.
+
+\section{A Side-by-Side Summary}
+
+\begin{table}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{2.6cm}p{2.2cm}p{2.1cm}p{2.1cm}p{2.1cm}p{2.1cm}}
+\toprule
+\textbf{Dimension} & \textbf{Fortran} & \textbf{C} & \textbf{C++} & \textbf{Python} & \textbf{Julia} \\
+\midrule
+Native array syntax & Yes, built in & No & Via libraries & Via NumPy & Yes, built in \\
+Default aliasing rule & None assumed & Must alias-proof & Must alias-proof & N/A & Arrays not assumed to alias \\
+Native complex numbers & Intrinsic since 1966 & C99 \texttt{\_Complex} (patchy) & Library type only & Built-in literal & \texttt{Complex\{T\}} via \texttt{im} \\
+Raw numerical speed & Excellent & Excellent & Excellent (with effort) & Poor unless compiled/JIT'd & Very good \\
+Core numerical libraries & BLAS, LAPACK, MINPACK & Thin wrappers, GSL & Eigen, Kokkos, RAJA & NumPy, SciPy (wrap Fortran/C) & Growing native ecosystem \\
+GPU/accelerator maturity & Emerging (OpenACC, \texttt{do concurrent}, early LLVM Flang offload) & CUDA C, OpenCL & Most mature (CUDA C++, HIP, SYCL) & Via CuPy/PyTorch wrappers & CUDA.jl, native kernels \\
+Package manager & fpm (young, still evolving) & None standard & Conan/vcpkg (maturing) & pip/conda (mature) & Pkg.jl (mature) \\
+Backward compatibility & Very strong (decades) & Strong & Weaker (standard shifts) & Broke at Python 2$\to$3 & Stabilizing since 1.0 \\
+Learning curve & Gentle for numerics & Moderate & Steep & Very gentle & Gentle to moderate \\
+Notable syntax pitfall & Legacy implicit typing (I--N rule) & Aliasing / undefined behavior & Virtual dispatch blocks inlining & Wrong-but-legal indentation changes scope silently & Numeric-literal juxtaposition precedence \\
+\bottomrule
+\end{tabular}
+\caption{A rough comparative sketch. Entries are qualitative judgments, not benchmark results, and vary by compiler, hardware, and how carefully each language is used.}
+\end{table}
+
+\section{Where the ``Still the Best'' Claim Weakens}
+
+An honest chapter has to weigh the counter-evidence as carefully as the case above.
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Exascale portability has moved toward C++.} The flagship performance-portability frameworks for the current generation of GPU-heavy supercomputers, Kokkos and RAJA, are C++ libraries, developed because Fortran's GPU offload story (OpenACC, \texttt{do concurrent}) is less mature and less uniformly supported across NVIDIA, AMD, and Intel hardware. AMD's production Fortran compiler for its Instinct GPUs only became the default with ROCm 7.0, and LLVM Flang's own GPU runtime support was still described as experimental as of early 2026.
+  \item \textbf{Package management remains a weak point.} The Fortran Package Manager (fpm) reached a significant release (v0.13.0) in February 2026 and is under active development, but its own documentation still describes it as an early, rapidly evolving tool. This lags well behind the maturity of \texttt{pip}/\texttt{conda} for Python or \texttt{Pkg.jl} for Julia, and it affects how easy it is to pull in third-party numerical code.
+  \item \textbf{General-purpose popularity has been volatile, not steadily rising.} Language-popularity indices such as TIOBE (which measure search and tutorial interest, not lines of production code) showed Fortran climbing into the top ten during 2024 and early 2025, only to fall back to roughly seventeenth place by mid-2026. This is a weak proxy for technical merit, but it does undercut any claim that Fortran's role is expanding rather than holding a stable, shrinking-relative-to-the-field niche.
+  \item \textbf{Machine learning now dominates a large share of what is called ``scientific computing.''} That ecosystem --- PyTorch, JAX, TensorFlow --- is built in Python with C++/CUDA backends. Fortran has essentially no presence there, and this is not a small corner of the field anymore.
+  \item \textbf{Julia directly targets Fortran's traditional justification.} If the appeal of Fortran is ``fast numerics without C++'s complexity,'' Julia is a serious answer to the same problem, with the added benefit of not requiring a separate prototyping language at all.
+\end{itemize}
+
+\section{Conclusion: Best at What}
+
+The claim that Fortran is ``still the best language for scientific computing'' is defensible, but only once the scope is narrowed to where its actual advantages live: dense numerical linear algebra, legacy HPC codebases with decades of validation behind them, and any workload that ultimately calls into BLAS/LAPACK, which is to say most of numerical computing, including code written in every other language on this list. Within that scope, Fortran's array semantics, aliasing guarantees, and compiler maturity remain genuinely hard to beat, and its stability is an asset that newer languages have not yet had the decades needed to prove or disprove for themselves.
+
+Outside that scope, the field has fragmented in ways a single-language answer cannot capture. C++ has taken the lead on GPU-portable exascale computing. Python has taken the lead on machine learning and on everyday exploratory work. Julia is the most direct attempt to unify fast numerics with expressive, high-level syntax, and it is close enough to succeeding that it deserves to be taken as a genuine alternative rather than a curiosity. The more accurate summary is not that Fortran is the best language for scientific computing, but that it is still the best language for the specific, load-bearing core of scientific computing that everything else quietly depends on --- and that this core, while enormous, is no longer the whole of the field.
+
+\bigskip
+\noindent\textit{An old joke in the Fortran community holds that whatever the dominant programming language of the future turns out to look like, people will probably still call it Fortran. Sixty-plus years on, the joke keeps landing because the punch line keeps being half true.}
+
+\section*{Notes and Further Reading}
+\begin{itemize}[leftmargin=1.5em]
+  \item TIOBE Programming Community Index, monthly rankings (2024--2026), for the popularity-trend figures cited above.
+  \item LLVM Flang project documentation (\texttt{flang.llvm.org}) and the LLVM Project blog, for the status of GPU offload support.
+  \item AMD's documentation for its Next-Generation Fortran Compiler (ROCm 7.0+), for OpenMP GPU-offload production status.
+  \item The Fortran Package Manager project (\texttt{fpm.fortran-lang.org}), for release history and its own description of its maturity.
+  \item The DOE Exascale Computing Project documentation for Kokkos and RAJA, for the C++-based performance-portability landscape.
+  \item Boucher, N. and Anderson, R., ``Trojan Source: Invisible Vulnerabilities'' (University of Cambridge, 2021), for the Unicode bidi/homoglyph issue discussed above.
+  \item The Julia Language manual, sections on Complex and Rational Numbers and on Numeric Literal Coefficients (\texttt{docs.julialang.org}), for the exact juxtaposition and precedence rules cited above.
+\end{itemize}
+
+\end{document}
