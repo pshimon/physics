@@ -1,0 +1,1515 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsfonts,mathtools}
+\usepackage{bm}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage{xcolor}
+\geometry{margin=1in}
+
+\title{\textbf{Artificial Intelligence in Physics:\
+From Data Analysis to Scientific Discovery}}
+
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Artificial intelligence (AI), and in particular modern machine learning (ML), is
+rapidly becoming part of the methodology of physics. Its role extends far beyond
+the traditional use of computers for numerical calculation. Machine-learning
+methods are now used for experimental data analysis, parameter estimation,
+inverse problems, numerical simulation, surrogate modelling, experimental
+design, control, theory construction, and the search for new physical laws.
+Physics-informed machine learning further attempts to combine empirical data
+with known physical principles, while neural operators provide a new approach
+to learning mappings between functions and accelerating the solution of
+parameterized differential equations.
+
+This paper reviews the role of AI in physics from a methodological rather than
+purely technological perspective. We distinguish between AI as a computational
+tool, AI as an approximation to a known physical theory, and AI as a possible
+instrument of scientific discovery. Particular attention is paid to the relation
+between data-driven and theory-driven approaches. We argue that the central
+problem is not whether AI can replace theoretical physics, but how machine
+learning can be integrated with the existing hierarchy of physical concepts:
+symmetry, conservation laws, variational principles, differential equations,
+effective theories, and statistical inference.
+
+The paper also discusses fundamental limitations. A machine-learning model can
+fit data without identifying the underlying causal structure, can violate exact
+physical constraints, can extrapolate catastrophically outside its training
+domain, and can produce apparently convincing but scientifically meaningless
+patterns. Consequently, validation, interpretability, uncertainty quantification,
+dimensional analysis, symmetry, and independent physical verification remain
+essential. The most promising future appears to be a hybrid methodology in
+which human physicists and AI systems cooperate: physics supplies structure,
+constraints, and questions, while AI supplies high-dimensional search,
+approximation, pattern recognition, and computational exploration.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Physics has always been intimately connected with computation. The development
+of numerical methods transformed problems that could not be solved analytically
+into quantitative predictions. Computational physics subsequently became a
+third component of scientific methodology alongside experiment and theory.
+
+Artificial intelligence introduces a further change. Traditional numerical
+computation is based on algorithms explicitly constructed from mathematical
+equations. Machine learning, in contrast, constructs an approximation from
+examples, observations, simulations, or other forms of data. The distinction
+can be expressed schematically as
+\begin{equation}
+\text{equations} \longrightarrow \text{algorithm}
+\end{equation}
+for conventional computational physics, whereas machine learning often follows
+\begin{equation}
+\text{data} \longrightarrow \text{model}.
+\end{equation}
+
+The distinction should not be exaggerated. Modern scientific machine learning
+frequently combines the two:
+\begin{equation}
+\text{data}+\text{physical laws}+\text{numerical methods}
+\longrightarrow
+\text{learned physical model}.
+\end{equation}
+This hybrid approach is one of the most important developments in contemporary
+computational science.
+
+Machine learning has already become pervasive in physics, including
+experimental particle physics, condensed matter physics, plasma physics,
+fluid mechanics, cosmology, quantum physics, and climate physics
+\cite{Carleo2019,Karagiorgi2022,Karn2021,Brunton2020}.
+The application spectrum ranges from comparatively modest tasks, such as
+classifying experimental events, to ambitious attempts to discover new
+equations and physical structures.
+
+The important question is therefore no longer whether AI can be useful in
+physics. It clearly can. The more fundamental question is:
+
+\begin{quote}
+\emph{What is the proper epistemological and methodological role of AI in
+physics?}
+\end{quote}
+
+This question is more subtle than the question of computational efficiency.
+Physics is not merely the prediction of numbers. A physical theory attempts to
+identify a coherent structure that explains a class of phenomena and permits
+generalization to situations not previously observed. Prediction and
+understanding are related, but they are not identical.
+
+\section{AI, Machine Learning, and Physics}
+
+The term artificial intelligence covers a large collection of methods. For
+physics, three broad categories are especially important.
+
+\subsection{Supervised learning}
+
+In supervised learning one is given pairs $(x_i,y_i)\quad i=1\dots N$,
+and attempts to construct a function $y\simeq f(\theta,x)$,where $\theta$ 
+denotes the parameters of the model.
+
+In physics, $x$ may represent experimental observables and $y$ may represent
+particle identities, phases of matter, physical parameters, or solutions of
+differential equations.
+
+\subsection{Unsupervised and self-supervised learning}
+
+Here the objective is to identify structure without specifying the desired
+output explicitly. Examples include clustering, dimensional reduction,
+anomaly detection, and representation learning.
+
+This is particularly interesting for physics because scientific discovery often
+begins with the recognition that data contain a structure not anticipated by
+the existing theoretical description.
+
+\subsection{Generative models}
+
+Generative models attempt to represent a probability distribution
+$p(x)$ or a conditional distribution $p(y|x)$.
+
+Generative models are useful for simulation, sampling, uncertainty estimation,
+and inverse problems. They can potentially replace expensive Monte Carlo or
+numerical calculations by learned approximations.
+
+Large language models represent another form of generative AI. Their immediate
+importance for physics is not that they ``understand'' physical reality in the
+same way that a physical theory does, but that they can manipulate large
+amounts of scientific text, mathematical expressions, computer code, and
+symbolic descriptions. Their role in theoretical research is therefore
+potentially significant, but also requires special caution
+\cite{He2024}.
+
+\section{The Hierarchy of AI Applications in Physics}
+
+It is useful to distinguish several levels of AI usage.
+
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Data analysis:} extracting information from experimental data.
+
+\item \textbf{Parameter inference:} estimating physical parameters from
+observations.
+
+\item \textbf{Numerical acceleration:} replacing expensive calculations by
+surrogate models.
+
+\item \textbf{Inverse problems:} reconstructing hidden physical quantities from
+observable consequences.
+
+\item \textbf{Experimental design:} selecting measurements that maximize
+scientific information.
+
+\item \textbf{Model discovery:} finding mathematical relations compatible with
+observations.
+
+\item \textbf{Theory discovery:} constructing candidate physical principles or
+dynamical laws.
+
+\item \textbf{Scientific autonomy:} combining hypothesis generation, simulation,
+experiment, analysis, and verification into an automated scientific loop.
+\end{enumerate}
+
+The first five levels are already established research activities. The last
+three are substantially more ambitious and raise fundamental questions about
+what constitutes scientific understanding.
+
+\section{AI as a Tool for Experimental Physics}
+
+\subsection{High-dimensional data}
+
+Modern experiments generate enormous quantities of data. Particle detectors,
+astronomical surveys, gravitational-wave observatories, synchrotron sources,
+neutron facilities, and imaging systems all produce datasets whose dimensionality
+can exceed the capacity of conventional analysis methods.
+
+Machine learning is particularly effective when the useful information is
+distributed nonlinearly over a large number of observables.
+
+For example, a classifier can approximate
+\begin{equation}
+P(\mathrm{signal}|x_1,\ldots,x_n),
+\end{equation}
+where the $x_i$ are measured quantities.
+
+In high-energy physics this can be used to distinguish signal from background.
+Machine learning has consequently become an important component of searches for
+new physics \cite{Karagiorgi2022}.
+
+\subsection{Anomaly detection}
+
+Anomaly detection is potentially more interesting from the point of view of
+fundamental physics.
+
+A conventional search begins with a hypothesis:
+\begin{equation}
+H_1=\text{specific new-physics model}.
+\end{equation}
+
+One then searches for the predicted signature.
+
+An alternative is
+\begin{equation}
+H_0=\text{known physics}
+\end{equation}
+and asks whether the data contain statistically significant deviations from
+the learned distribution of known events.
+
+This changes the logic from
+\begin{equation}
+\text{theory}\rightarrow\text{prediction}\rightarrow\text{test}
+\end{equation}
+toward
+\begin{equation}
+\text{data}\rightarrow\text{anomaly}\rightarrow\text{hypothesis}.
+\end{equation}
+
+The second procedure cannot by itself establish new physics. An anomaly may
+result from detector effects, calibration errors, statistical fluctuations,
+or deficiencies in the background model. Nevertheless, it provides a powerful
+mechanism for discovering phenomena not represented in a predefined catalogue
+of theories.
+
+\section{AI for Inverse Problems}
+
+Many important problems in physics have the structure
+\begin{equation}
+\mathcal{F}[u]=y,
+\end{equation}
+where $u$ is an unknown physical field or parameter and $y$ represents
+observations.
+
+The forward problem is
+\begin{equation}
+u\longrightarrow y,
+\end{equation}
+while the inverse problem is
+\begin{equation}
+y\longrightarrow u.
+\end{equation}
+
+Inverse problems are frequently ill-posed in the sense of Hadamard. Small
+errors in $y$ can produce large errors in the reconstructed $u$.
+
+Machine learning can provide an approximate inverse map
+\begin{equation}
+u\simeq \mathcal{N}_\theta(y).
+\end{equation}
+
+Examples include:
+
+\begin{itemize}
+\item reconstruction of particle trajectories;
+\item tomography;
+\item reconstruction of cosmological parameters;
+\item imaging of astrophysical objects;
+\item estimation of material properties;
+\item reconstruction of electromagnetic fields;
+\item parameter inference in quantum systems.
+\end{itemize}
+
+However, an AI reconstruction should not be interpreted as a unique physical
+solution merely because it produces a visually convincing result. The
+non-uniqueness of the inverse problem remains a property of the underlying
+physics.
+
+\section{Physics-Informed Machine Learning}
+
+One of the most important developments is the attempt to incorporate physical
+laws directly into the learning procedure.
+
+Suppose a physical field satisfies
+\begin{equation}
+\mathcal{L}[u]=0.
+\end{equation}
+
+A neural network proposes
+\begin{equation}
+u_\theta(x,t).
+\end{equation}
+
+Instead of minimizing only a data error,
+\begin{equation}
+L_{\mathrm{data}} =
+\sum_i
+\left|u_\theta(x_i,t_i)-u_i\right|^2,
+\end{equation}
+one may introduce a physics loss
+\begin{equation}
+L_{\mathrm{phys}}=
+\int
+\left|
+\mathcal{L}[u_\theta]
+\right|^2,dx,dt.
+\end{equation}
+
+The total loss is then
+\begin{equation}
+L=
+\lambda_{\mathrm{data}}L_{\mathrm{data}}
++
+\lambda_{\mathrm{phys}}L_{\mathrm{phys}}.
+\end{equation}
+
+This idea is commonly associated with physics-informed neural networks
+(PINNs), although the broader concept includes many architectures and methods
+\cite{Karn2021}.
+
+The conceptual importance of this construction is greater than the particular
+neural-network implementation. It represents an attempt to combine two sources
+of knowledge:
+\begin{equation}
+\boxed{
+\text{empirical information}
++
+\text{theoretical information}
+}.
+\end{equation}
+
+Physics is therefore not treated merely as a source of training examples.
+
+\section{Exact Constraints and Symmetry}
+
+A major weakness of unconstrained machine learning is that a network may
+approximate a function extremely well while violating an exact physical
+principle.
+
+For example, a model may violate:
+
+\begin{itemize}
+\item conservation of energy;
+\item momentum conservation;
+\item gauge invariance;
+\item Lorentz invariance;
+\item permutation symmetry;
+\item rotational symmetry;
+\item unitarity;
+\item positivity;
+\item locality;
+\item dimensional consistency.
+\end{itemize}
+
+Whenever possible, these properties should be built into the representation.
+
+Suppose a physical quantity satisfies
+\begin{equation}
+f(Rx)=f(x)
+\end{equation}
+under a symmetry group $G$.
+
+Rather than learning this symmetry from data, one can construct an architecture
+that satisfies it exactly.
+
+More generally, if
+\begin{equation}
+x\mapsto \rho_X(g)x,
+\qquad
+y\mapsto \rho_Y(g)y,
+\end{equation}
+then an equivariant map satisfies
+\begin{equation}
+f(\rho_X(g)x)=
+\rho_Y(g)f(x).
+\end{equation}
+
+Equivariant neural networks provide a natural bridge between group theory and
+machine learning.
+
+This observation is particularly important for physics. Symmetry is not merely
+a statistical regularity. It is often part of the definition of the physical
+theory.
+
+\section{Neural Operators and the Learning of Equations}
+
+A conventional neural network usually learns a finite-dimensional map
+\begin{equation}
+\mathbb{R}^n\rightarrow\mathbb{R}^m.
+\end{equation}
+
+Many physical problems, however, are naturally formulated as mappings between
+functions:
+\begin{equation}
+u(x)\longrightarrow v(x).
+\end{equation}
+
+A differential equation defines precisely such a mapping. For example,
+\begin{equation}
+\mathcal{L}*\mu u=f
+\end{equation}
+defines an operator
+\begin{equation}
+\mathcal{G}*\mu:f\mapsto u.
+\end{equation}
+
+Neural operators attempt to learn such mappings directly:
+\begin{equation}
+\mathcal{G}_\theta\simeq\mathcal{G}.
+\end{equation}
+
+This can be particularly valuable when the same physical problem must be
+solved repeatedly for many parameter values. Once the operator has been
+learned, new solutions can be obtained much more rapidly than by repeatedly
+solving the original equations numerically
+\cite{Azizzadenesheli2024}.
+
+This suggests an important change in computational physics:
+
+\begin{equation}
+\text{solve equation repeatedly}
+\quad\longrightarrow\quad
+\text{learn the solution operator}.
+\end{equation}
+
+The latter does not eliminate the original physics. Rather, it constructs a
+computational surrogate for it.
+
+\section{AI and Numerical Physics}
+
+There is a common misconception that machine learning is intended to replace
+numerical physics.
+
+In reality, the most effective strategy is often hybrid.
+
+Suppose a computationally expensive simulation produces
+\begin{equation}
+y=F(x).
+\end{equation}
+
+A neural network can approximate
+\begin{equation}
+F(x)\simeq F_\theta(x).
+\end{equation}
+
+The expensive solver is used to generate a training set, while the learned
+model is subsequently used for rapid exploration.
+
+This is especially useful when one needs millions of evaluations, for example
+in:
+
+\begin{itemize}
+\item Bayesian parameter estimation;
+\item uncertainty propagation;
+\item optimization;
+\item Monte Carlo sampling;
+\item experimental design;
+\item real-time control.
+\end{itemize}
+
+Thus the appropriate comparison is not
+\begin{equation}
+\text{AI versus numerical physics},
+\end{equation}
+but
+\begin{equation}
+\boxed{
+\text{AI + numerical physics}
+}.
+\end{equation}
+
+\section{AI in Fluid Dynamics and Complex Systems}
+
+Fluid dynamics provides an especially natural domain for AI because realistic
+flows involve nonlinear partial differential equations and enormous ranges of
+spatial and temporal scales.
+
+The Navier--Stokes equations,
+\begin{equation}
+\partial_t\bm{u}
++
+(\bm{u}\cdot\nabla)\bm{u}=
+-\frac{1}{\rho}\nabla p
++
+\nu\nabla^2\bm{u}
++
+\bm{f},
+\end{equation}
+are computationally expensive at high Reynolds number.
+
+Machine learning can be used to approximate unresolved scales, construct
+reduced-order models, estimate flow fields from sparse measurements, and
+control flows \cite{Brunton2020,Vinuesa2023}.
+
+The important methodological possibility is the construction of hybrid models,
+schematically
+\begin{equation}
+\partial_t u=
+F_{\mathrm{known}}[u]
++
+F_{\mathrm{ML}}[u].
+\end{equation}
+
+Here the well-established part of the physics remains explicit, while AI
+represents an unknown or computationally expensive component.
+
+This approach may be more scientifically robust than asking a neural network
+to learn the entire dynamics from data.
+
+\section{AI in Cosmology and Astrophysics}
+
+Cosmology combines enormous datasets with expensive forward models, making it
+particularly suitable for machine learning.
+
+Possible applications include
+
+\begin{itemize}
+\item classification of galaxies;
+\item gravitational-lensing reconstruction;
+\item parameter estimation;
+\item emulation of cosmological simulations;
+\item detection of transient astronomical events;
+\item reconstruction of large-scale structure;
+\item inference of dark-matter distributions.
+\end{itemize}
+
+An important example is the use of learned surrogate models for cosmological
+simulations. A full simulation may require substantial computational resources,
+while a trained emulator can provide approximate predictions at a fraction of
+the cost.
+
+The danger is extrapolation. If the training simulations cover only a limited
+region of parameter space, the learned model may produce plausible but
+incorrect predictions elsewhere.
+
+Consequently, the question
+\begin{equation}
+\text{`How accurate is the neural network?'}
+\end{equation}
+must be replaced by the more physical question
+\begin{equation}
+\text{`In what domain is the learned approximation valid?'}
+\end{equation}
+
+\section{AI in Quantum Physics}
+
+Machine learning has found applications in quantum physics at several levels.
+
+For a quantum state
+\begin{equation}
+|\psi\rangle=
+\sum_x \psi(x)|x\rangle,
+\end{equation}
+a neural-network representation may approximate the amplitudes
+\begin{equation}
+\psi(x)\simeq\psi_\theta(x).
+\end{equation}
+
+Such representations have been used for variational calculations and many-body
+quantum states \cite{Carleo2017,Carleo2019}.
+
+Machine learning can also assist in:
+
+\begin{itemize}
+\item quantum state tomography;
+\item quantum control;
+\item identification of quantum phases;
+\item many-body simulation;
+\item Hamiltonian learning;
+\item lattice field theory;
+\item Monte Carlo sampling.
+\end{itemize}
+
+A particularly interesting possibility is learning a Hamiltonian from
+observations. If measurements $D$ are generated by
+\begin{equation}
+H(\lambda)=\sum_i\lambda_i O_i,
+\end{equation}
+one may attempt to infer the parameters $\lambda_i$.
+
+This is an inverse problem, but it also approaches the boundary between
+parameter estimation and theory identification.
+
+\section{AI and Fundamental Physics}
+
+The most ambitious application of AI is the search for new fundamental physics.
+
+The traditional scientific cycle is approximately
+\begin{equation}
+\text{observation}
+\rightarrow
+\text{concept}
+\rightarrow
+\text{mathematical theory}
+\rightarrow
+\text{prediction}
+\rightarrow
+\text{experiment}.
+\end{equation}
+
+AI potentially modifies this cycle by introducing a computational exploration
+stage:
+\begin{equation}
+\text{observation}
+\rightarrow
+\boxed{\text{AI exploration}}
+\rightarrow
+\text{candidate structure}
+\rightarrow
+\text{human formulation}
+\rightarrow
+\text{prediction}.
+\end{equation}
+
+Symbolic regression is particularly relevant. Given observations
+$(x_i,y_i)$, one searches over mathematical expressions
+\begin{equation}
+y=f(x)
+\end{equation}
+rather than fixing the functional form in advance.
+
+The objective may be
+\begin{equation}
+\min_f
+\left[
+\chi^2(f)+\lambda C(f)
+\right],
+\end{equation}
+where $C(f)$ measures complexity.
+
+This expresses an old scientific principle in algorithmic form:
+
+\begin{quote}
+Prefer a simple law that explains the observations.
+\end{quote}
+
+However, finding a compact formula is not equivalent to discovering a physical
+law. A law must possess explanatory power, survive independent tests, and fit
+within a broader theoretical structure.
+
+\section{AI and the Discovery of Physical Laws}
+
+Suppose a set of observations suggests
+\begin{equation}
+y=f(x_1,x_2,\ldots,x_n).
+\end{equation}
+
+A machine-learning system may discover a highly accurate approximation
+\begin{equation}
+f_{\mathrm{ML}}(x_1,\ldots,x_n).
+\end{equation}
+
+But physics asks a deeper question:
+
+\begin{equation}
+\text{Why does this relation hold?}
+\end{equation}
+
+For example, the discovery of
+\begin{equation}
+F\propto\frac{m_1m_2}{r^2}
+\end{equation}
+is not equivalent to fitting an inverse-square function to observations. The
+physical significance comes from its relation to a wider theory involving
+symmetry, dynamics, conservation laws, and limiting principles.
+
+This distinction can be summarized as
+
+\begin{equation}
+\boxed{
+\text{prediction}\neq\text{explanation}
+}.
+\end{equation}
+
+AI can potentially discover regularities. Whether those regularities constitute
+physical understanding remains a separate question.
+
+\section{The Problem of Interpretability}
+
+Most deep neural networks contain a very large number of parameters. Their
+internal representation is therefore difficult to interpret in conventional
+physical terms.
+
+The problem is not merely philosophical.
+
+A black-box model may produce
+\begin{equation}
+y_{\mathrm{ML}}\approx y_{\mathrm{experiment}}
+\end{equation}
+with extraordinary accuracy while relying on correlations that have no physical
+meaning.
+
+For physics, interpretability can therefore be regarded as a scientific
+requirement rather than merely a desirable software feature.
+
+Several strategies are possible:
+
+\begin{enumerate}
+\item symbolic regression;
+\item sparse model discovery;
+\item dimensional analysis;
+\item symmetry constraints;
+\item interpretable latent variables;
+\item causal modelling;
+\item uncertainty quantification;
+\item comparison with known limiting cases.
+\end{enumerate}
+
+The ideal scientific model should not merely predict the data. It should expose
+the structure responsible for the prediction.
+
+\section{Dimensional Analysis as a Constraint on AI}
+
+Dimensional analysis provides a particularly simple and powerful example of
+physical prior knowledge.
+
+Suppose
+\begin{equation}
+Q=Q(x_1,\ldots,x_n).
+\end{equation}
+
+The dimensions must satisfy
+\begin{equation}
+[Q]=
+\prod_i[x_i]^{a_i}.
+\end{equation}
+
+An unconstrained neural network generally does not know this.
+
+A physically informed model can instead operate on dimensionless variables.
+Using Buckingham's $\Pi$ theorem, one may write
+\begin{equation}
+\Pi_1=f(\Pi_2,\ldots,\Pi_k).
+\end{equation}
+
+This can drastically reduce the effective dimensionality of the learning
+problem.
+
+It also illustrates a broader principle:
+
+\begin{equation}
+\boxed{
+\text{the more physical structure is known, the less AI has to learn}.
+}
+\end{equation}
+
+This is one of the central methodological arguments for physics-informed AI.
+
+\section{Symmetry as a Form of Data Compression}
+
+Symmetry has another interpretation in machine learning.
+
+If a system is invariant under a group $G$, then many apparently different
+configurations represent the same physical situation.
+
+Learning them independently is wasteful.
+
+For example, rotational invariance means that
+\begin{equation}
+f(Rx)=f(x).
+\end{equation}
+
+Instead of training on all rotated configurations, the architecture can identify
+them as equivalent.
+
+Thus symmetry provides a form of data compression.
+
+This is particularly significant in physics because the relevant symmetry groups
+are often known a priori.
+
+For relativistic systems, Lorentz symmetry requires
+\begin{equation}
+f(\Lambda x)=\rho(\Lambda)f(x),
+\end{equation}
+with $\Lambda\in SO(1,3)$ or the appropriate covering group.
+
+Embedding such structures into machine-learning models connects AI directly with
+the mathematical architecture of physical theories.
+
+\section{AI and the Scientific Method}
+
+It is useful to compare AI-assisted physics with the traditional scientific
+method.
+
+A simplified traditional cycle is
+\begin{equation}
+\boxed{
+\text{Question}
+\rightarrow
+\text{Hypothesis}
+\rightarrow
+\text{Prediction}
+\rightarrow
+\text{Experiment}
+\rightarrow
+\text{Revision}.
+}
+\end{equation}
+
+An AI-assisted cycle can contain additional loops:
+\begin{equation}
+\boxed{
+\text{Question}
+\rightarrow
+\text{AI exploration}
+\rightarrow
+\text{candidate hypotheses}
+\rightarrow
+\text{simulation}
+\rightarrow
+\text{experiment}
+\rightarrow
+\text{AI updating}.
+}
+\end{equation}
+
+The crucial point is that AI need not replace the scientific method. It may
+increase the number and sophistication of hypotheses that can be explored.
+
+This resembles the historical role of mathematics and computers. Neither
+mathematics nor computation eliminated physical reasoning; they amplified it.
+
+\section{AI as a Microscope for Theory Space}
+
+A useful conceptual interpretation is that AI may function as a
+\emph{microscope for theory space}.
+
+Consider a space $\mathcal{T}$ of possible models:
+\begin{equation}
+T\in\mathcal{T}.
+\end{equation}
+
+A human physicist can explore only a very small part of this space. AI can
+perform large-scale searches over parameterizations, functional forms,
+architectures, or candidate effective theories.
+
+The process may be represented as
+\begin{equation}
+\mathcal{T}
+\overset{\mathrm{AI}}{\longrightarrow}
+\mathcal{T}*{\mathrm{candidate}}
+\overset{\mathrm{physics}}{\longrightarrow}
+\mathcal{T}*{\mathrm{viable}}.
+\end{equation}
+
+The second arrow is essential.
+
+AI can search the space, but physical reasoning must determine whether the
+candidate structures are meaningful.
+
+\section{AI and Effective Theories}
+
+The framework of effective field theory provides an especially interesting
+setting.
+
+Suppose the low-energy Lagrangian is
+\begin{equation}
+\mathcal{L}_{\mathrm{eff}}=
+\mathcal{L}_0
++
+\sum_i
+\frac{c_i}{\Lambda^{d_i-4}}
+\mathcal{O}_i.
+\end{equation}
+
+AI can be used to identify combinations of operators that best describe data,
+estimate Wilson coefficients, or search for deviations from a reference theory.
+
+The important physical constraints remain:
+
+\begin{itemize}
+\item symmetry;
+\item locality;
+\item dimensional analysis;
+\item unitarity;
+\item gauge invariance;
+\item consistency of the low-energy expansion.
+\end{itemize}
+
+Thus AI could become a search engine through the space of effective theories,
+but it should not be allowed to treat mathematically possible expressions as
+physically equivalent.
+
+\section{Uncertainty Quantification}
+
+One of the most serious weaknesses of ordinary machine learning is that
+prediction accuracy does not automatically provide reliable uncertainty.
+
+Physics requires statements such as
+\begin{equation}
+x=x_0\pm\Delta x,
+\end{equation}
+not merely
+\begin{equation}
+x\simeq x_0.
+\end{equation}
+
+For a learned prediction
+\begin{equation}
+y=f_\theta(x),
+\end{equation}
+one should ideally determine
+\begin{equation}
+p(y|x,D),
+\end{equation}
+where $D$ is the training dataset.
+
+Uncertainty has several sources:
+
+\begin{enumerate}
+\item measurement noise;
+\item finite training data;
+\item model uncertainty;
+\item numerical approximation;
+\item distribution shift;
+\item extrapolation beyond the training domain.
+\end{enumerate}
+
+The last category is particularly dangerous.
+
+A model may be extremely accurate inside
+\begin{equation}
+x\in\mathcal{D}_{\mathrm{train}}
+\end{equation}
+and completely unreliable outside it.
+
+This is especially problematic in physics because the most interesting discoveries
+often occur precisely where existing models have not been tested.
+
+\section{The Problem of Extrapolation}
+
+Interpolation and extrapolation must be sharply distinguished.
+
+If
+\begin{equation}
+x_{\min}<x<x_{\max}
+\end{equation}
+belongs to the training domain, the model may interpolate successfully.
+
+For
+\begin{equation}
+x<x_{\min}
+\quad\text{or}\quad
+x>x_{\max},
+\end{equation}
+it extrapolates.
+
+Physics frequently demands extrapolation:
+
+\begin{itemize}
+\item high-energy limits;
+\item low-temperature limits;
+\item early-universe conditions;
+\item long-time evolution;
+\item extreme densities;
+\item strong gravitational fields.
+\end{itemize}
+
+A purely data-driven model has no general reason to extrapolate according to
+the correct physical law.
+
+Physical priors can therefore be more important for extrapolation than for
+interpolation.
+
+\section{AI and Causality}
+
+Correlation is not causation.
+
+Suppose
+\begin{equation}
+Y=f(X)
+\end{equation}
+is observed experimentally.
+
+A machine-learning model may learn this relation without determining whether
+$X$ causes $Y$, whether $Y$ causes $X$, or whether both are consequences of a
+third variable $Z$.
+
+Physics is fundamentally concerned with causal structure because dynamical
+equations specify how physical states evolve.
+
+A future scientific AI should therefore incorporate causal structure rather than
+merely statistical dependence.
+
+This is especially important in complex systems where correlations may be
+strong but physically irrelevant.
+
+\section{Generative AI and Large Language Models}
+
+Large language models introduce a qualitatively different capability.
+
+A physicist can ask an LLM to:
+
+\begin{itemize}
+\item explain a mathematical derivation;
+\item generate computer code;
+\item manipulate symbolic expressions;
+\item search and organize literature;
+\item compare theoretical approaches;
+\item propose possible calculations;
+\item translate between mathematical representations;
+\item assist in writing scientific documents.
+\end{itemize}
+
+These capabilities can substantially reduce the cost of routine intellectual
+work.
+
+However, LLMs have an important limitation: they generate plausible symbolic
+sequences rather than guaranteeing mathematical truth.
+
+Consequently, an LLM-generated derivation must be treated like a conjecture
+until verified.
+
+This distinction is fundamental:
+\begin{equation}
+\boxed{
+\text{linguistic plausibility}\neq\text{mathematical validity}.
+}
+\end{equation}
+
+For physics, automatic verification through symbolic algebra, numerical tests,
+dimensional analysis, limiting cases, and independent derivations should
+therefore accompany AI-generated mathematics.
+
+\section{AI as a Collaborator in Theoretical Physics}
+
+A productive model of AI-assisted theory research is not
+\begin{equation}
+\text{human}\rightarrow\text{AI}\rightarrow\text{answer},
+\end{equation}
+but
+\begin{equation}
+\text{human}
+\leftrightarrow
+\text{AI}
+\leftrightarrow
+\text{computer algebra}
+\leftrightarrow
+\text{numerical simulation}
+\leftrightarrow
+\text{literature}.
+\end{equation}
+
+The human physicist remains responsible for:
+
+\begin{itemize}
+\item defining the physical problem;
+\item selecting meaningful variables;
+\item identifying relevant principles;
+\item interpreting results;
+\item checking consistency;
+\item deciding what constitutes an explanation.
+\end{itemize}
+
+AI can contribute:
+
+\begin{itemize}
+\item rapid exploration;
+\item pattern recognition;
+\item generation of candidate models;
+\item code generation;
+\item optimization;
+\item large-scale literature synthesis;
+\item automated numerical experimentation.
+\end{itemize}
+
+This division of labor is likely to be more productive than attempting to
+construct a completely autonomous scientist.
+
+\section{Verification: The Essential Scientific Filter}
+
+Any AI-generated physical result should pass several independent tests.
+
+\subsection{Dimensional consistency}
+
+Every equation must possess consistent physical dimensions.
+
+\subsection{Symmetry}
+
+The result must respect the relevant symmetry principles.
+
+\subsection{Limiting cases}
+
+For example,
+\begin{equation}
+\hbar\rightarrow0,
+\qquad
+c\rightarrow\infty,
+\qquad
+G\rightarrow0,
+\end{equation}
+should reproduce appropriate classical, nonrelativistic, or nongravitational
+limits where applicable.
+
+\subsection{Conservation laws}
+
+If the theory predicts a conserved quantity,
+\begin{equation}
+\frac{dQ}{dt}=0,
+\end{equation}
+the learned model must reproduce this property.
+
+\subsection{Independent reproduction}
+
+The result should ideally be confirmed by a method independent of the original
+AI system.
+
+This last criterion is especially important because an AI system may reproduce
+its own systematic errors.
+
+\section{AI Does Not Eliminate the Need for Theory}
+
+There is a tempting but misleading argument:
+
+\begin{quote}
+If a sufficiently powerful neural network can predict every observable, then a
+physical theory is unnecessary.
+\end{quote}
+
+This conclusion does not follow.
+
+A predictive algorithm and a physical theory have different functions.
+
+A theory provides:
+
+\begin{enumerate}
+\item a compact description;
+\item a conceptual framework;
+\item a mechanism;
+\item relations among apparently different phenomena;
+\item extrapolation principles;
+\item consistency conditions;
+\item new predictions.
+\end{enumerate}
+
+An AI model may perform the first task extremely well while providing little
+insight into the others.
+
+The distinction is analogous to the difference between a table of experimental
+results and a theory that explains them.
+
+\section{The Role of Mathematical Physics}
+
+Mathematical physics may become more important, rather than less important, in
+the age of AI.
+
+Machine learning produces candidate structures. Mathematics provides the tools
+for determining whether those structures are:
+
+\begin{itemize}
+\item well-defined;
+\item stable;
+\item differentiable;
+\item invariant;
+\item causal;
+\item consistent;
+\item integrable;
+\item unitary;
+\item renormalizable, where appropriate.
+\end{itemize}
+
+For example, if AI proposes a new dynamical equation
+\begin{equation}
+\partial_t u=F[u],
+\end{equation}
+mathematical analysis can determine existence, uniqueness, stability, and
+well-posedness.
+
+Thus AI may increase the number of conjectures while mathematics remains
+essential for establishing their validity.
+
+\section{AI and the Future of Experimental Design}
+
+AI can be particularly powerful when experiments are expensive.
+
+Suppose an experiment depends on parameters
+\begin{equation}
+\bm{\lambda}=
+(\lambda_1,\ldots,\lambda_n).
+\end{equation}
+
+Rather than selecting $\bm{\lambda}$ according to a fixed grid, AI can optimize
+the experiment according to an information criterion.
+
+For Bayesian inference one may maximize the expected information gain
+\begin{equation}
+\mathcal{I}=
+D_{\mathrm{KL}}
+\left[
+p(\theta|D,\bm{\lambda})
+\Vert
+p(\theta)
+\right].
+\end{equation}
+
+The experimental system can therefore become adaptive:
+\begin{equation}
+\text{measurement}
+\rightarrow
+\text{analysis}
+\rightarrow
+\text{updated model}
+\rightarrow
+\text{next measurement}.
+\end{equation}
+
+This creates a feedback loop between theory, computation, and experiment.
+
+\section{Towards Autonomous Scientific Laboratories}
+
+The logical extension is an autonomous scientific laboratory.
+
+A simplified architecture would be
+
+\begin{equation}
+\boxed{
+\begin{array}{c}
+\text{AI hypothesis generation}\
+\downarrow\
+\text{simulation}\
+\downarrow\
+\text{experimental design}\
+\downarrow\
+\text{automated experiment}\
+\downarrow\
+\text{data analysis}\
+\downarrow\
+\text{hypothesis updating}
+\end{array}}
+\end{equation}
+
+Such systems could explore regions of parameter space much more rapidly than
+human researchers.
+
+Nevertheless, complete autonomy should not be confused with scientific
+understanding. An automated system may optimize a criterion without knowing why
+the criterion is scientifically interesting.
+
+The definition of the scientific objective remains a profoundly human task.
+
+\section{A Taxonomy of AI Roles in Physics}
+
+The discussion can be summarized by the following hierarchy.
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Level & AI role & Scientific function\\
+\midrule
+I & Calculator & Numerical acceleration\\
+II & Classifier & Data interpretation\\
+III & Emulator & Fast simulation\\
+IV & Inference engine & Parameter reconstruction\\
+V & Optimizer & Experimental design\\
+VI & Pattern finder & Anomaly detection\\
+VII & Model finder & Equation discovery\\
+VIII & Hypothesis generator & Theory exploration\\
+IX & Scientific agent & Closed-loop discovery\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The first five levels are already well established. Levels VI--VIII are active
+areas of research. Level IX remains largely prospective.
+
+\section{A Possible Division of Labor Between Physics and AI}
+
+The most promising methodology can be summarized schematically as
+
+\begin{equation}
+\boxed{
+\begin{array}{rcl}
+\text{Physics} &\longrightarrow&
+\text{principles, symmetries, constraints, questions}\\
+&&\downarrow\\
+\text{AI} &\longrightarrow&
+\text{search, approximation, inference, optimization}\\
+&&\downarrow\\
+\text{Mathematics} &\longrightarrow&
+\text{consistency, proof, structure}\\
+&&\downarrow\\
+\text{Experiment} &\longrightarrow&
+\text{empirical validation}.
+\end{array}}
+\end{equation}
+
+The essential idea is that none of these components is sufficient by itself.
+
+Data without theory can produce correlations.
+
+Theory without data can produce elegant but physically false models.
+
+AI without mathematical verification can produce convincing errors.
+
+Mathematics without empirical input cannot determine which possible structures
+describe nature.
+
+The future of physics is therefore likely to be increasingly hybrid.
+
+\section{Limitations and Risks}
+
+Several limitations deserve particular emphasis.
+
+\subsection{Training-data bias}
+
+AI learns from its data. If the training set is incomplete or biased, the
+resulting model inherits those deficiencies.
+
+\subsection{Distribution shift}
+
+A model trained under one experimental condition may fail under another.
+
+\subsection{Hallucination}
+
+Generative AI can produce references, equations, or arguments that appear
+credible but are false.
+
+\subsection{Opacity}
+
+A high-dimensional model may be difficult to interpret physically.
+
+\subsection{Overfitting}
+
+A model can fit statistical fluctuations rather than genuine physical structure.
+
+\subsection{False discovery}
+
+Given sufficiently large datasets and sufficiently flexible models, apparently
+significant correlations can arise by chance.
+
+\subsection{Reproducibility}
+
+Scientific AI requires reproducible datasets, model architectures, training
+procedures, random seeds where relevant, and validation protocols.
+
+These issues mean that AI must be embedded within the existing culture of
+scientific verification rather than treated as an oracle.
+
+\section{The Deeper Philosophical Question}
+
+The use of AI in physics raises a question that is deeper than technology:
+
+\begin{quote}
+What does it mean to understand a physical phenomenon?
+\end{quote}
+
+Suppose an AI system predicts every experimentally accessible quantity with
+extraordinary accuracy.
+
+Does it understand the theory?
+
+There are at least three possible meanings of understanding:
+
+\begin{enumerate}
+\item \textbf{Predictive understanding:} the ability to predict observations.
+
+\item \textbf{Structural understanding:} identification of mathematical
+relations and symmetries.
+
+\item \textbf{Conceptual understanding:} identification of the physical
+principles and mechanisms responsible for the phenomena.
+\end{enumerate}
+
+AI is already very powerful in the first category and increasingly capable in
+the second.
+
+The third remains much less clear.
+
+This distinction may become central to the philosophy of AI-assisted science.
+
+\section{Conclusion}
+
+Artificial intelligence is becoming an integral component of physics. Its role
+already extends from experimental data analysis to numerical simulation,
+inverse problems, experimental design, and theoretical research.
+
+The most important development is not the replacement of physical equations by
+neural networks. It is the emergence of hybrid methods in which data-driven and
+theory-driven approaches are combined.
+
+Physics supplies structure:
+\begin{equation}
+\text{symmetry}+\text{conservation}+\text{dynamics}+\text{causality}.
+\end{equation}
+
+AI supplies computational flexibility:
+\begin{equation}
+\text{search}+\text{approximation}+\text{pattern recognition}
++\text{optimization}.
+\end{equation}
+
+The resulting methodology is potentially more powerful than either component
+alone:
+\begin{equation}
+\boxed{
+\text{AI}+\text{physics}+\text{mathematics}+\text{experiment}.
+}
+\end{equation}
+
+The greatest opportunity may lie not in asking AI to discover physics without
+human intervention, but in using AI to enlarge the domain of problems that
+physicists can investigate.
+
+The historical progression
+\begin{equation}
+\text{experiment}
+\rightarrow
+\text{theory}
+\rightarrow
+\text{computation}
+\rightarrow
+\text{data-intensive science}
+\end{equation}
+may therefore be followed by
+\begin{equation}
+\boxed{
+\text{human--AI scientific collaboration}.
+}
+\end{equation}
+
+Whether this will constitute a genuinely new paradigm of science depends not
+on the size of neural networks but on whether AI systems can participate in the
+central activities of physics: identifying meaningful concepts, discovering
+general principles, producing falsifiable predictions, and revealing structures
+that humans did not previously recognize.
+
+For the foreseeable future, the most scientifically productive vision is not
+``AI instead of physics'', but
+
+\begin{equation}
+\boxed{
+\text{AI as an instrument for doing physics that was previously
+computationally or conceptually inaccessible.}
+}
+\end{equation}
+
+\begin{thebibliography}{99}
+
+\bibitem{Carleo2017}
+G.~Carleo and M.~Troyer,
+``Solving the quantum many-body problem with artificial neural networks,''
+Science \textbf{355}, 602--606 (2017).
+
+\bibitem{Carleo2019}
+G.~Carleo, I.~Cirac, K.~Cranmer, L.~Daudet, M.~Schuld, N.~Tishby,
+L.~Vogt-Maranto and L.~Zdeborov'a,
+``Machine learning and the physical sciences,''
+Rev.\ Mod.\ Phys.\ \textbf{91}, 045002 (2019).
+
+\bibitem{Brunton2020}
+S.~L.~Brunton, B.~R.~Noack and P.~Koumoutsakos,
+``Machine learning for fluid mechanics,''
+Annu.\ Rev.\ Fluid Mech.\ \textbf{52}, 477--508 (2020).
+
+\bibitem{Karn2021}
+G.~E.~Karniadakis, I.~G.~Kevrekidis, L.~Lu, P.~Perdikaris,
+S.~Wang and L.~Yang,
+``Physics-informed machine learning,''
+Nature Rev.\ Phys.\ \textbf{3}, 422--440 (2021).
+
+\bibitem{Karagiorgi2022}
+G.~Karagiorgi, G.~Kasieczka, S.~Kravitz, B.~Nachman and D.~Shih,
+``Machine learning in the search for new fundamental physics,''
+Nature Rev.\ Phys.\ \textbf{4}, 399--412 (2022).
+
+\bibitem{Douglas2022}
+M.~R.~Douglas,
+``Machine learning as a tool in theoretical science,''
+Nature Rev.\ Phys.\ \textbf{4}, 145--146 (2022).
+
+\bibitem{Thiyagalingam2022}
+J.~Thiyagalingam, M.~Shankar, G.~Fox and T.~Hey,
+``Scientific machine learning benchmarks,''
+Nature Rev.\ Phys.\ \textbf{4}, 413--420 (2022).
+
+\bibitem{Cranmer2023}
+K.~Cranmer, G.~Kanwar, S.~Racani\`ere, D.~J.~Rezende and
+P.~E.~Shanahan,
+``Advances in machine-learning-based sampling motivated by lattice quantum
+chromodynamics,''
+Nature Rev.\ Phys.\ \textbf{5}, 526--535 (2023).
+
+\bibitem{Vinuesa2023}
+R.~Vinuesa, S.~L.~Brunton and B.~McKeon,
+``The transformative potential of machine learning for experiments in fluid
+mechanics,''
+Nature Rev.\ Phys.\ \textbf{5}, 536--545 (2023).
+
+\bibitem{Azizzadenesheli2024}
+K.~Azizzadenesheli, Z.~Kovachki, Z.~Li, M.~Liu-Schiaffini,
+J.~Kossaifi and A.~Anandkumar,
+``Neural operators for accelerating scientific simulations and design,''
+Nature Rev.\ Phys.\ \textbf{6}, 320--328 (2024).
+
+\bibitem{He2024}
+Y.-H.~He,
+``AI-driven research in pure mathematics and theoretical physics,''
+Nature Rev.\ Phys.\ \textbf{6}, 546--553 (2024).
+
+\bibitem{Bracco2025}
+A.~Bracco, J.~Brajard, H.~A.~Dijkstra, P.~Hassanzadeh,
+C.~Lessig and C.~Monteleoni,
+``Machine learning for the physics of climate,''
+Nature Rev.\ Phys.\ \textbf{7}, 6--20 (2025).
+
+\end{thebibliography}
+
+\end{document}

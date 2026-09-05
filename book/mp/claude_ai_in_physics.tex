@@ -1,0 +1,172 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{authblk}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=blue!50!black,
+    urlcolor=blue!50!black
+}
+
+\title{\bfseries Artificial Intelligence in Physics: \\ Methods, Applications, and Open Questions}
+\author{Your Name}
+\affil{Your Affiliation}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent Over the past decade, machine learning has moved from a peripheral curiosity to a working tool across nearly every subfield of physics. This paper surveys the main ways artificial intelligence is now used in physical science: as a pattern-recognition engine for high-dimensional experimental and observational data, as a variational or surrogate representation for solving equations that are otherwise intractable, and as an increasingly autonomous partner in discovery and experimental design. We review representative case studies from particle physics, astrophysics, condensed-matter and quantum many-body theory, computational physics, and fusion control, giving in each case a sketch of the underlying method. We then discuss the genuine limitations of these approaches --- interpretability, simulation bias, the difficulty of guaranteeing physical consistency, and the gap between predictive accuracy and explanatory understanding --- before closing with an outlook on where the field is headed.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Physics has always been a data-hungry and model-hungry discipline, and both of these appetites turn out to be well matched to what modern machine learning (ML) does well. On the data side, experiments at facilities such as the Large Hadron Collider (LHC) or the Laser Interferometer Gravitational-Wave Observatory (LIGO) produce datasets whose dimensionality and volume exceed what can be searched by hand-constructed features and simple cuts. On the model side, many of the central equations of physics --- the many-body Schr\"odinger equation, nonlinear partial differential equations (PDEs) describing fluids or fields, the path integral of a strongly coupled gauge theory --- are analytically intractable and only approximately accessible even numerically, because the relevant function spaces grow exponentially with the number of degrees of freedom.
+
+Artificial intelligence, and deep learning in particular, offers a common set of tools for both problems: flexible, differentiable function approximators trained by gradient-based optimization on large amounts of data or simulated instances. This has produced three broad, and increasingly overlapping, uses of AI in physics:
+
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{Pattern extraction from data.} Classifying or regressing on raw or lightly processed experimental signals --- collider events, telescope light curves, detector strain time series --- often outperforming hand-engineered features derived from domain knowledge alone.
+    \item \textbf{Representation and solution of physical models.} Using neural networks as flexible ansatze for wavefunctions, solutions of differential equations, or free-energy functionals, exploiting automatic differentiation and stochastic optimization in place of, or alongside, traditional numerical methods.
+    \item \textbf{Discovery and design.} Using search, reinforcement learning, and symbolic methods to propose new experiments, control complex physical systems in real time, or recover closed-form physical laws directly from data.
+\end{enumerate}
+
+The remainder of this paper is organized around these three uses. Section~\ref{sec:primer} gives a brief, physics-oriented primer on the relevant ML methods. Sections~\ref{sec:data}--\ref{sec:discovery} survey applications, using well-documented case studies rather than an exhaustive catalog. Section~\ref{sec:limits} discusses the limitations and open methodological problems that any serious use of AI in physics has to confront, and Section~\ref{sec:outlook} closes with a brief outlook.
+
+\section{A brief primer on relevant machine-learning methods}
+\label{sec:primer}
+
+\paragraph{Supervised learning and neural networks.} The workhorse tool is the feed-forward or convolutional neural network trained by supervised learning: given labeled pairs $(x_i, y_i)$, a network $f_\theta$ is optimized to minimize a loss such as $\mathcal{L}(\theta) = \frac{1}{N}\sum_i \ell(f_\theta(x_i), y_i)$ by stochastic gradient descent, using backpropagation to compute $\nabla_\theta \mathcal{L}$. Convolutional architectures exploit translation invariance and are natural for image-like or time-series data (detector images, light curves, strain data); transformer and recurrent architectures handle sequential or set-structured data and long-range dependencies.
+
+\paragraph{Unsupervised and generative models.} Autoencoders, generative adversarial networks, normalizing flows, and diffusion models learn a probability density $p_\theta(x)$ over a data distribution without labels. In physics these are used for anomaly detection (flagging events inconsistent with the learned background distribution), for accelerating Monte Carlo sampling of lattice field configurations, and for generating realistic synthetic data.
+
+\paragraph{Reinforcement learning.} A policy $\pi_\theta(a\mid s)$ is trained to maximize expected cumulative reward through interaction with an environment (real or simulated), rather than by matching a fixed label. This framework is a natural fit for feedback control of physical apparatus and for sequential decision problems such as experimental design.
+
+\paragraph{Symbolic regression.} Unlike the methods above, symbolic regression searches directly over the space of mathematical expressions for a closed-form function that fits the data, rather than over the weights of a fixed differentiable architecture. It sits closer to the traditional goal of theoretical physics --- an interpretable equation --- than to black-box function approximation.
+
+With this vocabulary in hand, we turn to applications.
+
+\section{AI for experimental and observational data analysis}
+\label{sec:data}
+
+\subsection{Particle physics}
+
+Searches for rare or unknown particles are fundamentally classification problems: distinguish a small signal from an overwhelming background, using kinematic and detector-level features of each collision event. For decades this relied on ``shallow'' classifiers (boosted decision trees, low-dimensional likelihood cuts) applied to a handful of hand-engineered high-level variables motivated by the underlying physics. Baldi, Sadowski, and Whiteson showed that deep neural networks trained directly on low-level kinematic features, without manual feature engineering, could match or exceed the performance of the best shallow methods on benchmark problems involving Higgs-boson and supersymmetric-particle signatures, improving the relevant classification metric by as much as eight percent \cite{baldi2014}. This result, together with the broader push toward deep learning at the LHC for triggering, jet substructure tagging, and anomaly detection, illustrates a recurring pattern: deep networks are effective not because they encode more physics than hand-built variables, but because they can extract higher-order correlations among low-level features that are impractical to construct by hand.
+
+\subsection{Astrophysics and cosmology}
+
+\paragraph{Exoplanet detection.} Identifying the periodic dimming of a star caused by a transiting planet, against a background of stellar variability and instrumental noise, is again a signal-classification problem on time-series data. Shallue and Vanderburg trained a convolutional neural network (\emph{AstroNet}) on light curves from NASA's Kepler mission to distinguish genuine transiting-planet signals from astrophysical and instrumental false positives; applying the trained classifier to previously known multi-planet systems led to the identification of a new planet, Kepler-90i, bringing that system's known planet count to eight --- tied at the time with the Sun's own planetary count \cite{shallue2018}.
+
+\paragraph{Gravitational-wave astronomy.} Matched filtering against a bank of template waveforms is the traditional method for detecting compact-binary mergers in interferometer data, but it becomes computationally expensive as the parameter space of sources grows. George and Huerta introduced ``Deep Filtering,'' a convolutional-network pipeline trained on numerical-relativity waveforms injected into real Advanced LIGO noise, and showed it could perform real-time detection and parameter estimation of binary black-hole mergers with sensitivity comparable to matched filtering but at a small fraction of the computational cost \cite{george2018}. This line of work has since become one input among several in low-latency gravitational-wave alert pipelines.
+
+\section{AI for computational physics: representing and solving physical models}
+\label{sec:models}
+
+\subsection{Neural-network quantum states}
+
+The central obstacle in quantum many-body physics is that the Hilbert space dimension grows exponentially with system size, so an exact representation of a generic wavefunction is out of reach beyond a few tens of particles. Carleo and Troyer proposed representing the wavefunction amplitude of a spin configuration $\mathbf{s} = (s_1,\dots,s_N)$ variationally as a restricted Boltzmann machine,
+\begin{equation}
+\Psi_M(\mathbf{s}; \mathcal{W}) \;=\; \sum_{\{h_i\}} \exp\!\Big(\sum_j a_j s_j + \sum_i b_i h_i + \sum_{i,j} W_{ij}\, h_i s_j\Big)
+\;=\; e^{\sum_j a_j s_j}\prod_{i=1}^{M} 2\cosh\!\Big(b_i + \sum_j W_{ij}s_j\Big),
+\end{equation}
+where the hidden units $h_i$ are summed out analytically and $\mathcal{W} = (a,b,W)$ are variational parameters optimized, via stochastic reconfiguration or a related variational Monte Carlo scheme, to minimize the energy expectation value $\langle \Psi_M | \hat H | \Psi_M\rangle / \langle \Psi_M|\Psi_M\rangle$. On prototypical two-dimensional spin models this neural-network ansatz matched or exceeded the accuracy of established variational and tensor-network methods \cite{carleo2017}, and the approach has since been extended to fermionic and continuous-space systems, becoming a standard tool --- \emph{neural quantum states} --- alongside more traditional many-body methods.
+
+\subsection{Physics-informed neural networks}
+
+A complementary strategy targets differential equations directly. A physics-informed neural network (PINN) represents the solution $u(x,t)$ of a PDE by a neural network $u_\theta(x,t)$ and is trained to satisfy the governing equation, together with any boundary, initial, or observational data, simultaneously. For a generic PDE of the form $u_t + \mathcal{N}[u] = 0$ --- for example Burgers' equation $u_t + u u_x - \nu u_{xx} = 0$ --- one defines the residual network $f_\theta(x,t) = u_{\theta,t} + \mathcal{N}[u_\theta]$, whose derivatives with respect to $x$ and $t$ are obtained by automatic differentiation rather than finite differences, and minimizes the composite loss
+\begin{equation}
+\mathcal{L}(\theta) = \underbrace{\frac{1}{N_u}\sum_{i=1}^{N_u} \big|u_\theta(x_i,t_i) - u_i\big|^2}_{\text{data / boundary term}} \;+\; \underbrace{\frac{1}{N_f}\sum_{j=1}^{N_f} \big| f_\theta(x_j,t_j)\big|^2}_{\text{physics residual term}}.
+\end{equation}
+This lets the network interpolate between sparse or noisy data and known governing equations, and, critically, allows the same framework to be used for \emph{inverse} problems --- inferring unknown coefficients (viscosity, diffusivity, source terms) of the governing PDE from data --- by treating those coefficients as additional trainable parameters \cite{raissi2019}. Because the network representation is mesh-free and differentiable everywhere, PINNs have found particular use in problems with irregular geometries, sparse measurements, or coupled multi-physics systems that are awkward for grid-based solvers.
+
+\section{AI as a discovery and design tool}
+\label{sec:discovery}
+
+\subsection{Symbolic regression and law discovery}
+
+Where the methods above use neural networks as opaque function approximators, symbolic regression aims to recover an explicit, human-readable formula from data --- closer to what a physicist means by ``discovering a law.'' Udrescu and Tegmark's \emph{AI Feynman} algorithm combines a neural-network fit of the data with a suite of physics-motivated heuristics --- testing the fitted function for symmetries, separability, and compositional structure, and recursively decomposing the problem when such structure is found --- to search efficiently over the space of candidate closed-form expressions. Applied to a benchmark of 100 equations drawn from the \emph{Feynman Lectures on Physics}, the method recovered all 100, compared with 71 for the best previously available symbolic-regression software, and substantially improved performance on a harder physics-based benchmark set as well \cite{udrescu2020}. The result is a nice illustration of how injecting physics-specific priors (the kinds of structure physical laws tend to have) into an otherwise generic search can outperform either pure brute-force search or pure neural-network fitting alone.
+
+\subsection{Automated design of experiments}
+
+AI has also been used to search the space of possible experiments themselves. Krenn, Malik, Fickler, Lapkiewicz, and Zeilinger built an algorithm, \emph{MELVIN}, that performs an automated search over configurations of optical elements (beam splitters, holograms, nonlinear crystals) to find setups producing desired high-dimensional or multi-partite entangled quantum states. The algorithm rediscovered known experimental techniques and also proposed new, non-intuitive configurations that human researchers had not considered, later understood more systematically through a graph-theoretic reformulation of the search space \cite{krenn2016}. This is an early example of a broader trend --- using automated search, and later reinforcement learning and generative models, as a genuine collaborator in experimental design rather than only as a data-analysis tool after the fact.
+
+\section{AI for real-time control of physical systems}
+\label{sec:control}
+
+Feedback control of complex physical apparatus is a natural setting for reinforcement learning, since the problem is inherently sequential and the ``correct'' control action at a given instant is defined implicitly by its long-term consequences rather than by a labeled example. A striking demonstration came from magnetic confinement fusion: Degrave et al.\ trained a deep reinforcement-learning controller in a simulated environment to command the poloidal-field coils of a tokamak, and then deployed the resulting policy on the Tokamak \`a Configuration Variable (TCV) at EPFL, successfully shaping and sustaining a range of plasma configurations --- including elongated, negative-triangularity, and ``snowflake'' divertor shapes --- using only magnetic measurements as feedback, without an explicit real-time equilibrium reconstruction \cite{degrave2022}. Beyond the specific engineering result, this is a useful case study in sim-to-real transfer: the controller never sees the real tokamak during training, and its success depends on the fidelity of the simulated environment together with an architecture and training procedure robust enough to survive the inevitable mismatch between simulation and reality.
+
+\section{A cross-disciplinary case study: AlphaFold}
+\label{sec:alphafold}
+
+Although protein structure prediction sits in biology and chemistry rather than physics proper, the AlphaFold system is worth including here because it is arguably the clearest existence proof, to date, of what deep learning can do when a hard inverse problem --- inferring three-dimensional structure from one-dimensional sequence, constrained by known physical and geometric relationships between residues --- is combined with a large, carefully engineered attention-based architecture and a very large training corpus of solved structures. Jumper et al.\ demonstrated accuracy competitive with experimental structure-determination methods on the majority of targets in the 14th Critical Assessment of protein Structure Prediction (CASP14), a level of accuracy that had eluded the field for decades of more traditional physics-based modeling \cite{jumper2021}. Whether comparably large gains are available for the analogous inverse problems within physics proper --- inferring interatomic potentials, phase diagrams, or effective field theories from data --- is an open and actively pursued question, and AlphaFold functions as something like a benchmark for what a sufficiently well-posed, well-resourced learning problem in the physical sciences can achieve.
+
+\section{Limitations and open methodological problems}
+\label{sec:limits}
+
+None of the above should be read as suggesting that AI methods are a drop-in replacement for physical reasoning. Several limitations recur across the case studies above and are worth stating plainly.
+
+\paragraph{Interpretability and the gap between fitting and understanding.} A trained neural network that classifies collision events, represents a many-body wavefunction, or solves a PDE is, in general, a black box: it reproduces the target function to high accuracy without exposing the structure --- symmetries, conserved quantities, effective degrees of freedom --- that a physicist would consider an \emph{explanation}. Symbolic regression is a partial answer to this problem precisely because it targets interpretable output, but it remains far more limited in scope than black-box regression. This gap between predictive accuracy and physical understanding is not merely a practical inconvenience; it bears on what, exactly, an AI-assisted result is entitled to claim about the physics of the system it was trained on, and it is an active topic of methodological discussion in the field.
+
+\paragraph{Simulation bias and data quality.} Many of the pipelines above are trained, in whole or in part, on simulated data --- Monte Carlo event generators in particle physics, numerical-relativity waveforms in gravitational-wave astronomy, simulated tokamak environments in plasma control. A network trained this way can only be as faithful to nature as the simulator is; systematic mismatches between simulation and reality (mis-modeled backgrounds, unmodeled detector effects, sim-to-real gaps in control problems) can be absorbed silently into the learned function rather than flagged as an error.
+
+\paragraph{Physical consistency is not automatically guaranteed.} Symmetries, conservation laws, and other exact constraints of a physical theory are, in most of the architectures above, imposed only approximately, as soft penalty terms in a loss function or as architectural biases (equivariant network layers built to respect a known symmetry group). Ensuring exact rather than approximate consistency, and understanding when approximate consistency is good enough, is a live design problem rather than a solved one.
+
+\paragraph{Generalization and extrapolation.} Neural networks are generally reliable within the regime spanned by their training data and unreliable outside it, with no guaranteed way to know in advance where that boundary lies. This is a particular concern for discovery-oriented applications, where the entire point is often to find something outside previously seen regimes.
+
+\section{Outlook}
+\label{sec:outlook}
+
+Several directions seem likely to shape how AI is used in physics over the coming years. First, architectures that build in known symmetries and conservation laws as exact, rather than merely learned, properties (equivariant and physics-informed architectures more broadly) are likely to keep displacing generic black-box networks wherever the relevant symmetry structure is known in advance. Second, foundation models trained across large, heterogeneous collections of simulated and experimental physics data --- analogous to large language models trained on text --- are an active area of exploration, with the open question being whether such pretraining transfers usefully across the genuinely disparate subfields of physics, given that many physical problems are more heterogeneous and effective-theory-dependent than natural language. Third, the discovery- and design-oriented uses of AI surveyed in Section~\ref{sec:discovery} --- symbolic regression, automated experimental design, and their descendants --- point toward a longer-term role for AI not just as an analysis tool applied after an experiment or calculation, but as an active participant earlier in the scientific process, proposing hypotheses, experiments, or approximations for a human physicist to evaluate. How much of that process can be delegated, and how the interpretability gap discussed in Section~\ref{sec:limits} is managed as that delegation increases, remains an open and genuinely unsettled question.
+
+\section{Conclusion}
+
+Artificial intelligence has become a working part of the physicist's toolkit rather than a passing trend, with concrete, well-documented successes in signal classification, variational representation of intractable models, control of complex apparatus, and, increasingly, in automating parts of the discovery process itself. Its value in each case comes from a fairly specific match between what deep learning does well --- flexible, differentiable approximation of high-dimensional functions, optimized against large amounts of data or simulated experience --- and a corresponding bottleneck in the traditional physics workflow, whether that bottleneck is manual feature engineering, the exponential cost of exact many-body methods, or the latency of classical control algorithms. The limitations reviewed in Section~\ref{sec:limits} are just as real as the successes, and much of the current methodological work in the field is precisely about closing the gap between what these methods can fit and what physicists are willing to call understanding.
+
+\bibliographystyle{plain}
+\begin{thebibliography}{99}
+
+\bibitem{baldi2014}
+P.~Baldi, P.~Sadowski, and D.~Whiteson, ``Searching for exotic particles in high-energy physics with deep learning,'' \emph{Nature Communications} \textbf{5}, 4308 (2014).
+
+\bibitem{shallue2018}
+C.~J.~Shallue and A.~Vanderburg, ``Identifying exoplanets with deep learning: a five-planet resonant chain around Kepler-80 and an eighth planet around Kepler-90,'' \emph{The Astronomical Journal} \textbf{155}, 94 (2018).
+
+\bibitem{george2018}
+D.~George and E.~A.~Huerta, ``Deep learning for real-time gravitational wave detection and parameter estimation: results with Advanced LIGO data,'' \emph{Physics Letters B} \textbf{778}, 64--70 (2018).
+
+\bibitem{carleo2017}
+G.~Carleo and M.~Troyer, ``Solving the quantum many-body problem with artificial neural networks,'' \emph{Science} \textbf{355}, 602--606 (2017).
+
+\bibitem{raissi2019}
+M.~Raissi, P.~Perdikaris, and G.~E.~Karniadakis, ``Physics-informed neural networks: a deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations,'' \emph{Journal of Computational Physics} \textbf{378}, 686--707 (2019).
+
+\bibitem{udrescu2020}
+S.-M.~Udrescu and M.~Tegmark, ``AI Feynman: a physics-inspired method for symbolic regression,'' \emph{Science Advances} \textbf{6}, eaay2631 (2020).
+
+\bibitem{krenn2016}
+M.~Krenn, M.~Malik, R.~Fickler, R.~Lapkiewicz, and A.~Zeilinger, ``Automated search for new quantum experiments,'' \emph{Physical Review Letters} \textbf{116}, 090405 (2016).
+
+\bibitem{degrave2022}
+J.~Degrave, F.~Felici, J.~Buchli, M.~Neunert, B.~Tracey, F.~Carpanese, \emph{et al.}, ``Magnetic control of tokamak plasmas through deep reinforcement learning,'' \emph{Nature} \textbf{602}, 414--419 (2022).
+
+\bibitem{jumper2021}
+J.~Jumper, R.~Evans, A.~Pritzel, T.~Green, M.~Figurnov, O.~Ronneberger, \emph{et al.}, ``Highly accurate protein structure prediction with AlphaFold,'' \emph{Nature} \textbf{596}, 583--589 (2021).
+
+\bibitem{carleo2019review}
+G.~Carleo, I.~Cirac, K.~Cranmer, L.~Daudet, M.~Schuld, N.~Tishby, L.~Vogt-Maranto, and L.~Zdeborov\'a, ``Machine learning and the physical sciences,'' \emph{Reviews of Modern Physics} \textbf{91}, 045002 (2019).
+
+\end{thebibliography}
+
+\end{document}
