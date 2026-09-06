@@ -150,8 +150,12 @@ measurable feature of the real world. A piece of mathematics belongs in
 theoretical physics for exactly as long as such a dictionary exists and keeps
 being used, not merely gestured at.
 
-Newton's second law, $m\ddot{x} = F(x,t)$, the heat equation, $\partial_t u =
-\kappa\,\nabla^2 u$, and the wave equation, $\partial_t^2 u = c^2\,\nabla^2 u$,
+Newton's second law: 
+\[m\ddot{x} = F(x,t),\] 
+the heat equation: 
+\[\partial_t u =\kappa\,\nabla^2 u,\] 
+and the wave equation:
+\[\partial_t^2 u = c^2\,\nabla^2 u,\]
 are the paradigm of useful mathematics because they were not imported into
 physics; they were extracted from it. Every symbol carries an operational
 meaning fixed independently of the equation itself --- mass and force are read
@@ -518,7 +522,7 @@ practiced, is Bayesian inference over a self-imposed model space --- even when,
 and especially when, the explicit statistical vocabulary used to report the
 result is frequentist.
 
-\subsection{Model space as an implicit prior}
+\paragraph{Model space as an implicit prior}
 
 \begin{definition}
 A \emph{model space} $\mathcal{M}$ is the set of hypotheses a physicist is
@@ -555,7 +559,7 @@ which is suppressed for models whose parameter space wastes prior mass on
     regions the data rule out.
 \end{remark}
 
-\subsection{Sequential updating across experiments}
+\paragraph{Sequential updating across experiments}
 
 The history of confidence in General Relativity is not well described as a
 sequence of independent frequentist tests, each beginning from total ignorance
@@ -571,7 +575,7 @@ already established. This is posterior-to-prior updating,
 carried out informally, paper by paper, over decades, whether or not any
 individual paper ever computes a posterior.
 
-\subsection{Confidence intervals: frequentist construction, Bayesian use}
+\paragraph{Confidence intervals: frequentist construction, Bayesian use}
 
 A frequentist $100(1-\alpha)\%$ confidence interval $I(D)$ is defined by the
 coverage property
@@ -596,7 +600,7 @@ This is almost never how such an interval is read once quoted. ``The top-quark
     is precisely why the conflation goes unnoticed.
 \end{remark}
 
-\subsection{Systematic uncertainty as a nuisance-parameter prior}
+\paragraph{Systematic uncertainty as a nuisance-parameter prior}
 
 A detector's calibration constant, an integrated luminosity, a background
 normalization --- these are not resampled across hypothetical repetitions of
@@ -607,14 +611,14 @@ marginalizing,
 P(\theta \mid D) \;=\; \int P(\theta \mid D, \lambda)\,\pi(\lambda)\, d\lambda,
 \end{equation}
 over a nuisance parameter $\lambda$ --- calibration, background rate,
-theoretical cross-subsection uncertainty --- is exactly Bayesian
+theoretical cross-paragraph uncertainty --- is exactly Bayesian
 nuisance-parameter marginalization. There is no frequentist repeated-sampling
 story under which ``the calibration constant of this detector, on this day, has
 a 90\% confidence interval'' is a meaningful statement: there is only one
 calibration constant, and one day. Experimental physicists carry out this
 marginalization routinely, correctly, and almost never under that name.
 
-\subsection{Case study: the $5\sigma$ threshold and the Higgs boson}
+\paragraph{Case study: the $5\sigma$ threshold and the Higgs boson}
 
 The 2012 discovery announcement was couched entirely in frequentist terms: a
 local significance in excess of $5\sigma$, i.e.\ a $p$-value under the
@@ -640,7 +644,7 @@ What made the announcement compelling was never the $p$-value in isolation. It
     even while the reported statistic is not.
 \end{remark}
 
-\subsection{Real-world content versus ideal-world ensembles}
+\paragraph{Real-world content versus ideal-world ensembles}
 
 This section's thesis connects directly to the real-world/ideal-world
 distinction developed earlier in this book. The frequentist confidence interval
@@ -665,7 +669,6 @@ A physicist who reports a frequentist interval but reasons, updates confidence,
     chapter on Euclidean lattice calculation.
 \end{corollary}
 
-\subsection{Closing}
 
 None of this is an argument that frequentist tools are dispensable. Profile
 likelihoods, $p$-values, and coverage guarantees remain the disciplined

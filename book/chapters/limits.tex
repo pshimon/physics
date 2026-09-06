@@ -3,72 +3,34 @@
 
 Physics advances largely by replacing complicated systems with
 idealized limits: the point particle, the rigid body, the
-continuum, the thermodynamic limit, the classical ($\hbar\to0$)
-limit. These idealizations are so routine that it is easy to
+continuum, the thermodynamic limit, the classical ($\hbar\to0$) 
+and non-relativistic ($ c \to \infty $)
+limits. These idealizations are so routine that it is easy to
 forget they are genuine limiting procedures, valid only under
 conditions that are rarely stated. When a system depends on a
 single small (or large) parameter, sending that parameter to its
 limiting value is usually harmless. Most interesting problems,
 however, carry \emph{two or more} such parameters, and it is a
 basic fact of analysis that iterated limits need not commute:
-$\lim_{\varepsilon\to0}\lim_{\delta\to0} f$ can differ from
-$\lim_{\delta\to0}\lim_{\varepsilon\to0} f$, or the joint limit
-may fail to exist at all. We study this phenomenon through three
-worked examples: a beam resting on three rigid pillars, whose
-reaction forces depend on whether the beam or the pillars are
-idealized as rigid first; Frenkel's classical point electron,
-whose self-energy, electromagnetic mass, and radiation-reaction
-dynamics depend on the order in which the electron's radius is
-sent to zero and its bare mass is renormalized; and the
-thermodynamic limit in statistical mechanics, where spontaneous
-magnetization exists only if the system-size limit is taken
-\emph{before} the symmetry-breaking field is switched off, never
-the other way around. We contrast these with limits that are
-safe -- the same point-particle and rigid-body idealizations,
-used elsewhere, cause no trouble at all -- and extract a general
-diagnostic, rooted in the classical theory of singular
-perturbations, for telling in advance which limits are
-dangerous.
+\[\lim_{\varepsilon\to0}\lim_{\delta\to0} f\]
+can differ from
+\[\lim_{\delta\to0}\lim_{\varepsilon\to0} f,\]
+or the joint limit
+may fail to exist at all. 
 
-Physics is, in large part, a science of controlled idealization.
-We compute planetary orbits by treating planets as point masses;
-we compute the deflection of a loaded shelf by treating steel as
-a rigid body; we compute the pressure of a gas by treating
-$N\sim10^{23}$ molecules as if $N=\infty$; we compute chemical
-bonding by treating nuclei as fixed classical points while
-treating electrons quantum mechanically; we recover ray optics
-from wave optics by sending the wavelength to zero. Each of
-these is a genuine mathematical limit -- of a size, a
-compliance, an inverse particle number, a wavelength -- applied
-to a more complete underlying theory. The success of these
-idealizations is one of the great practical facts of physics:
-point-particle celestial mechanics is accurate to many decimal
-places; rigid-body statics designs bridges that stand for a
-century; the thermodynamic limit predicts the boiling point of
-water.
+In modern physics, Berry is widely credited with cementing "singular limits" as
+a major conceptual idea \footnote{I am aware of Arnold's Principle:
+"Discoveries are rarely attributed to the correct person (including this
+principle itself)"}. Berry extensively popularized the term to explain how
+macro-scale "borderland physics" emerges from micro-scale laws (e.g., how wave
+optics transitions to ray optics, or how quantum mechanics transitions to
+classical chaos). But that word, by itself, is a label, not an explanation. Let
+us consider some examples.
 
-It is worth asking \emph{why} these limits are safe, because the
-answer clarifies exactly when they stop being safe. A limit in a
-single parameter, $\varepsilon\to0$, is unproblematic whenever
-the quantity of interest is a continuous (indeed usually
-analytic) function of $\varepsilon$ near $\varepsilon=0$: the
-answer at small but finite $\varepsilon$ differs from the
-idealized answer only by a small, controllable correction, and
-nothing is lost by setting $\varepsilon=0$ outright. Trouble
-begins when a problem depends on \emph{two or more} such
-parameters that are idealized together. Elementary analysis
-already warns us that double limits need not commute, and, more
-importantly for physics, that the two possible iterated limits
-can correspond to two entirely different physical scenarios --
-because the order in which we idealize encodes an assumption
-about which physical mechanism is responsible for resolving
-whatever the un-idealized, finite-parameter system needed to
-resolve. Get the order wrong, and the model quietly answers a
-different question than the one being asked.
+\section{The mathematics of  limits}
+\label{lm:ma}
 
-\section{The mathematics of non-commuting limits}
-\label{lm:ncl}
-
+\subsection{Calculus}
 The phenomenon  already appears in
 single-variable calculus applied to two variables. Consider
 \begin{equation}
@@ -76,21 +38,22 @@ f(x,y) = \frac{x^2}{x^2+y^2}, \qquad (x,y)\neq(0,0).
 \end{equation}
 For any fixed $y\neq0$,
 \begin{equation}
-\lim_{x\to0} f(x,y) = 0 \quad\Longrightarrow\quad
-    \lim_{y\to0}\Big(\lim_{x\to0}f(x,y)\Big) = 0,
+\lim_{x\to0}f(x,y)=0\longrightarrow\lim_{y\to0}\Big(\lim_{x\to0}f(x,y)\Big)=0,
 \end{equation}
 while for any fixed $x\neq0$,
 \begin{equation}
-\lim_{y\to0} f(x,y) = 1 \quad\Longrightarrow\quad
-    \lim_{x\to0}\Big(\lim_{y\to0}f(x,y)\Big) = 1.
+\lim_{y\to0}f(x,y)=1\longrightarrow\lim_{x\to0}\Big(\lim_{y\to0}f(x,y)\Big)=1.
 \end{equation}
 The two iterated limits disagree, and in fact the joint limit
-$\lim_{(x,y)\to(0,0)}f(x,y)$ does not exist at all: approaching
-the origin along the ray $y=\lambda x$ gives $f =
-1/(1+\lambda^2)$, a different value for every slope $\lambda$.
+\[\lim_{(x,y)\to(0,0)}f(x,y)\]
+does not exist at all: approaching
+the origin along the ray $y=\lambda x$ gives 
+\[f =1/(1+\lambda^2),\]
+a different value for every slope $\lambda$.
 There is no way to ``just set $x=y=0$''; the answer one gets
 depends entirely on the \emph{path} by which the two small
-parameters are sent to zero together.
+parameters are sent to zero together, in other words the 
+function is not analytical near $x=y=0$ point.
 
 This is not a pathology invented for textbooks. It is the
 generic behavior of a two-parameter limit unless one can show,
@@ -103,6 +66,8 @@ carries two small (or large) quantities -- a size and a
 coupling, a compliance and a stiffness, an inverse system size
 and a symmetry-breaking field -- that are both being sent to an
 extreme value in the course of ``simplifying'' the problem.
+
+\subsection{Differential equations}
 
 The same structure reappears, in disguise, in the classical
 theory of \emph{singular perturbations}. Consider a
@@ -124,18 +89,14 @@ it, it is not. The parameter $\varepsilon$ multiplies the
 \emph{highest derivative} in the equation, and it is precisely
 this feature -- a small parameter multiplying the term that
 carries the extra structure needed to fix an otherwise
-under-determined problem -- that signals a dangerous limit. All
-three case studies below exhibit this same signature, dressed in
-different physical clothing.
+under-determined problem -- that signals a dangerous limit. 
 
-\section{The staircase paradox}
-\label{lm:stp}
+\subsection{Geometry}
 
 Take a right triangle with legs (catheti) of length $a$ and $b$, and hypotenuse
-$c$. Place the right angle at the origin, so the legs run along the axes:
-$$(0,0),\qquad (a,0),\qquad (0,b),$$
-with the hypotenuse joining $(a,0)$ and $(0,b)$. By Pythagoras,
-$c=\sqrt{a^2+b^2}$. For concreteness take $a=b=6$, so $c = 6\sqrt2 \approx 8.485$.
+$c$ (see  Figure~\ref{stairs}). 
+By Pythagoras,
+$c=\sqrt{a^2+b^2}$. 
 
 Instead of the straight hypotenuse, approximate it by a staircase: replace the
 diagonal with a path that alternates horizontal and vertical steps, starting
@@ -210,53 +171,14 @@ and the maximum distance between the staircase and the line is at most
 $\max(a,b)/k \to 0$. Since the staircases ``become'' the hypotenuse in the
 limit, and each one has length $a+b$, it seems to follow that
 $$c = a+b.$$
-For $a=b=6$ this claims $c=12$, in place of the true value $6\sqrt2\approx
-8.485$.
-
 
 The flaw is the assumption that if a sequence of curves converges to a limit
 curve (as point sets, or uniformly), then their lengths converge to the
 length of the limit. That assumption is false, and this staircase is the
 standard counterexample.
 
-\paragraph{An L1/L2 mismatch.} Every staircase, at any resolution, is a
-\emph{taxicab} (L1) path from $(a,0)$ to $(0,b)$: it only ever moves parallel
-to the axes. The L1 distance between those two points is exactly $a+b$, and
-that number has nothing to do with $k$ -- refining the staircase just
-subdivides the same L1 path into smaller axis-aligned pieces, it never turns
-it into a diagonal one. The hypotenuse, by contrast, is the L2 (Euclidean)
-distance $\sqrt{a^2+b^2}$. No amount of subdividing a taxicab path turns it
-into a straight line; you would need to actually tilt the segments, not just
-shrink them.
-
-\paragraph{Length is only lower semicontinuous.} What \emph{is} true in
-general is
-$$\liminf_{k\to\infty} L_k \;\ge\; L(\text{limit curve}),$$
-i.e.\ length can jump \emph{up} in the limit but never down -- consistent with
-$a+b \ge c$ here (the triangle inequality, with equality only in the
-degenerate case $a=0$ or $b=0$). Uniform convergence of curves guarantees
-this inequality, not equality. Equality needs more: the curves must converge
-together with their \emph{tangent directions} (e.g.\ $C^1$ convergence), so
-that each small piece of the approximating curve is not just close to the
-limit in position but is pointing the right way. The staircase fails this
-badly -- every one of its segments points either due east or due north, never
-along the $45^\circ$ direction of the hypotenuse, no matter how small the
-steps get.
-
-The correct statement is Pythagoras' theorem, $c=\sqrt{a^2+b^2}$, not
-$c=a+b$. The staircase is a legitimate example of curves that coincide in the
-limit as point sets -- the Hausdorff distance between the $k$-step staircase
-and the hypotenuse goes to $0$ -- while their lengths stay apart forever,
-off by a constant factor of $\dfrac{a+b}{\sqrt{a^2+b^2}}$ (here
-$\dfrac{12}{6\sqrt2}=\sqrt2$). It is the same phenomenon as the zig-zag
-triangle construction: pointwise or uniform convergence of a sequence of
-curves does not, on its own, imply convergence of their lengths.
-
-\section{The length of the curve}
-\label{lm:cl}
-
-One can think that paradox described in section~\ref{lm:stp} can
-not occur for smooth curves, however two smooth curve may coincide as sets of 
+One can think that paradox described above can
+not occur for smooth curves, however even two smooth curve may coincide as sets of 
 points, but have different lengths. Let $ y_n= \sin(n x)/n $ on the  
 interval $ 0\le x \le 2 \pi $. Calculation of length of sinusoidal curve 
 is a simple exercise in elliptic integrals:
@@ -274,8 +196,7 @@ and ratio of its length to that of segment is $ \approx 1.22 $ independent of $
 n $. On the other hand maximal distance between the curve and straight segment
 $ d_n=1/n $ vanishes for $ n\rightarrow \infty $.
 
-\section{Wigner--In\"on\"u Contractions}
-\label{lm:wig}
+\subsection{Algebra}
 
 The Wigner--In\"on\"u contraction is a systematic procedure that produces one Lie
 algebra as a singular limit of another.  Originally introduced by Wigner and
@@ -324,67 +245,9 @@ $\mathfrak{p}$:
 with $X_h \in \mathfrak{h}$ and $X_p \in \mathfrak{p}$.
 Taking $\varepsilon \to 0$ yields the contracted algebra.
 
-\paragraph{Example: Poincar\'e \texorpdfstring{$\to$}{→} Galilei}
-Let $J_i$ be spatial rotations, $K_i$ Lorentz boosts, $P_i$ spatial momenta,
-and $H$ the energy operator of the Poincar\'e algebra.  The characteristic
-relativistic commutators are
-\begin{equation}
-   [K_i,K_j] = - \frac{1}{c^2} \epsilon_{ijk} J_k,
-   \qquad
-   [K_i,P_j] = \frac{1}{c^2} \delta_{ij} H.
-\end{equation}
-Define rescaled generators
-\begin{equation}
-    K_i' = c\, K_i, \qquad H' = H.
-\end{equation}
-Then
-\begin{equation}
-   [K_i',K_j'] = - c^2 \frac{1}{c^2} \epsilon_{ijk} J_k
-      \xrightarrow[c\to\infty]{} 0, 
-   \qquad
-   [K_i',P_j] = c \frac{1}{c^2} \delta_{ij} H
-      \xrightarrow[c\to\infty]{} 0 .
-\end{equation}
-The resulting commutation relations coincide with those of the Galilei algebra,
-showing that the Galilean symmetry arises as the singular limit $c\to\infty$
-of the Poincar\'e symmetry.
-
-\paragraph{Example: \texorpdfstring{$\mathfrak{so}(3) \to \mathfrak{e}(2)$}{so(3)→e(2)}}
-Let $J_x,J_y,J_z$ generate $\mathfrak{so}(3)$.  Define
-\begin{equation}
-    P_x = \varepsilon J_x, \qquad
-    P_y = \varepsilon J_y, \qquad
-    J = J_z.
-\end{equation}
-Then
-\begin{align}
-    [P_x,P_y] &= \varepsilon^2 J_z \xrightarrow{\varepsilon\to 0} 0, \\
-    [J,P_x] &= P_y, \qquad [J,P_y] = - P_x.
-\end{align}
-This is precisely the Lie algebra $\mathfrak{e}(2)$ of the Euclidean group
-$E(2)$ in two dimensions.  Geometrically, this corresponds to the limit in
-which a sphere of radius $R = 1/\varepsilon$ becomes flat as $R\to\infty$.
-
-The simple contraction may be generalized by assigning distinct scaling
-exponents to different generators:
-\begin{equation}
-    X_i' = \varepsilon^{n_i} X_i ,
-\end{equation}
-with nonnegative integers $n_i$.  This includes all graded contractions and
-produces a wide variety of non-isomorphic limit algebras.  Such generalized
-contractions underlie the classification of kinematical Lie algebras by Bacry
-and L\'evy-Leblond.
-
-Contractions correspond to well-defined physical limits: the
-nonrelativistic limit $c\to\infty$, flat-space limits $R\to\infty$ of curved
-spacetimes, ultra-relativistic limits leading to Carroll algebras, and
-weak-coupling or large-mass limits in field theory.  In all cases, the
-contraction captures the algebraic residue of a theory after certain dynamical
-effects have been suppressed.
-
-
-\section{ The beam on three pillars}
-\label{lm:bm3}
+\section{The physics of limits}
+\label{lm:ph}
+\subsection{ The beam on three pillars}
 
 Contrary to common belief not every properly set problem in
 classical mechanics has unique solution. Let's take for example
@@ -446,49 +309,7 @@ problem when elasticity coefficients go to infinity.
 So generally we can't simply neglect elastic deformations,
 we should be more careful.
 
-\section{ The rigid-body limit}
-\label{lm:rb}
-
-A perfectly rigid body is often defined by the condition that distances between
-material points remain fixed:
-$|\mathbf{x}_A-\mathbf{x}_B|=\mathrm{const}$.
-Real solids satisfy this only approximately.
-For an elastic body, deformation is controlled by elastic moduli, density,
-geometry, loading rate, and boundary conditions. A naive rigid-body limit might
-be written $E\rightarrow\infty$.
-But another relevant quantity is the elastic wave speed 
-\[c_s\sim\sqrt{\frac{E}{\rho}}.\]
-Thus $E\rightarrow\infty$ typically implies $c_s\rightarrow\infty$
-if density is held fixed.
-Consequently, the rigid-body limit simultaneously contains an assumption of
-infinitely rapid propagation of stress.
-If the characteristic time of observation is $T$ and the body size is $L$, 
-then the important parameter is
-\[\epsilon=\frac{L/c_s}{T}.\]
-The rigid approximation corresponds to $\epsilon\ll 1$.
-But this can be achieved in different ways:
-\[c_s\rightarrow\infty\quad\text{at fixed }L,T,\]
-or
-\[T\rightarrow\infty\quad\text{at fixed }c_s,L,\]
-or through correlated scalings.
-These limits need not be equivalent in dynamical problems.
-
-Relativity introduces an additional obstruction. No physical disturbance can 
-propagate faster than $c$.
-A strictly rigid relativistic body in the Newtonian sense would require
-instantaneous transmission of constraints and is therefore incompatible with
-relativistic causality.
-The successful rigid-body approximation is consequently an asymptotic regime:
-\[\frac{L}{c_s T}\ll 1,\]
-with $c_s<c$.
-Thus the nonrelativistic rigid body is not literally a material object of
-infinite stiffness. It is an effective description valid when elastic
-transients are irrelevant to the phenomena being studied.
-The distinction between an exact ideal object and a controlled asymptotic
-approximation is crucial.
-
-\section{Frenkel's point electron}
-\label{lm:fr}
+\subsection{Frenkel's point electron}
 
 \paragraph{Self-energy and the point limit}
 
@@ -498,50 +319,25 @@ sphere of radius $r_0$. The electrostatic self-energy is
 \begin{equation}
 U(r_0) = \kappa\,\frac{e^2}{r_0}, \qquad \kappa = O(1)
 \end{equation}
-( $\kappa=\tfrac12$ for a thin shell,$\kappa=\tfrac35$ for a uniform solid sphere),
+( $\kappa=\tfrac12$ for a thin shell,$\kappa=\tfrac35$ for a 
+uniform solid sphere),
 which diverges as $r_0\to0$. If this self-energy is attributed
 entirely to the field's inertia, one obtains an
 ``electromagnetic mass'' -- but the value one gets depends on
 \emph{how} it is computed. From the field momentum of a slowly
-moving charged sphere, $p_{\rm em}=\tfrac{4}{3}(U/c^2)v$, so
-that $p=m_{\rm em}v$ gives 
-$m_{\rm em}^{(p)}=\tfrac{4}{3}U/c^2$;
-from the energy directly, $m_{\rm em}^{(E)}=U/c^2$. The mismatch
-by a factor of $4/3$ is the classic \emph{$4/3$ problem}: a
-purely electromagnetic self-energy is not, on its own,
-consistent with relativistic energy-momentum bookkeeping. It is
-resolved (Poincar\'e) by recognizing that a charge distribution
-held together against its own Coulomb repulsion needs a
-non-electromagnetic cohesive stress, and that stress's own
-energy and momentum supply exactly the missing $-\tfrac13$,
-restoring $m_{\rm total}=E_{\rm total}/c^2$. The lesson is direct:
+moving charged sphere,
+\[p_{\rm em}=\tfrac{4}{3}(U/c^2)v,\]
+so that $p=m_{\rm em}v$ gives 
+\[m_{\rm em}^{(p)}=\tfrac{4}{3}U/c^2;\]
+from the energy directly, 
+\[m_{\rm em}^{(E)}=U/c^2.\]
+The mismatch
+by a factor of $4/3$ is the classic \emph{$4/3$ problem}.
+The lesson is direct:
 ``send $r_0\to0$'' is not, by itself, a
 well-defined instruction until one has also decided how the
 (divergent) self-energy is to be renormalized against a second,
 independently divergent quantity -- here, the binding stress.
-
-\paragraph{Mass renormalization: two divergences, one limit}
-
-The point-particle idealization becomes fully explicit, and fully
-double-parametered, once we ask for the electron's \emph{total} inertial mass.
-Write the observed mass as
-\begin{equation}
-m = m_0(r_0) + \frac{U(r_0)}{c^2} = m_0(r_0) + \kappa\,\frac{e^2}{r_0 c^2},
-\end{equation}
-where $m_0(r_0)$ is a ``bare'' mechanical mass attributed to
-whatever holds the charge together. The point limit $r_0\to0$ is
-only physically sensible if it is taken \emph{together} with
-$m_0(r_0)\to-\infty$ at a matched rate, $m_0(r_0) = m - \kappa
-e^2/(r_0c^2) + O(r_0)$, so that the finite, measured mass $m$
-survives. This is nothing other than the electromagnetic
-prototype of mass renormalization later central to quantum field
-theory: a single, uncorrelated limit $r_0\to0$ is meaningless
-(it sends $U/c^2\to\infty$), while the \emph{correlated} double
-limit, in which $r_0\to0$ and $m_0\to-\infty$ are locked
-together so that their sum stays fixed, is perfectly well
-defined. Once again, the naive single-parameter idealization
-(``the electron is a point'') silently presupposes a highly
-specific joint limit in a second, hidden parameter.
 
 \paragraph{Radiation reaction}
 
@@ -576,7 +372,7 @@ the charge has had a chance to regularize the self-force at
 short times. Keeping $r_0$ finite removes both problems (at the
 cost of reintroducing internal structural dynamics that must
 themselves be modeled), just as keeping stiffness $EI$ or $k$ finite
-removed the indeterminacy of the beam in section \ref{limits:beam}.
+removed the indeterminacy of the beam.
 This is precisely the
 sense in which the point-particle limit is \emph{singular} for
 the specific question ``what is the self-consistent equation of
@@ -590,272 +386,169 @@ the charge all depend on $r_0$ only through smooth, subdominant
 corrections of relative size $(r_0/L)^n$, where $L$ is the
 relevant external length scale, and these corrections vanish
 continuously as $r_0\to0$ with no hidden second parameter
-involved. The point-electron idealization is thus simultaneously
-excellent (for scattering and orbits) and treacherous (for
-self-energy and radiation reaction) -- the difference is
-entirely about \emph{which question is being asked}, not about
-the idealization itself. Frenkel's own 1926 model of a
-relativistic, spinning point electron sits squarely in this
-tradition: it sidesteps the internal-structure question by fiat
-(endowing the point particle with an intrinsic spin and magnetic
-moment rather than deriving them from a charge distribution),
-buying calculability at the price of leaving the self-energy and
-radiation-reaction issues exactly where the discussion above
-leaves them.
+involved. 
 
-\section{The thermodynamic limit and spontaneous magnetization}
-\label{lm:td}
+\section{Not a Limit, but an Atlas}
+\label{lm:at}
 
-For a magnetic system of $N$ spins in an external field $h$ at
-temperature $T$, the partition function $Z_N(T,h)$ is a finite
-sum of exponentials of the spin configuration energies, hence an
-entire (analytic) function of $h$ and $T$ for every finite $N$.
-In particular, for $h=0$ the up--down symmetry of the
-Hamiltonian forces the average magnetization per spin to vanish
-\emph{exactly} for every finite $N$:
-\begin{equation}
-m(T,h=0,N) = 0 \qquad \text{for all finite } N.
-\end{equation}
-Yet real ferromagnets below their Curie temperature $T_c$
-exhibit a nonzero \emph{spontaneous} magnetization at zero
-field. The resolution is again a matter of the order of two
-limits. Define
-\begin{equation}
-m_s(T) \equiv \lim_{h\to0^+}\ \lim_{N\to\infty}\ m(T,h,N).
-\end{equation}
-For $T<T_c$ this limit is nonzero: sending $N\to\infty$
-\emph{first}, at fixed small $h>0$, allows the free-energy
-landscape to develop two deep, well-separated minima (``up'' and
-``down''), and the infinite system, prepared with an
-infinitesimal field, is trapped in one of them even after the
-field is switched off. But the \emph{opposite} order,
-\begin{equation}
-\lim_{N\to\infty}\ \lim_{h\to0}\ m(T,h,N) = \lim_{N\to\infty} 0 = 0,
-\end{equation}
-gives identically zero at every temperature, because the inner
-limit is zero for every finite $N$ by the symmetry argument
-above. Spontaneous symmetry breaking is, in this precise sense,
-only ever visible in one of the two iterated limits: the
-thermodynamic limit must be taken \emph{before} the
-symmetry-breaking field is removed, never after. A closely
-related statement is the Lee--Yang picture of phase transitions:
-the zeros of $Z_N$ in the complex-field plane are, for finite
-$N$, always off the physical (real) axis, so that $Z_N$ and all
-its finite-$N$ thermodynamic functions are perfectly smooth; a
-genuine non-analyticity -- a true phase transition -- can only
-appear where those zeros pinch the real axis as $N\to\infty$.
-Once again, a physically essential phenomenon (ferromagnetism,
-phase transitions generally) is invisible unless a particular
-one of two possible iterated limits is used, and the finite-$N$,
-finite-$h$ system does not, by itself, tell you which order is
-the physically relevant one; that has to be supplied from
-outside, by the physical fact that real magnets are prepared in
-one broken-symmetry state at a time, not in a symmetric
-superposition of both.
+It is a piece of standard folklore, repeated in the first pages of countless
+textbooks, that classical mechanics is ``what remains'' of relativity when
+$c\to\infty$ (equivalently, when the characteristic speeds of the problem
+satisfy $\beta = v/c \to 0$) and of quantum mechanics when $\hbar\to 0$. The
+picture suggested by this way of speaking is a comforting one: there is a
+single family of theories, continuously parametrized by $1/c$ and $\hbar$, with
+special relativity and quantum mechanics sitting at generic points of the
+family and classical mechanics sitting at the corner where both parameters
+vanish. Classical mechanics, on this picture, is not really an autonomous
+theory at all; it is a limit point, an image, a shadow cast by the deeper
+theories onto the hyperplane $1/c=\hbar=0$.
 
-\section{Continuum limit versus point-particle limit}
-\label{lm:cpp}
+ Two observations, already familiar to anyone who has tried to take the
+folklore literally, show that something more interesting is going on.
 
-At first sight, the point-particle limit and the continuum limit appear
-opposite.
-The point-particle limit removes internal spatial structure:
-$R/L\rightarrow 0$. The continuum limit removes microscopic granularity:
-$\ell_{\rm micro}/L\rightarrow 0$.
-But both are examples of scale separation.
+First, the mathematical structures involved are not nested in the way the
+picture requires. The phase space of a classical system and the Hilbert space
+of its quantum counterpart are not the same kind of object related by a small
+deformation; one is a symplectic manifold, the other a vector space with a
+Hermitian form, and the passage between them (geometric quantization, or its
+inverse) is a substantial piece of mathematics, not a Taylor expansion.
+Likewise, the Galilei group is not a subgroup of the Poincar\'e group that one
+recovers by ``turning off'' some generators. The relation between the
+two is a \emph{contraction}, a specific and rather violent operation on Lie
+algebras, not an inclusion.
 
-Suppose a system contains
-$\ell_{\rm micro}\ll R \ll L$.
-Then one may first construct a continuum description of an extended object,
-$\ell_{\rm micro}/R\rightarrow 0$,
-and subsequently approximate that object as pointlike,
-$R/L\rightarrow 0$.
+Second, and more strikingly, classical mechanics contains objects that have no
+counterpart at all on the other side of the limit, no matter how one takes it.
+The rigid body is the standard example: an object whose configuration space is
+finite-dimensional ($SE(3)$, or a quotient of it) precisely because every
+internal distance is exactly conserved. Special relativity excludes such an
+object outright, for any finite $c$, on causal grounds.
 
-These operations may be interchangeable only if there exists an overlap region
-satisfying
-$\ell_{\rm micro}\ll R \ll L$.
-If this hierarchy collapses, the two approximations can interfere.
-For example, if $R\rightarrow 0$ is taken so rapidly that $R\sim\ell_{\rm micro}$,
-then the continuum description loses validity before the point-particle approximation is reached.
-Thus continuum limit followed by point limit need not equal the reverse procedure.
-The existence of a useful intermediate scale is often what makes successive idealizations legitimate.
+Friction and other dissipative forces are a second example: they break
+time-reversal invariance and shrink phase-space volume, while the unitary
+evolution of an isolated quantum system does neither, at any order in $\hbar$.
+ These are not objects that quantum mechanics or
+relativity describe badly, or only approximately; they are objects that
+literally cannot be the image of anything on the quantum or relativistic side,
+under any map deserving the name ``limit.''
 
-\section{Thermodynamic and long-time limits}
-\label{lm:lt}
+The two observations reinforce each other. If the limit were regular --- if
+solutions, symmetry groups, and observables all deformed continuously and were
+connected by convergent, invertible correspondences --- then every classical
+object would have to arise as the limit of \emph{something}, however
+degenerate, on the quantum or relativistic side. The fact that some classical
+objects have no such precursor is the symptom; the mismatch in mathematical
+structure is the underlying disease. 
 
-The thermodynamic limit is another central example.
-For a finite system,$N<\infty$,
-the partition function is generally analytic under ordinary conditions. Sharp phase 
-transitions emerge only in an infinite-system limit.
-Schematically,$\lim_{N\rightarrow\infty}$
-may produce nonanalytic behavior that is absent for every finite $N$.
-Now introduce the long-time limit, $t\rightarrow\infty$.
-The two limits $N\rightarrow\infty$ and $t\rightarrow\infty$
-can be highly nontrivial.
+The right diagnosis is
+that these are not (even singular) limits 
+but something closer to an \emph{atlas} of local charts, each
+valid in its own regime, glued together where their domains overlap, with no
+single chart covering the whole territory.
 
-For finite $N$, a Hamiltonian system may exhibit recurrences on sufficiently
-long times. If the thermodynamic limit is taken first, recurrence times may
-diverge and irreversible behavior can emerge at the level of effective
-descriptions.
-Thus one encounters the conceptual contrast
-$\lim_{t\to\infty}\lim_{N\to\infty}$ versus $\lim_{N\to\infty}\lim_{t\to\infty}$.
-The relation between these procedures is central to the foundations of
-statistical mechanics and the emergence of irreversibility.
-The phrase \emph{take the thermodynamic limit} therefore conceals assumptions 
-concerning observation time, coarse graining, boundary conditions, and the 
-class of states being considered.
+\section{An analogy from cartography}
+\label{lm:ca}
 
-\section{Zero temperature and infinite volume}
-\label{lm:zt}
+Consider instead what it means for two maps to be maps ``of the same territory.''
+Two maps can differ along at least four largely independent axes.
 
-Quantum and statistical systems often involve the pair
-$T\rightarrow 0,\qquad V\rightarrow\infty$.
-At finite volume, energy levels are generally discrete. In the infinite-volume limit, 
-spectra may become continuous or dense.
-The ground-state structure can therefore depend subtly on the order of limits.
-Similarly, spontaneous symmetry breaking is sharply formulated only after an
-infinite-volume or thermodynamic limit is invoked. For finite systems,
-symmetry-related states can tunnel into one another, and exact eigenstates may
-retain the symmetry of the Hamiltonian.
+\paragraph{Theme: what a theory is about}
 
-The usual conceptual sequence is often
-$V\rightarrow\infty$,
-followed by the removal of an infinitesimal symmetry-breaking source,
-$h\rightarrow 0$.
-The order
-\[\lim_{h\to0}\lim_{V\to\infty}\]
-can differ from
-\[\lim_{V\to\infty}\lim_{h\to0}.\]
+A weather map and a political map of France are not related by any limiting
+procedure at all; neither is a coarsening or a refinement of the other, because
+they depict different things. Mechanics, thermodynamics, and electromagnetism
+stand in the same relation. Thermodynamics is not a low-resolution version of
+electromagnetism, nor a special case of it; it is a different thematic layer
+over the same territory, addressing questions (heat, entropy, equilibrium) that
+a purely mechanical or electromagnetic map does not attempt to answer.
+Demanding that thermodynamics arise as \emph{the} limit of electromagnetism
+would be as confused as demanding that a weather map arise as the limit of a
+political one.
 
-This is not a mathematical curiosity. It expresses the physical distinction between:
- first selecting a macroscopic phase and then removing the external bias;
- first removing the bias in a finite symmetric system and only then increasing the size.
-Thus spontaneous symmetry breaking itself provides a paradigmatic example of noncommuting limits.
+\paragraph{Projection: how a theory represents its subject}
 
-\section{The classical limit: $\hbar\to 0$ is not a universal procedure}
-\label{lm:h0}
+Within a single theme, different projections of the same territory preserve
+different structure at the expense of other structure -- this is not a defect
+of cartography but a theorem about it. A conformal (angle-preserving)
+projection such as Mercator's cannot also be equal-area; an equal-area
+projection such as Albers's cannot also be conformal. Gauss's \emph{Theorema
+Egregium} makes the obstruction precise: a curved surface's intrinsic curvature
+cannot be flattened into the plane without distorting either lengths, angles,
+or areas -- there is no projection that gets everything right at once, only a
+menu of projections each suited to a different purpose (Mercator for
+navigation, Albers for area comparisons).
 
-The statement that classical mechanics is obtained by taking
-$\hbar\rightarrow 0$ is useful but incomplete.
-The physically relevant semiclassical parameter is typically an action ratio,
-\[\epsilon_{\rm sc}=\frac{\hbar}{S_{\rm cl}}.\]
-Thus the classical regime may be reached through large actions rather than a literal variation of Planck's constant.
-Moreover, another parameter may be time.
-Semiclassical approximations are frequently valid only over restricted time scales. In chaotic systems, small quantum corrections may grow under classical instability.
-Thus $\hbar\rightarrow 0$ and $t\rightarrow\infty$ may not commute.
-For fixed finite $t$, $\lim_{\hbar\to0}$ 
-may reproduce classical dynamics.
-But if $t$ increases simultaneously with decreasing $\hbar$, 
-interference and quantum corrections can become important.
-The appropriate question is therefore not simply
-"$\hbar\rightarrow 0$?" but rather "$\frac{\hbar}{S}\rightarrow 0 \quad\text{with what scaling of }t$?"
+The different formalisms of a single physical theory are projections in exactly
+this sense, not distinct theories and not limits of one another. The
+Hamiltonian and Lagrangian formulations of classical mechanics carry the same
+content but make different structure legible: the Hamiltonian picture displays
+conserved quantities and symmetries transparently (as the book's chapter on the
+geometric versus coordinate formulations of mechanics discusses at length)
+while partially obscuring manifest covariance, which the Lagrangian picture,
+built from a scalar action, preserves more readily. The Schr\"odinger,
+Heisenberg, and path-integral pictures of quantum mechanics stand in the same
+relation to one another. None of this is a reduction; it is re-projection, and
+asking which picture is ``really'' the theory is as misguided as asking whether
+Greenland is ``really'' as big as Africa.
 
-This illustrates a general principle:
- A limiting theory may be valid at every fixed value of a second variable and nevertheless fail to be uniformly valid as that second variable also approaches an extreme regime.
+\paragraph{Extent: domain of validity}
 
-\section{ The Newtonian limit and weak-field limit}
-\label{lm:wf}
+A street map of Paris does not contain Berlin, not because Berlin has been
+idealized away but because it was never in scope. In the same way, Newtonian
+gravitation's domain of validity (weak fields, low speeds) is a genuine subset
+of general relativity's, and special relativity's domain (no gravity at all) is
+neither contained in nor contains Newtonian gravity's domain -- the two extents
+overlap only partially. This axis is what turns the whole picture from a loose
+metaphor into something with real structure. 
 
-Relativity provides another multiparameter example.
-A nonrelativistic weak-field regime may involve
-$\frac{v}{c}\ll 1,\qquad \frac{GM}{rc^2}\ll 1$.
-It is tempting to regard these as independent.
-However, different physical systems can approach the joint Newtonian regime along very different paths.
-A system may have $v/c\ll 1$ but still experience strong gravitational fields, or conversely 
-have weak gravity while containing ultrarelativistic particles.
-Thus $c\rightarrow\infty$ and $G\rightarrow 0$
-are not conceptually identical limiting procedures.
-One may define different contractions or scaling limits depending on which combinations of parameters are held fixed.
+\paragraph{Resolution: the one genuine limit, and why even it can fail}
 
-Similarly, the limits $c\rightarrow\infty,\qquad\hbar\rightarrow 0$
-raise a further question:
-\[\text{Does classical mechanics arise before or after the nonrelativistic limit?}\]
-In ordinary regimes the resulting descriptions overlap and agree. But the
-mathematical limiting structures need not be identical, especially when spin,
-antiparticles, constraints, or quantum fields are involved.
 
-\section{Why some limits are safe}
-\label{lm:sf}
+Only along the resolution axis is ``limit'' close to the right word. A
+1:1{,}000{,}000 map genuinely can, in principle, be produced by coarse-graining
+a 1:1{,}000 map of the same theme, projection, and extent: this is a real
+limiting operation on one and the same representation, and it is the
+cartographic image of coarse-graining a microscopic statistical-mechanical
+description into a macroscopic thermodynamic one, or of a renormalization-group
+step integrating out short-distance degrees of freedom.
 
-The case studies above should not be read as an indictment
-of point-particle or rigid-body idealizations in general -- both
-are used successfully, constantly, throughout physics. What
-distinguishes a safe use from a dangerous one is not the
-idealization itself but the \emph{role} the discarded parameter
-was playing in the finite theory.
+But even this limit routinely fails to be smooth. The length of a coastline,
+measured at increasing resolution, does not converge to a finite number: it
+grows without bound as the measuring scale shrinks, because coastlines are
+statistically self-similar over a wide range of scales (the coastline paradox,
+quantified by Richardson and Mandelbrot in terms of a fractal dimension greater
+than one). Only certain coarse features -- the shape of a bay, the overall
+outline of a continent -- stabilize under coarsening; the fine-grained quantity
+``total length'' simply has no resolution-independent limit. The physical
+analogue is exact: the thermodynamic limit is singular precisely at a phase
+transition, where the system develops fluctuations at every length scale
+simultaneously (critical phenomena), and the renormalization-group flow sits at
+a fixed point at which ``resolution'' stops being a meaningful independent
+parameter at all. The one axis along which cartography licenses talk of a limit
+is also the one axis along which cartography itself warns that the limit can be
+singular.
 
-\begin{principle}
-A limiting idealization is safe (the order of limits does not
-    matter, and a single limit suffices) when the discarded
-    parameter enters the quantity of interest only as a smooth,
-    subdominant correction that vanishes continuously as the
-    parameter is removed.
-\end{principle}
+\paragraph{The discipline of atlas-making}
 
-This is exactly the situation in planetary mechanics (finite
-planetary radius enters orbital dynamics only through small,
-regular tidal and multipole corrections), in Rutherford-style
-scattering (finite nuclear size enters the cross-section as a
-regular form-factor correction, negligible when the probe
-wavelength is much larger than the nucleus), and in ordinary,
-\emph{statically determinate} rigid-body mechanics, where the
-number of unknown constraint forces already matches the number
-of equilibrium equations before any compliance is introduced, so
-elastic corrections enter as small, regular shifts rather than
-as the sole source of a missing equation. The thermodynamic
-limit is likewise safe for the overwhelming majority of bulk
-thermodynamic quantities -- the equation of state, the specific
-heat away from a critical point, the equilibrium constant of a
-chemical reaction -- because these depend smoothly on $1/N$ and
-converge to the same value regardless of how any auxiliary field
-is handled.
+If this is right, the project of relating physical theories to one another is
+better conceived as atlas-making than as limit-taking. An atlas does not aim at
+a single chart covering everything -- indeed, for a sphere no such chart exists
+without a coordinate singularity somewhere, a fact with the same flavor as the
+no-go theorems. It aims instead at a well-chosen cover, with transition maps
+that are explicit about where they are valid, honest about where they break
+down, and unapologetic about the fact that some regions require an altogether
+different theme, not merely a different resolution, to be represented at all.
 
-\begin{principle}
-A limiting idealization is dangerous when the discarded
-    parameter is doing one of three jobs in the finite theory:
-    \begin{enumerate}
-       \item resolving a redundancy or degeneracy (a statically
-    indeterminate structure, a degenerate ground-state
-    manifold);
-       \item regularizing a formally divergent,
-    self-referential quantity (a self-energy, a self-force);
-       \item selecting among multiple locally stable branches or
-    vacua (spontaneous symmetry breaking, runaway versus
-    physical solutions of an equation of motion).
-    \end{enumerate}
-\end{principle}
-
-\section{Conclusion}
-\label{lm:co}
-
-Idealized limits are indispensable, and in the great majority of
-their uses they are also perfectly safe: the point particle, the
-rigid body, the continuum, and the thermodynamic limit each work
-because the physics they discard enters only as a small, smooth
-correction. 
-
-But whenever an idealizing parameter is secretly
-doing double duty -- resolving a redundancy, regularizing a
-self-interaction, or selecting a symmetry-broken branch -- the
-limit becomes a genuine two-(or more-)parameter limit in the
-technical sense, and the order in which the
-idealizations are imposed is no longer a matter of convenience
-but a physical assumption in its own right, one that must be
-justified by the actual mechanism operating in the un-idealized
-system. 
-
-The beam on three pillars, the point electron, and the
-thermodynamic limit of a ferromagnet each illustrate a different
-flavor of this same structure -- static redundancy,
-field-theoretic self-reference, and spontaneous symmetry
-breaking, respectively -- and, not coincidentally, each
-historically forced the development of new formal machinery (the
-force method and compatibility conditions in structural
-mechanics; mass renormalization in classical and later quantum
-field theory; the Lee--Yang theory of phase transitions in
-statistical mechanics) precisely in order to tame it.
-Recognizing the common mathematical skeleton beneath these
-episodes --- non-commuting iterated limits, --- is a useful 
-piece of general-purpose
-intuition for noticing, before the paradox appears, when an
-idealization needs a second parameter kept on a leash.
+This has the same shape as the real-world/ideal-world distinction developed in
+Chapter~\ref{rm}. A cartographic error occurs when a feature of the map -- a
+projection's coordinate singularity at the pole, Greenland's inflated area
+under Mercator -- is mistaken for a feature of the territory. The corresponding
+physical error runs in both directions: treating the mathematical singularity
+of a correspondence limit as if it were merely a calculational inconvenience to
+be patched away, and, just as badly, dismissing a real emergent phenomenon that
+appears only at the singularity of a limit -- a phase transition, a caustic,
+the light cone itself -- as ``just'' an artifact of idealization. Both mistakes
+come from forgetting that a map, however good, is not the territory, and that
+the interesting places on any map are so often exactly where two of them stop
+agreeing.
 
