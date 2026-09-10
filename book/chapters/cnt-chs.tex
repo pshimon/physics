@@ -357,3 +357,865 @@ no trajectory passable for given time. Variation problem simply can not be posed
 Hamiltonian $ H=p \Omega $ looks like that for harmonic oscillator in
 action-angle variables and so we can  transform it to usual quadratic form, but
 the condition $  -S\le p \le S$ makes this transformation pure formal.
+
+
+\section{On the (In)equivalence of the Formulations of Classical Mechanics}
+\label{chs:nf}
+
+The Newtonian, Lagrangian, Hamiltonian, and Hamilton--Jacobi formulations of
+classical mechanics are routinely presented as equivalent packagings of a
+single physical theory, related by Hamilton's principle, the Legendre
+transform, and Jacobi's theorem. This claim is correct, but only under
+conditions that are rarely stated explicitly and that fail even for
+holonomic systems considered above.
+
+Here we show a number  of
+ distinct ways in which the standard equivalence breaks down: 
+\begin{itemize}
+   \item the gap
+between Hamilton's principle (stationarity of the action) and the popularly
+stated ``principle of \emph{least} action'' (minimality), which fails beyond a
+conjugate time fixed by the curvature of the potential and which can be made
+arbitrarily short;
+   \item the consequent failure of the boundary-value problem built
+into Hamilton's principle itself to be well-posed---even for $H=p^2/2m+V(q)$, a
+sufficiently steep $V$ makes the two-endpoint problem admit no solution, or
+infinitely many, in contrast to the always-well-posed Newtonian initial-value
+problem;
+   \item the existence of singular Lagrangians, for which the Legendre
+transform is not invertible and Dirac's theory of constraints is required;
+   \item the existence of Newtonian force laws that admit no
+Lagrangian description at all, governed by the Helmholtz conditions;
+   \item the
+failure of the Legendre transform to be a global diffeomorphism even for
+pointwise-regular Lagrangians, absent the stronger condition of
+hyperregularity;
+   \item the mechanistically identical failure of the Hamilton--Jacobi
+equation's generating function to stay single-valued beyond a caustic;
+\end{itemize}
+
+Let us display shortly the four standard formulations.
+
+\paragraph{Newtonian mechanics}
+For a system of $N$ particles with positions $\mathbf{r}_i \in \mathbb{R}^3$,
+Newton's second law reads $m_i \ddot{\mathbf{r}}_i = \mathbf{F}_i$, where
+$\mathbf{F}_i$ is the total force on particle $i$. Constraints are handled by
+splitting the force into an applied part and a constraint (reaction) part,
+$\mathbf{F}_i = \mathbf{F}_i^{\mathrm{app}} + \mathbf{F}_i^{\mathrm{c}}$, and
+postulating---this is d'Alembert's principle---that the constraint forces do no
+virtual work: $\sum_i \mathbf{F}_i^{\mathrm{c}}\cdot \delta \mathbf{r}_i = 0$
+for every virtual displacement $\delta\mathbf{r}_i$ compatible with the
+constraints at a frozen instant of time. It is d'Alembert's principle, not
+Newton's second law by itself, that supplies the bridge to the variational
+formulations below.
+
+\paragraph{Lagrangian mechanics}
+Let $Q$ be the configuration manifold and $TQ$ its tangent bundle, with induced
+coordinates $(q^i,\dot q^i)$. A Lagrangian is a function $L : TQ \times
+\mathbb{R} \to \mathbb{R}$, typically (but not necessarily) of the form $L = T
+- V$, kinetic minus potential energy. Hamilton's principle asserts that
+physical trajectories $q(t)$ extremize the action
+\begin{equation}
+S[q(\cdot)] = \int_{t_0}^{t_1} L\big(q(t),\dot q(t), t\big)\, dt
+\end{equation}
+among curves with fixed endpoints $q(t_0), q(t_1)$. Setting the first variation
+to zero yields the Euler--Lagrange equations
+\begin{equation}
+\label{EL}
+\frac{d}{dt}\frac{\partial L}{\partial\dot q^i} - \frac{\partial L}{\partial q^i} = 0 ,
+    \qquad i = 1,\dots,n=\dim Q .
+\end{equation}
+For a system subject to \emph{ideal, holonomic} constraints, this is fully
+equivalent to Newton's second law plus d'Alembert's principle, once $Q$ is
+taken to be the constraint surface itself and the $q^i$ are independent
+generalized coordinates on it.
+
+\paragraph{Hamiltonian mechanics}
+Define the momenta $p_i = \partial L/\partial \dot q^i$. This is the
+\emph{fiber derivative} 
+$\mathbb{F}L: TQ \to T^*Q$, $(q,\dot q)\mapsto (q,p)$.
+Where $\mathbb{F}L$ can be inverted for $\dot q$ in terms of $(q,p)$, one
+defines the Hamiltonian by the Legendre transform,
+\begin{equation}
+H(q,p,t) = p_i \dot q^i - L(q,\dot q, t)\Big|_{\dot q = \dot q(q,p,t)} ,
+\end{equation}
+and Hamilton's canonical equations
+\begin{equation}
+\label{Ham}
+\dot q^i = \frac{\partial H}{\partial p_i}, \qquad 
+    \dot p_i = -\frac{\partial H}{\partial q^i}
+\end{equation}
+reproduce~\eqref{EL} on the nose. The cotangent bundle $T^*Q$ carries a
+canonical symplectic form $\omega = dp_i \wedge dq^i$, giving Hamiltonian
+mechanics its distinctive geometry: canonical transformations, Poisson
+brackets, Liouville's theorem, and so on.
+
+The precise statement licensing the textbook claim is the following.
+\begin{proposition}[Regular equivalence]
+\label{prop:regular}
+Let $$L: TQ\times\mathbb{R}\to\mathbb{R}$$
+    be \emph{regular}: the fiber Hessian
+    $$W_{ij} = \partial^2 L/\partial \dot q^i \partial \dot q^j$$
+    is nondegenerate at every point of $TQ$. Then $\mathbb{F}L$ is a local
+    diffeomorphism, $H$ is well defined locally, and solutions of~\eqref{EL}
+    correspond, via 
+    $$p = \mathbb{F}L(q,\dot q),$$ 
+    bijectively and locally to
+    solutions of~\eqref{Ham}. If in addition $\mathbb{F}L$ is a \emph{global}
+    diffeomorphism $TQ \to T^*Q$---in which case $L$ is called
+    \emph{hyperregular}---this correspondence extends to a global bijection
+    between the full solution spaces of the two theories.
+\end{proposition}
+
+\paragraph{Hamilton--Jacobi theory}
+A fourth formulation, historically inseparable from Hamilton's own work,
+replaces the $2n$ first-order equations~\eqref{Ham} by a single first-order
+partial differential equation for a scalar function. Define \emph{Hamilton's
+principal function} $S(q,t)$ as the action evaluated along the true trajectory
+of the system that starts at some fixed reference event $(q_0,t_0)$ and ends at
+$(q,t)$. Hamilton showed that, viewed as a function of its endpoint, $S$
+satisfies the \emph{Hamilton--Jacobi equation}
+\begin{equation}
+\label{HJ}
+\frac{\partial S}{\partial t}+H\Big(q,\frac{\partial S}{\partial q},t\Big)=0.
+\end{equation}
+Conversely, Jacobi showed how to run this construction backwards and recover
+the canonical equations~\eqref{Ham} directly from~\eqref{HJ}, without
+integrating an ordinary differential equation, provided one can find a
+\emph{complete integral}: an $n$-parameter family of solutions $S(q,t;\alpha)$,
+$\alpha=(\alpha_1,\dots,\alpha_n)$, of~\eqref{HJ} whose mixed Hessian
+$\partial^2 S/\partial q^i\partial \alpha_j$ is everywhere nondegenerate on the
+\emph{domain of interest}.
+
+\begin{proposition}[Jacobi's theorem]
+\label{prop:jacobi-thm}
+Let $S(q,t;\alpha)$ be a complete integral of~\eqref{HJ} on an open set
+    $U\subset Q\times\mathbb{R}$, with $\det(\partial^2 S/\partial
+    q^i\partial\alpha_j)\neq 0$ throughout $U$. Then the equations
+\begin{equation}
+\frac{\partial S}{\partial\alpha_j} = \beta_j \ (\text{constants}), 
+    \qquad p_i = \frac{\partial S}{\partial q^i}
+\end{equation}
+implicitly define, for each choice of constants $(\alpha,\beta)$, a curve
+    $(q(t),p(t))$ solving Hamilton's equations~\eqref{Ham} on $U$; every
+    solution of~\eqref{Ham} passing through $U$ arises this way for a suitable
+    choice of $(\alpha,\beta)$.
+\end{proposition}
+
+Proposition~\ref{prop:jacobi-thm} is the formal engine behind solving
+Hamiltonian systems by separation of variables, and it is a genuine equivalence
+result: wherever a complete integral with nondegenerate mixed Hessian exists,
+the Hamilton--Jacobi and Hamiltonian pictures determine exactly the same
+trajectories. The qualification \emph{'on the domain of interest'} is doing real
+work, and  cannot in general be
+dropped, and that its failure is tied to the same mechanism that undermines the
+``least action'' reading of Hamilton's principle.
+
+Everything that follows  concerns ways in which the
+hypotheses of Proposition~\ref{prop:regular} or
+Proposition~\ref{prop:jacobi-thm} can fail to hold, or ways in which their
+being satisfied does not settle every reasonable sense in which one might want
+two physical theories to be ``the same.'' 
+
+The equivalence between Hamilton's principle and the Euler--Lagrange
+equations \eqref{EL} is exact and unconditional: $\delta S=0$ for all
+admissible variations if and only if \eqref{EL} holds along the trajectory.
+This is a first-order, local statement about the action, and none of
+standard formulations depends on anything more. But the popular name for
+Hamilton's principle---the ``principle of \emph{least} action''---asserts
+something stronger: that the true trajectory does not merely make $S$
+stationary but \emph{minimizes} it among nearby competitors with the same
+endpoints. This stronger claim concerns the second variation, not the first,
+and it is generally false, even for the most elementary holonomic,
+unconstrained, regular Lagrangian system one could write down.
+
+For a one-dimensional natural Lagrangian 
+$$L(x,\dot x) = \tfrac12 m\dot x^2 - V(x),$$
+consider a perturbation $x(t)+\varepsilon\eta(t)$ of a solution $x(t)$
+of \eqref{EL}, with $\eta(t_0)=\eta(t_1)=0$. The second variation of the action
+is
+\begin{equation}
+\delta^2 S[\eta] = \int_{t_0}^{t_1} \Big[ m\dot\eta(t)^2 - V''(x(t))\,\eta(t)^2 \Big]\, dt ,
+\end{equation}
+and the trajectory is a genuine local minimum of $S$ if and only if
+$\delta^2S[\eta]>0$ for every admissible $\eta\not\equiv0$. Whether this holds
+is governed by the \emph{Jacobi accessory equation}, obtained by
+linearizing~\eqref{EL} about $x(t)$,
+\begin{equation}
+\label{jacobi-eq}
+m\ddot\eta + V''(x(t))\,\eta = 0 ,
+\end{equation}
+together with $\eta(t_0)=0$. A time $t_c>t_0$ is a \emph{conjugate point} (or
+\emph{kinetic focus}) to $t_0$ along the trajectory if the nontrivial solution
+of~\eqref{jacobi-eq} with $\eta(t_0)=0$ vanishes again at $t_c$.
+
+\begin{proposition}[Jacobi's necessary condition]
+\label{prop:jacobi-necessary}
+The trajectory $x(t)$ furnishes a local minimum of the action on $[t_0,t_1]$
+    only if $t_1$ occurs before the first conjugate point to $t_0$. If $t_1$
+    lies beyond the first conjugate point, $S$ is a saddle point at $x(t)$:
+    nearby trial trajectories exist with strictly smaller action, even though
+    $x(t)$ exactly satisfies~\eqref{EL}.
+\end{proposition}
+
+\begin{example}[Harmonic oscillator]
+\label{sho}
+Take $V(x)=\tfrac12 kx^2$, so $V''\equiv k$ and \eqref{jacobi-eq} becomes
+    $\ddot\eta+\omega^2\eta=0$ with $\omega=\sqrt{k/m}$. The solution with
+    $\eta(t_0)=0$ is $\eta(t)=\sin\!\big(\omega(t-t_0)\big)$, which next
+    vanishes at $t_c=t_0+\pi/\omega$---exactly half a period. By
+    Proposition~\ref{prop:jacobi-necessary}, a segment of oscillator trajectory
+    genuinely minimizes the action if its duration is less than $\pi/\omega$,
+    and is merely a stationary saddle point if its duration exceeds
+    $\pi/\omega$.
+\end{example}
+
+Example~\ref{sho} answers, quantitatively, the question of how short is ``short
+enough.'' The conjugate-point time $\pi/\omega=\pi\sqrt{m/k}$ is set entirely
+by the curvature $V''=k$ of the potential and shrinks without bound as $k$
+grows: no fixed time interval is safe for every system, because a sufficiently
+steeply curved potential will already have produced a conjugate point within
+it. More generally, conjugate points arise only where $V''>0$ along the
+trajectory; for potentials with $V''(x)\leq 0$ for all $x$ (a free particle,
+uniform gravity, an inverted quadratic barrier) no conjugate point ever forms,
+and the action is minimized for arbitrarily long times.
+Whether ``the action is minimized'' is therefore not a property of Hamilton's
+principle in general---it is a property of the specific potential, and
+specifically of how sharply it curves.
+
+It is worth being precise about what this does and does not show. Hamilton's
+principle, in its correct form ($\delta S=0$), remains exactly equivalent to
+Newton's second law throughout; nothing here contradicts
+Proposition~\ref{prop:regular}. What fails is the stronger, popularly stated
+identification of Hamilton's principle with a principle of \emph{least}
+action---and it fails already in the cleanest setting available anywhere in
+this paper: a single unconstrained particle, regular and hyperregular
+Lagrangian, smooth potential. That is precisely why this failure mode belongs
+at the head of this subsection, ahead of the more exotic constructions that
+follow.
+
+The question is asked whether a trajectory already known to
+satisfy~\eqref{EL} minimizes the action. A logically prior question is whether
+such a trajectory exists and is unique at all, given the data Hamilton's
+principle is actually stated in terms of: not an initial position and velocity,
+but two fixed \emph{endpoints}, $q(t_0)=q_A$ and $q(t_1)=q_B$---exactly the
+boundary conditions built into the action functional. 
+This is a fundamentally different mathematical
+problem from the Newtonian initial-value problem. Given $(q_0,\dot q_0)$ at a
+single instant, standard ODE theory (Picard--Lindelöf) guarantees a unique
+solution of~\eqref{EL}, at least locally in time, for any reasonably smooth
+force law: the ``most boring'' Hamiltonian, $H=p^2/2m+V(q)$, is always
+well-posed as an initial-value problem. Fixing $q(t_0)$ and $q(t_1)$ instead
+offers no such guarantee. The boundary-value problem can have no solution, a
+unique solution, or infinitely many, and which of these holds is governed by
+exactly the conjugate points.
+
+Fix $t_0$ and $q_A=q(t_0)$, and let $x(t,v_0)$ denote the unique initial-value
+solution with $\dot x(t_0)=v_0$. The \emph{shooting map} $v_0\mapsto
+x(t_1,v_0)$ determines which endpoints are reachable in time $T=t_1-t_0$ and
+how many initial velocities reach a given one. Its derivative $\partial
+x(t,v_0)/\partial v_0$ satisfies~\eqref{EL} linearized about the
+trajectory---for $H=p^2/2m+V(q)$ this is exactly the Jacobi accessory
+equation~\eqref{jacobi-eq}, with initial data $\eta(t_0)=0$, $\dot\eta(t_0)=1$.
+Consequently
+\begin{equation}
+\frac{\partial x(t_1,v_0)}{\partial v_0} = 0
+    \quad\Longleftrightarrow\quad t_1 \text{ is a conjugate point to } t_0 ,
+\end{equation}
+so the shooting map is a local diffeomorphism precisely up to the first
+conjugate time, and can fold---losing injectivity, surjectivity, or both---at
+and beyond it.
+
+\begin{example}[Harmonic oscillator boundary-value problem]
+\label{sho-bvp}
+Continuing Example~\ref{sho}, set $t_0=0$, $q_A=0$. The initial-value solution
+    is $x(t,v_0)=(v_0/\omega)\sin(\omega t)$, so the shooting map to time $T$
+    is $v_0\mapsto (v_0/\omega)\sin(\omega T)$, and
+\begin{equation}
+v_0 = \frac{\omega\, q_B}{\sin(\omega T)}
+\end{equation}
+solves $x(0)=0$, $x(T)=q_B$ whenever $\sin(\omega T)\neq0$: a unique solution,
+    as expected for $T$ short of the first conjugate time $\pi/\omega$. But at
+    $T=n\pi/\omega$ for a positive integer $n$---an integer multiple of the
+    conjugate time---$\sin(\omega T)=0$ identically, and the shooting map
+    collapses to $v_0\mapsto 0$ regardless of $v_0$: for $q_B\neq0$ \emph{no}
+    solution exists, while for $q_B=0$ \emph{every} $v_0\in\mathbb{R}$ solves
+    the boundary-value problem, a one-parameter family of distinct true
+    trajectories connecting the same two events.
+\end{example}
+
+Example~\ref{sho-bvp} shows non-existence and non-uniqueness sitting on
+opposite sides of the same coincidence, both triggered by the same
+conjugate-time condition, and both occurring for the most elementary confining
+potential there is. The critical travel times $n\pi/\omega$ are evenly spaced
+only because the harmonic oscillator's own equation of motion is already
+linear---so it coincides with its own Jacobi equation, and conjugate points
+recur exactly periodically. For a general potential, the accessory
+equation~\eqref{jacobi-eq} has a time-varying coefficient $V''(x(t))/m$ and the
+conjugate times need not be evenly spaced, but the qualitative picture
+survives, and can be more dramatic still: so quartic
+oscillator, $V(x)=\tfrac14 Cx^4$, in which a whole family of distinct true
+trajectories leaving a common starting event recross one another at a common
+later event, producing multiple genuinely different---not merely differently
+scaled---solutions of the same boundary-value problem.
+
+ Since $\omega=\sqrt{k/m}$ for the harmonic case,
+the critical travel times $n\pi/\omega = n\pi\sqrt{m/k}$ shrink as the
+curvature $k$ grows, so for \emph{any} fixed travel time $T$, a steep enough
+potential well places $T$ at or past a degenerate configuration. ``The most
+boring system there is,'' $H=p^2/2m+V(q)$, therefore fails to have a well-posed
+boundary-value problem in exactly the regime---strongly confining, rapidly
+growing $V$---that most textbook potentials are drawn from.
+
+This multiplicity is not a curiosity confined to classical mechanics: it is
+exactly what the Feynman path-integral formulation of quantum mechanics must
+sum over. The semiclassical propagator between $q_A$ and $q_B$ is, in general,
+a sum of contributions from \emph{every} classical trajectory solving the
+boundary-value problem, each carrying a phase determined by its action together
+with a further phase set by the \emph{Maslov index}---the number of conjugate
+points the trajectory has crossed. The Maslov index is, in
+this sense, a bookkeeping device  it is needed because the classical
+boundary-value problem it
+quantizes is not, in general, uniquely solvable.
+
+A Lagrangian is \emph{singular} (or degenerate) when its fiber Hessian $W_{ij}
+= \partial^2 L/\partial \dot q^i \partial \dot q^j$ is degenerate somewhere on
+$TQ$. In that case $\mathbb{F}L$ is not a local diffeomorphism there: the
+momenta $p_i = \partial L/\partial \dot q^i$ are not independent functions of
+the velocities, and one cannot solve for all of $\dot q$ in terms of $(q,p)$.
+Concretely, degeneracy of $W_{ij}$ means the map $\mathbb{F}L$ satisfies one or
+more relations
+\begin{equation}
+\phi_a(q,p) = 0, \qquad a = 1,\dots,k,
+\end{equation}
+purely among the momenta and coordinates---\emph{primary constraints}, in
+Dirac's terminology---that hold identically on the image of $\mathbb{F}L$,
+before any equations of motion are imposed.
+
+The cleanest illustration is to note that Hamiltonian mechanics is itself,
+formally, a maximally singular special case of Lagrangian mechanics. Treat
+$(q,p)$ as $2n$ independent coordinates on an auxiliary configuration space and
+consider the first-order ``Hamiltonian-form'' Lagrangian
+\begin{equation}
+L_1(q,p,\dot q,\dot p) = p_i \dot q^i - H(q,p).
+\end{equation}
+Its Euler--Lagrange equations reproduce~\eqref{Ham} exactly, so in one sense
+Hamiltonian mechanics \emph{is} a special case of Lagrangian mechanics on a
+bigger space. But the fiber Hessian of $L_1$ with respect to $(\dot q,\dot p)$
+vanishes identically---$L_1$ is linear, not quadratic, in the velocities---so
+$L_1$ is about as singular as a Lagrangian can be, and the naive
+Legendre-transform machinery simply does not
+apply to it. Recovering Hamilton's equations from $L_1$ requires running the
+full constrained-Hamiltonian algorithm below, not the regular Legendre
+transform.
+
+The general treatment of singular Lagrangians is due to Dirac and Bergmann.
+ One passes to the \emph{primary constraint surface}
+$\Sigma_1 \subset T^*Q$ cut out by the $\phi_a$, and checks whether the primary
+constraints are preserved under time evolution generated by a (now only
+partially determined) Hamiltonian; if not, this consistency requirement
+generates \emph{secondary constraints}, and the process is iterated until a
+stable constraint surface is reached. Constraints are further classified as
+\emph{first class} (those with vanishing Poisson brackets with all other
+constraints, which typically signal gauge freedom---directions in phase space
+that are not physically distinguishable) or \emph{second class} (which can be
+eliminated using the Dirac bracket, an amended Poisson bracket adapted to the
+constraint surface). The upshot is that for a
+singular $L$, the physical phase space is not $T^*Q$ but a further-reduced
+submanifold, of dimension strictly smaller than $2n$ in the presence of
+first-class constraints, and the map from Lagrangian solutions to Hamiltonian
+solutions is not the clean bijection of Proposition~\ref{prop:regular} but a
+considerably more elaborate correspondence, often carrying residual gauge
+freedom on the Lagrangian side that has no counterpart in a naively
+written-down Hamiltonian system.
+
+Singular Lagrangians are not a pathology confined to toy examples: they are the
+generic situation for gauge theories. Electromagnetism, Yang--Mills theory, and
+general relativity all have singular Lagrangians, precisely because the local
+gauge symmetry (arising from Noether's second theorem) forces degeneracy of the
+fiber Hessian. For essentially all of fundamental field theory, then, the
+``equivalence'' between the Lagrangian and Hamiltonian pictures is not the
+elementary Legendre-transform story at all, but
+the considerably more delicate Dirac--Bergmann correspondence.
+
+\paragraph{The inverse problem: not every Newtonian system is Lagrangian}
+
+Even in the unconstrained case, the passage from Newtonian to Lagrangian
+mechanics is not guaranteed to exist at all. Given a system of second-order
+ODEs $\ddot q^i = f^i(q,\dot q,t)$---an arbitrary Newtonian force law, divided
+by mass---one can ask whether it arises as the Euler--Lagrange equations of
+\emph{some} Lagrangian. This is the \emph{inverse problem of the calculus of
+variations}. The answer is governed by the \emph{Helmholtz conditions}: the
+linearized (Fr\'echet) differential operator associated with the equations of
+motion must be self-adjoint. Douglas (1941) gave a complete classification
+of when a Lagrangian exists in the two-degree-of-freedom case, building on
+earlier work of Hirsch and Mayer; the general $n$-dimensional theory remains an
+active area of research in the geometric calculus of variations.
+
+The familiar case that fails the Helmholtz conditions is linear
+velocity-dependent damping. The damped harmonic oscillator,
+\begin{equation}
+m\ddot x + \gamma \dot x + k x = 0 ,
+\end{equation}
+is not the Euler--Lagrange equation of any Lagrangian of the ordinary
+autonomous, single-particle form $L(x,\dot x)$: the friction term breaks the
+self-adjointness that the Helmholtz conditions require. This is not merely a
+failure of imagination; it reflects the fact that a Hamilton's-principle
+Lagrangian for a single degree of freedom automatically conserves a symplectic
+volume (Liouville's theorem), while a damped oscillator's phase-space volume
+visibly contracts as the system loses energy to friction. One can restore a
+variational description, but only at a structural cost: by doubling the degrees
+of freedom (the Bateman construction, pairing the damped oscillator with a
+time-reversed, amplified partner), by using an explicitly time-dependent
+Lagrangian such as the Caldirola--Kanai form $L = e^{\gamma t/m}\big(\tfrac12
+m\dot x^2 - \tfrac12 kx^2\big)$, or by admitting non-standard
+(non-quadratic-in-velocity) Lagrangians. Each of these routes reproduces the
+correct equation of motion, but none of them is the ``obvious,''
+structure-preserving Lagrangian one would have guessed, and none is unique.
+
+The general moral is that Newtonian mechanics, understood as ``any second-order
+ODE system one likes,'' is strictly more permissive than Lagrangian mechanics:
+the class of Lagrangian-representable force laws is a proper,
+Helmholtz-constrained subset of the class of Newtonian force laws, unless one
+is willing to pay for a Lagrangian description with auxiliary variables or
+explicit time dependence.
+
+\paragraph{Global obstructions: regularity is not hyperregularity}
+Proposition~\ref{prop:regular} distinguishes \emph{regularity} (the fiber
+Hessian is nondegenerate at each point) from \emph{hyperregularity} (the fiber
+derivative $\mathbb{F}L$ is a diffeomorphism of the whole of $TQ$ onto the
+whole of $T^*Q$). The distinction matters because regularity is a purely local,
+pointwise condition, while the equivalence of the full \emph{solution spaces}
+of the Lagrangian and Hamiltonian theories is a global statement about
+$\mathbb{F}L$.
+
+A Lagrangian can be regular everywhere and still fail to be hyperregular, in
+either of two ways. First, $\mathbb{F}L$ can fail to be \emph{surjective}: if
+$L$ grows sub-quadratically in $\dot q$ at large velocity (rather than the
+quadratic-plus-lower-order growth of the usual kinetic-minus-potential form),
+the momenta $p=\partial L/\partial\dot q$ can be bounded even as $\dot
+q\to\infty$, so that some momentum values in $T^*Q$ are simply never reached,
+and the corresponding Hamiltonian trajectories have no Lagrangian counterpart.
+Second, $\mathbb{F}L$ can fail to be \emph{injective} globally even while being
+a local diffeomorphism everywhere---the fiber derivative can ``fold back'' on
+itself far from any particular point, so that two distinct velocities at the
+same base point map to the same momentum. In either case, one is forced either
+to restrict attention to a proper open subset of phase space on which
+$\mathbb{F}L$ does behave well, or to accept that the Lagrangian and
+Hamiltonian pictures describe genuinely different (if overlapping) collections
+of physically possible histories. This is a comparatively mild failure mode,
+ but it shows that even the
+textbook regularity condition, usually checked (if at all) by verifying $\det
+W_{ij}\neq 0$ at a single representative point, is not by itself sufficient for
+the global equivalence the folklore claims.
+
+\paragraph{The Hamilton--Jacobi correspondence: caustics}
+Jacobi's theorem (Proposition~\ref{prop:jacobi-thm}) is, like
+Proposition~\ref{prop:regular}, a genuine equivalence result---but, like
+Proposition~\ref{prop:regular} without hyperregularity, it is only a
+\emph{local} one, and the nondegeneracy hypothesis on the mixed Hessian
+$\partial^2S/\partial q\partial\alpha$ is not guaranteed to persist away from
+the point where it is first checked.
+
+Construct Hamilton's principal function concretely,
+fix an initial event $(q_0,t_0)$, and for each
+nearby $(q,t)$ let $S(q,t)$ be the action along the trajectory that solves
+Hamilton's equations with $q(t_0)=q_0$ and $q(t)=q$. For $S$ to be a
+well-defined, single-valued, smooth function of $(q,t)$, this connecting
+trajectory must exist and be \emph{unique}. Existence is guaranteed for short
+enough time by ordinary differential equation theory. Uniqueness is exactly
+where the conjugate points re-enter: consider the
+family of trajectories leaving $q_0$ at $t_0$ with varying initial velocity,
+and ask where two members of this family, with infinitesimally different
+initial velocity, next intersect. This is precisely the kinetic-focus
+construction, and it recurs at the same time $t_c$
+computed there. Beyond $t_c$, distinct nearby trajectories from $(q_0,t_0)$ can
+reconverge near the same later point, so more than one candidate value competes
+to be $S(q,t)$: the function becomes multivalued, its would-be smooth branches
+meeting along an envelope---the \emph{caustic}---where the Jacobian of the map
+from initial velocity to endpoint, and with it the mixed Hessian of
+Proposition~\ref{prop:jacobi-thm}, degenerates.
+
+\begin{proposition}
+\label{prop:caustic}
+Let $t_c$ be the first conjugate time to $t_0$ along a trajectory.
+    Hamilton's principal function $S(q,t)$, built
+    from trajectories issuing from $(q_0,t_0)$, is a smooth, single-valued
+    solution of the Hamilton--Jacobi equation~\eqref{HJ} for $t<t_c$, and
+    generically fails to remain single-valued for $t>t_c$, where the family of
+    trajectories develops a caustic.
+\end{proposition}
+
+Nothing dynamically singular happens to the particle at a caustic: the actual
+trajectories---the characteristics of~\eqref{HJ}---pass through it perfectly
+smoothly, exactly as they pass through the conjugate point.
+What breaks down is the specific representational
+device of Hamilton--Jacobi theory: a single, smooth, globally valid generating
+function from which the entire flow can be read off via $p=\partial S/\partial
+q$. This is the same phenomenon, and the same underlying mathematics, that
+produces caustics in geometric optics---where Hamilton first developed the
+parallel theory---and it is the classical root of the phase corrections (the
+Maslov index) that enter semiclassical, WKB-type quantization once a trajectory
+has passed through one or more foci.
+
+``The Hamiltonian and
+Hamilton--Jacobi formulations are equivalent'' is true, without qualification,
+only up to the first conjugate point; beyond it, recovering the dynamics from
+Hamilton--Jacobi theory requires patching together multiple local branches of
+$S$, or abandoning the single smooth generating function in favor of directly
+integrating~\eqref{Ham}. This has nothing to do
+with singular Lagrangians, nonholonomic constraints, or a failure of
+hyperregularity: the same one-dimensional particle in a smooth potential well
+illustrates this failure too, because
+a conjugate point in the variational sense and a point on a caustic in the
+Hamilton--Jacobi sense are the same event, described in two different
+formulations of classical mechanics.
+
+\paragraph{Non-uniqueness: the correspondence is not one-to-one in the other direction}
+Even restricting entirely to the well-behaved case---holonomic constraints, $L$
+regular and hyperregular---the map from ``the physics'' to ``a Lagrangian (or
+Hamiltonian) representing it'' is many-to-one rather than one-to-one, which
+complicates any claim that a given Lagrangian and a given Hamiltonian
+formulation are simply \emph{the} representations of one theory. Adding a total
+time derivative, $L \mapsto L + \frac{d}{dt}F(q,t)$ for arbitrary $F$, leaves
+the Euler--Lagrange equations, and hence all physical predictions, unchanged;
+more drastically, so-called $s$-equivalent Lagrangians can differ by more than
+a total derivative and still generate the same force law, again governed by the
+multiplier version of the Helmholtz analysis. On
+the Hamiltonian side, canonical transformations relate infinitely many
+distinct-looking triples $(q,p,H)$ that all describe the same underlying
+dynamics. None of this contradicts Proposition~\ref{prop:regular}---the
+\emph{solution sets} still correspond bijectively---but it means the intuitive
+picture of ``one Newtonian system, one Lagrangian, one Hamiltonian''
+understates how much freedom is built into the correspondence in both
+directions.
+
+\section{Geometric Elegance versus Coordinate Practice }
+\label{chs:geom}
+
+There are two ways to write down classical mechanics, and every
+physicist learns them in the wrong order. First comes the practical
+apparatus: pick generalized coordinates $q^i(t)$, write a Lagrangian
+$L(q,\dot q,t)$ or a Hamiltonian $H(q,p,t)$, grind through the
+Euler--Lagrange or Hamilton equations, solve. This is what one
+actually computes with, and it is indispensable --- but it is also,
+in a precise sense, an arbitrary choice of language: nothing about
+the physics singles out these particular coordinates $q^i$ over some
+other set. Only later, if at all, does a student meet the second
+formulation: configuration space as an abstract smooth manifold,
+velocities and momenta as elements of its tangent and cotangent
+bundles, the dynamics generated by a connection or a symplectic
+form defined without reference to any coordinate system whatsoever.
+
+The two formulations describe exactly the same physical content; the
+tension between them is not a tension between two theories but
+between two languages for one theory. And as with any well-chosen
+change of language, some things become obvious that were obscure,
+and some things become laborious that were once immediate. This
+chapter sets the two side by side, with a single worked example run
+in both, and asks what each buys --- and costs.
+
+\subsection{The Coordinate Form, and What It Hides}
+
+The familiar machinery needs only a brief reminder. Generalized
+coordinates $q^1,\dots,q^n$ parametrize the configurations of a
+system; the Lagrangian $L(q,\dot q,t) = T - V$ is a function of
+coordinates, velocities, and time; the equations of motion are
+\begin{equation}
+  \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
+  - \frac{\partial L}{\partial q^i} \;=\; 0,
+  \qquad i=1,\dots,n.
+  \label{el-coord}
+\end{equation}
+This is the form in which mechanics is actually solved: one grinds
+out~\eqref{el-coord} in whatever coordinates the problem hands
+you, and out comes a trajectory.
+
+Consider the simplest possible case: a free particle of mass $m$
+moving in a plane, described in plane polar coordinates $(r,\phi)$
+rather than Cartesian ones. The kinetic energy is $T =
+\tfrac12 m(\dot r^2 + r^2\dot\phi^2)$, and there is no potential, so
+$L=T$. Equation~\eqref{el-coord} gives
+\begin{equation}
+  m\ddot r - m r\dot\phi^2 \;=\; 0,
+  \qquad
+  \frac{d}{dt}\bigl(m r^2\dot\phi\bigr) \;=\; 0.
+  \label{polar-free}
+\end{equation}
+The second equation is unremarkable --- it just says angular
+momentum about the origin is conserved, as it must be for a free
+particle. The first is the interesting one: it contains a term
+$-mr\dot\phi^2$ that looks, for all the world, like an outward
+centrifugal force. There is, of course, no force of any kind acting
+on this particle; it travels in a perfectly straight line. The term
+is not physics. It is the price of insisting on writing Newton's
+second law in a coordinate system whose coordinate lines are
+curved --- exactly analogous to the centrifugal and Coriolis terms
+that appear when the same free-particle problem is worked in a
+rotating frame, except that here the "frame" is not rotating at all;
+only the \emph{coordinate grid} is curved.
+
+This is not a quirk of polar coordinates specifically. In any
+curvilinear coordinate system, extra terms of exactly this kind are
+forced to appear, because the bare second derivative $\ddot q^i$ is
+not, by itself, a coordinate-independent (tensorial) object; only the
+combination
+\begin{equation}
+  \ddot q^i + \Gamma^i_{jk}(q)\,\dot q^j\dot q^k
+  \label{covariant-accel}
+\end{equation}
+transforms correctly under a change of coordinates, where $\Gamma^i_{jk}$ are
+the Christoffel symbols of the coordinate system (built from the kinetic-energy
+metric $ds^2 = \sum_i m_i\,dq^i dq^i$). The Euler--Lagrange machinery
+automatically assembles the correctly covariant
+combination~\eqref{covariant-accel}, but it does so by generating, coordinate
+by coordinate, extra terms that read exactly like additional applied forces ---
+centrifugal, Coriolis, Euler --- even when, as here, the true physics is
+completely force-free.
+
+None of this is a defect of the coordinate approach; it is the
+coordinate approach doing exactly what it is for. This is how
+problems actually get integrated, in closed form or numerically, and
+it is the only form in which mechanics ever makes contact with a
+laboratory: no experiment outputs "a point of an abstract manifold,"
+it outputs a number, which is to say a coordinate, read off a ruler,
+a protractor, or a clock. A great deal of the technical skill of
+mechanics --- finding action-angle variables for an integrable
+system, Delaunay or Poincar\'e elements in celestial mechanics,
+normal coordinates near an equilibrium --- consists precisely in
+finding the coordinates in which a given problem's equations of
+motion become as simple as possible. Coordinate choice is not
+bookkeeping; it is frequently the whole content of solving a hard
+problem.
+
+But this leaves an uncomfortable question hanging. The same physical
+system, worked in different coordinates, can produce equations of
+motion that look wildly different in complexity, that display or
+conceal conserved quantities, that contain "force" terms present in
+one description and absent in another. Precisely because the
+coordinate form does not, by itself, distinguish physics from
+artifact, it cannot by itself answer a question that matters a great
+deal: how much of what is written on the page in
+equation~\eqref{polar-free} is actually about the world, and how
+much is only about the choice of $(r,\phi)$?
+
+\subsection{The Geometric Reformulation}
+
+\paragraph{Configuration space as a manifold}
+The geometric answer to that question begins by refusing to
+privilege any coordinate system in the first place. Configuration
+space $Q$ is taken to be an abstract smooth manifold; a specific
+choice of generalized coordinates $q^i$ is only ever a local chart on
+$Q$, one among infinitely many equally valid alternatives, and
+physical content is, by definition, whatever does not depend on
+which chart one happens to be using.
+
+Velocities of the system live in the tangent bundle $TQ$; the Lagrangian is
+intrinsically a function $L : TQ\times\mathbb R \to \mathbb R$, stated without
+reference to any coordinates at all. The Euler--Lagrange
+equations~\eqref{el-coord} themselves have a coordinate-free meaning: they are
+the flow of a specific vector field on $TQ$, picked out by the
+Poincar\'e--Cartan structure that $L$ induces on $TQ$, satisfying the
+second-order condition that this flow really does generate velocities
+consistent with positions. What one writes down in coordinates
+as~\eqref{el-coord} is the local expression of this single intrinsic object,
+valid in every chart, looking different in each.
+
+\paragraph{Phase space and the symplectic form}
+Passing (via the Legendre transform, where it is well defined) to
+the momenta $p_i = \partial L/\partial \dot q^i$ carries the
+description to the cotangent bundle $T^*Q$, the phase space. This
+space carries a canonical structure that exists with reference to no
+coordinates whatsoever: the \emph{tautological} (or Liouville) 1-form
+$\theta$, defined at a point $(q,p)\in T^*Q$ by $\theta(v) =
+p\bigl(\pi_*v\bigr)$ for any tangent vector $v$ there, where $\pi:
+T^*Q\to Q$ is the projection. Its exterior derivative $\omega =
+d\theta$ is the canonical symplectic form on $T^*Q$: closed,
+nondegenerate, and built entirely out of the bundle structure of
+$T^*Q$ over $Q$, with no reference to a coordinate system anywhere in
+its definition.
+
+Hamilton's equations are then the local expression of a single
+intrinsic equation,
+\begin{equation}
+  \iota_{X_H}\,\omega \;=\; dH,
+  \label{hamiltonian-vf}
+\end{equation}
+which defines the Hamiltonian vector field $X_H$ for any smooth
+function $H$ on phase space. In local coordinates $(q^i,p_i)$ in
+which $\theta = p_i\,dq^i$ and $\omega$ takes its standard constant
+form, \eqref{hamiltonian-vf} reproduces exactly the familiar
+\begin{equation}
+  \dot q^i \;=\; \frac{\partial H}{\partial p_i},
+  \qquad
+  \dot p_i \;=\; -\,\frac{\partial H}{\partial q^i}.
+  \label{hamilton-coord}
+\end{equation}
+Coordinates in which $\omega$ takes this simple constant form are
+called \emph{canonical}, or \emph{Darboux}, coordinates, after Gaston
+Darboux, who proved in 1882 that such coordinates always exist, at
+least locally, around every point of every symplectic
+manifold. This is a striking fact with no analogue
+in Riemannian geometry, where curvature is a genuine local invariant
+obstructing the metric from being brought to a standard flat form
+even at a single point's neighborhood. Symplectic manifolds have no
+such local invariant: every symplectic manifold of a given dimension
+looks, locally, exactly like every other one. This is precisely why
+Hamilton's equations can always be brought to the same simple
+form~\eqref{hamilton-coord}, no matter how complicated the
+physical system --- the complexity of a hard mechanics problem lives
+entirely in the choice of \emph{which} canonical coordinates to use,
+never in whether they exist.
+
+\paragraph{Canonical transformations reinterpreted}
+In the coordinate treatment, canonical transformations tend to arrive
+as a slightly mysterious piece of technology: a table of generating
+functions $F_1,F_2,F_3,F_4$, and a set of conditions to check that a
+proposed change of variables $(q,p)\mapsto(Q,P)$ preserves the form
+of Hamilton's equations. From the geometric point of view, a
+canonical transformation is simply a diffeomorphism of phase space
+that preserves $\omega$ --- a \emph{symplectomorphism}. The
+generating-function apparatus becomes a practical tool for
+constructing particular symplectomorphisms, rather than the
+definition of the concept. Darboux's theorem, in this light, is
+exactly the statement that a symplectomorphism from a neighborhood
+of any point to the flat model $(\mathbb R^{2n}, \sum dq^i\wedge
+dp_i)$ always exists: "finding canonical coordinates" and "finding a
+symplectomorphism to the standard model" are the same task, phrased
+in two vocabularies.
+
+\paragraph{Geodesics, connections, and the return of the Christoffel symbols}
+The same reinterpretation applies to the free-particle example. Motion
+generated by a Riemannian metric --- whether the plain kinetic-energy metric of
+a free system, or the Jacobi metric that reformulates a potential as pure
+geometry --- is intrinsically \emph{geodesic} motion: $\nabla_{\dot x}\dot x =
+0$, where $\nabla$ is the Levi-Civita connection of the metric, an object
+defined without reference to any coordinate chart. Written out in coordinates,
+this intrinsic equation reads
+\begin{equation}
+  \ddot x^i + \Gamma^i_{jk}(x)\,\dot x^j \dot x^k \;=\; 0,
+  \label{geodesic-coord}
+\end{equation}
+with exactly the Christoffel symbols that appeared, unbidden, as
+"fictitious centrifugal force" in equation~\eqref{polar-free}.
+That is not a coincidence or an analogy: a free particle moving in a
+straight line, described in polar coordinates, \emph{is} geodesic
+motion in the flat metric $ds^2 = dr^2 + r^2 d\phi^2$, and the
+Christoffel symbols of that metric in polar coordinates are precisely
+the coefficients that turned up as a spurious force term. "Fictitious
+force" and "Christoffel symbol" are the same object seen from two
+sides. One calls it a force only for as long as one has declined to
+think geometrically about it.
+
+\subsection{What Each Form Buys You}
+
+The geometric form earns its keep by telling you, in advance and for
+free, which features of a set of equations of motion are physical
+and which are artifacts of a chart. It explains why canonical
+transformations exist and behave the way they do (Darboux's
+theorem). It makes the relationship between symmetry and conservation
+essentially automatic: a continuous symmetry is the flow of a vector
+field preserving both $\omega$ and $H$, and when that symmetry comes
+from the action of a Lie group, the associated conserved quantity is
+the group's \emph{momentum map} --- the modern, coordinate-free
+statement of Noether's theorem.
+It also exposes genuinely global, topological facts that no single
+coordinate patch can see: the phase space of a rigid body, for
+instance, is the cotangent bundle of the rotation group $SO(3)$,
+which cannot be covered by a single nonsingular coordinate chart at
+all --- the root cause of gimbal lock, which textbooks often present
+as an engineering nuisance but which is, geometrically, an
+unavoidable topological obstruction. A coordinate singularity, on
+this view, is never a physical singularity: it is only ever the
+failure of one particular chart, repaired by changing coordinates or,
+better, by working with the coordinate-free structure directly, where
+the question of a "singularity" never even arises.
+
+The coordinate form earns its keep by being the only form in which a
+problem is actually solved, in closed form or on a computer, and the
+only form that connects directly to a measurement, which is always
+reported as a number relative to some frame. Darboux's theorem
+guarantees good coordinates exist near any point; it says nothing
+whatsoever about how to find the ones adapted to a \emph{specific}
+Hamiltonian's structure --- action-angle variables for an integrable
+system, say, which is frequently the entire technical content of
+actually solving a hard problem in mechanics. No amount of abstract
+symplectic geometry does that work for you.
+
+Seen from the perspective of the wider project of this book, the two
+forms sit on opposite sides of its recurring divide: a coordinate
+expression is what gets compared, number for number, against
+measurement, and so belongs to the "real world" side of the ledger;
+the manifold, the connection, the symplectic form are pieces of
+"ideal world" mathematics, whose entire justification is that they
+correctly organize and predict the coordinate-level facts, and
+nothing more. Neither side is dispensable, and neither is more
+fundamental than the other in any sense that would let one be
+discarded.
+
+\subsection{A Worked Contrast: The Spherical Pendulum}
+
+A single example run in both languages makes the trade-off concrete.
+A pendulum of length $\ell$ and bob mass $m$, free to swing in any
+direction, has configuration space the sphere of radius $\ell$
+centered on the pivot.
+
+\emph{Coordinate form.} Using the polar angle $\theta$ from the
+downward vertical and the azimuth $\phi$, the Lagrangian is
+\begin{equation}
+  L \;=\; \tfrac12 m\ell^2\bigl(\dot\theta^2 + \sin^2\theta\,
+  \dot\phi^2\bigr) \;+\; mg\ell\cos\theta .
+  \label{sph-pendulum-L}
+\end{equation}
+The coordinate $\phi$ does not appear in $L$ itself, so its conjugate
+momentum
+\begin{equation}
+  p_\phi \;=\; m\ell^2\sin^2\theta\,\dot\phi
+  \label{sph-pendulum-pphi}
+\end{equation}
+is conserved --- it is the angular momentum about the vertical axis
+--- and the problem reduces to an effective one-dimensional motion in
+$\theta$ alone, with effective potential $V_{\mathrm{eff}}(\theta) =
+mg\ell\cos\theta + p_\phi^2/(2m\ell^2\sin^2\theta)$. This is the form
+in which the problem is actually solved, e.g.\ by quadrature or
+numerically.
+
+\emph{Geometric form.} Configuration space is the sphere $S^2$
+itself, with the circle group $SO(2)$ acting on it by rotation about
+the vertical axis, an action that preserves the Lagrangian. The
+conservation of $p_\phi$ is nothing but the momentum map for this
+$SO(2)$ symmetry, an instance of Noether's theorem requiring no
+mention of $\theta,\phi$ at all. And the coordinate singularities of
+$(\theta,\phi)$ at the poles $\theta=0,\pi$ --- where $\phi$ becomes
+undefined and equation~\eqref{sph-pendulum-pphi} degenerates ---
+are transparently artifacts of this particular chart: $S^2$ has no
+distinguished points and no singularity there whatsoever. A pendulum
+hanging straight down, or balanced straight up, is a perfectly smooth
+physical configuration; it is only the coordinate system built from
+$(\theta,\phi)$ that breaks down at exactly those two points, for the
+same reason that all spherical coordinate systems break down at their
+poles.
+
+\subsection{Closing Remarks}
+
+The two languages are not competitors; they specialize in different
+questions. The geometric form is the place to ask what is really
+happening, structurally, and what is guaranteed to remain true no
+matter which coordinates one happens to choose. The coordinate form
+is the place --- indeed the only place --- to ask what number a
+system actually produces. A physicist who works only in coordinates
+is at permanent risk of mistaking an artifact of a chosen chart for a
+physical effect, exactly as happened, for a good part of the
+twentieth century, with the coordinate singularity of the
+Schwarzschild solution at its horizon: a singularity of the
+particular $(t,r,\theta,\phi)$ coordinates originally used to write
+the metric down, mistaken for decades for a genuine physical
+singularity of spacetime itself, and only cleared up by passing to
+coordinates (Eddington--Finkelstein, Kruskal) in which the horizon is
+manifestly perfectly smooth --- a general-relativistic descendant, on
+a much larger stage, of exactly the confusion embodied in the
+centrifugal term of equation~\eqref{polar-free}. A physicist who
+works only in the geometric language, on the other hand, has an
+elegant theory of everything and the means to compute nothing. The
+working practice of mechanics has always required both, spoken
+fluently, and switched between as the problem at hand demands.
