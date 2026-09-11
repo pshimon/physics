@@ -1,6 +1,932 @@
 \chapter{Less Known Facts}
 \label{lnf}
 
+Classical mechanics is usually presented as the most settled part of
+physics: three laws, a variational principle, and a semester of
+worked examples. By the time a student reaches quantum theory or
+general relativity, mechanics has already receded into the
+background as a body of technique rather than a live subject. This
+impression is not wrong, exactly, but it is incomplete. 
+Even such simple concept as \emph{configuration space} is not trivial.
+
+\section{Configuration Space:Deeper Insight}
+\label{lnf:cs}
+
+Let's discuss configuration space in some details. For $N$ point particles it
+is 
+\[\underbrace{\mathbb{R}^3 \times \mathbb{R}^3 \times \dots
+\times\mathbb{R}^3}_{N \text{times}}\] 
+which naturally isomorphic to
+$\mathbb{R}^{3 N}$as vector space, topological space, and smooth manifold. But
+they emphasize different structures and interpretations\footnote{In quantum 
+mechanics the contrast is much more clear if identity of particles is taken 
+into account}. For example natural
+rotation is $SO(3) \subset SO(3N)$ not $SO(3N)$, kinetic energy has natural block
+structure. 
+
+Two-dimensional isotropic harmonic oscillator and two
+identical, spatially distant, non-interacting one-dimensional oscillators have
+exactly the same configuration space, $\mathbb{R}^2$, and, once the two
+one-dimensional coordinates are laid side by side, exactly the same
+Hamiltonian. This coincidence might seem to threaten the idea that
+configuration space carries direct physical meaning: if the bare pair $(Q,H)$
+cannot distinguish ``one particle moving in a plane'' from ``two particles
+moving on separate, distant lines,'' in what sense does configuration space
+represent physical positions at all? We examine this coincidence carefully,
+show that it persists at every level of structure computable from $(Q,H)$ alone
+--- classical trajectories, the symplectic structure,
+--- and then identify precisely what additional data is needed
+to tell the two systems apart:  an embedding of $Q$ into physical space
+together with the action of the spatial isometry group, which is geometrically
+realized in one case and merely accidental in the other;
+and  the algebra of interactions that locality in physical
+space picks out as natural, which governs how each system couples to a generic
+environment. We package this as the \emph{physical dressing} of a bare
+Hamiltonian system and argue that configuration space, taken on its own, is
+best understood as a representation-dependent bookkeeping device rather than a
+self-standing arena of physical positions: its physical reading requires this
+further data as an independent postulate, not something read off the space
+itself.
+
+In elementary treatments of analytical mechanics, configuration space is often
+introduced as though it simply \emph{were} the space of physical positions of a
+system: a point $q\in Q$ is ``where the system is,'' and the Hamiltonian
+$H:T^*Q\to\mathbb{R}$ tells us how that point moves. This picture is useful
+and, for the simplest systems, harmless. But it invites a stronger reading on
+which the pair $(Q,H)$ is taken to \emph{fix} the physical system being
+described --- as if knowing the configuration manifold and the Hamiltonian
+function on it were enough to know what kind of physical situation one is
+dealing with.
+
+A simple example shows this stronger reading to be false. Consider, on the one
+hand, a single particle of mass $m$ moving in a plane under an isotropic
+harmonic restoring force (the two-dimensional isotropic oscillator), and, on
+the other hand, two particles of equal mass $m$, held very far apart, each
+independently oscillating along its own line under a harmonic force of the same
+strength. Written in the natural coordinates for each case, the two systems
+have configuration space $Q$ and Hamiltonian $H$
+\emph{identically}. There is no sense in which the bare mathematical data
+$(Q,H)$ --- or, equivalently, the classical trajectories it generates,
+--- differs between the two cases. Yet no one would say that a
+single particle vibrating in a plane and two distant, independent oscillators
+are ``the same physical system.'' Something is being smuggled in from outside
+$(Q,H)$ whenever we say what the system \emph{is}.
+
+Let us consider two systems:
+
+\paragraph{System A (the planar oscillator).} A single particle of mass $m$
+moves in a plane, subject to an isotropic harmonic potential centered on a
+fixed equilibrium point.
+
+\paragraph{System B (two distant oscillators).} Two particles, each of mass
+$m$, sit at fixed, well-separated base points in physical space and each
+oscillates, independently and without interaction, along its own fixed axis.
+
+Any account of what
+distinguishes the two systems must therefore appeal to something that is not a
+function of $(Q,H)$ alone.
+We identify  independent sources of physical structure that are not
+visible in $(Q,H)$, each of which distinguishes System A from System B once
+made explicit.
+
+The transformation $R_\theta$ identified above is, as a transformation of the
+abstract manifold $Q=\mathbb{R}^2$, a symmetry of $H$ in \emph{both} systems.
+But this bare fact does not tell us whether $R_\theta$ corresponds to anything
+happening in physical space. To ask that question we must specify an embedding
+of $Q$ into physical space $\Sigma$ (taken here to be $\mathbb{R}^3$, or a
+plane within it) that says what each coordinate \emph{is}.
+
+For System A, the natural embedding sends the single particle's configuration
+to its actual position,
+\[
+\iota_A(q_1,q_2)=\mathbf{X}^{(0)}+q_1\hat{e}_1+q_2\hat{e}_2 \ \in\ \Sigma,
+\]
+and $R_\theta$ is exactly the pushforward, under $\iota_A$, of a genuine
+rotation of physical space about the fixed point $\mathbf{X}^{(0)}$: rotating
+the lab by angle $\theta$ carries the particle from $\iota_A(q_1,q_2)$ to
+$\iota_A(R_\theta(q_1,q_2))$. The symmetry is \emph{geometric}: it is
+implemented by an isometry of $\Sigma$, it corresponds to a real conserved
+angular momentum exchangeable with other systems via torque, and it is what
+makes $L=q_1p_2-q_2p_1$ deserve the name ``angular momentum'' rather than being
+merely a conserved combination of phase-space coordinates.
+
+For System B, the natural embedding sends the pair of independent
+one-dimensional configurations to the positions of two separate particles,
+\[
+\iota_B(q_1,q_2)=\Big(\mathbf{X}_1^{(0)}+q_1\hat{n}_1,\ \
+\mathbf{X}_2^{(0)}+q_2\hat{n}_2\Big)\ \in\ \Sigma\times\Sigma,
+\]
+with $\mathbf{X}_1^{(0)}\neq\mathbf{X}_2^{(0)}$ (this is what ``distant''
+means). Here $R_\theta$ cannot be the pushforward of \emph{any} isometry of
+$\Sigma$.
+
+\begin{proposition}[Non-transfer of the rotational symmetry]
+For $\mathbf{X}_1^{(0)}\neq\mathbf{X}_2^{(0)}$, there is no isometry $\rho$ of
+    $\Sigma$ such that $\iota_B\circ R_\theta=(\rho,\rho)\circ\iota_B$ holds
+    for all $\theta$ (other than $\theta\in\pi\mathbb{Z}$).
+\end{proposition}
+
+\begin{proof}
+An isometry $\rho$ of physical space acts \emph{pointwise}: the image
+    $\rho(\mathbf{y})$ of a point $\mathbf{y}\in\Sigma$ depends only on
+    $\mathbf{y}$ itself. In particular, the would-be image of particle 2's
+    position, $\rho\big(\mathbf{X}_2^{(0)}+q_2\hat n_2\big)$, can depend only
+    on $q_2$ --- it cannot depend on $q_1$, since particle~1's displacement
+    plays no role in specifying the point $\mathbf{X}_2^{(0)}+q_2\hat{n}_2$
+    that $\rho$ is asked to act on. But the second component of
+    $\iota_B(R_\theta(q_1,q_2))$ is
+    $\mathbf{X}_2^{(0)}+(q_1\sin\theta+q_2\cos\theta)\hat n_2$, which for
+    $\sin\theta\neq 0$ depends non-trivially on $q_1$. No pointwise map can
+    reproduce this dependence, so no single isometry $\rho$ can serve as
+    $\iota_B\circ R_\theta=(\rho,\rho)\circ\iota_B$ for such $\theta$.
+\end{proof}
+
+The obstruction is not a matter of fine-tuning
+$\mathbf{X}_1^{(0)},\mathbf{X}_2^{(0)},\hat n_1,\hat n_2$; it holds however
+these are chosen, and it fails only in the degenerate limit
+$\mathbf{X}_1^{(0)}=\mathbf{X}_2^{(0)}$ --- precisely the limit in which System
+B stops being ``two distant oscillators'' and coincides with System A. So
+$R_\theta$ is, for System B, a symmetry of the Hamiltonian with no geometric
+referent: it mixes the coordinates of two causally and spatially independent
+objects in a way that no rotation, translation, or reflection of the physical
+world could ever do. It is what is sometimes called a \emph{hidden},
+\emph{accidental}, or purely \emph{dynamical} symmetry --- real as a statement
+about the equations of motion, but carrying none of the physical content
+(conservation via Noether's theorem applied to an actual spacetime symmetry,
+exchangeability of angular momentum with other systems\footnote{and appearance in a
+Wigner-Eckart-type selection rule in quantum mechanics} tied to real rotations) 
+that the same-looking
+symmetry carries in System A.
+
+\begin{remark}
+This is not special to the isotropic case $\omega_1=\omega_2$. If the two
+    frequencies differ, $H=\frac{p_1^2+p_2^2}{2m}+\frac12
+    m(\omega_1^2q_1^2+\omega_2^2q_2^2)$ still describes, term for term, both
+    ``one particle in an anisotropic planar potential'' and ``two distant,
+    differently-tuned oscillators,''. The isotropic case is simply the 
+    sharpest illustration, because
+    there the enhanced symmetry make the geometric/accidental distinction most
+    conspicuous.
+\end{remark}
+
+A second, complementary way to separate the two systems is to ask not about
+their isolated dynamics but about how they couple to the rest of the world.
+Isolation is always an idealization; a real oscillator sits in some environment
+(radiation field, phonon bath, measuring apparatus), and it is a basic fact
+about physical interactions that they are \emph{local}: an environmental degree
+of freedom that is spatially near one object couples appreciably to that object
+and negligibly to a second object located far away.
+
+For System B this has an immediate and specific consequence. Because particle~1
+and particle~2 occupy distant regions of space, generic environmental
+influences factorize: to good approximation, particle~1 couples to a bath $B_1$
+associated with its own neighborhood and particle~2 couples to an independent
+bath $B_2$ associated with its neighborhood,
+\begin{equation}
+H_{SE}\ \approx\ q_1\otimes \hat B_1 \ +\ q_2\otimes \hat B_2 ,
+\label{localcoupling}
+\end{equation}
+with $\hat B_1,\hat B_2$ statistically independent (uncorrelated) environmental
+operators. This is simply the statement that two distant systems have
+independent noise sources --- an instance of what is often called cluster
+decomposition.
+
+For System A, by contrast, there is only one particle, occupying one region of
+space, and a generic local environmental influence acts at that single
+location. Such an influence couples to some particular direction $\hat
+n\cdot(q_1,q_2)$ in configuration space determined by the geometry of the
+perturbation (e.g.\ the direction of a stray field at the particle's location),
+not separately and independently to $q_1$ and $q_2$; arranging two independent
+environments that couple exclusively along the $q_1$-axis and the $q_2$-axis
+respectively, at one and the same spatial point, is not something locality
+delivers for free, the way \eqref{localcoupling} is delivered for free in
+System B --- it would need to be imposed by hand. There is consequently no
+generic physical reason for a local environment to single out the particular
+coordinate split $(q_1,q_2)$, as opposed to any rotated pair
+$(q_1',q_2')=R_\theta(q_1,q_2)$.
+
+\paragraph{Normal modes.} The same moral appears, in a sense running the other
+way, in the theory of coupled oscillators. A collection of masses connected by
+springs, in general spatially local and physically coupled, has a Hamiltonian
+that, after diagonalization in terms of normal-mode coordinates, takes exactly
+the form of a set of \emph{decoupled} one-dimensional oscillators, $H=\sum_k
+\big(P_k^2/2+\frac12\Omega_k^2 Q_k^2\big)$. If one only looked at this final,
+diagonal $(Q,H)$, one might be tempted to read it as describing independent,
+uncoupled particles. But the normal-mode coordinates $Q_k$ are collective
+variables, each typically a linear combination of every original particle's
+displacement; a perturbation local to one physical mass is, in normal-mode
+space, generically \emph{non-local}, spreading across many or all of the $Q_k$.
+
+\section{Canonical Transformations and the Roll-Back }
+
+Canonical transformations are among the most powerful computational tools in
+mechanics: a well-chosen change of phase-space coordinates can turn an
+intractable Hamiltonian into a trivial one, and action--angle variables in
+particular underlie Hamilton--Jacobi theory, adiabatic invariance, and
+canonical perturbation theory. But canonicity --- preservation of the
+symplectic form, or equivalently of the Poisson-bracket structure --- is a
+purely formal property, and by itself it guarantees only that a transformation
+is \emph{locally} invertible near points where a mild non-degeneracy condition
+holds. It says nothing about whether the transformation is globally defined,
+single-valued, or, when constructed perturbatively as a formal series,
+convergent at all. 
+
+We propose that a set of canonically transformed variables
+carries physical meaning as a description of a system's own state exactly to
+the extent that it can be \emph{rolled back}: mapped, exactly or with
+controlled approximation, back to the system's actual positions and velocities.
+We examine where this holds and where it fails. 
+
+For a single degree of freedom,
+action--angle variables roll back essentially perfectly, modulo an ordinary
+coordinate degeneracy at equilibrium and the need for separate charts across a
+separatrix; for several degrees of freedom, complete integrability can still
+obstruct a single \emph{global} choice of action--angle variables for a purely
+topological reason (Hamiltonian monodromy). 
+
+Most importantly, for generic
+near-integrable systems we derive explicitly the small-divisor terms that
+appear in canonical perturbation theory and explain, following Poincar\'e,
+Kolmogorov--Arnold--Moser, and Nekhoroshev, why the transformation to
+action--angle-like variables generically fails to converge at all: what
+survives is not an exact roll-back but a controlled, finite-order
+approximation, valid up to quantifiable and typically exponentially small error
+over long but finite times.
+
+We close with a structurally identical obstruction
+in quantum mechanics --- the non-existence of a global phase operator
+canonically conjugate to the number operator --- and relate the whole
+discussion to a companion analysis of what further data, beyond bare
+Hamiltonian structure, is required for mathematical formalism to carry physical
+content.
+
+Much of the power of Hamiltonian mechanics comes from the freedom to change
+coordinates. A canonical transformation --- one that preserves the symplectic
+form $\mathrm{d} q\wedge \mathrm{d} p$, or equivalently the canonical Poisson
+brackets --- leaves Hamilton's equations in their canonical form no matter how
+violently it scrambles $q$ and $p$ together. This freedom is what makes
+Hamilton--Jacobi theory, adiabatic invariants, and canonical perturbation
+theory possible: one looks for the canonical transformation that makes the new
+Hamiltonian as simple as possible, ideally a function of the new momenta alone,
+so that the new coordinates evolve trivially. Action--angle variables are the
+paradigm case: for an integrable system they turn the dynamics into uniform
+rotation on a torus, $\dot\theta_i=\omega_i(J)=\text{const}$, $\dot J_i=0$, and
+the actions $J_i$ acquire the status of conserved quantities with an almost
+thermodynamic flavor --- they survive slow (adiabatic) changes in the
+Hamiltonian, they quantize cleanly in the old quantum theory, and they organize
+the whole theory of nearly integrable systems.
+
+It is tempting, given how much work these new variables do, to treat them as
+themselves physical: to say that the system \emph{is}, in some direct sense, at
+action $J$ and phase $\theta$, the way one would say a particle \emph{is} at
+position $q$ with velocity $\dot q$. But canonicity, on its own, does not
+license this. Canonicity is a structural property --- it says the new variables
+are \emph{legitimate coordinates on the same phase space}, nothing more.
+Whether those coordinates correspond to anything one could, even in principle,
+read off the system's actual motion is a separate question, and it is the
+question this section takes up. We propose a simple criterion: a canonically
+transformed variable earns physical standing exactly to the extent that the
+transformation that produced it can be \emph{rolled back} --- inverted, exactly
+or with controlled approximation, to recover the system's physical coordinates
+and velocities. Where roll-back holds, the new variables are not just
+convenient bookkeeping; they are legitimate redescriptions of the same physical
+facts. Where it fails, the new variables may still solve Hamilton's equations
+formally and generate correct approximations, but the physical claims one is
+tempted to make in terms of them --- ``the action is conserved,'' ``the system
+has phase $\theta$'' --- need independent justification, and generically only
+survive in an approximate, time-limited form.
+
+This is a companion question to one addressed in section~\ref{lnf:cs} 
+there, the issue was
+whether a bare configuration space and Hamiltonian, on their own, fix what
+physical system is being described at all.
+ Here we hold the physical system fixed and ask
+a narrower question: given that $(q,p)$ already denote an actual system's
+position and momentum, when does a further canonical transformation
+$(q,p)\mapsto(Q,P)$ preserve that physical standing? The two questions share a
+moral --- that mathematical structure preserved by a transformation (symplectic
+form, Hamiltonian form-invariance) is weaker than physical content preserved by
+it --- applied to two different steps of the same formalism.
+
+We take the physical state of a system with $n$ degrees of freedom to be its
+actual, in-principle-measurable positions and velocities, $(q,\dot q)\in TQ$.
+Given a regular Lagrangian $L(q,\dot q)$ --- meaning $\det\!\big(\partial^2
+L/\partial \dot q_i\partial \dot q_j\big)\neq0$ --- the Legendre transform
+$p_i=\partial L/\partial \dot q_i$ is itself invertible for $\dot q$ at fixed
+$q$, by the implicit function theorem. This is worth flagging explicitly
+because it is the first, usually invisible, instance of the theme of this section:
+$(q,p)$ and $(q,\dot q)$ carry exactly the same physical information only
+because this particular transformation happens to be invertible.\footnote{It
+can fail: for a singular (degenerate) Lagrangian, as in gauge theories or
+systems with constraints, the Legendre transform is not invertible and the
+passage to Hamiltonian mechanics requires the separate machinery of constrained
+(Dirac--Bergmann) Hamiltonian dynamics. We set this aside here and assume a
+regular Lagrangian throughout.} We take $(q,p)$, so obtained, as already
+\emph{physical} in the relevant sense: they are the given, dressed, measurable
+coordinates of the system, and the question of this section is what happens to
+that status under a further, generic canonical transformation.
+
+\begin{definition}[Canonical transformation]
+A map $\Phi:(q,p)\mapsto(Q,P)$ is \emph{canonical} if it preserves the
+    canonical symplectic form, $\mathrm{d} Q\wedge\mathrm{d} P=\mathrm{d}
+    q\wedge \mathrm{d} p$ (summed over degrees of freedom), equivalently if
+    $\{Q_i,P_j\}_{q,p}=\delta_{ij}$, $\{Q_i,Q_j\}_{q,p}=\{P_i,P_j\}_{q,p}=0$.
+    Such a $\Phi$ leaves Hamilton's equations in canonical form for any
+    Hamiltonian: if $H(q,p)$ generates the dynamics of $(q,p)$, then
+    $H(q(Q,P),p(Q,P))$ generates the same dynamics, expressed in $(Q,P)$, again
+    in canonical form.
+\end{definition}
+
+Canonical transformations are usually constructed from generating functions
+--- $F_1(q,Q)$, $F_2(q,P)$, $F_3(p,Q)$, or $F_4(p,P)$ --- via relations such as
+$p=\partial F_2/\partial q$, $Q=\partial F_2/\partial P$. Given such an $F_2$,
+the implicit function theorem guarantees that the equations $p=\partial
+F_2/\partial q(q,P)$ can be solved locally for $P$ in terms of $(q,p)$ wherever
+the Hessian $\partial^2F_2/\partial q\,\partial P$ is non-degenerate, and that
+the resulting $\Phi$ is, near such a point, a local diffeomorphism with a
+well-defined local inverse.
+
+This is the entirety of what canonicity, on its own, hands you: local
+invertibility near non-degenerate points. It hands you nothing about:
+\begin{itemize}
+\item \textbf{Global invertibility.} A local diffeomorphism need not be
+    injective globally; the same $(Q,P)$ can, in principle, correspond to
+        several different $(q,p)$, or the domain of validity can fail to cover
+        the region of phase space one actually cares about.
+\item \textbf{Explicit invertibility.} Even where a genuine global inverse
+    exists, it need not be expressible in closed form; it may require solving a
+        transcendental equation.
+\item \textbf{Convergence, when $\Phi$ is constructed as a formal series.} This
+    is the case that matters most for what follows. In canonical perturbation
+        theory one typically builds $F_2=qP+\epsilon
+        F_2^{(1)}(q,P)+\epsilon^2F_2^{(2)}(q,P)+\cdots$ order by order in a
+        small parameter, so as to simplify $H$ order by order. Each
+        \emph{finite truncation} of this series is an honest generating
+        function, defining an honest, locally canonical, locally invertible
+        transformation. But canonicity of every finite truncation implies
+        nothing whatsoever about whether the full, infinite series converges to
+        an actual transformation at all. A formal power series that is
+        ``canonical order by order'' can still fail to define any map.
+\end{itemize}
+
+It is easy to build a sequence of
+perfectly good canonical transformations, each one closer to eliminating some
+unwanted feature of the Hamiltonian, without the sequence converging to a
+well-defined transformation in the limit --- in which case the ``variables''
+one would obtain in that limit are a formal fiction, however useful the finite
+approximations to them may be.
+
+
+\begin{definition}[Roll-back]
+Let $(q,p)$ be given, physically dressed coordinates of a system, and let
+    $\Phi:(q,p)\mapsto(Q,P)$ be a canonical transformation. We say $(Q,P)$
+    \emph{rolls back} on a domain $\mathcal U$ of phase space if $\Phi$
+    restricted to $\mathcal U$ is invertible and its inverse $\Phi^{-1}$ is
+    available --- exactly, or as a controlled approximation with quantified
+    error over a quantified domain or time interval --- so that $(q,p)$ can be
+    recovered from $(Q,P)$ on $\mathcal U$.
+\end{definition}
+
+\begin{proposition}[Roll-back criterion]
+$(Q,P)$ have physical sense as descriptors of the system's own actual state, on
+    $\mathcal U$, if and only if $(Q,P)$ roll back on $\mathcal U$.
+\end{proposition}
+
+It is useful to distinguish grades of roll-back, since they
+carry different physical weight:
+\begin{enumerate}
+\item \emph{Exact and global}: an inverse exists and is single-valued over the
+    whole domain of physical interest. Physical quantities computed from
+        $(Q,P)$ (their conservation, their value, their rate of change) are
+        then exactly physical quantities.
+\item \emph{Exact but only chart-wise}: the domain must be covered by several
+    patches, each with its own transformation and its own inverse, glued
+        together at their boundaries (possibly with a nontrivial transition
+        rule). Physical sense holds patch by patch, but a single global formula
+        for ``the'' action or angle may not exist.
+\item \emph{Approximate, with controlled error}: only a finite truncation of a
+    formal transformation is used; the inverse recovers $(q,p)$ up to a
+        quantified error, valid for a quantified range of the small parameter
+        or a quantified time interval. Physical statements made in terms of
+        $(Q,P)$ --- e.g., ``this action is conserved'' --- inherit exactly that
+        qualification: approximately true, with a stated and generically
+        non-removable error.
+\item \emph{No roll-back}: the transformation is only formal, and does not
+    converge to any map at all. $(Q,P)$ remain useful for organizing a
+        calculation, but carry no independent physical content; in particular,
+        nothing licenses treating a formally ``conserved'' quantity built this
+        way as actually conserved.
+\end{enumerate}
+
+\paragraph{The Good Case, and Its Hidden Subtleties}
+
+Let $H(q,p)$ have closed level curves $H(q,p)=E$ for $E$ ranging over some open
+interval, and define the action
+\begin{equation}
+J(E)=\frac{1}{2\pi}\oint_{H=E} p\,\mathrm{d} q .
+\label{actiondef}
+\end{equation}
+On any interval where the corresponding period, equivalently the frequency
+$\omega(E)=\mathrm{d} H/\mathrm{d} J$, is finite and nonzero, $J(E)$ is a
+smooth, strictly monotonic function of $E$ and is therefore invertible,
+$E=E(J)$. Hamilton's characteristic function $W(q,J)=\int^q
+p\big(q',E(J)\big)\,\mathrm{d} q'$, with the correct sign of $p$ chosen on each
+half of the orbit, generates the transformation via $p=\partial W/\partial q$,
+$\theta=\partial W/\partial J$; inverting the second relation for $q$ at fixed
+$J$ is guaranteed locally by the implicit function theorem wherever $\partial
+p/\partial J\neq0$.
+
+For the harmonic oscillator, $H=p^2/2m+\tfrac12 m\omega^2q^2$, the enclosed
+phase-space area is that of an ellipse with semi-axes $\sqrt{2E/(m\omega^2)}$
+and $\sqrt{2mE}$, giving $J=E/\omega$, i.e.\ $E=\omega J$, and the
+transformation can be written explicitly and in closed form:
+\begin{equation}
+q(J,\theta)=\sqrt{\frac{2J}{m\omega}}\sin\theta,
+    \qquad p(J,\theta)=\sqrt{2Jm\omega}\cos\theta .
+\label{hoexplicit}
+\end{equation}
+
+One checks directly that
+$p^2/2m+\tfrac12m\omega^2q^2=J\omega(\cos^2\theta+\sin^2\theta)=\omega J$,
+confirming $H=\omega J$, and that $\{q,p\}=1$, confirming canonicity.
+Equation~\eqref{hoexplicit} \emph{is} the roll-back map, and it is defined,
+single-valued, and smooth on the whole domain $J\ge0$, $\theta\in[0,2\pi)$:
+given any $(J,\theta)$ one reads off a definite $(q,p)$. It degenerates in only
+one place, at $J=0$, where every value of $\theta$ maps to the same point
+$(q,p)=(0,0)$ --- the ordinary, entirely benign coordinate degeneracy familiar
+from polar coordinates at the origin, and one with a clean physical reading: a
+system at rest at equilibrium has no well-defined phase of oscillation to speak
+of. It is the \emph{opposite} direction, computing $\theta$ from a given
+$(q,p)$, that is genuinely ill-defined at that single point; the roll-back
+direction that this section is concerned with is, for the harmonic oscillator,
+essentially perfect.
+
+The good behavior above used that $H=E$ has closed level curves
+throughout the range of interest. Many systems of interest --- the pendulum
+being the canonical example --- have both closed orbits (libration, for
+energies below that of the unstable equilibrium) and open, unbounded-in-angle
+orbits (rotation, for energies above it), separated by a separatrix at the
+critical energy itself. The definition~\eqref{actiondef} needs a different
+topological cycle on each side --- integrate over the bounded libration range
+on one side, over a full $2\pi$ period of $q$ on the other --- and each choice
+generates its own, separately well-behaved action--angle chart, with roll-back
+exactly as good as above within its own domain. But the two charts do
+not merge into one: as the energy approaches the separatrix from either side,
+the frequency $\omega(E)\to0$ (the period diverges, logarithmically, as the
+orbit spends ever longer asymptotically approaching the unstable equilibrium),
+and the map to $(J,\theta)$ becomes singular there; the separatrix itself
+supports no action--angle description at all. Even in the unambiguously
+``good'' case of one degree of freedom, then, roll-back is generically
+available only chart by chart, in the sense of grade~(b) above, not as a single
+global formula --- an elementary illustration that even benign cases carry a
+caveat worth stating explicitly.
+
+A sharper and less well known version of the same caveat survives even complete
+integrability with several degrees of freedom. The Arnold--Liouville theorem
+guarantees that, near any regular compact invariant torus of
+an integrable system with $n$ commuting integrals in involution, action--angle
+variables exist and roll back exactly. One might
+expect these local charts to always patch together into a single global set of
+action variables over the whole region foliated by such tori. Duistermaat
+showed that this expectation can fail for a purely topological reason he called
+\emph{monodromy}: transporting the local action--angle
+chart around a closed loop in the space of tori that encircles a certain kind
+of singular fiber (a ``focus--focus'' point) can return a chart related to the
+original one by a nontrivial integer linear transformation, rather than the
+identity. When this happens, no single-valued, globally consistent choice of
+action variables exists over the punctured region, even though every individual
+torus in it carries a perfectly good local action--angle description that rolls
+back exactly. The spherical pendulum --- a mass constrained to a sphere in a
+uniform gravitational field, an utterly integrable, textbook system with no
+small denominators anywhere in sight --- is the paradigm example of this
+phenomenon. It is a
+useful corrective to any temptation to think that the obstructions to roll-back
+discussed in this section are all, at bottom, a matter of insufficient convergence
+in a perturbative expansion: here there is no perturbation at all, only global
+topology.
+
+\paragraph{The Bad Case: Small Divisors }
+
+We now turn to the  central example: an integrable system with $n\ge2$
+degrees of freedom, subjected to a generic small perturbation. Let
+$\theta=(\theta_1,\dots,\theta_n)\in\mathbb T^n$, $J=(J_1,\dots,J_n)$ be
+action--angle variables for the unperturbed, integrable Hamiltonian $H_0(J)$,
+and consider
+\begin{equation}
+H(J,\theta;\epsilon)=H_0(J)+\epsilon H_1(J,\theta),
+    \qquad H_1(J,\theta)=\sum_{k\in\mathbb Z^n}H_{1,k}(J)\,e^{ik\cdot\theta} ,
+\label{pertH}
+\end{equation}
+with $H_1$ real and periodic in each $\theta_i$, hence expandable in a Fourier
+series with $H_{1,-k}=\overline{H_{1,k}}$. Write $\omega(J)=\partial
+H_0/\partial J$ for the unperturbed frequency vector. We seek a near-identity
+canonical transformation $(J,\theta)\mapsto(J',\theta')$, generated by
+\begin{equation}
+S(\theta,J';\epsilon)=\theta\cdot J'+\epsilon S_1(\theta,J')+O(\epsilon^2),
+    \qquad J=\frac{\partial S}{\partial\theta},
+    \quad \theta'=\frac{\partial S}{\partial J'},
+\label{genfn}
+\end{equation}
+chosen so as to remove the $\theta$-dependence of the Hamiltonian at order
+$\epsilon$: $H'(J')=H_0(J')+\epsilon\overline{H}_1(J')+O(\epsilon^2)$, with
+$\overline H_1(J')\equiv H_{1,0}(J')$ the angle-average of $H_1$.
+
+\begin{proposition}[The homological equation and the small divisor]
+To first order in $\epsilon$, the generating function in~\eqref{genfn} must
+    satisfy
+\begin{equation}
+\omega(J')\cdot\frac{\partial S_1}{\partial\theta}(\theta,J')
+    =\overline H_1(J')-H_1(J',\theta) .
+\label{homological}
+\end{equation}
+Writing $S_1(\theta,J')=\sum_{k\neq0}S_{1,k}(J')\,e^{ik\cdot\theta}$ (the $k=0$
+    term may be dropped without loss of generality, as it is physically inert),
+    the unique solution is
+\begin{equation}
+S_{1,k}(J')=\frac{i\,H_{1,k}(J')}{\omega(J')\cdot k},\qquad k\in\mathbb Z^n\setminus\{0\}.
+\label{smalldivisor}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+From~\eqref{genfn}, $J=J'+\epsilon\,\partial_\theta
+    S_1(\theta,J')+O(\epsilon^2)$. Substituting into~\eqref{pertH} and
+    Taylor-expanding $H_0$ about $J'$,
+\[
+H(J,\theta)=H_0(J')+\epsilon\,\omega(J')\cdot\partial_\theta S_1(\theta,J')+\epsilon H_1(J',\theta)+O(\epsilon^2).
+\]
+Demanding that this equal $H_0(J')+\epsilon\overline H_1(J')+O(\epsilon^2)$,
+    independent of $\theta$, gives~\eqref{homological}. Expanding both sides in
+    Fourier modes $e^{ik\cdot\theta}$: the $k=0$ mode gives $\overline
+    H_1=H_{1,0}$, consistent by definition; for $k\neq0$, $\partial_\theta
+    S_1=\sum_{k\neq0}ik\,S_{1,k}\,e^{ik\cdot\theta}$, so matching coefficients
+    gives $i\,(\omega(J')\cdot k)\,S_{1,k}(J')=-H_{1,k}(J')$, which
+    is~\eqref{smalldivisor}.
+\end{proof}
+
+Equation~\eqref{smalldivisor} is the small-divisor problem in its simplest,
+first-order form: the generating function that removes the $\theta$-dependence
+of $H$ to $O(\epsilon)$ requires dividing each Fourier component of the
+perturbation by $\omega(J')\cdot k$, and this quantity can be made arbitrarily
+small (or exactly zero) by choosing $J'$ near a resonance, $\omega(J')\cdot
+k\approx0$. For $n\ge2$, the resonant hypersurfaces $\{\omega(J')\cdot k=0\}$,
+one for each nonzero $k\in\mathbb Z^n$, form a countable union of hypersurfaces
+that is \emph{dense} in action space (though of Lebesgue measure zero) ---
+exactly as the rationals are dense in the reals. So for essentially any $J'$
+one cares about, there are Fourier modes $k$ for which $\omega(J')\cdot k$ is
+arbitrarily small, and whenever the corresponding $H_{1,k}(J')$ does not vanish
+there too (the generic case), the series $S_1=\sum_k S_{1,k}e^{ik\cdot\theta}$
+either fails to converge outright or, if $H_1$ is a trigonometric polynomial
+with only finitely many nonzero $H_{1,k}$, is well-defined at first order but
+only on the complement of finitely many resonant hypersurfaces --- already an
+obstruction to a single global chart, and one that compounds severely at higher
+orders.
+
+This is, in essence, the discovery Poincar\'e made in his study of the
+three-body problem: he showed that the formal series one would need to
+construct a convergent transformation to action--angle-like variables for a
+generic perturbed integrable system --- equivalently, to exhibit a second,
+independent conserved quantity beyond energy --- generically fails to converge,
+precisely because of the accumulation of ever-smaller divisors at ever-higher
+orders in $\epsilon$. In modern language: a generic
+near-integrable Hamiltonian system with two or more degrees of freedom is
+\emph{not} integrable, and the formal ``action--angle variables to all orders''
+that canonical perturbation theory tries to construct do not, in general, exist
+as an honest canonical transformation at all. Grade (d)  is the
+generic situation, not a pathological exception.
+
+What survives this negative result is two-fold, and both parts matter for how
+one should actually think about the physical status of near-integrable
+``actions.''
+
+\paragraph{Kolmogorov--Arnold--Moser (KAM).} If $H_1$ is sufficiently smooth
+(real-analytic is the classical hypothesis) and $H_0$ is non-degenerate
+($\det(\partial^2H_0/\partial J^2)\neq0$, so that $\omega$ is a genuine local
+diffeomorphism of $J$-space), then for those $J'$ whose frequency vector
+satisfies a Diophantine condition,
+\begin{equation}
+|\omega(J')\cdot k|\ \ge\ \frac{\gamma}{|k|^{\tau}}
+    \qquad\text{for all }k\in\mathbb Z^n\setminus\{0\},
+\label{diophantine}
+\end{equation}
+for some $\gamma>0$ and $\tau>n-1$, the small denominators
+in~\eqref{smalldivisor} and its higher-order analogues are controlled well
+enough, order by order, that the full transformation converges after all, for
+$\epsilon$ small enough. This is the Kolmogorov--Arnold--Moser theorem:
+the invariant tori with
+sufficiently irrational frequencies survive the perturbation, carrying genuine,
+exactly rolled-back action--angle variables (grade (a)/(b),
+restricted to this torus), while the resonant and near-resonant tori --- dense
+in the unperturbed action space, though of shrinking total measure as
+$\epsilon\to0$ --- are generically destroyed. The set of surviving tori is a
+Cantor set: positive measure, but nowhere dense, for any fixed $\epsilon>0$. So
+even the positive part of the resolution is not a blanket rescue of
+action--angle variables; it identifies a fractal subset of phase space on which
+they happen to still make exact physical sense.
+
+\paragraph{Nekhoroshev.} Away from that Cantor set --- which is to say, for the
+``rest'' of phase space, including all of it once $\epsilon$ is not small
+enough for KAM's asymptotic hypotheses to bite --- one can still salvage grade
+(c) roll-back. Truncate the generating function at some finite order $N$ in
+$\epsilon$: $S=\theta\cdot J'+\epsilon S_1+\cdots+\epsilon^N S_N$. This is a
+finite sum, hence perfectly well-defined (no convergence question arises for a
+finite sum), and it defines an honest, exactly invertible canonical
+transformation, valid away from the finitely many resonances that appear up to
+order $N$. The new Hamiltonian is $H'(J')=H_0(J')+O(\epsilon^{N+1})$: not
+independent of $\theta'$ exactly, only up to a residual term of order
+$\epsilon^{N+1}$, so $J'$ is not exactly conserved, only approximately so.
+Nekhoroshev's theorem makes this quantitative: for $H_0$ satisfying a mild
+geometric condition (convexity or ``steepness''), the order $N$ can be
+optimized as a function of $\epsilon$ so that
+\begin{equation}
+\big\|J'(t)-J'(0)\big\|\ \le\ C\,\epsilon^{b}\qquad\text{for all }|t|\ 
+    \le\ T(\epsilon)=\exp\!\big(c/\epsilon^{a}\big),
+\label{nekhoroshev}
+\end{equation}
+for suitable positive constants $a,b,c$ depending on $n$ and on $H_0$. This is
+the honest final status of ``the action'' for a generic near-integrable system:
+not an exactly conserved quantity (Poincar\'e's result forbids that,
+generically), and not merely a useless formal symbol either, but a grade-(c)
+approximately-rolled-back quantity, drifting by an amount that is smaller than
+any power of $\epsilon$ and stays small for a time longer than any power of
+$1/\epsilon$ --- for all practical purposes constant, without actually being
+so.
+
+The moral is: canonicity
+at any finite order is free --- truncated perturbation theory always defines an
+honest, exactly-invertible transformation --- but the thing one actually wants,
+a convergent transformation to genuinely conserved action variables, is a
+strictly stronger, generically false condition. What one gets instead,
+generically, sits precisely at grade~(c): a controlled, quantitatively
+excellent, but not exact roll-back.
+
+\paragraph{Adiabatic invariants.} The same construction --- a near-identity
+canonical transformation built as a formal series in a small parameter,
+convergent nowhere in general but truncatable to give an excellent finite-order
+approximation --- underlies the classical theory of adiabatic invariants for a
+Hamiltonian that depends on time through a slowly varying external parameter,
+rather than through an autonomous perturbation. There too the relevant action
+is conserved not exactly but up to an error that is smaller than any power of
+the slowness parameter (and, under further regularity assumptions,
+exponentially small in it); this is the mathematical fact
+underlying, for instance, the practical near-conservation of the magnetic
+moment of a charged particle gyrating in a slowly varying magnetic field, a
+cornerstone of plasma confinement theory. The physical status of such an
+adiabatic invariant is exactly grade~(c): extremely good, quantitatively
+controlled, and not exact.
+
+Canonicity is cheap: it is preserved by composition, by formal power series
+manipulation order by order, and it guarantees, at best, local invertibility
+near non-degenerate points. None of this is the same as physical
+meaningfulness. We have proposed that a canonically transformed variable earns
+the latter exactly when it can be rolled back --- mapped back to the system's
+actual, physically dressed positions and velocities, exactly or with quantified
+approximation. Action--angle variables for a single degree of freedom very
+nearly achieve the strongest grade of this, modulo an entirely benign
+coordinate degeneracy at equilibrium and the mild inconvenience of needing
+separate charts across a separatrix. Beyond one degree of freedom, two
+independent obstructions appear, of quite different character: a purely
+topological one, Hamiltonian monodromy, which can prevent a single global
+choice of action--angle variables even for an exactly integrable system with no
+small divisors anywhere; and an analytic one, the small-divisor problem of
+canonical perturbation theory, which generically prevents a convergent
+transformation to action--angle variables for a perturbed integrable system at
+all, leaving only the approximate, finite-order, but remarkably good roll-back
+captured by KAM and Nekhoroshev theory. In every case, the lesson is the same
+one that motivated this inquiry: a transformation's preserving the formal
+structure of mechanics does not by itself transport physical meaning through
+it. That transport is a further, checkable condition, and checking it is what
+tells you whether the elegant new variables you have constructed describe your
+system, or merely compute it.
+
+\section{Symmetry}
+\label{lnf:sim}
+Symmetry is often introduced to students as a single, monolithic idea: ``the
+Lagrangian is invariant under such-and-such transformation, therefore there is
+a conserved quantity, therefore the system respects the symmetry.'' In
+practice, the situation is considerably richer, and the richness is not a
+technicality but the source of some of the deepest phenomena in physics, from
+the accidental degeneracies of the Kepler problem to the existence of the
+electron mass and the pion.
+
+It is useful to keep three distinct objects in view:
+\begin{enumerate}
+\item the \textbf{Lagrangian} (or action, or Hamiltonian) that \emph{defines} 
+    the dynamics;
+\item the \textbf{equations of motion} (EOM) that it \emph{generates}; and
+\item an actual \textbf{solution} of those equations, singled out by initial
+    or boundary data;\footnote {or, in a many-body/field-theoretic setting, 
+        the state that is actually realized as the ground state or equilibrium 
+        configuration of the system.}
+\end{enumerate}
+Each of these objects has its own symmetry group, and the three groups need not
+coincide. Two inclusions organize the entire subject:
+\begin{itemize}
+    \item $G_L \subseteq G_{EOM}$: \emph{every symmetry of the Lagrangian is a
+        symmetry of the equations of motion, but the equations of motion can
+        admit strictly more symmetry than is manifest in the Lagrangian one
+        wrote down.} 
+    \item $G_{sol} \subseteq G_{EOM}$: \emph{a particular solution, or a
+        particular physically realized state, generally respects only a
+        subgroup of the symmetry of the equations that produced it.} 
+        Asymmetry is put in by hand
+        through the choice of initial or boundary data. This is contingent:
+        choosing symmetric data restores a symmetric solution, and averaging
+        over the group orbit of solutions restores the full symmetry at the
+        ensemble level.\footnote{In systems with infinite number of
+        degrees of freedom another mechanism --- Spontaneous Symmetry
+        Breaking --- may exist. The Lagrangian, the equations of motion,
+        \emph{and} the boundary conditions are all fully symmetric, and yet the
+        stable, physically realized solution is not. This is not contingent: it
+        is a structural consequence of the existence of a degenerate manifold
+        of energy-minimizing (or free-energy-minimizing) configurations,
+        together with an instability of the symmetric configuration and, in the
+        case of a genuine phase transition, the thermodynamic (infinite-volume)
+        limit.}
+\end{itemize}
+
+\section{$G_L$ vs $G_{EOM}$}
+\label{LvsEOM}
+
+Let $q^a(t)$, $a=1,\dots,n$, be generalized coordinates on a 
+configuration
+space $Q$, with Lagrangian $L(q,\dot q,t)$ and action
+\[
+S[q] = \int_{t_1}^{t_2} L(q(t),\dot q(t),t)\,dt .
+\]
+The Euler--Lagrange (EL) operator acting on $L$ is
+\[
+[L]_a = \frac{\partial L}{\partial q^a} - 
+\frac{d}{dt}\frac{\partial L}{\partial \dot q^a}
+\]
+and the equations of motion are $[L]_a=0$.
+
+\begin{definition}[Variational / Noether symmetry]
+An infinitesimal transformation $\delta q^a = \epsilon X^a(q,\dot q,t)$ is a
+    \emph{variational symmetry} of $L$ if there exists a function $F(q,\dot
+    q,t)$ such that, \emph{identically in $q(t)$} (not only on solutions),
+    $\delta L=\epsilon \tfrac{dF}{dt}$. Equivalently, the action changes only by
+    a boundary term, $\delta S = \epsilon\big[F\big]_{t_1}^{t_2}$, for
+    arbitrary paths, not just extremal ones.
+\end{definition}
+
+\begin{definition}[Symmetry of the equations of motion]
+A transformation $g$ (finite or infinitesimal) is a \emph{symmetry of the EOM},
+    or a \emph{dynamical symmetry}, if it maps every solution of $[L]_a=0$ to 
+    another solution of the \emph{same} equations, i.e. it maps the solution 
+    set to itself. No reference to the action or to boundary terms is required 
+    by this definition.
+\end{definition}
+
+\begin{proposition}
+\label{noether-forward}
+Every variational symmetry of $L$ is a symmetry of the equations of motion. In
+    symbols, $G_L \subseteq G_{EOM}$.
+\end{proposition}
+
+\begin{proof}[Proof (standard, physicist's level)]
+Two facts are needed.
+\emph{(a) The EL operator annihilates total time derivatives.} 
+    identically  in $q(t)$ — not merely on shell.
+
+\emph{(b) A change of path is a change of path, regardless of whether it is
+    a symmetry.} Consider the one-parameter family of paths 
+    $q_\epsilon(t) = q(t) + \epsilon X(q(t),\dot q(t),t) + O( \epsilon^2)$, 
+    for \emph{arbitrary} $q(t)$, not necessarily a solution. By hypothesis,
+\[
+L(q_\epsilon,\dot q_\epsilon,t) = L(q,\dot q,t) + \epsilon\, \frac{dF}{dt} + O(\epsilon^2)
+\]
+identically in $q(t)$. Hence the action evaluated on $q_\epsilon$ differs from
+    the action evaluated on $q$ only by the boundary term
+    $\epsilon[F]_{t_1}^{t_2}$, \emph{for every path, not only extremal ones}.
+    Consequently $q(t)$ is a stationary point of $S$ under variations that
+    vanish at the endpoints if and only if $q_\epsilon(t)$ is — because the two
+    actions differ by a term that does not depend on the interior of the path
+    at all. Since ``being a solution of $[L]_a=0$'' is exactly the statement of
+    being such a stationary point, $q(t)$ solves the EOM iff $q_\epsilon(t)$
+    does, to first order in $\epsilon$. Thus the transformation maps solutions
+    to solutions: it is a symmetry of the EOM.
+\end{proof}
+
+The familiar conserved charge follows from the same computation kept on shell:
+\[
+Q = \frac{\partial L}{\partial \dot q^a} X^a - F, 
+\qquad \frac{dQ}{dt}\Big|_{\text{on shell}} = 0 .
+\]
+
+The converse of Proposition~\ref{noether-forward} fails in general: the
+equations of motion routinely admit more symmetry than is manifest in the
+Lagrangian one starts from. It is useful to separate \emph{manifest point
+symmetries} of $L$ (transformations of $q$ and $t$ alone, geometrically visible
+in the way $L$ is written), from \emph{generalized (dynamical) variational
+symmetries}, which are allowed to depend on velocities or momenta and need not
+correspond to any simple geometric transformation of configuration space, from
+the full group $G_{EOM}$ of symmetries of the equations of motion:
+\[
+G_L^{\text{point}} \;\subseteq\; G_L^{\text{gen}} \;\subseteq\; G_{EOM} .
+\]
+It is a subtle question, belonging to the \emph{inverse problem of the calculus
+of variations}\footnote{see examples in section~\ref{cm:pla}}, exactly when 
+the second inclusion is an equality; under
+favorable regularity assumptions many symmetries of a regular,
+finite-dimensional Lagrangian system's EOM can indeed be exhibited as
+\emph{generalized} variational symmetries (possibly of a Lagrangian differing
+from the original by a boundary term), but this is not automatic, and 
+in degenerate (constrained) systems it can fail outright. What
+matters for the point of this paper is the \emph{first} inclusion: it is very
+often strict, i.e., there is real, physically important symmetry of the EOM
+that is simply invisible if one only stares at the naive, manifest symmetry of
+$L$.
+
+\begin{example}[Free particle: hidden $SL(2,\mathbf R)$]
+The Lagrangian $L=\tfrac12 m\dot x^2$ manifestly has the Galilei symmetry
+    (translations, boosts) plus time translation. But the equation of motion
+    $\ddot x=0$ has straight lines as its general solution, and the space of
+    straight lines is left invariant by the larger, one-dimensional-time
+    conformal (``Schr\"odinger/M\"obius'') group acting projectively on $t$,
+\[
+t \;\longmapsto\; \frac{\alpha t+\beta}{\gamma t+\delta},
+    \qquad \alpha\delta-\beta\gamma=1,
+\]
+together with a compensating rescaling of $x$. This $SL(2,\mathbf R)$ ``dynamical''
+    symmetry (closely related to the conformal/Schr\"odinger symmetry of the
+    free Schr\"odinger equation, and to the Ermakov--Lewis invariant of the
+    time-dependent oscillator) is not visible as a point symmetry of
+    $L=\tfrac12 m\dot x^2$ written in the ordinary way, yet it is a genuine
+    symmetry of $\ddot x=0$.
+\end{example}
+
+\begin{example}[Kepler problem: hidden $SO(4)$]
+For $L = \tfrac12 m\dot{\bm r}^2 + k/r$, the manifest symmetry is $SO(3)$ 
+    (rotations) plus time translation. The equations of motion, however, 
+    admit the additional conserved Laplace--Runge--Lenz vector
+\[
+\bm A = \bm p \times \bm L - mk\,\hat{\bm r},
+\]
+whose associated transformations close, together with angular momentum, into an
+    $SO(4)$ algebra (for bound orbits). This hidden symmetry is responsible for
+    the non-precession of Kepler ellipses and for the accidental $n^2$
+    degeneracy of the hydrogen spectrum; it is a symmetry of the dynamics, not
+    a geometrically manifest symmetry of the Lagrangian's potential term.
+\end{example}
+
+\begin{example}[Integrable systems: toroidal symmetry from action-angle variables]
+More generally, for a Liouville-integrable Hamiltonian system with $n$ degrees
+    of freedom, one can pass to action-angle variables $(I_i,\theta^i)$ in
+    which $\mathcal{H} = \mathcal{H}(I)$ depends only on the actions. 
+    The flow generated by
+    $\mathcal{H}$ is then, trivially, an ($n$-torus of) simultaneous phase shifts
+    $\theta^i \to \theta^i+c^i$, an abelian $U(1)^n$ symmetry group of the
+    equations of motion. This symmetry is exact and completely general for
+    integrable systems, yet it is essentially never visible as a point symmetry
+    of the Lagrangian written in the original coordinates; the free-particle
+    $SL(2,\mathbf R)$ and the Kepler $SO(4)$ above are, in this sense, special
+    cases of the general toroidal symmetry structure of integrable systems,
+    made visible only after a nontrivial (often nonlocal, momentum-dependent)
+    change of variables.
+\end{example}
+
+\paragraph{The stabilizer of a solution}
+Suppose $G_{EOM}$ acts on the solution space $\mathcal S$ of $[L]_a=0$.
+ this action is well defined at least for
+$g\in G_L$, and by definition for all of $G_{EOM}$). A single solution
+$q(t)\in\mathcal S$, picked out by initial data $(q(t_0),\dot q(t_0))$ or by
+boundary data, need not be a fixed point of this action. Its symmetry is the
+\emph{stabilizer subgroup}
+\[
+    G_{sol}=\mathrm{Stab}_{G_{EOM}}(q) = \{ g\in G_{EOM} : g\cdot q
+    = q \} \subseteq G_{EOM} .
+\]
+Generically $G_{sol} \subsetneq G_{EOM}$: the group moves the given
+solution to a \emph{different} member of $\mathcal S$ (still a valid solution —
+the equations do not care — but a different trajectory), rather than mapping it
+to itself.
+
+\begin{example}[Central force problem]
+The Kepler/central-force EOM has full $SO(3)$ symmetry.
+     A single
+    orbit, however, has a definite, fixed angular momentum vector $\bm L = \bm
+    r\times\bm p\neq 0$, determined by the initial position and velocity, and
+    lies entirely in the plane orthogonal to $\bm L$. The stabilizer of this
+    orbit inside $SO(3)$ is only the $SO(2)$ subgroup of rotations about the
+    $\bm L$ axis (together with, for a closed orbit, possibly a discrete
+    reflection). The other two rotational generators move the orbital plane to
+    a different plane, i.e. map this solution to a genuinely different
+    solution. Nothing is wrong with the dynamics; the reduction from $SO(3)$ to
+    $SO(2)$ is entirely a consequence of the choice of initial data.
+\end{example}
+
+\begin{example}[Free particle]
+$\ddot x=0$ is invariant under all spatial translations and Galilean boosts. A
+    single trajectory $x(t)=x_0+v_0t$ is left invariant only by time
+    translations (and, trivially, the identity among boosts/translations); a
+    spatial translation or a boost maps it to a different straight line.
+    Symmetric \emph{initial data} — e.g. $x_0=0,\,v_0=0$, the particle
+    permanently at rest at the origin — is the unique choice whose stabilizer
+    is the full translation-and-boost group; any other data breaks it
+    explicitly.
+\end{example}
+
 \section{Hertz's forceless mechanics }
 \label{lnf:hertz}
 
@@ -160,243 +1086,330 @@ mechanics'. Fortunately due to a number of reasons I did not published
 my investigations and so escaped unintentional but clear plagiarism.
 
 
-\section{Configuration Space:Deeper Insight}
-\label{lnf:cs}
+\section{The Koopman Formulation of Classical Mechanics}
+\label{lnf:koop}
 
-Classical mechanics is usually presented as the most settled part of
-physics: three laws, a variational principle, and a semester of
-worked examples. By the time a student reaches quantum theory or
-general relativity, mechanics has already receded into the
-background as a body of technique rather than a live subject. This
-impression is not wrong, exactly, but it is incomplete. Even such simple concept as \emph{configuration space} is not trivial.
+\newcommand{\PB}[2]{\{#1,#2\}} 
+\newcommand{\CL}{\widehat{\mathcal{L}}}
 
-Let's discuss configuration space in some details. For $N$ point particles it
-is 
-\[\underbrace{\mathbb{R}^3 \times \mathbb{R}^3 \times \dots
-\times\mathbb{R}^3}_{N \text{times}}\] 
-which naturally isomorphic to
-$\mathbb{R}^{3 N}$as vector space, topological space, and smooth manifold. But
-they emphasize different structures and interpretations. For example natural
-rotation is $SO(3) \subset SO(3N)$ not $SO(3N)$, kinetic energy has natural block
-structure. 
+Classical mechanics is
+a theory of nonlinear ordinary differential equations: Hamilton's equations
+$\dot q^i = \partial H/\partial p_i$, $\dot p_i = -\partial H/\partial q^i$
+generate, in general, a highly nonlinear flow on phase space. It is therefore a
+standing surprise, still under-advertised in most mechanics courses, that this
+same dynamics admits an exactly equivalent description in which the fundamental
+object evolves \emph{linearly}. This is the content of the Koopman formulation:
+instead of following the trajectory $x(t)=\phi_t(x_0)$ of a single point
+through phase space, one follows the evolution of an entire function $f$ (an
+``observable'') under composition with the flow, $f \mapsto f\circ\phi_t$.
+Composition with a fixed map is a linear operation on the vector space of
+functions, however wild the map $\phi_t$ itself may be. All of the nonlinearity
+of the dynamics is absorbed into the definition of a single linear operator, at
+the price of moving from a finite-dimensional phase space to an
+infinite-dimensional space of functions on it.
 
-Two-dimensional isotropic harmonic oscillator and two
-identical, spatially distant, non-interacting one-dimensional oscillators have
-exactly the same configuration space, $\mathbb{R}^2$, and, once the two
-one-dimensional coordinates are laid side by side, exactly the same
-Hamiltonian. This coincidence might seem to threaten the idea that
-configuration space carries direct physical meaning: if the bare pair $(Q,H)$
-cannot distinguish ``one particle moving in a plane'' from ``two particles
-moving on separate, distant lines,'' in what sense does configuration space
-represent physical positions at all? We examine this coincidence carefully,
-show that it persists at every level of structure computable from $(Q,H)$ alone
---- classical trajectories, the symplectic structure,
---- and then identify precisely what additional data is needed
-to tell the two systems apart:  an embedding of $Q$ into physical space
-together with the action of the spatial isometry group, which is geometrically
-realized in one case and merely accidental in the other;
-and  the algebra of interactions that locality in physical
-space picks out as natural, which governs how each system couples to a generic
-environment. We package this as the \emph{physical dressing} of a bare
-Hamiltonian system and argue that configuration space, taken on its own, is
-best understood as a representation-dependent bookkeeping device rather than a
-self-standing arena of physical positions: its physical reading requires this
-further data as an independent postulate, not something read off the space
-itself.
+This move was introduced by Koopman in 1931 \cite{koopman}, with the
+operator-theoretic machinery placed on a rigorous footing almost immediately
+afterward by von Neumann \cite{vonNeumann1932} and Stone \cite{stone}, and used
+by Koopman and von Neumann together to characterize the different levels of
+statistical irregularity (ergodicity, mixing) that a Hamiltonian system can
+exhibit, in terms of the spectrum of a single linear operator.
+The timing was not an accident: Koopman's paper
+is contemporaneous with -- and directly motivated by -- the controversy
+surrounding the ergodic hypothesis in statistical mechanics, which was resolved
+essentially simultaneously by von Neumann's mean ergodic theorem and Birkhoff's
+pointwise ergodic theorem. The operator picture turned the
+vague physical question ``does the time average of an observable equal its
+phase-space average?'' into a precise question about the point spectrum of a
+self-adjoint operator.
 
-In elementary treatments of analytical mechanics, configuration space is often
-introduced as though it simply \emph{were} the space of physical positions of a
-system: a point $q\in Q$ is ``where the system is,'' and the Hamiltonian
-$H:T^*Q\to\mathbb{R}$ tells us how that point moves. This picture is useful
-and, for the simplest systems, harmless. But it invites a stronger reading on
-which the pair $(Q,H)$ is taken to \emph{fix} the physical system being
-described --- as if knowing the configuration manifold and the Hamiltonian
-function on it were enough to know what kind of physical situation one is
-dealing with.
+\subsection{Phase space, Hamilton's equations, and the flow}
 
-A simple example shows this stronger reading to be false. Consider, on the one
-hand, a single particle of mass $m$ moving in a plane under an isotropic
-harmonic restoring force (the two-dimensional isotropic oscillator), and, on
-the other hand, two particles of equal mass $m$, held very far apart, each
-independently oscillating along its own line under a harmonic force of the same
-strength. Written in the natural coordinates for each case, the two systems
-have configuration space $Q$ and Hamiltonian $H$
-\emph{identically}. There is no sense in which the bare mathematical data
-$(Q,H)$ --- or, equivalently, the classical trajectories it generates,
---- differs between the two cases. Yet no one would say that a
-single particle vibrating in a plane and two distant, independent oscillators
-are ``the same physical system.'' Something is being smuggled in from outside
-$(Q,H)$ whenever we say what the system \emph{is}.
+Let phase space be $M=\mathbb R^{2n}$ with coordinates
+$x=(q^1,\dots,q^n,p_1,\dots,p_n)$ (everything below goes through, with the
+obvious modifications, for a general symplectic manifold $(M,\omega)$). Fix a
+Hamiltonian $H:M\to\mathbb R$, assumed smooth and, for simplicity, such that its flow
+is complete. Hamilton's equations
+\begin{equation}
+\dot q^i = \frac{\partial H}{\partial p_i}, 
+    \qquad \dot p_i = -\frac{\partial H}{\partial q^i}, \qquad i=1,\dots,n,
+\label{hameq}
+\end{equation}
+define a vector field $X_H$ on $M$ (the Hamiltonian vector field) and hence
+a one-parameter group of diffeomorphisms
+\begin{equation}
+\phi_t : M \to M, \qquad \frac{d}{d t}\phi_t(x) = X_H(\phi_t(x)), 
+    \qquad \phi_0=\mathrm{id}, \qquad \phi_t\circ\phi_s=\phi_{t+s}.
+\label{flow}
+\end{equation}
+The Poisson bracket of two functions $f,g:M\to\mathbb R$ is
+\begin{equation}
+\PB{f}{g} = \sum_{i=1}^n\left(\frac{\partial f}{\partial q^i}
+    \frac{\partial g}{\partial p_i}-\frac{\partial f}{\partial p_i}
+    \frac{\partial g}{\partial q^i}\right),
+\label{PBdef}
+\end{equation}
+with the sign convention fixed so that, for any smooth $f$, 
+its rate of change along a trajectory is
+\begin{equation}
+\dot f = \PB{f}{H}.
+\label{eom}
+\end{equation}
+(One checks directly from \eqref{PBdef} that 
+$\PB{q^i}{H}=\partial H/\partial p_i$ and 
+$\PB{p_i}{H}=-\partial H/\partial q^i$, reproducing \eqref{hameq}.)
 
-Let us consider two systems:
-
-\paragraph{System A (the planar oscillator).} A single particle of mass $m$
-moves in a plane, subject to an isotropic harmonic potential centered on a
-fixed equilibrium point.
-
-\paragraph{System B (two distant oscillators).} Two particles, each of mass
-$m$, sit at fixed, well-separated base points in physical space and each
-oscillates, independently and without interaction, along its own fixed axis.
-
-Any account of what
-distinguishes the two systems must therefore appeal to something that is not a
-function of $(Q,H)$ alone.
-We identify  independent sources of physical structure that are not
-visible in $(Q,H)$, each of which distinguishes System A from System B once
-made explicit.
-
-\subsection{Embedding in physical space and the status of the rotational symmetry}
-
-The transformation $R_\theta$ identified above is, as a transformation of the
-abstract manifold $Q=\mathbb{R}^2$, a symmetry of $H$ in \emph{both} systems.
-But this bare fact does not tell us whether $R_\theta$ corresponds to anything
-happening in physical space. To ask that question we must specify an embedding
-of $Q$ into physical space $\Sigma$ (taken here to be $\mathbb{R}^3$, or a
-plane within it) that says what each coordinate \emph{is}.
-
-For System A, the natural embedding sends the single particle's configuration
-to its actual position,
-\[
-\iota_A(q_1,q_2)=\mathbf{X}^{(0)}+q_1\hat{e}_1+q_2\hat{e}_2 \ \in\ \Sigma,
-\]
-and $R_\theta$ is exactly the pushforward, under $\iota_A$, of a genuine
-rotation of physical space about the fixed point $\mathbf{X}^{(0)}$: rotating
-the lab by angle $\theta$ carries the particle from $\iota_A(q_1,q_2)$ to
-$\iota_A(R_\theta(q_1,q_2))$. The symmetry is \emph{geometric}: it is
-implemented by an isometry of $\Sigma$, it corresponds to a real conserved
-angular momentum exchangeable with other systems via torque, and it is what
-makes $L=q_1p_2-q_2p_1$ deserve the name ``angular momentum'' rather than being
-merely a conserved combination of phase-space coordinates.
-
-For System B, the natural embedding sends the pair of independent
-one-dimensional configurations to the positions of two separate particles,
-\[
-\iota_B(q_1,q_2)=\Big(\mathbf{X}_1^{(0)}+q_1\hat{n}_1,\ \
-\mathbf{X}_2^{(0)}+q_2\hat{n}_2\Big)\ \in\ \Sigma\times\Sigma,
-\]
-with $\mathbf{X}_1^{(0)}\neq\mathbf{X}_2^{(0)}$ (this is what ``distant''
-means). Here $R_\theta$ cannot be the pushforward of \emph{any} isometry of
-$\Sigma$.
-
-\begin{proposition}[Non-transfer of the rotational symmetry]
-For $\mathbf{X}_1^{(0)}\neq\mathbf{X}_2^{(0)}$, there is no isometry $\rho$ of
-    $\Sigma$ such that $\iota_B\circ R_\theta=(\rho,\rho)\circ\iota_B$ holds
-    for all $\theta$ (other than $\theta\in\pi\mathbb{Z}$).
+\begin{proposition}[Liouville's theorem]
+\label{liouville}
+The Hamiltonian vector field $X_H$ is divergence-free with respect to the 
+    Liouville measure $d\mu = \prod_{i=1}^n d q^i\,d p_i$, and 
+    consequently $\phi_t$ preserves $\mu$: $\mu(\phi_t(A))=\mu(A)$ 
+    for every measurable $A\subset M$.
 \end{proposition}
-
 \begin{proof}
-An isometry $\rho$ of physical space acts \emph{pointwise}: the image
-    $\rho(\mathbf{y})$ of a point $\mathbf{y}\in\Sigma$ depends only on
-    $\mathbf{y}$ itself. In particular, the would-be image of particle 2's
-    position, $\rho\big(\mathbf{X}_2^{(0)}+q_2\hat n_2\big)$, can depend only
-    on $q_2$ --- it cannot depend on $q_1$, since particle~1's displacement
-    plays no role in specifying the point $\mathbf{X}_2^{(0)}+q_2\hat{n}_2$
-    that $\rho$ is asked to act on. But the second component of
-    $\iota_B(R_\theta(q_1,q_2))$ is
-    $\mathbf{X}_2^{(0)}+(q_1\sin\theta+q_2\cos\theta)\hat n_2$, which for
-    $\sin\theta\neq 0$ depends non-trivially on $q_1$. No pointwise map can
-    reproduce this dependence, so no single isometry $\rho$ can serve as
-    $\iota_B\circ R_\theta=(\rho,\rho)\circ\iota_B$ for such $\theta$.
+$\operatorname{div}X_H = \sum_i\left(\dfrac{\partial}{\partial q^i}
+    \dfrac{\partial H}{\partial p_i}+\dfrac{\partial}{\partial p_i}
+    \left(-\dfrac{\partial H}{\partial q^i}\right)\right)=
+    \sum_i\left(\dfrac{\partial^2 H}{\partial q^i\partial p_i}-
+    \dfrac{\partial^2 H}{\partial p_i\partial q^i}\right)=0$ 
+    by equality of mixed partials. Measure preservation then follows from 
+    Liouville's formula for the Jacobian of the flow of a vector field, 
+    $\det D\phi_t(x) = \exp\!\big(\int_0^t 
+    \operatorname{div}X_H(\phi_s(x))\,d s\big)=1$.
 \end{proof}
 
-The obstruction is not a matter of fine-tuning
-$\mathbf{X}_1^{(0)},\mathbf{X}_2^{(0)},\hat n_1,\hat n_2$; it holds however
-these are chosen, and it fails only in the degenerate limit
-$\mathbf{X}_1^{(0)}=\mathbf{X}_2^{(0)}$ --- precisely the limit in which System
-B stops being ``two distant oscillators'' and coincides with System A. So
-$R_\theta$ is, for System B, a symmetry of the Hamiltonian with no geometric
-referent: it mixes the coordinates of two causally and spatially independent
-objects in a way that no rotation, translation, or reflection of the physical
-world could ever do. It is what is sometimes called a \emph{hidden},
-\emph{accidental}, or purely \emph{dynamical} symmetry --- real as a statement
-about the equations of motion, but carrying none of the physical content
-(conservation via Noether's theorem applied to an actual spacetime symmetry,
-exchangeability of angular momentum with other systems, appearance in a
-Wigner-Eckart-type selection rule tied to real rotations) that the same-looking
-symmetry carries in System A.
+This innocuous-looking fact is the load-bearing wall of everything that
+follows: it is the only place where the specifically \emph{Hamiltonian}
+character of the dynamics enters the Koopman construction, and it is exactly
+what will make the Koopman operator unitary rather than merely an isometry or a
+general (non-unitary) linear operator.
 
-\begin{remark}
-This is not special to the isotropic case $\omega_1=\omega_2$. If the two
-    frequencies differ, $H=\frac{p_1^2+p_2^2}{2m}+\frac12
-    m(\omega_1^2q_1^2+\omega_2^2q_2^2)$ still describes, term for term, both
-    ``one particle in an anisotropic planar potential'' and ``two distant,
-    differently-tuned oscillators,'' and the argument of Section~2 goes through
-    unchanged. The isotropic case is simply the sharpest illustration, because
-    there the enhanced symmetry make the geometric/accidental distinction most
-    conspicuous.
-\end{remark}
-
-\subsection{Locality and the coupling to a generic environment}
-\label{loc}
-
-A second, complementary way to separate the two systems is to ask not about
-their isolated dynamics but about how they couple to the rest of the world.
-Isolation is always an idealization; a real oscillator sits in some environment
-(radiation field, phonon bath, measuring apparatus), and it is a basic fact
-about physical interactions that they are \emph{local}: an environmental degree
-of freedom that is spatially near one object couples appreciably to that object
-and negligibly to a second object located far away.
-
-For System B this has an immediate and specific consequence. Because particle~1
-and particle~2 occupy distant regions of space, generic environmental
-influences factorize: to good approximation, particle~1 couples to a bath $B_1$
-associated with its own neighborhood and particle~2 couples to an independent
-bath $B_2$ associated with its neighborhood,
+An \emph{observable} is a (possibly complex-valued) function on phase space, 
+$f:M\to\mathbb C$. We work in the Hilbert space
 \begin{equation}
-H_{SE}\ \approx\ q_1\otimes \hat B_1 \ +\ q_2\otimes \hat B_2 ,
-\label{localcoupling}
+\mathcal H = L^2(M,\mu), \qquad \langle f,g\rangle = 
+    \int_M \overline{f(x)}\,g(x)\,d\mu(x),
 \end{equation}
-with $\hat B_1,\hat B_2$ statistically independent (uncorrelated) environmental
-operators. This is simply the statement that two distant systems have
-independent noise sources --- an instance of what is often called cluster
-decomposition.
+of observables that are square-integrable with respect to the invariant
+Liouville measure. Physically, $L^2(M,\mu)$ is the natural home for observables
+when the system carries a normalizable invariant probability distribution
+(e.g.\ on a compact energy shell, with $\mu$ the corresponding microcanonical
+measure); this is the setting Koopman himself had in mind, motivated by
+statistical mechanics. Everything below extends to a general invariant measure
+$\mu$, and, with appropriate modifications, to non-invariant or infinite
+measures as well.
 
-For System A, by contrast, there is only one particle, occupying one region of
-space, and a generic local environmental influence acts at that single
-location. Such an influence couples to some particular direction $\hat
-n\cdot(q_1,q_2)$ in configuration space determined by the geometry of the
-perturbation (e.g.\ the direction of a stray field at the particle's location),
-not separately and independently to $q_1$ and $q_2$; arranging two independent
-environments that couple exclusively along the $q_1$-axis and the $q_2$-axis
-respectively, at one and the same spatial point, is not something locality
-delivers for free, the way \eqref{localcoupling} is delivered for free in
-System B --- it would need to be imposed by hand. There is consequently no
-generic physical reason for a local environment to single out the particular
-coordinate split $(q_1,q_2)$, as opposed to any rotated pair
-$(q_1',q_2')=R_\theta(q_1,q_2)$.
+\begin{definition}[Koopman operator]
+For each $t\in\mathbb R$, the Koopman operator $U_t:\mathcal H\to\mathcal H$ 
+    is defined by
+\begin{equation}
+(U_t f)(x) = f(\phi_t(x)), \qquad\text{i.e.}\qquad U_t f = f\circ\phi_t.
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Linearity and group law]
+\label{linear-group}
+For all $t,s\in\mathbb R$ and $f,g\in\mathcal H$, $a,b\in\mathbb C$:
+\begin{enumerate}
+\item $U_t(af+bg) = a\,U_tf+b\,U_tg$;
+\item $U_0=\mathrm{id}$ and $U_tU_s=U_{t+s}$; in particular 
+    $U_t^{-1}=U_{-t}$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) is immediate from the definition, since composition with a fixed map 
+    $\phi_t$ acts pointwise: $(U_t(af+bg))(x) = af(\phi_t(x))+bg(\phi_t(x))$.
+(ii) $(U_tU_sf)(x) = (U_sf)(\phi_t(x)) = f(\phi_s(\phi_t(x))) = f(\phi_{s+t}(x)) 
+    = (U_{s+t}f)(x)$, using the group law \eqref{flow} for the flow.
+\end{proof}
+
+Statement (i) is the entire point of the construction: $\phi_t$ can be an 
+arbitrarily complicated nonlinear diffeomorphism of $M$, yet its pullback 
+action $U_t$ on functions is exactly linear, with no approximation involved. 
+Statement (ii) says that $\{U_t\}_{t\in\mathbb R}$ is a one-parameter group of linear 
+operators on $\mathcal H$.
+
+\begin{proposition}[Unitarity]
+\label{unitary}
+For every $t\in\mathbb R$, $U_t$ is a unitary operator on $\mathcal H=L^2(M,\mu)$.
+\end{proposition}
+\begin{proof}
+For $f,g\in\mathcal H$,
+\begin{equation}
+\langle U_tf,U_tg\rangle = 
+    \int_M \overline{f(\phi_t(x))}\,g(\phi_t(x))\,d\mu(x).
+\end{equation}
+Substitute $y=\phi_t(x)$; since $\phi_t$ is a diffeomorphism with 
+    $\left|\det D\phi_t\right|=1$ by Proposition~\ref{liouville}, 
+    the measure transforms as $d\mu(x)=d\mu(y)$, so
+\begin{equation}
+\langle U_tf,U_tg\rangle = \int_M \overline{f(y)}\,g(y)\,d\mu(y) =
+    \langle f,g\rangle.
+\end{equation}
+Thus $U_t$ is an isometry; since it is also invertible 
+    (Proposition~\ref{linear-group}(ii), with inverse $U_{-t}$, 
+    itself an isometry by the same argument), $U_t$ is unitary.
+\end{proof}
+
+It is worth being explicit about what did the work: unitarity is \emph{not} an
+automatic feature of ``Koopman operators'' for arbitrary dynamical systems; it
+requires an invariant measure. For a general (e.g.\ dissipative) dynamical
+system with no invariant probability measure, the Koopman operator built the
+same way is still linear and still a composition operator, but it need not be
+unitary or even bounded on a naturally chosen $L^2$ space. It is Liouville's
+theorem, i.e.\ the specifically Hamiltonian structure of classical mechanics,
+that upgrades ``linear'' to ``unitary.''
+
+Finally, strong continuity ($t\mapsto U_tf$ continuous in $\mathcal H$ for each
+fixed $f$, under mild regularity of $H$ and $f$) makes $\{U_t\}$ a
+\emph{strongly continuous one-parameter unitary group}, which is precisely the
+hypothesis of Stone's theorem, taken up next.
+
+\begin{definition}[Generator]
+The (infinitesimal) generator of the Koopman group is the operator
+\begin{equation}
+Df := \left.\frac{d}{d t}\right|_{t=0} U_tf,
+\end{equation}
+defined on the (dense) domain of $f\in\mathcal H$ for which the limit 
+    exists in $\mathcal H$.
+\end{definition}
+
+By the chain rule and \eqref{eom},
+\begin{equation}
+(Df)(x) = \left.\frac{d}{d t}\right|_{t=0} 
+    f(\phi_t(x)) = X_H f(x) = \PB{f}{H}(x),
+\end{equation}
+so the generator is simply the Poisson bracket with $H$:
+\begin{equation}
+D = \PB{\,\cdot\,}{H}.
+\label{Ddef}
+\end{equation}
+Because $\phi_t$ is a flow, $D$ commutes with $U_t$ and one has, 
+formally,
+\begin{equation}
+U_t = e^{tD}, \qquad \frac{d}{d t}U_t = D\,U_t = U_t\,D.
+\label{Uexp}
+\end{equation}
+
+\begin{proposition}[Skew-adjointness of $D$]
+\label{skew}
+On functions vanishing at infinity (or, if $M$ is compact, with no further 
+    hypotheses), $D$ is skew-adjoint with respect to 
+    $\langle\,\cdot\,,\,\cdot\,\rangle$: $\langle Df,g\rangle =
+    -\langle f,Dg\rangle$ for all $f,g$ in the domain.
+\end{proposition}
+\begin{proof}
+Take $f,g$ real-valued and smooth with compact support, for definiteness 
+    (the general complex case follows by linearity, using that $D$ has real
+    coefficients so $D\bar f=\overline{Df}$). Integrating by parts twice in 
+    \eqref{PBdef} (once in $q^i$, once in $p_i$, discarding boundary terms) 
+    gives
+\begin{align}
+\int_M \PB{f}{H}\,g\,d\mu
+&= \sum_i\int_M\left(\frac{\partial f}{\partial q^i}\frac{\partial H}
+    {\partial p_i}-\frac{\partial f}{\partial p_i}\frac{\partial H}
+    {\partial q^i}\right)g\,d\mu \notag\\
+&= -\sum_i\int_M f\left(\frac{\partial^2H}{\partial q^i\partial p_i}g
+    +\frac{\partial H}{\partial p_i}\frac{\partial g}{\partial q^i}
+    -\frac{\partial^2H}{\partial p_i\partial q^i}g
+    -\frac{\partial H}{\partial q^i}\frac{\partial g}
+    {\partial p_i}\right)d\mu.
+\end{align}
+The two mixed-partial terms cancel identically, leaving
+\begin{equation}
+\int_M \PB{f}{H}\,g\,d\mu = -\int_M f\left(\sum_i\Big(\frac{\partial H}
+    {\partial p_i}\frac{\partial g}{\partial q^i}-
+    \frac{\partial H}{\partial q^i}\frac{\partial g}
+    {\partial p_i}\Big)\right)d\mu = \int_M f\,\PB{g}{H}\,d\mu,
+\end{equation}
+i.e.\ $\langle Df,g\rangle = -\langle f, Dg\rangle$ (the last relative sign is
+    exactly $-1$ because $\PB{g}{H}=-\PB{H}{g}$ is being compared to 
+    $D g = \PB{g}{H}$; the displayed identity already contains it).
+\end{proof}
+
+A skew-adjoint operator becomes self-adjoint (Hermitian) after multiplication 
+by $i$. Define the \emph{Liouvillian}
+\begin{equation}
+\boxed{\CL := -i D = -i\,\PB{\,\cdot\,}{H} = i\,\PB{H}{\,\cdot\,}.\ }
+\label{Liouvillian}
+\end{equation}
+By Proposition~\ref{skew}, $\CL^\dagger=(-i D)^\dagger = i D^\dagger = 
+i(-D)=-i D=\CL$: the Liouvillian is Hermitian. Combined with \eqref{Uexp}, 
+and since $D=i\CL$,
+\begin{equation}
+U_t = e^{tD} = e^{i t\CL}.
+\label{Ut-CL}
+\end{equation}
+This is precisely Stone's theorem \cite{stone} at work: a strongly continuous
+one-parameter \emph{unitary} group is always of the form $e^{i t A}$ for a
+unique self-adjoint (generally unbounded) operator $A$; here $A=\CL$, built
+entirely out of the classical Poisson bracket with $H$. Equation \eqref{Ut-CL}
+is the precise sense in which classical Hamiltonian evolution is ``already''
+Schr\"odinger-like, well before any quantization has taken place. Note,
+however, that conventions for the sign and placement of $i$ in $\CL$ vary
+across the literature; \eqref{Liouvillian} is fixed here purely so that
+\eqref{Ut-CL} and the density equation of the next section come out in the most
+familiar-looking form.
+
+
+The Koopman operator $U_t$ propagates \emph{observables} forward in time: it is
+the classical analogue of the Heisenberg picture. There is a dual,
+Schr\"odinger-like picture that propagates \emph{probability densities},
+obtained simply by taking the adjoint.
+
+\begin{definition}[Transfer, or Perron--Frobenius, operator]
+The operator $P_t := U_t^\dagger$ acting on densities 
+    $\rho\in\mathcal H$ is defined by duality,
+\begin{equation}
+\int_M (P_t\rho)\,f\,d\mu = \int_M \rho\,(U_tf)\,d\mu 
+    \qquad \text{for all } f\in\mathcal H.
+\end{equation}
+\end{definition}
+
+Since $U_t$ is unitary, $P_t = U_t^\dagger = U_t^{-1}=U_{-t}$, so $(P_t\rho)(x)
+= \rho(\phi_{-t}(x))$: the density at $x$ at time $t$ equals the density that
+was at the point $\phi_{-t}(x)$ that flowed \emph{into} $x$. This is exactly
+the statement that probability is transported (not created or destroyed) along
+the flow, consistent with Proposition~\ref{liouville}.
+
+Differentiating $P_t\rho = \rho\circ\phi_{-t}$ at $t=0$, the generator of $P_t$ 
+is $-D$, i.e.
+\begin{equation}
+\frac{\partial \rho_t}{\partial t} = -D\rho_t = -\PB{\rho_t}{H} = 
+    \PB{H}{\rho_t},
+\label{liouville-eq}
+\end{equation}
+which is exactly the classical Liouville equation, usually written 
+$\partial_t\rho+\PB{\rho}{H}=0$. Multiplying \eqref{liouville-eq} by $i$ and 
+using $D=i\CL$,
+\begin{equation}
+\boxed{\ i\,\frac{\partial \rho_t}{\partial t} = \CL\,\rho_t. \ }
+\label{kvn-density}
+\end{equation}
+This is a genuine Schr\"odinger-type equation for the classical phase-space
+density, with Hermitian ``Hamiltonian'' $\CL$: $\rho_t = e^{-i t \CL}\rho_0 =
+P_t\rho_0$. It is the direct forerunner of the Koopman--von Neumann equation. 
 
 \begin{remark}
-This argument is offered as a physical heuristic, not a theorem: it says what
-    is \emph{generic} given locality, not what is strictly forced by $(Q,H)$
-    (which, after all, says nothing at all about any environment). That is
-    exactly the point --- the distinction it draws on is additional structure,
-    namely a specification of which couplings to the wider world are
-    ``local''/``natural'' for the system in question.\footnote{ This is close in spirit
-    to the observation, developed rigorously by Zanardi, Lidar, and Lloyd
-    \cite{zll}, that a tensor-product (subsystem)
-    decomposition of a quantum state space is not read off the Hilbert space or
-    the Hamiltonian in isolation but is induced by the algebra of operationally
-    accessible interactions and measurements. Here the analogous claim is made
-    already at the level of which classical/environmental couplings are
-    physically natural.}
+The two pictures are related exactly as in quantum mechanics: observables
+    evolve by $U_t=e^{i t\CL}$ (formally, $i\partial_tf_t = -\CL f_t$, the
+    classical Heisenberg equation, consistent with $\dot f=\PB{f}{H}$), while
+    densities evolve by the inverse/adjoint operator $P_t=e^{-i t\CL}$,
+    Eq.~\eqref{kvn-density}. The relative sign is the same
+    Heisenberg/Schr\"odinger duality familiar from quantum theory, here derived
+    from nothing more than the unitarity of $U_t$.
 \end{remark}
 
-\paragraph{Normal modes.} The same moral appears, in a sense running the other
-way, in the theory of coupled oscillators. A collection of masses connected by
-springs, in general spatially local and physically coupled, has a Hamiltonian
-that, after diagonalization in terms of normal-mode coordinates, takes exactly
-the form of a set of \emph{decoupled} one-dimensional oscillators, $H=\sum_k
-\big(P_k^2/2+\frac12\Omega_k^2 Q_k^2\big)$. If one only looked at this final,
-diagonal $(Q,H)$, one might be tempted to read it as describing independent,
-uncoupled particles. But the normal-mode coordinates $Q_k$ are collective
-variables, each typically a linear combination of every original particle's
-displacement; a perturbation local to one physical mass is, in normal-mode
-space, generically \emph{non-local}, spreading across many or all of the $Q_k$.
-This is the mirror image of subsection~\ref{loc}:
-there, an abstractly ``local-looking''
-coordinate split ($q_1,q_2$) failed to be the physically local one for System
-A; here, an abstractly decoupled-looking Hamiltonian hides a physically
-coupled, spatially local system. Both cases show that reading physical locality
-or particle-independence directly off the form of $H$ in a given coordinate
-system is unreliable without independent knowledge of the embedding.
+The Koopman formulation adds no new physics to classical mechanics: every
+statement derivable in the operator language is, by construction, a restatement
+of Hamilton's equations. What it buys is a change of mathematical category,
+from nonlinear dynamics on a finite-dimensional manifold to linear operator
+theory on an infinite-dimensional Hilbert space, and that change of category is
+not free -- it is purchased with the invariant measure furnished by Liouville's
+theorem, which is what makes the Koopman operator unitary rather than merely
+linear. Once purchased, the machinery of spectral theory becomes directly
+applicable to a question -- how ergodic, or how mixing, is this system? -- that
+has no simple formulation in the original nonlinear language, and this is
+precisely the use Koopman, von Neumann, and Birkhoff made of it in the early
+1930s.
 

@@ -452,7 +452,7 @@ brackets, Liouville's theorem, and so on.
 
 The precise statement licensing the textbook claim is the following.
 \begin{proposition}[Regular equivalence]
-\label{prop:regular}
+\label{regular}
 Let $$L: TQ\times\mathbb{R}\to\mathbb{R}$$
     be \emph{regular}: the fiber Hessian
     $$W_{ij} = \partial^2 L/\partial \dot q^i \partial \dot q^j$$
@@ -488,7 +488,7 @@ $\partial^2 S/\partial q^i\partial \alpha_j$ is everywhere nondegenerate on the
 \emph{domain of interest}.
 
 \begin{proposition}[Jacobi's theorem]
-\label{prop:jacobi-thm}
+\label{jacobi-thm}
 Let $S(q,t;\alpha)$ be a complete integral of~\eqref{HJ} on an open set
     $U\subset Q\times\mathbb{R}$, with $\det(\partial^2 S/\partial
     q^i\partial\alpha_j)\neq 0$ throughout $U$. Then the equations
@@ -502,7 +502,7 @@ implicitly define, for each choice of constants $(\alpha,\beta)$, a curve
     choice of $(\alpha,\beta)$.
 \end{proposition}
 
-Proposition~\ref{prop:jacobi-thm} is the formal engine behind solving
+Proposition~\ref{jacobi-thm} is the formal engine behind solving
 Hamiltonian systems by separation of variables, and it is a genuine equivalence
 result: wherever a complete integral with nondegenerate mixed Hessian exists,
 the Hamilton--Jacobi and Hamiltonian pictures determine exactly the same
@@ -512,8 +512,8 @@ dropped, and that its failure is tied to the same mechanism that undermines the
 ``least action'' reading of Hamilton's principle.
 
 Everything that follows  concerns ways in which the
-hypotheses of Proposition~\ref{prop:regular} or
-Proposition~\ref{prop:jacobi-thm} can fail to hold, or ways in which their
+hypotheses of Proposition~\ref{regular} or
+Proposition~\ref{jacobi-thm} can fail to hold, or ways in which their
 being satisfied does not settle every reasonable sense in which one might want
 two physical theories to be ``the same.'' 
 
@@ -550,7 +550,7 @@ together with $\eta(t_0)=0$. A time $t_c>t_0$ is a \emph{conjugate point} (or
 of~\eqref{jacobi-eq} with $\eta(t_0)=0$ vanishes again at $t_c$.
 
 \begin{proposition}[Jacobi's necessary condition]
-\label{prop:jacobi-necessary}
+\label{jacobi-necessary}
 The trajectory $x(t)$ furnishes a local minimum of the action on $[t_0,t_1]$
     only if $t_1$ occurs before the first conjugate point to $t_0$. If $t_1$
     lies beyond the first conjugate point, $S$ is a saddle point at $x(t)$:
@@ -564,7 +564,7 @@ Take $V(x)=\tfrac12 kx^2$, so $V''\equiv k$ and \eqref{jacobi-eq} becomes
     $\ddot\eta+\omega^2\eta=0$ with $\omega=\sqrt{k/m}$. The solution with
     $\eta(t_0)=0$ is $\eta(t)=\sin\!\big(\omega(t-t_0)\big)$, which next
     vanishes at $t_c=t_0+\pi/\omega$---exactly half a period. By
-    Proposition~\ref{prop:jacobi-necessary}, a segment of oscillator trajectory
+    Proposition~\ref{jacobi-necessary}, a segment of oscillator trajectory
     genuinely minimizes the action if its duration is less than $\pi/\omega$,
     and is merely a stationary saddle point if its duration exceeds
     $\pi/\omega$.
@@ -586,7 +586,7 @@ specifically of how sharply it curves.
 It is worth being precise about what this does and does not show. Hamilton's
 principle, in its correct form ($\delta S=0$), remains exactly equivalent to
 Newton's second law throughout; nothing here contradicts
-Proposition~\ref{prop:regular}. What fails is the stronger, popularly stated
+Proposition~\ref{regular}. What fails is the stronger, popularly stated
 identification of Hamilton's principle with a principle of \emph{least}
 action---and it fails already in the cleanest setting available anywhere in
 this paper: a single unconstrained particle, regular and hyperregular
@@ -724,7 +724,7 @@ constraint surface). The upshot is that for a
 singular $L$, the physical phase space is not $T^*Q$ but a further-reduced
 submanifold, of dimension strictly smaller than $2n$ in the presence of
 first-class constraints, and the map from Lagrangian solutions to Hamiltonian
-solutions is not the clean bijection of Proposition~\ref{prop:regular} but a
+solutions is not the clean bijection of Proposition~\ref{regular} but a
 considerably more elaborate correspondence, often carrying residual gauge
 freedom on the Lagrangian side that has no counterpart in a naively
 written-down Hamiltonian system.
@@ -781,7 +781,7 @@ is willing to pay for a Lagrangian description with auxiliary variables or
 explicit time dependence.
 
 \paragraph{Global obstructions: regularity is not hyperregularity}
-Proposition~\ref{prop:regular} distinguishes \emph{regularity} (the fiber
+Proposition~\ref{regular} distinguishes \emph{regularity} (the fiber
 Hessian is nondegenerate at each point) from \emph{hyperregularity} (the fiber
 derivative $\mathbb{F}L$ is a diffeomorphism of the whole of $TQ$ onto the
 whole of $T^*Q$). The distinction matters because regularity is a purely local,
@@ -810,9 +810,9 @@ W_{ij}\neq 0$ at a single representative point, is not by itself sufficient for
 the global equivalence the folklore claims.
 
 \paragraph{The Hamilton--Jacobi correspondence: caustics}
-Jacobi's theorem (Proposition~\ref{prop:jacobi-thm}) is, like
-Proposition~\ref{prop:regular}, a genuine equivalence result---but, like
-Proposition~\ref{prop:regular} without hyperregularity, it is only a
+Jacobi's theorem (Proposition~\ref{jacobi-thm}) is, like
+Proposition~\ref{regular}, a genuine equivalence result---but, like
+Proposition~\ref{regular} without hyperregularity, it is only a
 \emph{local} one, and the nondegeneracy hypothesis on the mixed Hessian
 $\partial^2S/\partial q\partial\alpha$ is not guaranteed to persist away from
 the point where it is first checked.
@@ -834,10 +834,10 @@ reconverge near the same later point, so more than one candidate value competes
 to be $S(q,t)$: the function becomes multivalued, its would-be smooth branches
 meeting along an envelope---the \emph{caustic}---where the Jacobian of the map
 from initial velocity to endpoint, and with it the mixed Hessian of
-Proposition~\ref{prop:jacobi-thm}, degenerates.
+Proposition~\ref{jacobi-thm}, degenerates.
 
 \begin{proposition}
-\label{prop:caustic}
+\label{caustic}
 Let $t_c$ be the first conjugate time to $t_0$ along a trajectory.
     Hamilton's principal function $S(q,t)$, built
     from trajectories issuing from $(q_0,t_0)$, is a smooth, single-valued
@@ -884,7 +884,7 @@ a total derivative and still generate the same force law, again governed by the
 multiplier version of the Helmholtz analysis. On
 the Hamiltonian side, canonical transformations relate infinitely many
 distinct-looking triples $(q,p,H)$ that all describe the same underlying
-dynamics. None of this contradicts Proposition~\ref{prop:regular}---the
+dynamics. None of this contradicts Proposition~\ref{regular}---the
 \emph{solution sets} still correspond bijectively---but it means the intuitive
 picture of ``one Newtonian system, one Lagrangian, one Hamiltonian''
 understates how much freedom is built into the correspondence in both
