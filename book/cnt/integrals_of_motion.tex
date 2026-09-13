@@ -1,0 +1,498 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PB}[2]{\{#1,#2\}}
+
+\title{Two Notions of \emph{Integral of Motion}:\\
+Symmetry-Generated Conservation Laws versus\\
+the Universal $2n$ Constants of the General Solution}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Physicists commonly say that a mechanical system does or does not \emph{have}
+integrals of motion, depending on whether its Hamiltonian possesses continuous
+symmetries, and that possessing enough independent, mutually commuting
+integrals (Liouville integrability) is a rare and dynamically important
+property. At the same time, elementary ODE theory --- underlying, for
+instance, a well-known remark of Landau and Lifshitz --- shows that
+\emph{every} Hamiltonian system with $n$ degrees of freedom possesses $2n$
+(or $2n-1$, if autonomous) independent integrals of motion, with no
+reference to any symmetry whatsoever. This note explains why the two
+statements are complementary rather than contradictory. We review the
+symmetry-based (Noether) origin of dynamically useful integrals and the
+Liouville--Arnold notion of integrability; we prove, via an explicit
+construction using the phase-space flow map, the folklore fact that $2n$
+(or $2n-1$) integrals always exist; we show, using an elementary bound
+from symplectic linear algebra, that at most $n$ integrals can ever be in
+mutual involution, so the ``always available'' integrals essentially never
+contribute to integrability; and we illustrate the discussion with the
+harmonic oscillator, a resonant/non-resonant pair of oscillators, and the
+chaotic H\'enon--Heiles system.
+\end{abstract}
+
+\section{Introduction}
+
+Two statements about ``integrals of motion'' circulate in classical
+mechanics, and at first sight they seem to be in tension.
+
+\begin{enumerate}[label=(\Alph*)]
+\item \textbf{The symmetry statement.} A conserved quantity is tied to a
+continuous symmetry of the system (Noether's theorem): momentum is
+conserved because space is homogeneous, angular momentum because space is
+isotropic, energy because the dynamics is time-translation invariant. A
+generic system need not have any of these symmetries, and correspondingly
+need not have (beyond perhaps energy) any conserved quantity at all. The
+strongest and most useful version of ``having enough integrals'' is
+\emph{Liouville integrability}: $n$ independent, pairwise Poisson-commuting
+integrals for a system with $n$ degrees of freedom. Most systems with
+$n\ge 2$ do not have this property; they are non-integrable, generically
+chaotic.
+\item \textbf{The counting statement.} Regardless of any of this, a system
+with $n$ degrees of freedom always possesses $2n$ independent integrals of
+motion (or $2n-1$ time-independent ones, if the system is autonomous). This
+is not a statement about symmetry at all; it is a direct consequence of the
+existence and uniqueness theorem for ordinary differential equations. It
+appears already in Landau and Lifshitz's \emph{Mechanics} \cite{landau},
+where it is used to motivate the very definition of an integral of motion.
+\end{enumerate}
+
+The puzzle is: if every system automatically has $2n-1$ (or $2n$)
+integrals, in what sense can a system ``lack'' integrals, or fail to be
+integrable? The resolution is that (A) and (B) are answers to different
+questions. Statement (B) is a bare existence theorem: it guarantees that
+\emph{some} functions with the defining property of a constant of motion
+exist, locally, near any given point of phase space and time. It says
+nothing about whether those functions are smooth beyond a small
+neighbourhood, whether they have a closed form, whether they can be written
+down without already having solved the equations of motion, or whether they
+are useful for anything. Statement (A) is about a much more restrictive and
+much more useful class of integrals: quantities with a fixed, symmetry-determined
+functional form that remains valid however the ``non-symmetric'' part of the
+dynamics is changed, and --- in the strongest case --- quantities that are
+in involution with one another, which is what actually allows the equations
+of motion to be solved.
+
+The rest of this note makes this precise. Section~\ref{sec:prelim} fixes
+notation. Section~\ref{sec:symmetry} recalls Noether's theorem and
+Liouville integrability. Section~\ref{sec:universal} proves the counting
+statement (B) as a theorem, with an explicit construction. Section~\ref{sec:involution}
+proves that no matter how the $2n$ (or $2n-1$) integrals of
+Section~\ref{sec:universal} are chosen, at most $n$ of them can ever be in
+involution --- which is the precise sense in which counting integrals is
+not the same as having integrability. Section~\ref{sec:examples} works
+through the harmonic oscillator, a pair of oscillators (resonant and
+non-resonant), and the chaotic H\'enon--Heiles system, to show concretely
+how ``always existing'' and ``practically useless'' can coexist. Section~\ref{sec:discussion}
+discusses the reconciliation and its relation to the ``isolating
+integral'' terminology used in galactic dynamics.
+
+\section{Preliminaries}\label{sec:prelim}
+
+Let $(q,p)=(q_1,\dots,q_n,p_1,\dots,p_n)$ be canonical (Darboux) coordinates
+on a $2n$-dimensional phase space, with symplectic form
+$\omega=\sum_{i=1}^n dq_i\wedge dp_i$, and let
+$H=H(q,p,t)$ be a Hamiltonian, possibly explicitly time-dependent. Hamilton's
+equations are
+\begin{equation}
+\dot q_i=\frac{\partial H}{\partial p_i},\qquad
+\dot p_i=-\frac{\partial H}{\partial q_i},\qquad i=1,\dots,n.
+\end{equation}
+For functions $F,G$ on phase space, the Poisson bracket is
+\begin{equation}
+\PB{F}{G}=\sum_{i=1}^n\left(\frac{\partial F}{\partial q_i}\frac{\partial G}{\partial p_i}
+-\frac{\partial F}{\partial p_i}\frac{\partial G}{\partial q_i}\right).
+\end{equation}
+The Hamiltonian vector field of a function $F(q,p)$ is defined by
+$\iota_{X_F}\omega=dF$; in Darboux coordinates,
+$X_F=\sum_i\left(\partial_{p_i}F\,\partial_{q_i}-\partial_{q_i}F\,\partial_{p_i}\right)$,
+and a direct computation gives $\omega(X_F,X_G)=\PB{F}{G}$.
+
+\begin{definition}[Integral of motion]
+A function $F=F(q,p,t)$ is an \emph{integral of motion} (or \emph{constant
+of motion}, or \emph{conserved quantity}) if
+\begin{equation}
+\frac{dF}{dt}=\frac{\partial F}{\partial t}+\PB{F}{H}=0
+\end{equation}
+identically, i.e.\ $F$ is constant along every solution of Hamilton's
+equations. Two integrals $F_1,\dots,F_k$ are \emph{functionally independent}
+at a point if $dF_1,\dots,dF_k$ are linearly independent there, and they are
+\emph{in involution} if $\PB{F_i}{F_j}=0$ for all $i,j$.
+\end{definition}
+
+\section{Integrals from symmetry, and Liouville integrability}\label{sec:symmetry}
+
+The physically substantive notion of an integral of motion is tied to
+invariance of the dynamics under a continuous transformation.
+
+\subsection{Noether's theorem}
+
+In the Hamiltonian formalism, Noether's theorem takes an almost
+tautological, and for that reason very clean, form: if $Q=Q(q,p)$ has no
+explicit time dependence, then
+\begin{equation}
+\frac{dQ}{dt}=\PB{Q}{H},
+\end{equation}
+so $Q$ is conserved if and only if $\PB{Q}{H}=0$ --- and this is exactly
+the condition that $H$ is invariant under the flow generated by $Q$ (equivalently,
+by the antisymmetry of the bracket, that $Q$ is invariant under the flow
+generated by $H$). Conservation of $Q$ and invariance of $H$ under the
+one-parameter group generated by $Q$ are the same statement. (The
+Lagrangian version of Noether's theorem, with an infinitesimal
+transformation $q_i\to q_i+\epsilon\eta_i(q,t)$ leaving the action
+invariant up to a boundary term, is equivalent to this after a Legendre
+transform; we will not need its more elaborate bookkeeping here.)
+
+The simplest instances are \emph{cyclic coordinates}: if $H$ does not
+depend on $q_i$ at all, then $\PB{p_i}{H}=-\partial H/\partial q_i=0$, so
+$p_i$ is conserved. Whether a given coordinate is cyclic is a contingent
+fact about the specific $H$ under study, not a general feature of
+mechanical systems:
+\begin{itemize}
+\item translation invariance of $H$ in a Cartesian coordinate $\Rightarrow$
+the conjugate linear momentum is conserved;
+\item rotation invariance of $H$ about an axis $\Rightarrow$ the conjugate
+angular momentum is conserved;
+\item invariance of $H$ under time translation (i.e.\ $H$ autonomous)
+$\Rightarrow$ $H$ itself (the energy) is conserved.
+\end{itemize}
+A generic Hamiltonian --- e.g.\ three bodies interacting gravitationally
+with no special symmetry, or a double pendulum --- has none of the spatial
+symmetries above, and only energy is conserved by this mechanism. Whether
+\emph{any} further integral exists is then a separate, dynamical question,
+not something guaranteed by the structure of mechanics as such. This is
+precisely statement (A) of the introduction.
+
+\subsection{Liouville--Arnold integrability}
+
+The strongest useful sense in which a system ``has enough'' integrals is
+integrability in the sense of Liouville.
+
+\begin{theorem}[Liouville--Arnold, see \cite{arnold}]
+Suppose a Hamiltonian system with $n$ degrees of freedom has $n$
+functionally independent integrals of motion $F_1=H,F_2,\dots,F_n$ that are
+pairwise in involution, $\PB{F_i}{F_j}=0$. Then, under mild completeness
+conditions, the common level sets $\{F_i=c_i\}$ are (unions of) Lagrangian
+tori, motion on each torus is quasi-periodic, and the system can be
+integrated by quadratures in suitable action--angle variables.
+\end{theorem}
+
+The content of this theorem is that having $n$ integrals \emph{in
+involution} is what actually lets one solve the equations of motion; the
+number $n$ is not arbitrary, and involution --- not mere existence --- is
+the crucial extra structure. Systems that fail to be Liouville integrable
+(the generic case for $n\ge 2$) typically exhibit chaotic dynamics.
+
+\section{The universal integrals of the general solution}\label{sec:universal}
+
+We now turn to statement (B). The following construction is exactly the
+one behind the folklore fact recorded, e.g., in \cite{landau}: the general
+solution of the equations of motion contains $2n$ arbitrary constants
+(fixed by initial data), and \emph{inverting} the solution to express those
+constants in terms of $(q,p,t)$ produces $2n$ integrals of motion, valid
+for any system whatsoever.
+
+\begin{theorem}\label{thm:universal}
+Let $H\in C^k(U\times I)$, $k\ge 1$, where $U\subseteq\mathbb R^{2n}$ is
+open and $I\subseteq\mathbb R$ is an open interval, and suppose that for
+every $(q_0,p_0)\in U$ and $t_0\in I$ the solution of Hamilton's equations
+with $(q(t_0),p(t_0))=(q_0,p_0)$ exists, is unique, and remains in $U$ for
+all $t\in I$ (no finite-time blow-up on $I$). Fix a reference time
+$t_0\in I$. Then there exist $2n$ functions $C_1,\dots,C_{2n}\in
+C^k(U\times I)$ such that:
+\begin{enumerate}[label=(\roman*)]
+\item each $C_a$ is an integral of motion: $C_a(q(t),p(t),t)$ is constant
+along every solution $(q(t),p(t))$;
+\item for each fixed $t\in I$, the map $(q,p)\mapsto\big(C_1(q,p,t),\dots,C_{2n}(q,p,t)\big)$
+is a $C^k$ diffeomorphism of $U$ onto its image; in particular the $C_a$
+are functionally independent.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By the standard theorem on existence, uniqueness, and $C^k$ dependence of
+solutions of ODEs on initial data (see e.g.\ \cite{hartman}), the time-$t$
+flow map
+\begin{equation}
+\Phi_{t,t_0}:U\to U,\qquad \Phi_{t,t_0}(q_0,p_0)=\big(q(t;q_0,p_0,t_0),\,p(t;q_0,p_0,t_0)\big)
+\end{equation}
+is, for each $t\in I$, a $C^k$ diffeomorphism of $U$ onto its image, jointly
+$C^k$ in $(t,q_0,p_0)$. Uniqueness of solutions gives the group law
+$\Phi_{t_2,t_1}\circ\Phi_{t_1,t_0}=\Phi_{t_2,t_0}$ and $\Phi_{t_0,t_0}=\mathrm{id}$,
+so $\Phi_{t,t_0}^{-1}=\Phi_{t_0,t}$. Define
+\begin{equation}
+C(q,p,t):=\Phi_{t,t_0}^{-1}(q,p)=\Phi_{t_0,t}(q,p)\in\mathbb R^{2n},
+\end{equation}
+with components $C_1,\dots,C_{2n}$; this is $C^k$ jointly in $(q,p,t)$ by
+the same smooth-dependence theorem.
+
+(i) If $(q(t),p(t))$ solves Hamilton's equations, then
+$(q(t),p(t))=\Phi_{t,t_0}(q(t_0),p(t_0))$ for all $t\in I$, so
+\begin{equation}
+C(q(t),p(t),t)=\Phi_{t,t_0}^{-1}\big(\Phi_{t,t_0}(q(t_0),p(t_0))\big)=(q(t_0),p(t_0)),
+\end{equation}
+which does not depend on $t$. Hence each $C_a$ is an integral of motion.
+
+(ii) For fixed $t$, $(q,p)\mapsto C(q,p,t)=\Phi_{t,t_0}^{-1}(q,p)$ is by
+construction the inverse of the diffeomorphism $\Phi_{t,t_0}$, hence is
+itself a diffeomorphism, with everywhere-invertible Jacobian. In
+particular $dC_1\wedge\cdots\wedge dC_{2n}\ne 0$.
+\end{proof}
+
+Nothing in this argument refers to any symmetry of $H$: it holds for a
+generic, non-autonomous, non-integrable, even chaotic system, exactly as
+freely as for the harmonic oscillator. It is, in an honest sense, a
+bookkeeping device: $C(q,p,t)$ simply records \emph{which initial condition
+the trajectory through $(q,p)$ at time $t$ came from}. Knowing all $2n$
+components of $C$ as explicit functions is equivalent to already having
+solved the equations of motion.
+
+\begin{corollary}[Autonomous reduction]\label{cor:autonomous}
+If $H=H(q,p)$ has no explicit time dependence, then $\Phi_{t,t_0}$ depends
+on $t,t_0$ only through $\tau=t-t_0$. Away from equilibria ($X_H\ne 0$),
+the flow-box (straightening) theorem for non-vanishing vector fields
+provides local coordinates $(\tau,y_1,\dots,y_{2n-1})$ in which the flow is
+simply $\tau\mapsto\tau+t$, $y\mapsto y$. Then $C_{2n}:=t-\tau(q,p)$ is the
+one integral that carries explicit $t$-dependence, while
+$C_1,\dots,C_{2n-1}:=y_1(q,p),\dots,y_{2n-1}(q,p)$ are $2n-1$ functionally
+independent integrals with \emph{no} explicit time dependence. Thus an
+autonomous system with $n$ degrees of freedom has $2n-1$ time-independent
+integrals of motion (plus one further, explicitly time-dependent one),
+matching the count in \cite{landau}.
+\end{corollary}
+
+\begin{remark}
+The reduction in Corollary~\ref{cor:autonomous} is only \emph{local}: away
+from equilibria it holds near any given point, but the resulting $C_a$ need
+not extend to smooth, single-valued functions on all of $U$. Example~\ref{ex:pair}
+below exhibits this concretely.
+\end{remark}
+
+\section{Counting is not enough: an involution bound}\label{sec:involution}
+
+The $2n$ (or $2n-1$) integrals produced by Theorem~\ref{thm:universal} vastly
+outnumber the $n$ integrals required for Liouville integrability. One might
+wonder whether some subset of them could simply be selected to establish
+integrability of \emph{any} system. The following elementary fact from
+symplectic linear algebra shows this is never possible beyond a hard bound,
+regardless of how the integrals are chosen.
+
+\begin{proposition}\label{prop:bound}
+On a $2n$-dimensional symplectic manifold, at most $n$ functionally
+independent functions can be pairwise in involution in a neighbourhood of a
+point where their differentials are linearly independent.
+\end{proposition}
+
+\begin{proof}
+Let $F_1,\dots,F_k$ be functionally independent and pairwise in involution
+near $x$, so $dF_1(x),\dots,dF_k(x)$ are linearly independent and
+$\PB{F_i}{F_j}=0$ for all $i,j$. Let $X_i:=X_{F_i}$; since $\omega$ is
+non-degenerate, $X_1(x),\dots,X_k(x)$ are linearly independent, spanning a
+$k$-dimensional subspace $W\subseteq T_xM$. For any $i,j$,
+\begin{equation}
+\omega(X_i,X_j)=\PB{F_i}{F_j}=0,
+\end{equation}
+so $W$ is isotropic. A general fact about a $2n$-dimensional symplectic
+vector space $(V,\omega)$ is that its \emph{symplectic orthogonal}
+$W^{\omega}=\{v\in V:\omega(v,w)=0\ \forall w\in W\}$ satisfies
+$\dim W+\dim W^\omega=2n$; isotropy of $W$ means $W\subseteq W^\omega$, so
+$\dim W\le\dim W^\omega=2n-\dim W$, giving $\dim W\le n$. Hence $k\le n$.
+\end{proof}
+
+\begin{corollary}\label{cor:bound}
+Of the $2n$ (general case) or $2n-1$ (autonomous case) integrals guaranteed
+by Theorem~\ref{thm:universal} and Corollary~\ref{cor:autonomous}, at most
+$n$ can ever be pairwise in involution, however they are chosen. Mere
+existence of ``enough'' integrals, in number, therefore never by itself
+implies Liouville integrability. Integrability requires exactly $n$
+independent integrals \emph{in involution}: a restrictive algebraic
+condition that is not satisfied generically, and is satisfied, when it is,
+typically because of extra symmetry (an abelian group of symmetries acting
+appropriately, or separability of the Hamilton--Jacobi equation) --- not
+because of the counting argument of Section~\ref{sec:universal}.
+\end{corollary}
+
+\section{Examples}\label{sec:examples}
+
+\begin{example}[Harmonic oscillator, $n=1$]\label{ex:sho}
+Let $H=\dfrac{p^2}{2m}+\dfrac12 m\omega^2q^2$, with general solution
+$q(t)=A\cos(\omega t+\varphi)$, $p(t)=-m\omega A\sin(\omega t+\varphi)$, so
+$2n=2$ constants $(A,\varphi)$. Inverting,
+\begin{equation}
+A(q,p)=\sqrt{q^2+\Big(\frac{p}{m\omega}\Big)^2},\qquad
+\varphi(q,p,t)=\operatorname{atan2}\!\Big(-\frac{p}{m\omega},\,q\Big)-\omega t
+\ \ (\mathrm{mod}\ 2\pi).
+\end{equation}
+The amplitude $A$ (equivalently the energy $H=\tfrac12m\omega^2A^2$) is the
+$2n-1=1$ time-independent integral of Corollary~\ref{cor:autonomous}; the
+phase $\varphi$ is the one integral carrying explicit $t$-dependence, and
+it is only defined modulo $2\pi$ and only smooth away from the equilibrium
+$A=0$, illustrating the local, non-global nature of the flow-box
+construction even in the simplest possible case.
+
+For $n=1$ the two notions of Section~\ref{sec:symmetry} and
+Section~\ref{sec:universal} in fact coincide: since phase space is
+two-dimensional, the orbits of an autonomous flow are (generically)
+one-dimensional level curves, so \emph{any} time-independent integral must
+locally be a function of energy alone. The interesting distinction between
+``symmetry-generated'' and ``merely guaranteed to exist'' integrals is
+vacuous at $n=1$; it first becomes visible at $n\ge 2$.
+\end{example}
+
+\begin{example}[Two oscillators, $n=2$: resonance and global multivaluedness]\label{ex:pair}
+Let $H=\big(\tfrac{p_1^2}{2m_1}+\tfrac12m_1\omega_1^2q_1^2\big)+\big(\tfrac{p_2^2}{2m_2}+\tfrac12m_2\omega_2^2q_2^2\big)$,
+with constant frequencies $\omega_1,\omega_2$. Writing each oscillator in
+action-angle form, $E_j(q_j,p_j)$ and $\theta_j(q_j,p_j,t)=\theta_j^{(0)}(q_j,p_j)+\omega_jt$
+for $j=1,2$, the $2n=4$ raw constants are $E_1,E_2,\theta_1^{(0)},\theta_2^{(0)}$.
+The two energies $E_1,E_2$ are already time-independent and are in
+involution ($\PB{E_1}{E_2}=0$, since they depend on disjoint canonical
+pairs): this accounts for $2$ of the $2n-1=3$ time-independent integrals
+required by Corollary~\ref{cor:autonomous}, and, being $n=2$ independent
+commuting integrals, they already establish Liouville integrability on
+their own.
+
+The third time-independent integral must be built from the two phases; the
+explicit-$t$ dependence cancels in the combination
+\begin{equation}
+\Psi:=\omega_2\,\theta_1^{(0)}(q_1,p_1)-\omega_1\,\theta_2^{(0)}(q_2,p_2)
+=\omega_2\theta_1-\omega_1\theta_2 .
+\end{equation}
+Two qualitatively different things can happen:
+\begin{itemize}
+\item If $\omega_1/\omega_2$ is rational, orbits are closed Lissajous
+curves, and (a suitably normalized version of) $\Psi$ is a genuine
+\emph{global}, smooth, closed-form integral --- a resonance-induced
+``extra'' conserved quantity beyond $E_1,E_2$ separately, of the same
+character as the classical analogue of the accidental $SU(2)$ symmetry of
+the two-dimensional isotropic oscillator ($\omega_1=\omega_2$).
+\item If $\omega_1/\omega_2$ is irrational, the orbit is dense on the
+invariant torus $\{E_1,E_2=\text{const}\}$ (this is the classical
+irrational rotation of the torus). Then $\Psi$, while still smooth and
+well-defined \emph{locally}, cannot be extended to a continuous
+single-valued function on the whole torus: a continuous invariant of a
+dense orbit must be constant on a dense set, hence constant everywhere,
+which $\Psi$ is not. The system remains Liouville integrable throughout
+(the actions $E_1,E_2$ suffice), but the particular ``extra'' integral
+handed to us by the general construction of Theorem~\ref{thm:universal}
+simply fails to be a nice global object.
+\end{itemize}
+This shows explicitly that even for a fully linear, exactly solvable,
+integrable system, the universal integrals of Section~\ref{sec:universal}
+need not be globally smooth --- confirming the caveat after
+Corollary~\ref{cor:autonomous}.
+\end{example}
+
+\begin{example}[A chaotic system: H\'enon--Heiles]\label{ex:hh}
+Let $H=\tfrac12(p_x^2+p_y^2)+\tfrac12(x^2+y^2)+x^2y-\tfrac13y^3$
+($n=2$), the H\'enon--Heiles Hamiltonian \cite{henonheiles}. Energy is
+conserved (time-translation invariance), but no further global,
+closed-form integral is known, and numerical experiments show the system
+is non-integrable: above a threshold energy the accessible region of phase
+space contains a chaotic sea alongside surviving invariant tori. By
+Theorem~\ref{thm:universal} and Corollary~\ref{cor:autonomous}, $2n-1=3$
+time-independent integrals still exist, in the strict local sense, near any
+non-equilibrium point. But in the chaotic region they cannot be extended to
+smooth functions on any sizeable open set, have no closed form, and are
+exponentially sensitive to initial conditions (a manifestation of positive
+Lyapunov exponents): two nearby initial points generically flow to values
+of these ``integrals'' that diverge exponentially fast under backward
+iteration of the construction. The guarantee of Theorem~\ref{thm:universal}
+is not false here --- it is simply empty of practical content, in sharp
+contrast with the single, robust, globally defined, closed-form Noether
+integral $H$.
+\end{example}
+
+\section{Discussion}\label{sec:discussion}
+
+The tension between statements (A) and (B) dissolves once the word
+``integral'' is recognized as covering two different things:
+\begin{itemize}
+\item \emph{Universal integrals} (Theorem~\ref{thm:universal}): guaranteed
+to exist for any system, by the bare existence-and-uniqueness theorem for
+ODEs; equivalent, in information content, to already having solved the
+equations of motion; generically without closed form; valid, in general,
+only locally (Example~\ref{ex:pair}); with no stable functional form under
+a change of Hamiltonian (perturbing $H$ at all, whether or not it breaks a
+symmetry, changes the flow map $\Phi_{t,t_0}$ and hence changes every
+$C_a$ completely); and, by Proposition~\ref{prop:bound}, never more than
+$n$ of them can be placed in involution, so they essentially never
+contribute to integrability beyond what symmetry already provides.
+\item \emph{Symmetry-generated integrals} (Section~\ref{sec:symmetry}):
+tied to an actual invariance of $H$; retain the exact same functional form
+(e.g.\ $p_i$, or $L=q\times p$) under any deformation of $H$ that preserves
+the symmetry, however drastically the rest of the dynamics is changed;
+automatically in involution when they arise from an abelian symmetry group
+acting appropriately, which is what makes Liouville integrability possible
+in the first place.
+\end{itemize}
+A closely related distinction is made under the name \emph{isolating}
+versus \emph{non-isolating} integrals in the stellar/galactic dynamics
+literature \cite{binneytremaine}: an isolating integral (such as energy, or
+angular momentum in an axisymmetric potential) genuinely confines an orbit
+to a lower-dimensional invariant surface throughout the accessible region
+of phase space, whereas a non-isolating integral --- guaranteed to exist by
+essentially the same local argument as Theorem~\ref{thm:universal} --- has
+level sets that are typically dense and provide no actual constraint on the
+orbit's global behaviour. Example~\ref{ex:pair} is a clean, fully solvable
+illustration of exactly this phenomenon.
+
+The upshot is that the number $2n$ (or $2n-1$) in statement (B) is a
+statement about the local invertibility of a flow, not a statement about
+dynamics being simple, solvable, or governed by any symmetry. Statement (A)
+is the substantive one: whether a system has symmetry-generated integrals,
+and whether enough of them are in involution to achieve Liouville
+integrability, is a real, non-trivial question about the specific
+Hamiltonian at hand, to which the answer is generically ``no'' once
+$n\ge 2$. That a bare existence theorem and a substantive dynamical
+statement can be phrased using the same word, ``integral of motion,'' is
+itself a small instance of a larger and more general phenomenon: results
+that are transparently true once translated into pure mathematics can look
+like non-trivial physical claims when left in physicists' language, and
+conflating the two registers is a recurring source of apparent paradox in
+classical mechanics.
+
+\section*{Acknowledgments}
+None.
+
+\begin{thebibliography}{9}
+
+\bibitem{landau}
+L.~D.~Landau and E.~M.~Lifshitz, \emph{Mechanics}, 3rd ed., Course of
+Theoretical Physics Vol.~1, Butterworth-Heinemann, 1976, \S6.
+
+\bibitem{arnold}
+V.~I.~Arnold, \emph{Mathematical Methods of Classical Mechanics}, 2nd ed.,
+Springer, 1989.
+
+\bibitem{hartman}
+P.~Hartman, \emph{Ordinary Differential Equations}, 2nd ed., SIAM
+Classics in Applied Mathematics, 2002.
+
+\bibitem{binneytremaine}
+J.~Binney and S.~Tremaine, \emph{Galactic Dynamics}, 2nd ed., Princeton
+University Press, 2008.
+
+\bibitem{henonheiles}
+M.~H\'enon and C.~Heiles, ``The applicability of the third integral of
+motion: Some numerical experiments,'' \emph{Astron.\ J.} \textbf{69}, 73
+(1964).
+
+\end{thebibliography}
+
+\end{document}
