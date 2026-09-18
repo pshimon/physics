@@ -1,0 +1,1925 @@
+
+\chapter{Variational Principles in Classical, Semiclassical, and Quantum Mechanics}
+\label{chap:variational}
+
+\section{Introduction}
+
+Variational principles occupy a peculiar position in physics.  They are often presented as alternative ways of writing the equations of motion, but this description conceals an important fact: different variational principles may correspond to genuinely different choices of independent variables, endpoint data, conserved quantities, or physical constraints.  They are therefore not simply different notations for the same calculation.
+
+The most familiar example is Hamilton's principle,
+\begin{equation}
+\delta S=0,
+\qquad
+S[q]=\int_{t_1}^{t_2}L(q,\dot q,t),dt,
+\end{equation}
+with fixed endpoint configurations and fixed endpoint times.  Closely related is Maupertuis' principle,
+\begin{equation}
+\delta W=0,
+\qquad
+W=\int p_i,dq^i,
+\end{equation}
+which is naturally formulated at fixed energy and determines the spatial orbit without initially specifying its time parametrization.
+
+For a long time these two principles were generally treated as the two basic variational formulations of mechanics.  Gray, Karl, and Novikov showed that this picture is incomplete.  The Hamilton and Maupertuis principles each possess a reciprocal counterpart, producing a fourfold structure of variational principles.  The resulting framework also clarifies the relation of Rayleigh, Percival, and other specialized principles to the basic variational structure.  It provides an especially interesting bridge to the Schr"odinger variational principle and hence to semiclassical mechanics.
+
+The purpose of this chapter is to organize these principles into a single physical picture.  We shall distinguish carefully between:
+\begin{enumerate}
+\item fundamental trajectory variational principles;
+\item Legendre transformations and reductions;
+\item reciprocal principles;
+\item local variational principles such as d'Alembert's and Gauss' principles;
+\item specialized principles such as Rayleigh, Ritz, and Percival;
+\item quantum variational principles due to Schr"odinger, Feynman, and Schwinger.
+\end{enumerate}
+
+A central theme will be that the familiar statement ``the action is stationary'' represents only one member of a considerably richer variational structure.
+
+\section{Hamilton's Principle}
+
+Consider a mechanical system described by generalized coordinates
+$q^i$, with Lagrangian
+\begin{equation}
+L(q,\dot q,t).
+\end{equation}
+The action is
+\begin{equation}
+S[q]
+=
+\int_{t_1}^{t_2}
+L(q,\dot q,t),dt.
+\end{equation}
+
+Hamilton's principle states
+\begin{equation}
+\boxed{\delta S=0}
+\label{eq:hamilton-principle}
+\end{equation}
+for variations satisfying
+\begin{equation}
+\delta q^i(t_1)=\delta q^i(t_2)=0,
+\end{equation}
+with $t_1$ and $t_2$ fixed.
+
+The variation gives
+\begin{equation}
+\delta S=\int_{t_1}^{t_2}\left[\frac{\partial L}{\partial q^i}
+-\frac{d}{dt}\frac{\partial L}{\partial\dot q^i}\right]\delta q^i,dt,
+\end{equation}
+and therefore
+\begin{equation}
+\boxed{
+\frac{d}{dt}
+\frac{\partial L}{\partial\dot q^i}
+-
+\frac{\partial L}{\partial q^i}
+=0.
+}
+\end{equation}
+
+For
+\begin{equation}
+L=T-V,
+\end{equation}
+these are Newton's equations in generalized coordinates.
+
+It is important that Hamilton's principle is a principle about an entire history.  The variable being varied is the path
+\begin{equation}
+q(t),
+\end{equation}
+not merely the instantaneous position or acceleration.
+
+Furthermore, the action is not generally a minimum.  The stationary trajectory may correspond to a minimum, maximum, or saddle point.  The more precise terminology is therefore the \emph{principle of stationary action}.
+
+\section{The Phase-Space Action}
+
+Introduce the canonical momenta
+\begin{equation}
+p_i=
+\frac{\partial L}{\partial\dot q^i}
+\end{equation}
+and the Hamiltonian
+\begin{equation}
+H(q,p,t)
+=
+p_i\dot q^i-L.
+\end{equation}
+The action may then be written
+\begin{equation}
+S
+=
+\int_{t_1}^{t_2}
+\left(
+p_i\dot q^i-H
+\right)dt.
+\label{eq:phase-space-action}
+\end{equation}
+
+Variation with respect to $p_i$ and $q^i$ gives
+\begin{equation}
+\dot q^i
+=
+\frac{\partial H}{\partial p_i},
+\qquad
+\dot p_i
+=
+-\frac{\partial H}{\partial q^i}.
+\end{equation}
+
+Thus Hamilton's equations are themselves variational equations.
+
+The phase-space form is particularly important for the discussion below because it displays the two quantities
+\begin{equation}
+p_i,dq^i
+\qquad\hbox{and}\qquad
+H,dt
+\end{equation}
+on an equal footing.
+
+\section{Abbreviated Action and Maupertuis' Principle}
+
+Define the abbreviated action
+\begin{equation}
+\boxed{
+W=\int p_i,dq^i.
+}
+\label{eq:abbreviated-action}
+\end{equation}
+
+Since
+\begin{equation}
+dq^i=\dot q^i,dt,
+\end{equation}
+we have
+\begin{equation}
+W
+=
+\int p_i\dot q^i,dt.
+\end{equation}
+
+From
+\begin{equation}
+L=p_i\dot q^i-H
+\end{equation}
+it follows that
+\begin{equation}
+\boxed{
+S=W-\int H,dt.
+}
+\label{eq:S-W-H}
+\end{equation}
+
+For a time-independent Hamiltonian, the energy
+\begin{equation}
+E=H
+\end{equation}
+is conserved, so
+\begin{equation}
+\boxed{
+S=W-E T,
+}
+\label{eq:S-W-ET}
+\end{equation}
+where
+\begin{equation}
+T=t_2-t_1.
+\end{equation}
+
+Maupertuis' principle is
+\begin{equation}
+\boxed{
+\delta W=0
+}
+\label{eq:maupertuis}
+\end{equation}
+for variations between fixed configurations at fixed energy.
+
+The physical question is consequently different from that posed by Hamilton's principle.
+
+Hamilton's principle asks:
+
+\begin{quote}
+Which trajectory joins the two specified configurations in the specified time?
+\end{quote}
+
+Maupertuis' principle asks:
+
+\begin{quote}
+Which spatial orbit joins the two configurations for a specified energy?
+\end{quote}
+
+The latter formulation has eliminated the explicit time parametrization.
+
+\section{Jacobi's Principle and the Geometry of Mechanics}
+
+For a natural mechanical system,
+\begin{equation}
+L
+=
+\frac12g_{ij}\dot q^i\dot q^j-V(q),
+\end{equation}
+the energy is
+\begin{equation}
+E
+=
+\frac12g_{ij}\dot q^i\dot q^j+V(q).
+\end{equation}
+
+Consequently,
+\begin{equation}
+\frac12g_{ij}\dot q^i\dot q^j
+=
+E-V.
+\end{equation}
+
+Writing
+\begin{equation}
+ds^2=g_{ij}dq^i dq^j,
+\end{equation}
+one obtains
+\begin{equation}
+W
+=
+\int
+\sqrt{2(E-V)},ds.
+\end{equation}
+
+Define the Jacobi metric
+\begin{equation}
+\boxed{
+d\ell_J^2
+=
+2(E-V)g_{ij},dq^i dq^j.
+}
+\label{eq:jacobi-metric}
+\end{equation}
+
+Then
+\begin{equation}
+W=\int d\ell_J,
+\end{equation}
+and Maupertuis' principle becomes
+\begin{equation}
+\boxed{
+\delta\int d\ell_J=0.
+}
+\end{equation}
+
+Thus the configuration-space orbit of a conservative mechanical system at fixed energy is a geodesic of the Jacobi metric.
+
+This is one of the earliest and most important geometrizations of mechanics.
+
+The time parametrization is subsequently reconstructed from
+\begin{equation}
+dt
+=
+\frac{ds}{\sqrt{2(E-V)}}.
+\end{equation}
+
+The Jacobi principle therefore determines the orbit but not, by itself, the physical clock along that orbit.
+
+\section{Hamilton's Principal and Characteristic Functions}
+
+The Hamilton principal function is
+\begin{equation}
+S=S(q,t).
+\end{equation}
+It satisfies the Hamilton--Jacobi equation
+\begin{equation}
+\boxed{
+\frac{\partial S}{\partial t}
++
+H\left(q,\frac{\partial S}{\partial q},t\right)
+=0.
+}
+\label{eq:HJE}
+\end{equation}
+
+For a time-independent Hamiltonian one may write
+\begin{equation}
+S(q,t;E)
+=
+W(q;E)-Et.
+\end{equation}
+The Hamilton--Jacobi equation then becomes
+\begin{equation}
+\boxed{
+H\left(q,\frac{\partial W}{\partial q}\right)=E.
+}
+\label{eq:stationary-HJ}
+\end{equation}
+
+The characteristic function is related to the abbreviated action through
+\begin{equation}
+p_i
+=
+\frac{\partial W}{\partial q^i}.
+\end{equation}
+
+The relation
+\begin{equation}
+S=W-Et
+\end{equation}
+therefore connects the Hamilton and Maupertuis formulations.
+
+It is nevertheless important not to regard this as a globally valid equivalence of scalar functions.  The Hamilton--Jacobi function can become multivalued at caustics, and a globally defined velocity potential need not exist.  The underlying Hamiltonian dynamics can remain perfectly regular even when a single-valued $S(q,t)$ ceases to exist.
+
+\section{The Gray--Karl--Novikov Fourfold Structure}
+
+The conventional picture consisting only of Hamilton's and Maupertuis' principles is incomplete.
+
+Let
+\begin{equation}
+T=t_2-t_1
+\end{equation}
+and define the mean energy
+\begin{equation}
+\bar E
+=
+\frac1T
+\int_{t_1}^{t_2}H,dt.
+\end{equation}
+Then
+\begin{equation}
+\boxed{
+S=W-T\bar E.
+}
+\label{eq:master-legendre}
+\end{equation}
+
+Its variation is
+\begin{equation}
+\boxed{
+\delta S+\bar E,\delta T
+=
+\delta W-T,\delta\bar E.
+}
+\label{eq:master-variation}
+\end{equation}
+
+This equation provides a compact organizing principle for the four variational formulations identified by Gray, Karl, and Novikov.
+
+\subsection{Hamilton Principle}
+
+Holding $T$ fixed gives
+\begin{equation}
+\boxed{
+(\delta S)_T=0.
+}
+\end{equation}
+
+\subsection{Reciprocal Hamilton Principle}
+
+Holding $S$ fixed gives
+\begin{equation}
+\boxed{
+(\delta T)_S=0.
+}
+\end{equation}
+
+This is the reciprocal Hamilton principle.
+
+The two principles form the pair
+\begin{equation}
+\boxed{
+S\longleftrightarrow T.
+}
+\end{equation}
+
+\subsection{Generalized Maupertuis Principle}
+
+Holding the mean energy fixed gives
+\begin{equation}
+\boxed{
+(\delta W)_{\bar E}=0.
+}
+\end{equation}
+
+This generalized formulation is less restrictive than requiring every trial path to have exactly the same instantaneous energy.
+
+\subsection{Reciprocal Maupertuis Principle}
+
+Holding the abbreviated action fixed gives
+\begin{equation}
+\boxed{
+(\delta\bar E)_W=0.
+}
+\end{equation}
+
+The Maupertuis pair is therefore
+\begin{equation}
+\boxed{
+W\longleftrightarrow\bar E.
+}
+\end{equation}
+
+The four principles may consequently be displayed as
+\begin{equation}
+\boxed{
+\begin{array}{ccc}
+S &\longleftrightarrow&T\\
+\updownarrow&&\updownarrow\\
+W&\longleftrightarrow&\bar E .
+\end{array}}
+\label{eq:four-principles}
+\end{equation}
+
+The horizontal arrows represent reciprocity, while the vertical relationships are associated with the Legendre structure of mechanics.
+
+\section{Unconstrained Variational Principles}
+
+The constrained principles can be represented by more general relations.
+
+For the Hamilton family,
+\begin{equation}
+\boxed{
+\delta S+E,\delta T=0.
+}
+\label{eq:UHP}
+\end{equation}
+
+For the Maupertuis family,
+\begin{equation}
+\boxed{
+\delta W-T,\delta\bar E=0.
+}
+\label{eq:UMP}
+\end{equation}
+
+These are often called the unconstrained Hamilton and unconstrained Maupertuis principles.
+
+The usual principles follow immediately:
+\begin{align}
+\delta T=0
+&\quad\Rightarrow\quad
+\delta S=0,
+\
+\delta S=0
+&\quad\Rightarrow\quad
+\delta T=0,
+\end{align}
+and
+\begin{align}
+\delta\bar E=0
+&\quad\Rightarrow\quad
+\delta W=0,
+\
+\delta W=0
+&\quad\Rightarrow\quad
+\delta\bar E=0.
+\end{align}
+
+Thus the reciprocal principles are not arbitrary additional constructions.  They are already contained in the same variational identity.
+
+\section{Legendre Transformation and Reciprocity}
+
+Two operations must be distinguished.
+
+A Legendre transformation changes the variables used to describe the dynamics.  For example,
+\begin{equation}
+L(q,\dot q,t)
+\longrightarrow
+H(q,p,t).
+\end{equation}
+
+A reciprocal transformation instead exchanges the quantity being varied with the quantity held fixed:
+\begin{equation}
+\delta S|_T
+\longleftrightarrow
+\delta T|*S,
+\end{equation}
+or
+\begin{equation}
+\delta W|*{\bar E}
+\longleftrightarrow
+\delta\bar E|_W.
+\end{equation}
+
+The distinction is conceptually important.  Legendre transformation changes the description; reciprocity changes the variational role of the quantities.
+
+This is closely analogous to thermodynamics, where different thermodynamic potentials arise through Legendre transformations and where apparently different extremum principles describe the same equilibrium structure under different constraints.
+
+\section{Routh's Principle}
+
+Routh reduction is another application of the Legendre structure.
+
+Suppose $q^a$ are cyclic coordinates:
+\begin{equation}
+\frac{\partial L}{\partial q^a}=0.
+\end{equation}
+Then
+\begin{equation}
+p_a
+=
+\frac{\partial L}{\partial\dot q^a}
+\end{equation}
+are conserved.
+
+Perform a partial Legendre transformation:
+\begin{equation}
+\boxed{
+R
+=
+L-p_a\dot q^a.
+}
+\end{equation}
+
+The resulting Routhian governs the remaining coordinates.
+
+Thus
+\begin{equation}
+\boxed{
+\text{Routh reduction}
+=
+\text{partial Legendre transformation}.
+}
+\end{equation}
+
+Routh's principle should therefore not be regarded as another unrelated extremum law.  It is a reduction of the Hamilton--Lagrange structure using conserved momenta.
+
+\section{d'Alembert's Principle}
+
+d'Alembert's principle has a different character.
+
+For particles,
+\begin{equation}
+\boxed{
+\sum_a
+(\mathbf F_a-m_a\mathbf a_a)
+\cdot\delta\mathbf r_a=0.
+}
+\label{eq:dalembert}
+\end{equation}
+
+It is an instantaneous virtual-work statement.  It does not require the integration over a complete history that appears in Hamilton's principle.
+
+For generalized coordinates,
+\begin{equation}
+\sum_i
+\left[
+\frac{d}{dt}
+\frac{\partial L}{\partial\dot q^i}
+-
+\frac{\partial L}{\partial q^i}
+-
+Q_i
+\right]\delta q^i=0.
+\end{equation}
+
+For ideal constraints this leads directly to Lagrange's equations.
+
+\section{Lagrange--d'Alembert Principle}
+
+For nonconservative generalized forces $Q_i^{\rm nc}$,
+\begin{equation}
+\boxed{
+\delta\int L,dt
++
+\int Q_i^{\rm nc}\delta q^i,dt
+=
+0.
+}
+\end{equation}
+
+This formulation is important because a purely conservative action principle cannot simply be used to represent arbitrary frictional forces.
+
+The Lagrange--d'Alembert principle therefore occupies a complementary position to the Hamilton--Maupertuis family:
+\begin{equation}
+\text{Hamilton}
+\quad\text{for conservative dynamics},
+\end{equation}
+versus
+\begin{equation}
+\text{Lagrange--d'Alembert}
+\quad\text{for dynamics with prescribed nonconservative forces}.
+\end{equation}
+
+\section{Gauss' Principle of Least Constraint}
+
+Gauss introduced a variational principle involving the instantaneous accelerations.
+
+For particles, define
+\begin{equation}
+Z=
+\frac12
+\sum_a
+\frac1{m_a}
+\left|
+\mathbf F_a-m_a\mathbf a_a
+\right|^2.
+\end{equation}
+
+The actual accelerations are obtained by minimizing $Z$ subject to the constraints.
+
+The conceptual distinction is clear:
+\begin{equation}
+\boxed{
+\begin{array}{ll}
+\text{Hamilton:}&
+\text{variation of histories},\\
+\text{d'Alembert:}&
+\text{variation of virtual displacements},\\
+\text{Gauss:}&
+\text{variation of instantaneous accelerations}.
+\end{array}}
+\end{equation}
+
+These principles can lead to the same equations of motion while representing substantially different physical organizations of the problem.
+
+\section{Hertz's Principle and Geometrization}
+
+Hertz sought a formulation in which the motion of a mechanical system could be represented as geodesic motion in an appropriate configuration space.
+
+This continues the geometrical idea already present in Jacobi's principle:
+\begin{equation}
+\text{mechanics}
+\longrightarrow
+\text{geometry}.
+\end{equation}
+
+Jacobi's construction is especially transparent:
+\begin{equation}
+\text{fixed energy}
+\longrightarrow
+\text{Jacobi metric}
+\longrightarrow
+\text{geodesic orbit}.
+\end{equation}
+
+Hertz's formulation attempts to make the geometrical character even more fundamental by enlarging the configuration space so that forces can be absorbed into geometry.
+
+\section{Rayleigh's Principle}
+
+For a system possessing normal modes, one frequently encounters the Rayleigh quotient
+\begin{equation}
+\omega^2
+=
+\frac{\langle q,Kq\rangle}
+{\langle q,Mq\rangle}.
+\end{equation}
+
+The physical frequency is obtained by stationarity:
+\begin{equation}
+\boxed{
+\delta\omega^2=0.
+}
+\end{equation}
+
+Rayleigh's principle is not an independent fundamental member of the fourfold Gray--Karl--Novikov structure.  It can be obtained as a special case of reciprocal variational formulations.
+
+This is an important example of a general phenomenon: principles that appear unrelated when expressed in their specialized form may be different limits or reductions of a common variational structure.
+
+\section{Ritz's Variational Method}
+
+The Ritz procedure should be distinguished from a fundamental variational principle.
+
+Suppose that a functional $I[q]$ is stationary at the physical solution.  Approximate the function by
+\begin{equation}
+q(x)
+=
+\sum_{n=1}^N a_n\phi_n(x).
+\end{equation}
+
+The infinite-dimensional variational problem becomes
+\begin{equation}
+\frac{\partial I}{\partial a_n}=0,
+\qquad
+n=1,\ldots,N.
+\end{equation}
+
+Ritz is therefore primarily a \emph{method for exploiting a variational principle}.
+
+The distinction is useful:
+\begin{equation}
+\boxed{
+\text{variational principle}
+\neq
+\text{variational approximation method}.
+}
+\end{equation}
+
+\section{Percival's Principle}
+
+For integrable Hamiltonian systems, motion can be represented on invariant tori.  The action variables are
+\begin{equation}
+J_k
+=
+\frac{1}{2\pi}
+\oint p_k,dq_k.
+\end{equation}
+
+Percival developed a variational formulation particularly suited to quasiperiodic motion, in which the frequencies are treated as fixed quantities.
+
+Its importance is that it extends the variational viewpoint from isolated trajectories to invariant tori.
+
+Schematically,
+\begin{equation}
+\boxed{
+\text{RMP}
+\longrightarrow
+\text{Percival principle}
+\longrightarrow
+\text{variational description of invariant tori}.
+}
+\end{equation}
+
+This becomes relevant to integrable systems, perturbation theory, semiclassical mechanics, and the structure underlying KAM theory.
+
+\section{Variational Principles for Scattering}
+
+The standard endpoint formulation becomes awkward for scattering because
+\begin{equation}
+t\rightarrow\pm\infty.
+\end{equation}
+
+The action contains divergent free-particle contributions.  One therefore separates
+\begin{equation}
+S
+=
+S_{\rm free}+S_{\rm int},
+\end{equation}
+and formulates the variational problem in terms of a finite interaction contribution.
+
+The reciprocal variational formulation is particularly useful in this context because it naturally permits the action-like and energy-like quantities to exchange their variational roles.
+
+Thus scattering provides another example in which the reciprocal formulation is not merely formal but practically useful.
+
+\section{Schr"odinger's Variational Principle}
+
+Quantum mechanics introduces another important variational structure.
+
+For a normalized state,
+\begin{equation}
+\langle\psi|\psi\rangle=1,
+\end{equation}
+the expectation value of the Hamiltonian is
+\begin{equation}
+\bar E
+=
+\langle\psi|\hat H|\psi\rangle.
+\end{equation}
+
+The stationary condition
+\begin{equation}
+\boxed{
+\delta\bar E=0
+}
+\end{equation}
+gives
+\begin{equation}
+\hat H|\psi\rangle
+=
+E|\psi\rangle.
+\end{equation}
+
+Without normalization one writes
+\begin{equation}
+\boxed{
+\delta
+\frac{
+\langle\psi|\hat H|\psi\rangle
+}{
+\langle\psi|\psi\rangle
+}
+=0.
+}
+\end{equation}
+
+This is the foundation of the Rayleigh--Ritz method in quantum mechanics.
+
+The connection with classical mechanics is particularly striking.  Gray and collaborators showed that the reciprocal Maupertuis principle provides the classical counterpart of the Schr"odinger variational principle in the appropriate semiclassical limit.
+
+Thus one has
+\begin{equation}
+\boxed{
+\text{Schr"odinger variational principle}
+\longrightarrow
+\text{reciprocal Maupertuis principle}
+}
+\end{equation}
+in the classical limit.
+
+This is conceptually different from the more familiar Feynman connection discussed next.
+
+\section{Feynman's Path Integral}
+
+The quantum transition amplitude can be written formally as
+\begin{equation}
+\boxed{
+K(q_2,t_2;q_1,t_1)
+=
+\int{\cal D}q,
+\exp\left(\frac{i}{\hbar}S[q]\right).
+}
+\label{eq:feynman}
+\end{equation}
+
+Unlike classical mechanics, quantum mechanics does not select one trajectory.  All paths contribute.
+
+In the classical limit, rapidly oscillating phases cancel except near stationary-action paths:
+\begin{equation}
+\delta S=0.
+\end{equation}
+
+Therefore
+\begin{equation}
+\boxed{
+\text{Feynman path integral}
+\overset{\hbar\rightarrow0}{\longrightarrow}
+\text{Hamilton principle}.
+}
+\end{equation}
+
+The distinction from the Schr"odinger variational principle is important:
+\begin{equation}
+\boxed{
+\begin{array}{ccc}
+\text{Feynman}
+&\longrightarrow&
+\text{Hamilton},\\
+\text{Schr"odinger}
+&\longrightarrow&
+\text{reciprocal Maupertuis}.
+\end{array}}
+\end{equation}
+
+Thus quantum mechanics contains at least two conceptually different routes to classical variational mechanics.
+
+\section{Schwinger's Action Principle}
+
+Schwinger's action principle provides a quantum formulation directly in terms of variations of transition amplitudes.
+
+Schematically,
+\begin{equation}
+\boxed{
+\delta\langle f|i\rangle
+=
+\frac{i}{\hbar}
+\langle f|\delta S|i\rangle.
+}
+\end{equation}
+
+Here $S$ is promoted from a classical functional to an operator structure appropriate to quantum mechanics.
+
+The principle provides a systematic route to equations of motion, canonical commutation relations, and transformation properties.
+
+It is therefore useful to distinguish three quantum variational ideas:
+\begin{equation}
+\boxed{
+\begin{array}{ll}
+\text{Schr"odinger:}&
+\text{stationarity of mean energy},\\
+\text{Feynman:}&
+\text{sum over histories},\\
+\text{Schwinger:}&
+\text{variation of quantum transition amplitudes}.
+\end{array}}
+\end{equation}
+
+They overlap, but they are not simply three versions of the same statement.
+
+\section{The Classical--Quantum Variational Map}
+
+The principal relations can now be summarized as
+\begin{equation}
+\boxed{
+\begin{array}{ccc}
+\text{Hamilton}
+&\longleftrightarrow&
+\text{Reciprocal Hamilton} \\
+\updownarrow&&\updownarrow \\
+\text{Maupertuis}
+&\longleftrightarrow&
+\text{Reciprocal Maupertuis}.
+\end{array}}
+\end{equation}
+
+The lower-left member has the geometrical realization
+\begin{equation}
+\text{Maupertuis}
+\longrightarrow
+\text{Jacobi metric}
+\longrightarrow
+\text{geodesic mechanics}.
+\end{equation}
+
+The upper-left member has the quantum realization
+\begin{equation}
+\text{Feynman}
+\longrightarrow
+\text{stationary phase}
+\longrightarrow
+\text{Hamilton}.
+\end{equation}
+
+The lower-right member has the quantum variational realization
+\begin{equation}
+\text{Schr"odinger}
+\longrightarrow
+\text{semiclassical limit}
+\longrightarrow
+\text{RMP}.
+\end{equation}
+
+The resulting structure may be represented schematically as
+\begin{equation}
+\boxed{
+\begin{array}{ccccc}
+&&\text{Feynman}&&\text{Schr"odinger}\\
+&&\downarrow&&\downarrow\\
+&&\text{Hamilton}&&\text{RMP}\\
+&&\updownarrow&&\updownarrow\\
+&&\text{RHP}&&\text{MP}\\
+&&&&\downarrow\\
+&&&&\text{Jacobi}\\
+&&&&\downarrow\\
+&&&&\text{geodesic mechanics}.
+\end{array}}
+\end{equation}
+
+The diagram is schematic rather than a chain of strict equivalences.  Each arrow involves assumptions concerning the Hamiltonian, boundary data, conserved quantities, or limiting procedures.
+
+\section{A Taxonomy of Variational Principles}
+
+It is useful to distinguish the various principles according to their logical status.
+
+\subsection{Trajectory principles}
+
+The central fourfold structure is
+\begin{equation}
+\boxed{
+\text{Hamilton},\quad
+\text{reciprocal Hamilton},\quad
+\text{Maupertuis},\quad
+\text{reciprocal Maupertuis}.
+}
+\end{equation}
+
+These differ primarily in what is varied and what is held fixed.
+
+\subsection{Transformations and reductions}
+
+The following are principally transformations of the mechanical description:
+\begin{equation}
+\boxed{
+\text{Legendre},\quad
+\text{Routh},\quad
+\text{Hamilton--Jacobi},\quad
+\text{Jacobi}.
+}
+\end{equation}
+
+They need not be regarded as additional fundamental variational laws.
+
+\subsection{Local dynamical principles}
+
+These include
+\begin{equation}
+\boxed{
+\text{d'Alembert},\quad
+\text{Lagrange--d'Alembert},\quad
+\text{Gauss}.
+}
+\end{equation}
+
+Their distinguishing feature is that they formulate dynamics in terms of virtual displacements or instantaneous accelerations.
+
+\subsection{Specialized principles}
+
+These include
+\begin{equation}
+\boxed{
+\text{Rayleigh},\quad
+\text{Ritz},\quad
+\text{Percival},
+}
+\end{equation}
+together with specialized scattering and semiclassical principles.
+
+They are usually better understood as specializations or applications of more general structures.
+
+\subsection{Quantum principles}
+
+The principal quantum formulations are
+\begin{equation}
+\boxed{
+\text{Schr"odinger},\quad
+\text{Feynman},\quad
+\text{Schwinger}.
+}
+\end{equation}
+
+Their relation to the classical principles is subtle and should not be reduced to the slogan that ``quantum mechanics is Hamilton's principle with $S/\hbar$.''
+
+\section{Variational Principles and Boundary Data}
+
+A major source of confusion is that two variational principles can have the same equations of motion but different boundary conditions.
+
+Hamilton's principle fixes
+\begin{equation}
+q(t_1),\qquad q(t_2),\qquad t_1,\qquad t_2.
+\end{equation}
+
+Maupertuis fixes
+\begin{equation}
+q_1,\qquad q_2,\qquad E.
+\end{equation}
+
+The corresponding variational problems therefore have different spaces of admissible histories.
+
+This observation becomes particularly important in Hamilton--Jacobi theory.  The action function is generated from boundary-value data, and its local existence does not imply that a single scalar function $S(q,t)$ exists globally.
+
+Caustics provide a direct example.  A family of classical trajectories may project smoothly in phase space while its projection onto configuration space develops singularities.  At such points the generating function becomes multivalued or requires different local branches.
+
+Thus the variational formulation can remain globally meaningful even when the Hamilton--Jacobi representation as a single-valued scalar field fails.
+
+\section{Stationarity, Minima, and Saddle Points}
+
+Variational principles should generally be interpreted as stationarity conditions:
+\begin{equation}
+\delta I=0.
+\end{equation}
+
+Nothing in this equation requires
+\begin{equation}
+\delta^2 I>0.
+\end{equation}
+
+The stationary solution may instead satisfy
+\begin{equation}
+\delta^2 I<0
+\end{equation}
+or have an indefinite second variation.
+
+This is especially important in field theory and in the action principle of general relativity, where physically relevant solutions are very often saddle points of the action.
+
+The expression ``least action'' is therefore historically useful but mathematically misleading when interpreted literally.
+
+\section{Field Theory}
+
+The variational framework extends naturally from particles to fields.
+
+For a field $\phi^A(x)$,
+\begin{equation}
+S[\phi]
+=
+\int d^4x,{\cal L}
+(\phi,\partial_\mu\phi).
+\end{equation}
+
+Stationarity gives
+\begin{equation}
+\delta S=0
+\end{equation}
+and hence
+\begin{equation}
+\frac{\partial{\cal L}}{\partial\phi^A}
+-
+\partial_\mu
+\frac{\partial{\cal L}}
+{\partial(\partial_\mu\phi^A)}
+=0.
+\end{equation}
+
+For electromagnetism,
+\begin{equation}
+S_{\rm EM}
+=
+-\frac{1}{16\pi}
+\int d^4x,\sqrt{-g},
+F_{\mu\nu}F^{\mu\nu},
+\end{equation}
+while for general relativity,
+\begin{equation}
+S_{\rm EH}
+=
+\frac{c^3}{16\pi G}
+\int d^4x,\sqrt{-g},R.
+\end{equation}
+
+Variation with respect to the metric yields Einstein's equations,
+\begin{equation}
+G_{\mu\nu}
+=
+\frac{8\pi G}{c^4}T_{\mu\nu}.
+\end{equation}
+
+Thus the variational idea is not restricted to particle mechanics.
+
+\section{What the Variational Principles Do Not Say}
+
+A variational principle is not necessarily a statement that Nature ``chooses'' a path by minimizing something.
+
+In classical mechanics, the stationary action is a compact mathematical characterization of the dynamical equations.
+
+In quantum mechanics, the situation is fundamentally different.  The path integral assigns an amplitude to every path:
+\begin{equation}
+{\cal A}[q]
+\sim
+e^{iS[q]/\hbar}.
+\end{equation}
+
+The classical path emerges because neighboring paths interfere destructively except near stationary-action paths.
+
+Likewise, the Schr"odinger variational principle does not say that Nature literally minimizes an energy functional in the classical sense.  It expresses the spectral problem through stationarity of the expectation value.
+
+The language of ``optimization'' is therefore secondary.  The more fundamental notion is \emph{stationarity under specified variations and constraints}.
+
+\section{Schwinger's Independent-Variable Variational Principle}
+
+There is a formulation due to Schwinger which is especially revealing when one compares the Lagrangian, Hamiltonian, and Maupertuis descriptions of mechanics. It differs from the ordinary Hamilton phase-space principle in one important respect: the momentum and velocity are not related \emph{a priori}. Instead, the velocity is introduced as an independent variable and the relation between momentum and velocity follows from the variational principle itself.
+
+This formulation is sometimes described as a ``third, Schwingerian, viewpoint'' on classical action principles. For a particle moving in a potential \(V(\mathbf r,t)\), one writes
+
+\begin{equation}
+L_S(\mathbf r,\mathbf p,\mathbf v,\dot{\mathbf r},t)=
+\mathbf p\cdot(\dot{\mathbf r}-\mathbf v)
++\frac12m v^2
+-V(\mathbf r,t).
+\label{eq:SchwingerExtendedL}
+\end{equation}
+
+The variables
+
+$$
+\mathbf r(t),\qquad
+\mathbf p(t),\qquad
+\mathbf v(t)
+$$
+
+are regarded as independent.
+
+The action is therefore
+
+\begin{equation}
+W_{12}=
+\int_{t_1}^{t_2}
+dt,
+\left[
+\mathbf p\cdot(\dot{\mathbf r}-\mathbf v)
++\frac12m v^2
+-V(\mathbf r,t)
+\right].
+\label{eq:SchwingerAction}
+\end{equation}
+
+It is useful to rewrite this in Hamiltonian-looking form. Define
+
+\begin{equation}
+H(\mathbf r,\mathbf p,\mathbf v,t)=
+\mathbf p\cdot\mathbf v
+-\frac12m v^2
++V(\mathbf r,t),
+\label{eq:SchwingerH}
+\end{equation}
+
+so that
+
+\begin{equation}
+W_{12}=
+\int_{t_1}^{t_2}
+\left(
+\mathbf p\cdot\dot{\mathbf r}
+-H(\mathbf r,\mathbf p,\mathbf v,t)
+\right)dt .
+\label{eq:SchwingerPhaseAction}
+\end{equation}
+
+The crucial point is that this \(H\) is initially a function of
+\(\mathbf r,\mathbf p,\mathbf v\), rather than a function of
+\(\mathbf r,\mathbf p\) alone.
+
+\subsection{Independent variations}
+
+Variation with respect to \(\mathbf p\) gives
+
+\begin{equation}
+\delta_{\mathbf p}W_{12}=
+\int_{t_1}^{t_2}
+dt,
+\delta\mathbf p\cdot
+(\dot{\mathbf r}-\mathbf v),
+\end{equation}
+
+and hence
+
+\begin{equation}
+\boxed{\dot{\mathbf r}=\mathbf v}.
+\label{eq:SchwingerVelocity}
+\end{equation}
+
+Thus the velocity appearing in the Lagrangian is not initially identified with the derivative of the coordinate. That identification is a \emph{result} of the variation.
+
+Variation with respect to \(\mathbf v\) gives
+
+\begin{equation}
+\delta_{\mathbf v}W_{12}=
+\int_{t_1}^{t_2}
+dt,
+\delta\mathbf v\cdot
+(-\mathbf p+m\mathbf v),
+\end{equation}
+
+and consequently
+
+\begin{equation}
+\boxed{\mathbf p=m\mathbf v}.
+\label{eq:SchwingerMomentum}
+\end{equation}
+
+Thus the canonical momentum--velocity relation also emerges from the variational principle.
+
+Finally, variation with respect to \(\mathbf r\), with the endpoint positions fixed, gives
+
+\begin{equation}
+\delta_{\mathbf r}W_{12}=
+-\int_{t_1}^{t_2}
+dt,
+\delta\mathbf r\cdot
+\left(
+\dot{\mathbf p}+\nabla V
+\right),
+\end{equation}
+
+and therefore
+
+\begin{equation}
+\boxed{
+\dot{\mathbf p}=-\nabla V
+}.
+\label{eq:SchwingerNewton}
+\end{equation}
+
+Combining this with Eq.~\eqref{eq:SchwingerMomentum} gives
+
+\begin{equation}
+m\dot{\mathbf v}=
+-\nabla V,
+\end{equation}
+
+which is Newton's equation.
+
+Thus three relations which are normally distributed among the definitions and equations of the Lagrangian and Hamiltonian formalisms are obtained simultaneously:
+
+\begin{equation}
+\boxed{
+\dot{\mathbf r}=\mathbf v,
+\qquad
+\mathbf p=m\mathbf v,
+\qquad
+\dot{\mathbf p}=-\nabla V.
+}
+\end{equation}
+
+\subsection{General Lagrangian}
+
+The construction is not restricted to
+
+$$
+L=\frac12m v^2-V.
+$$
+
+Let
+
+\begin{equation}
+L=L(q,v,t)
+\end{equation}
+
+be a regular Lagrangian. Introduce \(p_i\) independently and define
+
+\begin{equation}
+\mathcal L_S(q,p,v,\dot q,t)=
+p_i(\dot q^i-v^i)+L(q,v,t).
+\label{eq:GeneralSchwingerL}
+\end{equation}
+
+The action is
+
+\begin{equation}
+S_S=
+\int_{t_1}^{t_2}
+dt,
+\left[
+p_i(\dot q^i-v^i)+L(q,v,t)
+\right].
+\label{eq:GeneralSchwingerAction}
+\end{equation}
+
+The three independent variations give
+
+\begin{align}
+\delta p_i:
+&\qquad
+\dot q^i-v^i=0,
+\label{eq:SchwingerGeneral1}
+[4pt]
+\delta v^i:
+&\qquad
+p_i=\frac{\partial L}{\partial v^i},
+\label{eq:SchwingerGeneral2}
+[4pt]
+\delta q^i:
+&\qquad
+\dot p_i=\frac{\partial L}{\partial q^i}.
+\label{eq:SchwingerGeneral3}
+\end{align}
+
+The second equation is precisely the canonical momentum definition. Substitution of
+
+$$
+p_i=\frac{\partial L}{\partial\dot q^i}
+$$
+
+and \(v^i=\dot q^i\) into the third equation gives the Euler--Lagrange equations
+
+\begin{equation}
+\boxed{
+\frac{d}{dt}
+\frac{\partial L}{\partial\dot q^i}-
+\frac{\partial L}{\partial q^i}=0.
+}
+\end{equation}
+
+The important conceptual feature is therefore that the Legendre relation is no longer an external definition. It is one of the Euler equations of the enlarged variational problem.
+
+\subsection{Relation to the ordinary Hamilton principle}
+
+The usual Hamilton principle starts with
+
+\begin{equation}
+S[q]=\int_{t_1}^{t_2}L(q,\dot q,t),dt
+\end{equation}
+
+and varies \(q(t)\). The velocity is already defined as
+
+$$
+\dot q=\frac{dq}{dt},
+$$
+
+and the momentum is subsequently defined by
+
+$$
+p_i=\frac{\partial L}{\partial\dot q^i}.
+$$
+
+Schwinger's construction reverses this logical order. One introduces
+
+$$
+(q^i,p_i,v^i,\dot q^i)
+$$
+
+as independent quantities and imposes their dynamical relations through stationarity.
+
+The relationship can be summarized schematically as
+
+\begin{equation}
+\begin{array}{ccc}
+L(q,\dot q,t)
+&
+\xrightarrow{\text{Legendre transform}}
+&
+H(q,p,t)\\
+[6pt]
+\updownarrow
+&
+&
+\updownarrow\\
+[-1pt]
+\text{Hamilton}
+&
+&
+\text{Hamilton phase-space}\\
+[6pt]
+\multicolumn{3}{c}{
+\rotatebox{90}{$\subset$}
+}
+[-4pt]
+\multicolumn{3}{c}{
+\text{Schwinger enlarged variational principle}.
+}
+\end{array}
+\end{equation}
+
+More directly,
+
+\begin{equation}
+\boxed{
+\mathcal L_S=p_i(\dot q^i-v^i)+L(q,v,t)
+}
+\end{equation}
+
+is a first-order extension of the ordinary Lagrangian. The variable \(p_i\) acts as a Lagrange multiplier enforcing
+
+$$
+\dot q^i=v^i,
+$$
+
+while variation with respect to \(v^i\) generates the Legendre relation.
+
+\subsection{Relation to the Hamilton phase-space principle}
+
+The ordinary Hamilton phase-space action is
+
+\begin{equation}
+S_H[q,p]=
+\int dt,
+\left[
+p_i\dot q^i-H(q,p,t)
+\right].
+\end{equation}
+
+Here \(q\) and \(p\) are independent, but the velocity has already disappeared in favor of the Hamiltonian.
+
+Schwinger's construction retains the velocity as an independent quantity:
+
+\begin{equation}
+S_S[q,p,v]=
+\int dt,
+\left[
+p_i\dot q^i-
+H(q,p,v,t)
+\right],
+\end{equation}
+
+where
+
+\begin{equation}
+H(q,p,v,t)=p_iv^i-L(q,v,t).
+\end{equation}
+
+Variation with respect to \(v\) gives
+
+\begin{equation}
+\frac{\partial H}{\partial v^i}=0,
+\end{equation}
+
+or
+
+\begin{equation}
+p_i=
+\frac{\partial L}{\partial v^i}.
+\end{equation}
+
+For a regular Lagrangian this equation can be solved for \(v=v(q,p,t)\). Substitution then produces the ordinary Hamiltonian
+
+\begin{equation}
+H(q,p,t)=p_i v^i(q,p,t)-L(q,v(q,p,t),t).
+\end{equation}
+
+Thus the ordinary Hamiltonian formalism can be regarded as the result of \emph{eliminating the independent velocity by its own stationarity condition}.
+
+This observation is conceptually important. The Legendre transformation need not be regarded as the starting point of Hamiltonian mechanics. It can instead emerge as a consequence of a larger variational principle.
+
+\subsection{Relation to the Hamilton--Pontryagin construction}
+
+The same mathematical structure is now often described in modern geometric mechanics by the Hamilton--Pontryagin principle,
+
+\begin{equation}
+\delta
+\int_{t_1}^{t_2}
+\left[
+L(q,v,t)
++
+p_i(\dot q^i-v^i)
+\right]dt
+=0.
+\label{eq:HP}
+\end{equation}
+
+Its equations are
+
+\begin{align}
+\dot q^i &=v^i,p_i&=\frac{\partial L}{\partial v^i},\\
+\dot p_i&=\frac{\partial L}{\partial q^i}.
+\end{align}
+
+Thus, mathematically, the Schwingerian construction is closely related to what is now called the Hamilton--Pontryagin principle.
+
+The historical terminology should nevertheless be kept separate. The modern geometric Hamilton--Pontryagin formulation and Schwinger's variational viewpoint have different historical origins and motivations. The important common feature is the treatment of \(q\), \(v\), and \(p\) as independent variables.
+
+\subsection{Why this principle matters for the taxonomy of variational principles}
+
+This formulation reveals a distinction that is easily obscured when all mechanics is presented through the standard Lagrangian and Hamiltonian routes.
+
+There are at least three logically different levels:
+
+\begin{enumerate}
+\item The ordinary Lagrangian formulation,
+\[
+S[q]=\int L(q,\dot q,t)\,dt,
+\]
+where the velocity is kinematically defined.
+\item The ordinary Hamiltonian formulation,
+$$S[q,p]=\int(p_i\dot q^i-H)\,dt,$$
+where \(q\) and \(p\) are independent but the Legendre transformation has already been performed.
+\item The enlarged Schwinger formulation,
+$$S[q,p,v]=\int\left[p_i(\dot q^i-v^i)+L(q,v,t)\right]dt,$$
+where the relations among velocity, momentum, and coordinate evolution all emerge from stationarity.
+\end{enumerate}
+
+The third formulation is therefore particularly useful when discussing the logical status of the Legendre transformation. It makes explicit that
+
+$$p_i=\frac{\partial L}{\partial\dot q^i}$$
+
+is not itself a law of motion. It is a constitutive relation generated by variation with respect to an independently introduced velocity.
+
+\subsection{Endpoint variations}
+
+The preceding derivation assumed fixed endpoint coordinates. Schwinger's treatment is also notable because the endpoint variations can be retained. In phase-space form the variation has the general structure
+
+\begin{equation}
+\delta S=\left[
+p_i\delta q^i-H\delta t
+\right]_{t_1}^{t_2}
++
+\text{bulk terms}.
+\end{equation}
+
+On a classical solution the bulk terms vanish, giving
+
+\begin{equation}
+\boxed{
+\delta S=p_i^{(2)}\delta q_2^i
+-H_2\delta t_2-
+p_i^{(1)}\delta q_1^i
++H_1\delta t_1.
+}
+\label{eq:EndpointSchwinger}
+\end{equation}
+
+This equation connects the variational formulation directly with Hamilton's principal function and with the identification
+
+\begin{equation}
+p_i=\frac{\partial S}{\partial q^i},
+\qquad
+H=-\frac{\partial S}{\partial t},
+\end{equation}
+
+subject to the chosen endpoint convention.
+
+It is also the classical structure that underlies Schwinger's later quantum action principle, in which variations of the action are related to variations of transition amplitudes. Schwinger's quantum action principle should therefore not be confused with the independent-\(q,p,v\) classical construction discussed here, although the two are closely related conceptually.
+
+\subsection{Relation to the Gray--Karl--Novikov principles}
+
+The Schwinger construction should also be distinguished from the four variational principles emphasized by Gray, Karl, and Novikov.
+
+The latter arise from different choices of the quantities held fixed among
+
+$$ S,\qquad T,\qquad W,\qquad \bar E,$$
+
+with
+
+\begin{equation}
+S=W-T\bar E
+\end{equation}
+
+and
+
+\begin{equation}
+\delta S+\bar E,\delta T=\delta W-T,\delta\bar E.
+\end{equation}
+
+The resulting principles are
+
+\begin{align}
+(\delta S)_T&=0,&&\text{Hamilton},
+(\delta T)_S&=0,
+&&\text{reciprocal Hamilton},
+\\
+(\delta W)_{\bar E}&=0,
+&&\text{generalized Maupertuis},
+\\
+(\delta\bar E)_W&=0,
+&&\text{reciprocal Maupertuis}.
+\end{align}
+
+Schwinger's construction concerns a different issue. It enlarges the space of variables in the action and allows the canonical momentum and velocity to be varied independently. The Gray--Karl--Novikov construction instead reorganizes the endpoint and integral constraints among action, time, abbreviated action, and energy.
+
+Consequently the two developments are complementary rather than competing:
+
+\begin{equation}
+\boxed{
+\begin{array}{c}
+\text{Schwinger: enlarge the space of dynamical variables}
+\\[4pt]
+\Downarrow
+\\[4pt]
+(q,p,v)\ \text{independent}
+\end{array}
+}
+\qquad
+\boxed{
+\begin{array}{c}
+\text{Gray--Karl--Novikov: enlarge the space of variational constraints}
+\\[4pt]
+\Downarrow
+\\[4pt]
+(S,T,W,\bar E)
+\end{array}
+}
+\end{equation}
+
+This distinction is useful for avoiding the tendency to treat all ``action principles'' as merely different wordings of Hamilton's principle.
+
+\subsection{Relation to Maupertuis and reciprocal principles}
+
+The Schwinger formulation also provides a natural bridge to the distinction between the full action and abbreviated action.
+
+The phase-space action is
+
+\begin{equation}
+S
+=
+\int(p_i\dot q^i-H)\,dt
+=
+\int p_i\,dq^i-\int H\,dt,
+\end{equation}
+
+hence
+
+\begin{equation}
+S=W-\int H\,dt.
+\end{equation}
+
+For a trajectory of fixed energy \(E\),
+
+\begin{equation}
+S=W-E T.
+\end{equation}
+
+The ordinary Maupertuis principle fixes \(E\) and varies \(W\):
+
+\begin{equation}
+\delta W=0.
+\end{equation}
+
+The reciprocal Maupertuis principle instead fixes \(W\) and varies the mean energy:
+
+\begin{equation}
+\delta\bar E=0.
+\end{equation}
+
+The Schwinger formulation operates at a different level: before either of these reductions is made, the phase-space structure itself can be obtained from a variational principle in which the velocity is independent.
+
+One may therefore regard the logical sequence schematically as
+
+\begin{equation}
+\boxed{
+\text{Schwinger enlarged principle}
+\longrightarrow
+\text{Hamilton phase-space principle}
+\longrightarrow
+\begin{cases}
+\text{Hamilton principle},\\
+\text{Maupertuis principle},
+\end{cases}
+}
+\end{equation}
+
+while the Gray--Karl--Novikov construction subsequently reveals the reciprocal possibilities associated with the corresponding constraints.
+
+\subsection{A broader interpretation}
+
+The most interesting feature of Schwinger's construction is not computational. It changes the way the variational formulation is interpreted.
+
+In the ordinary Lagrangian formulation,
+
+\[
+q(t)\quad\longrightarrow\quad
+\dot q(t)\quad\longrightarrow\quad
+p(t)
+\]
+
+looks like a hierarchy of definitions.
+
+In the enlarged formulation,
+
+$$q(t),\qquad v(t),\qquad p(t)$$
+
+are independent variational variables, and the relations
+
+$$
+v=\dot q,
+\qquad
+p=\frac{\partial L}{\partial v},
+\qquad
+\dot p=\frac{\partial L}{\partial q}
+$$
+
+are simultaneous consequences of stationarity.
+
+This is particularly significant in modern formulations of mechanics, where one frequently distinguishes between:
+
+\begin{itemize}
+\item configuration variables,
+\item tangent variables or velocities,
+\item cotangent variables or momenta,
+\item constraints relating these spaces.
+\end{itemize}
+
+The Schwinger/Hamilton--Pontryagin viewpoint makes these distinctions explicit rather than hiding them inside the notation \(L(q,\dot q,t)\).
+
+\subsection{Updated taxonomy}
+
+The enlarged classification of variational principles can therefore be organized as follows.
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\textbf{Class} & \textbf{Principle} & \textbf{Characteristic} \\
+\hline
+Trajectory & Hamilton & fixed time interval \\
+Trajectory & reciprocal Hamilton & fixed action \\
+Trajectory & Maupertuis & fixed energy \\
+Trajectory & reciprocal Maupertuis & fixed abbreviated action \\
+Enlarged variables & Schwinger & \(q,p,v\) independent \\
+Phase-space & Hamilton & \(q,p\) independent \\
+Local virtual work & d'Alembert & instantaneous dynamics \\
+Nonholonomic & Lagrange--d'Alembert & constraints/forces \\
+Acceleration & Gauss & least constraint \\
+Geometrical & Jacobi & fixed-energy geodesic form \\
+Reduction & Routh & partial Legendre transform \\
+Geometrical & Hertz & configuration-space geometry \\
+Approximation & Rayleigh--Ritz & stationary quotient \\
+Invariant structures & Percival & invariant tori \\
+Quantum & Schrödinger & stationary energy functional \\
+Quantum & Feynman & sum over histories \\
+Quantum & Schwinger & variation of transition amplitudes \\
+\hline
+\end{tabular}
+\end{center}
+
+The two entries bearing Schwinger's name should therefore be kept distinct:
+
+\begin{equation}
+\boxed{
+\begin{array}{ll}
+\text{Schwinger classical variational viewpoint:}
+&
+q,p,v\ \text{independent},\\
+[5pt]
+\text{Schwinger quantum action principle:}
+&
+\delta\langle f|i\rangle=
+\frac{i}{\hbar}
+\langle f|\delta S|i\rangle.
+\end{array}}
+\end{equation}
+
+They are related historically and conceptually, but they are not the same variational principle.
+
+\subsection{Conclusion}
+
+The independent-variable formulation is more than a reformulation of Hamilton's equations. It exposes a deeper structural fact: the passage
+
+$$
+L(q,\dot q)
+\longrightarrow
+p=\frac{\partial L}{\partial\dot q}
+\longrightarrow
+H(q,p)
+$$
+
+can itself be incorporated into a single variational framework.
+
+The extended action
+
+\begin{equation}
+\boxed{
+S_S=
+\int dt,
+\left[
+p_i(\dot q^i-v^i)+L(q,v,t)
+\right]
+}
+\end{equation}
+
+contains, as its Euler equations,
+
+\begin{equation}
+\boxed{
+\dot q^i=v^i,\qquad
+p_i=\frac{\partial L}{\partial v^i},\qquad
+\dot p_i=\frac{\partial L}{\partial q^i}.
+}
+\end{equation}
+
+Thus the kinematical identification of velocity, the definition of canonical momentum, and the dynamical equation are produced together.
+
+This provides a particularly useful conceptual bridge between the Lagrangian and Hamiltonian descriptions and should be regarded as an important member of the historical landscape of variational mechanics alongside the Hamilton, Maupertuis, reciprocal, and unconstrained principles.
+
+\section{Conclusions}
+
+The usual presentation of variational mechanics can be substantially clarified by recognizing the fourfold structure
+\begin{equation}
+\boxed{
+\begin{array}{ccc}
+S &\longleftrightarrow&T\\
+\updownarrow&&\updownarrow\\
+W&\longleftrightarrow&\bar E.
+\end{array}}
+\end{equation}
+
+The four corresponding principles are
+\begin{equation}
+\boxed{
+\begin{aligned}
+(\delta S)_T&=0,
+&
+\text{Hamilton},
+(\delta T)_S&=0,
+&
+\text{reciprocal Hamilton},
+\\
+(\delta W)_{\bar E}&=0,
+&
+\text{generalized Maupertuis},
+\\
+(\delta\bar E)_W&=0,
+&
+\text{reciprocal Maupertuis}.
+\end{aligned}}
+\end{equation}
+
+The ordinary Jacobi principle is the geometrical form of the fixed-energy Maupertuis problem.  Routh's construction is a partial Legendre transformation.  d'Alembert's and Gauss' principles provide alternative, more local formulations of mechanics.  Rayleigh, Ritz, and Percival arise naturally as specialized variational constructions.
+
+On the quantum side, three distinct formulations should be separated:
+\begin{equation}
+\boxed{
+\begin{array}{ccc}
+\text{Feynman}
+&\longrightarrow&
+\text{Hamilton}
+\\[2mm]
+\text{Schr\"odinger}
+&\longrightarrow&
+\text{reciprocal Maupertuis}
+\\[2mm]
+\text{Schwinger}
+&\longrightarrow&
+\text{quantum action formulation}.
+\end{array}}
+\end{equation}
+
+The resulting picture is considerably more symmetric than the conventional ``Hamilton versus Maupertuis'' presentation.
+
+Most importantly, the variational principle should not be regarded merely as an alternative derivation of Newton's equations.  It is a way of organizing the physical problem around its natural variables, constraints, conserved quantities, boundary data, and transformations.  The Gray--Karl--Novikov reciprocal structure makes this particularly explicit and provides a useful bridge between classical mechanics, geometrical mechanics, and semiclassical quantum theory.
+
+\begin{thebibliography}{99}
+
+\bibitem{GrayKarlNovikov1996}
+C.~G.~Gray, G.~Karl, and V.~A.~Novikov,
+``The four variational principles of mechanics,''
+\emph{Annals of Physics} \textbf{251}, 1--25 (1996).
+
+\bibitem{GrayTaylor2007}
+C.~G.~Gray and E.~F.~Taylor,
+``When action is not least,''
+\emph{American Journal of Physics} \textbf{75}, 442--458 (2007).
+
+\bibitem{GrayKarlNovikov2001}
+C.~G.~Gray, G.~Karl, and V.~A.~Novikov,
+``Variational principles in classical and semiclassical mechanics,''
+(2001).
+
+\bibitem{GrayKarlNovikov2003}
+C.~G.~Gray, G.~Karl, and V.~A.~Novikov,
+``New variational principles in classical and semiclassical mechanics,''
+(2003).
+
+\bibitem{Goldstein}
+H.~Goldstein, C.~Poole, and J.~Safko,
+\emph{Classical Mechanics},
+3rd ed., Addison--Wesley (2002).
+
+\bibitem{Arnold}
+V.~I.~Arnold,
+\emph{Mathematical Methods of Classical Mechanics},
+2nd ed., Springer (1989).
+
+\bibitem{Lanczos}
+C.~Lanczos,
+\emph{The Variational Principles of Mechanics},
+4th ed., Dover (1986).
+
+\bibitem{FeynmanHibbs}
+R.~P.~Feynman and A.~R.~Hibbs,
+\emph{Quantum Mechanics and Path Integrals},
+McGraw--Hill (1965).
+
+\bibitem{Schwinger}
+J.~Schwinger,
+``The theory of quantized fields. I,''
+\emph{Physical Review} \textbf{82}, 914--927 (1951).
+
+\bibitem{Percival}
+I.~C.~Percival,
+``Variational principles of invariant tori,''
+\emph{Journal of Physics A} \textbf{12}, 1469--1480 (1979).
+
+\bibitem{Jacobi}
+C.~G.~J.~Jacobi,
+\emph{Vorlesungen \"uber Dynamik},
+Georg Reimer, Berlin (1884).
+
+\end{thebibliography}
+ 
