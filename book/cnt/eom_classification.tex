@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+
+\title{Classification of Conditions and Problems\\ for an Equation of Motion}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+This note organizes the standard problem types associated with an
+equation of motion (EOM) along two axes: (A) \emph{what data specifies
+the problem} (the conditions imposed), and (B) \emph{what feature of
+the solution's structure is being investigated}, once the EOM itself
+is fixed.
+
+\section*{A. By the Conditions Imposed}
+
+\subsection*{1. Initial Value Problem (IVP / Cauchy problem)}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Condition:} the full state (position and velocity, or a
+  phase-space point) at one instant $t_0$.
+  \item \textbf{Governing results:} the Picard--Lindel\"of theorem gives
+  local existence and uniqueness for Lipschitz forces; global existence
+  requires a no-blow-up bound.
+  \item This is what time-stepping integrators (RK4, symplectic
+  schemes, etc.) actually solve.
+\end{itemize}
+
+\subsection*{2. Boundary Value Problem (BVP)}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Condition:} data at two or more distinct times/points,
+  e.g. $x(t_0) = x_0$, $x(t_1) = x_1$ --- not a full state at one
+  instant.
+  \item Existence and uniqueness are \emph{not} automatic (unlike the
+  IVP): zero, one, or many solutions can occur.
+  \item \textbf{Prototypes:} the brachistochrone problem, geodesics
+  between two points, Lambert's problem, and any Euler--Lagrange
+  equation arising from a fixed-endpoint action principle.
+  \item \textbf{Numerically:} shooting methods, relaxation /
+  finite-difference methods, collocation.
+\end{itemize}
+
+\subsection*{3. Eigenvalue Problem (a BVP subtype)}
+\begin{itemize}[leftmargin=*]
+  \item A linear EOM together with boundary conditions admits
+  nontrivial solutions only for special parameter values ---
+  normal-mode frequencies, quantized energies.
+\end{itemize}
+
+\subsection*{4. Scattering Problem}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Condition:} an asymptotic free state as $t \to
+  -\infty$ (or $r \to \infty$).
+  \item \textbf{Sought:} the asymptotic outgoing state as $t \to
+  +\infty$ --- the $S$-matrix or cross-section --- given a localized
+  interaction region in between.
+  \item Differs in kind from the IVP/BVP: the conditions sit at
+  infinity, and often the trajectory itself is discarded --- only the
+  in $\to$ out map matters.
+\end{itemize}
+
+\subsection*{5. Periodicity Condition}
+\begin{itemize}[leftmargin=*]
+  \item Search for $x(t+T) = x(t)$. Effectively a BVP with the two
+  endpoints identified, but $T$ is itself unknown, making it a
+  nonlinear eigenvalue-type problem.
+  \item \textbf{Poincar\'e--Bendixson theorem} (2D flows): a bounded
+  trajectory that does not approach a fixed point must approach a
+  periodic orbit.
+\end{itemize}
+
+\subsection*{6. Inverse Problem}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Condition:} observed trajectories or scattering data.
+  \item \textbf{Sought:} the force law / potential / EOM itself
+  (inverse scattering; Newton inferring $1/r^2$ from Kepler's laws is
+  the archetype).
+\end{itemize}
+
+\subsection*{7. Control / Optimization Problem}
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Sought:} an external input, or a member of a family of
+  EOMs, that steers the system to a target state while extremizing a
+  cost functional --- Pontryagin's maximum principle.
+  \item Structurally a BVP with an added adjoint (costate) system.
+\end{itemize}
+
+\section*{B. By the Question Asked About Solution Structure}
+
+Given a fixed EOM, the following ask about the qualitative or global
+structure of its solutions rather than about how the problem was
+posed.
+
+\begin{center}
+\begin{tabular}{@{}p{4cm}p{5cm}p{6cm}@{}}
+\toprule
+\textbf{Problem} & \textbf{What it asks} & \textbf{Key tools / results} \\
+\midrule
+Existence / uniqueness / well-posedness &
+Does a solution exist, is it unique, does it depend continuously on the data? &
+Picard--Lindel\"of; Hadamard well-posedness \\
+\addlinespace
+Stationary solutions &
+Fixed points $\dot{x} = f(x) = 0$, or static critical points $\nabla V = 0$ &
+--- \\
+\addlinespace
+Linear stability &
+Behavior under infinitesimal perturbation of a fixed point / orbit &
+Jacobian eigenvalues (node / saddle / focus / center); Floquet multipliers for periodic orbits \\
+\addlinespace
+Nonlinear (Lyapunov) stability &
+Does the full nonlinear flow stay near, or converge to, equilibrium? &
+Lyapunov functions; LaSalle invariance principle \\
+\addlinespace
+Structural stability &
+Does the qualitative phase portrait survive small changes to the EOM itself? &
+Leads into bifurcation theory \\
+\addlinespace
+Bifurcation &
+Qualitative change in fixed points / orbits as a parameter varies &
+Saddle-node, pitchfork, transcritical, Hopf, period-doubling \\
+\addlinespace
+Attractors \& basins &
+Long-time ($t \to \infty$) fate of trajectories in dissipative systems &
+Fixed point / limit cycle / torus / strange attractor; basin of attraction \\
+\addlinespace
+Chaos &
+Sensitive dependence on initial conditions &
+Lyapunov exponents; Poincar\'e sections; homoclinic tangles (Melnikov method); routes to chaos (period-doubling, Ruelle--Takens, intermittency) \\
+\addlinespace
+Integrability &
+Enough conserved quantities in involution to reduce the problem to quadratures &
+Liouville integrability; action-angle variables; Noether symmetries; Lax pairs; Painlev\'e test \\
+\addlinespace
+Perturbation theory &
+Fate of near-integrable systems under small perturbation &
+Regular / singular perturbation; multiple scales; averaging; KAM theorem \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Structural Notes}
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Conservative (Hamiltonian) systems have no attractors}
+  --- Liouville's theorem forbids phase-space contraction --- so their
+  long-time behavior is governed instead by the
+  integrability/KAM/chaos axis (invariant tori surviving or breaking
+  up into chaotic layers), not by attractor classification.
+  \item \textbf{Dissipative systems} are where ``attractor'' language
+  belongs; stability and bifurcation theory there describe how the
+  attractor set itself changes.
+  \item \textbf{Scattering is best read as an asymptotic BVP}: the
+  conditions sit at $t = \pm\infty$ rather than at finite times, which
+  is exactly why it needs its own machinery ($S$-matrix, asymptotic
+  completeness) rather than shooting/relaxation methods.
+  \item Bifurcation theory is the natural bridge between ``stability
+  of a single solution'' and ``existence of qualitatively new families
+  of solutions'' (e.g., a fixed point losing stability via a Hopf
+  bifurcation and handing off to a limit cycle, which can itself
+  period-double into chaos).
+\end{itemize}
+
+\end{document}
