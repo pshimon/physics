@@ -1,10 +1,28 @@
 \documentclass[preview]{standalone}
 \usepackage{tikz-cd}
+\newcommand{\df}[2]{\frac{d #1}{d #2}}
+\newcommand{\ddf}[2]{\frac{d^2 #1}{d #2^2}}
+
+\newcommand{\vd}[2]{\frac{\delta #1}{\delta #2}}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\ppd}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \begin{document}
 
 \begin{tikzcd}
   A \arrow[r, "f"] \arrow[d, "g"'] & B \arrow[d, "h"] \\
   C \arrow[r, "k"']                 & D
 \end{tikzcd}
+\[
+  \df{x}{y}, \qquad
+  \ddf{x}{y}, \qquad
+  \vd{S}{x}
+\]
 
+\[
+  \pd{f}{y}, \qquad
+  \pdd{g}{y}, \qquad
+  \ppd{f}{x}{y}.
+\]
 \end{document}
