@@ -1,0 +1,2033 @@
+\chapter{Dissipative systems}
+\section{Caldirola–Kanai}
+The Caldirola–Kanai (CK) Lagrangian is a standard way of representing a damped classical system within an ordinary Lagrangian/Hamiltonian formalism.
+For a particle of mass \(m\) in a potential \(V(q)\), with linear damping coefficient \(\gamma\), the CK Lagrangian is
+\[L_{CK}=e^{\gamma t}\left [\frac{m}{2}\dot{q}^2-V(q)\right]\]
+Here \(\gamma\) has dimensions of inverse time.
+
+\subsection{ Why this gives the damped equation}
+Applying Euler–Lagrange,
+$$ \frac{d}{dt}\frac{\partial L}{\partial\dot q} -\frac{\partial L}{\partial q}=0, $$
+gives
+$$ \frac{\partial L}{\partial\dot q} =m e^{\gamma t}\dot q, $$
+and therefore
+$$ m e^{\gamma t}(\ddot q+\gamma\dot q) + e^{\gamma t}V'(q)=0. $$
+Thus
+$$ \boxed{ m\ddot q+m\gamma\dot q+V'(q)=0, } $$
+which is precisely Newton's equation with linear friction.
+For a harmonic oscillator,
+$$ V(q)=\frac12m\omega_0^2q^2, $$
+one obtains
+$$ \boxed{ \ddot q+\gamma\dot q+\omega_0^2q=0. } $$
+So the interesting point is that a dissipative equation can nevertheless be obtained from an ordinary variational principle, provided the Lagrangian is explicitly time dependent.
+\subsection{The canonical momentum is unusual}
+The canonical momentum is
+$$ \boxed{ p=\frac{\partial L}{\partial\dot q} =m e^{\gamma t}\dot q. } $$
+It is therefore not the mechanical momentum
+$$ p_{\rm mech}=m\dot q. $$
+Rather,
+$$ p=e^{\gamma t}p_{\rm mech}. $$
+This distinction becomes particularly important after quantization.
+Solving for the velocity,
+$$ \dot q=\frac{p}{m e^{\gamma t}}, $$
+the Hamiltonian is
+$$ H=p\dot q-L, $$
+hence
+$$ \boxed{ H_{\rm CK}(q,p,t) = e^{-\gamma t}\frac{p^2}{2m} + e^{\gamma t}V(q). } $$
+Although this Hamiltonian is explicitly time dependent, Hamilton's equations give
+$$ \dot q=\frac{p}{m}e^{-\gamma t}, $$ $$ \dot p=-e^{\gamma t}V'(q), $$
+and eliminating \(p\) again produces
+$$ m\ddot q+m\gamma\dot q+V'(q)=0. $$
+
+\subsection{ What is conceptually peculiar about it?}
+The CK construction is interesting because dissipation has not actually been put into the fundamental variational structure as a nonconservative force.
+Instead, the friction term emerges because of the explicit factor
+$$ e^{\gamma t}. $$
+In other words,
+$$ L_{\rm CK}=e^{\gamma t}L_0. $$
+The price is explicit time dependence. Consequently, the canonical Hamiltonian is not conserved:
+$$ \frac{dH_{\rm CK}}{dt} = -\frac{\partial L_{\rm CK}}{\partial t} \neq0. $$
+The physical energy,
+$$ E_{\rm mech} = \frac12m\dot q^2+V(q), $$
+satisfies
+$$ \frac{dE_{\rm mech}}{dt} = -m\gamma\dot q^2\leq0, $$
+as expected for friction.
+But note that \(H_{\rm CK}\) is not simply this mechanical energy.
+
+\subsection{Relation to the Bateman construction}
+There are two famous Lagrangian approaches to damping that are worth distinguishing.
+\paragraph{Caldirola–Kanai}
+One modifies the Lagrangian by an explicit time-dependent factor:
+$$ L_{\rm CK} = e^{\gamma t} \left(T-V\right). $$
+It uses the same number of degrees of freedom, but the Lagrangian is explicitly time dependent.
+
+\paragraph{Bateman dual system}
+One introduces an additional coordinate \(y\), obtaining a time-independent Lagrangian such as
+$$ L_B = m\dot x\dot y +\frac{m\gamma}{2}(x\dot y-y\dot x) -\omega_0^2mxy. $$
+The \(x\)-equation is the damped oscillator,
+$$ \ddot x+\gamma\dot x+\omega_0^2x=0, $$
+while the \(y\)-equation is the corresponding anti-damped oscillator,
+$$ \ddot y-\gamma\dot y+\omega_0^2y=0. $$
+So Bateman restores time-translation invariance by embedding the dissipative system in a larger conservative system.
+This is a useful distinction if you are thinking about your recent question concerning variational equivalence versus equivalence of equations of motion: CK and Bateman give the same damped equation for \(x\), but they are very different variational systems.
+
+\subsection{ Why CK became important in quantum mechanics}
+The CK Hamiltonian
+$$ H_{\rm CK}(t) = e^{-\gamma t}\frac{p^2}{2m} + e^{\gamma t}V(q) $$
+can formally be quantized by
+$$ p\longrightarrow -i\hbar\frac{\partial}{\partial q}, $$
+giving
+$$ i\hbar\frac{\partial\psi}{\partial t} = \left[ -\frac{\hbar^2}{2m}e^{-\gamma t}\frac{\partial^2}{\partial q^2} + e^{\gamma t}V(q) \right]\psi. $$
+For the harmonic oscillator,
+$$ H_{\rm CK}(t) = e^{-\gamma t}\frac{p^2}{2m} + \frac12m\omega_0^2e^{\gamma t}q^2. $$
+This produces a perfectly Hermitian time-dependent Hamiltonian, but it raises a physical question:
+What exactly does the canonical momentum \(p\) represent physically?
+Since
+$$ p=e^{\gamma t}m\dot q, $$
+it is not the mechanical momentum \(m\dot q\). This becomes one of the central issues in interpreting the CK quantum theory.
+A useful way of viewing CK
+There is a particularly simple transformation that exposes what is going on. Define
+$$ P=e^{-\gamma t}p=m\dot q. $$
+Then \(P\) is the mechanical momentum, but this transformation is time dependent, so it changes the Hamiltonian in a nontrivial way. The resulting formulation can be related to other descriptions of the damped oscillator.
+Thus the CK Lagrangian is best regarded not as saying that friction has somehow become conservative, but as a clever time-dependent variational embedding of a dissipative equation.
+That distinction becomes important when asking whether two formulations are merely equivalent at the level of Euler equations or are genuinely equivalent as variational problems.
+
+\subsection{Multidimensional CK}
+The Caldirola–Kanai construction generalizes very naturally to \(n>1\) degrees of freedom.
+For coordinates \(q^i\), \(i=1,\ldots,n\), with mass matrix \(M_{ij}(q)\) and potential \(V(q,t)\), the natural CK Lagrangian is
+$$ \boxed{ L_{\rm CK} = e^{\gamma t} \left[ \frac12 M_{ij}(q)\dot q^i\dot q^j - V(q,t) \right]. } $$
+For a constant mass matrix \(M_{ij}\),
+$$ L_{\rm CK} = e^{\gamma t} \left[ \frac12\dot{\mathbf q}^{\,T}M\dot{\mathbf q} - V(\mathbf q,t) \right]. $$
+The Euler–Lagrange equations are
+$$ \boxed{ M_{ij}\ddot q^j + \gamma M_{ij}\dot q^j + \frac{\partial V}{\partial q^i} =0 } $$
+when \(M\) is constant.
+Thus, in vector notation,
+$$ \boxed{ M\ddot{\mathbf q} +\gamma M\dot{\mathbf q} +\nabla V=0. } $$
+So the same scalar damping coefficient \(\gamma\) produces isotropic linear friction in the kinetic metric.
+
+\paragraph{More general damping}
+The important point is that in several dimensions there is no reason for the damping to have to be proportional to the mass matrix.
+Suppose instead we want
+$$ \boxed{ M\ddot{\mathbf q} +D\dot{\mathbf q} +\nabla V=0, } $$
+where \(D\) is a constant damping matrix.
+A simple scalar multiplying factor such as \(e^{\gamma t}\) cannot in general produce arbitrary \(D\). It gives only
+$$ D=\gamma M. $$
+This is a genuine difference between one and several dimensions.
+For example, with
+$$ M=mI,\qquad D= \begin{pmatrix} \gamma_1m&0\\ 0&\gamma_2m \end{pmatrix}, $$
+the equations are
+$$ \ddot x+\gamma_1\dot x+\frac1m V_x=0, $$ $$ \ddot y+\gamma_2\dot y+\frac1m V_y=0. $$
+There is no single scalar factor \(f(t)\) multiplying the ordinary Lagrangian that produces both damping constants unless
+$$ \gamma_1=\gamma_2. $$
+The multidimensional CK form
+For isotropic damping,
+$$ L_{\rm CK} = e^{\gamma t} \left[ \frac12m\sum_i\dot q_i^2 - V(q_1,\ldots,q_n) \right]. $$
+The canonical momenta are
+$$ p_i = \frac{\partial L}{\partial\dot q_i} = m e^{\gamma t}\dot q_i, $$
+so
+$$ \boxed{ \mathbf p=e^{\gamma t}m\dot{\mathbf q}. } $$
+The Hamiltonian becomes
+$$ \boxed{ H_{\rm CK} = e^{-\gamma t}\frac{\mathbf p^2}{2m} + e^{\gamma t}V(\mathbf q). } $$
+The Hamilton equations then give
+$$ \dot{\mathbf q} = e^{-\gamma t}\frac{\mathbf p}{m}, $$ $$ \dot{\mathbf p} = -e^{\gamma t}\nabla V, $$
+and therefore
+$$ m\ddot{\mathbf q} +m\gamma\dot{\mathbf q} +\nabla V=0. $$
+
+\subsection{But there is a deeper issue for \(n>1\)}
+
+For a general mechanical system with a velocity-dependent force, CK is much less general.
+For example,
+$$ M\ddot{\mathbf q} +D\dot{\mathbf q} + \nabla V - Q\dot{\mathbf q}=0, $$
+where \(Q^T=-Q\), describes damping plus a gyroscopic/magnetic-type force. A scalar CK multiplier cannot generate the antisymmetric \(Q\dot{\mathbf q}\) term.
+More generally, a force linear in velocity,
+$$ F_i=-D_{ij}\dot q^j, $$
+has two qualitatively different parts:
+$$ D_{ij}=D_{(ij)}+D_{[ij]}. $$
+The symmetric part is dissipative, whereas the antisymmetric part is gyroscopic and does no mechanical work:
+$$ \dot q^iD_{[ij]}\dot q^j=0. $$
+This distinction becomes particularly important in more than one dimension.
+So the one-dimensional CK trick generalizes directly only to damping proportional to the kinetic metric. Arbitrary multidimensional dissipation requires a more general construction—often involving a matrix-valued multiplier, velocity-dependent terms, auxiliary variables, or a contact/Herglotz formulation.
+
+From the inverse problem of the calculus of variations viewpoint, that is actually quite revealing: the question becomes which dissipative \(n\)-dimensional equations admit an ordinary Lagrangian at all?
+
+
+\section{Multidimensional  Systems:Review}
+
+In several dimensions, dissipation becomes considerably richer than the one-dimensional \(m\ddot q+\gamma\dot q+V'=0\) example. The key distinction is between dissipative forces, gyroscopic forces, and forces that are not variational in an ordinary configuration-space Lagrangian.
+
+\subsection{General mechanical system}
+
+Let $$ q=(q^1,\ldots,q^n) $$
+be configuration coordinates, with kinetic energy
+$$ T=\frac12 g_{ij}(q)\dot q^i\dot q^j. $$
+The conservative Lagrangian is $$ L_0=T-V. $$
+A general dissipative system can be written
+$$ \boxed{ \frac{d}{dt}\frac{\partial L_0}{\partial\dot q^i} -\frac{\partial L_0}{\partial q^i} =Q_i(q,\dot q,t). } $$
+For a flat configuration space with constant mass matrix \(M\),
+$$ \boxed{ M\ddot q+ \nabla V = Q(q,\dot q,t). } $$
+The simplest multidimensional dissipation is linear in velocity:
+$$ \boxed{ Q=-D(q,t)\dot q. } $$
+Hence
+$$ \boxed{ M\ddot q+D\dot q+\nabla V=0. } $$
+But now \(D\) is an \(n\times n\) matrix, and this is where the genuinely multidimensional structure appears.
+
+\subsection{ Symmetric versus antisymmetric velocity forces}
+Decompose $$ D=D_s+D_a, $$
+where $$ D_s=\frac12(D+D^T), \qquad D_a=\frac12(D-D^T).$$
+Then $$ D\dot q=D_s\dot q+D_a\dot q. $$
+The mechanical energy $$ E=T+V $$
+satisfies, for time-independent \(M,V,D\),
+$$ \dot E = -\dot q^T D\dot q. $$
+But $$ \dot q^TD_a\dot q=0, $$
+because \(D_a\) is antisymmetric. Consequently,
+$$ \boxed{ \dot E=-\dot q^T D_s\dot q. } $$
+Thus:
+$$\boxed{ D_s\geq0 \quad\Longrightarrow\quad \text{energy dissipation}.} $$
+Whereas \(D_a\) does no work.
+This gives an important physical distinction:
+
+\begin{tabular} {l c r}
+    Force &	Matrix &	Work\\
+    friction/dissipation &	\(D_s\)	& nonzero \\
+    gyroscopic &	\(D_a\)	& zero \\
+    conservative &	\(-\nabla V\) &	stored/recovered
+\end{tabular}
+
+\subsection{Example: anisotropic friction}
+Consider
+$$M=mI,\qquad D= m \begin{pmatrix} \gamma_x&0\\ 0&\gamma_y \end{pmatrix}.$$
+Then
+$$ \ddot x+\gamma_x\dot x+\frac{1}{m}V_x=0, $$ $$ \ddot y+\gamma_y\dot y+\frac{1}{m}V_y=0. $$
+This is still ordinary linear friction, but there is no single CK factor unless $$ \gamma_x=\gamma_y. $$ A scalar multiplier $$ L=f(t)(T-V) $$
+always produces $$ M\ddot q+\frac{\dot f}{f}M\dot q+\nabla V=0, $$
+so that $$ D=\frac{\dot f}{f}M. $$
+Thus the scalar CK construction represents only
+$$ \boxed{D\propto M.} $$
+
+\subsection{Coupled dissipation}
+More interestingly,
+$$ D= \begin{pmatrix} \gamma_1&\kappa\\ \kappa&\gamma_2 \end{pmatrix}. $$
+Then
+$$ \ddot x+\gamma_1\dot x+\kappa\dot y+\frac1mV_x=0, $$ $$ \ddot y+\kappa\dot x+\gamma_2\dot y+\frac1mV_y=0. $$
+The dissipative power is
+$$ P_{\rm diss} = -\begin{pmatrix}\dot x&\dot y\end{pmatrix} D \begin{pmatrix}\dot x\\\dot y\end{pmatrix}. $$
+For genuine passive dissipation, \(D_s\) should be positive semidefinite.
+This type of cross-friction is common in effective descriptions of coupled degrees of freedom.
+
+\subsection{Gyroscopic forces}
+Now suppose $$ Q=-D_s\dot q+G\dot q, $$ with $$ G^T=-G. $$
+Then $$ \dot E=-\dot q^TD_s\dot q, $$
+because $$ \dot q^TG\dot q=0. $$
+
+A familiar example is the Lorentz force. In two dimensions,
+$$ G= \begin{pmatrix} 0&-B\\ B&0 \end{pmatrix}, $$
+and
+$$ G\dot q = B \begin{pmatrix} -\dot y\\ \dot x \end{pmatrix}. $$
+This is perpendicular to the velocity and therefore does no work.
+
+Importantly, gyroscopic forces are perfectly compatible with an ordinary Lagrangian. For a charged particle,
+$$ L= \frac12m\dot{\mathbf q}^2 +\frac{e}{c}\mathbf A(\mathbf q)\cdot\dot{\mathbf q} -e\phi(\mathbf q), $$
+the antisymmetric velocity force arises from the magnetic field.
+So one should not equate "velocity-dependent" with "dissipative."
+
+\subsection{Rayleigh dissipation function}
+
+For symmetric linear damping there is a very convenient formalism.
+Define the Rayleigh dissipation function
+$$ \boxed{ \mathcal R(q,\dot q) = \frac12\dot q^T D_s(q)\dot q. } $$
+Then
+$$ Q_i^{\rm diss} = -\frac{\partial\mathcal R}{\partial\dot q^i}. $$
+The equations become
+$$ \boxed{ \frac{d}{dt}\frac{\partial L}{\partial\dot q^i} - \frac{\partial L}{\partial q^i} + \frac{\partial\mathcal R}{\partial\dot q^i} =0. } $$
+For linear damping,
+$$ \mathcal R = \frac12D_{ij}\dot q^i\dot q^j. $$
+This is extremely useful in ordinary mechanics and engineering.
+But there is an important caveat:
+The Rayleigh function does \emph{not} turn the dissipative system into an ordinary variational system.
+It is an additional prescription for the equations of motion.
+
+\subsection{Can dissipation have an ordinary Lagrangian?}
+
+This is the deeper question.Given $$ \ddot q^i=F^i(q,\dot q,t), $$
+we may ask:
+
+Does there exist a regular Lagrangian \(L(q,\dot q,t)\) whose Euler–Lagrange equations reproduce these equations?
+
+This is the inverse problem of the calculus of variations.
+The answer is not automatically yes.The relevant conditions are the Helmholtz conditions.
+One introduces a multiplier
+$$ g_{ij}(q,\dot q,t) = \frac{\partial^2L}{\partial\dot q^i\partial\dot q^j}, $$
+which must be symmetric and nonsingular.
+The inverse problem asks whether one can find such a \(g_{ij}\) satisfying the Helmholtz conditions.
+This immediately explains why the multidimensional problem is much more interesting than simply writing down a CK factor.
+
+\subsection{ Why CK works}
+
+For $$ M\ddot q+D\dot q+\nabla V=0, $$ with $$ D=\gamma M, $$
+the multiplier can be chosen $$ g(t)=e^{\gamma t}M. $$
+Indeed,
+$$ L= e^{\gamma t} \left( \frac12\dot q^TM\dot q-V \right). $$
+Thus the effective configuration-space metric in velocity space is
+$$ \boxed{ g_{ij}^{\rm CK}(t)=e^{\gamma t}M_{ij}. } $$
+The damping has effectively been absorbed into a time-dependent kinetic metric.
+This interpretation becomes particularly useful in the multidimensional case.
+
+\subsection{Matrix-valued CK generalization}
+
+Suppose we try
+$$ \boxed{ L= \frac12\dot q^T A(t)\dot q - U(q,t), } $$
+with \(A(t)=A^T(t)\).
+The Euler–Lagrange equations are
+$$ A\ddot q+\dot A\dot q+\nabla U=0. $$
+If we want
+$$ M\ddot q+D\dot q+\nabla V=0, $$
+we would need
+$$ A=M $$
+for the inertial term and simultaneously
+$$ \dot A=D. $$
+For constant \(M,D\), this is impossible unless \(D=0\).
+But one can instead multiply the entire equation by an integrating matrix.
+Suppose $$ M\ddot q+D\dot q+\nabla V=0. $$
+We seek \(A(t)\) such that $$ A M\ddot q+A D\dot q+A\nabla V $$
+is Euler–Lagrange.
+
+The condition $$ \boxed{ \dot A=AD } $$ appears naturally.
+For constant \(D\),$$ A(t)=A_0e^{Dt}. $$
+However, because \(A\) must be symmetric as a Hessian with respect to velocities, additional compatibility conditions arise.
+This is where arbitrary multidimensional damping becomes substantially subtler.
+
+\subsection{A beautiful obstruction}
+
+Suppose $$ M=I $$ and \(D\) is constant.
+If $$ A(t)=e^{Dt}, $$ then generally $$ A(t)^T\neq A(t) $$
+unless \(D\) has suitable symmetry properties.
+For symmetric \(D\), $$ A=e^{Dt} $$
+is symmetric and positive definite when \(D\geq0\).
+
+This suggests the multidimensional generalization
+$$ \boxed{ L= \frac12\dot q^T e^{Dt}\dot q - e^{Dt}V(q) } $$
+\textcolor{red} {Seems a chatGPT mistake last term is matrix, but
+should be scalar!}
+for appropriate conventions, but the potential term requires care: its gradient must reproduce the desired force after multiplication by \(e^{Dt}\). This works straightforwardly only under additional compatibility conditions between \(D\) and \(V\).
+
+For a quadratic potential, $$ V=\frac12q^TKq, $$ 
+the condition is essentially a commutation/compatibility problem involving \(D\) and \(K\).
+So even when the damping matrix is symmetric, the existence of a simple CK-type Lagrangian depends on the potential as well.
+
+\subsection{Nonlinear dissipation}
+
+There is no reason to restrict ourselves to $$ Q=-D\dot q. $$
+Examples include $$ Q=-\gamma |\dot q|\dot q, $$
+or componentwise
+$$ Q_i=-\gamma_i|\dot q_i|\dot q_i. $$
+
+More generally,
+$$ Q_i=-\frac{\partial \mathcal R}{\partial\dot q^i} $$
+can arise from a nonlinear dissipation potential
+$$ \mathcal R(q,\dot q). $$
+
+For example,$$ \mathcal R = \frac{\gamma}{3}|\dot q|^3 $$
+produces a quadratic drag force proportional to
+$$ -|\dot q|\dot q. $$
+
+This is often the natural language for phenomenological dissipation.
+
+\subsection{Configuration-dependent friction}
+
+For $$ D=D(q), $$ one has
+$$ M(q)\ddot q+\Gamma(q)(\dot q,\dot q) +D(q)\dot q+\nabla V=0. $$
+The dissipative power is
+$$ P_{\rm diss} = -\dot q^TD(q)\dot q. $$
+If \(D(q)\) is positive semidefinite, the mechanical energy decreases.
+This is especially natural for systems with spatially varying drag or friction.
+
+\subsection{Contact mechanics}
+
+There is another formulation that is conceptually very important.
+Ordinary Hamiltonian mechanics lives on $$ (q,p) $$
+with a symplectic form $$ \omega=dq^i\wedge dp_i. $$
+Dissipative mechanics is naturally associated instead with contact geometry, using $$ (q,p,S), $$
+where \(S\) is an additional variable related to action/entropy.
+
+A contact Hamiltonian can generate equations such as
+$$ \dot q=\frac{\partial H}{\partial p}, $$
+$$ \dot p=-\frac{\partial H}{\partial q} -\gamma p, $$ 
+$$ \dot S=p_i\frac{\partial H}{\partial p_i}-H. $$
+Thus linear damping appears directly as a contraction term in phase space.
+This is conceptually different from CK:
+
+\fbox{CK: ordinary symplectic mechanics + explicit time dependence} 
+
+whereas
+$$ \boxed{ \text{contact mechanics: enlarged contact phase space + intrinsic dissipation}. } $$
+
+\subsection{Bateman's approach}
+
+Another route is to enlarge the system.
+For one damped oscillator,$$ \ddot x+\gamma\dot x+\omega^2x=0, $$
+introduce a dual coordinate \(y\). The Bateman Lagrangian produces simultaneously
+$$ \ddot x+\gamma\dot x+\omega^2x=0, $$
+and
+$$ \ddot y-\gamma\dot y+\omega^2y=0. $$
+The total enlarged system is conservative.
+This generalizes to multidimensional systems and provides a useful interpretation:
+
+Dissipation in a subsystem can be regarded as energy transfer into additional degrees of freedom.
+This is physically closer to what happens in many real dissipative systems.
+
+\subsection{Reservoir models}
+
+A more physical version of the same idea is to couple the system to many environmental oscillators:
+$$ L=L_{\rm system}+L_{\rm bath}+L_{\rm interaction}. $$
+The total system is Hamiltonian, while after eliminating the bath variables one obtains an effective equation such as
+$$ M\ddot q(t) +\int_{-\infty}^t K(t-t')\dot q(t')\,dt' +\nabla V(q) =\xi(t). $$
+Now dissipation is generally accompanied by memory and, in a statistical description, noise.
+This leads to the generalized Langevin equation,
+$$ \boxed{ M\ddot q +\nabla V +\int_0^tK(t-s)\dot q(s)\,ds =\xi(t). } $$
+The ordinary friction term $$ D\dot q $$
+is the Markovian/local limit of this much more general description.
+
+\subsection{Fluctuation–dissipation}
+
+Once the environment is treated statistically, dissipation and noise are no longer independent.
+Schematically,
+$$ \boxed{ \text{dissipation} \quad\leftrightarrow\quad \text{fluctuations}. } $$
+For an equilibrium bath, the noise correlation is related to the friction kernel:
+$$ \langle \xi_i(t)\xi_j(t')\rangle \sim k_BT\,K_{ij}(t-t'). $$
+This is the multidimensional fluctuation-dissipation theorem.
+
+Thus there is a hierarchy:
+$$ \boxed{ 
+\begin{array}{c} 
+\text{Hamiltonian system + bath}\\
+\downarrow\\ 
+\text{generalized Langevin equation}\\
+\downarrow\\
+\text{Markov approximation}\\ 
+\downarrow\\ 
+M\ddot q+D\dot q+\nabla V=\xi(t)\\
+\downarrow\\
+\text{deterministic friction: }\xi=0. 
+\end{array}} $$
+
+\subsection{A useful classification}
+
+For multidimensional mechanics I would distinguish at least these cases:
+$$ \boxed{ M\ddot q+F(q,\dot q,t)=0 } $$
+with Conservative $$ F=\nabla V. $$
+Ordinary autonomous Lagrangian.
+
+Gyroscopic $$ F=\nabla V-G\dot q, \qquad G^T=-G. $$
+Still ordinary Lagrangian in many important cases.
+
+Rayleigh dissipative
+$$ F=\nabla V+D\dot q, \qquad D=D^T\geq0. $$
+Naturally described by \(L+\mathcal R\), but not generally by an ordinary time-independent Lagrangian.
+
+CK-type $$ D=\gamma M. $$
+Admits the particularly simple
+$$ L=e^{\gamma t}(T-V). $$
+
+General variationally representable dissipation
+More complicated multipliers \(g_{ij}(q,\dot q,t)\) may exist.
+
+Non-variational dissipation
+No regular local \(L(q,\dot q,t)\) exists; one needs an extended formalism.
+
+Open-system dissipation
+$$ M\ddot q+\nabla V+\int K\dot q=\xi, $$
+where dissipation is understood as effective behavior after eliminating environmental degrees of freedom.
+
+\subsection{The important conceptual point}
+
+I think the most interesting distinction is this:
+$$ \boxed{ \text{dissipative equations} \neq \text{non-Lagrangian equations}. } $$
+Some dissipative equations possess ordinary Lagrangians—CK is the simplest striking example. Others require an integrating multiplier or an enlarged system. Still others are most naturally treated as effective equations obtained by eliminating environmental degrees of freedom.
+And in \(n>1\), the matrix structure matters:
+$$ \boxed{ D=D_s+D_a } $$
+separates genuine dissipation from gyroscopic motion, while the Helmholtz conditions determine whether the resulting equations can actually arise from an ordinary variational principle.
+
+This makes multidimensional dissipation a particularly nice application of the hierarchy you were discussing recently:
+$$ \boxed{ \text{same equations} \;\not\Rightarrow\; \text{same variational problem} \;\not\Rightarrow\; \text{same global solution structure}. } $$
+
+CK, Bateman, Rayleigh, contact mechanics, and reservoir formulations can describe closely related physical motion while having very different variational structures.
+
+\section{Herglotz variational principle}
+The Herglotz variational principle is probably the cleanest modern variational formulation of dissipative mechanics. Its essential idea is remarkably simple:
+
+Instead of requiring the action to be an integral of a prescribed Lagrangian, the action itself becomes a dynamical variable whose rate of change is determined by the Lagrangian.
+
+This makes dissipation intrinsic rather than something added afterward.
+
+\subsection{Ordinary variational mechanics}
+
+In ordinary mechanics,
+$$ S[q]=\int_{t_0}^{t_1}L(q,\dot q,t)\,dt, $$
+and one varies \(q(t)\) with fixed endpoints.
+The Euler–Lagrange equations are
+$$ \frac{d}{dt}\frac{\partial L}{\partial\dot q^i} - \frac{\partial L}{\partial q^i}=0. $$
+The important structural fact is that $$ L=L(q,\dot q,t) $$
+does not depend on the accumulated action.
+
+\subsection{Herglotz's modification}
+
+Herglotz replaces the integral definition of the action by the differential equation $$ \boxed{ \dot S(t)=L(q,\dot q,S,t). } $$
+Thus $$ S(t_0)=S_0 $$ and the final action \(S(t_1)\) is determined dynamically.
+The variational problem is:
+$$ \boxed{\text{extremize }S(t_1)} $$
+rather than
+$$ \text{extremize }\int L\,dt. $$
+The crucial new ingredient is
+$$ \boxed{L=L(q,\dot q,S,t).} $$
+The Lagrangian is allowed to depend on the action itself.
+
+\subsection{Herglotz equation}
+
+The generalized Euler–Lagrange equation is
+
+$$ \boxed{ \frac{d}{dt} \frac{\partial L}{\partial\dot q^i} - \frac{\partial L}{\partial q^i} - \frac{\partial L}{\partial S} \frac{\partial L}{\partial\dot q^i} =0. } $$
+Compare this with the ordinary equation:
+$$ \frac{d}{dt} \frac{\partial L}{\partial\dot q^i} - \frac{\partial L}{\partial q^i} =0. $$
+The additional term
+$$ \boxed{ -\frac{\partial L}{\partial S} \frac{\partial L}{\partial\dot q^i} } $$
+is precisely what can generate friction.
+
+\subsection{The simplest example: linear damping}
+
+Take $$\boxed{L(q,\dot q,S)=\frac12m\dot q^2-V(q)-\gamma S.} $$
+Then
+$$ \frac{\partial L}{\partial\dot q}=m\dot q, $$ $$ \frac{\partial L}{\partial q}=-V'(q), $$
+and $$ \frac{\partial L}{\partial S}=-\gamma. $$
+
+The Herglotz equation gives
+$$ m\ddot q+V'(q)+\gamma m\dot q=0. $$
+Therefore
+$$ \boxed{ m\ddot q+m\gamma\dot q+V'(q)=0. } $$
+So friction appears directly from the variational principle.
+There is no explicitly time-dependent CK factor.
+
+\subsection{Why this is different from Caldirola–Kanai}
+
+This comparison is particularly illuminating.
+
+CK $$ L_{\rm CK} = e^{\gamma t} \left( \frac12m\dot q^2-V \right). $$
+The action is $$ S=\int L_{\rm CK}\,dt. $$
+Dissipation is represented by explicit time dependence.
+
+Herglotz $$ \dot S = \frac12m\dot q^2-V-\gamma S. $$
+Dissipation is represented by action dependence.
+
+Thus:
+$$ \boxed{ \begin{array}{c} \text{CK: }L=L(q,\dot q,t)\\[2mm] \text{Herglotz: }L=L(q,\dot q,S,t). \end{array}} $$
+The resulting equations can be identical, but the variational structures are not.
+
+\subsection{Relation between CK and Herglotz}
+
+The relationship is actually quite beautiful.
+Starting from $$ \dot S = L_0(q,\dot q)-\gamma S, $$
+we have $$ \dot S+\gamma S=L_0. $$
+Multiplying by \(e^{\gamma t}\),
+$$ \frac{d}{dt}\left(e^{\gamma t}S\right) = e^{\gamma t}L_0. $$
+
+Therefore
+$$ e^{\gamma t_1}S(t_1) - e^{\gamma t_0}S(t_0) = \int_{t_0}^{t_1} e^{\gamma t}L_0\,dt. $$
+Thus, apart from the fixed initial contribution,
+$$ \boxed{ e^{\gamma t_1}S(t_1) \sim \int e^{\gamma t}L_0\,dt. } $$
+The CK action appears naturally.
+
+So CK and Herglotz are not unrelated tricks: for linear action dependence they can be transformed into one another at the level of the equations and endpoint functional.
+But conceptually Herglotz puts the dissipative mechanism in a different place.
+
+\subsection{Multidimensional Herglotz mechanics}
+
+Now take $$ q=(q^1,\ldots,q^n) $$
+and $$ \boxed{ L(q,\dot q,S,t) = L_0(q,\dot q,t)-\gamma S. } $$
+The equations become
+$$ \frac{d}{dt} \frac{\partial L_0}{\partial\dot q^i} - \frac{\partial L_0}{\partial q^i} + \gamma \frac{\partial L_0}{\partial\dot q^i} =0. $$
+
+For $$ L_0 = \frac12g_{ij}(q)\dot q^i\dot q^j - V(q), $$
+the canonical momentum is $$ p_i = g_{ij}\dot q^j, $$
+and the equations are
+$$ \boxed{ \frac{D\dot q^i}{dt} + \gamma\dot q^i + g^{ij}\partial_jV =0. } $$
+So Herglotz naturally produces isotropic friction with respect to the kinetic metric.
+This is exactly the multidimensional generalization of the CK restriction we discussed.
+
+\subsection{Arbitrary friction matrix}
+
+Suppose instead we want $$ M\ddot q+D\dot q+\nabla V=0, $$
+with arbitrary symmetric positive \(D\).
+One might try
+$$ L= \frac12\dot q^TM\dot q -V(q) -S\,f(\dot q). $$
+The Herglotz term produces
+$$ -f_{\dot q}\,\frac{\partial L}{\partial S}. $$
+However, the structure of the resulting friction is constrained.
+
+A particularly useful construction is to allow
+$$ \boxed{ L=L_0(q,\dot q)-\mathcal R(q,\dot q,S), } $$
+so that $$ \frac{\partial L}{\partial S} $$
+can be chosen to generate the desired velocity-dependent force.
+For linear friction, however, the simplest Herglotz choice remains
+$$ L=L_0-\gamma S, $$ and gives friction proportional to canonical momentum.
+
+For a general matrix \(D\), one needs a more elaborate \(S\)-dependence or a generalized Herglotz/contact construction.
+
+\subsection{Energy behavior}
+
+For $$ L=L_0-\gamma S, $$ with $$ L_0=T-V, $$
+the Herglotz dynamics gives $$ \dot E=-\gamma\,2T. $$
+
+For $$ T=\frac12m\dot q^2, $$
+this becomes
+$$ \boxed{ \dot E=-m\gamma\dot q^2. } $$
+Thus the physical mechanical energy decreases exactly as expected.
+
+This is conceptually attractive because dissipation is not imposed afterward; it follows from the generalized variational structure.
+
+\subsection{Herglotz and contact geometry}
+
+This is perhaps the most important modern interpretation.
+The variables are $$ (q^i,p_i,S), $$
+rather than merely $$ (q^i,p_i). $$
+This is a contact manifold.
+The canonical contact form can be written
+$$ \boxed{ \eta=dS-p_i\,dq^i } $$
+(up to sign conventions).
+
+Ordinary Hamiltonian mechanics lives on a symplectic phase space
+$$ (q,p), $$
+while Herglotz mechanics naturally lives on the contact space
+$$ (q,p,S). $$
+Dissipation then appears as a natural property of the contact flow.
+
+This gives the conceptual chain
+$$ \boxed{ \text{Herglotz variational principle} \longleftrightarrow \text{contact mechanics} \longleftrightarrow \text{dissipative dynamics}. } $$
+
+\subsection{Contact Hamiltonian formulation}
+
+Define $$ p_i=\frac{\partial L}{\partial\dot q^i}. $$
+The Legendre transformation gives a contact Hamiltonian
+$$ \boxed{ H(q,p,S,t) = p_i\dot q^i-L. } $$
+The contact Hamilton equations, in one common convention, are
+$$ \dot q^i = \frac{\partial H}{\partial p_i}, $$ 
+$$ \dot p_i = -\frac{\partial H}{\partial q^i} -p_i\frac{\partial H}{\partial S}, $$ 
+$$ \dot S = p_i\frac{\partial H}{\partial p_i}-H. $$
+For $$ H= \frac{p^2}{2m}+V(q)+\gamma S, $$
+one obtains
+$$ \dot q=\frac{p}{m}, $$ $$ \dot p=-\nabla V-\gamma p, $$
+and therefore
+$$ \boxed{ m\ddot q+\gamma m\dot q+\nabla V=0. } $$
+This is one of the cleanest ways of seeing how friction enters Hamiltonian-like dynamics.
+
+\subsection{Phase-space volume contracts}
+
+Ordinary Hamiltonian mechanics obeys Liouville's theorem:
+$$ \operatorname{div}X_H=0. $$
+Dissipative contact dynamics generally does not.
+For $$ \dot q=\frac{p}{m}, \qquad \dot p=-\nabla V-\gamma p, $$
+the phase-space divergence is
+$$ \nabla_{(q,p)}\cdot X = -n\gamma. $$
+Therefore
+$$ \boxed{ d\Gamma(t)=e^{-n\gamma t}d\Gamma(0). } $$
+So the contraction of phase-space volume is built directly into the contact formulation.
+This is something CK hides rather well because CK retains an ordinary symplectic Hamiltonian formulation, albeit with explicit time dependence.
+
+\subsection{ Herglotz and Noether's theorem}
+
+Another important feature is that the ordinary Noether theorem is modified.
+For an ordinary Lagrangian, a continuous symmetry gives a conserved quantity. With $$ L=L(q,\dot q,S,t), $$ the corresponding quantity generally obeys
+$$ \dot J = \frac{\partial L}{\partial S}J $$
+rather than $$ \dot J=0. $$
+
+For $$ \frac{\partial L}{\partial S}=-\gamma, $$
+one gets $$ \boxed{ \dot J=-\gamma J, } $$
+and hence $$ J(t)=J(0)e^{-\gamma t}. $$
+Thus Herglotz naturally replaces conservation laws by exponentially decaying balance laws in dissipative systems.
+
+This is one reason the formulation is much more than a trick for reproducing the damped oscillator.
+
+\subsection{Herglotz versus Rayleigh}
+
+It is useful to keep these distinct.
+
+\paragraph{Rayleigh}
+Start with $$ L_0(q,\dot q,t) $$
+and introduce $$ \mathcal R(q,\dot q,t). $$
+Then
+$$ \frac{d}{dt} \frac{\partial L_0}{\partial\dot q^i} - \frac{\partial L_0}{\partial q^i} + \frac{\partial\mathcal R}{\partial\dot q^i} =0. $$
+Dissipation is an extra force prescription.
+
+\paragraph{Herglotz}
+Start with $$ \dot S=L(q,\dot q,S,t). $$
+Then dissipation is part of the variational principle itself.
+
+So:
+$$ \boxed{ \text{Rayleigh: variational mechanics + dissipative force} } $$
+whereas
+$$ \boxed{ \text{Herglotz: generalized variational mechanics}. } $$
+
+\subsection{Herglotz versus Bateman}
+
+Again, the distinction is instructive.
+
+\paragraph{Bateman:}
+$$ (q,p)\quad\rightarrow\quad(q,y,p_q,p_y). $$
+Add degrees of freedom to make the enlarged system conservative.
+
+\paragraph{Herglotz:}
+$$ (q,p)\quad\rightarrow\quad(q,p,S). $$
+Add an action/contact variable, and permit the dynamics itself to be nonconservative.
+
+So one may summarize:
+$$ \boxed{ 
+\begin{array}{c|c} \text{Method}&\text{How dissipation is represented}\\ 
+    \hline 
+    \text{CK}&\text{explicit time dependence}\\ 
+    \text{Bateman}&\text{additional dynamical DOF}\\ 
+    \text{Rayleigh}&\text{additional dissipation function}\\ 
+    \text{Herglotz}&\text{action dependence}\\ 
+\text{Contact}&\text{contact geometry}\\ 
+\text{Reservoir}&\text{elimination of environmental DOF} 
+\end{array}} $$
+
+\subsection{Why Herglotz is particularly interesting for multidimensional mechanics}
+
+There is a deeper reason I think Herglotz is relevant to the issues you have been considering. For an ordinary Lagrangian, $$ L(q,\dot q,t), $$
+the action is a functional of the entire trajectory:
+$$ S[q]=\int L\,dt. $$
+Herglotz changes this architecture:
+$$ \boxed{ \dot S=L(q,\dot q,S,t). } $$
+The action becomes a state variable.
+Consequently, the distinction between
+$$ \text{dynamics} $$
+and
+$$ \text{variational principle} $$
+becomes much sharper.
+
+In particular, the same equation
+$$ m\ddot q+\gamma m\dot q+\nabla V=0 $$
+can arise from
+$$ L_{\rm CK}=e^{\gamma t}(T-V) $$
+or from
+$$ \dot S=T-V-\gamma S, $$
+yet these are not the same variational formulation.
+That is a very concrete example of your earlier hierarchy:
+$$ \boxed{ \text{equivalent equations of motion} \;\not\Rightarrow\; \text{equivalent variational formulations}. } $$
+And Herglotz makes the reason particularly transparent: it changes what we mean by action itself.
+
+\subsection{One final distinction}
+
+There are really three increasingly general levels:
+$$ \boxed{ 
+\begin{array}{ccc} 
+\text{ordinary mechanics} & \longrightarrow& L(q,\dot q,t) \\[2mm]
+&&\downarrow\\[-1mm]
+\text{Herglotz mechanics} && L(q,\dot q,S,t) \\[2mm]
+&&\downarrow\\[-1mm]
+\text{contact mechanics} && (q,p,S). 
+\end{array}} $$
+
+Ordinary Lagrangian mechanics is recovered when
+$$ \frac{\partial L}{\partial S}=0. $$
+
+So Herglotz is not merely "another Lagrangian for friction." It is a genuine extension of the variational principle in which the action becomes dynamical, and contact Hamiltonian mechanics emerges as its natural phase-space formulation.
+
+For the multidimensional dissipation problem, the next particularly useful step would be to examine the most general Herglotz Lagrangian \(L(q,\dot q,S,t)\) and determine exactly which friction matrices \(D_{ij}(q,\dot q,t)\) it can generate. That connects Herglotz directly to the Helmholtz inverse problem and makes the comparison with CK mathematically precise.
+
+\section{Herglotz Lagrangian}
+
+The clean way to do this is to start from the general Herglotz Lagrangian and ask an inverse question:
+$$ \boxed{\text{Given }M(q)\ddot q+D(q,\dot q,t)\dot q+\nabla V=0, \quad\text{when can it come from Herglotz?}} $$
+The answer reveals an important limitation: Herglotz mechanics is much more general than CK, but an arbitrary friction matrix is not automatically represented by a simple \(L(q,\dot q,S,t)\). The structure of the \(S\)-dependence matters.
+
+The modern literature confirms the generalized Euler–Lagrange–Herglotz equation
+$$ \frac{d}{dt}L_{\dot q^i}-L_{q^i}-L_S L_{\dot q^i}=0, $$
+and its natural contact-space interpretation on \(T^*Q\times\mathbb R\).
+
+\subsection{Start with the general Herglotz problem}
+
+Let $$ q=(q^1,\ldots,q^n) $$
+and introduce the action variable \(S(t)\) through
+$$ \boxed{ \dot S=L(q,\dot q,S,t). } $$
+We fix $$ q(t_0),\qquad q(t_1), \qquad S(t_0), $$
+and require stationarity of \(S(t_1)\).
+The resulting equations are
+\begin{equation}
+\frac{d}{dt}\frac{\partial L}{\partial\dot q^i} - \frac{\partial L}{\partial q^i} - \frac{\partial L}{\partial S} \frac{\partial L}{\partial\dot q^i} =0.  \tag{1} 
+\end{equation}
+This is the basic equation from which everything follows.
+
+\subsection{Write it in a useful mechanical form}
+
+Define $$ p_i=L_{\dot q^i}. $$
+Then (1) becomes
+\begin{equation}
+ \boxed{ \dot p_i=L_{q^i}+L_Sp_i. } \tag{2} 
+\end{equation}
+This is already very suggestive.
+In ordinary mechanics,
+$$ \dot p_i=L_{q^i}. $$
+Herglotz adds
+$$ \boxed{L_Sp_i}. $$
+Therefore the simplest Herglotz dissipation is necessarily a force proportional to the canonical momentum.
+That observation is the key to understanding multidimensional Herglotz mechanics.
+
+\subsection{Mechanical Lagrangian plus linear \(S\)-dependence}
+
+Take
+\begin{equation}
+ \boxed{ L(q,\dot q,S,t) = L_0(q,\dot q,t)-\gamma S. } \tag{3} 
+\end{equation}
+Then $$ L_S=-\gamma, $$ and $$ p_i=L_{0,\dot q^i}. $$
+Equation (1) gives
+$$ \frac{d}{dt}p_i-L_{0,q^i} +\gamma p_i=0. $$
+Thus
+\begin{equation}
+\boxed{ \dot p_i = L_{0,q^i} -\gamma p_i. } \tag{4} 
+\end{equation}
+This is the general multidimensional Herglotz damping law.
+
+\subsection{Natural mechanical system}
+
+Take $$ L_0 = \frac12 g_{ij}(q)\dot q^i\dot q^j - V(q). $$
+Then $$ p_i=g_{ij}\dot q^j. $$
+The ordinary Euler–Lagrange equation is
+$$ \nabla_{\dot q}\dot q = -\operatorname{grad}V. $$
+Herglotz changes it to
+\begin{equation}
+ \boxed{ \nabla_{\dot q}\dot q = -\operatorname{grad}V -\gamma\dot q. } \tag{5} 
+\end{equation}
+So on an arbitrary Riemannian configuration space, Herglotz naturally produces friction proportional to velocity.
+This result is also obtained explicitly in recent geometric treatments of Herglotz mechanics.
+
+\subsection{Flat \(n\)-dimensional space}
+
+For $$ L_0 = \frac12\dot q^TM\dot q-V(q), $$
+with constant positive-definite \(M\), $$ p=M\dot q. $$
+Equation (4) gives
+$$ M\ddot q+\nabla V+\gamma M\dot q=0. $$
+Hence
+\begin{equation}
+ \boxed{ D=\gamma M. } \tag{6} 
+\end{equation}
+This is the multidimensional Herglotz analogue of the CK result.
+
+It is important:
+The simplest Herglotz Lagrangian produces isotropic damping with respect to the kinetic metric, not an arbitrary damping matrix.
+
+\subsection{Compare with the desired general equation}
+
+Suppose we want
+\begin{equation}
+ \boxed{ M\ddot q+D\dot q+\nabla V=0. } \tag{7} 
+\end{equation}
+The simplest Herglotz model gives
+$$ M\ddot q+\gamma M\dot q+\nabla V=0. $$
+Therefore $$ D=\gamma M. $$
+So if $$ D\neq\gamma M, $$ we cannot obtain (7) from
+$$ L=L_0-\gamma S. $$
+This is exactly analogous to the limitation of the CK multiplier.
+
+\subsection{Can we generalize the \(S\)-dependence?}
+
+Now consider 
+\begin{equation}
+ \boxed{ L=L_0+F(q,\dot q,S,t). } \tag{8} 
+\end{equation}
+The Herglotz equation becomes
+$$ \frac{d}{dt} \left( L_{0,\dot q}+F_{\dot q} \right) - \left( L_{0,q}+F_q \right) - F_S \left( L_{0,\dot q}+F_{\dot q} \right) =0. $$
+Rearranging,
+ 
+\begin{equation}
+\boxed{ \operatorname{EL}(L_0) + \frac{d}{dt}F_{\dot q} -F_q -F_Sp_0 -F_SF_{\dot q} =0, } \tag{9} 
+\end{equation}
+where
+$$ p_0=L_{0,\dot q}. $$
+This formula is extremely useful.
+It shows that a general Herglotz term can do three different things:
+modify the force through \(F_q\);
+modify the momentum through \(F_{\dot q}\);
+generate a friction-like term through \(F_Sp\).
+
+But there is a price.
+If \(F\) depends nonlinearly on \(\dot q\), then
+$$ \frac{d}{dt}F_{\dot q} $$
+contains additional acceleration terms.
+So one generally changes the inertial structure, not merely the friction.
+
+\subsection{Linear \(S\)-dependence}
+The most important next case is
+
+\begin{equation}
+\boxed{ L=L_0(q,\dot q,t)+R(q,\dot q,t)-\gamma(q,\dot q,t)S.}\tag{10}
+\end{equation}
+
+Then $$ L_S=-\gamma, $$ but now
+$$ L_{\dot q} = L_{0,\dot q}+R_{\dot q} -S\gamma_{\dot q}. $$
+Consequently,
+$$ \frac{d}{dt}L_{\dot q} $$ contains
+$$ -\dot S\,\gamma_{\dot q} -S\frac{d}{dt}\gamma_{\dot q}. $$
+Since $$ \dot S=L, $$
+the equations generally acquire explicit \(S\)-dependent terms.
+Therefore, if we want a conventional mechanical equation
+$$ M(q)\ddot q+F(q,\dot q,t)=0 $$
+that does not contain the additional state variable \(S\), there is a strong restriction:
+$$ \boxed{ \gamma_{\dot q}=0 } $$
+is the natural simple condition.
+Thus take
+\begin{equation}
+ \boxed{ L=L_0+R(q,\dot q,t)-\gamma(q,t)S. } \tag{11} 
+\end{equation}
+But even now \(S\)-dependence remains through
+$$ S\nabla\gamma. $$
+Hence, for a completely ordinary force law independent of \(S\), we are naturally led further toward
+\begin{equation}
+ \boxed{ \gamma=\text{constant}. } \tag{12} 
+\end{equation}
+This is why the elegant Herglotz model
+$$ L=L_0-\gamma S $$
+is much more rigid than it initially appears.
+
+\subsection{What about Rayleigh dissipation?}
+
+Suppose we introduce
+$$ R(q,\dot q) = \frac12\dot q^TD\dot q. $$
+One might try $$ L=L_0-R-\gamma S. $$
+But this does not simply give
+$$ M\ddot q+D\dot q+\gamma M\dot q+\nabla V=0. $$
+Why? Because $$ \frac{d}{dt}R_{\dot q} $$
+contains accelerations.
+
+Indeed,$$ R_{\dot q}=D\dot q, $$ and therefore
+$$ \frac{d}{dt}R_{\dot q} = D\ddot q $$
+for constant \(D\).
+Thus the effective inertial matrix becomes $$ M+D $$
+rather than remaining \(M\).
+So one should not simply insert the Rayleigh function into the Herglotz Lagrangian.
+This is a useful distinction between
+$$ \text{Rayleigh dissipation} $$ and $$ \text{Herglotz action dependence}. $$
+
+\subsection{Can Herglotz generate an arbitrary \(D\)?}
+
+There is a much more subtle possibility.
+Instead of insisting that \(L_0\) have the prescribed kinetic metric \(M\), allow the Herglotz Lagrangian itself to have a modified velocity Hessian
+$$ \boxed{ G_{ij} = \frac{\partial^2L} {\partial\dot q^i\partial\dot q^j}. } $$
+For a regular Lagrangian, $$ \det G\neq0. $$
+
+The inverse problem is then:
+Given $$ \ddot q^i=F^i(q,\dot q,t), $$
+does there exist a regular Herglotz \(L(q,\dot q,S,t)\) producing it?
+This is a Herglotz version of the inverse problem of the calculus of variations.
+
+The answer involves generalized Helmholtz conditions.
+The ordinary inverse problem asks for a multiplier
+$$ g_{ij}(q,\dot q,t) $$
+satisfying the Helmholtz conditions.
+The Herglotz problem has an additional scalar \(S\) and an additional term
+$$ L_S L_{\dot q}. $$
+So the multiplier equations are modified accordingly.
+\subsection{A useful way to see the generalized problem}
+Write the target equation as
+\begin{equation}
+ \boxed{ \ddot q^i=F^i(q,\dot q,t). } \tag{13} 
+\end{equation}
+For a Herglotz Lagrangian define
+$$ p_i=L_{\dot q^i}. $$
+Then
+\begin{equation}
+ \dot p_i=L_{q^i}+L_Sp_i. \tag{14} 
+\end{equation}
+Since
+$$ p_i=p_i(q,\dot q,S,t), $$
+we have
+$$ \dot p_i = \frac{\partial p_i}{\partial\dot q^j}\ddot q^j + \frac{\partial p_i}{\partial q^j}\dot q^j + \frac{\partial p_i}{\partial S}\dot S + \frac{\partial p_i}{\partial t}. $$
+But
+$$ \frac{\partial p_i}{\partial\dot q^j} = L_{\dot q^i\dot q^j} \equiv G_{ij}. $$
+Therefore
+\begin{equation}
+ \boxed{ G_{ij}\ddot q^j = L_{q^i} +L_Sp_i - p_{i,q^j}\dot q^j - p_{i,S}L - p_{i,t}. } \tag{15} 
+\end{equation}
+Substituting
+$$ \ddot q^i=F^i $$
+gives the fundamental inverse equation
+\begin{equation}
+ \boxed{ G_{ij}F^j = L_{q^i} +L_SL_{\dot q^i} - \frac{\partial L_{\dot q^i}}{\partial q^j}\dot q^j - \frac{\partial L_{\dot q^i}}{\partial S}L - \frac{\partial L_{\dot q^i}}{\partial t}. } \tag{16} 
+\end{equation}
+Together with $$ G_{ij}=G_{ji}, $$
+this is the starting point for the generalized inverse problem.
+
+\subsection{The important conclusion}
+
+Equation (16) tells us something that the simple \(L=L_0-\gamma S\) example hides.
+
+There are two distinct questions:
+Question A --- Can I represent the damping force by the simple Herglotz term $$ -\gamma S? $$ Answer: $$ \boxed{D=\gamma M.} $$
+
+Question B --- Can I find some regular Herglotz Lagrangian
+$$ L(q,\dot q,S,t) $$
+whose equations reproduce the desired dissipative system?
+
+This is much broader and becomes an inverse variational problem.
+Therefore $$ \boxed{ D\neq\gamma M } $$
+does not mean that the system is non-Herglotz.
+It only means that the particularly simple Herglotz Lagrangian is insufficient.
+
+\subsection{A particularly revealing example}
+
+Consider $$ M\ddot q+D\dot q+\nabla V=0 $$
+with constant symmetric positive-definite \(D\).
+If \(M\) and \(D\) can be simultaneously diagonalized, introduce normal coordinates such that
+$$ M=I, \qquad D= \operatorname{diag} (\gamma_1,\ldots,\gamma_n). $$
+The equations are
+$$ \ddot q_i+\gamma_i\dot q_i+\partial_iV=0. $$
+If the potential separates,
+$$ V(q)=\sum_iV_i(q_i), $$
+then each coordinate admits its own Herglotz representation,
+$$ \dot S_i = \frac12\dot q_i^2-V_i(q_i)-\gamma_iS_i. $$
+But notice the crucial point:
+$$ \boxed{ S_1,\ldots,S_n } $$
+are now separate action variables.
+
+A single scalar Herglotz variable \(S\) naturally produces a common dissipation rate. Independent damping constants require either a more elaborate coupling or multiple action-like variables.
+This is one reason multidimensional Herglotz mechanics is genuinely more restrictive than treating \(n\) independent one-dimensional problems separately.
+
+\subsection{Anisotropic damping versus geometry}
+
+There is another possibility that is physically more interesting.
+Suppose $$ M\ddot q+D\dot q+\nabla V=0. $$
+If \(D\) is positive definite, define $$ \Gamma=M^{-1}D. $$
+Then $$ \ddot q+\Gamma\dot q+M^{-1}\nabla V=0. $$
+The simple Herglotz term gives $$ \Gamma=\gamma I. $$
+So ordinary Herglotz damping is geometrically isotropic.
+To obtain $$ \Gamma\neq\gamma I, $$
+one needs additional structure.
+
+This could be:
+a modified kinetic metric;
+configuration-dependent Herglotz coupling;
+additional variables;
+contact reduction;
+coupling to an environment;
+or a genuinely generalized variational principle.
+
+\subsection{Gyroscopic forces are different}
+
+Now consider $$ M\ddot q+ D\dot q+ G\dot q+ \nabla V=0, $$
+where $$ D^T=D, \qquad G^T=-G. $$
+The \(G\dot q\) term is not dissipative.
+It can arise from an ordinary velocity-linear Lagrangian,
+$$ L= \frac12\dot q^TM\dot q +A(q)\cdot\dot q -V(q). $$
+The antisymmetric derivative
+$$ F_{ij} = \partial_iA_j-\partial_jA_i $$
+generates the gyroscopic force.
+So a very useful decomposition is
+$$ \boxed{ \text{velocity force} = \underbrace{D\dot q}_{\text{dissipative}} + \underbrace{G\dot q}_{\text{gyroscopic}}. } $$
+Herglotz need only account for the first part.
+
+\subsection{Contact Hamiltonian makes the structure transparent}
+
+The Herglotz Lagrangian has a contact Hamiltonian
+$$ H=p_i\dot q^i-L. $$
+The contact equations are
+$$ \dot q^i=H_{p_i}, $$ $$ \dot p_i=-H_{q^i}-p_iH_S, $$ $$ \dot S=p_iH_{p_i}-H. $$
+This is the natural Hamiltonian counterpart of the Herglotz equation.
+
+For $$ \boxed{ H(q,p,S) = H_0(q,p)+\gamma S, } $$
+we obtain $$ \dot p_i = -\frac{\partial H_0}{\partial q^i} -\gamma p_i. $$
+For $$ H_0=\frac12p^TM^{-1}p+V, $$
+this becomes $$ \boxed{ \dot p=-\nabla V-\gamma p. } $$
+Thus the damping acts directly on momentum.
+
+\subsection{Energy equation}
+
+For an autonomous Herglotz system, $$ E=p_i\dot q^i-L. $$
+One obtains 
+\begin{equation}
+\boxed{ \dot E=L_S E. } \tag{17} 
+\end{equation}
+For $$ L=L_0-\gamma S, $$ $$ L_S=-\gamma, $$
+so $$ \boxed{ \dot E=-\gamma E. } $$
+The rescaled quantity
+$$ \boxed{ e^{\gamma t}E } $$
+is conserved.
+This is the Herglotz analogue of an ordinary energy conservation law. Recent treatments explicitly formulate this as a generalized/dissipated Noether quantity.
+Notice how closely this resembles the CK structure.
+
+\subsection{CK versus Herglotz revisited}
+
+For the damped system
+$$ M\ddot q+\gamma M\dot q+\nabla V=0, $$
+we have:
+CK
+$$ L_{\rm CK} = e^{\gamma t} \left( \frac12\dot q^TM\dot q-V \right). $$
+Canonical momentum:
+$$ p_{\rm CK}=e^{\gamma t}M\dot q. $$
+
+Herglotz
+$$ \boxed{ \dot S= \frac12\dot q^TM\dot q -V-\gamma S. } $$
+Canonical momentum:
+$$ \boxed{ p_{\rm H}=M\dot q. } $$
+This is an important physical distinction.
+In Herglotz mechanics the canonical momentum is the ordinary mechanical momentum for this simple model.
+In CK it is exponentially rescaled:
+$$ p_{\rm CK}=e^{\gamma t}p_{\rm mech}. $$
+That is one of the reasons the Herglotz formulation is often conceptually cleaner for dissipative mechanics.
+
+\subsection{Relation to the inverse problem}
+
+Now we can formulate the real mathematical question precisely.
+
+Given
+$$ \boxed{ M_{ij}(q)\ddot q^j+ F_i(q,\dot q,t)=0, } $$
+ask whether there exists
+$$ L(q,\dot q,S,t) $$
+such that
+$$ \dot S=L $$
+and
+$$ \frac{d}{dt}L_{\dot q^i} -L_{q^i} -L_SL_{\dot q^i}=0. $$
+This is the Herglotz inverse problem.
+
+The ordinary Helmholtz problem asks whether
+$$ M_{ij}\ddot q^j+F_i=0 $$
+is Euler–Lagrange.
+
+The Herglotz problem adds one extra degree of freedom at the variational level:
+$$ (q,\dot q) \quad\longrightarrow\quad (q,\dot q,S). $$
+Consequently the class of representable systems changes.
+
+\subsection{The hierarchy I would use}
+
+For multidimensional dissipative mechanics, I would therefore distinguish:
+$$ \boxed{ 
+\begin{array}{ll} 
+\text{Level 1:}& L(q,\dot q,t) \\[1mm]
+&\text{ordinary variational mechanics} \\[4mm]
+\text{Level 2:}& L(q,\dot q,t)+\mathcal R(q,\dot q,t) \\[1mm]
+&\text{Rayleigh-type phenomenology} \\[4mm]
+\text{Level 3:}& L(q,\dot q,S,t) \\[1mm] 
+&\text{Herglotz variational mechanics} \\[4mm]
+\text{Level 4:}& (q,p,S) \\[1mm] 
+&\text{contact Hamiltonian mechanics} \\[4mm] 
+\text{Level 5:}& (q,\text{environment}) \\[1mm]
+&\text{Hamiltonian reservoir theory}. 
+\end{array}} $$
+The last level is especially important physically: real dissipation generally means that degrees of freedom have been eliminated. The generalized Langevin equation with memory and noise is the corresponding effective description.
+
+\subsection{The main result for your multidimensional question}
+
+For $$ M\ddot q+D\dot q+\nabla V=0, $$
+we can now say quite precisely:
+$$ \boxed{ L=L_0-\gamma S \quad\Longleftrightarrow\quad D=\gamma M. } $$
+This is the simple Herglotz class.
+
+If $$ D\neq\gamma M, $$ 
+there are three possibilities:
+a more complicated Herglotz \(L(q,\dot q,S,t)\) exists;
+an enlarged/contact formulation is needed;
+the dissipative equation is more naturally regarded as an effective equation obtained after eliminating environmental degrees of freedom.
+And this is exactly where the Helmholtz inverse problem becomes interesting.
+
+One should not say simply "Herglotz can describe arbitrary dissipation." The correct statement is more nuanced:
+$$ \boxed{ \text{Herglotz substantially enlarges the variational class, but does not make every arbitrary force law variational.} } $$
+Recent work is extending this structure beyond ordinary tangent-bundle mechanics—to Lie algebroids, reduction, and dissipative field theories—so the framework is not merely a reformulation of the damped oscillator.
+
+The next step that would be especially worthwhile is to work out the actual Herglotz–Helmholtz conditions for
+$$ M\ddot q+D(q)\dot q+\nabla V=0, $$
+and determine explicitly when an arbitrary symmetric \(D(q)\) admits a single-scalar Herglotz Lagrangian. That would turn the above qualitative discussion into a precise theorem and would also let us compare CK, Herglotz, and ordinary inverse-variational mechanics on exactly the same footing.
+
+\section{Arbitrary symmetric D(q)}
+Let us make the statement precise for the important class
+$$ M(q)\ddot q+D(q)\dot q+\nabla V(q)=0, $$
+and ask:
+When does this system admit a single-scalar Herglotz variational formulation \( \dot S=L(q,\dot q,S,t)\)?
+There is a clean result for the natural mechanical class, and it also clarifies exactly where the more general inverse problem begins.
+
+\subsection{General Herglotz equation}
+
+For$$ \dot S=L(q,\dot q,S,t), $$
+the Herglotz equations are
+\begin{equation}
+ \boxed{ \frac{d}{dt}L_{\dot q^i} -L_{q^i} -L_S L_{\dot q^i}=0. } \tag{1} 
+\end{equation}
+Equivalently, with $$ p_i=L_{\dot q^i}, $$
+\begin{equation}
+  \boxed{ \dot p_i=L_{q^i}+L_Sp_i. } \tag{2} 
+\end{equation}
+This is the only equation we need.
+The extra term $$ L_Sp_i $$
+is the source of the nonconservative force. This is the standard Herglotz equation.
+
+\subsection{The natural mechanical ansatz}
+
+Suppose the desired mechanical system has kinetic energy
+$$ T=\frac12 g_{ij}(q)\dot q^i\dot q^j $$
+and potential \(V(q)\).
+Take the Herglotz Lagrangian
+\begin{equation}
+ \boxed{ L(q,\dot q,S) = \frac12g_{ij}(q)\dot q^i\dot q^j -V(q) +F(q,S). } \tag{3} 
+\end{equation}
+The crucial restriction here is that the \(S\)-dependent part does not depend on velocity.
+Then $$ p_i=g_{ij}\dot q^j. $$
+The Herglotz equations give
+$$ \frac{D\dot q^i}{dt} + g^{ij}\partial_jV - g^{ij}\partial_jF - F_S\dot q^i =0. $$
+Therefore
+\begin{equation}
+ \boxed{ \nabla_{\dot q}\dot q = -\operatorname{grad}V +\operatorname{grad}F +F_S\dot q. } \tag{4} 
+\end{equation}
+This already gives the answer.
+
+\subsection{Requirement for pure friction}
+
+Suppose we want
+\begin{equation}
+ \boxed{ \nabla_{\dot q}\dot q = -\operatorname{grad}V -\Gamma(q)\dot q, } \tag{5} 
+\end{equation}
+where \(\Gamma\) is a linear friction operator.
+Comparing (4) and (5), we require
+$$ \operatorname{grad}F=0, $$
+and
+\begin{equation}
+ \boxed{ F_S\,I=-\Gamma. } \tag{6} 
+\end{equation}
+But \(F_S\) is a scalar.
+Therefore
+\begin{equation}
+ \boxed{ \Gamma(q)=\gamma(q)I. } \tag{7} 
+\end{equation}
+In coordinates with mass matrix \(M\),$$ D=M\Gamma, $$
+so 
+\begin{equation}
+ \boxed{ D(q)=\gamma(q)M(q). } \tag{8} 
+\end{equation}
+This is the precise result.
+
+\subsection{The simple theorem}
+
+We can state it as follows.
+Consider a natural mechanical system
+$$ L_0(q,\dot q) = \frac12g_q(\dot q,\dot q)-V(q) $$
+and seek a Herglotz Lagrangian of the form
+$$ L=L_0+F(q,S), $$
+with the same kinetic metric \(g\), and whose equations contain only a linear velocity damping term.
+Then the damping tensor must be proportional to the kinetic metric:
+$$ \boxed{ D(q)=\gamma(q)g(q). } $$
+
+Conversely, if
+$$ D(q)=\gamma(q)g(q), $$
+then
+$$ \boxed{ L= \frac12g_q(\dot q,\dot q) -V(q) -\gamma(q)S } $$
+works only if \(\gamma\) is constant, if we insist that there be no additional force proportional to \(S\).
+This last qualification is important.
+
+\subsection{ Why \(\gamma(q)\) causes trouble}
+
+Suppose we try $$ L=T-V-\gamma(q)S. $$
+Then $$ L_S=-\gamma(q), $$
+but also
+$$ L_{q^i} = (T-V)_{q^i} - S\,\partial_i\gamma. $$
+Consequently,
+\begin{equation}
+ \boxed{ \nabla_{\dot q}\dot q = -\operatorname{grad}V -\gamma(q)\dot q + S\,\operatorname{grad}\gamma. } \tag{9} 
+\end{equation}
+There is an unwanted \(S\)-dependent force.
+Thus the very clean Herglotz representation
+$$ \boxed{ L=T-V-\gamma S } $$
+really corresponds to
+\begin{equation}
+ \boxed{ D=\gamma M,\qquad \gamma=\text{constant}. } \tag{10} 
+\end{equation}
+This is stronger than merely saying \(D\propto M\).
+
+\subsection{Why this is analogous to Caldirola–Kanai}
+
+For CK,$$ L_{\rm CK} = e^{\gamma t}(T-V), $$
+and $$ D=\gamma M. $$
+
+For Herglotz,$$ L_{\rm H} = T-V-\gamma S, $$
+and again 
+$$ D=\gamma M. $$
+Thus both formulations naturally select the same isotropic damping tensor.
+But the reason is different:
+$$ \boxed{ \begin{array}{c|c} 
+\text{CK}& \text{time-dependent multiplier}\\ \hline 
+\text{Herglotz}& \text{action-dependent multiplier} 
+\end{array}} $$
+
+\subsection{ What if \(D\) is anisotropic?}
+
+Consider
+$$ M=I, \qquad D= \begin{pmatrix} \gamma_1&0\\ 0&\gamma_2 \end{pmatrix}. $$
+The equations are
+$$ \ddot x+\gamma_1\dot x+V_x=0, $$ $$ \ddot y+\gamma_2\dot y+V_y=0. $$
+A single Herglotz variable with
+$$ L=T-V+F(q,S) $$
+would require simultaneously
+$$ F_S=-\gamma_1, $$
+and
+$$ F_S=-\gamma_2. $$
+Therefore
+$$ \boxed{\gamma_1=\gamma_2.} $$
+So an anisotropic damping matrix cannot be represented by this simple single-action-variable Herglotz construction.
+
+\subsection{Could velocity dependence of \(L_S\) solve the problem?}
+
+This is where things become more interesting.
+Suppose
+\begin{equation}
+ \boxed{ L=T-V+\Gamma(q,\dot q)S. } \tag{11} 
+\end{equation}
+Then
+$$ L_S=\Gamma(q,\dot q), $$
+so the Herglotz term gives
+$$ \Gamma(q,\dot q)p. $$
+At first sight one might hope to choose
+$$ \Gamma(q,\dot q) $$
+to produce arbitrary matrix damping.
+But there is a serious complication:
+$$ L_{\dot q} = M\dot q + S\,\Gamma_{\dot q}. $$
+Therefore
+$$ \frac{d}{dt}L_{\dot q} $$
+contains
+$$ S\Gamma_{\dot q\dot q}\ddot q $$
+and
+$$ \dot S\,\Gamma_{\dot q}. $$
+Since
+$$ \dot S=L, $$
+the resulting equation generally contains:
+modified inertial terms;
+quadratic velocity terms;
+\(S\)-dependent terms;
+nonlinear velocity terms.
+So one does not get an arbitrary matrix \(D(q)\dot q\) simply by making \(L_S\) velocity dependent.
+This is precisely why the general inverse problem is nontrivial.
+
+The literature indeed uses Herglotz Lagrangians with \(\gamma(q,\dot q)S\) to represent much more general dissipative dynamics, but the resulting force law has corresponding additional structure.
+
+\subsection{A useful general calculation}
+
+Take
+\begin{equation}
+ \boxed{ L= \frac12\dot q^TM\dot q -V(q) + \Gamma(q,\dot q)S, } \tag{12} 
+\end{equation}
+where \(M\) is constant.
+Then
+$$ p_i = M_{ij}\dot q^j + S\Gamma_{\dot q^i}. $$
+Differentiate:
+$$ \dot p_i = M_{ij}\ddot q^j + \dot S\,\Gamma_{\dot q^i} + S\frac{d}{dt}\Gamma_{\dot q^i}. $$
+Since
+$$ \dot S=L, $$
+the Herglotz equation becomes
+\begin{equation}
+ \begin{aligned} M_{ij}\ddot q^j ={}& -\partial_iV +\Gamma_{q^i}S +\Gamma \left( M_{ij}\dot q^j+ S\Gamma_{\dot q^i} \right) \\ &- L\Gamma_{\dot q^i} - S\frac{d}{dt}\Gamma_{\dot q^i}. \end{aligned} \tag{13} 
+\end{equation}
+This is the crucial formula.
+It shows explicitly why arbitrary \(D(q)\dot q\) is not obtained for free.
+
+\subsection{A special case that works}
+
+There is, however, a useful class.
+Let
+$$ \Gamma=\Gamma(t) $$
+depend on time only.
+Then
+$$ \Gamma_{\dot q}=0, \qquad \Gamma_q=0. $$
+Equation (13) reduces immediately to
+$$ M\ddot q+\nabla V-\Gamma(t)M\dot q=0. $$
+Thus
+$$ \boxed{ D(t)=-\Gamma(t)M. } $$
+Choosing
+$$ \Gamma(t)=-\gamma(t) $$
+gives
+$$ \boxed{ M\ddot q+\gamma(t)M\dot q+\nabla V=0. } $$
+So Herglotz naturally accommodates time-dependent isotropic damping.
+For example,
+$$ L= T-V-\gamma(t)S $$
+gives
+$$ M\ddot q+\gamma(t)M\dot q+\nabla V=0. $$
+No problem occurs because
+$$ \partial_q\gamma=0. $$
+
+\subsection{What about an arbitrary symmetric \(D(q)\)?}
+
+Now we can answer the question you asked very precisely.
+Suppose
+\begin{equation}
+ \boxed{ M(q)\ddot q+D(q)\dot q+\nabla V(q)=0, } \tag{14} 
+\end{equation}
+with
+$$ D=D^T>0. $$
+There are three increasingly broad questions.
+A. Simple Herglotz
+$$ L=L_0-\gamma S. $$
+Then
+$$ \boxed{ D=\gamma M,\qquad\gamma=\text{constant}. } $$
+B. Herglotz with \(F(q,S)\)
+$$ L=L_0+F(q,S). $$
+To obtain pure linear damping without extra forces,
+$$ \boxed{ D=\gamma M,\qquad\gamma=\text{constant}. } $$
+C. Completely general Herglotz
+$$ L=L(q,\dot q,S,t). $$
+Now the question is an inverse problem, and \(D\) need not have the form \(\gamma M\).
+But obtaining a prescribed \(D(q)\) generally requires the Herglotz Lagrangian to modify more than just the damping term.
+
+\subsection{This is where Helmholtz enters}
+
+For ordinary mechanics, given
+$$ \ddot q^i=F^i(q,\dot q,t), $$
+we ask whether there exists a multiplier
+$$ g_{ij}(q,\dot q,t) $$
+such that
+$$ g_{ij}(\ddot q^j-F^j) $$
+is Euler–Lagrange.
+The multiplier must satisfy the Helmholtz conditions.
+For dissipative equations one can alternatively introduce a Rayleigh-type function \(D\), and generalized Helmholtz conditions characterize when
+$$ g_{ij}(\ddot q^j-F^j) = \frac{d}{dt}L_{\dot q^i} -L_{q^i} -\frac{\partial\mathcal R}{\partial\dot q^i}. $$
+There is established work on precisely this inverse problem for dissipative systems.
+The Herglotz problem changes the equation to
+$$ g_{ij}(\ddot q^j-F^j) = \frac{d}{dt}L_{\dot q^i} -L_{q^i} -L_SL_{\dot q^i}. $$
+So the Herglotz analogue contains an additional scalar degree of freedom \(L_S\).
+
+\subsection{A useful structural interpretation}
+
+For ordinary inverse mechanics:
+$$ \boxed{ \text{Find a multiplier }g_{ij}. } $$
+For Herglotz inverse mechanics:
+$$ \boxed{ \text{Find }(L,g_{ij},L_S) } $$
+subject to
+$$ g_{ij}=L_{\dot q^i\dot q^j} $$
+and the Herglotz equation.
+Thus Herglotz enlarges the inverse problem, but does not trivialize it.
+This is the mathematically precise version of the statement:
+$$ \boxed{ \text{Herglotz is more general than ordinary variational mechanics, but not universal.} } $$
+
+\subsection{An important counterexample}
+
+Take two-dimensional friction
+$$ D= \begin{pmatrix} \gamma&\kappa\\ \kappa&\gamma \end{pmatrix}. $$
+The equations contain
+$$ \gamma\dot x+\kappa\dot y, $$ $$ \kappa\dot x+\gamma\dot y. $$
+Diagonalize with
+$$ u=\frac{x+y}{\sqrt2}, \qquad v=\frac{x-y}{\sqrt2}. $$
+Then
+$$ D\rightarrow \begin{pmatrix} \gamma+\kappa&0\\ 0&\gamma-\kappa \end{pmatrix}. $$
+Unless
+$$ \kappa=0, $$
+the two normal modes have different damping rates.
+A single scalar \(S\) with the simple Herglotz coupling cannot represent this as
+$$ L=T-V-\Gamma S $$
+because that gives only one rate.
+This is a useful physical example: coupled dissipation contains more information than a single scalar dissipation rate.
+
+\subsection{But diagonalization does not solve the general Herglotz problem}
+
+One might say:
+Why not introduce two action variables \(S_1,S_2\)?
+One can construct such generalized theories, but that is no longer the standard single-scalar Herglotz principle.
+The standard Herglotz theory has
+$$ \boxed{S\in\mathbb R} $$
+as one additional variable.
+If one introduces
+$$ S^a,\qquad a=1,\ldots,r, $$
+one is moving toward a multi-contact or vector-valued action structure.
+That could represent independent dissipative channels, but it is a genuine extension.
+
+\subsection{Relation to contact geometry}
+
+The standard Herglotz theory corresponds to the contact manifold
+$$ T^*Q\times\mathbb R $$
+with coordinates
+$$ (q^i,p_i,S). $$
+The contact form is
+$$ \eta=dS-p_i\,dq^i. $$
+A contact Hamiltonian
+$$ H(q,p,S) $$
+gives
+$$ \dot q^i=H_{p_i}, $$ $$ \dot p_i=-H_{q^i}-p_iH_S, $$ 
+$$ \dot S=p_iH_{p_i}-H. $$
+This is the Hamiltonian counterpart of Herglotz mechanics.
+For
+$$ H=\frac12p^TM^{-1}p+V+\gamma S, $$
+we obtain
+$$ \dot p=-\nabla V-\gamma p. $$
+Again,
+$$ D=\gamma M. $$
+So the restriction is visible from the contact Hamiltonian side as well.
+
+\subsection{What happens to energy?}
+
+For an autonomous Herglotz Lagrangian,
+$$ E=p_i\dot q^i-L, $$
+one obtains
+\begin{equation}
+ \boxed{ \dot E=L_SE. } \tag{15} 
+\end{equation}
+This is a standard Herglotz energy-balance relation.
+For
+$$ L=T-V-\gamma S, $$
+we have
+$$ \dot E=-\gamma E. $$
+Therefore
+$$ E(t)=E(0)e^{-\gamma t}. $$
+But for the damped oscillator,
+$$ \frac{d}{dt}(T+V) = -\gamma\,2T, $$
+so \(E\) here should be interpreted carefully: the Herglotz generalized energy is not necessarily identical to the naive mechanical energy for every generalized model.
+For the simple natural Lagrangian it is the mechanical energy,
+$$ E=T+V, $$
+and the equations imply the familiar result. The apparent form
+$$ \dot E=-\gamma E $$
+versus
+$$ \dot E=-2\gamma T $$
+signals a convention issue in the coefficient used in the Herglotz term. If the equation is
+$$ M\ddot q+\Gamma M\dot q+\nabla V=0, $$
+the correct Herglotz choice is
+$$ L=T-V-\Gamma S, $$
+but the general Herglotz energy identity must be evaluated with the actual \(E=p\dot q-L\); for the damped oscillator the direct mechanical-energy calculation gives
+$$ \boxed{\dot E=-\Gamma\,\dot q^TM\dot q=-2\Gamma T.} $$
+This is a useful warning: one should not blindly identify the Herglotz generalized-energy formula with the mechanical energy balance without checking the precise contact/Herglotz convention.
+
+\subsection{The cleanest conclusion}
+
+We can now sharpen our earlier statement considerably.
+For
+$$ \boxed{ M(q)\ddot q+D(q)\dot q+\nabla V(q)=0, } $$
+with a prescribed kinetic metric \(M\):
+Simple Herglotz
+$$ \boxed{ L=T-V-\gamma S } $$
+gives exactly
+$$ \boxed{ D=\gamma M. } $$
+Single-scalar Herglotz with \(F(q,S)\)
+Still cannot produce arbitrary \(D\) without introducing additional forces.
+General single-scalar Herglotz
+$$ L(q,\dot q,S,t) $$
+can represent substantially more complicated dissipative equations, but the price is that velocity dependence in \(L_S\) also modifies the inertial and nonlinear-force structure.
+Arbitrary \(D(q)\)
+There is therefore no simple theorem saying that every positive symmetric \(D(q)\) admits a standard Herglotz Lagrangian with the original kinetic energy.
+The precise existence question is an inverse Herglotz problem, analogous to the Helmholtz inverse problem.
+
+\subsection{ And this connects directly to our earlier variational hierarchy}
+
+For the same dissipative equation,
+$$ M\ddot q+D\dot q+\nabla V=0, $$
+we can ask successively:
+$$ \boxed{ \begin{array}{c} \text{Does it have an ordinary Lagrangian?}\\ \downarrow\\ \text{Does it have a CK-type Lagrangian?}\\ \downarrow\\ \text{Does it have a single-scalar Herglotz Lagrangian?}\\ \downarrow\\ \text{Does it have a contact Hamiltonian realization?}\\ \downarrow\\ \text{Does it arise from a conservative enlarged system?} \end{array}} $$
+These are different existence questions.
+In particular, the fact that the equations have a Herglotz representation does not make that representation equivalent to the CK representation. Herglotz changes the variational category by making \(S\) a state variable, whereas CK remains an ordinary time-dependent Lagrangian.
+That is precisely the kind of example where
+$$ \boxed{ \text{equivalence of equations} \;<\; \text{equivalence of variational problems} } $$
+becomes mathematically concrete.
+And the next step, if we want the full result rather than just the natural-Lagrangian theorem above, is to derive the generalized Helmholtz conditions for a single-scalar Herglotz Lagrangian. That is the point at which one can give necessary and sufficient conditions on a general \(F^i(q,\dot q,t)\), rather than only on the linear friction class.
+
+%new section
+\section{Inverse Problem}
+
+Let us do the inverse problem properly, and separate what is genuinely analogous to the ordinary Helmholtz problem from what is special to Herglotz mechanics.
+
+\subsection{General Herglotz inverse problem}
+Let
+$$ q^i,\qquad v^i=\dot q^i,\qquad z $$
+be coordinates on \(TQ\times\mathbb R\), and suppose the prescribed dynamics is the second-order system
+\begin{equation}
+ \ddot q^i=F^i(q,v,t). \tag{1} 
+\end{equation}
+A regular Herglotz Lagrangian is a function
+\begin{equation}
+ L=L(q,v,z,t), \qquad \det\left(L_{v^iv^j}\right)\neq0, \tag{2} 
+\end{equation}
+together with
+\begin{equation}
+ \dot z=L(q,v,z,t). \tag{3} 
+\end{equation}
+Stationarity of \(z(T)\) gives
+\begin{equation}
+ \frac{d}{dt}L_{v^i}-L_{q^i}-L_zL_{v^i}=0. \tag{4} 
+\end{equation}
+This is the fundamental Herglotz Euler equation.
+Define the velocity Hessian
+\begin{equation}
+ g_{ij}:=L_{v^iv^j}. \tag{5} 
+\end{equation}
+Expanding (4),
+\begin{equation}
+ g_{ij}\ddot q^j +L_{v^iq^j}v^j +L_{v^iz}L +L_{v^it} -L_{q^i} -L_zL_{v^i}=0. \tag{6} 
+\end{equation}
+Therefore a prescribed SODE (1) is generated by \(L\) precisely when
+\begin{equation}
+ \boxed{ g_{ij}F^j +L_{v^iq^j}v^j +L_{v^iz}L +L_{v^it} -L_{q^i} -L_zL_{v^i}=0. } \tag{7} 
+\end{equation}
+Together with
+\begin{equation}
+ \boxed{g_{ij}=L_{v^iv^j},\qquad g_{ij}=g_{ji},\qquad \det g\neq0,} \tag{8} 
+\end{equation}
+this is the basic inverse-Herglotz system.
+The important point is that the multiplier is not an independently introduced object. It is the velocity Hessian of the unknown Herglotz Lagrangian.
+
+\subsection{Comparison with the ordinary Helmholtz problem}
+
+For ordinary mechanics one starts with
+$$ \ddot q^i=F^i(q,v,t) $$
+and asks whether there exists
+$$ L_0(q,v,t) $$
+such that
+$$ \frac d{dt}L_{0,v^i}-L_{0,q^i}=0. $$
+One introduces
+$$ g_{ij}=L_{0,v^iv^j} $$
+and obtains the Helmholtz conditions on \(g_{ij}\).
+The Herglotz problem differs in one essential way:
+$$ \boxed{ \text{ordinary:}\quad \frac d{dt}p_i-L_{q^i}=0 } $$
+whereas
+$$ \boxed{ \text{Herglotz:}\quad \frac d{dt}p_i-L_{q^i}-L_zp_i=0. } $$
+Thus \(L_z\) acts as a scalar modification of the momentum transport.
+This is also apparent geometrically. The Herglotz vector field lives on \(TQ\times\mathbb R\), rather than merely \(TQ\), and the inverse problem can be characterized in terms of an appropriate contact distribution.
+
+\subsection{The crucial integrating factor}
+
+There is a very useful way of seeing what the Herglotz term does.
+Along a particular trajectory define
+\begin{equation}
+ \mu(t) = \exp\left[-\int_{t_0}^{t}L_z(\tau)\,d\tau\right]. \tag{9} 
+\end{equation}
+Then
+\begin{equation}
+ \dot\mu=-L_z\mu. \tag{10} 
+\end{equation}
+Consequently,
+$$ \frac d{dt}(\mu L_{v^i}) = \mu\frac d{dt}L_{v^i} -L_z\mu L_{v^i}. $$
+Hence (4) becomes
+\begin{equation}
+ \boxed{ \frac d{dt}(\mu L_{v^i}) = \mu L_{q^i}. } \tag{11} 
+\end{equation}
+This is the key structural observation.
+The Herglotz modification is therefore an integrating-factor modification of the Euler–Lagrange equations.
+But—and this is important—\(\mu\) is generally a functional of the trajectory because \(L_z\) depends on \(q,v,z,t\). Therefore (11) does not automatically mean that Herglotz mechanics is just ordinary Lagrangian mechanics with a modified Lagrangian.
+Only in special cases does the integrating factor become a prescribed function of \(t\).
+
+\subsection{The simple dissipative case}
+
+Take
+\begin{equation}
+ L(q,v,z,t) = L_0(q,v,t)-\gamma z, \tag{12} 
+\end{equation}
+with constant \(\gamma\).
+Then
+$$ L_z=-\gamma, $$
+so
+$$ \mu=e^{\gamma t}. $$
+The Herglotz equation becomes
+\begin{equation}
+ \frac d{dt}L_{0,v^i} -L_{0,q^i} +\gamma L_{0,v^i}=0. \tag{13} 
+\end{equation}
+Equivalently,
+\begin{equation}
+ \boxed{ \frac d{dt} \left(e^{\gamma t}L_{0,v^i}\right) - e^{\gamma t}L_{0,q^i}=0. } \tag{14} 
+\end{equation}
+This is exactly the Caldirola–Kanai structure.
+Thus, at least for constant \(\gamma\),
+$$ \boxed{ \text{Herglotz} \quad\longleftrightarrow\quad \text{time-dependent ordinary Lagrangian} } $$
+at the level of the resulting equations.
+This explains very directly why
+$$ L_H=L_0-\gamma z $$
+and
+$$ L_{\rm CK}=e^{\gamma t}L_0 $$
+produce the same equations.
+But they are not the same variational problem. The first has an additional dynamical variable \(z\); the second has an explicitly time-dependent ordinary action.
+That distinction is exactly the sort of distinction you were making earlier between equivalence of equations and equivalence of variational principles.
+
+\subsection{Natural multidimensional mechanics}
+
+Now take
+\begin{equation}
+L_0 = \frac12 g_{ij}(q)v^iv^j-V(q). \tag{15} 
+\end{equation}
+The Herglotz Lagrangian
+\begin{equation}
+ \boxed{ L= \frac12g_{ij}v^iv^j-V(q)-\gamma z } \tag{16} 
+\end{equation}
+gives
+\begin{equation}
+ \nabla_{\dot q}\dot q = -\operatorname{grad}_g V -\gamma\dot q. \tag{17} 
+\end{equation}
+This is the coordinate-free result.
+In coordinates,
+\begin{equation}
+ g_{ij}\ddot q^j + \Gamma_{ijk}v^jv^k + \partial_iV + \gamma g_{ij}v^j =0. \tag{18} 
+\end{equation}
+Thus the friction tensor in the covariant equation is
+\begin{equation}
+ \boxed{ D_{ij}=\gamma g_{ij}. } \tag{19} 
+\end{equation}
+This is not merely a convenient example. It reveals a structural restriction of the simple natural Herglotz ansatz. The current literature likewise identifies \(L=T-V-\gamma z\) as the natural Herglotz realization of metric/Rayleigh damping.
+
+\subsection{Why an arbitrary damping matrix does not fit}
+
+Suppose instead that the physical equation is
+\begin{equation}
+ g_{ij}\nabla_{\dot q}\dot q^j + \partial_iV + D_{ij}(q)v^j =0. \tag{20} 
+\end{equation}
+We would like to obtain this from
+\begin{equation}
+ L= \frac12g_{ij}v^iv^j - V + F(q,z). \tag{21} 
+\end{equation}
+Now
+$$ L_{v^i}=g_{ij}v^j, $$
+and
+$$ L_z=F_z. $$
+The Herglotz equation gives
+\begin{equation}
+ g_{ij}\nabla_{\dot q}\dot q^j + \partial_iV - F_{q^i} - F_zg_{ij}v^j =0. \tag{22} 
+\end{equation}
+To reproduce (20), we need
+$$ F_{q^i}=0 $$
+and
+$$ F_zg_{ij}v^j=D_{ij}v^j. $$
+Therefore
+\begin{equation}
+ \boxed{ D_{ij}=F_z\,g_{ij}. } \tag{23} 
+\end{equation}
+Since \(F_z\) is a scalar,
+\begin{equation}
+ \boxed{ D=\gamma g. } \tag{24} 
+\end{equation}
+Hence:
+A single scalar Herglotz variable with a natural kinetic Lagrangian produces only damping proportional to the kinetic metric, if no additional velocity-dependent structure is introduced.
+For example,
+$$ D= \begin{pmatrix} \gamma_1&0\\ 0&\gamma_2 \end{pmatrix} $$
+with
+$$ \gamma_1\neq\gamma_2 $$
+cannot be produced by this simple ansatz.
+This is a genuine multidimensional restriction; it does not appear in one dimension because every \(1\times1\) matrix is automatically proportional to the metric.
+
+\subsection{Can we fix this by allowing \(F(q,v,z)\)?}
+
+This is where things become much more interesting.
+Consider
+\begin{equation}
+ L= \frac12g_{ij}v^iv^j-V(q)+F(q,v,z). \tag{25} 
+\end{equation}
+Then
+$$ L_{v^i} = g_{ij}v^j+F_{v^i}. $$
+Therefore
+$$ \frac{d}{dt}L_{v^i} $$
+contains
+$$ \left(g_{ij}+F_{v^iv^j}\right)\ddot q^j. $$
+The effective inertial matrix is consequently
+\begin{equation}
+ \boxed{ G_{ij} = g_{ij}+F_{v^iv^j}. } \tag{26} 
+\end{equation}
+This is the essential obstruction.
+If we introduce velocity dependence into the Herglotz part in order to manufacture an arbitrary damping matrix, we generally also change the mass/inertia matrix.
+There are further terms involving
+$$ F_{v^iq^j}v^j, \qquad F_{v^iz}L, \qquad F_zF_{v^i}, $$
+and therefore generally nonlinear velocity and \(z\)-dependent terms.
+So the idea
+$$ L=T-V+F(q,v)z $$
+does not simply mean
+$$ D_{ij}v^j $$
+with an arbitrary \(D_{ij}\).
+It is a substantially more complicated inverse problem.
+
+\subsection{Explicit calculation for \(L=T-V+\Gamma(q,v)z\)}
+
+Let
+\begin{equation}
+ L = \frac12g_{ij}v^iv^j - V(q) + \Gamma(q,v)z. \tag{27} 
+\end{equation}
+Then
+\begin{equation}
+ L_{v^i} = g_{ij}v^j+z\Gamma_{v^i}. \tag{28} 
+\end{equation}
+The Herglotz equation is
+\begin{equation}
+ \frac d{dt} \left(g_{ij}v^j+z\Gamma_{v^i}\right) - \left( \frac12g_{jk,i}v^jv^k-V_{,i} +z\Gamma_{,i} \right) - \Gamma \left(g_{ij}v^j+z\Gamma_{v^i}\right) =0. \tag{29} 
+\end{equation}
+Since
+$$ \dot z=L, $$
+we obtain
+\begin{equation}
+ \begin{aligned} 0={}& g_{ij}\ddot q^j +\Gamma_{ijk}v^jv^k +\partial_iV \\ &+ z\Gamma_{v^iv^j}\ddot q^j + z\Gamma_{v^iq^j}v^j + L\Gamma_{v^i} - z\Gamma_{q^i} \\ &- \Gamma g_{ij}v^j - z\Gamma\Gamma_{v^i}. \end{aligned} \tag{30} 
+\end{equation}
+Therefore the coefficient of acceleration is
+\begin{equation}
+ \boxed{ g_{ij}+z\Gamma_{v^iv^j}. } \tag{31} 
+\end{equation}
+This immediately shows why the construction is difficult.
+If we demand that the physical inertial tensor remain exactly \(g_{ij}\), we must have
+\begin{equation}
+ \boxed{ \Gamma_{v^iv^j}=0. } \tag{32} 
+\end{equation}
+Thus
+\begin{equation}
+ \Gamma(q,v) = A_i(q)v^i+B(q). \tag{33} 
+\end{equation}
+Even then, the resulting equation contains additional terms from \(A_i(q)\), \(B(q)\), and \(z\).
+So an arbitrary damping matrix is not obtained merely by allowing \(L_z\) to depend on velocity.
+
+\subsection{A particularly revealing special case}
+
+Take
+\begin{equation}
+ L= \frac12g_{ij}v^iv^j - V - A_i(q)v^i z - \gamma(q)z. \tag{34} 
+\end{equation}
+Then
+$$ L_z=-A_iv^i-\gamma. $$
+The Herglotz term contributes
+$$ (A_iv^i+\gamma)g_{ij}v^j. $$
+But there are also terms involving
+$$ z\,\partial_iA_j, $$
+and because
+$$ \dot z=L, $$
+terms involving \(L A_i\).
+Thus the desired force is no longer simply
+$$ -D_{ij}v^j. $$
+We have generated a much larger class of dynamics, including terms depending on \(z\) and quadratic or higher powers of velocity.
+This is exactly why the inverse Herglotz problem is not simply "replace \(\gamma\) by a matrix".
+
+\subsection{The general inverse equations}
+
+We can now formulate the problem cleanly.
+Given
+\begin{equation}
+ \boxed{ \ddot q^i=F^i(q,v,t), } \tag{35} 
+\end{equation}
+seek
+$$ L(q,v,z,t) $$
+such that
+\begin{equation}
+ \dot z=L \tag{36} 
+\end{equation}
+and
+\begin{equation}
+ \boxed{ g_{ij}F^j + L_{v^iq^j}v^j + L_{v^iz}L + L_{v^it} - L_{q^i} - L_zL_{v^i} =0. } \tag{37} 
+\end{equation}
+with
+\begin{equation}
+ \boxed{ g_{ij}=L_{v^iv^j},\qquad g_{ij}=g_{ji},\qquad \det g\ne0. } \tag{38} 
+\end{equation}
+Equation (37) is the direct inverse-Herglotz equation.
+It is a nonlinear PDE for \(L\).
+The important difference from the ordinary inverse problem is that \(L\) itself determines the additional coordinate dynamics
+$$ \dot z=L. $$
+Thus the true Herglotz system is not just the projected SODE (35), but
+\begin{equation}
+ \boxed{ \begin{cases} \dot q^i=v^i,\\[2mm] \dot v^i=F^i(q,v,t),\\[2mm] \dot z=L(q,v,z,t). \end{cases}} \tag{39} 
+\end{equation}
+This is a SODE on the extended space \(TQ\times\mathbb R\).
+That point is crucial.
+
+\subsection{Why the inverse problem is actually different from Helmholtz}
+
+For ordinary mechanics we ask:
+$$ F(q,v,t) \stackrel{?}{\longrightarrow} L_0(q,v,t). $$
+For Herglotz mechanics we really ask:
+$$ F(q,v,t) \stackrel{?}{\longrightarrow} \bigl(L(q,v,z,t),\,\dot z=L\bigr). $$
+Therefore the same projected dynamics can correspond to different choices of how the trajectory is lifted into the \(z\)-direction.
+Recent work on the inverse Herglotz problem makes precisely this geometric point: the natural inverse characterization is in terms of a contact distribution and its invariance, rather than simply a direct copy of the classical Helmholtz conditions.
+This is an important distinction from the ordinary inverse problem.
+12. Contact-geometric version
+The regular Herglotz Lagrangian defines
+$$ p_i=L_{v^i}, $$
+and the contact form
+\begin{equation}
+ \eta_L=dz-p_i\,dq^i. \tag{40} 
+\end{equation}
+The associated Herglotz vector field has the schematic structure
+\begin{equation}
+ \xi_L = v^i\frac{\partial}{\partial q^i} + F_L^i\frac{\partial}{\partial v^i} + L\frac{\partial}{\partial z}. \tag{41} 
+\end{equation}
+The inverse problem therefore asks whether a given extended SODE can be supplied with a suitable contact structure for which its flow is compatible with the contact geometry. This is the geometric analogue of asking for a multiplier in the classical Helmholtz problem.
+So we can write the hierarchy schematically as
+$$ \boxed{ \text{SODE} \rightarrow \text{Herglotz multiplier/contact structure} \rightarrow L(q,v,z,t). } $$
+
+\subsection{What happens to the usual Helmholtz multiplier?}
+
+For ordinary mechanics,
+$$ g_{ij}=L_{v^iv^j} $$
+is the Helmholtz multiplier.
+The same object appears here:
+$$ \boxed{ g_{ij}=L_{v^iv^j}. } $$
+But now it lives on the enlarged space
+$$ (q,v,z,t), $$
+so
+$$ g_{ij}=g_{ij}(q,v,z,t) $$
+in general.
+Consequently, even the multiplier can acquire explicit \(z\)-dependence.
+If we insist that
+$$ g_{ij}=g_{ij}(q) $$
+be the physical kinetic metric, we are imposing a strong additional restriction on the inverse problem.
+That is precisely what we did in the natural mechanical analysis above.
+
+\subsection{The linear damping problem revisited}
+
+Now consider the physically important system
+\begin{equation}
+ \boxed{ M_{ij}(q)\nabla_{\dot q}\dot q^j + D_{ij}(q,t)v^j + \partial_iV =0. } \tag{42} 
+\end{equation}
+There are now three logically different questions.
+Question A
+Does the equation have an ordinary Lagrangian?
+That is the usual inverse problem.
+Question B
+Does it have a Herglotz Lagrangian?
+This is the inverse Herglotz problem.
+Question C
+Does it have a Herglotz Lagrangian with the prescribed kinetic metric \(M\) and no additional \(z\)-dependent forces?
+This is a much more restrictive question.
+For the simple natural Herglotz form,
+$$ L=\frac12M_{ij}v^iv^j-V-\gamma z, $$
+the answer to C is
+\begin{equation}
+ \boxed{D_{ij}=\gamma M_{ij}.} \tag{43} 
+\end{equation}
+Therefore
+$$ D\not\propto M $$
+rules out that particular Herglotz realization.
+It does not, however, prove that no more general Herglotz Lagrangian exists.
+That distinction is important.
+
+\subsection{Anisotropic damping is therefore a good test case}
+
+Take
+\begin{equation}
+ M= \begin{pmatrix} m_1&0\\ 0&m_2 \end{pmatrix}, \qquad D= \begin{pmatrix} d_1&0\\ 0&d_2 \end{pmatrix}. \tag{44} 
+\end{equation}
+If
+$$ \frac{d_1}{m_1} = \frac{d_2}{m_2} =\gamma, $$
+then
+$$ D=\gamma M $$
+and the elementary Herglotz construction works.
+If instead
+$$ \frac{d_1}{m_1} \neq \frac{d_2}{m_2}, $$
+then the elementary one-scalar Herglotz model fails.
+But the correct conclusion is not
+$$ \text{"anisotropic damping is non-Herglotz."} $$
+The correct conclusion is
+$$ \boxed{ \text{"anisotropic damping is not representable by the simple natural one-scalar Herglotz ansatz."} } $$
+A more general \(L(q,v,z,t)\), or a different extended formulation, must then be investigated.
+
+\subsection{Symmetric versus antisymmetric damping}
+
+There is another useful physical distinction.
+Write
+$$ D=D_{\rm s}+D_{\rm a}, $$
+where
+$$ D_{\rm s}^T=D_{\rm s}, \qquad D_{\rm a}^T=-D_{\rm a}. $$
+The mechanical energy satisfies
+$$ E=T+V $$
+and
+\begin{equation}
+ \dot E = -v^TDv = -v^TD_{\rm s}v, \tag{45} 
+\end{equation}
+because
+$$ v^TD_{\rm a}v=0. $$
+Thus:
+$$ \boxed{ D_{\rm s}:\text{ genuine dissipation}, \qquad D_{\rm a}:\text{ gyroscopic force}. } $$
+This suggests that an arbitrary matrix \(D\) should not even be regarded as one physical phenomenon.
+The antisymmetric part belongs naturally with magnetic/gyroscopic terms, whereas the symmetric part is the dissipative part.
+
+\subsection{This exposes a limitation of the scalar Herglotz mechanism}
+
+The elementary Herglotz mechanism produces
+$$ -\gamma p_i. $$
+In velocity language this is
+$$ -\gamma g_{ij}v^j. $$
+It therefore acts essentially as a scalar contraction of momentum.
+By contrast, a general friction law is
+$$ -\mathcal D_i(q,v,t). $$
+For linear friction,
+$$ -\mathcal D_i=-D_{ij}v^j. $$
+A single scalar \(z\) naturally supplies only one scalar damping coefficient.
+Hence the structural picture is
+$$ \boxed{ \text{one scalar Herglotz variable} \quad\Rightarrow\quad \text{one scalar momentum contraction} } $$
+in the simplest contact/Herglotz realization.
+To obtain genuinely tensorial dissipation one may need additional structure: a more general \(L\), additional internal variables, several dissipative variables, a reservoir, or an alternative contact/open-system construction.
+
+\subsection{Relation to Caldirola–Kanai}
+
+We can now see CK much more sharply.
+For
+$$ L_H=L_0-\gamma z, $$
+we have
+$$ \dot z=L_0-\gamma z. $$
+Hence
+\begin{equation}
+ \frac d{dt} \left(e^{\gamma t}z\right) = e^{\gamma t}L_0. \tag{46} 
+\end{equation}
+Thus
+\begin{equation}
+ e^{\gamma t}z(t) = z(t_0)e^{\gamma t_0} + \int_{t_0}^{t}e^{\gamma\tau}L_0(\tau)\,d\tau. \tag{47} 
+\end{equation}
+The CK action therefore appears naturally as the integrating-factor representation of the Herglotz action variable.
+So
+$$ \boxed{ \text{CK and linear Herglotz are dynamically equivalent} } $$
+but
+$$ \boxed{ \text{their variational structures are not identical}. } $$
+That is exactly the distinction you were emphasizing in the earlier discussion.
+
+\subsection{And now the hierarchy becomes precise}
+
+For dissipative dynamics we can distinguish at least four levels:
+$$ \boxed{ \begin{array}{c} \text{same differential equations}\\ \Downarrow\\ \text{same variational principle}\\ \Downarrow\\ \text{same extended variational structure}\\ \Downarrow\\ \text{same global solution/lift structure} \end{array}} $$
+with none of the reverse implications generally valid.
+For example,
+$$ L_H=L_0-\gamma z $$
+and
+$$ L_{\rm CK}=e^{\gamma t}L_0 $$
+give the same projected equation
+$$ M\ddot q+\gamma M\dot q+\nabla V=0, $$
+but:
+Herglotz has the state variable \(z\);
+CK has explicit time dependence;
+their canonical/contact structures differ;
+their natural notions of action differ;
+their global lifts of the same physical trajectory differ.
+So this is a concrete example of
+$$ \boxed{ \text{equation equivalence} \not\Rightarrow \text{variational equivalence}. } $$
+
+\subsection{One correction to our earlier discussion}
+
+There is one point I would explicitly correct from the earlier treatment.
+For
+$$ L=T-V-\gamma z, $$
+the generalized Herglotz energy
+$$ E_H=v^iL_{v^i}-L $$
+is not automatically identical to the ordinary mechanical energy \(T+V\), because it contains the \(+\gamma z\) contribution:
+\begin{equation}
+ E_H = T+V+\gamma z. \tag{48} 
+\end{equation}
+The Herglotz balance law concerns \(E_H\), not necessarily the mechanical energy \(T+V\). The contact-Hamiltonian formulation likewise has its own generalized Hamiltonian balance law.
+For the physical mechanical energy,
+$$ E_{\rm mech}=T+V, $$
+the actual equation gives directly
+\begin{equation}
+ \boxed{ \dot E_{\rm mech} = -\gamma\,g_{ij}v^iv^j } \tag{49} 
+\end{equation}
+for the natural system.
+This is the physically relevant dissipation law.
+
+\subsection{The main result}
+
+I would summarize the inverse problem we have uncovered as follows.
+Restricted theorem
+For
+$$ L= \frac12g_{ij}(q)v^iv^j-V(q)+F(q,z), $$
+the Herglotz equations are
+\begin{equation}
+ \nabla_{\dot q}\dot q = -\operatorname{grad}V + \operatorname{grad}F + F_z\dot q. \tag{50} 
+\end{equation}
+Therefore, if the desired equation is
+\begin{equation}
+ \nabla_{\dot q}\dot q = -\operatorname{grad}V - \Gamma(q)v, \tag{51} 
+\end{equation}
+with no additional force and with the same kinetic metric, then
+$$ \boxed{ \Gamma(q)=\gamma g^{-1}(q) } $$
+in the appropriate index convention, and the scalar Herglotz coupling must reduce essentially to
+$$ F=-\gamma z+\text{constant}. $$
+In particular, a general anisotropic friction tensor cannot be represented within this restricted ansatz.
+General theorem/problem
+For a completely general
+$$ F^i(q,v,t), $$
+the inverse Herglotz problem is instead:
+\begin{equation}
+ \boxed{ \begin{aligned} &\text{find }L(q,v,z,t),\\ &g_{ij}=L_{v^iv^j},\quad \det g\neq0,\\ &g_{ij}F^j+ L_{v^iq^j}v^j+ L_{v^iz}L+ L_{v^it} -L_{q^i} -L_zL_{v^i}=0. \end{aligned}} \tag{52} 
+\end{equation}
+This is the genuine Herglotz analogue of the inverse problem of the calculus of variations.
+And, importantly, there is no reason to expect the answer to be a simple set of Helmholtz conditions on \(F^i\) alone, because the Herglotz structure includes the additional \(z\)-dynamics. The modern geometric formulation instead characterizes the problem through compatible contact structures/distributions.
+That, I think, is the technically correct place to stop before going further: we have established the restricted result analytically, while the completely general inverse problem has to be formulated on \(TQ\times\mathbb R\), not merely on \(TQ\).
