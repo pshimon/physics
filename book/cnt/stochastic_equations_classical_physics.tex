@@ -1,0 +1,512 @@
+% ============================================================
+% Stochastic Equations in Classical Physics
+% Book chapter. Compiles standalone with pdflatex.
+% To fold into a larger manuscript: drop the preamble/\begin{document}
+% lines and \input{} this file's body after \chapter{...}.
+% ============================================================
+\documentclass[11pt]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{remark}{Remark}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\kB}{k_{B}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+
+\title{Stochastic Equations in Classical Physics}
+\author{}
+\date{}
+
+\begin{document}
+
+\chapter{Stochastic Equations in Classical Physics}
+\label{ch:stochastic}
+
+\section{Determinism, ignorance, and the origin of noise}
+\label{sec:intro}
+
+Classical mechanics, in the form developed in the preceding chapters, is
+deterministic: given a complete set of initial conditions, Hamilton's
+equations (or Newton's law) fix the trajectory of a system for all time.
+This determinism is a property of the \emph{ideal world} of the theory --
+the mathematical model built from a Lagrangian or a Hamiltonian, a phase
+space, and an initial point in it. It is emphatically not a property that
+we can exploit in practice for most real systems, because the real world
+almost never hands us a closed, low-dimensional set of degrees of freedom.
+
+Consider a grain of pollen suspended in water. A complete Newtonian
+description would have to include the grain together with every one of the
+$\sim 10^{23}$ water molecules buffeting it. Such a description is exact,
+deterministic, and completely useless: we neither know the initial
+conditions of the water molecules nor care about their individual
+trajectories. What we want is an equation of motion for the grain alone,
+and there is no exact, closed equation of that kind -- the grain's dynamics
+depends on the full microstate of the fluid.
+
+Stochastic equations are the standard resolution of this impasse. We keep a
+small number of "slow" or "relevant" degrees of freedom (here, the position
+and velocity of the grain) and replace the influence of everything we have
+discarded by an effective random force. The word "random" needs a caveat
+that will recur throughout this chapter: the force is not random in the
+sense that it violates the underlying determinism of the real world. It is
+random in the sense that it is unpredictable \emph{to us}, given the
+information we have chosen to retain. A stochastic differential equation is
+an ideal-world object -- a specific, well-defined piece of mathematics --
+that is deliberately built to model our real-world ignorance of the
+eliminated degrees of freedom. This is a somewhat different maneuver from
+the ones we met when discussing Hertz's forceless mechanics or nonholonomic
+constraints, where the tension was between two competing ideal-world
+descriptions of the same real system. Here the tension is built into the
+method itself: we manufacture an ideal-world fiction (a random force with
+prescribed statistics) precisely because it lets us describe the real world
+better than a naive, exact, deterministic account would, given what we
+actually know. Whether this maneuver is applied correctly, and what happens
+when its idealizations are taken too literally, will be a recurring theme.
+
+\section{Brownian motion: from observation to atoms}
+\label{sec:brownian}
+
+The phenomenon that gave the subject its name was reported by the botanist
+Robert Brown in 1827: pollen grains suspended in water perform an
+incessant, irregular jiggling motion, visible under a microscope, that
+never damps out. Brown ruled out a biological origin (the same motion is
+seen with inorganic dust), but no dynamical explanation was available for
+decades.
+
+The explanation, when it came in 1905 from Einstein (and independently
+around the same time from Smoluchowski), was statistical rather than
+dynamical in the traditional sense. Einstein did not attempt to write an
+equation of motion for the grain. Instead he asked for the probability
+$P(x,t)$ that a grain starting at the origin is found near $x$ after time
+$t$, given that it receives a huge number of independent, uncorrelated
+molecular impacts per unit time. A short argument based on the
+Chapman--Kolmogorov idea (the displacement over $[0,t+\tau]$ is the
+independent sum of the displacements over $[0,t]$ and $[t,t+\tau]$) shows
+that $P$ must obey the diffusion equation
+\begin{equation}
+\frac{\partial P}{\partial t} = D\,\frac{\partial^2 P}{\partial x^2},
+\label{eq:diffusion}
+\end{equation}
+with diffusion constant $D$ related to the microscopic friction the grain
+experiences through the \emph{Stokes--Einstein relation}
+\begin{equation}
+D = \frac{\kB T}{6\pi \eta a},
+\label{eq:stokes-einstein}
+\end{equation}
+where $a$ is the grain radius, $\eta$ the fluid viscosity, $T$ the
+temperature, and $\kB$ Boltzmann's constant. Equation~\eqref{eq:diffusion}
+predicts $\avg{x^2(t)} = 2Dt$: the mean-square displacement grows
+\emph{linearly} in time, not as $t^2$ as it would for free ballistic
+motion. This distinctive signature was confirmed quantitatively by Jean
+Perrin's experiments (1908--1909), which used the measured value of $D$ to
+extract Avogadro's number and are usually credited with settling, for the
+working physics community, the reality of atoms and molecules.
+
+\begin{remark}
+It is worth pausing on what kind of result this is. A piece of
+ideal-world mathematics -- a linear parabolic PDE describing an idealized
+random walk -- was used to answer a real-world existence question ("do
+atoms exist?") that had resisted direct attack. The stochastic model here
+is not merely a convenient approximation; its quantitative match to
+experiment is what turned atomism from a useful bookkeeping device into
+an empirically established fact. Few ideal-world constructions in this
+book carry that much real-world weight.
+\end{remark}
+
+\section{The Langevin equation}
+\label{sec:langevin}
+
+Einstein's argument works directly with the probability density and never
+mentions a trajectory or a force. In 1908 Langevin gave an equivalent, more
+mechanical formulation that has become the standard starting point for
+stochastic dynamics. Newton's second law for the grain is written as
+\begin{equation}
+m\dot v(t) = -\gamma v(t) + \xi(t),
+\label{eq:langevin}
+\end{equation}
+where $-\gamma v$ is the ordinary Stokes viscous drag and $\xi(t)$ is a
+\emph{random force} representing the net effect of molecular collisions,
+with statistics
+\begin{equation}
+\avg{\xi(t)} = 0, \qquad \avg{\xi(t)\xi(t')} = 2B\,\delta(t-t').
+\label{eq:noise-stats}
+\end{equation}
+The force is taken to be Gaussian, zero-mean, and $\delta$-correlated in
+time ("white noise"): its value at time $t$ is uncorrelated with its value
+at any other time $t'\neq t$. This is already an idealization, discussed
+further in Section~\ref{sec:white-noise}, since the true molecular force
+has a correlation time set by the duration of a collision, many orders of
+magnitude shorter than any time scale of interest for the grain -- short
+enough that replacing it by zero is an excellent approximation, but not
+exactly zero.
+
+Equation~\eqref{eq:langevin} is linear and can be solved by the integrating
+factor $e^{\gamma t/m}$:
+\begin{equation}
+v(t) = v(0)\,e^{-\gamma t/m} + \frac{1}{m}\int_0^t e^{-\gamma (t-s)/m}\,\xi(s)\,\dd s.
+\label{eq:v-solution}
+\end{equation}
+Squaring, averaging over the noise, and using \eqref{eq:noise-stats} gives
+\begin{equation}
+\avg{v^2(t)} = \avg{v^2(0)}\,e^{-2\gamma t/m}
++ \frac{B}{m\gamma}\Bigl(1 - e^{-2\gamma t/m}\Bigr).
+\label{eq:v2-t}
+\end{equation}
+As $t\to\infty$ the grain must reach thermal equilibrium with the fluid, so
+equipartition requires $\avg{v^2}_{\rm eq} = \kB T/m$. Comparing with the
+$t\to\infty$ limit of \eqref{eq:v2-t} fixes the noise strength:
+\begin{equation}
+B = \gamma \kB T
+\qquad\Longrightarrow\qquad
+\avg{\xi(t)\xi(t')} = 2\gamma \kB T\,\delta(t-t').
+\label{eq:fdt-langevin}
+\end{equation}
+This is our first encounter with the \emph{fluctuation-dissipation
+theorem}: the strength of the random force is not a free parameter but is
+tied to the friction coefficient $\gamma$ and the temperature $T$. We
+return to the general statement in Section~\ref{sec:fdt}.
+
+Integrating \eqref{eq:v-solution} once more and computing the mean-square
+displacement reproduces Einstein's diffusive law
+$\avg{x^2(t)}\to 2Dt$ for $t \gg m/\gamma$, with
+$D = \kB T/\gamma$, consistent with \eqref{eq:stokes-einstein} once
+$\gamma = 6\pi\eta a$ (Stokes drag) is inserted. The Langevin and Einstein
+pictures are two routes -- one following a (stochastic) trajectory, the
+other following a probability density -- to the same physical content;
+Section~\ref{sec:fpe} makes the equivalence precise.
+
+\section{White noise as an idealization}
+\label{sec:white-noise}
+
+The object $\xi(t)$ deserves scrutiny, because it is more singular than it
+looks. A stationary Gaussian process with $\avg{\xi(t)\xi(t')} =
+2\gamma\kB T\,\delta(t-t')$ has, formally, infinite variance at each
+instant ($\delta(0) = \infty$) and is nowhere continuous, let alone
+differentiable. No real physical force behaves this way: any actual
+process has some finite correlation time $\tau_c$ (for molecular
+collisions, of order $10^{-13}\,\mathrm{s}$ or less), and
+$\avg{\xi(t)\xi(t')}$ is some narrow but smooth function of $t-t'$, not a
+literal $\delta$-function. White noise is the $\tau_c \to 0$ limit of this
+family of processes -- a genuine \emph{singular limit} in the same sense
+encountered earlier in this book when relating classical mechanics to its
+parent theories: the limiting object (a $\delta$-correlated process) has
+qualitatively different properties (non-differentiable sample paths, an
+ambiguity discussed in Section~\ref{sec:ito}) from every process in the
+family that approaches it.
+
+The right way to think about $\xi(t)$ is not as a function at all but as a
+random \emph{distribution} (generalized function): it is defined by the
+values of its integrals $\int f(t)\xi(t)\,\dd t$ against smooth test
+functions $f$, and only these integrated quantities are guaranteed to be
+finite, ordinary random variables. This is formalized through the
+\emph{Wiener process} $W(t)$, defined as the Gaussian process with
+\begin{equation}
+W(0)=0,\qquad \avg{W(t)} = 0, \qquad \avg{\bigl(W(t)-W(s)\bigr)^2} = |t-s|,
+\end{equation}
+and independent increments. $W(t)$ is continuous but almost surely
+nowhere differentiable; $\xi(t)$ is the (nonexistent, but formally useful)
+derivative $\dd W/\dd t$. Equation~\eqref{eq:langevin} is more properly
+written as the \emph{stochastic differential equation} (SDE)
+\begin{equation}
+m\,\dd v = -\gamma v\,\dd t + \sqrt{2\gamma \kB T}\;\dd W(t),
+\label{eq:sde-langevin}
+\end{equation}
+an integral equation in disguise: $v(t) - v(0) = \int_0^t(\ldots)\dd s +
+\sqrt{2\gamma\kB T}\bigl(W(t)-W(0)\bigr)$, with all the content in the last,
+perfectly well-defined stochastic integral.
+
+\section{The It\^o--Stratonovich ambiguity}
+\label{sec:ito}
+
+Equation~\eqref{eq:sde-langevin} is \emph{additive}: the noise term
+$\sqrt{2\gamma\kB T}\,\dd W$ does not multiply any function of $v$, so there
+is no subtlety in defining the corresponding stochastic integral. Trouble
+appears as soon as the noise couples to the state variable, as it does in
+countless applications (a diffusion coefficient that depends on position,
+multiplicative noise in population models, noise entering through a
+state-dependent coupling). Consider a general one-dimensional SDE
+\begin{equation}
+\dd x = a(x,t)\,\dd t + b(x,t)\,\dd W(t).
+\label{eq:general-sde}
+\end{equation}
+Because $W(t)$ has unbounded variation on every interval, the Riemann-sum
+definition of $\int b(x,t)\,\dd W$ depends on \emph{where in each
+subinterval} $b$ is evaluated -- a dependence that vanishes for ordinary,
+finite-variation integrals but survives here. Two conventions dominate the
+literature:
+\begin{itemize}[leftmargin=1.6em]
+\item \textbf{It\^o}: evaluate $b$ at the \emph{left} endpoint of each
+subinterval. This makes $b(x(t),t)$ statistically independent of the noise
+increment $\dd W(t)$ that follows it, which is convenient for probability
+theory (in particular, $\avg{f(x(t))\,\dd W(t)} = 0$ exactly) but means
+ordinary calculus (the chain rule) fails; it is replaced by It\^o's lemma,
+which carries an extra second-derivative term.
+\item \textbf{Stratonovich}: evaluate $b$ at the \emph{midpoint} of each
+subinterval. This convention obeys the ordinary chain rule, at the cost of
+$b(x(t),t)$ no longer being independent of the subsequent noise increment.
+\end{itemize}
+The two conventions give \emph{different} solutions $x(t)$ for the same
+formal equation \eqref{eq:general-sde} whenever $b$ depends on $x$. They are
+related by a well-known conversion formula: the Stratonovich equation
+$\dd x = a\,\dd t + b\circ \dd W$ is equivalent to the It\^o equation
+\begin{equation}
+\dd x = \left(a + \tfrac{1}{2} b\,\frac{\partial b}{\partial x}\right)\dd t + b\,\dd W.
+\label{eq:ito-strat}
+\end{equation}
+
+This is not a mere technical footnote; it is a physical question in
+disguise. Equation~\eqref{eq:general-sde} is, after all, itself an
+idealization -- the $\tau_c\to 0$ limit of a system driven by smooth,
+rapidly fluctuating \emph{colored} noise, exactly as in
+Section~\ref{sec:white-noise}. The Wong--Zakai theorem answers the
+question of which convention is "physical": if $\xi(t)$ is approximated by
+a family of smooth Gaussian processes with correlation time $\tau_c$, and
+one solves the resulting \emph{ordinary} differential equation (well
+defined, since the noise is smooth) and then takes $\tau_c\to 0$, the
+limit converges to the \textbf{Stratonovich} solution, not the It\^o one.
+Physical multiplicative noise -- noise that is really a $\tau_c\to0$ limit
+of some smooth real-world process -- should therefore be interpreted in
+the Stratonovich sense; the It\^o convention is best reserved for
+situations, common in finance and in discrete-time models of chance, where
+the "left-endpoint, no look-ahead" property is itself part of the
+real-world content being modeled, rather than an artifact of the noise's
+idealized whiteness.
+
+\begin{remark}
+The It\^o--Stratonovich ambiguity is a clean illustration of a hazard
+specific to this chapter's method. Ordinary differential equations, once
+written down, have no such interpretational fork: the ideal-world object
+and its solution are unambiguous. The moment we idealize a real
+fluctuating force as literally $\delta$-correlated, we introduce a fork in
+the road that has no counterpart in the pre-limit, physically honest
+description. Failing to ask which branch corresponds to the real-world
+limit -- treating white noise as simply "there" rather than as a stand-in
+for a limit of smooth processes -- is exactly the kind of real-world/
+ideal-world conflation this book keeps returning to, here in a
+comparatively elementary and very concrete form.
+\end{remark}
+
+\section{The Fokker--Planck equation}
+\label{sec:fpe}
+
+Einstein's diffusion equation and Langevin's stochastic trajectory are two
+sides of the same coin; the general bridge between an SDE and a PDE for
+its probability density is the \emph{Fokker--Planck equation} (also called
+the forward Kolmogorov equation). For the general one-dimensional It\^o
+SDE \eqref{eq:general-sde}, the probability density $P(x,t)$ of $x(t)$
+obeys
+\begin{equation}
+\frac{\partial P}{\partial t}
+= -\frac{\partial}{\partial x}\bigl[a(x,t)P\bigr]
++ \frac{1}{2}\frac{\partial^2}{\partial x^2}\bigl[b(x,t)^2 P\bigr].
+\label{eq:fpe-general}
+\end{equation}
+This can be derived either directly from the Chapman--Kolmogorov equation
+for the transition probability (a short-time expansion known as the
+Kramers--Moyal expansion, truncated at second order because the noise is
+Gaussian) or, equivalently, from It\^o's lemma applied to an arbitrary
+test function together with an integration by parts. The first term on the
+right, the \emph{drift} term, transports probability along the
+deterministic part of the flow; the second, the \emph{diffusion} term,
+spreads it out.
+
+Two special cases connect back to what we have already derived:
+\begin{itemize}[leftmargin=1.6em]
+\item Applying \eqref{eq:fpe-general} to the velocity SDE
+\eqref{eq:sde-langevin} ($a = -\gamma v/m$, $b^2 = 2\gamma\kB T/m^2$) gives
+the \emph{Klein--Kramers equation for the velocity distribution},
+\begin{equation}
+\frac{\partial P(v,t)}{\partial t}
+= \frac{\gamma}{m}\frac{\partial}{\partial v}\bigl[vP\bigr]
++ \frac{\gamma \kB T}{m^2}\frac{\partial^2 P}{\partial v^2},
+\label{eq:ou-fpe}
+\end{equation}
+whose stationary solution is the Maxwell--Boltzmann distribution
+$P_{\rm eq}(v)\propto \exp(-mv^2/2\kB T)$, and whose full time-dependent
+solution (for a Gaussian initial condition) defines the
+\emph{Ornstein--Uhlenbeck process} -- historically the first stochastic
+process, after the Wiener process itself, to be solved in closed form
+(Uhlenbeck and Ornstein, 1930).
+\item In the strongly damped (\emph{overdamped} or \emph{Smoluchowski})
+regime, appropriate whenever $\gamma/m$ is much faster than any other rate
+in the problem, inertia can be dropped from \eqref{eq:langevin} entirely
+($m\dot v \to 0$), leaving $\gamma \dot x = F(x) + \xi(t)$ for a particle in
+an external force $F(x) = -U'(x)$. The corresponding Fokker--Planck
+equation for the position alone is the \emph{Smoluchowski equation}
+\begin{equation}
+\frac{\partial P(x,t)}{\partial t}
+= \frac{\partial}{\partial x}\!\left[\frac{U'(x)}{\gamma}P\right]
++ D\,\frac{\partial^2 P}{\partial x^2}, \qquad D = \frac{\kB T}{\gamma},
+\label{eq:smoluchowski}
+\end{equation}
+which reduces to Einstein's bare diffusion equation \eqref{eq:diffusion}
+when $U\equiv 0$, and is the workhorse equation for Brownian motion in a
+potential (Section~\ref{sec:kramers}).
+\end{itemize}
+
+\section{The fluctuation--dissipation theorem}
+\label{sec:fdt}
+
+The relation $B = \gamma \kB T$ found in \eqref{eq:fdt-langevin} is a
+special case of a much more general statement. Whenever a system is
+coupled linearly to a large thermal reservoir, the reservoir does two
+things at once: it damps the system's motion (dissipation, characterized
+by a friction kernel or, in the memoryless case, a single coefficient
+$\gamma$) and it drives the system with a fluctuating force (characterized
+by a noise spectrum). These are not independent effects with independently
+adjustable strengths -- both arise from the same microscopic coupling to
+the same reservoir at the same temperature, and the \emph{fluctuation-
+dissipation theorem} states that the noise spectrum and the dissipation
+kernel are related by a universal formula fixed by $T$ alone. In the
+simplest, memoryless (Markovian) case this collapses to
+\eqref{eq:fdt-langevin}; more generally, for a friction kernel
+$\gamma(t-t')$ (memory friction), the theorem reads
+\begin{equation}
+\avg{\xi(t)\xi(t')} = \kB T\,\gamma(t-t'),
+\end{equation}
+with the memoryless Langevin equation recovered when $\gamma(t-t') =
+2\gamma\,\delta(t-t')$. The same relation, in its electrical-circuit guise,
+is the origin of Johnson--Nyquist noise: a resistor of resistance $R$ at
+temperature $T$ develops a fluctuating open-circuit voltage with spectral
+density $4\kB T R$, exactly as required for the resistor's Joule
+dissipation and its thermal voltage noise to be two faces of one coupling
+to the electromagnetic and lattice degrees of freedom it is built from.
+
+\begin{remark}
+The fluctuation-dissipation theorem is what keeps the ideal-world
+construction of Section~\ref{sec:langevin} honest. Nothing in the bare
+form of the Langevin equation \eqref{eq:langevin} forces $B$ and $\gamma$
+to be related; one could simply posit \emph{some} friction and \emph{some}
+independent noise strength, and the mathematics of Sections
+\ref{sec:white-noise}--\ref{sec:fpe} would go through unchanged. Doing so,
+however, would in general drive the stationary distribution away from the
+Boltzmann distribution $e^{-U/\kB T}$, in violation of the second law: an
+uncoupled, freely chosen $(\gamma,B)$ pair generically describes a system
+being pumped by its own noise into a non-equilibrium steady state,
+extracting or dumping work for nothing. The fluctuation-dissipation
+relation is precisely the extra real-world input -- equilibrium
+statistical mechanics -- needed to keep the stochastic ideal-world model
+from describing a thermodynamically impossible engine. It is a strong
+example of a constraint that does not follow from the internal mathematics
+of the model at all, and must be imported from outside it.
+\end{remark}
+
+\section{Master equations for discrete states}
+\label{sec:master}
+
+Not every classical stochastic system is naturally described by a
+continuous variable diffusing under noise. Radioactive decay, chemical
+reaction kinetics, and population or queueing models are more naturally
+posed on a discrete (often countable) set of states $n$, with transitions
+occurring as instantaneous jumps at random times. The governing equation
+is the \emph{master equation},
+\begin{equation}
+\frac{\dd P_n(t)}{\dd t} = \sum_{m\neq n}\Bigl[W(n\mid m)\,P_m(t) - W(m\mid n)\,P_n(t)\Bigr],
+\label{eq:master}
+\end{equation}
+where $W(n\mid m)$ is the transition rate from state $m$ to state $n$.
+Equation~\eqref{eq:master} is a direct statement of probability
+conservation applied to gain and loss terms, and it is Markovian in the
+same sense as the Fokker--Planck equation: the future depends on the
+present state alone, not on the history that produced it.
+
+The master equation and the Fokker--Planck equation are not competing
+descriptions but limits of a single, more general framework (the full
+Kramers--Moyal expansion of the Chapman--Kolmogorov equation). When the
+individual jumps are small compared to the scale over which $P$ varies --
+as happens, for instance, for a chemical system with a very large number
+of molecules, where each reaction event changes the population by a
+single, comparatively negligible unit -- the master equation's sum can be
+Taylor-expanded in the jump size, reproducing a Fokker--Planck equation
+with drift and diffusion coefficients built from the first two jump
+moments (the van Kampen system-size expansion). Truncating consistently
+at second order is what turns a fundamentally discrete, jump-driven
+process into an effectively continuous diffusion; higher-order terms,
+dropped in this limit, are the trace of the discreteness left behind.
+
+\section{Kramers' escape problem}
+\label{sec:kramers}
+
+A classic application that draws on nearly everything above is the rate at
+which thermal noise drives a particle out of a metastable potential well.
+Let $U(x)$ have a local minimum at $x_a$ and a barrier at $x_b > x_a$ of
+height $\Delta U = U(x_b) - U(x_a) \gg \kB T$, and let the particle obey
+the overdamped Langevin equation of Section~\ref{sec:fpe}. In the absence
+of noise the particle sits at $x_a$ forever; with noise, it occasionally
+receives a large enough kick to cross the barrier, and the mean time
+$\tau$ spent in the well before escaping can be computed from the
+stationary Smoluchowski equation \eqref{eq:smoluchowski} with an absorbing
+boundary placed just past $x_b$ (a standard \emph{mean first-passage time}
+calculation). The result, worked out by Kramers in 1940, is an
+Arrhenius-type law
+\begin{equation}
+\frac{1}{\tau} \;\approx\; \frac{\sqrt{U''(x_a)\,|U''(x_b)|}}{2\pi\gamma}\;
+e^{-\Delta U/\kB T},
+\label{eq:kramers-rate}
+\end{equation}
+valid in the high-friction regime, with a friction-independent prefactor
+correction in the low-friction (energy-diffusion-limited) regime that
+Kramers also worked out. The exponential factor $e^{-\Delta U/\kB T}$ is
+the familiar Boltzmann-weighted Arrhenius law of chemical kinetics; what
+the stochastic calculation supplies, beyond phenomenological chemistry, is
+the prefactor and its explicit dependence on the local curvature of the
+potential and on the friction $\gamma$ -- information invisible to
+equilibrium thermodynamics alone, since escape is fundamentally a dynamical,
+not merely a thermodynamic, question. Kramers' problem remains the
+standard reference point for noise-activated transitions across
+chemical reaction rate theory, nucleation, and the switching of bistable
+systems generally.
+
+\section{Closing remarks: reading the dictionary both ways}
+\label{sec:closing}
+
+It is worth collecting, in one place, the real-world/ideal-world
+correspondences this chapter has relied on, since they run in a direction
+slightly different from the ones met earlier in this book.
+
+\begin{itemize}[leftmargin=1.6em]
+\item In the chapters on classical mechanics proper, paradoxes typically
+arose because an ideal-world construction (a coordinate system, a
+constraint, a limiting procedure) was mistaken for -- or failed to
+correspond to -- some feature of the real system it was meant to describe.
+The direction of the error was: too much confidence that the mathematics
+faithfully tracked the physics.
+\item Here the situation is reversed. We \emph{start} from the acknowledged
+fact that we cannot track the real system in full (too many degrees of
+freedom, no access to their initial conditions) and \emph{deliberately}
+introduce an ideal-world fiction -- a $\delta$-correlated random force,
+a Wiener process, white noise -- that has no direct real-world referent at
+all. The risk is not overconfidence in the mathematics but the opposite:
+forgetting that the fiction is a fiction, and that it is licensed only as
+a limit of an honest, non-singular, real-world process (colored noise
+with a small but nonzero correlation time). Section~\ref{sec:ito} showed
+concretely what goes wrong when this is forgotten: the naive ideal-world
+object (white noise multiplying a state-dependent coefficient) admits two
+inequivalent completions, and only one of them, the Stratonovich one, is
+the actual limit of the real-world family that white noise is supposed to
+stand in for.
+\item The fluctuation-dissipation theorem (Section~\ref{sec:fdt}) is the
+clearest single illustration of the discipline this requires: the
+ideal-world model (friction coefficient here, noise amplitude there) has
+free parameters that look independent on the page but are not free at all
+once the model is required to reproduce a real-world constraint
+(thermal equilibrium, the second law) that has no analogue inside the
+stochastic differential equation itself.
+\end{itemize}
+
+Stochastic equations, in short, are not a retreat from the deterministic,
+mechanistic picture of the earlier chapters but its natural extension: a
+disciplined way of being honest about what we do not track, provided we
+remember, at each of the junctures above, that the discipline is imported
+from the real world and does not follow automatically from the ideal-world
+mathematics alone.
+
+\end{document}
