@@ -1,0 +1,200 @@
+\chapter{Claude}
+Analyzing the discrete dispersion relation's long-wavelength limit.
+\section{Constant Parameters}
+
+Take a 1D chain of $N$ identical masses $m$, spaced a distance $a$ apart at
+equilibrium, 
+each connected to its neighbors by identical springs of stiffness $k$.
+Let $ u_n(t) $ be the displacement of the n-th mass from its equilibrium 
+position.
+
+Newton's law for each mass:
+\begin{equation}
+   \label {neq}
+    m \ddot u_n=k(u_{n+1}-u_n)-k(u_n-u_{n-1}=k(u_{n+1}-2 u_{n}+u_{n-1})
+\end{equation}
+This is the discrete wave equation — a set of coupled ODEs, one per mass, with
+a second-difference operator in the spatial index $n$ playing the role that 
+$ \partial^2_x $ will play in the continuum.
+
+The discrete Lagrangian
+\begin{equation}
+   \label {dlag}
+    L=\Sigma_n \left[\frac{m}{2}{\dot u}_n^2-\frac{k}{2}(u_{n+1}-u_n)^2 \right]
+\end{equation}
+Applying the Euler–Lagrange equation for each coordinate 
+\begin{equation}
+   \label {dELe}
+    \frac{d}{d t}\pd{L}{\dot {u_n}}-\pd{L}{u_n}=0
+\end{equation}
+gives back Newton's law \eqref{neq}.
+Taking the continuum limit $ a \to 0 $ with the total length $Na$ fixed,
+and promoting the discrete label to a continuous field: $ u_n(t) \to u(x,t) $
+with $x=na$ we get
+\begin{equation}
+   \label {ne1}
+    m u_{tt}=k a^2 u_{xx} + \mathcal{O}(a^4)
+\end{equation}
+Now take $a \to 0$ while holding two combinations finite:
+\begin{itemize}
+    \item $\mu=m/a$ (mass per unit length)
+       \item $ Y=ka $ (a tension-like constant)
+\end{itemize}
+we get 
+\begin{equation}
+   \label {we}
+    \mu u_{tt}= Y u_{xx}
+\end{equation}
+which is exactly the wave equation with wave velocity 
+\begin{equation}
+   \label {wv}
+   c= \sqrt{Y/\mu} =a \sqrt{k/m}.
+\end{equation}
+\paragraph{The continuum Lagrangian (density)}
+Do the same limiting procedure directly on L \eqref{dlag} rather than on the 
+equation of motion — this is the cleaner and more instructive route.
+Rewrite \eqref{dlag} as
+\begin{equation}
+   \label {dlag1}
+    L=\Sigma_n a \left[\frac{m}{2 a}{\dot u}_n^2-\frac{ka}{2}(\frac{u_{n+1}-u_n}{a})^2 \right]
+\end{equation}
+and make limit $ a\to 0 $ as above.
+We got 
+\begin{equation}
+   \label {lag}
+    L=\int \mathcal{L} dx \quad \mathcal{L}(u,u_t,u_x)=\frac{\mu}{2}u_t^2-\frac{Y}{2}u_x^2
+\end{equation}
+This is the Lagrangian density that gives the wave equation. 
+
+Note that Euler–Lagrange equation for (field) action 
+\begin{equation}
+   \label {fac}
+   S=\int \mathcal{L}(u,u_t,u_x) dt dx
+\end{equation}
+becomes
+\begin{equation}
+   \label {ELe}
+    \partial_t \left(\pd{\mathcal{L}}{u_t)}\right)+ 
+    \partial_x \left(\pd{\mathcal{L}}{u_x)}\right)-
+    \pd{\mathcal{L}}{u)}
+\end{equation}
+and we get the same wave equation \eqref{we}.
+
+\paragraph{Why this limit is legitimate: the dispersion relation}
+It's worth checking when the continuum wave equation is a good approximation
+to the actual lattice, rather than just taking $a \to 0$ formally. 
+Plug a plane-wave ansatz 
+\begin{equation}
+   \label {anz}
+    u_n(t)=Ae^{i(qna-\omega t)}
+\end{equation}
+into the exact discrete equation \eqref{neq}
+and obtain  dispersion relation of the discrete chain 
+\begin{equation}
+   \label {dsol}
+    \omega(q)=2 \sqrt{k/m}|\sin(qa/2)|
+\end{equation}
+It's periodic in  (Brillouin zone) and nonlinear, 
+the lattice is dispersive.
+For long wavelengths $ qa \ll 1 $ 
+a linear dispersion relation, $ \omega=c q $ appears,
+which is exactly what the continuum wave equation \eqref{we} predicts.
+ So the wave equation is the leading long-wavelength behavior of the lattice;
+ it fails once the wavelength approaches the lattice spacing, where the group 
+ velocity $ d \omega /d q $ actually goes to zero at the zone boundary rather 
+ than staying at c.
+
+\section{Variable parameters}
+
+Keep the lattice spacing 
+a uniform, but now let the mass at each site and the stiffness of each spring vary with position: mass $m_n$ at site $n$,
+spring constant $k$ connecting sites $n$ and $n+1$.
+Newton's equation became:
+\begin{equation}
+   \label {neq1}
+    m_n \ddot u_n=k_n(u_{n+1}-u_n)-k_{n-1}(u_n-u_{n-1})
+\end{equation}
+and discrete Lagrangian:
+\begin{equation}
+   \label {dlag1}
+    L=\Sigma_n \left[\frac{m_n}{2}{\dot u}_n^2-\frac{k_n}{2}(u_{n+1}-u_n)^2 \right]
+\end{equation}
+
+Define the local mass density and stiffness density the same way as before, but now as functions of 
+$x$ rather than constants. So Lagrangian \eqref{dlag1} becomes:
+\begin{equation}
+   \label {flag}
+    L=\int \mathcal{L} dx \quad \mathcal{L}(u,u_t,u_x)=\frac{\mu(x)}{2}u_t^2-\frac{Y(x)}{2}u_x^2
+\end{equation}
+Apply the same field Euler-Lagrange equations \eqref{ELe} and
+get 
+\begin{equation}
+   \label {we1}
+    \mu(x) u_{tt}-\partial_x \left[Y(x) u_x \right]
+\end{equation} 
+which is equal to
+\begin{equation}
+   \label {we2}
+    \mu(x) u_{tt}=Y(x) u_{xx} + Y'(x)u_x
+\end{equation} 
+
+This is the Sturm–Liouville wave equation — the standard PDE for a non-uniform string, an inhomogeneous elastic rod, sound waves in a medium of varying density/bulk modulus, or light in a medium of varying refractive index (1D case). The extra term 
+$Y'(x)u_x$ is easy to lose if you try to shortcut the derivation by writing $Y(x)u_{xx}$  directly from the discrete equation without going through Lagrangian
+ --- it's a genuine physical effect (a stiffness gradient exerts a net force even on a wave with zero curvature at that point) and the Lagrangian route makes it impossible to accidentally drop.
+
+What's physically new
+\begin{enumerate}
+  \item  Local wave speed is now a function of position. A pulse doesn't just translate rigidly anymore — it distorts, and generically part of it reflects  (this is the continuum version of impedance mismatch — the same physics as light reflecting at an interface between media, or a wave partially bouncing off a mass defect in a chain).
+  \item  Energy is still locally conserved — momentum is not.
+  \item  Normal modes become a Sturm–Liouville eigenvalue problem.
+ This is the rigorous foundation for "normal modes of a non-uniform string/rod."
+  \item Slowly-varying limit eikonal approximation. This is the standard approximation used for seismic waves through the Earth, sound through the atmosphere, etc.
+\end{enumerate}
+\section{Non-uniform Spacing}
+There's a second, physically distinct way to introduce inhomogeneity: keep 
+$m,\ k$ constant but let the equilibrium spacing $a_n$ 
+  between sites vary with position (e.g., an unevenly-machined lattice). That's not equivalent to varying 
+$\mu(x),\ Y(x)$ at fixed spacing — it requires tracking a coordinate transformation from lattice index $n$ to physical position $x(n)$, and the continuum PDE picks up Jacobian factors ($dx/dn$) rather than appearing as coefficient functions multiplying $u_{xx}$ directly. It's the same idea used to go from a uniform mesh to curvilinear coordinates.
+
+The right way to handle this is to separate the index (which is always naturally uniform — it's just counting: $n=1,2,3,\ldots$) from the physical position. 
+Introduce: $\xi=na$ — a uniform reference coordinate, with constant step $a$ and $x(\xi)$ — a smooth, monotonic map giving the actual physical position of the site labeled $\xi$
+and $J(\xi)=dx/d \xi$ 
+ — the local stretch factor (Jacobian): where 
+J is large, sites are physically far apart; where 
+J is small, they're bunched together.
+The physical spacing near site $n$ is 
+\[\Delta x=x_{n+1}-x_n \approx J(\xi_n) a. \]
+
+The discrete Lagrangian \eqref{dlag} is unchanged 
+giving the same-looking equation of motion. 
+  Nothing about the discrete physics knows about the non-uniform spacing yet — that information is entirely encoded in how the index $n$ relates to physical position 
+$x$. This is the key conceptual point of the whole calculation.
+
+
+Step 1: take the continuum limit in $\xi$ exactly as above.
+Lagrangian is the same as \eqref{lag}.
+ This is the whole point of using $\xi$: relative to the reference coordinate, the chain looks perfectly uniform. All the non-uniformity is hiding in the map $x(\xi)$, not yet visible.
+
+Step 2: convert to the physical coordinate $x$ — the Jacobian appears. 
+We get the same Lagrangian \eqref{flag} but now
+\begin{equation}
+   \label {muY}
+    \mu(x)=\frac{m}{a J(x)} \quad Y(x)=k a J(x)
+\end{equation}
+
+\paragraph{The distinguishing signature of pure geometric non-uniformity}
+The product \[\mu(x) Y(x)=m k=\text{Constant}\]
+\emph{This is the key qualitative difference from the general 
+case discussed earlier.} Geometric non-uniformity is a strictly one-parameter-function subfamily of the general Sturm–Liouville problem.
+
+\paragraph{Physical interpretation}
+\begin{description}
+    \item [Local wave speed:] $c=c_0 J(x)$ 
+The wave moves faster wherever the lattice is more spread out — sensible, since a "hop" between neighboring identical masses/springs covers more physical ground per unit time there.  
+    \item [Reflection from pure geometry:] Even though every mass and every spring is physically identical, a wave will partially reflect wherever $J(x)$ changes.
+    \item [Numerical relevance:] This is precisely the calculation underlying finite-difference/finite-element wave solvers on non-uniform (graded) meshes.
+    \item [Curvilinear-coordinates viewpoint:] $J(x)$  is playing exactly the role of an inverse-metric component. That's the natural next generalization if it's useful — moving from a fixed background reparametrization 
+ to a genuine spacetime metric.
+\end{description}
+
+

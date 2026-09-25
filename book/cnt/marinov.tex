@@ -1,0 +1,877 @@
+
+\section{Hamilton--Jacobi Theory, Lagrangian Manifolds, and Phase-Space Generating Functions}
+
+\subsection{Three different meanings of ``the action''}
+
+It is useful to distinguish three objects which are often denoted by the same
+letter and are sometimes treated as if they were different versions of one
+and the same action.
+
+First, the Hamilton principal function is a two-point object,
+\begin{equation}
+S(q,t;q_0,t_0)
+==============
+
+\int_{t_0}^{t} L(q,\dot q,\tau),d\tau ,
+\end{equation}
+where the trajectory is required to connect two prescribed configuration-space
+points.  It is therefore associated with a boundary-value problem.
+
+Second, one may consider a Hamilton--Jacobi function
+\begin{equation}
+S(q,t)
+\end{equation}
+whose gradient defines a Lagrangian graph
+\begin{equation}
+p=\frac{\partial S}{\partial q}.
+\end{equation}
+The Hamilton--Jacobi equation for
+\begin{equation}
+H(q,p,t)
+\end{equation}
+is
+\begin{equation}
+\frac{\partial S}{\partial t}
++
+H\left(q,\frac{\partial S}{\partial q},t\right)=0.
+\label{HJ}
+\end{equation}
+
+Third, Marinov introduces a function
+\begin{equation}
+\Phi(z,t),\qquad z=(q,p),
+\end{equation}
+defined directly on phase space.  It generates the finite Hamiltonian
+canonical transformation rather than a particular Lagrangian graph in
+configuration space.  Marinov's basic construction starts from the phase-space
+Hamilton equations and introduces the phase action through an implicit
+relation between the initial point, the final point, and their midpoint.
+The transformation generated in this way is canonical for arbitrary
+\(\Phi\). \cite{Marinov1979}
+
+These three objects should therefore not be regarded as interchangeable.
+They correspond to three increasingly less specialized descriptions of the
+same classical dynamics.
+
+\subsection{The ordinary Hamilton--Jacobi representation}
+
+Consider, for definiteness,
+\begin{equation}
+H(q,p,t)=\frac{p^2}{2m}+V(q,t).
+\end{equation}
+Equation~\eqref{HJ} becomes
+\begin{equation}
+S_t+\frac{1}{2m}(\nabla S)^2+V=0.
+\end{equation}
+The momentum and velocity fields are
+\begin{equation}
+p=\nabla S,
+\qquad
+v=\frac{1}{m}\nabla S.
+\label{gradientvelocity}
+\end{equation}
+Consequently,
+\begin{equation}
+\nabla\times v=0
+\label{irrotational}
+\end{equation}
+wherever \(S\) is a smooth single-valued function.
+
+This condition is sometimes hidden by the standard presentation of the
+Hamilton--Jacobi equation.  It means that a single scalar Hamilton--Jacobi
+function cannot represent an arbitrary configuration-space velocity field.
+The restriction is not a property of Hamiltonian mechanics itself.  It is a
+condition for representing the relevant phase-space dynamics as the graph
+\begin{equation}
+L_t={(q,p):p=\nabla S(q,t)}
+\end{equation}
+of an exact one-form over configuration space.
+
+In differential-geometric language, the canonical one-form
+\begin{equation}
+\theta=p_i,dq^i
+\end{equation}
+restricted to a Lagrangian manifold \(L\) is locally closed.  A Hamilton--Jacobi
+function exists when this restricted one-form can locally be written as
+\begin{equation}
+\theta|_L=dS.
+\end{equation}
+Thus the HJ function is a local potential for the canonical one-form on the
+Lagrangian manifold.
+
+The obstruction is therefore not fundamentally the differential equation
+\eqref{HJ}.  It is the possibility of representing the relevant Lagrangian
+manifold globally as an exact graph over \(Q\).
+
+\subsection{Hamiltonian flow is more fundamental than its HJ representation}
+
+The Hamilton equations define a flow
+\begin{equation}
+\phi_t:T^*Q\longrightarrow T^*Q,
+\end{equation}
+\begin{equation}
+x(t)=\phi_t(x_0).
+\end{equation}
+For a regular Hamiltonian this flow is symplectic,
+\begin{equation}
+\phi_t^*\omega=\omega.
+\end{equation}
+
+There is no requirement here that the motion be represented by
+\begin{equation}
+p=\nabla S(q,t).
+\end{equation}
+Nor is there any requirement that a projection of the phase-space flow onto
+configuration space be nonsingular.
+
+This gives a useful hierarchy:
+\begin{equation}
+\boxed{
+\text{Hamiltonian flow}
+;\longrightarrow;
+\text{Lagrangian manifold}
+;\longrightarrow;
+\text{configuration-space graph}
+;\longrightarrow;
+\text{Hamilton--Jacobi function}.
+}
+\label{hierarchy}
+\end{equation}
+
+Every step to the right introduces additional representational assumptions.
+
+\subsection{Caustics as failures of projection}
+
+Let \(L_0\subset T^*Q\) be an initial Lagrangian manifold and let
+\begin{equation}
+L_t=\phi_t(L_0).
+\end{equation}
+Since \(\phi_t\) is a diffeomorphism, \(L_t\) remains a smooth manifold as long
+as the Hamiltonian flow itself remains regular.
+
+A caustic occurs when the projection
+\begin{equation}
+\pi_Q:L_t\longrightarrow Q
+\end{equation}
+fails to be locally invertible.  In local coordinates this means that the
+appropriate Jacobian vanishes,
+\begin{equation}
+\det\left(
+\frac{\partial q}{\partial\alpha}
+\right)=0,
+\label{projectioncaustic}
+\end{equation}
+where \(\alpha\) labels the trajectories on \(L_0\).
+
+Thus
+\begin{equation}
+\boxed{
+\text{caustic}
+==============
+
+\text{singularity of a projection},
+}
+\end{equation}
+not necessarily a singularity of the Hamiltonian flow.
+
+This distinction is particularly important in the interpretation of
+Hamilton's principal function.
+
+\subsection{The harmonic oscillator: configuration-space caustics}
+
+Consider
+\begin{equation}
+H=\frac{p^2}{2m}
++\frac12m\omega^2q^2.
+\end{equation}
+The phase-space evolution is
+\begin{equation}
+\begin{pmatrix}
+q_t\p_t
+\end{pmatrix}
+=============
+
+R(t)
+\begin{pmatrix}
+q_0\p_0
+\end{pmatrix},
+\end{equation}
+where
+\begin{equation}
+R(t)=
+\begin{pmatrix}
+\cos\omega t&
+\dfrac{\sin\omega t}{m\omega}[2mm]
+-m\omega\sin\omega t&
+\cos\omega t
+\end{pmatrix}.
+\label{oscillatorR}
+\end{equation}
+The matrix satisfies
+\begin{equation}
+\det R(t)=1
+\end{equation}
+for every \(t\).  The phase-space dynamics is therefore completely regular.
+
+The configuration-space solution is
+\begin{equation}
+q_t=q_0\cos\omega t
++\frac{p_0}{m\omega}\sin\omega t.
+\end{equation}
+For fixed \(q_0\),
+\begin{equation}
+\frac{\partial q_t}{\partial p_0}
+=================================
+
+\frac{\sin\omega t}{m\omega}.
+\end{equation}
+Consequently the configuration-space projection becomes singular at
+\begin{equation}
+\omega t=n\pi.
+\label{oscconfigcaustic}
+\end{equation}
+
+At the first such nontrivial time,
+\begin{equation}
+t=\frac{\pi}{\omega},
+\end{equation}
+one has
+\begin{equation}
+R=-I,
+\end{equation}
+and therefore
+\begin{equation}
+q_t=-q_0,\qquad p_t=-p_0.
+\end{equation}
+The Hamiltonian flow is perfectly regular, but the final position is
+independent of the initial momentum:
+\begin{equation}
+q_t=-q_0.
+\end{equation}
+Thus infinitely many phase-space trajectories with the same \(q_0\) arrive at
+the same configuration-space point.
+
+This is the precise origin of the singularity of the ordinary two-point
+action.
+
+Indeed,
+\begin{equation}
+S(q,t;q_0)
+==========
+
+\frac{m\omega}{2\sin\omega t}
+\left[
+(q^2+q_0^2)\cos\omega t-2qq_0
+\right],
+\label{oscS}
+\end{equation}
+which becomes singular when
+\begin{equation}
+\sin\omega t=0.
+\end{equation}
+
+Nothing singular has happened to the classical dynamics.  The singularity
+belongs to the attempt to represent the dynamics by a configuration-space
+two-point function.
+
+\subsection{Marinov's phase action}
+
+Marinov instead introduces
+\begin{equation}
+\Phi(z,t),\qquad z=(q,p),
+\end{equation}
+and defines it through a midpoint relation between the initial and final
+phase-space points.  The resulting transformation is canonical, and the
+phase action obeys a first-order Cauchy problem with
+\begin{equation}
+\Phi(z,0)=0.
+\end{equation}
+Marinov emphasizes precisely this difference from the ordinary Hamilton
+principal function: the phase action is a phase-space function and is obtained
+from a Cauchy problem rather than from a configuration-space two-point
+boundary problem. \cite{Marinov1979}
+
+For quadratic Hamiltonians, if
+\begin{equation}
+R(t)=\exp(tK)
+\end{equation}
+is the linear symplectic evolution matrix, Marinov obtains
+\begin{equation}
+B(t)=2[R(t)-I][R(t)+I]^{-1},
+\label{Cayley}
+\end{equation}
+and
+\begin{equation}
+\Phi(z,t)=\frac12 z^T B(t)z
+\end{equation}
+up to his convention for the quadratic form. \cite{Marinov1979}
+
+For the isotropic oscillator this gives
+\begin{equation}
+\Phi(z,t)
+=========
+
+z^2\tan\frac{\omega t}{2},
+\label{oscPhi}
+\end{equation}
+again in Marinov's normalized phase-space notation. \cite{Marinov1979}
+
+The important observation is that \(\Phi\) has a different singularity from
+the ordinary HJ action.
+
+\subsection{The Marinov singularity}
+
+Equation~\eqref{Cayley} is a Cayley transform.  It fails whenever
+\begin{equation}
+\det(I+R)=0.
+\label{centrecaustic}
+\end{equation}
+Equivalently, \(R\) has an eigenvalue
+\begin{equation}
+\lambda=-1.
+\end{equation}
+
+For the oscillator,
+\begin{equation}
+R=-I
+\end{equation}
+at
+\begin{equation}
+\omega t=(2n+1)\pi,
+\end{equation}
+and consequently
+\begin{equation}
+\tan\frac{\omega t}{2}
+\end{equation}
+diverges.
+
+This is a crucial qualification to the statement that the phase action is
+``caustic-free.''  The phase-space flow itself is regular, but the particular
+generating-function representation \(\Phi\) is not globally regular.
+
+Thus there are already two distinct singularity conditions:
+\begin{align}
+\det\frac{\partial q_t}{\partial p_0}&=0,
+&&\text{configuration-space caustic},\
+\det(I+R)&=0,
+&&\text{centre/Marinov generating-function caustic}.
+\end{align}
+
+They need not coincide in a general system.
+
+\subsection{Free motion}
+
+The free particle makes the contrast particularly transparent.  With
+\begin{equation}
+H=\frac{p^2}{2m},
+\end{equation}
+the flow is
+\begin{equation}
+R(t)=
+\begin{pmatrix}
+1&t/m\
+0&1
+\end{pmatrix}.
+\end{equation}
+The configuration-space projection satisfies
+\begin{equation}
+\frac{\partial q_t}{\partial p_0}
+=================================
+
+\frac{t}{m},
+\end{equation}
+which is nonzero for \(t\neq0\).
+
+The Marinov Cayley matrix is also nonsingular because
+\begin{equation}
+\det(I+R)=4.
+\end{equation}
+Marinov obtains the particularly simple result
+\begin{equation}
+\Phi(z,t)=tH(z).
+\label{freePhi}
+\end{equation}
+\cite{Marinov1979}
+
+Thus free motion has neither the configuration-space caustic nor the
+centre-generating-function caustic at finite nonzero time.
+
+\subsection{The two different projections in the oscillator}
+
+The oscillator permits the distinction to be displayed explicitly:
+\begin{center}
+\begin{tabular}{c|c}
+\hline
+Representation & Singular condition\
+\hline
+Configuration-space action \(S(q,t;q_0)\)
+&
+\(\sin\omega t=0\)
+[1mm]
+Marinov centre action \(\Phi(z,t)\)
+&
+\(\cos(\omega t/2)=0\)
+[1mm]
+Hamiltonian flow \(R(t)\)
+&
+never singular
+
+$$
+\hline
+\end{tabular}
+\end{center}
+
+The difference is particularly striking at
+\begin{equation}
+ \omega t=2\pi.
+\end{equation}
+There
+\begin{equation}
+ R=I.
+\end{equation}
+The centre representation is regular, whereas the ordinary two-point
+configuration-space action again encounters its familiar conjugate-point
+structure.
+
+Thus the word ``caustic'' by itself is insufficient.  One must specify the
+projection or generating-function representation.
+
+\subsection{Generating functions as local charts}
+
+This observation places Marinov's construction in the standard theory of
+generating functions for canonical transformations.
+
+A canonical transformation can be represented locally by different
+generating functions, for example
+\begin{equation}
+ F_1(q,Q),\qquad
+ F_2(q,P),\qquad
+ F_3(p,Q),\qquad
+ F_4(p,P).
+\end{equation}
+The existence of a particular generating function requires the corresponding
+projection to be nonsingular.
+
+Consequently a singularity of \(F_\alpha\) need not imply a singularity of
+the canonical transformation.
+
+The appropriate global object is the canonical transformation itself,
+while the generating functions constitute local charts.
+
+This is the correct interpretation of the oscillator example:
+\begin{equation}
+ \boxed{
+ R(t)\ \text{is globally regular, whereas the chosen Cayley chart is not.}
+ }
+\end{equation}
+
+The later development of symplectic generating-function theory makes this
+point explicit.  Generating functions of canonical relations are naturally
+defined on symmetric symplectic spaces, and their caustics are analyzed as
+singularities of the chosen representation. \cite{RiosOzorio2002,RiosOzorio2004}
+
+\subsection{Centre and chord generating functions}
+
+The later phase-space formulation introduces two complementary descriptions.
+For a canonical transformation
+\begin{equation}
+ x_-\mapsto x_+,
+\end{equation}
+define the centre
+\begin{equation}
+ x=\frac{x_++x_-}{2}
+\end{equation}
+and the chord
+\begin{equation}
+ \xi=x_+-x_-.
+\end{equation}
+
+The centre generating function \(S_C(x)\) satisfies, in standard conventions,
+\begin{equation}
+ J\xi=\frac{\partial S_C}{\partial x}.
+ \label{centregradient}
+\end{equation}
+Linearizing the canonical transformation gives the Hessian
+\begin{equation}
+ \frac{\partial^2 S_C}{\partial x^2}
+ =
+ -J(I-M)(I+M)^{-1},
+ \label{centreHessian}
+\end{equation}
+where \(M\) is the tangent symplectic matrix.  Thus the centre generating
+function becomes singular when
+\begin{equation}
+ \det(I+M)=0.
+\end{equation}
+This is precisely the condition already encountered in Marinov's Cayley
+transform. \cite{OzorioBrodier2006}
+
+The complementary chord representation has a corresponding singularity
+associated with
+\begin{equation}
+ \det(I-M)=0.
+\end{equation}
+
+Thus the modern theory does not attempt to find a single generating function
+which is globally nonsingular.  Instead, it uses complementary
+representations.
+
+\subsection{Marinov's Cauchy problem revisited}
+
+Marinov's phase action satisfies a Cauchy problem of the schematic form
+\begin{equation}
+ \frac{\partial\Phi}{\partial t}
+ =
+ H\left(
+ z+\frac12\Omega\nabla\Phi,t
+ \right),
+ \qquad
+ \Phi(z,0)=0.
+ \label{MarinovHJ}
+\end{equation}
+The precise signs and factors depend on the convention for the symplectic
+matrix.  Marinov derives this equation directly from his implicit phase-space
+definition and develops its short-time expansion. \cite{Marinov1979}
+
+This is indeed a genuine first-order Cauchy problem.  In this sense the
+claim of local existence and uniqueness is fundamentally different from the
+ordinary Hamilton principal function, which is associated with a two-point
+boundary-value problem.
+
+But the qualification ``local'' is essential.
+
+The oscillator demonstrates that a solution of the form
+\begin{equation}
+ \Phi(z,t)
+\end{equation}
+cannot remain a single smooth generating-function chart through a time at
+which
+\begin{equation}
+ \det(I+R)=0.
+\end{equation}
+
+Consequently one should distinguish
+\begin{equation}
+ \boxed{
+ \text{local uniqueness of a Cauchy solution}
+ }
+\end{equation}
+from
+\begin{equation}
+ \boxed{
+ \text{existence of one globally smooth scalar generating function}.
+ }
+\end{equation}
+
+These are not equivalent statements.
+
+\subsection{The velocity-gradient obstruction revisited}
+
+The Marinov formulation also removes another restriction of ordinary HJ
+theory.
+
+In the ordinary formulation,
+\begin{equation}
+ p=\nabla_q S.
+\end{equation}
+For a natural Hamiltonian,
+\begin{equation}
+ v=\frac{1}{m}\nabla_qS,
+\end{equation}
+and hence
+\begin{equation}
+ \nabla\times v=0.
+\end{equation}
+
+Marinov does not impose this relation.  His basic function is
+\begin{equation}
+ \Phi(q,p,t),
+\end{equation}
+and its derivatives with respect to the full phase-space coordinates generate
+the canonical transformation.  There is therefore no requirement that a
+general velocity field be the gradient of a scalar defined on configuration
+space.
+
+This is a genuine conceptual extension of the HJ representation, rather than
+merely a change of notation.
+
+\subsection{Turning points are different}
+
+A one-dimensional turning point is not an example of vorticity.
+
+At a turning point,
+\begin{equation}
+ p=m\dot q=0,
+\end{equation}
+but there is no nontrivial curl in one spatial dimension.
+
+The relevant degeneracy is instead that
+\begin{equation}
+ \frac{dq}{dt}=0,
+\end{equation}
+so that \(q\) ceases to be a locally monotonic parameter along the trajectory.
+
+Thus three distinct phenomena should be kept separate:
+\begin{equation}
+\begin{array}{lll}
+\nabla\times v\neq0
+&
+\text{obstruction to a configuration-space gradient representation},
+\\[1mm]
+\det(d\pi_Q|_{L_t})=0
+&
+\text{configuration-space caustic},
+\\[1mm]
+\det(I+M)=0
+&
+\text{centre/Marinov generating-function caustic}.
+\end{array}
+\end{equation}
+
+None of these is, by itself, a singularity of the Hamiltonian flow.
+
+\subsection{Conjugate points}
+
+The same distinction is useful for conjugate points.
+
+For a variational problem, a conjugate point occurs when the second variation possesses a nontrivial zero mode satisfying the relevant endpoint conditions.  In Hamiltonian language this is reflected in a degeneracy of the map from initial data to final configuration data.  Consequently the mixed Hessian of the two-point action,
+\begin{equation}
+ \frac{\partial^2 S(q,t;q_0)}{\partial q\,\partial q_0},
+\end{equation}
+becomes singular.
+
+For the oscillator,
+\begin{equation}
+ \frac{\partial^2S}{\partial q\,\partial q_0}
+ =
+ -\frac{m\omega}{\sin\omega t}.
+\end{equation}
+The conjugate points therefore occur at
+\begin{equation}
+ \sin\omega t=0.
+\end{equation}
+
+This is the same condition as the configuration-space projection caustic in
+this simple example, but conceptually the two notions arise from different
+constructions.  A conjugate point is a degeneracy of the variational
+boundary-value problem; a caustic is a degeneracy of a projection of a
+Lagrangian manifold.
+
+\subsection{What Marinov actually accomplishes}
+
+The central result can now be stated precisely.
+
+Marinov does not remove the geometrical difficulties of Hamilton--Jacobi
+theory.  Instead, he moves the fundamental object from configuration space
+to phase space.
+
+The ordinary HJ construction is
+\begin{equation}
+ \boxed{
+ \text{Lagrangian manifold}
+ \longrightarrow
+ \text{graph }p=\nabla S(q,t).
+ }
+\end{equation}
+
+Marinov's construction is
+\begin{equation}
+ \boxed{
+ \text{canonical transformation}
+ \longrightarrow
+ \text{phase-space generating function }\Phi(q,p,t).
+ }
+\end{equation}
+
+The latter has two important advantages.  It is formulated as a local
+Cauchy problem and it does not require the momentum field to be the gradient
+of a configuration-space scalar.
+
+But it has an equally important limitation: \(\Phi\) is a generating-function
+chart.  It can become singular even though the underlying canonical
+transformation remains perfectly regular.
+
+The later centre/chord formulation makes this explicit and develops
+complementary generating functions rather than treating such singularities
+as physical failures. \cite{OzorioBrodier2006,RiosOzorio2004}
+
+\subsection{Phase-space generating functions and semiclassical mechanics}
+
+The subsequent development is particularly significant for quantum
+mechanics.  In the Weyl representation, the semiclassical symbol of a
+unitary evolution operator has the form
+\begin{equation}
+ U_W(x,t)
+ \sim
+ A(x,t)
+ \exp\left[
+ \frac{i}{\hbar}S_C(x,t)
+ \right],
+\end{equation}
+where \(S_C\) is the centre generating function associated with the underlying
+classical canonical transformation.
+
+The amplitude contains a factor of the form
+\begin{equation}
+ A(x,t)\propto
+ \left|\det(I+M)\right|^{-1/2}.
+\end{equation}
+Consequently the same condition
+\begin{equation}
+ \det(I+M)=0
+\end{equation}
+appears as a semiclassical caustic.  The later theory interprets the
+resulting divergence as a singularity of the elementary semiclassical
+representation and replaces it, where necessary, by a uniform or
+complementary representation. \cite{OzorioBrodier2006}
+
+This is an important continuation of Marinov's original observation.  His
+phase action is not merely an alternative classical notation: it becomes a
+natural classical phase function for phase-space semiclassical quantum
+mechanics.
+
+\subsection{Double phase space}
+
+The centre/chord construction becomes particularly transparent in double
+phase space,
+\begin{equation}
+ T^*Q\times T^*Q.
+\end{equation}
+The two endpoints
+\begin{equation}
+ x_-,\qquad x_+
+\end{equation}
+are treated simultaneously.  The transformation
+\begin{equation}
+ x_+\!=\phi_t(x_-)
+\end{equation}
+defines a Lagrangian relation in the doubled space.
+
+The centre and chord variables are
+\begin{equation}
+ x=\frac{x_++x_-}{2},
+ \qquad
+ \xi=x_+-x_-.
+\end{equation}
+A centre generating function gives
+\begin{equation}
+ J\xi=\frac{\partial S_C}{\partial x},
+\end{equation}
+whereas a chord generating function uses the complementary polarization.
+
+From this viewpoint, a caustic is simply the failure of a particular
+projection of the Lagrangian relation to be a local graph.
+
+This provides the modern geometric interpretation of Marinov's construction:
+\begin{equation}
+ \boxed{
+ \text{the globally meaningful object is the canonical relation;
+ generating functions are local representations of it}.
+ }
+\end{equation}
+
+\subsection{A useful hierarchy of singularities}
+
+The discussion suggests the following classification.
+
+\begin{enumerate}
+\item
+\textbf{Dynamical singularity.}
+The Hamiltonian flow itself ceases to exist or ceases to be regular.
+
+\item
+\textbf{Configuration-space projection singularity.}
+The Hamiltonian flow is regular, but
+\begin{equation}
+ \pi_Q:L_t\rightarrow Q
+\end{equation}
+is singular.  This is the ordinary caustic.
+
+\item
+\textbf{Generating-function singularity.}
+The canonical transformation is regular, but the particular projection used
+to construct a scalar generating function is singular.  For the Marinov
+centre representation this is
+\begin{equation}
+ \det(I+M)=0.
+\end{equation}
+
+\item
+\textbf{Global/topological obstruction.}
+A locally defined action may fail to extend to a global single-valued
+function because of topology or nontrivial periods of the canonical
+one-form.
+
+\item
+\textbf{Gradient obstruction.}
+A configuration-space velocity or momentum field may fail to be globally
+representable as the gradient of a scalar.
+\end{enumerate}
+
+These should not be merged into one generic notion of ``the HJ caustic.''
+
+\subsection{Final assessment}
+
+The correct interpretation of Marinov's proposal is therefore not
+
+\begin{quote}
+``Marinov solves the Hamilton--Jacobi equation globally and eliminates
+caustics.''
+\end{quote}
+
+A more accurate statement is
+
+\begin{quote}
+Marinov replaces the configuration-space Hamilton principal function by a
+phase-space generating function for the finite Hamiltonian canonical
+transformation.  This converts the construction into a local Cauchy problem
+and avoids the requirement that momentum or velocity be represented globally
+as a configuration-space gradient.  Configuration-space caustics are thereby
+recognized as singularities of projection rather than singularities of the
+Hamiltonian flow itself.  The phase-space generating function, however, is
+itself only a local generating-function chart and can develop representation
+caustics.  Complementary generating functions and, ultimately, a
+double-phase-space description provide the natural global framework.
+\end{quote}
+
+The harmonic oscillator provides the simplest complete demonstration.  Its
+Hamiltonian flow is regular for all time,
+\begin{equation}
+ \det R(t)=1,
+\end{equation}
+while the ordinary configuration-space action becomes singular at
+\begin{equation}
+ \sin\omega t=0,
+\end{equation}
+and the Marinov centre generating function becomes singular at
+\begin{equation}
+ \det(I+R)=0,
+ \qquad
+ \omega t=(2n+1)\pi.
+\end{equation}
+
+The lesson is therefore not that one action has ``no caustics,'' but that
+caustics belong to the relation between the underlying symplectic dynamics
+and the particular representation used to describe it.
+
+This leads to a more fundamental view of Hamilton--Jacobi theory:
+\begin{equation}
+ \boxed{
+ \text{Hamiltonian dynamics}
+ \;\supset\;
+ \text{symplectic flow}
+ \;\supset\;
+ \text{Lagrangian manifolds}
+ \;\supset\;
+ \text{generating functions}
+ \;\supset\;
+ \text{ordinary HJ functions}.
+ }
+\end{equation}
+
+The Hamilton--Jacobi equation is consequently best regarded not as the
+fundamental formulation of classical dynamics, but as a particularly useful
+scalar representation of symplectic dynamics whenever the required
+projection is regular and the relevant Lagrangian manifold can be represented
+as an exact graph.
+$$
