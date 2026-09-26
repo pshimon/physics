@@ -1,4 +1,4 @@
-NAME:=top-test
+NAME:=top
 BLD_DIR=../build
 $(NAME).pdf $(NAME).bcf: $(NAME).bbl $(NAME).tex
 	echo "making $(NAME)"

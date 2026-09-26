@@ -1,5 +1,6 @@
 \documentclass[russian,english]{book}            
 \input{package}
+\usepackage{showkeys} %show labels, useful for draft
 \input{nt}
 \input{box}
 \input{cmd}
@@ -70,11 +71,11 @@ be minimal.
 
 \mainmatter
 \part{Metaphysics}
-\begin{refsection}
+%\begin{refsection}    %partial bibliography
 \input{chapters/mp-models}
 \input{chapters/mp-limits}
-\printbibliography[heading=subbibliography]
-\end{refsection}
+%\printbibliography[heading=subbibliography] %partial bibliography
+%\end{refsection}%partial bibliography
 
 %\begin{refsection}
 %\input{chapters/mp-limits}
@@ -82,11 +83,14 @@ be minimal.
 %\end{refsection}
 
 \part{Classical Nonrelativistic Theory}
+\input{chapters/cnt-intro}
+\input{chapters/cnt-chs}
+\input{chapters/cnt-vp}
 \part{Classical Relativistic Theory}
 \part{Quantum Nonrelativistic Theory}
 \part{Quantum Relativistic Theory}
 \backmatter
-\nocite{*}
+%\nocite{*} %prints full database, not only cited entries
 \printbibliography[
 heading=bibintoc,
 title={Bibliography}

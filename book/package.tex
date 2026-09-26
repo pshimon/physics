@@ -10,9 +10,61 @@
 \usepackage{siunitx}
 \usepackage{graphicx}
 \usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,fit,backgrounds}
-\usepackage{tikz-cd}
 \usepackage{mdframed}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{tikz}
+% Standard, XeLaTeX-compatible TikZ libraries
+\usetikzlibrary{
+  % Core, positions & shapes
+  positioning,
+  shapes.geometric,
+  shapes.symbols,
+  shapes.arrows,
+  shapes.multipart,
+  shapes.misc,
+  shapes.callouts,
+  % Paths, arrows & decorations
+  arrows.meta,
+  bending,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  decorations.text,
+  decorations.shapes,
+  decorations.markings,
+  decorations.fractals,
+  % Layouts, trees & graphs
+  fit,
+  matrix,
+  chains,
+  trees,
+  graphs,
+  mindmap,
+  % Plots, geometry & math
+  calc,
+  intersections,
+  through,
+  angles,
+  quotes,
+  datavisualization,
+  datavisualization.formats.functions,
+  % Fills, shadows & patterns
+  patterns,
+  patterns.meta,
+  shadows,
+  shadows.blur,
+  fadings,
+  %gradients,
+  % Specialized & 3D
+  3d,
+  perspective,
+  folding,
+  spy,
+  external,
+  backgrounds,
+  scopes,
+  cd, %instead of tikz-cd package
+  % Babel fix (Keep last among libraries if polyglossia/babel is used)
+  babel
+}
+

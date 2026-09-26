@@ -91,7 +91,7 @@ solved, at least locally, to eliminate one coordinate outright, and
 it reduces the dimension of the configuration space itself. A more
 general class of constraints is linear in the velocities,
 \begin{equation}
-  \sum_{i=1}^n a_i(q,t)\,\dot q^i + a_t(q,t) \;=\;0,
+  \sum_{i=1}^n a_i(q,t) \dot q^i + a_t(q,t) = 0,
   \label{pfaffian}
 \end{equation}
 a so-called Pfaffian constraint. If the left-hand side of
@@ -106,11 +106,10 @@ The canonical example is a coin (or disk) of radius $R$ rolling
 without slipping on a plane, with contact point $(x,y)$, heading
 angle $\phi$, and roll angle $\theta$ as coordinates. The
 rolling condition reads
-\begin{equation}
+\begin{equation*}
   \dot x = R\,\dot\theta\cos\phi ,\qquad
   \dot y = R\,\dot\theta\sin\phi ,
-  \label{eq:rolling-coin}
-\end{equation}
+\end{equation*}
 which is not integrable: it constrains the instantaneous velocity to
 a two-dimensional subspace of the four-dimensional tangent space at
 each point, and yet, by alternating steering and rolling, the coin
@@ -124,7 +123,9 @@ case, where a nontrivial velocity constraint always shrinks the
 accessible configuration space too.
 
 A second standard example, the \emph{Chaplygin sleigh}, makes an
-even sharper point. It is a rigid body sliding frictionlessly on a
+even sharper point.
+
+It is a rigid body sliding frictionlessly on a
 plane, with a knife edge that permits motion only along its own
 length (no sideways slip). The system conserves energy exactly ---
 there is no friction anywhere in the model --- and yet its reduced
