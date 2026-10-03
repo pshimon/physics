@@ -1,9 +1,8 @@
 \chapter{Conservative Holonomic Systems}
 \label{chs}
 
-
 \section{Simple Systems}
-\label{cm:ss}
+\label{chs:ss}
 
 Let us restrict ourselves with Conservative Holonomic Systems or
 more specifically with systems consisting of finite number of
@@ -13,34 +12,12 @@ There is a great number of books on the subject
 \cite{Lanczos},\cite{Goldstein}). 
 
 In Ideal world of classical mechanics space is three-dimensional  and euclidean
-$\mathbb{R}^3$, mass is real number and time is one-dimensional $\mathbb{T}$.
+$\mathbb{R}^3$ and time is one-dimensional $\mathbb{T}$.
 So universe of classical mechanics is $\mathbb{T} \times \mathbb{R}^3$. 
 
- The  group of galilean transformations acts on universe \cite{Arnold-cm}. 
-Every galilean transformation can be written in a unique way as the composition of a rotation, a translation,
-and a uniform motion ($g = g_1 \circ g_2 \circ g_3$), where
-\[g_1(t,\bm x)=(t,\bm x+\bm v t)\qquad \forall t\in \mathbb{R},\bm x \in\mathbb{R}^3\] 
-is uniform motion with velocity $\bm v \in\mathbb{R}^3$,
-\[g_2(t,\bm x)=(t+t_0,\bm x+\bm x_0)\qquad \forall t\in \mathbb{R},\bm x \in\mathbb{R}^3\] 
-is translation of the origin, and
-\[g_3(t,\bm x)=(t,O\bm x)\qquad \forall t\in \mathbb{R},\bm x \in\mathbb{R}^3\] 
-rotation of the coordinate axes ($O:\mathbb{R}^3 \rightarrow \mathbb{R}^3$ is an orthogonal transformation).
-
-Let $M$ be a set. A one-to-one correspondence 
-\[\phi_1: M \rightarrow \mathbb{R} \times \mathbb{R}^3\]
-is called a galilean (inertial) coordinate system on the set $M$. A coordinate system $\phi_2$ moves
-uniformly with respect to $\phi_1$  if $\phi_1\circ\phi_2^{-1}$ is a galilean
-transformation. 
-
-Inertial coordinate systems  possess the following two properties:
-\begin{enumerate}
-    \item All the laws of nature at all moments of time are the same in all inertial coordinate systems;
-    \item  All coordinate systems in uniform rectilinear motion with respect to an inertial one are themselves inertial.
-\end{enumerate}
-This is called `Galileo's principle of relativity'.
-
-The simplest object of classical mechanics is point mass (particle) i.e. object whose shape, 
-sizes and internal structure are inessential, so mass (positive scalar $m$) is the only parameter. 
+The simplest object of classical mechanics is point mass (particle) i.e. object
+whose shape, sizes and internal structure are inessential, so mass (positive
+scalar $m$) is the only parameter. 
 The state of a particle is fully determined by position ($\bm x \in\mathbb{R}^3$) 
 and velocity ($\bm v \in\mathbb{R}^3$). 
 More accurately: A motion in $\mathbb{R}^n$ is a differentiable mapping 
@@ -52,12 +29,13 @@ The derivative
 \[\ddot {\bm x}(t)=\frac{ d^2 {\bm x}}{dt^2}(t)\]
 is called the acceleration vector. 
 The image of motion (curve in $\mathbb{R}^3$) called trajectory and  curve in 
-$\mathbb{T} \times \mathbb{R}^3$ which appears  as the graph of a motion, is called a world line.
+$\mathbb{T} \times \mathbb{R}^3$ which appears  as the graph of a motion, is
+called a world line.
 
 The initial state of a mechanical system (the totality of positions and
 velocities of its points at some moment of time) uniquely determines all of
-its motion. In particular, the initial positions and velocities determine the accelerations.
-This is called `Newton's principle of determinacy'.
+its motion. In particular, the initial positions and velocities determine the
+accelerations. This is called `Newton's principle of determinacy'.
 
 \subsection{Newtonian mechanics}
 
@@ -201,17 +179,19 @@ given points or none at all.
 on the choice of coordinate system. This paves way to geometrisation of mechanics.
 \end{enumerate}
 
-It is easy to see that equation of motion (\ref{lagr}) are actually  Euler-Lagrange equations 
-for lagrangian \eqref{lagr3}. 
-So we have  Hamilton's principle of least action.
+It is easy to see that equation of motion (\ref{lagr}) are actually
+Euler-Lagrange equations for lagrangian \eqref{lagr3}. So we have  Hamilton's
+principle of least action.
 
-
-I believe that least action principle  is nothing but (powerful) heuristic. Indeed, to compute 
-action functional we should define explicitly {\em all} curves connecting given pair of points.
-This seems to be impossible or at least very difficult problem. Fortunately we do not need it.
-All what we really need is to set configuration space, choose Lagrange function 
-\eqref{lagr3} and get equations of motion \eqref{lagr}. It does not matter at all
-if we have minimum, maximum, saddle point or whatever property of some functional.
+In most of modern books the order is reversed: start from action and derive
+equations  of motion. I believe that least action principle  is nothing but
+(powerful) heuristic. Indeed, to compute action functional we should define
+explicitly {\em all} curves connecting given pair of points. This seems to be
+impossible or at least very difficult problem. Fortunately we do not need it.
+All what we really need is to set configuration space, choose Lagrange function
+\eqref{lagr3} and get equations of motion \eqref{lagr}. It does not matter at
+all if we have minimum, maximum, saddle point or whatever property of some
+functional.
 
 On the other hand having equations of motion as system of ordinary differential equations,
 we can transform it into equivalent one, say by multiplying every equation by arbitrary 
@@ -259,69 +239,100 @@ and
 \end{equation}
 are not even positive definite!
 
+\section{Configuration Space}
+\label{chs:cs}
+The configuration space of a mechanical system comprising $k$ particles is 
+\[   
+ \underbrace{\mathbb R^3\times\mathbb R^3\times\cdots\times\mathbb R^3}_{k\ \text{times}}. 
+\]
+which is naturally isomorphic (as vector space, topological space, and smooth manifold) to
+\[ \mathbb R^{3k}. \]
 
-\subsection{"Spin" in constant magnetic field}
+However this isomorphism hides the important difference ---
+the \(3k\) coordinates are not just arbitrary coordinates. They come in \(k\)
+distinguished groups of three. Rotations illustrate the difference:
+Suppose we rotate physical space by
+\[ R\in SO(3). \]
+For \(k\) particles, the same physical rotation acts on every particle:
+\[
+    (\mathbf r_1,\ldots,\mathbf r_k) \longrightarrow (R\mathbf r_1,\ldots,R\mathbf r_k). 
+\]
+Thus the physical rotation group is represented as
+$ SO(3)\subset SO(3k)$, with the action
+\[ R\mapsto 
+\begin{pmatrix} R&0&\cdots&0\\ 
+0&R&\cdots&0\\ 
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&R 
+\end{pmatrix}. 
+\]
+If one simply says that the configuration space is \(\mathbb R^{3k}\), one
+might incorrectly imagine that its natural rotation group is \(SO(3k)\).
+But a general element of \(SO(3k)\) can mix coordinates belonging to different particles,
+such a transformation is generally not a rotation of physical three-dimensional space.
 
-We used to natural systems where hamiltonian is quadratic form over momenta,
-but there are physical systems with hamiltonians linear over momenta.
-So lagrangian does not exist. Let us consider 
-dynamic of point magnetic moment in constant magnetic field has not only
-clear physical meaning but also significant practical value. I investigated
-this problem (actually slightly more general one) in connection with control of MRI
-scanner \cite{RPZ4},\cite{RPZ3},\cite{RPZ2},\cite{RPZ1}.
+Product structure contains additional information
+Once we write merely 
+\[ \mathbb R^{3k}, \]
+without further structure, there is no distinguished decomposition into \(k\)
+three-dimensional subspaces.
+Of course, we can impose such a decomposition:
+\[ \mathbb R^{3k} = V_1\oplus V_2\oplus\cdots\oplus V_k, \qquad V_i\simeq\mathbb R^3. \]
+But then we have effectively reconstructed the structure represented directly by
+\[ (\mathbb R^3)^k. \]
 
+This distinction becomes particularly important in configuration-space
+formulations of  quantum mechanics, because it is closely related
+to the question of whether the \(3k\)-dimensional configuration space should be
+regarded as a merely mathematical construction or as having some independent
+physical reality.
+\footnote{In quantum mechanics  $ 1,2,\ldots,3k $,
+are not physically meaningful for identical particles. One should then identify
+configurations related by a permutation,
+so the physical configuration space is more properly
+\[ Q_{\rm identical} = (\mathbb R^3)^k/S_k. \]}
 
-Hamiltonian is $ H=\bm M \cdot \bm B $ where $\bm M$ is magnetic moment 
-and $ \bm B $ is constant magnetic field.
-It is convenient to write $ \bm M=\frac{e}{m c}\bm S $ where $ \bm S $
-is angular moment ("spin")  and  include gyromagnetic ratio into magnetic field
-$ \bm \Omega = \frac{e}{m c}\bm B$. Components of $ \bm S $ are not
-canonical variables, their Poisson brackets are
-\begin{equation}
-   \label {pb}
-    \{S_i,S_j\}= \epsilon_{ijk} S_k
-\end{equation}
-However they define phase space (sphere)  and equation of motion:
-\begin{equation}
-   \label {sp1}
-    \dot S_i=\{S_i,H\}
-\end{equation} 
-or 
-\begin{equation}
-   \label {sp2}
-    \dot {\bm S} =-\bm S \times \bm \Omega
-\end{equation}
+Nevertheless, in most cases, especially when a number of holonomic constraints 
+\eqref{hol-const} $ f_1,f_2,ldots,f_m $ exists it is very convenient to forget
+of physical meaning of coordinates and consider configuration space as $ n=3 k -m $
+dimensional manifold  $ Q $ with arbitrary coordinates $q_1,q_2,\ldots q_n$ on it.
+This come with a price. Let us look at simple example.
 
-In canonical variables 
-\begin{equation}
-   \label {sp3}
-   \begin{split}
-       S_x & = \sqrt{S^2-p^2} \cos q \\
-       S_y & = \sqrt{S^2-p^2} \sin q \\
-       S_z & = p,\quad -S\le p \le S
-   \end{split}
-\end{equation}
-Let $ \bm \Omega =(0,0, \Omega) $ then $ H=p \Omega $ and canonical equations are:
-\begin{equation}
-   \label {sp4}
-   \begin{split}
-       \dot p & =0\\
-       \dot q & = \Omega
-   \end{split}
-\end{equation}
-Lagrangian $ L=0 $, so we can not get equations of motion as second order equation.
+The two-dimensional isotropic harmonic oscillator and two identical, spatially
+distant, non-interacting one-dimensional oscillators have exactly the same
+configuration space, $\mathbb{R}^2$, and, once the two one-dimensional
+coordinates are laid side by side, exactly the same Hamiltonian. This
+coincidence might seem to threaten the idea that configuration space carries
+direct physical meaning: if the bare pair $(Q,H)$ cannot distinguish ``one
+particle moving in a plane'' from ``two particles moving on separate, distant
+lines,'' in what sense does configuration space represent physical positions at
+all? 
 
-Moment $ p $ is integral of motion which is fine but velocity is not connected to 
-moment at all, it is constant. For pair of points in phase space generally there is
-no trajectory passable for given time. Variation problem simply can not be posed.
+This coincidence  persists at every
+level of structure computable from $(Q,H)$ alone --- classical trajectories,
+the symplectic structure, the quantum spectrum and its degeneracies.
+Additional data is needed to tell the two systems
+apart: 
+\begin{enumerate}
+   \item an embedding of $Q$ into physical space together with the action of
+the spatial isometry group, which is geometrically realized in one case and
+merely accidental in the other;
+   \item statistics and particle-content data,
+which matter only when exchange effects are actually observable;
+   \item the
+algebra of interactions that locality in physical space picks out as natural,
+which governs how each system couples to a generic environment.
+\end{enumerate}
+Configuration space, taken on its own, is best understood as a
+representation-dependent bookkeeping device rather than a self-standing arena
+of physical positions: its physical reading requires further data as an
+independent postulate, not something read off the space itself.
 
-Hamiltonian $ H=p \Omega $ looks like that for harmonic oscillator in
-action-angle variables and so we can  transform it to usual quadratic form, but
-the condition $  -S\le p \le S$ makes this transformation pure formal.
+From now on we shall use generalized coordinates $ q=\{q_j, j=1\ldots n\} $, 
+where $ n $ is the number of
+degrees of freedom. These coordinates may have or have not physical meaning.
 
-
-
-\section [(In)equivalence of the Formulations]{On the (In)equivalence of the Formulations of Classical Mechanics}
+\section {(In)equivalence of the Formulations} 
 \label{chs:nf}
 
 The Newtonian, Lagrangian, Hamiltonian, and Hamilton--Jacobi formulations of
@@ -360,12 +371,14 @@ Let us display shortly the four standard formulations.
 
 \paragraph{Newtonian mechanics}
 For a system of $N$ particles with positions $\bm{r}_i \in \mathbb{R}^3$,
-Newton's second law reads $m_i \ddot{\bm{r}}_i = \bm{F}_i$, where
-$\bm{F}_i$ is the total force on particle $i$. Constraints are handled by
+Newton's second law reads 
+\[m_i \ddot{\bm{r}}_i = \bm{F}_i,\]
+where $\bm{F}_i$ is the total force on particle $i$. Constraints are handled by
 splitting the force into an applied part and a constraint (reaction) part,
-$\bm{F}_i = \bm{F}_i^{\mathrm{app}} + \bm{F}_i^{\mathrm{c}}$, and
-postulating---this is d'Alembert's principle---that the constraint forces do no
-virtual work: $\sum_i \bm{F}_i^{\mathrm{c}}\cdot \delta \bm{r}_i = 0$
+\[\bm{F}_i = \bm{F}_i^{\mathrm{app}} + \bm{F}_i^{\mathrm{c}},\]
+and postulating---this is d'Alembert's principle---that the constraint forces 
+do no virtual work: 
+\[\sum_i \bm{F}_i^{\mathrm{c}}\cdot \delta \bm{r}_i = 0\]
 for every virtual displacement $\delta\bm{r}_i$ compatible with the
 constraints at a frozen instant of time. It is d'Alembert's principle, not
 Newton's second law by itself, that supplies the bridge to the variational
@@ -373,9 +386,10 @@ formulations below.
 
 \paragraph{Lagrangian mechanics}
 Let $Q$ be the configuration manifold and $TQ$ its tangent bundle, with induced
-coordinates $(q^i,\dot q^i)$. A Lagrangian is a function $L : TQ \times
-\mathbb{R} \to \mathbb{R}$, typically (but not necessarily) of the form $L = T
-- V$, kinetic minus potential energy. Hamilton's principle asserts that
+coordinates $(q^i,\dot q^i)$. A Lagrangian is a function 
+\[L : TQ \times \mathbb{R} \to \mathbb{R},\]
+typically (but not necessarily) of the form $L = T- V$, 
+kinetic minus potential energy. Hamilton's principle asserts that
 physical trajectories $q(t)$ extremize the action
 \begin{equation}
 S[q(\cdot)] = \int_{t_0}^{t_1} L\big(q(t),\dot q(t), t\big)\, dt
@@ -393,13 +407,15 @@ taken to be the constraint surface itself and the $q^i$ are independent
 generalized coordinates on it.
 
 \paragraph{Hamiltonian mechanics}
-Define the momenta $p_i = \partial L/\partial \dot q^i$. This is the
-\emph{fiber derivative} 
-$\mathbb{F}L: TQ \to T^*Q$, $(q,\dot q)\mapsto (q,p)$.
-Where $\mathbb{F}L$ can be inverted for $\dot q$ in terms of $(q,p)$, one
-defines the Hamiltonian by the Legendre transform,
+Define the momenta 
+\[p_i = \partial L/\partial \dot q^i.\]
+This is the \emph{fiber derivative} 
+\[\mathbb{F}L: TQ \to T^*Q \quad (\bm q,\dot {\bm q})\mapsto (\bm q, \bm p).\]
+Where $\mathbb{F}L$ can be inverted for $\dot {\bm q}$ in terms of $(\bm q,\bm p)$,\
+one defines the Hamiltonian by the Legendre transform,
 \begin{equation}
-H(q,p,t) = p_i \dot q^i - L(q,\dot q, t)\Big|_{\dot q = \dot q(q,p,t)} ,
+    H(\bm q,\bm p,t) = p_i \dot q^i - 
+    L(\bm q,\dot {\bm q}, t)\Big|_{\dot q = \dot q(q,p,t)} ,
 \end{equation}
 and Hamilton's canonical equations \footnote{ These equations also can 
 be obtained from variational principle discussed later}
@@ -1178,3 +1194,86 @@ works only in the geometric language, on the other hand, has an
 elegant theory of everything and the means to compute nothing. The
 working practice of mechanics has always required both, spoken
 fluently, and switched between as the problem at hand demands.
+
+
+
+
+
+\subsection{Gauge invariance} 
+We are used to think that gauge invariance is about electromagnetism, actually it appears
+already in classical mechanics. It is easy to prove that adding the total derivative
+\begin{equation}
+   \label {tot-der}
+    \frac{d \Phi (q,t)}{d t}=\frac{\partial \Phi(q,t)}{\partial t} + \frac{ \partial \Phi (q,t)}{\partial q_j} \dot q_j
+\end{equation}
+to Lagrangian does not change equations of motion. However canonical momenta
+\begin{equation}
+   \label {can-mom}
+   p_j=\frac{ \partial L(q,\dot q,t)}{\partial \dot q_j}
+\end{equation}
+becomes \[ P_j=p_j+\frac{\partial \Phi}{\partial q_j} \] Transformation $ p,q \rightarrow P,q $ is evidently
+canonical and new Hamiltonian becomes 
+\[ H_{new}=H(p(P),q)- \frac{\partial \Phi}{\partial t}\]
+The fact that canonical momenta have no physical meaning is not a weak but strong point of Hamiltonian 
+mechanics.
+
+\subsection{"Spin" in constant magnetic field}
+
+We used to natural systems where hamiltonian is quadratic form over momenta,
+but there are physical systems with hamiltonians linear over momenta.
+So lagrangian does not exist. Let us consider 
+dynamic of point magnetic moment in constant magnetic field has not only
+clear physical meaning but also significant practical value. I investigated
+this problem (actually slightly more general one) in connection with control of MRI
+scanner \cite{RPZ4},\cite{RPZ3},\cite{RPZ2},\cite{RPZ1}.
+
+
+Hamiltonian is $ H=\bm M \cdot \bm B $ where $\bm M$ is magnetic moment 
+and $ \bm B $ is constant magnetic field.
+It is convenient to write $ \bm M=\frac{e}{m c}\bm S $ where $ \bm S $
+is angular moment ("spin")  and  include gyromagnetic ratio into magnetic field
+$ \bm \Omega = \frac{e}{m c}\bm B$. Components of $ \bm S $ are not
+canonical variables, their Poisson brackets are
+\begin{equation}
+   \label {pb}
+    \{S_i,S_j\}= \epsilon_{ijk} S_k
+\end{equation}
+However they define phase space (sphere)  and equation of motion:
+\begin{equation}
+   \label {sp1}
+    \dot S_i=\{S_i,H\}
+\end{equation} 
+or 
+\begin{equation}
+   \label {sp2}
+    \dot {\bm S} =-\bm S \times \bm \Omega
+\end{equation}
+
+In canonical variables 
+\begin{equation}
+   \label {sp3}
+   \begin{split}
+       S_x & = \sqrt{S^2-p^2} \cos q \\
+       S_y & = \sqrt{S^2-p^2} \sin q \\
+       S_z & = p,\quad -S\le p \le S
+   \end{split}
+\end{equation}
+Let $ \bm \Omega =(0,0, \Omega) $ then $ H=p \Omega $ and canonical equations are:
+\begin{equation}
+   \label {sp4}
+   \begin{split}
+       \dot p & =0\\
+       \dot q & = \Omega
+   \end{split}
+\end{equation}
+Lagrangian $ L=0 $, so we can not get equations of motion as second order equation.
+
+Moment $ p $ is integral of motion which is fine but velocity is not connected to 
+moment at all, it is constant. For pair of points in phase space generally there is
+no trajectory passable for given time. Variation problem simply can not be posed.
+
+Hamiltonian $ H=p \Omega $ looks like that for harmonic oscillator in
+action-angle variables and so we can  transform it to usual quadratic form, but
+the condition $  -S\le p \le S$ makes this transformation pure formal.
+
+
