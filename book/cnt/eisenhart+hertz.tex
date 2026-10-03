@@ -1,0 +1,209 @@
+The comparison is quite revealing because Hertz mechanics and Eisenhart mechanics geometrize dynamics in almost opposite ways.
+
+1. Hertz's idea
+
+In Hertz's 1894 reformulation, one tries to eliminate forces altogether. Instead of
+
+$$ m\ddot q^i=-\partial_i V, $$
+
+one introduces an enlarged configuration space with coordinates
+
+$$ Q^A=(q^i,y^\alpha) $$
+
+and a purely kinetic Lagrangian
+
+$$ L_H=\frac12 M_{AB}\dot Q^A\dot Q^B. $$
+
+The enlarged system is free geodesic motion
+
+$$ \frac{D^2Q^A}{dt^2}=0 $$
+
+with respect to a suitable Riemannian metric.
+
+The original system is obtained by restricting/projecting the higher-dimensional free motion.
+
+So, schematically,
+
+$$ \boxed{ \text{forces} \quad\longrightarrow\quad \text{geodesic constraint} } $$
+
+rather than putting the force into the spacetime metric as Eisenhart does.
+
+2. Eisenhart versus Hertz
+
+The essential distinction is:
+
+	Hertz	Eisenhart
+Basic space	enlarged configuration space	enlarged spacetime
+Extra dimensions	usually configuration variables	\(t,s\)
+Metric	essentially Riemannian	Lorentzian
+Dynamics	geodesic	null geodesic
+Potential	encoded through extra coordinates/constraints	directly in \(g_{tt}\)
+Time	ordinary evolution parameter	coordinate of the geometry
+Energy	naturally important	not fixed
+Force	eliminated by lift	geometrized as connection/curvature
+Projection	constrained/geometric	null reduction
+Quantum connection	less direct	very direct via Schrödinger equation
+
+There is therefore a subtle but important difference:
+
+$$ \boxed{\text{Hertz: enlarge configuration space}} $$
+
+whereas
+
+$$ \boxed{\text{Eisenhart: enlarge spacetime}.} $$
+3. A simple example
+
+Take
+
+$$ L=\frac{m}{2}\dot{\mathbf q}^{\,2}-V(\mathbf q). $$
+
+Eisenhart introduces \(t,s\):
+
+$$ ds_E^2 = d\mathbf q^2+2\,dt\,ds -\frac{2V(\mathbf q)}{m}dt^2. $$
+
+The physical trajectory is a null geodesic.
+
+The potential therefore appears explicitly as geometry:
+
+$$ V(\mathbf q) \longleftrightarrow g_{tt}(\mathbf q). $$
+
+Hertz takes a different route. One introduces additional mechanical coordinates \(y^\alpha\), and constructs a kinetic system
+
+$$ L_H=\frac12M_{AB}\dot Q^A\dot Q^B $$
+
+whose geodesics, after imposing appropriate conditions on the extra motion, project onto
+
+$$ m\ddot{\mathbf q}=-\nabla V. $$
+
+The potential is therefore not simply a component of the spacetime metric. It is encoded in the way the physical subsystem sits inside the enlarged free system.
+
+4. The most important conceptual difference
+
+Hertz is much closer to the old idea:
+
+There are no forces; everything is inertial motion in a larger configuration space.
+
+Eisenhart says:
+
+There are no forces either, but inertial motion takes place in a curved spacetime.
+
+These sound similar, but geometrically they are quite different.
+
+In Eisenhart geometry,
+
+$$ \boxed{ \text{force} \rightarrow \Gamma^\mu_{\nu\rho} \rightarrow R^\mu{}_{\nu\rho\sigma}. } $$
+
+The force becomes curvature.
+
+In Hertz's construction, by contrast, the force is associated with the projection/restriction from the enlarged geodesic system to the physical degrees of freedom.
+
+5. Hertz and Jacobi are actually quite close
+
+There is another useful connection.
+
+For a time-independent system,
+
+$$ H=\frac{p^2}{2m}+V(q)=E, $$
+
+Jacobi mechanics uses
+
+$$ ds_J^2 = 2m(E-V)h_{ij}dq^i dq^j. $$
+
+Hertz's approach can be regarded as a way of realizing this kind of dynamics through a higher-dimensional purely kinetic system.
+
+In other words, there is a conceptual chain
+
+$$ \boxed{ \text{Newton} \rightarrow \text{Jacobi} \rightarrow \text{Hertz} } $$
+
+whereas Eisenhart provides another route:
+
+$$ \boxed{ \text{Newton} \rightarrow \text{Eisenhart} } $$
+
+with the important advantage that time-dependent potentials fit naturally.
+
+6. Why Eisenhart is particularly powerful
+
+Suppose
+
+$$ V=V(q,t). $$
+
+The Jacobi metric becomes problematic because there is no conserved energy.
+
+Hertz can still be formulated, but the construction becomes more elaborate because one has to encode the time dependence in the enlarged mechanical system.
+
+Eisenhart handles it immediately:
+
+$$ ds_E^2 = g_{ij}dq^i dq^j +2dt\,ds -\frac{2V(q,t)}m dt^2. $$
+
+Nothing special has to be done.
+
+Moreover,
+
+$$ R_{titj}\sim \partial_i\partial_jV $$
+
+means that the local stability properties of the original dynamical system are directly curvature properties of the Eisenhart spacetime.
+
+That is a particularly strong geometrization.
+
+7. But Hertz has an important philosophical advantage
+
+There is something attractive about Hertz that Eisenhart does not quite reproduce.
+
+Hertz attempts to retain ordinary time and ordinary kinetic mechanics, while making the entire dynamics look like free motion.
+
+Eisenhart achieves the same thing by introducing a Lorentzian spacetime whose null geodesics reproduce the mechanics.
+
+So if one's question is
+
+Can every mechanical force be regarded as an artifact of projection from a higher-dimensional free system?
+
+then Hertz is the more direct construction.
+
+If the question is
+
+Can Newtonian dynamics itself be regarded as geodesic motion in a geometrical spacetime?
+
+then Eisenhart is the cleaner construction.
+
+8. There is also a very interesting relation to your HJ/variational questions
+
+This is where I think the comparison becomes especially useful.
+
+You have been emphasizing the distinction
+
+$$ \text{Euler equations} \neq \text{variational problem} \neq \text{global solution space}. $$
+
+Neither Hertz nor Eisenhart should be interpreted as proving a stronger equivalence than they actually provide.
+
+For Eisenhart,
+
+$$ \{\text{physical Newton trajectories}\} \longleftrightarrow \{\text{appropriate null geodesics}\} $$
+
+only after specifying:
+
+the null condition,
+the conserved momentum in the \(s\)-direction,
+the parametrization,
+and the projection onto \(q^i(t)\).
+
+Likewise for Hertz, the projected trajectories depend on the constraint/reduction prescription.
+
+Thus
+
+$$ \boxed{ \text{geometrization of the equations} \neq \text{global equivalence of the dynamical theories}. } $$
+
+This becomes especially important in the presence of caustics, boundaries, topology, multiple branches, and singular projections.
+
+9. The deepest difference in one diagram
+
+I would summarize the two constructions as
+
+$$ \begin{array}{ccc} \textbf{Hertz} & & \textbf{Eisenhart} \\[4pt] \downarrow && \downarrow \\[4pt] \text{enlarge }Q && \text{enlarge spacetime} \\ \downarrow && \downarrow \\ \text{free geodesic} && \text{null geodesic} \\ \downarrow && \downarrow \\ \text{projection/constraint} && \text{null reduction} \\ \downarrow && \downarrow \\ \text{Newtonian dynamics} && \text{Newtonian dynamics}. \end{array} $$
+
+So I would not regard Hertz and Eisenhart as merely two versions of the same construction. They solve the same problem—removing forces from the fundamental equations—but they put the geometrical burden in different places.
+
+And there is a particularly interesting third construction sitting between them: Kaluza-type lifts, where a potential or gauge field is encoded in off-diagonal metric components. That gives a useful three-way comparison:
+
+$$ \boxed{\text{Hertz}\quad-\quad\text{Eisenhart}\quad-\quad\text{Kaluza}} $$
+
+because it clarifies three different meanings of "dynamics as geometry."

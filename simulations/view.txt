@@ -1,0 +1,5 @@
+Variations
+Movie or PNGs: add set terminal pngcairo; set output sprintf("frame_%06d.png", n) and loop over the files, then run ffmpeg on the frames.
+Particles or columnar data (x, y, z per particle): write an (n,3) array and plot with binary record=N format='%float64%float64%float64' using 1:2:3 with points. Note that this wants the data stored row-wise, so declare it as p(3,n) in Fortran.
+Single precision: use real32 and format='%float32', with -t f4 in the od call.
+Different machines: if the simulation and the plotter ever run on different architectures, add endian=little to the gnuplot binary options.

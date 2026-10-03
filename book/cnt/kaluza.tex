@@ -1,0 +1,240 @@
+A Kaluza-type lift is a third way of turning forces into geometry. The key idea is different from both Hertz and Eisenhart:
+
+$$ \boxed{\text{the force is encoded in off-diagonal components of a higher-dimensional metric}.} $$
+
+The prototype is Kaluza's five-dimensional treatment of electromagnetism.
+
+1. Start with a charged particle
+
+In four-dimensional spacetime, a particle of mass \(m\) and charge \(q\) has
+
+$$ L = \frac{m}{2}g_{\mu\nu}\dot x^\mu\dot x^\nu + q A_\mu\dot x^\mu . $$
+
+The electromagnetic potential appears linearly in the velocity.
+
+The corresponding equation is the Lorentz-force equation
+
+$$ m\frac{D u^\mu}{d\tau} = q F^\mu{}_{\nu}u^\nu, \qquad F_{\mu\nu} = \partial_\mu A_\nu-\partial_\nu A_\mu . $$
+
+The question is:
+
+Can the \(qA_\mu\dot x^\mu\) term itself arise from ordinary geodesic motion?
+
+The Kaluza answer is yes.
+
+2. Add one dimension
+
+Introduce an extra coordinate \(y\) and consider
+
+$$ X^A=(x^\mu,y). $$
+
+Take the five-dimensional metric
+
+$$ \boxed{ ds_5^2 = g_{\mu\nu}dx^\mu dx^\nu + \phi^2 \left(dy+\kappa A_\mu dx^\mu\right)^2 } $$
+
+where \(\phi\) is a scalar field and \(\kappa\) is a coupling constant.
+
+Expanding,
+
+$$ ds_5^2 = \left(g_{\mu\nu} +\kappa^2\phi^2 A_\mu A_\nu\right)dx^\mu dx^\nu + 2\kappa\phi^2A_\mu dx^\mu dy + \phi^2dy^2 . $$
+
+The crucial term is
+
+$$ \boxed{ g_{\mu y}\sim A_\mu. } $$
+
+So the electromagnetic potential is literally an off-diagonal component of the higher-dimensional metric.
+
+That is the defining Kaluza idea.
+
+3. How the Lorentz force appears
+
+Consider the five-dimensional geodesic Lagrangian
+
+$$ L_5= \frac12G_{AB}\dot X^A\dot X^B. $$
+
+Substitution gives
+
+$$ L_5= \frac12g_{\mu\nu}\dot x^\mu\dot x^\nu + \frac12\phi^2 \left( \dot y+\kappa A_\mu\dot x^\mu \right)^2. $$
+
+Because \(y\) does not appear explicitly,
+
+$$ p_y= \frac{\partial L_5}{\partial\dot y} = \phi^2 \left( \dot y+\kappa A_\mu\dot x^\mu \right) $$
+
+is conserved.
+
+Call this constant \(p_y=k\). Then
+
+$$ \dot y+\kappa A_\mu\dot x^\mu = \frac{k}{\phi^2}. $$
+
+Substituting this back into the \(x^\mu\) equations produces, schematically,
+
+$$ \boxed{ \frac{D u^\mu}{d\tau} \sim k\kappa F^\mu{}_\nu u^\nu +\text{terms involving }\phi . } $$
+
+If \(\phi\) is constant, this is precisely the Lorentz-force equation after identifying
+
+$$ q/m\sim k\kappa . $$
+
+Thus
+
+$$ \boxed{ \text{5D geodesic} \quad\longrightarrow\quad \text{4D charged-particle motion}. } $$
+
+This is conceptually very different from Eisenhart.
+
+4. Compare the three constructions
+
+Now the distinction becomes particularly clean.
+
+Hertz
+$$ \boxed{ \text{force} \longrightarrow \text{extra mechanical coordinates} } $$
+
+and the physical dynamics is a projection of free geodesic motion.
+
+Eisenhart
+$$ \boxed{ V \longrightarrow g_{tt} } $$
+
+and Newtonian trajectories are null geodesics.
+
+Kaluza
+$$ \boxed{ A_\mu \longrightarrow G_{\mu y} } $$
+
+and charged trajectories are projections of higher-dimensional geodesics.
+
+So:
+
+$$ \begin{array}{c|c} \text{Construction}&\text{What carries the dynamics}\\ \hline \text{Hertz}&\text{extra configuration-space structure}\\ \text{Eisenhart}&g_{tt}\\ \text{Kaluza}&g_{\mu y} \end{array} $$
+5. Why the gauge transformation becomes geometrical
+
+This is perhaps the most beautiful aspect.
+
+Electromagnetism has the gauge transformation
+
+$$ A_\mu\rightarrow A_\mu+\partial_\mu\lambda. $$
+
+Now make the coordinate transformation
+
+$$ \boxed{ y\rightarrow y-\kappa\lambda(x). } $$
+
+Then
+
+$$ dy\rightarrow dy-\kappa\,d\lambda, $$
+
+so
+
+$$ dy+\kappa A_\mu dx^\mu $$
+
+is unchanged:
+
+$$ dy-\kappa d\lambda + \kappa(A+d\lambda) = dy+\kappa A. $$
+
+Therefore
+
+$$ A_\mu\rightarrow A_\mu+\partial_\mu\lambda $$
+
+is simply the manifestation of a coordinate transformation in the higher-dimensional space.
+
+This is the fundamental Kaluza insight:
+
+$$ \boxed{ \text{gauge symmetry} \sim \text{higher-dimensional coordinate symmetry}. } $$
+6. The modern geometric interpretation
+
+The construction is best understood using a principal \(U(1)\) bundle.
+
+The extra coordinate \(y\) is a coordinate along the fiber, and
+
+$$ \boxed{ \theta=dy+\kappa A } $$
+
+is a connection one-form.
+
+Its curvature is
+
+$$ d\theta = \kappa\,dA = \kappa F. $$
+
+Thus
+
+$$ \boxed{ A = \text{connection}, \qquad F = \text{curvature}. } $$
+
+This is exactly the connection/curvature distinction you have been emphasizing in your discussions of gauge structure.
+
+The Kaluza metric is essentially
+
+$$ \boxed{ G = g_{\text{base}} + \phi^2\theta^2. } $$
+
+So the higher-dimensional metric contains simultaneously:
+
+$$ \begin{array}{ccl} g_{\mu\nu}&\rightarrow&\text{gravity},\\ A_\mu&\rightarrow&U(1)\text{ connection},\\ \phi&\rightarrow&\text{scalar field}. \end{array} $$
+7. Non-Abelian generalization
+
+This becomes even more interesting.
+
+Replace \(U(1)\) by a Lie group \(G\), with gauge potential
+
+$$ A=A_\mu^a T_a\,dx^\mu. $$
+
+The curvature is
+
+$$ F=dA+A\wedge A, $$
+
+or
+
+$$ F_{\mu\nu}^a = \partial_\mu A_\nu^a -\partial_\nu A_\mu^a + f^a{}_{bc}A_\mu^bA_\nu^c. $$
+
+A higher-dimensional space is constructed as a principal \(G\)-bundle over spacetime.
+
+Then schematically,
+
+$$ \boxed{ \text{higher-dimensional metric} \longrightarrow g_{\mu\nu}+A_\mu^a+\text{scalar fields}. } $$
+
+This is the geometric origin of the modern Kaluza–Klein picture.
+
+8. Kaluza versus Eisenhart: an important distinction
+
+There is a particularly useful conceptual difference.
+
+In Eisenhart,
+
+$$ V(q,t) $$
+
+is put into the metric itself as
+
+$$ g_{tt}\sim -V. $$
+
+Thus the potential is a metric component on spacetime.
+
+In Kaluza,
+
+$$ A_\mu $$
+
+appears in an off-diagonal metric component
+
+$$ G_{\mu y}\sim A_\mu. $$
+
+But the physically important electromagnetic field is
+
+$$ F=dA, $$
+
+which is the curvature of the connection.
+
+Thus:
+
+$$ \boxed{ \begin{array}{rcl} \text{Eisenhart} &: & V\rightarrow\text{metric}\\ \text{Kaluza} &: & A\rightarrow\text{connection}\\ &&F\rightarrow\text{curvature}. \end{array}} $$
+9. There is a very nice unified picture
+
+We can now put all three constructions into one framework:
+
+$$ \boxed{ \begin{array}{ccc} \text{Hertz} & \text{Eisenhart} & \text{Kaluza} \\[3pt] \downarrow&&\downarrow \\[-2pt] \text{extra configuration} & \text{extra null direction} & \text{fiber direction} \\ \downarrow& \downarrow& \downarrow \\ \text{geodesics} & \text{null geodesics} & \text{geodesics} \\ \downarrow& \downarrow& \downarrow \\ \text{mechanics} & \text{Newtonian mechanics} & \text{charged mechanics} \end{array}} $$
+
+But there is an even deeper connection:
+
+Eisenhart and Kaluza can actually be combined.
+
+One can construct a Bargmann/Kaluza-type metric in which both a scalar potential and a gauge potential occur:
+
+$$ \boxed{ ds^2 = g_{ij}dq^i dq^j + 2dt\left(ds+A_i\,dq^i-\Phi\,dt\right) } $$
+
+(up to convention and normalization).
+
+Then the null geodesics reproduce a particle subject simultaneously to scalar and magnetic forces.
+
+This is especially relevant to your interests in stochastic mechanics with gauge fields: the object that naturally appears is no longer merely a scalar potential \(V\), but a connection \(A\), and its curvature \(F\) produces the magnetic force. In geometric language, Eisenhart handles the scalar part while the Kaluza/Bargmann structure handles the connection part.
+
+That combined construction is probably the most useful next step if we want to connect these ideas to Nelson mechanics on manifolds, magnetic fields, and stochastic parallel transport.

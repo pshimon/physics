@@ -1,0 +1,278 @@
+Eisenhart geometric dynamics is a geometric reformulation of ordinary Newtonian mechanics in which the trajectories of a mechanical system are represented as null geodesics of a higher-dimensional Lorentzian manifold. It is usually called the Eisenhart lift or Eisenhart–Duval lift.
+
+The striking point is that the potential \(V(q,t)\), which makes Newton's equations non-geodesic,
+
+$$ m\ddot q^i=-\frac{\partial V}{\partial q^i}, $$
+
+can be absorbed into the geometry of an extended spacetime.
+
+1. The basic construction
+
+For a system
+
+$$ L(q,\dot q,t) = \frac12 m g_{ij}(q)\dot q^i\dot q^j-V(q,t), $$
+
+introduce two additional coordinates \(t\) and \(s\), and define the \((n+2)\)-dimensional metric
+
+$$ \boxed{ ds_E^2 = g_{ij}(q)\,dq^i dq^j +2\,dt\,ds -\frac{2V(q,t)}{m}\,dt^2 } $$
+
+(up to conventional factors and signs).
+
+This is the Eisenhart metric.
+
+Now consider its geodesic equations. If we choose the affine parameter \(\tau\) so that
+
+$$ \frac{dt}{d\tau}=\text{constant}, $$
+
+then the \(q^i\)-components of the geodesic equations reduce precisely to
+
+$$ \boxed{ \frac{D^2q^i}{dt^2} = -g^{ij}\partial_j\!\left(\frac{V}{m}\right) } $$
+
+or, for Euclidean configuration space,
+
+$$ \boxed{ m\ddot q^i=-\partial_iV. } $$
+
+So Newtonian dynamics is geodesic motion in one dimension higher (actually two dimensions higher than configuration space).
+
+2. Why two extra dimensions?
+
+The two coordinates have rather different roles.
+
+One is ordinary Newtonian time \(t\). The other, usually called \(s\), is an auxiliary coordinate.
+
+The metric has a null Killing vector
+
+$$ \xi=\frac{\partial}{\partial s}, \qquad g_E(\xi,\xi)=0. $$
+
+The momentum associated with \(s\),
+
+$$ p_s=g_{s\mu}\dot x^\mu=\dot t, $$
+
+is conserved.
+
+Thus one can identify
+
+$$ p_s=m $$
+
+and recover the ordinary mechanical mass as a conserved momentum associated with the extra null direction.
+
+This is closely related to the Bargmann structure of nonrelativistic mechanics.
+
+3. The really interesting point: dynamics becomes geometry
+
+Ordinary Newtonian mechanics distinguishes sharply between
+
+$$ \text{kinematics: } \ddot q^i=0 $$
+
+and
+
+$$ \text{dynamics: } \ddot q^i=-\frac1m\partial_iV. $$
+
+Eisenhart changes this interpretation.
+
+Instead one has
+
+$$ \boxed{ \text{free geodesic motion} } $$
+
+but in a curved higher-dimensional geometry.
+
+The potential is encoded in the metric component
+
+$$ g_{tt}=-\frac{2V}{m}. $$
+
+Consequently,
+
+$$ \text{force} \quad\longleftrightarrow\quad \text{connection coefficients} \quad\longleftrightarrow\quad \text{curvature}. $$
+
+This makes Eisenhart geometry particularly interesting if one is asking the broader question "can dynamics be understood as geometry?"
+
+4. Curvature contains the force field
+
+For the simplest Euclidean configuration space,
+
+$$ ds_E^2 = \delta_{ij}dq^i dq^j +2\,dt\,ds -\frac{2V(q,t)}{m}dt^2, $$
+
+the nontrivial Christoffel symbols include
+
+$$ \Gamma^i_{tt} = \frac{1}{m}\partial_iV. $$
+
+The geodesic equation gives
+
+$$ \ddot q^i+\Gamma^i_{tt}\dot t^2=0. $$
+
+Taking \(\dot t=1\),
+
+$$ \ddot q^i = -\frac1m\partial_iV. $$
+
+Even more interestingly, the curvature contains second derivatives of the potential:
+
+$$ \boxed{ R_{titj} = \frac{1}{m}\partial_i\partial_j V } $$
+
+up to sign convention.
+
+Thus the tidal structure of the mechanical force appears literally as spacetime curvature.
+
+This is very analogous to GR, where gravitational acceleration can be removed locally, while tidal acceleration—the relative acceleration of neighboring geodesics—is curvature.
+
+5. Jacobi fields give the stability matrix
+
+This gives a beautiful interpretation of the usual linearized dynamics.
+
+Let
+
+$$ q^i(t)\rightarrow q^i(t)+\eta^i(t). $$
+
+Linearizing Newton's equation gives
+
+$$ m\ddot\eta^i = -\partial_i\partial_jV\,\eta^j. $$
+
+But the geodesic-deviation equation in Eisenhart space is
+
+$$ \frac{D^2\eta^\mu}{d\tau^2} = -R^\mu{}_{\nu\rho\sigma} u^\nu\eta^\rho u^\sigma. $$
+
+The transverse part reproduces exactly the stability equation.
+
+So
+
+$$ \boxed{ \text{Hessian of }V \;\longleftrightarrow\; \text{curvature} \;\longleftrightarrow\; \text{linear stability}. } $$
+
+This is one reason Eisenhart geometry is much more than a formal rewriting.
+
+6. Relation to the Jacobi metric
+
+There are actually two important geometrizations of classical mechanics, and they should not be confused.
+
+Jacobi/Maupertuis geometry
+
+For a time-independent system at fixed energy \(E\),
+
+$$ L=\frac12m g_{ij}\dot q^i\dot q^j-V(q), $$
+
+one introduces the Jacobi metric
+
+$$ \boxed{ ds_J^2 = 2m(E-V(q))\,g_{ij}\,dq^i dq^j. } $$
+
+The mechanical trajectories at energy \(E\), after an appropriate reparametrization, become geodesics of this \(n\)-dimensional Riemannian metric.
+
+But this construction has serious limitations:
+
+it requires fixed energy;
+it fails at turning points \(E=V\);
+the metric becomes degenerate there;
+it does not naturally handle time-dependent potentials;
+caustics and reparametrization issues can become awkward.
+Eisenhart geometry
+
+Instead,
+
+$$ ds_E^2 = g_{ij}dq^i dq^j +2dt\,ds -\frac{2V}{m}dt^2 $$
+
+is a Lorentzian metric in \(n+2\) dimensions.
+
+It does not require fixing \(E\), and ordinary Newtonian trajectories arise as a distinguished class of null geodesics.
+
+This difference is quite important.
+
+7. Null geodesics and the action
+
+There is another beautiful feature.
+
+Take the Eisenhart Lagrangian
+
+$$ L_E = \frac12 \left( g_{ij}\dot q^i\dot q^j +2\dot t\dot s -\frac{2V}{m}\dot t^2 \right). $$
+
+For a null geodesic,
+
+$$ L_E=0. $$
+
+Choosing
+
+$$ t=\tau, $$
+
+gives
+
+$$ 0= \frac12g_{ij}\dot q^i\dot q^j +\dot s -\frac{V}{m}. $$
+
+Therefore
+
+$$ \dot s = -\frac12g_{ij}\dot q^i\dot q^j +\frac{V}{m}. $$
+
+With appropriate normalization,
+
+$$ s(t) \sim -\frac{1}{m}\int \left( \frac12m g_{ij}\dot q^i\dot q^j-V \right)dt = -\frac{S}{m}. $$
+
+So the extra coordinate \(s\) essentially contains the classical action.
+
+That is one of the deepest aspects of the construction:
+
+$$ \boxed{ \text{extra coordinate} \quad\sim\quad \text{action}. } $$
+8. Relation to Hamilton–Jacobi theory
+
+The Eisenhart construction also connects naturally with the Hamilton–Jacobi equation
+
+$$ \frac{\partial S}{\partial t} + \frac{1}{2m}(\nabla S)^2 + V=0. $$
+
+The extended geometry provides a way of regarding this equation as a null/geometric condition in the enlarged space.
+
+This is particularly relevant to the issues you have been raising about the global status of the Hamilton principal function. The Eisenhart construction does not magically eliminate caustics or multivalued actions, but it moves the basic dynamical problem into a geometric setting in which the relevant curves remain geodesics.
+
+That distinction is important:
+
+$$ \boxed{ \text{geometrizing the trajectories} \neq \text{making the Hamilton principal function globally single-valued}. } $$
+9. Relation to Bargmann geometry
+
+Modern treatments often formulate Eisenhart mechanics using Bargmann geometry.
+
+One starts with a Lorentzian manifold
+
+$$ (M_E,g_E) $$
+
+possessing a covariantly constant null vector field
+
+$$ \xi^\mu, \qquad \nabla_\mu\xi^\nu=0. $$
+
+The quotient by the null direction generated by \(\xi\) produces Newtonian spacetime.
+
+Schematically,
+
+$$ \boxed{ \text{Eisenhart/Bargmann spacetime} \longrightarrow \text{Newtonian spacetime} \longrightarrow \text{ordinary mechanics}. } $$
+
+This is the geometric formulation underlying much of modern nonrelativistic spacetime geometry.
+
+It also makes the connection with the Galilei group particularly transparent.
+
+10. Quantum mechanics enters surprisingly naturally
+
+There is also a famous Eisenhart–Duval relation to the Schrödinger equation.
+
+Consider a scalar field \(\Phi(q,t,s)\) on the extended space and impose
+
+$$ \Phi(q,t,s) = e^{ims/\hbar}\psi(q,t). $$
+
+Then, under suitable conditions, the massless Klein–Gordon equation in the Eisenhart metric,
+
+$$ \Box_E\Phi=0, $$
+
+reduces to the Schrödinger equation
+
+$$ \boxed{ i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2\psi + V\psi. } $$
+
+Thus one obtains the remarkable chain
+
+$$ \boxed{ \text{Newtonian mechanics} \leftrightarrow \text{null geodesics} } $$
+
+and
+
+$$ \boxed{ \text{Schrödinger equation} \leftrightarrow \text{massless wave equation in Eisenhart space}. } $$
+
+This is one of the reasons Eisenhart geometry has remained important in mathematical physics.
+
+11. A particularly useful way of thinking about it
+
+For your interests, I would distinguish three geometrizations:
+
+$$ \begin{array}{ccl} \text{Newtonian mechanics} &\xrightarrow{\text{Jacobi}}& \text{geodesics in configuration space} \\[3pt] &&\text{(fixed energy)} \\[10pt] \text{Newtonian mechanics} &\xrightarrow{\text{Eisenhart}}& \text{null geodesics in extended spacetime} \\[3pt] &&\text{(arbitrary energy/time-dependent }V\text{)} \\[10pt] \text{Newtonian mechanics} &\xrightarrow{\text{Hamilton--Jacobi}}& \text{first-order dynamics of }S. \end{array} $$
+
+The Eisenhart construction is arguably the cleaner geometrization if the goal is to retain time, forces, and the full dynamics, rather than restrict attention to a fixed-energy trajectory.
+
+And it is especially relevant to your earlier questions about whether a variational problem, its Euler equations, and its global solution space are really equivalent: the Eisenhart lift gives an equivalence at the level of trajectories under a specific projection and parametrization, but it does not imply that all global structures of the original mechanical problem and the geodesic problem are identical. That distinction becomes important at caustics, boundaries, topology, and for global Hamilton–Jacobi constructions.

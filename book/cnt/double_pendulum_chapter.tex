@@ -1,0 +1,1460 @@
+\documentclass[11pt,a4paper]{book}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,bm,mathtools}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\pb}[2]{\{#1,#2\}}
+\DeclareMathOperator{\sgn}{sgn}
+
+\lstset{
+  language=C,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  columns=fullflexible
+}
+
+\renewcommand{\bibname}{References}
+
+\begin{document}
+
+\setcounter{chapter}{0}
+\chapter{The Classical Double Pendulum}
+\label{ch:double-pendulum}
+
+\begin{quote}\itshape
+A system with two degrees of freedom, two masses, two rods and one uniform gravitational field:
+the smallest mechanical system in which every major formalism of classical mechanics has something
+to say, and the smallest in which they all fail to give a closed-form solution.
+\end{quote}
+
+\section{Introduction and Scope}
+
+The simple pendulum is the first nontrivial problem of classical mechanics: one degree of freedom,
+one conserved quantity, and a solution in terms of elliptic functions. Attach a second pendulum to the
+bob of the first and the character of the problem changes completely. The system now has two degrees of
+freedom but only one \emph{known} independent integral of motion (the energy), so the Liouville--Arnold
+theorem no longer applies. The motion is regular at low energy and chaotic at high energy, and the
+transition between the two regimes is a textbook illustration of the Kolmogorov--Arnold--Moser theory.
+
+The double pendulum is also an ideal vehicle for comparing the different formulations of classical
+mechanics. In this chapter we derive its equations of motion in the following ways:
+
+\begin{enumerate}
+  \item Newton's second law with constraint forces (Section~\ref{sec:newton});
+  \item d'Alembert's principle and Lagrange multipliers in Cartesian coordinates (Section~\ref{sec:cartesian});
+  \item the Euler--Lagrange equations in generalized coordinates (Section~\ref{sec:lagrange});
+  \item Hamilton's canonical equations, Poisson brackets and the symplectic structure (Section~\ref{sec:hamilton});
+  \item the Hamilton--Jacobi equation, separability, and action--angle variables in the small-oscillation limit
+        (Section~\ref{sec:hj});
+  \item further formulations: Hamilton's variational principle, the Jacobi--Maupertuis principle, the
+        Gibbs--Appell equations (Section~\ref{sec:others}).
+\end{enumerate}
+We then analyse small oscillations (Section~\ref{sec:small}), the structure of the phase space and the onset of
+chaos (Section~\ref{sec:chaos}), and numerical integration (Section~\ref{sec:numerics}). A set of exercises closes
+the chapter.
+
+General references for the formalisms used here are Goldstein, Poole and Safko~\cite{goldstein}, Landau and
+Lifshitz~\cite{landau} and, for the geometric viewpoint, Arnold~\cite{arnold} and Abraham and
+Marsden~\cite{abrahammarsden}. Kane's method is treated in~\cite{kanelevinson}; regular and chaotic Hamiltonian
+dynamics in~\cite{lichtenberg}; and geometric numerical integration in~\cite{ghw,sanzserna,leimkuhler}. The
+double pendulum itself, as a paradigm of chaos in a simple mechanical system, has been studied numerically and
+experimentally in~\cite{shinbrot,levien,stachowiak}.
+
+\section{The Model}
+\label{sec:model}
+
+\subsection{Setup and assumptions}
+
+Two point masses $m_1$ and $m_2$ are connected by massless, rigid, inextensible rods of lengths $l_1$ and $l_2$.
+The first rod is attached to a fixed frictionless pivot $O$; the second rod joins $m_1$ to $m_2$ through a
+frictionless hinge. The motion is confined to a vertical plane in a uniform gravitational field of
+magnitude $g$. We write $\mu \equiv m_1+m_2$ for the total mass.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.6,>=stealth]
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (-60:1.5);
+  \coordinate (B) at ($(A)+(-35:1.2)$);
+  \draw[dashed,gray] (O) -- (0,-2.6);
+  \draw[dashed,gray] (A) -- ($(A)+(0,-1.2)$);
+  \draw[thick] (O) -- (A) -- (B);
+  \fill (O) circle (1.2pt);
+  \fill (A) circle (2.5pt) node[right=3pt] {$m_1$};
+  \fill (B) circle (3pt) node[right=3pt] {$m_2$};
+  \draw (0,-0.7) arc (-90:-60:0.7);
+  \node at (0.17,-0.95) {$\theta_1$};
+  \draw ($(A)+(0,-0.6)$) arc (-90:-35:0.6);
+  \node at ($(A)+(0.28,-0.8)$) {$\theta_2$};
+  \node[above left] at ($(O)!0.5!(A)$) {$l_1$};
+  \node[above right] at ($(A)!0.5!(B)$) {$l_2$};
+  \draw[->] (2.2,-0.3) -- (2.2,-1.1) node[midway,right] {$\bm g$};
+  \node[above] at (O) {$O$};
+\end{tikzpicture}
+\caption{The planar double pendulum. Both angles are measured from the downward vertical, counter-clockwise
+positive.}
+\label{fig:dp}
+\end{figure}
+
+\subsection{Configuration space and degrees of freedom}
+
+Without constraints, the two particles in the plane have four degrees of freedom. The two holonomic constraints
+\begin{equation}
+  |\bm r_1| = l_1, \qquad |\bm r_2-\bm r_1| = l_2
+  \label{eq:constraints}
+\end{equation}
+leave two. We choose the angles $(\theta_1,\theta_2)$ of Fig.~\ref{fig:dp} as generalized coordinates. The
+configuration space is the two-torus $T^2=S^1\times S^1$ and the phase space is its cotangent bundle $T^*T^2$,
+of dimension four. Taking the origin at $O$ with the $y$-axis pointing up,
+\begin{align}
+  x_1 &= l_1\sin\theta_1, & y_1 &= -l_1\cos\theta_1, \label{eq:pos1}\\
+  x_2 &= l_1\sin\theta_1 + l_2\sin\theta_2, & y_2 &= -l_1\cos\theta_1 - l_2\cos\theta_2. \label{eq:pos2}
+\end{align}
+Differentiating,
+\begin{align}
+  \dot{x}_1 &= l_1\dot\theta_1\cos\theta_1, & \dot{y}_1 &= l_1\dot\theta_1\sin\theta_1,\\
+  \dot{x}_2 &= l_1\dot\theta_1\cos\theta_1 + l_2\dot\theta_2\cos\theta_2, &
+  \dot{y}_2 &= l_1\dot\theta_1\sin\theta_1 + l_2\dot\theta_2\sin\theta_2,
+\end{align}
+and therefore, with $\Delta\equiv\theta_1-\theta_2$,
+\begin{equation}
+  v_1^2 = l_1^2\dot\theta_1^2, \qquad
+  v_2^2 = l_1^2\dot\theta_1^2 + l_2^2\dot\theta_2^2 + 2l_1l_2\dot\theta_1\dot\theta_2\cos\Delta .
+  \label{eq:v2}
+\end{equation}
+
+\section{Newtonian Formulation}
+\label{sec:newton}
+
+In the Newtonian approach we treat the rod forces explicitly. Define, for $i=1,2$, the radial and tangential
+unit vectors
+\begin{equation}
+  \bm e_i = (\sin\theta_i,\,-\cos\theta_i), \qquad
+  \bm t_i = (\cos\theta_i,\ \sin\theta_i),
+\end{equation}
+so that $\dot{\bm e}_i=\dot\theta_i\bm t_i$ and $\dot{\bm t}_i=-\dot\theta_i\bm e_i$. Let $T_1$ and $T_2$ be the
+tensions in the upper and lower rods, and $\bm g=(0,-g)$. The forces are:
+\begin{itemize}
+  \item on $m_2$: gravity $m_2\bm g$ and the pull of the lower rod, $-T_2\bm e_2$;
+  \item on $m_1$: gravity $m_1\bm g$, the pull of the upper rod toward the pivot, $-T_1\bm e_1$, and the reaction
+        of the lower rod, $+T_2\bm e_2$.
+\end{itemize}
+Newton's second law gives
+\begin{align}
+  m_1\ddot{\bm r}_1 &= m_1\bm g - T_1\bm e_1 + T_2\bm e_2, \label{eq:newton1}\\
+  m_2\ddot{\bm r}_2 &= m_2\bm g - T_2\bm e_2. \label{eq:newton2}
+\end{align}
+The accelerations follow from \eqref{eq:pos1}--\eqref{eq:pos2}:
+\begin{align}
+  \ddot{\bm r}_1 &= l_1\big(\ddot\theta_1\bm t_1 - \dot\theta_1^2\bm e_1\big),\\
+  \ddot{\bm r}_2 &= \ddot{\bm r}_1 + l_2\big(\ddot\theta_2\bm t_2 - \dot\theta_2^2\bm e_2\big).
+\end{align}
+We need the scalar products
+\begin{equation}
+  \bm e_1\!\cdot\!\bm e_2=\bm t_1\!\cdot\!\bm t_2=\cos\Delta,\qquad
+  \bm t_1\!\cdot\!\bm e_2=-\sin\Delta,\qquad
+  \bm e_1\!\cdot\!\bm t_2=\sin\Delta,
+\end{equation}
+and $\bm g\!\cdot\!\bm e_i=g\cos\theta_i$, $\bm g\!\cdot\!\bm t_i=-g\sin\theta_i$.
+
+\paragraph{Lower mass.} Projecting \eqref{eq:newton2} on $\bm e_2$ and $\bm t_2$ gives
+\begin{align}
+  T_2 &= m_2\big[g\cos\theta_2 + l_1\ddot\theta_1\sin\Delta + l_1\dot\theta_1^2\cos\Delta + l_2\dot\theta_2^2\big],
+  \label{eq:T2}\\
+  l_2\ddot\theta_2 + l_1\ddot\theta_1\cos\Delta - l_1\dot\theta_1^2\sin\Delta + g\sin\theta_2 &= 0.
+  \label{eq:eom2}
+\end{align}
+
+\paragraph{Upper mass.} Projecting \eqref{eq:newton1} on $\bm t_1$ eliminates $T_1$ (which is orthogonal to the
+motion of $m_1$):
+\begin{equation}
+  m_1 l_1\ddot\theta_1 = -m_1 g\sin\theta_1 - T_2\sin\Delta .
+  \label{eq:tangent1}
+\end{equation}
+Substituting \eqref{eq:T2} for $T_2$ gives the second equation of motion. After a short manipulation (using
+\eqref{eq:eom2} to trade $\ddot\theta_2$ for $\ddot\theta_1$) one obtains
+\begin{equation}
+  \mu\, l_1\ddot\theta_1 + m_2 l_2\ddot\theta_2\cos\Delta + m_2 l_2\dot\theta_2^2\sin\Delta + \mu g\sin\theta_1 = 0 .
+  \label{eq:eom1}
+\end{equation}
+The radial projection of \eqref{eq:newton1} then determines $T_1$ once $\theta_i(t)$ is known. The tensions are
+thus a by-product, not an unknown that must be solved for simultaneously, \emph{provided} one projects the
+equations onto the directions orthogonal to the constraint forces. This projection is exactly what the Lagrangian
+formalism automates.
+
+\section{Cartesian Coordinates and Lagrange Multipliers}
+\label{sec:cartesian}
+
+\subsection{d'Alembert's principle}
+
+d'Alembert's principle states that the constraint forces do no virtual work on virtual displacements compatible with the
+constraints:
+\begin{equation}
+  \sum_{k=1}^{2}\big(\bm F_k - m_k\ddot{\bm r}_k\big)\cdot\delta\bm r_k = 0 ,
+\end{equation}
+where $\bm F_k=m_k\bm g$ are the applied forces. The constraints \eqref{eq:constraints} imply
+$\bm r_1\cdot\delta\bm r_1=0$ and $(\bm r_2-\bm r_1)\cdot(\delta\bm r_2-\delta\bm r_1)=0$, so $\delta\bm r_k$ is
+not arbitrary. Choosing $\delta\bm r_k=\sum_i(\partial\bm r_k/\partial\theta_i)\,\delta\theta_i$ with independent
+$\delta\theta_i$ yields the Lagrange equations of Section~\ref{sec:lagrange}.
+
+\subsection{Multiplier formulation}
+
+Alternatively, keep the redundant Cartesian coordinates $q=(\bm r_1,\bm r_2)\in\mathbb R^4$ and impose the constraints
+with multipliers. Write
+\begin{equation}
+  \phi_1=\tfrac12\big(\bm r_1^2-l_1^2\big)=0,\qquad
+  \phi_2=\tfrac12\big((\bm r_2-\bm r_1)^2-l_2^2\big)=0 ,
+\end{equation}
+and extend the Lagrangian to $L_\lambda=\sum_k\tfrac12 m_k\dot{\bm r}_k^2-\sum_k m_kgy_k-\lambda_1\phi_1-\lambda_2\phi_2$.
+Varying with respect to $\bm r_k$ and $\lambda_a$ gives
+\begin{align}
+  m_1\ddot{\bm r}_1 &= m_1\bm g - \lambda_1\bm r_1 + \lambda_2(\bm r_2-\bm r_1),\\
+  m_2\ddot{\bm r}_2 &= m_2\bm g - \lambda_2(\bm r_2-\bm r_1),\\
+  \phi_1&=\phi_2=0 .
+\end{align}
+Comparison with \eqref{eq:newton1}--\eqref{eq:newton2} identifies $T_2=\lambda_2 l_2$ and
+$T_1=\lambda_1 l_1 - \lambda_2\,\bm e_1\!\cdot\!(\bm r_2-\bm r_1)$. The multipliers therefore \emph{are} the
+(scaled) constraint forces; this is the principal practical advantage of the method.
+
+The price is that the system is now a differential--algebraic equation (DAE). Differentiating $\phi_a$ twice
+in time gives algebraic equations for $\lambda_a$ (index-3 DAE reduced to index-1 after two differentiations). In
+numerical work one needs constraint stabilization (Baumgarte~\cite{baumgarte}) or projection methods to prevent drift off the
+constraint manifold. For the double pendulum, the use of the angles $\theta_i$ avoids the problem altogether.
+
+\section{Lagrangian Formulation}
+\label{sec:lagrange}
+
+\subsection{Kinetic and potential energy}
+
+From \eqref{eq:v2}, the kinetic energy $T=\tfrac12m_1v_1^2+\tfrac12m_2v_2^2$ is
+\begin{equation}
+  T=\tfrac12\mu\,l_1^2\dot\theta_1^2+\tfrac12m_2l_2^2\dot\theta_2^2+m_2l_1l_2\dot\theta_1\dot\theta_2\cos(\theta_1-\theta_2).
+  \label{eq:T}
+\end{equation}
+The potential energy, with zero at the pivot height, is
+\begin{equation}
+  V=m_1gy_1+m_2gy_2=-\mu g\,l_1\cos\theta_1-m_2g\,l_2\cos\theta_2 .
+  \label{eq:V}
+\end{equation}
+The Lagrangian is $L=T-V$. The kinetic energy is a quadratic form $T=\tfrac12\dot{\bm\theta}^{\!\top}M(\bm\theta)\dot{\bm\theta}$
+with the configuration-dependent mass matrix
+\begin{equation}
+  M(\bm\theta)=
+  \begin{pmatrix}
+    \mu\,l_1^2 & m_2l_1l_2\cos\Delta\\[2pt]
+    m_2l_1l_2\cos\Delta & m_2l_2^2
+  \end{pmatrix},
+  \qquad
+  \det M=m_2l_1^2l_2^2\,\big(m_1+m_2\sin^2\Delta\big).
+  \label{eq:M}
+\end{equation}
+The determinant is strictly positive for $m_1>0$, so $M$ is positive definite everywhere, as it must be for a
+physical kinetic energy. (For $m_1\to0$ the determinant vanishes at $\Delta=0,\pi$: the upper bob becomes a
+massless joint and the coordinate system degenerates.)
+
+\subsection{Euler--Lagrange equations}
+
+The Euler--Lagrange equations $\frac{\dd}{\dd t}\frac{\partial L}{\partial\dot\theta_i}-\frac{\partial L}{\partial\theta_i}=0$
+require the generalized momenta
+\begin{align}
+  p_1=\frac{\partial L}{\partial\dot\theta_1}&=\mu\,l_1^2\dot\theta_1+m_2l_1l_2\dot\theta_2\cos\Delta,\\
+  p_2=\frac{\partial L}{\partial\dot\theta_2}&=m_2l_2^2\dot\theta_2+m_2l_1l_2\dot\theta_1\cos\Delta,
+\end{align}
+and the generalized forces
+\begin{align}
+  \frac{\partial L}{\partial\theta_1}&=-m_2l_1l_2\dot\theta_1\dot\theta_2\sin\Delta-\mu g\,l_1\sin\theta_1,\\
+  \frac{\partial L}{\partial\theta_2}&=+m_2l_1l_2\dot\theta_1\dot\theta_2\sin\Delta-m_2g\,l_2\sin\theta_2 .
+\end{align}
+Computing $\dot p_i$ and cancelling the terms proportional to $\dot\theta_1\dot\theta_2\sin\Delta$ yields
+\begin{align}
+  \mu\,l_1^2\ddot\theta_1+m_2l_1l_2\ddot\theta_2\cos\Delta+m_2l_1l_2\dot\theta_2^2\sin\Delta+\mu g\,l_1\sin\theta_1&=0,
+  \label{eq:EL1}\\
+  m_2l_2^2\ddot\theta_2+m_2l_1l_2\ddot\theta_1\cos\Delta-m_2l_1l_2\dot\theta_1^2\sin\Delta+m_2g\,l_2\sin\theta_2&=0.
+  \label{eq:EL2}
+\end{align}
+Dividing by $l_1$ and $m_2l_2$ respectively gives \eqref{eq:eom1} and \eqref{eq:eom2}, which were obtained
+in Section~\ref{sec:newton} through the Newtonian route. The Lagrangian derivation, however, did not require
+knowing the tensions at any stage.
+
+\subsection{Matrix form and explicit accelerations}
+
+In matrix form, the equations of motion read
+\begin{equation}
+  M(\bm\theta)\,\ddot{\bm\theta}+\Gamma(\bm\theta;\dot{\bm\theta},\dot{\bm\theta})+\nabla V=0,
+  \qquad
+  \Gamma_i=\sum_{jk}\Gamma_{ijk}\dot\theta_j\dot\theta_k,\quad
+  \Gamma_{ijk}=\tfrac12\Big(\frac{\partial M_{ij}}{\partial\theta_k}+\frac{\partial M_{ik}}{\partial\theta_j}-\frac{\partial M_{jk}}{\partial\theta_i}\Big),
+  \label{eq:matrixform}
+\end{equation}
+where $\Gamma_{ijk}$ are the Christoffel symbols of the first kind of the metric $M_{ij}$ on the configuration
+torus: the free motion of the system is geodesic motion with respect to the kinetic-energy metric. For the double
+pendulum, the only $\theta$-dependence of $M$ is through $\Delta$, so $\Gamma_{\,\cdot\,jk}$ reduces to the two
+terms in \eqref{eq:EL1}--\eqref{eq:EL2}, namely $\dot\theta_2^2\sin\Delta$ and $\dot\theta_1^2\sin\Delta$.
+
+Solving the $2\times2$ linear system for the accelerations (by Cramer's rule, using \eqref{eq:M}) gives the
+standard explicit form
+\begin{align}
+  \ddot\theta_1&=\frac{-g(2m_1+m_2)\sin\theta_1-m_2g\sin(\theta_1-2\theta_2)-2m_2\sin\Delta\,\big(l_2\dot\theta_2^2+l_1\dot\theta_1^2\cos\Delta\big)}
+  {l_1\big(2m_1+m_2-m_2\cos2\Delta\big)},\label{eq:acc1}\\[4pt]
+  \ddot\theta_2&=\frac{2\sin\Delta\,\big(l_1\mu\,\dot\theta_1^2+g\mu\cos\theta_1+l_2m_2\dot\theta_2^2\cos\Delta\big)}
+  {l_2\big(2m_1+m_2-m_2\cos2\Delta\big)} .\label{eq:acc2}
+\end{align}
+Note that $2m_1+m_2-m_2\cos2\Delta=2(m_1+m_2\sin^2\Delta)$, so the denominators are proportional to $\det M$
+and never vanish.
+
+\subsection{Symmetries and conserved quantities}
+
+Noether's theorem associates a conserved quantity with each continuous symmetry of $L$. The Lagrangian is
+independent of time, so the energy
+\begin{equation}
+  E=\sum_i\dot\theta_i\frac{\partial L}{\partial\dot\theta_i}-L=T+V
+\end{equation}
+is conserved. There is \emph{no} other continuous symmetry: the simultaneous rotation $\theta_i\to\theta_i+c$ would
+leave $T$ invariant (it depends only on $\Delta$) but it changes $V$ because gravity breaks rotational invariance
+about $O$. (In the absence of gravity, $g=0$, the total angular momentum $p_1+p_2$ would be conserved and the system
+would be integrable.) With only one integral of motion for two degrees of freedom the system is not Liouville
+integrable by this route, and this is the root of its chaotic behaviour.
+
+\begin{remark}
+Because $L$ has no ignorable coordinate, Routh's procedure of eliminating cyclic coordinates is of no use here. It is
+useful in related problems: the spherical double pendulum, for example, has the azimuthal symmetry about the vertical axis
+and the Routhian reduces the number of degrees of freedom from four to two.
+\end{remark}
+
+\section{Hamiltonian Formulation}
+\label{sec:hamilton}
+
+\subsection{Legendre transform}
+
+The Legendre transformation $H(\bm\theta,\bm p)=\bm p\cdot\dot{\bm\theta}-L$ is well defined because $M$ is
+positive definite, which makes $\bm p=M\dot{\bm\theta}$ invertible. Inverting the momenta,
+\begin{align}
+  \dot\theta_1&=\frac{l_2p_1-l_1p_2\cos\Delta}{l_1^2l_2\,(m_1+m_2\sin^2\Delta)},\label{eq:thd1}\\
+  \dot\theta_2&=\frac{\mu\,l_1p_2-m_2l_2p_1\cos\Delta}{m_2l_1l_2^2\,(m_1+m_2\sin^2\Delta)}.\label{eq:thd2}
+\end{align}
+The Hamiltonian, which is the total energy expressed in canonical variables, is
+\begin{equation}
+  H=\tfrac12\bm p^{\top}M^{-1}\bm p+V
+   =\frac{m_2l_2^2p_1^2+\mu\,l_1^2p_2^2-2m_2l_1l_2\,p_1p_2\cos(\theta_1-\theta_2)}
+         {2m_2l_1^2l_2^2\,\big(m_1+m_2\sin^2(\theta_1-\theta_2)\big)}
+   -\mu g\,l_1\cos\theta_1-m_2g\,l_2\cos\theta_2 .
+  \label{eq:H}
+\end{equation}
+
+\subsection{Canonical equations}
+
+Hamilton's equations $\dot\theta_i=\partial H/\partial p_i$, $\dot p_i=-\partial H/\partial\theta_i$ give for the
+position equations exactly \eqref{eq:thd1}--\eqref{eq:thd2}. For the momenta, one can differentiate
+\eqref{eq:H} directly, but it is much simpler to use the general identity (valid for $H=\tfrac12p^\top M^{-1}p+V$)
+$\partial H/\partial\theta_i|_{p}=-\partial L/\partial\theta_i|_{\dot\theta}$. Therefore
+\begin{align}
+  \dot p_1&=-m_2l_1l_2\,\dot\theta_1\dot\theta_2\sin\Delta-\mu g\,l_1\sin\theta_1,\\
+  \dot p_2&=+m_2l_1l_2\,\dot\theta_1\dot\theta_2\sin\Delta-m_2g\,l_2\sin\theta_2,
+\end{align}
+with $\dot\theta_1,\dot\theta_2$ understood as the functions of $(\bm\theta,\bm p)$ in \eqref{eq:thd1}--\eqref{eq:thd2}.
+These four first-order equations form the Hamiltonian system on $\mathbb R^4$ (more precisely on $T^2\times\mathbb R^2$).
+
+\subsection{Poisson brackets and symplectic structure}
+
+With $z=(\theta_1,\theta_2,p_1,p_2)$ and the canonical Poisson bracket
+\begin{equation}
+  \pb{F}{G}=\sum_{i=1}^{2}\Big(\frac{\partial F}{\partial\theta_i}\frac{\partial G}{\partial p_i}
+  -\frac{\partial F}{\partial p_i}\frac{\partial G}{\partial\theta_i}\Big),
+\end{equation}
+the equations of motion are $\dot z=\pb{z}{H}$ and any observable $F(z,t)$ evolves as
+\begin{equation}
+  \frac{\dd F}{\dd t}=\pb{F}{H}+\frac{\partial F}{\partial t}.
+\end{equation}
+The canonical brackets $\pb{\theta_i}{p_j}=\delta_{ij}$ hold, and the flow preserves the symplectic form
+$\omega=\sum_i\dd p_i\wedge\dd\theta_i$. Two immediate consequences:
+
+\begin{proposition}[Liouville]
+The Hamiltonian flow preserves the phase-space volume $\dd\theta_1\,\dd\theta_2\,\dd p_1\,\dd p_2$.
+\end{proposition}
+\begin{proof}
+The divergence of the vector field is $\sum_i\big(\partial\dot\theta_i/\partial\theta_i+\partial\dot p_i/\partial p_i\big)
+=\sum_i\big(\partial^2H/\partial\theta_i\partial p_i-\partial^2H/\partial p_i\partial\theta_i\big)=0$.
+\end{proof}
+
+\begin{proposition}[Poisson's theorem and non-integrability]
+If $F$ and $G$ are integrals of motion, so is $\pb{F}{G}$. For the double pendulum, the only globally known integral
+is $H$.
+\end{proposition}
+The existence of a \emph{second}, functionally independent, analytic integral $F$ with $\pb{F}{H}=0$ would make the
+system Liouville integrable. Such an integral does not exist for generic parameters: the double pendulum has been shown
+to be non-integrable in the analytic sense by methods based on the variational equations along particular
+solutions and differential Galois theory (the Ziglin and Morales-Ruiz--Ramis approach~\cite{ziglin,moralesruiz,mrr}). The numerical evidence is
+the Poincar\'e sections of Section~\ref{sec:chaos}.
+
+\subsection{Canonical transformations}
+
+A transformation $(\bm\theta,\bm p)\to(\bm Q,\bm P)$ is canonical if it preserves $\omega$ or, equivalently, the
+fundamental brackets. Generating functions of type 2, $F_2(\bm\theta,\bm P,t)$, give
+\begin{equation}
+  p_i=\frac{\partial F_2}{\partial\theta_i},\qquad Q_i=\frac{\partial F_2}{\partial P_i},\qquad
+  K=H+\frac{\partial F_2}{\partial t}.
+  \label{eq:F2}
+\end{equation}
+The goal of the Hamilton--Jacobi theory is to choose $F_2$ so that $K$ depends on $\bm P$ only; then all $Q_i$
+advance linearly in time.
+
+\section{Hamilton--Jacobi Theory}
+\label{sec:hj}
+
+\subsection{The Hamilton--Jacobi equation}
+
+Choose $F_2=S(\bm\theta,\bm\alpha,t)$ with constants $\bm\alpha=(\alpha_1,\alpha_2)$ such that the new Hamiltonian
+vanishes, $K=0$. Then $\bm P=\bm\alpha$, $\bm Q=\bm\beta$ are constants of motion, and $S$ must satisfy
+\begin{equation}
+  \frac{\partial S}{\partial t}+H\Big(\bm\theta,\frac{\partial S}{\partial\bm\theta}\Big)=0 .
+  \label{eq:HJ}
+\end{equation}
+For the double pendulum, with $S_i\equiv\partial S/\partial\theta_i$, this is the nonlinear first-order PDE
+\begin{equation}
+  \frac{\partial S}{\partial t}
+  +\frac{m_2l_2^2S_1^2+\mu\,l_1^2S_2^2-2m_2l_1l_2\,S_1S_2\cos\Delta}{2m_2l_1^2l_2^2\,(m_1+m_2\sin^2\Delta)}
+  -\mu g\,l_1\cos\theta_1-m_2g\,l_2\cos\theta_2=0 .
+  \label{eq:HJexplicit}
+\end{equation}
+Since $H$ does not depend on $t$, we separate time: $S=W(\bm\theta,\bm\alpha)-Et$ with $\alpha_1=E$, giving the
+reduced (time-independent) Hamilton--Jacobi equation
+\begin{equation}
+  H\Big(\bm\theta,\frac{\partial W}{\partial\bm\theta}\Big)=E .
+  \label{eq:HJtimeindep}
+\end{equation}
+A \emph{complete integral} $W(\theta_1,\theta_2;E,\alpha_2)$, depending on two independent constants, would solve the
+motion by quadratures: $\beta_i=\partial W/\partial\alpha_i$ (with $\beta_1=t+t_0$), and $p_i=\partial W/\partial\theta_i$.
+
+\subsection{Separability: why it fails}
+
+Equation \eqref{eq:HJtimeindep} is usually solved by separation of variables, $W=W_1(\theta_1)+W_2(\theta_2)$. Such a
+separation works only if the Hamiltonian has a Liouville or St\"ackel form in the chosen coordinates, i.e.\ if
+$H$ can be written as
+\[
+  H=\frac{\sum_i\big(p_i^2/2+U_i(\theta_i)\big)\,(\text{cofactors})}{\det\Phi}.
+\]
+In \eqref{eq:HJexplicit}, however, the mixed term $p_1p_2\cos(\theta_1-\theta_2)$ and the factor
+$(m_1+m_2\sin^2\Delta)$ in the denominator couple $\theta_1$ and $\theta_2$ irreducibly. No point transformation of the
+angles is known that restores the Stäckel structure and, in accordance with the non-integrability result quoted above, none
+exists in the analytic class. The Hamilton--Jacobi equation therefore has no closed-form complete integral in the
+general case.
+
+\subsection{Solvable limits}
+
+\paragraph{(a) Small oscillations: separation in normal coordinates.}
+Expand $H$ about the stable equilibrium $\bm\theta=0,\ \bm p=0$ to second order (see Section~\ref{sec:small}):
+\begin{equation}
+  H_2=\tfrac12\bm p^\top M_0^{-1}\bm p+\tfrac12\bm\theta^\top K\bm\theta,
+  \qquad M_0=M(\bm0),\quad K=\mathrm{diag}(\mu g l_1,\ m_2g l_2).
+\end{equation}
+Let $A$ be the matrix of normalized modal vectors, $A^\top M_0A=\mathbb 1$, $A^\top KA=\mathrm{diag}(\omega_1^2,\omega_2^2)$
+and define $\bm\theta=A\bm Q$ with conjugate momenta $\bm P=A^{\top}\bm p$ (hence $\bm P=\dot{\bm Q}$). Then
+\begin{equation}
+  H_2=\sum_{i=1}^{2}\tfrac12\big(P_i^2+\omega_i^2Q_i^2\big)
+\end{equation}
+is manifestly separable, and the Hamilton--Jacobi equation splits into two ordinary equations,
+$\tfrac12(W_i')^2+\tfrac12\omega_i^2Q_i^2=\alpha_i$, with
+\begin{equation}
+  W(\bm Q,\bm\alpha)=\sum_{i=1}^{2}\int^{Q_i}\!\sqrt{2\alpha_i-\omega_i^2Q^2}\,\dd Q .
+\end{equation}
+The corresponding action--angle variables are
+\begin{equation}
+  J_i=\frac1{2\pi}\oint P_i\,\dd Q_i=\frac{\alpha_i}{\omega_i},\qquad
+  \varphi_i=\frac{\partial W}{\partial J_i}=\omega_it+\varphi_i^{(0)},\qquad
+  H_2=\omega_1J_1+\omega_2J_2 .
+  \label{eq:AA}
+\end{equation}
+Phase-space trajectories in the linear approximation wind around invariant 2-tori $J_1,J_2=$ const.
+
+\paragraph{(b) Anharmonic corrections: Birkhoff normal form.}
+Retaining quartic terms in $H$ and applying a canonical transformation (via a generating function constructed order
+by order in a Lie-series or Deprit scheme) one finds, away from resonances $k_1\omega_1+k_2\omega_2=0$,
+\begin{equation}
+  H=\omega_1J_1+\omega_2J_2+\tfrac12\big(a_{11}J_1^2+2a_{12}J_1J_2+a_{22}J_2^2\big)+O(J^3),
+\end{equation}
+where the $a_{ij}$ are rational functions of the masses and lengths. The frequencies $\Omega_i=\partial H/\partial J_i$
+become amplitude-dependent. The normal form is generally only an asymptotic series; its divergence is the manifestation
+of the destruction of tori by resonances (Section~\ref{sec:chaos}).
+
+\paragraph{(c) Other solvable limits.}
+When $m_2\to0$ the lower pendulum is a test particle, driven by the upper simple pendulum, and the system is a
+one-degree-of-freedom pendulum plus a driven one: integrable in its autonomous part. When $l_2\to0$ it reduces to
+a simple pendulum of mass $\mu$. When $m_1\to0$ the upper mass is a massless joint and the Hamiltonian is singular
+at $\Delta=0,\pi$.
+
+\section{Other Classical Formulations}
+\label{sec:others}
+
+\subsection{Hamilton's variational principle}
+
+The motion makes the action $\mathcal S[\bm\theta]=\int_{t_0}^{t_1}L\,\dd t$ stationary among paths with fixed endpoints,
+$\delta\mathcal S=0$. The Euler--Lagrange equations \eqref{eq:EL1}--\eqref{eq:EL2} are the Euler equations of this
+variational problem. The equivalent phase-space form,
+$\delta\int\big(\bm p\cdot\dd\bm\theta-H\,\dd t\big)=0$, with independent variations of $\bm\theta$ and $\bm p$,
+reproduces Hamilton's canonical equations. The latter form is the starting point for symplectic (variational)
+integrators.
+
+\subsection{The Jacobi--Maupertuis principle and geodesic flow}
+
+For fixed energy $E$, the trajectory (but not the time parametrization) is determined by the Maupertuis
+(abbreviated-action) principle~\cite{arnold,abrahammarsden}
+\begin{equation}
+  \delta\int\bm p\cdot\dd\bm\theta=\delta\int\sqrt{2(E-V)\,M_{ij}\,\dd\theta^i\dd\theta^j}=0 .
+\end{equation}
+This is the statement that trajectories of energy $E$ are \emph{geodesics} of the Jacobi metric
+\begin{equation}
+  g^{(E)}_{ij}=2\,(E-V(\bm\theta))\,M_{ij}(\bm\theta)
+\end{equation}
+on the region of configuration space where $E>V$ (the Hill region). The geometry of this Riemannian two-manifold is
+a direct handle on the dynamics. At low energies the Hill region is a small disc around the minimum of $V$, where the
+Gaussian curvature of $g^{(E)}$ is positive and geodesics are stable. At higher energies the Hill region wraps around the
+torus and includes regions of negative curvature, where nearby geodesics diverge exponentially. Negative curvature is
+a sufficient (not necessary) mechanism for chaos.
+
+\subsection{Gibbs--Appell equations}
+
+Following Gibbs~\cite{gibbs} and Appell~\cite{appell}, let the \emph{acceleration energy} be
+$\mathcal G=\tfrac12\sum_km_k\ddot{\bm r}_k^{\,2}$. Written in terms of the generalized accelerations $\ddot\theta_i$,
+\begin{equation}
+  \mathcal G=\tfrac12\ddot{\bm\theta}^{\top}M(\bm\theta)\ddot{\bm\theta}+\ddot{\bm\theta}\cdot\bm c(\bm\theta,\dot{\bm\theta})
+  +\ (\text{terms independent of }\ddot{\bm\theta}),
+\end{equation}
+where $\bm c$ collects the velocity-dependent (Coriolis/centripetal) contributions. The Gibbs--Appell equations
+\begin{equation}
+  \frac{\partial\mathcal G}{\partial\ddot\theta_i}=Q_i,\qquad Q_i=-\frac{\partial V}{\partial\theta_i},
+\end{equation}
+are \emph{first-order in the accelerations}: they produce $M\ddot{\bm\theta}=-\bm c-\nabla V$, identical to
+\eqref{eq:matrixform}. The formalism needs only the accelerations, never the constraint forces, and is particularly
+efficient for nonholonomic systems; for holonomic systems such as the double pendulum it offers no savings over the
+Lagrangian method but provides an independent check.
+
+\subsection{Kane's method}
+\label{sec:kane}
+
+Kane's method~\cite{kane1961,kanewang,kanelevinson} is a vectorial formalism that, like the Lagrangian one,
+eliminates workless constraint forces, but does so \emph{without} constructing the energy functions $T$ or $L$
+and without differentiating them with respect to the coordinates. It is equivalent to Jourdain's principle of
+virtual power and to the Gibbs--Appell equations, and it is the standard tool for generating the equations of
+motion of multibody systems by computer algebra (for example in the Autolev and PyDy packages).
+
+\paragraph{The recipe.} Consider $N$ particles $P_k$ with $n$ degrees of freedom.
+\begin{enumerate}
+  \item \textbf{Generalized speeds.} Choose $n$ independent quantities
+        $u_r=\sum_sY_{rs}(\bm q,t)\,\dot q_s+z_r(\bm q,t)$, $r=1,\dots,n$, with $Y$ invertible. The simplest choice
+        is $u_r=\dot q_r$. For a system with $m$ nonholonomic constraints the freedom in this choice is used to make
+        the constraints solved identically, so that only $n-m$ independent speeds remain.
+  \item \textbf{Partial velocities.} Write every velocity as linear in the speeds,
+        $\bm v_k=\sum_r\bm v_k^{\,r}u_r+\bm v_k^{\,t}$. The coefficients
+        $\bm v_k^{\,r}=\partial\bm v_k/\partial u_r$ are the \emph{partial velocities}. They span the directions along which
+        the system can move without violating the constraints.
+  \item \textbf{Accelerations.} Differentiate once in an inertial frame, $\bm a_k=\dot{\bm v}_k$.
+  \item \textbf{Generalized active forces.}\quad $F_r=\sum_k\bm F_k\cdot\bm v_k^{\,r}$.
+  \item \textbf{Generalized inertia forces.}\quad $F_r^*=-\sum_km_k\,\bm a_k\cdot\bm v_k^{\,r}$.
+  \item \textbf{Kane's equations.}\quad $F_r+F_r^*=0$, $\quad r=1,\dots,n$.
+\end{enumerate}
+Ideal constraint forces never appear in $F_r$: they are orthogonal to the partial velocities (or, for internal
+forces, cancel in pairs). In the present problem the rod forces are $-T_1\bm e_1$ on $m_1$, $+T_2\bm e_2$ on $m_1$ and
+$-T_2\bm e_2$ on $m_2$, so their contribution to $F_r$ is
+\[
+  -T_1\bm e_1\cdot\bm v_1^{\,r}+T_2\bm e_2\cdot\big(\bm v_1^{\,r}-\bm v_2^{\,r}\big),
+\]
+which vanishes for $r=1,2$ because $\bm e_1\perp\bm t_1$ and $\bm e_2\perp\bm t_2$ (see the table below).
+
+\paragraph{Application to the double pendulum.} Take $u_1=\dot\theta_1$, $u_2=\dot\theta_2$ and the vectors
+$\bm e_i,\bm t_i$ of Section~\ref{sec:newton}.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & $m_1$ & $m_2$\\
+\midrule
+$\bm v_k$ & $l_1u_1\bm t_1$ & $l_1u_1\bm t_1+l_2u_2\bm t_2$\\
+$\bm v_k^{\,1}$ & $l_1\bm t_1$ & $l_1\bm t_1$\\
+$\bm v_k^{\,2}$ & $\bm 0$ & $l_2\bm t_2$\\
+$\bm a_k$ & $l_1(\dot u_1\bm t_1-u_1^2\bm e_1)$ & $\bm a_1+l_2(\dot u_2\bm t_2-u_2^2\bm e_2)$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+With $\bm F_k=m_k\bm g$ and $\bm g\cdot\bm t_i=-g\sin\theta_i$, the generalized active forces are
+\begin{equation}
+  F_1=(m_1+m_2)\,\bm g\cdot l_1\bm t_1=-\mu g\,l_1\sin\theta_1,\qquad
+  F_2=m_2\,\bm g\cdot l_2\bm t_2=-m_2g\,l_2\sin\theta_2 .
+\end{equation}
+Using $\bm t_1\!\cdot\!\bm t_2=\cos\Delta$, $\bm t_1\!\cdot\!\bm e_2=-\sin\Delta$, $\bm e_1\!\cdot\!\bm t_2=\sin\Delta$,
+the accelerations projected on the partial velocities are $\bm a_1\!\cdot\!\bm t_1=l_1\dot u_1$,
+$\bm a_2\!\cdot\!\bm t_1=l_1\dot u_1+l_2\dot u_2\cos\Delta+l_2u_2^2\sin\Delta$ and
+$\bm a_2\!\cdot\!\bm t_2=l_1\dot u_1\cos\Delta-l_1u_1^2\sin\Delta+l_2\dot u_2$, so that
+\begin{align}
+  F_1^*&=-l_1\Big[\mu\,l_1\dot u_1+m_2l_2\dot u_2\cos\Delta+m_2l_2u_2^2\sin\Delta\Big],\\
+  F_2^*&=-m_2l_2\Big[l_2\dot u_2+l_1\dot u_1\cos\Delta-l_1u_1^2\sin\Delta\Big].
+\end{align}
+Kane's equations $F_1+F_1^*=0$ and $F_2+F_2^*=0$ are, term by term, the Lagrange equations
+\eqref{eq:EL1}--\eqref{eq:EL2}. No energy function was formed and no derivative of $T$ was taken.
+
+\paragraph{Generalized mass matrix.} The coefficient of $\dot u_s$ in $-F_r^*$ is
+$M_{rs}=\sum_km_k\,\bm v_k^{\,r}\!\cdot\bm v_k^{\,s}$. Here
+$M_{11}=(m_1+m_2)l_1^2$, $M_{12}=m_2l_1l_2\,\bm t_1\!\cdot\!\bm t_2=m_2l_1l_2\cos\Delta$ and $M_{22}=m_2l_2^2$,
+which is exactly the matrix \eqref{eq:M}. In general Kane's equations take the form
+$M(\bm q)\,\dot{\bm u}=\bm f(\bm q,\bm u,t)$, which can be generated recursively for chains of rigid bodies.
+
+\paragraph{Equivalence with Lagrange's equations.} If $u_r=\dot q_r$, then $\partial\bm v_k/\partial\dot q_r=\partial\bm r_k/\partial q_r$ and
+\[
+  \sum_km_k\,\bm a_k\!\cdot\!\frac{\partial\bm r_k}{\partial q_r}
+  =\frac{\dd}{\dd t}\frac{\partial T}{\partial\dot q_r}-\frac{\partial T}{\partial q_r},
+\]
+so that $F_r^*=-\big(\frac{\dd}{\dd t}\frac{\partial T}{\partial\dot q_r}-\frac{\partial T}{\partial q_r}\big)$ while
+$F_r=Q_r=-\partial V/\partial q_r$ for conservative forces. Kane's equations are then Lagrange's equations; their
+advantages appear for nonholonomic systems and for other choices of speeds (for example body-fixed angular velocity
+components of rigid bodies), where Lagrange's equations require quasi-coordinates or multipliers.
+
+\paragraph{Recovering a constraint force: auxiliary speeds.} Because constraint forces do not enter $F_r$ they are
+absent from the equations of motion. To bring a particular one into evidence, Kane introduces an
+\emph{auxiliary} speed that releases the corresponding constraint. For the tension of the lower rod, let $u_3$ be a
+fictitious rate of extension of rod~2,
+\[
+  \bm v_2=l_1u_1\bm t_1+l_2u_2\bm t_2+u_3\,\bm e_2,\qquad \bm v_2^{\,3}=\bm e_2,\quad\bm v_1^{\,3}=\bm 0 .
+\]
+The force $-T_2\bm e_2$ on $m_2$ now has a nonzero partial velocity and counts as an active force:
+\[
+  F_3=(m_2\bm g-T_2\bm e_2)\cdot\bm e_2=m_2g\cos\theta_2-T_2,\qquad
+  F_3^*=-m_2\bm a_2\!\cdot\!\bm e_2=m_2\big(l_1\dot u_1\sin\Delta+l_1u_1^2\cos\Delta+l_2u_2^2\big),
+\]
+where $\bm a_2$ is evaluated after setting $u_3=\dot u_3=0$. The equation $F_3+F_3^*=0$ gives
+\[
+  T_2=m_2\big[g\cos\theta_2+l_1\dot u_1\sin\Delta+l_1u_1^2\cos\Delta+l_2u_2^2\big],
+\]
+identical to \eqref{eq:T2}. The tension of the upper rod is obtained in the same way from a fictitious speed
+$u_4$ along $\bm e_1$ applied to both bobs. In practice one solves the two Kane equations for $\dot u_1,\dot u_2$ and
+evaluates the tensions afterwards, exactly the economy of the Lagrangian approach combined with direct access to
+the reaction forces.
+
+\subsection{Summary of formulations}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Formulation & Variables & Order & Constraint forces & Typical use\\
+\midrule
+Newton & $\bm r_k$, $T_a$ & 2 & explicit & physical insight\\
+Lagrange multipliers & $\bm r_k$, $\lambda_a$ & 2 (DAE) & explicit & multibody, forces\\
+Lagrange (generalized) & $\theta_i$ & 2 & eliminated & derivations\\
+Hamilton & $\theta_i,p_i$ & 1 & eliminated & symplectic structure\\
+Hamilton--Jacobi & $S(\theta_i,t)$ & PDE & eliminated & integrability, AA variables\\
+Jacobi--Maupertuis & $\theta_i$ at fixed $E$ & geodesic & eliminated & geometry of chaos\\
+Gibbs--Appell, Kane & $\theta_i,\dot\theta_i$ & 2 & eliminated & multibody dynamics\\
+\bottomrule
+\end{tabular}
+\caption{The formulations of this chapter, all equivalent for the double pendulum.}
+\end{table}
+
+\section{Small Oscillations and Normal Modes}
+\label{sec:small}
+
+\subsection{Linearization}
+
+The stable equilibrium is $\theta_1=\theta_2=0$, where $V$ attains its global minimum $V_{\min}=-\mu g l_1-m_2g l_2$.
+Expanding $T$ and $V$ to second order,
+\begin{equation}
+  L_2=\tfrac12\dot{\bm\theta}^\top M_0\dot{\bm\theta}-\tfrac12\bm\theta^\top K\bm\theta,
+  \quad
+  M_0=\begin{pmatrix}\mu\,l_1^2&m_2l_1l_2\\ m_2l_1l_2&m_2l_2^2\end{pmatrix},\
+  K=\begin{pmatrix}\mu g\,l_1&0\\0&m_2g\,l_2\end{pmatrix}.
+\end{equation}
+The linear equations $M_0\ddot{\bm\theta}+K\bm\theta=0$ have solutions $\bm\theta=\bm u\,e^{i\omega t}$ provided
+$\det(K-\omega^2M_0)=0$.
+
+\subsection{Normal-mode frequencies}
+
+Evaluating the determinant and dividing by $m_2l_1l_2$ gives the quadratic equation in $\omega^2$
+\begin{equation}
+  m_1l_1l_2\,\omega^4-\mu g\,(l_1+l_2)\,\omega^2+\mu g^2=0,
+\end{equation}
+whose roots are
+\begin{equation}
+  \omega_\pm^2=\frac{g}{2m_1l_1l_2}\Big[\mu\,(l_1+l_2)\pm\sqrt{\mu^2(l_1+l_2)^2-4m_1\mu\,l_1l_2}\Big].
+  \label{eq:omega}
+\end{equation}
+The discriminant is positive since $\mu^2(l_1+l_2)^2-4m_1\mu l_1l_2\ge\mu(l_1+l_2)^2\,m_1\!\cdot\!0+\ldots>0$; more simply,
+$\mu(l_1+l_2)^2-4m_1l_1l_2=\mu(l_1-l_2)^2+4m_2l_1l_2>0$.
+The mode shapes follow from the first row of $(K-\omega^2M_0)\bm u=0$:
+\begin{equation}
+  \frac{u_2}{u_1}=\frac{\mu\,(g-\omega^2l_1)}{\omega^2m_2l_2}.
+\end{equation}
+
+\paragraph{Equal masses and lengths.} For $m_1=m_2=m$, $l_1=l_2=l$,
+\begin{equation}
+  \omega_\pm^2=\frac gl\,(2\pm\sqrt2),\qquad \frac{u_2}{u_1}=\pm\sqrt2 .
+\end{equation}
+The lower-frequency mode ($\omega_-^2=(2-\sqrt2)g/l$) is the in-phase swing with the lower bob having amplitude
+$\sqrt2$ times that of the upper bob; the higher-frequency mode ($\omega_+^2=(2+\sqrt2)g/l$) is an anti-phase
+motion in which the bobs move in opposite directions. The ratio $\omega_+/\omega_-=\sqrt{(2+\sqrt2)/(2-\sqrt2)}=1+\sqrt2$
+is irrational, so a generic small-amplitude motion is quasi-periodic and never exactly repeats.
+
+\section{Phase-Space Structure and Chaos}
+\label{sec:chaos}
+
+\subsection{Energy regimes}
+
+The potential \eqref{eq:V} has four critical points on the torus, given by $\sin\theta_1=\sin\theta_2=0$:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+$(\theta_1,\theta_2)$ & $V$ & Type\\
+\midrule
+$(0,0)$ & $-\mu g l_1-m_2gl_2$ & minimum\\
+$(0,\pi)$ & $-\mu g l_1+m_2gl_2$ & saddle\\
+$(\pi,0)$ & $+\mu g l_1-m_2gl_2$ & saddle\\
+$(\pi,\pi)$ & $+\mu g l_1+m_2gl_2$ & maximum\\
+\bottomrule
+\end{tabular}
+\end{center}
+These energies delimit the dynamical regimes. Below $V(0,\pi)$ the lower pendulum cannot pass over the top
+while the upper rod hangs down; motion is confined to a neighbourhood of the minimum and is predominantly regular.
+For energies above the lowest saddle the lower bob can flip over; the trajectory can then visit larger regions of the
+torus, where the Jacobi metric has negative curvature, and most orbits become chaotic. For energies above
+the maximum, $E>V(\pi,\pi)$, the whole torus is accessible, and both bobs can rotate continuously. Detailed numerical and experimental maps of the regular and chaotic regions, including flip-time diagrams, can be found in~\cite{shinbrot,levien,stachowiak}.
+
+\subsection{Poincar\'e sections}
+
+For fixed $E$ the motion lies on a three-dimensional energy surface $\{H=E\}$. A convenient two-dimensional Poincar\'e
+section is $\Sigma=\{\theta_1=0,\ \dot\theta_1>0\}$ with coordinates $(\theta_2,p_2)$; $p_1$ is then fixed by
+$H=E$. Successive piercings of $\Sigma$ define an area-preserving map $(\theta_2,p_2)_n\to(\theta_2,p_2)_{n+1}$.
+\begin{itemize}
+  \item At low $E$ the points lie on closed invariant curves: the cross-sections of KAM tori.
+  \item With increasing $E$, curves with rational frequency ratios $\Omega_1/\Omega_2=r/s$ break up into chains of
+        $s$ islands (Poincar\'e--Birkhoff theorem), separated by thin chaotic layers around hyperbolic points.
+  \item At still higher $E$ the last KAM tori are destroyed and the chaotic sea occupies most of the section, with
+        residual stable islands.
+\end{itemize}
+
+\subsection{KAM theorem and Lyapunov exponents}
+
+The Kolmogorov--Arnold--Moser theorem~\cite{kolmogorov,arnoldkam,moser} states that, for a small enough perturbation of an integrable Hamiltonian
+$H_0(\bm J)$ and a sufficiently non-degenerate $H_0$, the tori with sufficiently irrational (Diophantine) frequency
+vectors persist, slightly deformed. The double pendulum at low energy is a perturbation of the integrable
+$H_2$ of \eqref{eq:AA} and so the theorem governs the picture near the minimum, subject to the usual non-degeneracy
+condition, $\det(\partial^2H_0/\partial J_i\partial J_j)\ne0$, on the quartic coefficients $a_{ij}$.
+
+Chaos is quantified by the largest Lyapunov exponent~\cite{benettin}
+\begin{equation}
+  \lambda_{\max}=\lim_{t\to\infty}\lim_{\|\delta z(0)\|\to0}\frac1t\ln\frac{\|\delta z(t)\|}{\|\delta z(0)\|},
+\end{equation}
+where $\delta z$ obeys the variational equation $\dot{\delta z}=J(z(t))\,\delta z$, $J=\partial\dot z/\partial z$.
+Because the flow is Hamiltonian, the Lyapunov spectrum of this four-dimensional system is symmetric about zero,
+$\{\lambda_{\max},0,0,-\lambda_{\max}\}$, where the two zero exponents correspond to the flow direction and to the
+energy-conservation direction. A positive $\lambda_{\max}$ implies
+sensitive dependence on initial conditions: two initial conditions that differ by $10^{-10}$ in an angle typically
+separate to $O(1)$ over a time of $\sim\ln(10^{10})/\lambda_{\max}$.
+
+\section{Numerical Integration}
+\label{sec:numerics}
+
+\subsection{Choice of method}
+
+Since a closed-form solution is not available, numerical integration is the practical tool. Three remarks.
+
+\begin{enumerate}
+  \item The accelerations can be computed in the Lagrangian form by solving the $2\times2$ linear system
+        $M\ddot{\bm\theta}=\bm f$ at each step, avoiding the cancellation-prone closed forms
+        \eqref{eq:acc1}--\eqref{eq:acc2} close to $\Delta=0$.
+  \item A standard explicit Runge--Kutta method of fourth order (RK4~\cite{hnw}) with a small step is adequate for visualizing
+        the trajectory but is not symplectic: the energy drifts secularly over long integrations.
+  \item The Hamiltonian \eqref{eq:H} is \emph{not separable} ($H\ne T(\bm p)+V(\bm\theta)$ because $T$ depends on
+        $\bm\theta$), so the explicit leapfrog (St\"ormer--Verlet) scheme is not available. Symplectic alternatives are
+        the implicit midpoint rule (second order, symplectic for any $H$), the generalized implicit St\"ormer--Verlet
+        scheme of Hairer--Lubich--Wanner~\cite{ghw}, and higher-order Gauss--Legendre collocation methods. Variational integrators~\cite{marsdenwest}
+        derived by discretizing the action give a closely related family.
+\end{enumerate}
+
+\subsection{A reference implementation in C}
+
+The following program integrates the Lagrangian equations \eqref{eq:EL1}--\eqref{eq:EL2} with RK4 and prints the
+relative energy error, the cheapest check of the quality of the integration. A Fortran version, which also
+contains the symplectic integrators, is given in Section~\ref{sec:fortran}.
+
+\begin{lstlisting}
+#include <math.h>
+#include <stdio.h>
+
+typedef struct { double m1, m2, l1, l2, g; } Par;
+
+/* y = { th1, th2, w1, w2 },  w = d(theta)/dt */
+static void rhs(const double y[4], double dy[4], const Par *p)
+{
+    double d = y[0] - y[1], c = cos(d), s = sin(d);
+    double mu = p->m1 + p->m2;
+    double w1 = y[2], w2 = y[3];
+
+    /* A * (th1'', th2'')^T = b */
+    double a11 = mu * p->l1,  a12 = p->m2 * p->l2 * c;
+    double a21 = p->l1 * c,   a22 = p->l2;
+    double b1  = -p->m2 * p->l2 * w2 * w2 * s - mu * p->g * sin(y[0]);
+    double b2  =  p->l1 * w1 * w1 * s - p->g * sin(y[1]);
+    double det = a11 * a22 - a12 * a21;
+
+    dy[0] = w1;
+    dy[1] = w2;
+    dy[2] = (b1 * a22 - a12 * b2) / det;
+    dy[3] = (a11 * b2 - a21 * b1) / det;
+}
+
+static double energy(const double y[4], const Par *p)
+{
+    double d = y[0] - y[1], mu = p->m1 + p->m2;
+    double T = 0.5 * mu * p->l1 * p->l1 * y[2] * y[2]
+             + 0.5 * p->m2 * p->l2 * p->l2 * y[3] * y[3]
+             + p->m2 * p->l1 * p->l2 * y[2] * y[3] * cos(d);
+    double V = -mu * p->g * p->l1 * cos(y[0])
+               - p->m2 * p->g * p->l2 * cos(y[1]);
+    return T + V;
+}
+
+static void rk4(double y[4], double h, const Par *p)
+{
+    double k1[4], k2[4], k3[4], k4[4], t[4];
+    int i;
+    rhs(y, k1, p);
+    for (i = 0; i < 4; i++) t[i] = y[i] + 0.5 * h * k1[i];
+    rhs(t, k2, p);
+    for (i = 0; i < 4; i++) t[i] = y[i] + 0.5 * h * k2[i];
+    rhs(t, k3, p);
+    for (i = 0; i < 4; i++) t[i] = y[i] + h * k3[i];
+    rhs(t, k4, p);
+    for (i = 0; i < 4; i++)
+        y[i] += h * (k1[i] + 2*k2[i] + 2*k3[i] + k4[i]) / 6.0;
+}
+
+int main(void)
+{
+    Par p = { 1.0, 1.0, 1.0, 1.0, 9.81 };
+    double y[4] = { 2.0, 2.5, 0.0, 0.0 };   /* released from rest */
+    double h = 1e-3, E0 = energy(y, &p);
+    long n;
+
+    for (n = 0; n <= 100000; n++) {          /* t = 100 */
+        if (n % 1000 == 0)
+            printf("%8.3f %12.6f %12.6f %12.3e\n",
+                   n * h, y[0], y[1], (energy(y, &p) - E0) / fabs(E0));
+        rk4(y, h, &p);
+    }
+    return 0;
+}
+\end{lstlisting}
+
+\subsection{Symplectic integrators for a non-separable Hamiltonian}
+\label{sec:symplectic}
+
+A one-step map $\Phi_h:z_n\mapsto z_{n+1}$ is \emph{symplectic} if its Jacobian satisfies
+$(\Phi_h')^{\top}\mathbb J\,\Phi_h'=\mathbb J$, i.e.\ if it preserves the form $\omega$ exactly, as the true flow
+does~\cite{ghw,sanzserna,leimkuhler}. Backward error analysis shows that a symplectic method of order $p$ is the exact
+flow of a modified Hamiltonian $\tilde H=H+h^pH_{p+1}+h^{p+1}H_{p+2}+\dots$ (an asymptotic series). Consequently $H$ is
+conserved up to a bounded, oscillating error of size $O(h^p)$ over times that are exponentially long in $1/h$, in
+contrast with the secular drift of a generic non-symplectic method. The same argument shows that the
+implementation must solve the implicit equations to (near) machine precision; a loose iteration tolerance destroys
+the symplectic character and with it the long-time behaviour.
+
+Write $f(z)=\big(\partial H/\partial\bm p,\,-\partial H/\partial\bm\theta\big)$ for the Hamiltonian vector field, with
+$\partial H/\partial\bm p=M^{-1}\bm p=\dot{\bm\theta}$ and $\partial H/\partial\bm\theta=-\partial L/\partial\bm\theta$ as
+in Section~\ref{sec:hamilton}. Three symplectic schemes are used below.
+
+\paragraph{(a) Implicit midpoint rule.} 
+\begin{equation}
+  z_{n+1}=z_n+h\,f\!\Big(\frac{z_n+z_{n+1}}2\Big).
+\end{equation}
+It is symplectic for \emph{every} $H$, symmetric (time-reversible), of order~2, and conserves all quadratic first
+integrals.
+
+\paragraph{(b) Generalized St\"ormer--Verlet.} For a non-separable $H(\bm\theta,\bm p)$ the explicit leapfrog is not
+available. Its symplectic generalization~\cite{ghw} is
+\begin{align}
+  \bm p_{n+1/2}&=\bm p_n-\tfrac h2\,\partial_{\bm\theta}H(\bm\theta_n,\bm p_{n+1/2}),\\
+  \bm\theta_{n+1}&=\bm\theta_n+\tfrac h2\big[\partial_{\bm p}H(\bm\theta_n,\bm p_{n+1/2})
+                   +\partial_{\bm p}H(\bm\theta_{n+1},\bm p_{n+1/2})\big],\\
+  \bm p_{n+1}&=\bm p_{n+1/2}-\tfrac h2\,\partial_{\bm\theta}H(\bm\theta_{n+1},\bm p_{n+1/2}).
+\end{align}
+It is the composition of two symplectic Euler steps of length $h/2$, hence symplectic, symmetric and of order~2. The
+first two equations are implicit in $\bm p_{n+1/2}$ and $\bm\theta_{n+1}$ respectively and are solved by fixed-point
+iteration; the third is explicit. For $H=T(\bm p)+V(\bm\theta)$ the scheme reduces to the usual explicit leapfrog.
+
+\paragraph{(c) Fourth-order composition.} If $\Psi_h$ is a symmetric method of order 2, then the triple jump
+\begin{equation}
+  \Psi^{[4]}_h=\Psi_{\gamma_1h}\circ\Psi_{\gamma_0h}\circ\Psi_{\gamma_1h},\qquad
+  \gamma_1=\frac1{2-2^{1/3}},\quad\gamma_0=1-2\gamma_1=-\frac{2^{1/3}}{2-2^{1/3}},
+\end{equation}
+has order 4~\cite{yoshida} (the conditions are $2\gamma_1+\gamma_0=1$ and $2\gamma_1^3+\gamma_0^3=0$) and remains
+symplectic and symmetric, as compositions of symplectic maps are. Because $\gamma_0<0$ the middle step runs backwards
+in time. The cost is three Verlet steps per step. Here $\Psi_h$ is the scheme (b).
+
+\paragraph{Solving the implicit equations.} For a vector field with Lipschitz constant $\mathcal L$ the fixed-point
+iterations converge if $h\mathcal L<1$ (for the double pendulum $\mathcal L$ grows with the angular velocities and
+with $1/\det M$). If a larger step is needed, replace the fixed-point iteration by Newton's method with the Hessian
+of $H$ (analytic or by finite differences), at the cost of a $4\times4$ linear solve per iteration.
+
+\subsection{A reference implementation in Fortran}
+\label{sec:fortran}
+
+The Fortran~2008 program below collects all four integrators in a module \texttt{dp\_mod}. The Lagrangian state is
+$y=(\theta_1,\theta_2,\dot\theta_1,\dot\theta_2)$ for RK4 and the canonical state is
+$z=(\theta_1,\theta_2,p_1,p_2)$ for the symplectic methods; \texttt{vel\_to\_mom} and \texttt{mom\_to\_vel} convert
+between them via the mass matrix \eqref{eq:M} and its inverse \eqref{eq:thd1}--\eqref{eq:thd2}. The routines
+\texttt{h\_p} and \texttt{h\_th} are the analytic partial derivatives of \eqref{eq:H} (the latter using
+$\partial H/\partial\bm\theta=-\partial L/\partial\bm\theta$), and \texttt{vfield} assembles the vector field $f$.
+The driver integrates two initial conditions with the same step $h=10^{-2}$ for $t\in[0,1000]$ and records the
+relative energy error of every method. Compile with
+\begin{center}
+\texttt{gfortran -O2 -std=f2008 -Wall double\_pendulum.f90 -o dp}
+\end{center}
+
+\begin{lstlisting}[language={[95]Fortran},basicstyle=\ttfamily\scriptsize]
+! double_pendulum.f90
+! Planar double pendulum: RK4 (Lagrangian form) and three symplectic
+! integrators for the non-separable Hamiltonian H(theta,p):
+!   - implicit midpoint rule            (order 2)
+!   - generalized Stormer-Verlet        (order 2)
+!   - Yoshida triple-jump composition   (order 4)
+!
+! Build:  gfortran -O2 -std=f2008 -Wall double_pendulum.f90 -o dp
+!
+! Conventions: theta_i measured from the downward vertical,
+!   Lagrangian state  y = (th1, th2, w1, w2),   w = d(theta)/dt
+!   canonical state   z = (th1, th2, p1, p2)
+module dp_mod
+  use, intrinsic :: iso_fortran_env, only: wp => real64
+  implicit none
+  private
+  public :: wp, par_t, rhs, energy_v, ham, vel_to_mom, mom_to_vel
+  public :: rk4_step, midpoint_step, sv_step, yoshida4_step
+
+  type :: par_t
+     real(wp) :: m1 = 1.0_wp, m2 = 1.0_wp
+     real(wp) :: l1 = 1.0_wp, l2 = 1.0_wp
+     real(wp) :: g  = 9.81_wp
+  end type par_t
+
+  integer,  parameter :: maxit = 200
+  real(wp), parameter :: tol   = 1.0e-13_wp
+
+contains
+
+  !---------------------------------------------------------------
+  ! Lagrangian right-hand side: solve A*(th1'',th2'')^T = b
+  !---------------------------------------------------------------
+  subroutine rhs(p, y, dy)
+    type(par_t), intent(in)  :: p
+    real(wp),    intent(in)  :: y(4)
+    real(wp),    intent(out) :: dy(4)
+    real(wp) :: d, c, s, mu, a11, a12, a21, a22, b1, b2, det
+
+    d  = y(1) - y(2);  c = cos(d);  s = sin(d);  mu = p%m1 + p%m2
+    a11 = mu*p%l1;  a12 = p%m2*p%l2*c
+    a21 = p%l1*c;   a22 = p%l2
+    b1  = -p%m2*p%l2*y(4)**2*s - mu*p%g*sin(y(1))
+    b2  =  p%l1*y(3)**2*s      - p%g*sin(y(2))
+    det = a11*a22 - a12*a21
+
+    dy(1:2) = y(3:4)
+    dy(3)   = (b1*a22 - a12*b2)/det
+    dy(4)   = (a11*b2 - a21*b1)/det
+  end subroutine rhs
+
+  !---------------------------------------------------------------
+  ! Total energy from Lagrangian variables (th, w)
+  !---------------------------------------------------------------
+  function energy_v(p, y) result(e)
+    type(par_t), intent(in) :: p
+    real(wp),    intent(in) :: y(4)
+    real(wp) :: e, mu, t, v
+    mu = p%m1 + p%m2
+    t = 0.5_wp*mu*p%l1**2*y(3)**2 + 0.5_wp*p%m2*p%l2**2*y(4)**2        &
+        + p%m2*p%l1*p%l2*y(3)*y(4)*cos(y(1) - y(2))
+    v = -mu*p%g*p%l1*cos(y(1)) - p%m2*p%g*p%l2*cos(y(2))
+    e = t + v
+  end function energy_v
+
+  !---------------------------------------------------------------
+  ! Momenta <-> velocities (inverse mass matrix, eqs. thd1, thd2)
+  !---------------------------------------------------------------
+  subroutine vel_to_mom(p, th, w, mom)
+    type(par_t), intent(in)  :: p
+    real(wp),    intent(in)  :: th(2), w(2)
+    real(wp),    intent(out) :: mom(2)
+    real(wp) :: c, mu
+    c = cos(th(1) - th(2));  mu = p%m1 + p%m2
+    mom(1) = mu*p%l1**2*w(1) + p%m2*p%l1*p%l2*c*w(2)
+    mom(2) = p%m2*p%l2**2*w(2) + p%m2*p%l1*p%l2*c*w(1)
+  end subroutine vel_to_mom
+
+  subroutine mom_to_vel(p, th, mom, w)
+    type(par_t), intent(in)  :: p
+    real(wp),    intent(in)  :: th(2), mom(2)
+    real(wp),    intent(out) :: w(2)
+    real(wp) :: c, s, mu, den
+    c = cos(th(1) - th(2));  s = sin(th(1) - th(2));  mu = p%m1 + p%m2
+    den  = p%m1 + p%m2*s*s
+    w(1) = (p%l2*mom(1) - p%l1*c*mom(2)) / (p%l1**2*p%l2*den)
+    w(2) = (mu*p%l1*mom(2) - p%m2*p%l2*c*mom(1)) / (p%m2*p%l1*p%l2**2*den)
+  end subroutine mom_to_vel
+
+  !---------------------------------------------------------------
+  ! Hamiltonian, eq. (H), and its partial derivatives
+  !---------------------------------------------------------------
+  function ham(p, th, mom) result(h)
+    type(par_t), intent(in) :: p
+    real(wp),    intent(in) :: th(2), mom(2)
+    real(wp) :: h, w(2), mu
+    mu = p%m1 + p%m2
+    call mom_to_vel(p, th, mom, w)
+    h = 0.5_wp*(mom(1)*w(1) + mom(2)*w(2))                              &
+        - mu*p%g*p%l1*cos(th(1)) - p%m2*p%g*p%l2*cos(th(2))
+  end function ham
+
+  subroutine h_p(p, th, mom, hp)             ! dH/dp = M^{-1} p = theta'
+    type(par_t), intent(in)  :: p
+    real(wp),    intent(in)  :: th(2), mom(2)
+    real(wp),    intent(out) :: hp(2)
+    call mom_to_vel(p, th, mom, hp)
+  end subroutine h_p
+
+  subroutine h_th(p, th, mom, hq)            ! dH/dtheta at fixed p
+    type(par_t), intent(in)  :: p
+    real(wp),    intent(in)  :: th(2), mom(2)
+    real(wp),    intent(out) :: hq(2)
+    real(wp) :: w(2), s, mu, k
+    mu = p%m1 + p%m2
+    call mom_to_vel(p, th, mom, w)
+    s = sin(th(1) - th(2))
+    k = p%m2*p%l1*p%l2*w(1)*w(2)*s
+    hq(1) =  k + mu*p%g*p%l1*sin(th(1))
+    hq(2) = -k + p%m2*p%g*p%l2*sin(th(2))
+  end subroutine h_th
+
+  subroutine vfield(p, z, f)                 ! f = (dH/dp, -dH/dtheta)
+    type(par_t), intent(in)  :: p
+    real(wp),    intent(in)  :: z(4)
+    real(wp),    intent(out) :: f(4)
+    real(wp) :: hq(2)
+    call h_p (p, z(1:2), z(3:4), f(1:2))
+    call h_th(p, z(1:2), z(3:4), hq)
+    f(3:4) = -hq
+  end subroutine vfield
+
+  !---------------------------------------------------------------
+  ! Classical RK4 on the Lagrangian first-order system
+  !---------------------------------------------------------------
+  subroutine rk4_step(p, y, h)
+    type(par_t), intent(in)    :: p
+    real(wp),    intent(inout) :: y(4)
+    real(wp),    intent(in)    :: h
+    real(wp) :: k1(4), k2(4), k3(4), k4(4)
+    call rhs(p, y,              k1)
+    call rhs(p, y + 0.5_wp*h*k1, k2)
+    call rhs(p, y + 0.5_wp*h*k2, k3)
+    call rhs(p, y +        h*k3, k4)
+    y = y + h*(k1 + 2.0_wp*k2 + 2.0_wp*k3 + k4)/6.0_wp
+  end subroutine rk4_step
+
+  !---------------------------------------------------------------
+  ! Implicit midpoint rule  z1 = z0 + h f((z0+z1)/2)
+  ! (symplectic and symmetric for any H); fixed-point iteration,
+  ! convergent for h*|Hessian H| < 1.  Use Newton for larger h.
+  !---------------------------------------------------------------
+  subroutine midpoint_step(p, z, h, ok)
+    type(par_t), intent(in)    :: p
+    real(wp),    intent(inout) :: z(4)
+    real(wp),    intent(in)    :: h
+    logical,     intent(out)   :: ok
+    real(wp) :: f(4), zn(4), zt(4), err
+    integer  :: it
+
+    call vfield(p, z, f)
+    zn = z + h*f                              ! explicit Euler predictor
+    ok = .false.
+    do it = 1, maxit
+       call vfield(p, 0.5_wp*(z + zn), f)
+       zt  = z + h*f
+       err = maxval(abs(zt - zn))
+       zn  = zt
+       if (err < tol*(1.0_wp + maxval(abs(zn)))) then
+          ok = .true.;  exit
+       end if
+    end do
+    z = zn
+  end subroutine midpoint_step
+
+  !---------------------------------------------------------------
+  ! Generalized (implicit) Stormer-Verlet, Hairer-Lubich-Wanner:
+  !   p_{1/2} = p_0 - h/2 H_th(q_0, p_{1/2})
+  !   q_1     = q_0 + h/2 [H_p(q_0,p_{1/2}) + H_p(q_1,p_{1/2})]
+  !   p_1     = p_{1/2} - h/2 H_th(q_1, p_{1/2})
+  !---------------------------------------------------------------
+  subroutine sv_step(p, z, h, ok)
+    type(par_t), intent(in)    :: p
+    real(wp),    intent(inout) :: z(4)
+    real(wp),    intent(in)    :: h
+    logical,     intent(out)   :: ok
+    real(wp) :: q0(2), p0(2), ph(2), pt(2), q1(2), qt(2)
+    real(wp) :: hq(2), hp0(2), hp1(2), err
+    integer  :: it
+    logical  :: ok1, ok2
+
+    q0 = z(1:2);  p0 = z(3:4)
+
+    ! (1) implicit half step in p
+    ph = p0;  ok1 = .false.
+    do it = 1, maxit
+       call h_th(p, q0, ph, hq)
+       pt  = p0 - 0.5_wp*h*hq
+       err = maxval(abs(pt - ph));  ph = pt
+       if (err < tol*(1.0_wp + maxval(abs(ph)))) then
+          ok1 = .true.;  exit
+       end if
+    end do
+
+    ! (2) implicit full step in q
+    call h_p(p, q0, ph, hp0)
+    q1 = q0 + h*hp0;  ok2 = .false.
+    do it = 1, maxit
+       call h_p(p, q1, ph, hp1)
+       qt  = q0 + 0.5_wp*h*(hp0 + hp1)
+       err = maxval(abs(qt - q1));  q1 = qt
+       if (err < tol*(1.0_wp + maxval(abs(q1)))) then
+          ok2 = .true.;  exit
+       end if
+    end do
+
+    ! (3) explicit half step in p
+    call h_th(p, q1, ph, hq)
+    z(1:2) = q1
+    z(3:4) = ph - 0.5_wp*h*hq
+    ok = ok1 .and. ok2
+  end subroutine sv_step
+
+  !---------------------------------------------------------------
+  ! Order-4 composition (Yoshida 1990 / Suzuki triple jump):
+  !   Psi4(h) = Psi2(g1 h) o Psi2(g0 h) o Psi2(g1 h)
+  !---------------------------------------------------------------
+  subroutine yoshida4_step(p, z, h, ok)
+    type(par_t), intent(in)    :: p
+    real(wp),    intent(inout) :: z(4)
+    real(wp),    intent(in)    :: h
+    logical,     intent(out)   :: ok
+    real(wp), parameter :: g1 = 1.0_wp/(2.0_wp - 2.0_wp**(1.0_wp/3.0_wp))
+    real(wp), parameter :: g0 = 1.0_wp - 2.0_wp*g1
+    logical :: o1, o2, o3
+    call sv_step(p, z, g1*h, o1)
+    call sv_step(p, z, g0*h, o2)
+    call sv_step(p, z, g1*h, o3)
+    ok = o1 .and. o2 .and. o3
+  end subroutine yoshida4_step
+
+end module dp_mod
+
+!=====================================================================
+program dp_compare
+  use dp_mod
+  implicit none
+  type(par_t) :: p
+  real(wp) :: th0(2), w0(2), mom0(2), h, tfin, e0, emax(4)
+  real(wp) :: yr(4), zm(4), zs(4), zy(4)
+  integer  :: icase, n, nsteps, nprint
+  logical  :: ok
+
+  h      = 1.0e-2_wp
+  tfin   = 1000.0_wp
+  nsteps = nint(tfin/h)
+  nprint = nsteps/10
+
+  do icase = 1, 2
+     if (icase == 1) then                      ! low energy: regular motion
+        th0 = [0.4_wp, 0.2_wp]
+        print '(a)', '# case 1: th0 = (0.4, 0.2), at rest (regular regime)'
+     else                                      ! high energy: chaotic
+        th0 = [2.0_wp, 2.5_wp]
+        print '(a)', '# case 2: th0 = (2.0, 2.5), at rest (chaotic regime)'
+     end if
+     w0 = 0.0_wp
+     call vel_to_mom(p, th0, w0, mom0)
+
+     yr = [th0, w0]
+     zm = [th0, mom0];  zs = zm;  zy = zm
+     e0 = ham(p, th0, mom0)
+     emax = 0.0_wp
+     print '(a)', '#    t        RK4          midpoint     Stormer-Verlet  Yoshida4'
+
+     do n = 1, nsteps
+        call rk4_step(p, yr, h)
+        call midpoint_step(p, zm, h, ok);   if (.not. ok) print *, 'midpoint: no conv.'
+        call sv_step(p, zs, h, ok);         if (.not. ok) print *, 'SV: no conv.'
+        call yoshida4_step(p, zy, h, ok);   if (.not. ok) print *, 'Y4: no conv.'
+
+        emax(1) = max(emax(1), abs(energy_v(p, yr) - e0))
+        emax(2) = max(emax(2), abs(ham(p, zm(1:2), zm(3:4)) - e0))
+        emax(3) = max(emax(3), abs(ham(p, zs(1:2), zs(3:4)) - e0))
+        emax(4) = max(emax(4), abs(ham(p, zy(1:2), zy(3:4)) - e0))
+
+        if (mod(n, nprint) == 0) then
+           print '(f8.1,4es14.3)', n*h,                                 &
+              (energy_v(p, yr) - e0)/abs(e0),                           &
+              (ham(p, zm(1:2), zm(3:4)) - e0)/abs(e0),                  &
+              (ham(p, zs(1:2), zs(3:4)) - e0)/abs(e0),                  &
+              (ham(p, zy(1:2), zy(3:4)) - e0)/abs(e0)
+        end if
+     end do
+     print '(a,4es14.3)', '# max |dE/E0| :', emax/abs(e0)
+     print *
+  end do
+end program dp_compare
+\end{lstlisting}
+
+\subsection{Verification and results}
+\label{sec:results}
+
+\paragraph{Order of convergence.} For the initial condition $\bm\theta(0)=(2.0,\,2.5)$ at rest
+(equal masses and lengths, $g=9.81$) the solution at $t=2$ was computed with each method for a sequence of step
+sizes and compared with an RK4 reference obtained with $h=10^{-5}$. The maximum angle error is listed in
+Table~\ref{tab:order}. The observed orders agree with the theory: 2 for midpoint and Verlet, 4 for the composition
+and for RK4 (the apparent order of RK4 is still approaching 4 at the largest steps).
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+$h$ & RK4 & midpoint & St\"ormer--Verlet & Yoshida-4\\
+\midrule
+$2.0\times10^{-2}$ & $2.2\times10^{-4}$ & $4.8\times10^{-3}$ & $3.0\times10^{-3}$ & $1.0\times10^{-3}$\\
+$1.0\times10^{-2}$ & $8.8\times10^{-6}$ & $1.2\times10^{-3}$ & $7.5\times10^{-4}$ & $7.2\times10^{-5}$\\
+$5.0\times10^{-3}$ & $3.7\times10^{-7}$ & $3.0\times10^{-4}$ & $1.9\times10^{-4}$ & $4.7\times10^{-6}$\\
+$2.5\times10^{-3}$ & $1.7\times10^{-8}$ & $7.5\times10^{-5}$ & $4.7\times10^{-5}$ & $2.9\times10^{-7}$\\
+$1.25\times10^{-3}$ & $8.9\times10^{-10}$ & $1.9\times10^{-5}$ & $1.2\times10^{-5}$ & $1.8\times10^{-8}$\\
+\midrule
+observed order & 4.3 & 2.00 & 2.00 & 4.00\\
+\bottomrule
+\end{tabular}
+\caption{Maximum angle error at $t=2$ versus step size, $\bm\theta(0)=(2.0,2.5)$.}
+\label{tab:order}
+\end{table}
+
+\paragraph{Energy conservation.} Table~\ref{tab:energy} shows the relative energy error $(E-E_0)/|E_0|$ at
+$t=1000$ and its maximum modulus over the run, for the regular case $\bm\theta(0)=(0.4,0.2)$ and the chaotic case
+$\bm\theta(0)=(2.0,2.5)$, both at rest, with $h=10^{-2}$.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{@{}llcccc@{}}
+\toprule
+case & quantity & RK4 & midpoint & St\"ormer--Verlet & Yoshida-4\\
+\midrule
+regular & error at $t=1000$ & $-5.5\times10^{-7}$ & $6.4\times10^{-8}$ & $-6.4\times10^{-6}$ & $2.2\times10^{-9}$\\
+        & $\max|\Delta E/E_0|$ & $5.5\times10^{-7}$ & $8.4\times10^{-7}$ & $1.7\times10^{-5}$ & $8.5\times10^{-9}$\\
+chaotic & error at $t=1000$ & $-1.5\times10^{-2}$ & $3.4\times10^{-4}$ & $5.7\times10^{-5}$ & $1.4\times10^{-8}$\\
+        & $\max|\Delta E/E_0|$ & $1.5\times10^{-2}$ & $1.2\times10^{-2}$ & $2.4\times10^{-2}$ & $3.7\times10^{-3}$\\
+\bottomrule
+\end{tabular}
+\caption{Relative energy error for $h=10^{-2}$, $t\in[0,1000]$.}
+\label{tab:energy}
+\end{table}
+
+The qualitative difference is in the \emph{time dependence}, not in the size at a given instant. The RK4 error grows
+monotonically (linearly in the regular case, and to $1.5\%$ in the chaotic one), while the symplectic errors oscillate
+without trend. In the regular case the second-order symplectic schemes have bounded errors that are comparable to, or larger than,
+the RK4 error at $t=1000$, but the RK4 error keeps growing linearly and would exceed them in longer runs; only the
+fourth-order composition is better than RK4 at every time in this test. In the chaotic case the large
+\emph{maximum} for the symplectic methods is a transient excursion, not a drift: the sampled values in the program
+output fluctuate in sign and do not grow. Such excursions are associated with phases of fast motion, where the step
+$h=10^{-2}$ is coarse for a second-order method. The size of the oscillation decreases as $h^p$, so the step should be
+chosen according to the fastest time scale visited by the trajectory rather than the average one. As always in the chaotic regime, no integrator reproduces an individual
+orbit beyond a few Lyapunov times; the symplectic property guarantees the quality of the \emph{statistics}.
+
+\section{Summary}
+
+\begin{itemize}
+  \item The double pendulum has two degrees of freedom and the kinetic energy
+        \eqref{eq:T} with the configuration-dependent mass matrix \eqref{eq:M}.
+  \item The Newtonian, Lagrangian, and Hamiltonian formulations are equivalent; they differ in whether constraint
+        forces appear, the order of the differential equations, and the geometric structure that is made manifest.
+  \item The Hamiltonian \eqref{eq:H} is non-separable; the Hamilton--Jacobi equation is solvable only in the small-oscillation
+        limit, where action--angle variables \eqref{eq:AA} exist.
+  \item Energy is the only known integral. At low energy KAM theory ensures predominantly regular motion; above the saddle
+        energies the phase space becomes largely chaotic.
+  \item Kane's method gives the same equations as Lagrange's without forming $T$ or $L$, and yields the constraint
+        forces directly through auxiliary speeds (Section~\ref{sec:kane}).
+  \item Numerical integration must respect the structure of the problem: symplectic and reversible schemes for
+        long-time statistics, and energy monitoring as a minimal check of every run.
+\end{itemize}
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}
+
+\begin{exercise}
+Starting from \eqref{eq:EL1}--\eqref{eq:EL2}, verify the explicit accelerations \eqref{eq:acc1}--\eqref{eq:acc2}.
+\end{exercise}
+
+\begin{exercise}
+Show that $\det M=m_2l_1^2l_2^2(m_1+m_2\sin^2\Delta)$ and compute the inverse mass matrix. Hence derive the
+Hamiltonian \eqref{eq:H} and check that its Legendre transform returns the Lagrangian.
+\end{exercise}
+
+\begin{exercise}
+Verify the claimed identity $\partial H/\partial\theta_i|_{\bm p}=-\partial L/\partial\theta_i|_{\dot{\bm\theta}}$ for
+a Lagrangian $L=\tfrac12\dot q^\top M(q)\dot q-V(q)$ and use it to derive $\dot p_1$, $\dot p_2$ in
+Section~\ref{sec:hamilton}.
+\end{exercise}
+
+\begin{exercise}
+Compute $\pb{p_1+p_2}{H}$ and show that it equals $-\mu g l_1\sin\theta_1-m_2gl_2\sin\theta_2$ (the total gravitational torque about $O$).
+Interpret the result, and show that for $g=0$ the quantity $p_1+p_2$ is a second integral.
+\end{exercise}
+
+\begin{exercise}
+Find the normal-mode frequencies \eqref{eq:omega} in the limits $m_1\gg m_2$ and $m_1\ll m_2$, and for
+$l_2\to0$. Interpret each limit physically.
+\end{exercise}
+
+\begin{exercise}
+Derive the quartic terms of $H$ about the equilibrium and compute the coefficients $a_{11},a_{12},a_{22}$ of the Birkhoff normal
+form for $m_1=m_2$, $l_1=l_2$. Identify the lowest-order resonances $\omega_+/\omega_-=r/s$ with small $r,s$ that can be
+reached by tuning $m_2/m_1$ and $l_2/l_1$.
+\end{exercise}
+
+\begin{exercise}
+Compute the Gaussian curvature of the Jacobi metric $g^{(E)}_{ij}=2(E-V)M_{ij}$ on the torus and locate the regions
+where it is negative for $m_1=m_2$, $l_1=l_2$ and several values of $E$. Compare with the Poincar\'e section computed
+numerically.
+\end{exercise}
+
+\begin{exercise}
+Using the program of Section~\ref{sec:numerics}, compute the largest Lyapunov exponent by integrating the variational
+equations alongside the trajectory (or by the two-trajectory method with periodic renormalization). Plot $\lambda_{\max}$
+as a function of $E$ for $m_1=m_2$, $l_1=l_2$, and compare with the energies of Section~\ref{sec:chaos}.
+\end{exercise}
+
+\begin{exercise}
+Implement the implicit midpoint rule for \eqref{eq:H} with Newton iteration and compare the energy error with RK4 for
+$t\in[0,10^4]$ at fixed step size $h=10^{-2}$, once at low energy and once at high energy.
+\end{exercise}
+
+\begin{exercise}
+Apply Kane's method with generalized speeds $u_r=\dot\theta_r$ ($r=1,2,3$) to a \emph{triple} pendulum
+(masses $m_1,m_2,m_3$, rod lengths $l_1,l_2,l_3$). Show that the generalized mass matrix is
+$M_{rs}=\sum_{k\ge\max(r,s)}m_k\,l_rl_s\cos(\theta_r-\theta_s)$ and obtain the three tensions with auxiliary speeds.
+\end{exercise}
+
+\begin{exercise}
+Obtain the tension $T_1$ of the upper rod by introducing an auxiliary speed $u_4$ along $\bm e_1$ that displaces both
+bobs, and show that the result agrees with the radial projection of \eqref{eq:newton1} on $\bm e_1$.
+\end{exercise}
+
+\begin{exercise}
+Modify \texttt{midpoint\_step} in the Fortran code to use Newton's method with a finite-difference Jacobian, and
+find the largest step for which each of the fixed-point and Newton versions converges for the chaotic initial
+condition of Table~\ref{tab:energy}.
+\end{exercise}
+
+\begin{exercise}
+Add a fourth-order Gauss--Legendre (two-stage) implicit Runge--Kutta integrator to the Fortran module and compare
+its efficiency (energy error versus CPU time) with the Yoshida composition of Verlet steps.
+\end{exercise}
+
+\begin{thebibliography}{99}
+
+\bibitem{goldstein} H.~Goldstein, C.~Poole and J.~Safko, \emph{Classical Mechanics}, 3rd ed.
+(Addison-Wesley, 2002).
+
+\bibitem{landau} L.~D. Landau and E.~M. Lifshitz, \emph{Mechanics}, 3rd ed. (Pergamon Press, Oxford, 1976).
+
+\bibitem{arnold} V.~I. Arnold, \emph{Mathematical Methods of Classical Mechanics}, 2nd ed., Graduate Texts in
+Mathematics 60 (Springer, 1989).
+
+\bibitem{abrahammarsden} R.~Abraham and J.~E. Marsden, \emph{Foundations of Mechanics}, 2nd ed.
+(Benjamin/Cummings, 1978).
+
+\bibitem{kane1961} T.~R. Kane, ``Dynamics of nonholonomic systems,'' \emph{J. Appl. Mech.} \textbf{28} (1961) 574--578.
+
+\bibitem{kanewang} T.~R. Kane and C.~F. Wang, ``On the derivation of equations of motion,''
+\emph{J. Soc. Indust. Appl. Math.} \textbf{13} (1965) 487--492.
+
+\bibitem{kanelevinson} T.~R. Kane and D.~A. Levinson, \emph{Dynamics: Theory and Applications}
+(McGraw-Hill, 1985).
+
+\bibitem{gibbs} J.~W. Gibbs, ``On the fundamental formulae of dynamics,'' \emph{Amer. J. Math.} \textbf{2} (1879) 49--64.
+
+\bibitem{appell} P.~Appell, ``Sur une forme g\'en\'erale des \'equations de la dynamique,''
+\emph{C. R. Acad. Sci. Paris} \textbf{129} (1899) 459--460.
+
+\bibitem{baumgarte} J.~Baumgarte, ``Stabilization of constraints and integrals of motion in dynamical systems,''
+\emph{Comput. Methods Appl. Mech. Eng.} \textbf{1} (1972) 1--16.
+
+\bibitem{ziglin} S.~L. Ziglin, ``Branching of solutions and non-existence of first integrals in Hamiltonian mechanics. I,''
+\emph{Funct. Anal. Appl.} \textbf{16} (1982) 181--189.
+
+\bibitem{moralesruiz} J.~J. Morales-Ruiz, \emph{Differential Galois Theory and Non-Integrability of Hamiltonian
+Systems} (Birkh\"auser, 1999).
+
+\bibitem{mrr} J.~J. Morales-Ruiz and J.-P. Ramis, ``Galoisian obstructions to integrability of Hamiltonian systems,
+I and II,'' \emph{Methods Appl. Anal.} \textbf{8} (2001) 33--95 and 97--111.
+
+\bibitem{kolmogorov} A.~N. Kolmogorov, ``On the conservation of conditionally periodic motions under small perturbation
+of the Hamiltonian,'' \emph{Dokl. Akad. Nauk SSSR} \textbf{98} (1954) 527--530.
+
+\bibitem{arnoldkam} V.~I. Arnold, ``Proof of a theorem of A. N. Kolmogorov on the preservation of conditionally
+periodic motions under a small perturbation of the Hamiltonian,'' \emph{Russian Math. Surveys} \textbf{18}(5) (1963) 9--36.
+
+\bibitem{moser} J.~Moser, ``On invariant curves of area-preserving mappings of an annulus,''
+\emph{Nachr. Akad. Wiss. G\"ottingen Math.-Phys. Kl. II} (1962) 1--20.
+
+\bibitem{lichtenberg} A.~J. Lichtenberg and M.~A. Lieberman, \emph{Regular and Chaotic Dynamics}, 2nd ed.
+(Springer, 1992).
+
+\bibitem{benettin} G.~Benettin, L.~Galgani, A.~Giorgilli and J.-M. Strelcyn, ``Lyapunov characteristic exponents for
+smooth dynamical systems and for Hamiltonian systems; a method for computing all of them. Part 1: Theory,''
+\emph{Meccanica} \textbf{15} (1980) 9--20.
+
+\bibitem{shinbrot} T.~Shinbrot, C.~Grebogi, J.~Wisdom and J.~A. Yorke, ``Chaos in a double pendulum,''
+\emph{Am. J. Phys.} \textbf{60} (1992) 491--499.
+
+\bibitem{levien} R.~B. Levien and S.~M. Tan, ``Double pendulum: An experiment in chaos,''
+\emph{Am. J. Phys.} \textbf{61} (1993) 1038--1044.
+
+\bibitem{stachowiak} T.~Stachowiak and T.~Okada, ``A numerical analysis of chaos in the double pendulum,''
+\emph{Chaos, Solitons \& Fractals} \textbf{29} (2006) 417--422.
+
+\bibitem{hnw} E.~Hairer, S.~P. N{\o}rsett and G.~Wanner, \emph{Solving Ordinary Differential Equations I: Nonstiff
+Problems}, 2nd ed. (Springer, 1993).
+
+\bibitem{ghw} E.~Hairer, C.~Lubich and G.~Wanner, \emph{Geometric Numerical Integration}, 2nd ed.
+(Springer, 2006).
+
+\bibitem{sanzserna} J.~M. Sanz-Serna and M.~P. Calvo, \emph{Numerical Hamiltonian Problems}
+(Chapman \& Hall, 1994).
+
+\bibitem{leimkuhler} B.~Leimkuhler and S.~Reich, \emph{Simulating Hamiltonian Dynamics} (Cambridge University Press, 2004).
+
+\bibitem{marsdenwest} J.~E. Marsden and M.~West, ``Discrete mechanics and variational integrators,''
+\emph{Acta Numerica} \textbf{10} (2001) 357--514.
+
+\bibitem{yoshida} H.~Yoshida, ``Construction of higher order symplectic integrators,''
+\emph{Phys. Lett. A} \textbf{150} (1990) 262--268.
+
+\end{thebibliography}
+
+\end{document}

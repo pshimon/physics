@@ -1,0 +1,764 @@
+% ======================================================================
+%  Chapter: Hertz's Forceless Mechanics and the Double Pendulum
+%  Include with \include{hertz_chapter} from a `book' preamble that loads
+%    amsmath, amssymb, amsthm, mathtools, enumitem, booktabs, graphicx,
+%    tikz (+ arrows.meta library), hyperref.
+%  Figure file needed in the same directory:  jacobi_curvature.pdf
+%  Theorem-type environments are defined below only if not yet defined.
+% ======================================================================
+
+\makeatletter
+\@ifundefined{theorem}{\theoremstyle{plain}\newtheorem{theorem}{Theorem}[chapter]}{}
+\@ifundefined{proposition}{\theoremstyle{plain}\newtheorem{proposition}[theorem]{Proposition}}{}
+\@ifundefined{corollary}{\theoremstyle{plain}\newtheorem{corollary}[theorem]{Corollary}}{}
+\@ifundefined{definition}{\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}}{}
+\@ifundefined{example}{\theoremstyle{definition}\newtheorem{example}[theorem]{Example}}{}
+\@ifundefined{remark}{\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}}{}
+\makeatother
+
+\providecommand{\Rb}{\mathbb{R}}
+\providecommand{\Tor}{\mathbb{T}}
+\providecommand{\Sph}{\mathbb{S}}
+\providecommand{\ud}{\mathrm{d}}
+\providecommand{\Lap}{\Delta}
+\setlength{\emergencystretch}{2.5em}
+
+\chapter{Hertz's Forceless Mechanics and the Double Pendulum}
+\label{ch:hertz-double-pendulum}
+
+\section{A mechanics without forces}
+\label{sec:hz-intro}
+
+Newton's \emph{Principia} takes force as a primitive. The concept is so
+deeply built into the textbook presentation of mechanics that one forgets
+how uneasy its status has always been: a force is neither a displacement
+nor a mass, it cannot be seen, and the classical examples---gravitation
+across empty space, the tension of a string, the reaction of a table---have
+little in common except that each can be written on the right-hand side of
+$m\ddot{\mathbf x}=\mathbf F$. In \emph{Die Prinzipien der Mechanik in neuem
+Zusammenhange dargestellt}, which appeared in 1894 after Hertz's death
+and with a preface by Helmholtz, Heinrich Hertz proposed to remove force
+from the foundations altogether \cite{hdp:hertz1894}. His own ``image''
+of mechanics rests on three notions only---time, space and mass---and on
+a single law, which in the Jones--Walley translation of \S309 reads:
+``Every free system persists in its state of rest or of uniform motion in
+a straightest path.''
+
+The sentence has two moving parts. A \emph{free} system is one subject to
+no forces whatever; it is subject only to rigid connections between the
+positions of its parts. A \emph{straightest path} is a purely geometric
+notion, the path of least curvature compatible with those connections. What
+the Newtonian calls a force is then, in Hertz's account, of one of two
+kinds. It is either the reaction of a rigid connection among the visible
+bodies, or it is the visible trace of \emph{hidden masses}, rigidly
+connected to the visible ones and moving in ways we do not observe
+\cite{hdp:hertz1894,hdp:lutzen2005}. Helmholtz's preface to the book already
+voices reservations on whether hidden systems of the required kind can
+actually be found for the forces of nature, and the reception of the
+book was, for that reason, largely respectful and largely unconvinced.
+
+This chapter takes Hertz's program seriously as \emph{mathematics} and
+asks what it does when applied to the smallest system in which all its
+ingredients meet: the planar double pendulum. The double pendulum has
+rigid connections, which are Hertz's native material (the two rods); it has
+a force, gravity, which Hertz must explain away; and it has chaos, which
+any mechanics must be able to represent. The plan is as follows.
+
+\begin{itemize}[nosep]
+  \item Section~\ref{sec:hz-geometry} states Hertz's law precisely and shows
+        that, for holonomic connections, it is the statement that motion is
+        a geodesic of the mass-weighted configuration space.
+  \item Section~\ref{sec:hz-free-dp} shows that the double pendulum
+        \emph{without} gravity is a free Hertz system, computes the
+        curvature of its configuration space, and finds a hidden Killing
+        field.
+  \item Section~\ref{sec:hz-hidden} switches gravity on and eliminates it in
+        Hertz's way: by a representation theorem that turns any positive
+        potential into the kinetic energy of one hidden cyclic coordinate.
+  \item Section~\ref{sec:hz-jacobi} gives the second geometrization of the
+        same dynamics, the Jacobi metric at fixed energy, and uses it to ask
+        where the chaos of the double pendulum sits in the geometry.
+  \item Sections~\ref{sec:hz-compare} and~\ref{sec:hz-assess} compare the
+        geometrizations and assess what the Hertzian program does and does
+        not deliver, in the light of the theme of this book: the equations of
+        motion, not the formulations built around them, are the real-world
+        content of mechanics.
+\end{itemize}
+
+\section{Hertz's law and the geometry of configuration space}
+\label{sec:hz-geometry}
+
+\subsection{Systems, connections, free motion}
+
+\begin{definition}[Hertzian material system]\label{def:hz-system}
+A \emph{material system} consists of $N$ particles with masses $m_i>0$ and
+positions $\mathbf x_i\in\Rb^3$. Its \emph{mass-weighted ambient space} is
+$(\Rb^{3N},g)$ with
+\[
+  g(\xi,\eta)\;=\;\sum_{i=1}^{N}m_i\,\xi_i\!\cdot\eta_i .
+\]
+A \emph{rigid connection} is a relation that is linear and homogeneous in
+the differentials of the coordinates, $\omega_\alpha(x)(\ud x)=0$,
+$\alpha=1,\dots,k$, where the $\omega_\alpha$ are Pfaffian forms depending
+on position. Write
+$D_x=\bigcap_\alpha\ker\omega_\alpha(x)\subset\Rb^{3N}$ for the space of
+\emph{admissible velocities}. The connections are \emph{holonomic} if $D$
+is integrable, i.e.\ if there is a submanifold $\mathcal N\subset\Rb^{3N}$
+through every admissible position with $D=T\mathcal N$; otherwise they are
+\emph{nonholonomic} (both terms are Hertz's). A system is \emph{free} if
+it is subject to rigid connections only, with no active forces.
+\end{definition}
+
+Hertz measures path elements by the same mass-weighted expression
+$g(\ud x,\ud x)=\sum m_i\,\ud x_i^2$ (he divides by the total mass, which is
+immaterial here). Differentiating an admissible motion $x(t)$, with
+$\dot x\in D_x$, along the connections gives, for the acceleration $a=\ddot x$,
+\[
+  \omega_\alpha(x)(a)\;=\;c_\alpha(x,\dot x),
+  \qquad
+  c_\alpha:=-\,\partial_\beta\omega_{\alpha,\gamma}\,\dot x^\beta\dot x^\gamma ,
+\]
+so that at a given state $(x,\dot x)$ the admissible accelerations form an
+affine space $A_{(x,\dot x)}=a_0+D_x$.
+
+\begin{definition}[Straightest path]\label{def:hz-straightest}
+An admissible path is \emph{straightest} if at every point its curvature
+is the least among all admissible paths having the same position and the
+same tangent. For a path parametrized by constant speed, curvature is
+proportional to $|a|_g$, so this means
+\[
+  a\;=\;\operatorname*{arg\,min}_{a'\in A_{(x,\dot x)}}\ g(a',a').
+\]
+\end{definition}
+
+\begin{proposition}[Hertz's law in Newtonian language]\label{prop:hz-law}
+Let a free system move along a straightest path. Then:
+\begin{enumerate}[label=(\roman*),nosep]
+  \item $g(a,w)=0$ for every $w\in D_x$, i.e.\ $a\in D_x^{\perp}$;
+  \item the speed $g(\dot x,\dot x)^{1/2}$ is constant;
+  \item in components, $m_i\ddot{\mathbf x}_i=\mathbf R_i$ with a reaction
+        $R=(\mathbf R_i)$ satisfying $g^{-1}\!R\perp D_x$, that is, the
+        equations of d'Alembert--Lagrange with zero active forces;
+  \item if the connections are holonomic, $D=T\mathcal N$, then $x(t)$ is a
+        geodesic of the induced Riemannian manifold $(\mathcal N,g|_{\mathcal N})$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) Minimizing $g(a',a')$ over the affine space $a_0+D_x$ yields the
+orthogonal projection of the origin onto it, which is orthogonal to the
+direction space $D_x$. (ii) $\frac{\ud}{\ud t}g(\dot x,\dot x)=2g(a,\dot x)=0$
+because $\dot x\in D_x$. (iii) Write the reaction as $R:=g(a,\cdot)$; then
+$R(w)=0$ on $D_x$ is (i). (iv) Let $\nabla$ be the flat connection of
+$\Rb^{3N}$. For a curve in $\mathcal N$ the Gauss formula splits $a=\nabla_{\dot x}\dot x$
+into a part tangent to $\mathcal N$, which equals the covariant acceleration
+$\nabla^{\mathcal N}_{\dot x}\dot x$ of the induced metric, and a normal part.
+By (i) the tangential part vanishes.
+\end{proof}
+
+\begin{remark}[Gauss, and what is new]
+Gauss's principle of least constraint minimizes
+\[
+  \sum_i m_i\Bigl|\mathbf a_i-\frac{\mathbf F_i}{m_i}\Bigr|^2
+\]
+over admissible accelerations \cite{hdp:gauss1829}; Hertz's law is the case
+$\mathbf F=0$, and for stationary connections without active forces the two
+coincide \cite{hdp:eom-hertz}. The mathematical gain is therefore nil; the
+gain is conceptual. In Gauss's principle forces are given data and
+constraints are restrictions; in Hertz's the forces are to be \emph{derived},
+and the whole of dynamics becomes a statement about the metric $g$ and the
+distribution $D$.
+\end{remark}
+
+\begin{remark}[Nonholonomic connections]
+For nonholonomic $D$ a straightest path is in general neither a geodesic of
+any induced metric nor a minimizer of length among admissible paths; Hertz
+stressed that Hamilton's principle and the principle of least action fail for
+such systems \cite{hdp:lutzen2005}. The straightest-path condition (i) is the
+Lagrange--d'Alembert equation, not the variational (``vakonomic'') one. The
+double pendulum has holonomic connections only, so none of this affects the
+rest of the chapter.
+\end{remark}
+
+\subsection{Holonomic Hertzian mechanics is geodesic flow}
+
+For holonomic connections, part (iv) says that the entire dynamics of a free
+system is the geodesic flow of $(\mathcal N,M)$, where in coordinates
+$q^a$ on $\mathcal N$ the \emph{kinetic metric} is
+\begin{equation}\label{eq:hz-kinetic-metric}
+  M_{ab}(q)\;=\;\sum_i m_i\,\frac{\partial\mathbf x_i}{\partial q^a}\!\cdot\frac{\partial\mathbf x_i}{\partial q^b},
+\end{equation}
+and the equations of motion are
+\begin{equation}\label{eq:hz-geodesic}
+  \ddot q^a+\Gamma^a_{bc}(q)\,\dot q^b\dot q^c=0 ,
+  \qquad
+  \Gamma^a_{bc}=\tfrac12M^{ad}\bigl(\partial_bM_{dc}+\partial_cM_{db}-\partial_dM_{bc}\bigr).
+\end{equation}
+The ``centrifugal'' and ``Coriolis'' terms of textbook mechanics are the
+Christoffel symbols $\Gamma$: they are not forces but the coordinate
+expression of the connection of $M$. What remains outside this scheme, and what
+Hertz must account for in order to keep his claim of generality, is every
+term that is \emph{not} of this form, notably a potential force on the
+right-hand side of~\eqref{eq:hz-geodesic}.
+
+\section{The double pendulum without gravity is a free Hertz system}
+\label{sec:hz-free-dp}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1.15,>=Stealth]
+  % ceiling
+  \draw[thick] (-1.0,0) -- (1.0,0);
+  \foreach \x in {-0.9,-0.6,...,0.9}{\draw (\x,0) -- (\x-0.15,0.18);}
+  \coordinate (O) at (0,0);
+  \coordinate (A) at ({2*sin(28)},{-2*cos(28)});
+  \coordinate (B) at ({2*sin(28)+1.6*sin(62)},{-2*cos(28)-1.6*cos(62)});
+  % verticals
+  \draw[dashed,gray] (O) -- (0,-3.2);
+  \draw[dashed,gray] (A) -- ++(0,-1.9);
+  % rods
+  \draw[very thick] (O) -- (A) node[midway,above right=-2pt] {$l_1$};
+  \draw[very thick] (A) -- (B) node[midway,above right=-1pt] {$l_2$};
+  % bobs
+  \fill (O) circle (1.6pt);
+  \filldraw[fill=white,thick] (A) circle (0.13) node[right=5pt] {$m_1$};
+  \filldraw[fill=white,thick] (B) circle (0.13) node[right=5pt] {$m_2$};
+  % angles
+  \draw[->] (0,-0.85) arc[start angle=-90,end angle=-62,radius=0.85];
+  \node at (0.22,-1.12) {\small$\theta_1$};
+  \draw[->] (A)++(0,-0.7) arc[start angle=-90,end angle=-28,radius=0.7];
+  \node at ({2*sin(28)+0.42},{-2*cos(28)-0.98}) {\small$\theta_2$};
+  % gravity
+  \draw[->,thick] (3.2,-0.4) -- (3.2,-1.4) node[midway,right] {$g$};
+\end{tikzpicture}
+\caption{The planar double pendulum. Both angles are measured from the
+downward vertical, so the configuration manifold is the torus
+$\Tor^2=\Sph^1\times\Sph^1$ (the rods may swing through the upright position).}
+\label{fig:hz-dp}
+\end{figure}
+
+Let the two bobs have masses $m_1,m_2$ and positions $\mathbf x_1,\mathbf x_2$
+in a vertical plane, joined by massless rigid rods of lengths $l_1,l_2$ to the
+pivot and to each other (Figure~\ref{fig:hz-dp}). The mass-weighted ambient
+space is $\Rb^4$ with $g=\operatorname{diag}(m_1,m_1,m_2,m_2)$, and the
+connections are the two holonomic relations
+$|\mathbf x_1|=l_1$, $|\mathbf x_2-\mathbf x_1|=l_2$. They define
+$\mathcal N=\Tor^2$, parametrized by
+\[
+  \mathbf x_1=l_1(\sin\theta_1,-\cos\theta_1),\qquad
+  \mathbf x_2=\mathbf x_1+l_2(\sin\theta_2,-\cos\theta_2).
+\]
+
+\begin{proposition}[Kinetic metric]\label{prop:hz-dp-metric}
+With $\delta:=\theta_1-\theta_2$, the induced metric~\eqref{eq:hz-kinetic-metric} is
+\[
+  M\;=\;\begin{pmatrix}(m_1+m_2)\,l_1^2 & m_2\,l_1l_2\cos\delta\\[2pt]
+                       m_2\,l_1l_2\cos\delta & m_2\,l_2^2\end{pmatrix},
+  \qquad
+  \det M=m_2\,l_1^2l_2^2\,\bigl(m_1+m_2\sin^2\delta\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Differentiate the parametrization: $\partial_{\theta_1}\mathbf x_1=l_1(\cos\theta_1,\sin\theta_1)$,
+$\partial_{\theta_1}\mathbf x_2=\partial_{\theta_1}\mathbf x_1$,
+$\partial_{\theta_2}\mathbf x_1=0$, $\partial_{\theta_2}\mathbf x_2=l_2(\cos\theta_2,\sin\theta_2)$.
+Then $M_{11}=(m_1+m_2)l_1^2$, $M_{22}=m_2l_2^2$ and
+$M_{12}=m_2l_1l_2(\cos\theta_1\cos\theta_2+\sin\theta_1\sin\theta_2)=m_2l_1l_2\cos\delta$.
+\end{proof}
+
+The metric depends on $\theta_1,\theta_2$ only through $\delta$. Hertz's
+law for the gravity-free pendulum is therefore the geodesic
+equation~\eqref{eq:hz-geodesic} of $(\Tor^2,M)$, which reads explicitly
+\begin{equation}\label{eq:hz-dp-free}
+\begin{aligned}
+  \ddot\theta_1&=-\frac{m_2\,l_1\dot\theta_1^2\sin\delta\cos\delta+m_2\,l_2\dot\theta_2^2\sin\delta}{l_1\,(m_1+m_2\sin^2\delta)},\\[2pt]
+  \ddot\theta_2&=\frac{(m_1+m_2)\,l_1\dot\theta_1^2\sin\delta+m_2\,l_2\dot\theta_2^2\sin\delta\cos\delta}{l_2\,(m_1+m_2\sin^2\delta)} .
+\end{aligned}
+\end{equation}
+
+\begin{proposition}[Curvature and a hidden symmetry]\label{prop:hz-dp-curvature}
+The Gaussian curvature of $(\Tor^2,M)$ is
+\begin{equation}\label{eq:hz-KM}
+  K_M\;=\;\frac{m_1\cos\delta}{l_1l_2\,\bigl(m_1+m_2\sin^2\delta\bigr)^{2}} .
+\end{equation}
+The vector field $\partial_{\theta_1}+\partial_{\theta_2}$ is Killing, with Noether
+integral
+\[
+  J=\bigl[(m_1+m_2)l_1^2+m_2l_1l_2\cos\delta\bigr]\dot\theta_1
+   +\bigl[m_2l_2^2+m_2l_1l_2\cos\delta\bigr]\dot\theta_2 ,
+\]
+the total angular momentum about the pivot. Together with the
+speed, $J$ makes the geodesic flow of $(\Tor^2,M)$ Liouville integrable.
+\end{proposition}
+
+\begin{proof}
+Formula~\eqref{eq:hz-KM} follows from $K=R_{1212}/\det M$ with the Christoffel
+symbols of Proposition~\ref{prop:hz-dp-metric} (the computation was checked
+symbolically). Since $M$ depends on $\delta=\theta_1-\theta_2$ only, it is
+invariant under the simultaneous rotation $\theta_i\mapsto\theta_i+s$, whose
+generator is $\partial_{\theta_1}+\partial_{\theta_2}$; the conserved quantity
+$M(\partial_{\theta_1}+\partial_{\theta_2},\dot\theta)$ is $J$. A $2$-degree-of-freedom
+system with two independent commuting integrals (here the speed and $J$) is
+integrable.
+\end{proof}
+
+\begin{remark}[Negative curvature without chaos]\label{rem:hz-gb-free}
+By~\eqref{eq:hz-KM}, $K_M>0$ for $|\delta|<\pi/2$ and $K_M<0$ for $|\delta|>\pi/2$.
+This is forced: the Gauss--Bonnet theorem for the torus gives
+$\int_{\Tor^2}K_M\,\ud A=2\pi\chi(\Tor^2)=0$, so a non-flat metric on $\Tor^2$ must
+have regions of both signs (check directly: $\ud A=\sqrt{\det M}\,\ud\theta_1\ud\theta_2$
+and $K_M\sqrt{\det M}\propto\cos\delta\,(m_1+m_2\sin^2\delta)^{-3/2}$ integrates to zero
+over $\delta\in[0,2\pi]$). Yet the geodesic flow is integrable. Negative curvature somewhere is thus
+\emph{not} an indicator of chaos; we shall need this caveat in
+Section~\ref{sec:hz-jacobi}.
+\end{remark}
+
+\section{Switching on gravity: hidden masses}
+\label{sec:hz-hidden}
+
+With gravity the double pendulum is the Lagrangian system with
+$L=\tfrac12M_{ab}\dot\theta^a\dot\theta^b-V$,
+\begin{equation}\label{eq:hz-V}
+  V(\theta_1,\theta_2)=-(m_1+m_2)\,g\,l_1\cos\theta_1-m_2\,g\,l_2\cos\theta_2 ,
+\end{equation}
+and its equations of motion are
+\begin{equation}\label{eq:hz-dp-grav}
+  \ddot\theta^a+\Gamma^a_{bc}\dot\theta^b\dot\theta^c=-M^{ab}\partial_bV ,
+\end{equation}
+that is, \eqref{eq:hz-dp-free} with the additional terms
+\begin{align*}
+  \ddot\theta_1&\ni\frac{m_2\,g\sin\theta_2\cos\delta-(m_1+m_2)\,g\sin\theta_1}{l_1\,(m_1+m_2\sin^2\delta)},\\
+  \ddot\theta_2&\ni\frac{(m_1+m_2)\,g\,(\sin\theta_1\cos\delta-\sin\theta_2)}{l_2\,(m_1+m_2\sin^2\delta)} .
+\end{align*}
+The right-hand side of~\eqref{eq:hz-dp-grav} is a force. For a Hertzian it
+must be an appearance.
+
+\subsection{Hertz's response and a representation theorem}
+
+Hertz's answer is that forces are the effect of motions we do not see. The
+visible system is coupled by rigid connections to a hidden system; the
+combined system is free; and the visible variables, which alone are
+observed, move as if acted on by forces \cite{hdp:hertz1894,hdp:lutzen2005}.
+In the language of later analytical mechanics the mechanism is familiar: a
+hidden coordinate that is \emph{cyclic} can be eliminated by the Routh
+procedure \cite{hdp:routh1877}, leaving a visible system with an extra
+potential term (Helmholtz's monocyclic systems are the thermodynamic
+instance \cite{hdp:helmholtz1884}). The following theorem shows that this
+device is not merely available but \emph{universal} for potentials.
+
+\begin{theorem}[Cyclic representation of a potential]\label{thm:hz-cyclic}
+Let $(Q,M)$ be a Riemannian manifold, $V\in C^\infty(Q)$ with $V>0$, and
+$p>0$ a constant. On $Q\times\Sph^1$ with coordinates $(q^a,\varphi)$ put
+\begin{equation}\label{eq:hz-warped}
+  G=M_{ab}(q)\,\ud q^a\ud q^b+f(q)^2\,\ud\varphi^2,\qquad f=\frac{p}{\sqrt{2V}} .
+\end{equation}
+\begin{enumerate}[label=(\alph*),nosep]
+  \item If $(q(t),\varphi(t))$ is a geodesic of $G$ with $f^2\dot\varphi=p$, then
+        $q(t)$ solves $\ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c=-M^{ab}\partial_bV$ and
+        $\tfrac12M_{ab}\dot q^a\dot q^b+V=\tfrac12G(\dot\gamma,\dot\gamma)$ is constant.
+  \item Conversely, if $q(t)$ solves the equation in (a), then
+        $\varphi(t)=\varphi_0+\int_0^t 2V(q(s))/p\;\ud s$ makes
+        $(q,\varphi)$ a geodesic of $G$ with $f^2\dot\varphi=p$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Since $G$ is block diagonal and $\varphi$ does not appear in it, the only
+Christoffel symbols of $G$ that differ from those of $M$ and from zero are
+\[
+  \Gamma^a_{\varphi\varphi}=-\tfrac12M^{ab}\partial_b(f^2),\qquad
+  \Gamma^\varphi_{a\varphi}=\Gamma^\varphi_{\varphi a}=\partial_af/f ,
+\]
+while $\Gamma^a_{b\varphi}=\Gamma^\varphi_{ab}=\Gamma^\varphi_{\varphi\varphi}=0$.
+The geodesic equations are therefore
+\[
+  \ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c-\tfrac12M^{ab}\partial_b(f^2)\,\dot\varphi^2=0,
+  \qquad
+  \ddot\varphi+2\,\frac{\partial_af}{f}\,\dot q^a\dot\varphi=0 .
+\]
+The second equation is $\frac{\ud}{\ud t}(f^2\dot\varphi)=0$, the conservation of
+the cyclic momentum. Insert $\dot\varphi=p/f^2$ in the first:
+\[
+  \tfrac12M^{ab}\partial_b(f^2)\,\frac{p^2}{f^4}
+  =-\tfrac12M^{ab}\partial_b\!\Bigl(\frac{p^2}{f^2}\Bigr)
+  =-M^{ab}\partial_b V ,
+\]
+because $p^2/(2f^2)=V$. This proves (a); the energy statement follows from
+$\tfrac12f^2\dot\varphi^2=p^2/(2f^2)=V$. Part (b) reverses the steps: define
+$\varphi$ by $\dot\varphi=p/f^2=2V/p$, so the second geodesic equation holds, and
+the first reduces to the given equation.
+\end{proof}
+
+The theorem is Routh reduction run backwards: $R=\tfrac12M\dot q\dot q-p^2/(2f^2)$
+is the Routhian of $G$, and $p^2/(2f^2)$ is its effective potential.
+(A metric of the form $g+f^2\ud\varphi^2$ is also what Kaluza--Klein
+theory calls a circle compactification with a scalar $f$ and no gauge field;
+the potential $p^2/(2f^2)$ is the usual momentum-induced one.)
+The physical reading, in Hertz's terms, is that \emph{potential energy is the
+kinetic energy of the hidden rotor}: $V=\tfrac12f^2\dot\varphi^2$.
+
+\begin{example}[The simple pendulum as a Clairaut problem]\label{ex:hz-simple}
+For a pendulum of mass $m$ and length $l$, $Q=\Sph^1$ with $M=ml^2\ud\theta^2$ and
+$V=mgl(1-\cos\theta)+\varepsilon$, $\varepsilon>0$ (a constant shift changes only
+the value of the conserved energy). Then \eqref{eq:hz-warped} is a metric on a
+torus of revolution with profile $f(\theta)=p/\sqrt{2V(\theta)}$,
+and the pendulum's motion is a geodesic of that surface. The cyclic
+momentum $p=f^2\dot\varphi$ is Clairaut's constant: it equals $f$ times the
+component of the velocity along the parallel. In terms of arclength
+$s=\sqrt m\,l\,\theta$ the Gaussian curvature of the surface is $-f_{ss}/f$.
+The oscillating and rotating regimes of the pendulum are the geodesics that
+oscillate about, or wind around, the neck of the surface.
+\end{example}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[->] (-0.3,-2.0) -- (7.3,-2.0) node[right] {$q\in Q$};
+  \draw[thick,domain=0.2:6.8,samples=80,smooth] plot (\x,{0.85+0.4*sin(58*\x)});
+  \draw[thick,domain=0.2:6.8,samples=80,smooth] plot (\x,{-(0.85+0.4*sin(58*\x))});
+  \foreach \x in {0.6,1.6,2.6,3.6,4.6,5.6,6.6}{
+    \pgfmathsetmacro{\r}{0.85+0.4*sin(58*\x)}
+    \draw (\x,0) ellipse ({0.17} and {\r});
+    \draw[dotted] (\x,-2.0) -- (\x,{-\r});
+  }
+  \node at (0.6,1.55) {$f(q)$};
+  \draw[->] (3.0,1.25) -- (3.0,0.02);
+  \node[right] at (3.0,1.35) {\small hidden circle, angle $\varphi$};
+\end{tikzpicture}
+\caption{Schematic of Theorem~\ref{thm:hz-cyclic}: over each configuration
+$q$ of the visible system sits a hidden circle of radius $f(q)=p/\sqrt{2V(q)}$.
+Free (geodesic) motion on the total space projects to motion in the potential
+$V$; the hidden circle spins faster where the radius is smaller, that is,
+where the potential is higher.}
+\label{fig:hz-warped}
+\end{figure}
+
+\subsection{Application to the double pendulum}
+
+\begin{corollary}[Hertzian double pendulum]\label{cor:hz-dp}
+Let $V_c=V+V_0$ with $V$ given by~\eqref{eq:hz-V} and a constant
+$V_0>(m_1+m_2)gl_1+m_2gl_2$, and let $M$ be as in
+Proposition~\ref{prop:hz-dp-metric}. On $\Tor^3=\Tor^2\times\Sph^1$ the metric
+\[
+  G=M_{ab}\,\ud\theta^a\ud\theta^b+\frac{p^2}{2V_c(\theta)}\,\ud\varphi^2
+\]
+makes Hertz's law (geodesic motion with constant speed) equivalent to the
+double pendulum~\eqref{eq:hz-dp-grav} in the sense of
+Theorem~\ref{thm:hz-cyclic}, with $\tfrac12G(\dot\gamma,\dot\gamma)=E+V_0$,
+where $E=\tfrac12M\dot\theta\dot\theta+V$ is the pendulum's energy.
+The hidden rotor turns with angular velocity
+$\dot\varphi=2V_c(\theta(t))/p$.
+\end{corollary}
+
+The constant $V_0$ is necessary only because $f=p/\sqrt{2V_c}$ requires
+$V_c>0$ and $V$ attains negative values; it shifts the zero of potential
+energy and so, by Theorem~\ref{thm:hz-cyclic}, only the numerical value of the
+total geodesic energy. All the double-pendulum quantities in the following
+section are unchanged by it.
+
+\subsection{How literal are the hidden masses?}
+
+Hertz demands more than a Riemannian metric: hidden \emph{masses}, with
+rigid connections to the visible ones. Three observations clarify what the
+representation theorem does and does not give.
+
+\paragraph{(a) A literal rotor, with an inertia correction.}
+Let a hidden particle of unit mass be constrained to the position
+$\mathbf y=(r(\theta)\cos\varphi,\,r(\theta)\sin\varphi,\,0)$, a point on a circle
+whose radius is a prescribed function of the pendulum angles (a cam or linkage
+in a real mechanism). The total ambient metric restricted to the constraint manifold is
+\[
+  G=\bigl(M^{\rm bare}_{ab}+\partial_ar\,\partial_br\bigr)\ud\theta^a\ud\theta^b+r^2\ud\varphi^2 ,
+\]
+so the hidden mass also contributes to the inertia of the visible variables,
+and by Theorem~\ref{thm:hz-cyclic} (its proof uses only $V=p^2/(2f^2)$) the visible motion has effective metric
+$M^{\rm bare}+\ud r\otimes\ud r$ and potential $p^2/(2r^2)$. Choosing $r=p/\sqrt{2V_c}$ gives
+$\ud r\otimes\ud r=\dfrac{p^2}{8V_c^{3}}\,\ud V\otimes\ud V$, which is $O(V_0^{-3})$ at fixed $p$.
+Thus the literal rotor reproduces the double pendulum with a bare inertia that differs from
+the observed one by a correction that vanishes as the hidden energy $V_c$ grows relative to
+the variation of $V$. Exactness is recovered only if one declares the \emph{effective}
+inertia $M$ to be the observed one. The metric $G$ of Corollary~\ref{cor:hz-dp}
+encodes precisely this declaration.
+
+\paragraph{(b) Nash embedding: realizability at the level of geometry.}
+By Nash's theorem any compact Riemannian manifold embeds isometrically in
+some Euclidean space \cite{hdp:nash1956}. Applied to $(\Tor^3,G)$ this exhibits
+the Hertzian configuration space as the constraint manifold of a system of
+unit-mass coordinates with holonomic rigid connections. But in such a
+realization the pendulum angles $\theta^a$ are merely functions on the
+constraint manifold, not the positions of two identifiable bobs. The theorem
+shows that Hertz's \emph{geometry} is always realizable; it does not show that
+the hidden masses can be chosen compatibly with the visible ones.
+
+\paragraph{(c) Non-uniqueness.}
+Nothing in the visible motion selects the hidden structure. Replacing $V_c$ by
+a different positive function changes only the energy bookkeeping; adding more
+hidden rotors gives $V=\sum_kp_k^2/(2f_k^2)$ with many solutions; and the Jacobi
+and Eisenhart constructions of Sections~\ref{sec:hz-jacobi}
+and~\ref{sec:hz-compare} reproduce the same trajectories with entirely
+different hidden content. The Hertzian explanation of gravity is therefore not
+testable by observing the pendulum.
+
+\section{A second geometrization: the Jacobi metric}
+\label{sec:hz-jacobi}
+
+Hertz enlarges the configuration space. There is also a way to keep its
+dimension and to absorb the potential into the metric by a conformal
+rescaling, at the price of fixing the energy.
+
+\begin{theorem}[Jacobi]\label{thm:hz-jacobi}
+On the Hill region $U_E=\{q\in Q: V(q)<E\}$ let
+$J_E=(E-V)\,M$. The solutions of Newton's equations $\ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c=-M^{ab}\partial_bV$
+of energy $E$ are, after the reparametrization $\ud\tau=(E-V)\,\ud t$, the
+geodesics of $(U_E,J_E)$.
+\end{theorem}
+
+This is the geometric content of Maupertuis's principle: the abbreviated action
+\[
+  \int\sqrt{2(E-V)}\;\ud s_M
+\]
+is, up to the factor $\sqrt2$, the $J_E$-length of the path
+\cite{hdp:jacobi1866,hdp:arnold1989}. (The relation of this principle to Hamilton's and
+Hertz's is treated in the chapter on variational principles.)
+
+\subsection{Curvature of the Jacobi metric}
+
+In two dimensions the stability of nearby geodesics is governed by the Gaussian
+curvature: for a unit-speed geodesic of a surface, the normal deviation $\xi$
+between neighbouring geodesics obeys $\xi''+K\,\xi=0$ (Jacobi--Levi-Civita
+equation), exponentially growing where $K<0$.
+
+\begin{proposition}[Conformal formula]\label{prop:hz-conformal}
+For $J_E=\Omega\,M$ with $\Omega=E-V>0$ on a surface $(Q,M)$,
+\begin{equation}\label{eq:hz-KJ}
+  K_{J_E}\;=\;\frac{1}{\Omega}\Bigl(K_M-\tfrac12\,\Lap_M\ln\Omega\Bigr),
+\end{equation}
+where $\Lap_M$ is the Laplace--Beltrami operator of $M$. Near a regular point of the
+Hill boundary $\{V=E\}$, $K_{J_E}\simeq|\nabla\Omega|_M^2/(2\Omega^3)\to+\infty$.
+\end{proposition}
+
+\begin{proof}
+For $\hat g=e^{2u}g$ on a surface, $\hat K=e^{-2u}(K-\Lap_gu)$ \cite{hdp:docarmo1992}.
+Put $e^{2u}=\Omega$. For the boundary behaviour,
+$\Lap\ln\Omega=\Lap\Omega/\Omega-|\nabla\Omega|^2/\Omega^2$, and the second term dominates.
+(Formula~\eqref{eq:hz-KJ} was also checked symbolically against the Riemann tensor of $J_E$ for the double pendulum.)
+\end{proof}
+
+For the double pendulum $K_M$ is~\eqref{eq:hz-KM}, $\Omega=E-V$ with $V$
+from~\eqref{eq:hz-V}, and~\eqref{eq:hz-KJ} gives $K_{J_E}$ in closed form.
+
+\begin{proposition}[Negative curvature is unavoidable above the separatrix energy]\label{prop:hz-gb}
+Let $E>V_{\max}=(m_1+m_2)gl_1+m_2gl_2$. Then $U_E=\Tor^2$, $J_E$ is a smooth
+Riemannian metric on the torus, and $\int_{\Tor^2}K_{J_E}\,\ud A_{J_E}=0$. Hence, unless
+$K_{J_E}\equiv0$, it takes negative values somewhere.
+\end{proposition}
+
+\begin{proof}
+$V<V_{\max}<E$ everywhere, so $\Omega>0$ on all of $\Tor^2$. Apply Gauss--Bonnet
+with $\chi(\Tor^2)=0$. (For $m_1=m_2=l_1=l_2=g=1$ one finds numerically
+$K_{J_4}\in[-1.0,\,0.30]$, so $K_{J_E}\not\equiv0$.)
+\end{proof}
+
+\subsection{Where the negative curvature sits}
+
+Figure~\ref{fig:hz-curvature} shows the sign of $K_{J_E}$ for the
+unit-parameter pendulum ($m_1=m_2=l_1=l_2=g=1$, so $V=-2\cos\theta_1-\cos\theta_2$,
+$-3\le V\le3$) at three energies, and Table~\ref{tab:hz-curv} the fraction of
+the (Jacobi-)area where it is negative.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{jacobi_curvature.pdf}
+\caption{Sign of the Gaussian curvature $K_{J_E}$ of the Jacobi metric of the
+double pendulum on the torus $(\theta_1,\theta_2)\in[-\pi,\pi)^2$, for
+$m_1=m_2=l_1=l_2=g=1$. Blue: $K_{J_E}>0$; red: $K_{J_E}<0$; grey: inaccessible
+region $V\ge E$. At $E=-2$ the accessible region is a disc about the stable
+equilibrium and $K_{J_E}>0$ throughout. At $E=1$ a red region has opened; at
+$E=4>V_{\max}=3$ the whole torus is accessible and, as
+Proposition~\ref{prop:hz-gb} requires, the curvature has both signs.}
+\label{fig:hz-curvature}
+\end{figure}
+
+\begin{table}[t]
+\centering
+\begin{tabular}{@{}rcc@{}}
+\toprule
+$E$ & accessible part of the torus & fraction of $J_E$-area with $K_{J_E}<0$\\
+\midrule
+$-2$ & $0.13$ & $0$\\
+$1$  & $0.69$ & $0.20$\\
+$4$  & $1$    & $0.44$\\
+\bottomrule
+\end{tabular}
+\caption{Accessible fraction of the coordinate torus and fraction of the Jacobi area
+$\sqrt{\det J_E}\,\ud\theta_1\ud\theta_2$ on which the curvature is negative, for the
+unit-parameter double pendulum (grid evaluation, two significant digits).}
+\label{tab:hz-curv}
+\end{table}
+
+\begin{remark}[What the picture does and does not say]\label{rem:hz-caveat}
+The pattern is the expected one. At low energy the motion is a perturbed
+small oscillation and the whole accessible region has $K_{J_E}>0$; as energy
+rises, negative-curvature regions open and grow, and above the energy at which
+the rods can pass through the upright position the topology forces them to exist.
+But three cautions are required.
+(i) $K<0$ is sufficient for local exponential divergence of nearby geodesics, not necessary:
+oscillating positive curvature can produce instability by parametric resonance, which is the
+mechanism of the Hannay-angle chapter, and this is how chaos arises in many
+systems whose average curvature is positive \cite{hdp:casetti1996,hdp:pettini2007}.
+(ii) Remark~\ref{rem:hz-gb-free} shows that a torus metric with negative-curvature regions can
+have integrable geodesic flow; the sign of $K$ locates \emph{possible} instability,
+it does not by itself establish chaos.
+(iii) $J_E$ degenerates at the Hill boundary and its curvature diverges there
+(Proposition~\ref{prop:hz-conformal}), so the picture below the separatrix energy is a statement
+about the interior of $U_E$ only.
+\end{remark}
+
+\section{Three geometrizations side by side}
+\label{sec:hz-compare}
+
+A third construction due to Eisenhart lifts the dynamics to a \emph{Lorentzian}
+space. On $Q\times\Rb_t\times\Rb_z$ take
+\begin{equation}\label{eq:hz-eisenhart}
+  G_{\rm E}=M_{ab}\,\ud q^a\ud q^b+2\,\ud t\,\ud z-2V(q)\,\ud t^2 .
+\end{equation}
+The $t$-equation of the geodesic flow gives $\ddot t=0$, so $t$ is an affine
+parameter, and the $q$-equation is $\ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c=-M^{ab}\partial_bV$ (with
+$\Gamma^a_{tt}=M^{ab}\partial_bV$) \cite{hdp:eisenhart1929}. Table~\ref{tab:hz-compare} compares the three.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & Hertz (hidden rotor) & Jacobi & Eisenhart\\
+\midrule
+Signature & Riemannian & Riemannian & Lorentzian\\
+Dimension & $n+1$ & $n$ & $n+2$\\
+Fixed data & hidden momentum $p$ & energy $E$ & none\\
+Restriction on $V$ & $V+V_0>0$ & Hill region $V<E$ & none\\
+Geodesic parameter & physical time $t$ & $\tau$, $\ud\tau=(E-V)\ud t$ & physical time $t$\\
+Where $V$ sits & hidden kinetic energy & conformal factor & $G_{tt}$\\
+Hertzian reading & hidden masses & none & none\\
+\bottomrule
+\end{tabular}
+\caption{Three ways to turn the potential force into geometry. Only Hertz's
+construction has a mechanical reading in terms of positive masses.}
+\label{tab:hz-compare}
+\end{table}
+
+\section{Assessment: what Hertz's program delivers}
+\label{sec:hz-assess}
+
+\paragraph{What it gains.}
+Applied to the double pendulum the program does what it promises, in one
+respect: it removes every force from the statement of the law. The tension in
+the rods is a reaction of the rigid connection, the centrifugal-looking terms
+are Christoffel symbols, and gravity is the kinetic energy of a rotor. The
+geometry also yields something new that is invisible in the force picture:
+the Gauss--Bonnet argument of Proposition~\ref{prop:hz-gb} explains, without any
+numerics, why the Jacobi geometry of the double pendulum above the upright
+energy must contain regions in which nearby motions diverge.
+
+\paragraph{What it costs.}
+The cost is the hidden structure, and the analysis of Section~\ref{sec:hz-hidden}
+shows that it is both inessential and unconstrained. The visible motion
+of the pendulum determines the ordinary differential equation~\eqref{eq:hz-dp-grav}
+and nothing else; the hidden rotor, the Jacobi metric and the Eisenhart
+lift are three unrelated ways of writing that same equation as a geodesic problem,
+each in a different dimension and with different auxiliary data. To the extent
+that observation of the pendulum is all there is, the hidden masses
+are idle wheels. This is the pattern argued throughout this book: the equations
+of motion are the primary, real-world content of mechanics, and variational and
+geometric formulations are ideal-world devices for finding and organizing them.
+The three geometrizations are in this sense charts of one object, each valid
+on its own domain and each introducing singularities of its own: the positivity
+requirement $V+V_0>0$, the Hill boundary, the Lorentzian signature.
+
+\paragraph{What it cannot reach.}
+Hertz's systems are closed and conservative: all forces, including friction,
+must be traced to hidden conservative motion. Dissipation therefore enters
+only as a statement that the hidden energy is out of sight, and genuine open
+systems, such as the damped double pendulum, are outside the scheme as stated;
+they are the subject of the chapters on damping and on open systems.
+The nonholonomic extension, in which straightest paths differ from shortest
+paths, is the other place where Hertz's mechanics is not simply geodesic flow
+(Section~\ref{sec:hz-geometry}).
+
+\paragraph{Historical coda.}
+The reception was divided between those who found the hidden-mass hypothesis a
+barrier to physical content and those who appreciated the geometric form
+\cite{hdp:lutzen2005}. What survived was less the philosophy than the geometry:
+the representation of constrained mechanics as geodesic flow on a Riemannian
+manifold, which is the standard language of the modern geometric treatments.
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\begin{enumerate}[label=\textbf{\thechapter.\arabic*}.]
+  \item Prove Proposition~\ref{prop:hz-law}(i) by Lagrange multipliers: minimize
+        $g(a,a)$ subject to $\omega_\alpha(a)=c_\alpha$ and show the multipliers
+        are the constraint reactions.
+  \item Derive~\eqref{eq:hz-dp-free} directly from Proposition~\ref{prop:hz-law}(iii) with
+        the constraints $|\mathbf x_1|=l_1$, $|\mathbf x_2-\mathbf x_1|=l_2$, eliminating the
+        multipliers (the rod tensions).
+  \item Identify the second integral of the free double pendulum with
+        $J$ of Proposition~\ref{prop:hz-dp-curvature}, and find the dependence of the
+        period of the $\delta$-motion on $J$ and the speed.
+  \item In Example~\ref{ex:hz-simple} show that the surface of revolution is
+        smooth, that $K=-f_{ss}/f$ does not depend on $p$, and determine where $K<0$
+        (compare Gauss--Bonnet for the torus).
+  \item Verify the claim of Section~\ref{sec:hz-hidden}(a) that $\ud r\otimes\ud r=O(V_0^{-3})$
+        at fixed $p$, and compute the leading correction to the pendulum's small-oscillation frequency.
+  \item Verify that the geodesics of~\eqref{eq:hz-eisenhart} with $\dot t=1$ project to
+        solutions of~\eqref{eq:hz-dp-grav}, and find the quantity conserved by the
+        null Killing vector $\partial_z$.
+  \item Show that for $g\neq0$ the vector field $\partial_{\theta_1}+\partial_{\theta_2}$ is
+        \emph{not} a Killing field of $J_E$, so the angular momentum $J$ of
+        Proposition~\ref{prop:hz-dp-curvature} is no longer conserved. Why does this loss of
+        symmetry not by itself prove that the flow is non-integrable?
+\end{enumerate}
+
+\section*{Notes and references}
+\addcontentsline{toc}{section}{Notes and references}
+
+\emph{On verification.} The kinetic metric, the geodesic-versus-Lagrange form of the equations of
+motion, the explicit accelerations~\eqref{eq:hz-dp-free}--\eqref{eq:hz-dp-grav}, the Christoffel symbols
+of the warped metric, the curvature~\eqref{eq:hz-KM} and the conformal
+formula~\eqref{eq:hz-KJ} were checked symbolically (SymPy); the curvature map and the table were computed
+numerically from~\eqref{eq:hz-KJ} on a $900\times900$ grid, and the Gauss--Bonnet integral at $E=4$
+vanishes to rounding error, as it should.
+
+\begingroup
+\let\chapter\section
+\renewcommand{\bibname}{References}
+\begin{thebibliography}{99}
+\bibitem{hdp:hertz1894} H.~Hertz, \emph{Die Prinzipien der Mechanik in neuem Zusammenhange dargestellt},
+  Gesammelte Werke, Vol.~III (J.~A.~Barth, Leipzig, 1894), with a preface by H.~von Helmholtz.
+  English translation: \emph{The Principles of Mechanics Presented in a New Form}, trans.\ D.~E.~Jones and
+  J.~T.~Walley (Macmillan, London, 1899; repr.\ Dover, New York, 1956).
+\bibitem{hdp:lutzen2005} J.~L\"utzen, \emph{Mechanistic Images in Geometric Form: Heinrich Hertz's
+  ``Principles of Mechanics''} (Oxford University Press, Oxford, 2005).
+\bibitem{hdp:gauss1829} C.~F.~Gauss, \"Uber ein neues allgemeines Grundgesetz der Mechanik,
+  \emph{J.\ reine angew.\ Math.}\ \textbf{4} (1829) 232--235.
+\bibitem{hdp:eom-hertz} V.~V.~Rumyantsev, Hertz principle, in \emph{Encyclopedia of Mathematics} (EMS Press).
+\bibitem{hdp:routh1877} E.~J.~Routh, \emph{A Treatise on the Stability of a Given State of Motion}
+  (Macmillan, London, 1877).
+\bibitem{hdp:helmholtz1884} H.~von Helmholtz, Principien der Statik monocyklischer Systeme,
+  \emph{J.\ reine angew.\ Math.}\ \textbf{97} (1884) 111--140, 317--336.
+\bibitem{hdp:nash1956} J.~Nash, The imbedding problem for Riemannian manifolds,
+  \emph{Ann.\ of Math.}\ \textbf{63} (1956) 20--63.
+\bibitem{hdp:jacobi1866} C.~G.~J.~Jacobi, \emph{Vorlesungen \"uber Dynamik}, ed.\ A.~Clebsch
+  (G.~Reimer, Berlin, 1866).
+\bibitem{hdp:arnold1989} V.~I.~Arnold, \emph{Mathematical Methods of Classical Mechanics},
+  2nd ed., Graduate Texts in Mathematics \textbf{60} (Springer, New York, 1989).
+\bibitem{hdp:docarmo1992} M.~P.~do Carmo, \emph{Riemannian Geometry} (Birkh\"auser, Boston, 1992).
+\bibitem{hdp:eisenhart1929} L.~P.~Eisenhart, Dynamical trajectories and geodesics,
+  \emph{Ann.\ of Math.}\ \textbf{30} (1929) 591--606.
+\bibitem{hdp:casetti1996} L.~Casetti, C.~Clementi and M.~Pettini, Riemannian theory of Hamiltonian
+  chaos and Lyapunov exponents, \emph{Phys.\ Rev.\ E} \textbf{54} (1996) 5969--5984.
+\bibitem{hdp:pettini2007} M.~Pettini, \emph{Geometry and Topology in Hamiltonian Dynamics and
+  Statistical Mechanics} (Springer, New York, 2007).
+\end{thebibliography}
+\endgroup
