@@ -1,0 +1,256 @@
+% ======================================================================
+%  Section insert: Eisenhart's lifts in detail  (+ comparison table)
+%  Drop into hertz_chapter.tex in place of the old "Three geometrizations
+%  side by side" section (i.e. before \section{Assessment...}).
+%
+%  Needs: amsmath, amsthm (definition/theorem/proposition/remark/example
+%  environments as defined in the chapter), enumitem, booktabs.
+%  Cross-references used: thm:hz-cyclic, sec:hz-hidden, sec:hz-jacobi,
+%  prop:hz-dp-metric, eq:hz-V, eq:hz-KM, eq:hz-warped.
+%  Bibliography keys used: hdp:eisenhart1929, hdp:duval1985,
+%  hdp:duval1991, hdp:casetti2000.
+% ======================================================================
+
+\section{Eisenhart's lifts in detail}
+\label{sec:hz-eisenhart}
+
+In 1928--29 L.~P.~Eisenhart showed that the trajectories of a natural
+Lagrangian system can be obtained as geodesics of a metric on a larger space
+\cite{hdp:eisenhart1929}. His paper contains \emph{two} constructions,
+and they stand in different relations to Hertz. The first is
+Lorentzian, works for every potential (including time-dependent ones) and
+needs two extra coordinates; the second is Riemannian, needs a positive
+potential and one extra coordinate. The second turns out to be
+the metric of Theorem~\ref{thm:hz-cyclic}. The first was rediscovered
+in 1984--85 by Duval, Burdet, K\"unzle and Perrin, who called the resulting
+spaces \emph{Bargmann structures} \cite{hdp:duval1985,hdp:duval1991}, and
+the construction is now often called the Eisenhart--Duval lift.
+
+\subsection{The Lorentzian (null) lift}
+
+\begin{definition}[Eisenhart lift]\label{def:hz-eis}
+Let $(Q,M)$ be a Riemannian manifold and $V\in C^\infty(Q)$ arbitrary. On
+$\widehat Q=Q\times\Rb_t\times\Rb_z$ put
+\begin{equation}\label{eq:hz-eis-metric}
+  G_{\rm E}=M_{ab}(q)\,\ud q^a\ud q^b+2\,\ud t\,\ud z-2V(q)\,\ud t^2 .
+\end{equation}
+\end{definition}
+
+The $(t,z)$ block $\bigl(\begin{smallmatrix}-2V&1\\1&0\end{smallmatrix}\bigr)$
+has determinant $-1$ whatever $V$ is, so $G_{\rm E}$ is a non-degenerate metric
+of Lorentzian signature $(n{+}1,1)$. Its inverse has the components
+\begin{equation}\label{eq:hz-eis-inverse}
+  G^{ab}=M^{ab},\qquad G^{tz}=1,\qquad G^{zz}=2V,\qquad G^{tt}=G^{ta}=G^{za}=0 .
+\end{equation}
+The only Christoffel symbols that differ from those of $M$ and from zero are
+\begin{equation}\label{eq:hz-eis-christoffel}
+  \Gamma^a_{tt}=M^{ab}\partial_bV,\qquad
+  \Gamma^z_{at}=\Gamma^z_{ta}=-\partial_aV .
+\end{equation}
+(For the double pendulum this was checked symbolically for a flat base and
+confirmed for the curved base $M$ through the Ricci tensor below.)
+
+\begin{theorem}[Eisenhart]\label{thm:hz-eis}
+A curve $\gamma(s)=(q(s),t(s),z(s))$ is a geodesic of $G_{\rm E}$ if and only if
+\begin{equation}\label{eq:hz-eis-geod}
+  \ddot t=0,\qquad
+  \ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c=-M^{ab}\partial_bV\,\dot t^{\,2},\qquad
+  \ddot z=2\,\dot t\,\partial_aV\,\dot q^a .
+\end{equation}
+Consequently, if $\dot t=1$ (so $s=t$ is physical time):
+\begin{enumerate}[label=(\alph*),nosep]
+  \item $q(t)$ solves Newton's equations $\ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c=-M^{ab}\partial_bV$;
+  \item $\dot z=2V(q)-\varepsilon$ with a constant $\varepsilon$, so $p_t:=G(\partial_t,\dot\gamma)=-\varepsilon$;
+  \item $G_{\rm E}(\dot\gamma,\dot\gamma)=2(E-\varepsilon)$, where $E=\tfrac12M\dot q\dot q+V$ is the energy of $q(t)$;
+  \item $\gamma$ is a \emph{null} geodesic exactly when $\varepsilon=E$, and then
+        $z(t)=z_0-\int_0^t L\,\ud t'=z_0-S[q]$ with $L=\tfrac12M\dot q\dot q-V$.
+\end{enumerate}
+Conversely every solution $q(t)$ of Newton's equations lifts, for every
+choice of $\varepsilon$, $z_0$ and $t_0$, to a geodesic with $\dot t=1$.
+\end{theorem}
+
+\begin{proof}
+Equations~\eqref{eq:hz-eis-geod} are the geodesic equations with the symbols
+\eqref{eq:hz-eis-christoffel}: $\Gamma^t_{AB}=0$ gives $\ddot t=0$;
+$\ddot q^a+\Gamma^a_{bc}\dot q^b\dot q^c+\Gamma^a_{tt}\dot t^2=0$ is the second;
+$\ddot z+2\Gamma^z_{at}\dot q^a\dot t=0$ is the third. For $\dot t=1$ the third says
+$\ddot z=2\,\ud V/\ud t$, hence $\dot z=2V-\varepsilon$, and $p_t=-2V\dot t+\dot z=-\varepsilon$.
+Then
+\[
+  G(\dot\gamma,\dot\gamma)=M\dot q\dot q+2\dot z-2V
+  =2T+2(2V-\varepsilon)-2V=2(T+V-\varepsilon)=2(E-\varepsilon),
+\]
+which gives (c) and the first half of (d). If $\varepsilon=E$ then
+$\dot z=2V-E=V-T=-L$. The converse is immediate by defining
+$z$ through $\dot z=2V-\varepsilon$.
+\end{proof}
+
+\begin{remark}[The extra coordinate is the action]\label{rem:hz-z-action}
+Statement (d) is the geometric content of the lift: along the physical
+(null) geodesics the new coordinate $z$ is minus Hamilton's principal
+function evaluated along the path. This is no accident. With $\dot t=1$ the
+geodesic Lagrangian is $\tfrac12G(\dot\gamma,\dot\gamma)=L+\dot z$, so
+$\int\tfrac12G(\dot\gamma,\dot\gamma)\,\ud t=S[q]+z(t_2)-z(t_1)$:
+the energy functional of the lift is Hamilton's action up to endpoint terms.
+\end{remark}
+
+\subsection{Hamiltonian form and conserved quantities}
+
+The geodesic Hamiltonian $H_{\rm E}=\tfrac12G^{AB}p_Ap_B$ is, by~\eqref{eq:hz-eis-inverse},
+\begin{equation}\label{eq:hz-eis-ham}
+  H_{\rm E}=\tfrac12M^{ab}p_ap_b+p_tp_z+V(q)\,p_z^{\,2}.
+\end{equation}
+Both $t$ and $z$ are cyclic for time-independent $V$, so $p_t$ and $p_z$ are conserved.
+With $p_z=G(\partial_z,\dot\gamma)=\dot t=1$ and
+$H(q,p)=\tfrac12M^{ab}p_ap_b+V$ the physical Hamiltonian, \eqref{eq:hz-eis-ham} becomes
+\[
+  H_{\rm E}=H(q,p)+p_t ,
+\]
+and the null condition $H_{\rm E}=0$ is $p_t=-H=-E$: Hamilton's equations of $H_{\rm E}$
+are the equations of the \emph{extended phase space}, in which energy is the momentum conjugate
+to time and the dynamics is a constraint. The constant $p_z$ plays the role of a mass
+(in the Bargmann picture it is the mass or the electric charge of the particle), and the
+fixed value $p_z=1$ is what selects Newtonian dynamics with unit
+inertia. Hamilton's equations give $\dot t=\partial H_{\rm E}/\partial p_t=p_z=1$ and
+$\dot z=\partial H_{\rm E}/\partial p_z=p_t+2V=2V-E$, as found above.
+
+\subsection{Geometry of the lift: a pp-wave}
+
+\begin{proposition}[Curvature of the Eisenhart metric]\label{prop:hz-eis-curv}
+\leavevmode
+\begin{enumerate}[label=(\roman*),nosep]
+  \item $\nabla\,\partial_z=0$: the null vector field $\partial_z$ is covariantly constant.
+  \item The Ricci tensor of $G_{\rm E}$ has only the components
+        \[
+          \operatorname{Ric}_{ab}=\operatorname{Ric}^{M}_{ab},\qquad
+          \operatorname{Ric}_{tt}=\Lap_MV .
+        \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(i) is $\Gamma^A_{Bz}=0$, read off from \eqref{eq:hz-eis-christoffel}. For (ii) I computed the Ricci
+tensor symbolically for a flat base with arbitrary $V(x,y)$ and, for the
+unit-parameter double pendulum with its curved metric $M$, at random points, where the
+only non-vanishing components were $\operatorname{Ric}_{ab}=K_MM_{ab}$ and
+$\operatorname{Ric}_{tt}=\Lap_MV$ to rounding error; the general statement is the standard curvature
+property of Eisenhart metrics \cite{hdp:casetti2000}.
+\end{proof}
+
+A Lorentzian manifold with a covariantly constant null vector whose metric has this
+block form is a (generalized) \emph{pp-wave}, and the structure
+$(\widehat Q,G_{\rm E},\partial_z)$ is a Bargmann structure \cite{hdp:duval1985,hdp:duval1991}.
+Two consequences are worth stating.
+\begin{itemize}[nosep]
+  \item \emph{Gravity as curvature.} With $\Lap_MV=4\pi G\rho$ for a Newtonian
+        potential, $\operatorname{Ric}_{tt}=\Lap_MV$ is the Poisson equation, and Ricci-flatness of the lift
+        (flat $M$, harmonic $V$) is Newtonian gravity in vacuum. The lift makes Newtonian
+        gravity \emph{look} like general relativity; it is a statement about a Lorentzian
+        space of one dimension more than spacetime, not about spacetime.
+  \item \emph{Tidal tensor.} The geodesic deviation equation of $G_{\rm E}$ along a lifted
+        trajectory, restricted to the $q$-directions, is the usual variational equation of the
+        dynamics,
+        \[
+          \frac{D^2\xi^a}{\ud t^2}+R^{M\,a}{}_{bcd}\,\dot q^b\xi^c\dot q^d
+          +M^{ab}\nabla_b\nabla_cV\,\xi^c=0,
+        \]
+        and the trace of the tidal tensor is $\Lap_MV$ (the origin of $\operatorname{Ric}_{tt}$)
+        \cite{hdp:casetti2000}. In contrast to the Jacobi metric of
+        Section~\ref{sec:hz-jacobi}, no factor $E-V$ enters and there is no Hill-boundary singularity;
+        but the price is that the criterion for exponential instability is the standard
+        linear-stability computation, not a purely geometric sign condition.
+\end{itemize}
+
+\subsection{Examples}
+
+\begin{example}[Harmonic oscillator]\label{ex:hz-eis-ho}
+For $Q=\Rb$, $M=\ud q^2$ and $V=\tfrac12\omega^2q^2$,
+$G_{\rm E}=\ud q^2+2\,\ud t\,\ud z-\omega^2q^2\ud t^2$ is a plane wave with $\operatorname{Ric}_{tt}=\omega^2$.
+The null geodesics with $\dot t=1$ are $q=A\cos\theta$, $\theta=\omega t+\phi$, and
+\[
+  z=z_0+\tfrac14A^2\omega\,\sin2\theta ,
+\]
+which is $z_0-\int L\,\ud t$ with $L=-\tfrac12A^2\omega^2\cos2\theta$. The $z$-motion is a
+bounded oscillation at twice the frequency.
+\end{example}
+
+\begin{example}[Double pendulum]\label{ex:hz-eis-dp}
+With $M$ from Proposition~\ref{prop:hz-dp-metric} and $V$ from~\eqref{eq:hz-V},
+\[
+\begin{aligned}
+  G_{\rm E}={}&(m_1+m_2)\,l_1^2\,\ud\theta_1^2+2m_2l_1l_2\cos(\theta_1-\theta_2)\,\ud\theta_1\ud\theta_2
+  +m_2l_2^2\,\ud\theta_2^2\\
+  &+2\,\ud t\,\ud z+2g\bigl[(m_1+m_2)l_1\cos\theta_1+m_2l_2\cos\theta_2\bigr]\ud t^2 .
+\end{aligned}
+\]
+This is a four-dimensional Lorentzian manifold $\Tor^2\times\Rb^2$ with
+$\operatorname{Ric}_{ab}=K_MM_{ab}$ (with $K_M$ from~\eqref{eq:hz-KM}) and $\operatorname{Ric}_{tt}=\Lap_MV$.
+Its Killing fields include $\partial_z$ (null, parallel) and $\partial_t$; the rotation
+$\partial_{\theta_1}+\partial_{\theta_2}$ that was a symmetry of the free pendulum is
+broken by $V$. The null geodesics with $\dot t=1$ project to the chaotic trajectories of the pendulum,
+and $z$ along them is $-S[\theta]$.
+\end{example}
+
+\subsection{The Riemannian lift, and its identity with the hidden rotor}
+
+Eisenhart's second construction, for \emph{time-independent potentials that are positive} on $Q$,
+uses one extra coordinate and a Riemannian metric of the form
+$M+A(q)\,\ud z^2$ with $A$ built from $V$
+\cite{hdp:eisenhart1929,hdp:casetti2000}. Taking $A=1/V_c$ with $V_c=V+c>0$,
+\begin{equation}\label{eq:hz-eis-riem}
+  G_{\rm R}=M_{ab}\,\ud q^a\ud q^b+\frac{1}{V_c(q)}\,\ud z^2 ,
+\end{equation}
+the Hamiltonian is $\tfrac12M^{ab}p_ap_b+\tfrac12V_c\,p_z^2$, which equals
+the physical Hamiltonian $\tfrac12M^{ab}p_ap_b+V_c$ for $p_z=\sqrt2$. This is exactly
+the metric~\eqref{eq:hz-warped} of Theorem~\ref{thm:hz-cyclic} with $f^2=p^2/(2V_c)$, $p=\sqrt2$,
+and $\varphi=z$. The theorem therefore \emph{is} Eisenhart's Riemannian lift, with a different proof and with
+a physical interpretation of the extra coordinate added: Eisenhart's $z$ is Hertz's hidden
+cyclic coordinate, and $V=\tfrac12f^2\dot z^2$ is the kinetic energy of the hidden rotor.
+(Hertz did not write down the warped metric; the idea that a potential is the kinetic energy of
+a cyclic hidden motion is his, and the exact geometric statement is Eisenhart's.)
+
+\subsection{Hertzian or not?}
+
+Does the Lorentzian lift satisfy Hertz's requirements? Only in part. Its dynamics is
+free in the sense that the law is geodesic, and no force appears. But Hertz's mass metric is positive
+definite: kinetic energy is $\tfrac12\sum m\dot x^2\ge0$, and the straightest path is defined by minimizing
+a norm of acceleration. In signature $(n{+}1,1)$ there is no such norm, the physical
+trajectories are \emph{null}, and the extra coordinate $z$ is a null direction, not a hidden mass.
+The Lorentzian lift is thus forceless but not Hertzian; the Riemannian lift is both.
+That the two lifts are available side by side underlines the point of
+Section~\ref{sec:hz-hidden}(c): the geometric content of the visible dynamics does not fix its higher-dimensional
+realization.
+
+\section{Four geometrizations side by side}
+\label{sec:hz-compare}
+
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & Hertz / Eisenhart--Riem. & Jacobi & Eisenhart--Lorentz\\
+\midrule
+Signature & Riemannian & Riemannian & Lorentzian $(n{+}1,1)$\\
+Dimension & $n+1$ & $n$ & $n+2$\\
+Fixed data & $p_z$ (hidden momentum) & energy $E$ & $p_z=1$, null condition\\
+Restriction on $V$ & $V+c>0$ & Hill region $V<E$ & none\\
+Geodesic parameter & physical time $t$ & $\tau$, $\ud\tau=(E-V)\ud t$ & physical time $t$\\
+Where $V$ sits & hidden kinetic energy & conformal factor & $G_{tt}$\\
+Role of extra coordinates & hidden angle $z$ & none & $t$ and null $z=-S$\\
+Time-dependent $V$ & no & no & yes\\
+Hertzian reading & hidden masses & none & none (null)\\
+\bottomrule
+\end{tabular}
+\caption{Three ways (four constructions, since the first column is Hertz's idea and Eisenhart's
+Riemannian metric at once) to turn the potential force into geometry. Only the first has a
+mechanical reading in terms of positive masses.}
+\label{tab:hz-compare}
+\end{table}
+
+Table~\ref{tab:hz-compare} summarizes the comparison. The Lorentzian lift is the only one that
+treats time-dependent potentials uniformly, since $t$ is a coordinate of the lifted
+space; the Jacobi construction requires conservation of energy and the Riemannian lift
+requires a time-independent positive $V$.
+

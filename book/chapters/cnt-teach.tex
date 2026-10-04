@@ -1,0 +1,451 @@
+\chapter{Two Roads Between Newton and the Action}
+\label{two-roads}
+
+\begin{quote}\itshape
+Every textbook on classical mechanics must decide what is a postulate and
+what is a theorem. The choice is rarely made explicit, yet it determines which
+phenomena look natural and which look like paradoxes.
+\end{quote}
+
+\section{Introduction: the same theory, two logical orders}
+\label{two-orders}
+
+Classical mechanics is usually presented in one of two logical orders.
+
+\begin{description}
+  \item[Newton first.] The postulates are the second law
+  $m\ddot{\mathbf r}_a=\mathbf F_a$ (together with a catalogue of force laws
+  and a statement about constraint reactions). Lagrange's equations, the
+  principle of least action and the Hamiltonian formalism are \emph{derived}.
+  This is the order of Goldstein \cite{Goldstein}, Arnold's \cite{Arnold-cm} first chapters, and most
+  introductory courses.
+  \item[Action first.] The postulate is Hamilton's principle,
+  $\delta S=0$ with $S=\int L\,dt$. Newton's equations are \emph{derived}, and
+  conservation laws follow from symmetries of $L$ via Noether's theorem. This
+  is the order of Landau and Lifshitz \cite{Landau-Lifshitz-1}, 
+        Lanczos \cite{Lanczos} and of much of modern field theory.
+\end{description}
+
+Both orders lead to the same equations for simple systems of point particles, 
+so it is
+tempting to regard the choice as a matter of taste. It is not. The two roads
+are \emph{not} mutually inverse once we leave the simplest class of systems:
+the road from Newton to the action requires hypotheses (potential forces,
+ideal constraints) that the road back silently assumes, and the two roads give
+\emph{different} answers for nonholonomic constraints. This chapter walks both
+roads carefully, marks the places where hypotheses enter, and compares them
+as pedagogical strategies.
+
+In the language of chapter \ref{rm}, the Newtonian laws are
+statements anchored in the real world: forces are measured, constraints are
+realized by hinges, rails and blades. The action is a construction of the ideal
+world: a functional whose extremals are, by design, trajectories. The
+paradoxes of this chapter all occur at the interface where one is converted
+into the other.
+
+\section{From Newton to the action}
+\label{newton-to-action}
+
+\subsection{d'Alembert's principle: the bridge}
+
+Consider $N$ particles with positions $\mathbf r_a$, masses $m_a$, subject to
+applied forces $\mathbf F_a$ and constraint reactions $\mathbf R_a$:
+\begin{equation}
+  m_a\ddot{\mathbf r}_a=\mathbf F_a+\mathbf R_a .
+  \label{newton}
+\end{equation}
+The reactions $\mathbf R_a$ are unknown. Newtonian mechanics closes the system
+only by supplementing~\eqref{newton} with a statement about the
+\emph{nature} of constraint forces. The statement that makes the passage to
+Lagrangian mechanics possible is the following.
+
+\begin{quote}
+\textbf{Ideal constraints.} The reactions do no work on any \emph{virtual
+displacement}, that is, on any displacement $\delta\mathbf r_a$ compatible with
+the constraints at a frozen instant of time:
+\begin{equation}
+  \sum_a \mathbf R_a\cdot\delta\mathbf r_a = 0 .
+  \label{ideal}
+\end{equation}
+\end{quote}
+
+Substituting~\eqref{ideal} into~\eqref{newton} eliminates the unknown
+reactions and gives d'Alembert's principle:
+\begin{equation}
+  \sum_a\bigl(m_a\ddot{\mathbf r}_a-\mathbf F_a\bigr)\cdot\delta\mathbf r_a=0
+  \qquad\text{for all virtual displacements.}
+  \label{dalembert}
+\end{equation}
+It is worth stressing that~\eqref{ideal} is \emph{not} a theorem of
+Newtonian mechanics. It is a constitutive assumption about hinges, smooth
+surfaces and rolling without slipping. For a frictionless rail it is true by
+the definition of ``frictionless''; for rolling contact it is an empirical
+statement about the contact force doing no work at the instantaneous point of
+contact; for a rough surface it is false.
+
+\subsection{Generalized coordinates and Lagrange's equations}
+
+If the constraints are \emph{holonomic}, $f_k(\mathbf r_1,\dots,\mathbf r_N,t)=0$,
+we may choose independent generalized coordinates $q^1,\dots,q^n$ with
+$\mathbf r_a=\mathbf r_a(q,t)$. Virtual displacements are then arbitrary
+$\delta q^i$, and~\eqref{dalembert} becomes
+\begin{equation}
+  \sum_i\Bigl[\frac{d}{dt}\frac{\partial T}{\partial\dot q^i}
+  -\frac{\partial T}{\partial q^i}-Q_i\Bigr]\delta q^i=0,
+  \qquad Q_i=\sum_a\mathbf F_a\cdot\frac{\partial\mathbf r_a}{\partial q^i},
+  \label{lagrange-T}
+\end{equation}
+the key algebraic step being the identity
+$\frac{d}{dt}\frac{\partial\mathbf r_a}{\partial q^i}
+=\frac{\partial\dot{\mathbf r}_a}{\partial q^i}$. Independence of the
+$\delta q^i$ gives $n$ equations. If moreover $Q_i=-\partial V/\partial q^i$
+(or, more generally, $Q_i=\frac{d}{dt}\frac{\partial U}{\partial\dot q^i}
+-\frac{\partial U}{\partial q^i}$ for a generalized potential $U$), then with
+$L=T-V$ we obtain
+\begin{equation}
+  \frac{d}{dt}\frac{\partial L}{\partial\dot q^i}-\frac{\partial L}{\partial q^i}=0 .
+  \label{EL}
+\end{equation}
+
+\subsection{From Lagrange's equations to an action}
+
+Equation~\eqref{dalembert} is a statement at one instant. To turn it into
+a statement about whole trajectories, integrate over $[t_0,t_1]$ and integrate
+the term $m_a\ddot{\mathbf r}_a\cdot\delta\mathbf r_a$ by parts, using
+$\delta\mathbf r_a(t_0)=\delta\mathbf r_a(t_1)=0$:
+\begin{equation}
+  \int_{t_0}^{t_1}\Bigl(\delta T+\sum_a\mathbf F_a\cdot\delta\mathbf r_a\Bigr)dt=0 .
+  \label{integral-dalembert}
+\end{equation}
+This is the \emph{Lagrange--d'Alembert principle}. It is valid for \emph{any}
+applied forces, including friction and driving. Only when
+$\sum_a\mathbf F_a\cdot\delta\mathbf r_a=-\delta V$ (or $\delta U$ with the
+appropriate velocity-dependent form) does the integrand become an exact
+variation and~\eqref{integral-dalembert} collapse into Hamilton's principle
+\begin{equation}
+  \delta S=0,\qquad S[q]=\int_{t_0}^{t_1}L(q,\dot q,t)\,dt .
+  \label{hamilton}
+\end{equation}
+
+This is the first moral of the Newton-first road. The \emph{variational}
+principle is the special case of a more general \emph{virtual-work}
+principle, valid when the active forces are derivable from a (generalized)
+potential. Dissipative forces fit into~\eqref{integral-dalembert} but not
+into~\eqref{hamilton}; this is why friction is a nuisance for the
+action-first road and a non-event for the Newton-first road.
+
+\subsection{Constraints on the Newton-first road}
+
+On this road constraints cost nothing conceptually. There are two equivalent
+techniques.
+
+\begin{enumerate}
+  \item \textbf{Elimination.} Solve the constraints, pass to $q^i$,
+  and write~\eqref{EL}. The reactions never appear.
+  \item \textbf{Multipliers.} Keep redundant coordinates $x^\mu$ and impose
+  $f_k(x)=0$. Because virtual displacements satisfy
+  $\partial_\mu f_k\,\delta x^\mu=0$, the vector $\mathbf R$ in~\eqref{ideal}
+  must be a combination of the gradients $\partial_\mu f_k$:
+  \begin{equation}
+    m\ddot x_\mu=F_\mu+\sum_k\lambda_k\,\partial_\mu f_k .
+    \label{multipliers}
+  \end{equation}
+  The multipliers $\lambda_k$ are \emph{the constraint reactions}, with direct
+  physical meaning (tension in a rod, normal force on a surface).
+\end{enumerate}
+
+The multiplier technique has a pedagogical advantage that is usually
+squandered: the multipliers answer questions about the real world
+(will the rope go slack? will the bead leave the surface?) that the reduced
+Lagrangian cannot.
+
+\begin{example}[Plane pendulum]\label{pendulum}
+Take coordinates $(x,y)$ with $y$ upward and the constraint
+$f=x^2+y^2-\ell^2=0$. Equation~\eqref{multipliers} reads
+\[
+  m\ddot x=2\lambda x,\qquad m\ddot y=-mg+2\lambda y .
+\]
+Writing $x=\ell\sin\theta$, $y=-\ell\cos\theta$ and projecting on the radial
+and tangential directions gives
+\[
+  \ell\ddot\theta=-g\sin\theta,\qquad
+  T:=-2\lambda\ell=m\bigl(\ell\dot\theta^{2}+g\cos\theta\bigr).
+\]
+The first is what elimination gives directly. The second is the tension, and
+the criterion $T>0$ tells us when a pendulum on a string (rather than a rod)
+stops behaving like a pendulum.
+\end{example}
+
+\section{From the action back to Newton}
+\label{action-to-newton}
+
+Now reverse the order. Postulate~\eqref{hamilton}, with $L=T-V$ and
+Cartesian coordinates for a free particle in a potential.
+
+\subsection{The derivation, and what it uses}
+
+Let $q(t)\to q(t)+\varepsilon\,\eta(t)$ with $\eta(t_0)=\eta(t_1)=0$. Then
+\[
+  \frac{dS}{d\varepsilon}\Big|_0=\int_{t_0}^{t_1}
+  \Bigl(\frac{\partial L}{\partial q}-\frac{d}{dt}\frac{\partial L}{\partial\dot q}\Bigr)\eta\,dt=0
+  \quad\text{for all }\eta .
+\]
+The \emph{fundamental lemma of the calculus of variations} (the integrand is
+continuous and orthogonal to every test function, so it vanishes) gives the
+Euler--Lagrange equation~\eqref{EL}. For $L=\tfrac12m\dot q^2-V(q)$ this is
+$m\ddot q=-V'(q)$: Newton's second law.
+
+Four assumptions have been used silently.
+\begin{enumerate}
+  \item The functional \emph{has} the form $T-V$. Nothing in the principle
+  says so. Nature (or the teacher) supplies $L$.
+  \item Variations are taken with fixed endpoints in \emph{time and
+  position}. The motion is therefore determined by a boundary-value problem,
+  although Newton's law is an initial-value problem.
+  \item The word ``least'' is not justified. The principle is
+  \emph{stationarity}.
+  \item The variations $\eta$ range over all smooth functions: there are no
+  constraints on the admissible paths. Constraints are discussed in
+  Section~\ref{constraints-variational}.
+\end{enumerate}
+
+\subsection{Stationary, not least}
+\label{least}
+
+The traditional name ``principle of least action'' is misleading. For the
+harmonic oscillator $\ddot q=-\omega^2q$ the action of the true trajectory
+between $t_0$ and $t_1$ is a minimum if and only if $t_1-t_0<\pi/\omega$;
+beyond that the second variation acquires a negative direction, and the
+true path is a saddle. In general, a trajectory ceases to be a local minimum
+at the first \emph{conjugate point} (Jacobi). The geometric optics analogue is
+a caustic. On a sphere, the great circle between two points is minimal only
+up to the antipode.
+
+This matters pedagogically. A student told that ``the particle chooses the
+path of least action'' will naturally ask how it \emph{knows} the final point
+in advance. The honest answer is that it does not: the boundary-value
+formulation is an equivalent \emph{global description} of an \emph{initial-value}
+motion, and stationarity is the local property that survives. This is the
+point at which the action-first road most invites teleological language,
+precisely the sort of mixing of real-world causality and ideal-world logic
+that the  chapter \ref{rm} of this book warn against.
+
+\subsection{The inverse problem and non-uniqueness}
+\label{inverse}
+
+The road from the equations of motion to a Lagrangian is not a function. Three
+observations:
+\begin{itemize}
+  \item $L$ and $L+\frac{d}{dt}F(q,t)$ give identical equations (the action
+  changes by boundary terms only).
+  \item $L$ and $cL$ give identical equations for any constant $c\neq0$.
+  \item Genuinely different Lagrangians can give the same equations. The
+  two-dimensional isotropic oscillator, for example, admits Lagrangians that
+  are not related by a total derivative or a constant factor.
+\end{itemize}
+The existence question (``is a given system of second-order equations
+Euler--Lagrange?'') is answered by the Helmholtz conditions: in particular a
+system $\ddot q^i=f^i(q,\dot q,t)$ with friction linear in the velocity,
+$\ddot q=-\gamma\dot q-\omega^2q$, is Euler--Lagrange only after an explicit
+time-dependent factor $e^{\gamma t/m}$ is introduced (the Caldirola--Kanai
+Lagrangian), and then the canonical momentum no longer equals the mechanical
+momentum. The dissipative world is not forbidden to the action, but it is not
+natural to it.
+
+\section{Constraints on the action-first road}
+\label{constraints-variational}
+
+\subsection{Holonomic constraints: agreement}
+
+Suppose we vary $S$ over paths that satisfy $f_k(x)=0$ at every time.
+Introduce the augmented action
+\begin{equation}
+  \tilde S=\int\bigl[L(x,\dot x)+\lambda_k(t)\,f_k(x)\bigr]dt .
+  \label{aug-holonomic}
+\end{equation}
+Its Euler--Lagrange equations are precisely the multiplier
+equations~\eqref{multipliers}, with $\lambda_k$ as the (time-dependent)
+reaction forces. For holonomic constraints the two roads agree completely, and
+the multipliers play the same physical role.
+
+A conceptual remark: in the action-first road the multipliers are
+\emph{introduced to enforce a restriction on trial paths}. In the Newton-first
+road they are the \emph{forces that actually do the enforcing}. That the two
+coincide is a theorem, not a tautology; it follows from~\eqref{ideal}.
+
+\subsection{Nonholonomic constraints: disagreement}
+\label{nonholonomic}
+
+A nonholonomic constraint restricts velocities, not positions:
+\begin{equation}
+  a^k_i(q)\,\dot q^i=0,\qquad k=1,\dots,m,
+  \label{nonhol}
+\end{equation}
+where the one-forms $a^k=a^k_i\,dq^i$ do not integrate to the form $df_k$.
+Two natural generalizations of the holonomic procedure exist, and they give
+different equations (see section \ref{cm:nh}) .
+
+\paragraph{Route A: Lagrange--d'Alembert (Newton-first).}
+Take~\eqref{ideal} as the definition of an ideal constraint and impose the
+constraint on virtual displacements:
+$a^k_i\,\delta q^i=0$. Then
+$\bigl(\frac{d}{dt}\frac{\partial L}{\partial\dot q^i}-\frac{\partial L}{\partial q^i}\bigr)\delta q^i=0$
+for all admissible $\delta q$, so
+\begin{equation}
+  \frac{d}{dt}\frac{\partial L}{\partial\dot q^i}-\frac{\partial L}{\partial q^i}
+  =\lambda_k\,a^k_i .
+  \label{LdA}
+\end{equation}
+This is \emph{not} the Euler--Lagrange equation of any augmented action built
+from~\eqref{nonhol}; it is a virtual-work principle that does not
+integrate into~\eqref{hamilton}.
+
+\paragraph{Route B: vakonomic (action-first).}
+Treat the problem as a variational problem with a nonholonomic side
+condition. Extremize $S$ among paths satisfying~\eqref{nonhol}; the
+multipliers enter as in~\eqref{aug-holonomic},
+$\tilde L=L+\lambda_k a^k_i\dot q^i$, and the Euler--Lagrange equations
+for $q^i$ are
+\begin{equation}
+  \frac{d}{dt}\frac{\partial L}{\partial\dot q^i}-\frac{\partial L}{\partial q^i}
+  =-\dot\lambda_k\,a^k_i-\lambda_k\bigl(\partial_ja^k_i-\partial_ia^k_j\bigr)\dot q^j .
+  \label{vako}
+\end{equation}
+
+Comparing~\eqref{LdA} and~\eqref{vako}: the term $-\dot\lambda_ka^k_i$
+alone could be absorbed by redefining the multiplier, which is what happens
+in the holonomic case. The second term involves the \emph{curvature} of the
+constraint distribution, $d a^k=\tfrac12(\partial_ja^k_i-\partial_ia^k_j)\,dq^j\wedge dq^i$,
+and is nonzero precisely when the constraint is not integrable. In other
+words:
+\begin{quote}
+\emph{The two procedures coincide if and only if the constraint is
+holonomic.}
+\end{quote}
+The disagreement is not a computational subtlety. It is a statement about
+how nature behaves, and nature has voted against vakonomic (section \ref{cm:nh}).
+
+\begin{example}[A skate]\label{skate}
+A skate is a rigid body on a plane whose blade touches the ice at its center
+of mass. Coordinates $(x,y,\varphi)$, with Lagrangian
+$L=\tfrac12m(\dot x^2+\dot y^2)+\tfrac12I\dot\varphi^2$, and the blade cannot
+slip sideways:
+\[
+  a=\sin\varphi\,dx-\cos\varphi\,dy,\qquad a_\varphi=0 .
+\]
+\emph{Route~A.} The reaction is perpendicular to the blade and applied at the
+center of mass, so it exerts no torque: $I\ddot\varphi=0$ and the speed along
+the blade is constant. This is what a skater coasting on a straight line
+observes.
+
+\emph{Route~B.} The $\varphi$-component of~\eqref{vako} reads
+\[
+  I\ddot\varphi=\lambda\,v,\qquad v=\dot x\cos\varphi+\dot y\sin\varphi,
+\]
+so in general the ``constraint'' exerts a torque about the center of mass
+which the real blade cannot exert. Moreover, Route~B is a
+\emph{boundary-value} problem: for given endpoints the multiplier is fixed
+by the final configuration, and the particle's initial velocity can no longer be
+prescribed freely.
+\end{example}
+
+Experiments on rolling bodies, skates and sleighs (and the engineering
+practice of wheeled vehicles) are consistent with Route~A. Route~B is not
+wrong, but it answers a different question: it describes the optimal control
+of a system whose velocities are \emph{steered} (a sub-Riemannian
+geodesic problem, with applications to robotics and parking a car), not the
+free motion of a system whose velocities are \emph{forced} by a passive
+constraint. The principle of least action is therefore a theorem about
+\emph{potential} dynamics under \emph{holonomic} constraints, and a
+definition or a hypothesis beyond that.
+
+\subsection{Constraints as limits}
+\label{constraints-limits}
+
+A third answer to ``what is a constraint?'' replaces the idealization by a
+family of smooth models. A holonomic constraint $f=0$ is the limit
+$\kappa\to\infty$ of a stiff potential $V_\kappa=\tfrac12\kappa f^2$. The limit
+is delicate (see chapter \ref{lm}). If the initial position lies on the surface
+and the initial
+velocity is tangent to it, the motion converges to the d'Alembert motion on the
+surface (Rubin and Ungar). If the initial velocity has a normal component, the
+normal motion is a fast oscillation with a conserved action, and the limiting
+motion on the surface is governed by the original Hamiltonian \emph{plus an
+extra potential} that depends on that action. Rubin and Ungar 
+\cite{RubinUngar1957}proved this for
+codimension one; Takens \cite{Takens1980} treated the general case, 
+under a non-resonance
+condition on the frequencies of the normal oscillations. When that condition
+fails (frequencies crossing along the surface), there may be no differential
+equation on the surface governing the limiting motion at all.
+Similarly, a nonholonomic constraint of the type~\eqref{nonhol} is
+the limit of a large viscous friction $-\mu\,(a_i\dot q^i)\,a^i$ as
+$\mu\to\infty$, and \emph{this} limit reproduces Route~A (the
+Lagrange--d'Alembert equations), not Route~B.
+
+This is a clean illustration of the thesis that a theory is not a limit of
+another but a chart on it: the same rod, with the same symbol $f=0$, belongs
+to different physical charts depending on whether it is the limit of a stiff
+spring or the limit of a viscous friction.
+
+\section{Comparing the routes as pedagogy}
+\label{pedagogy}
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{3.1cm}p{5.6cm}p{5.6cm}@{}}
+\toprule
+ & \textbf{Newton $\to$ action} & \textbf{Action $\to$ Newton}\\
+\midrule
+Postulates & $m\ddot{\mathbf r}=\mathbf F$, ideal constraints, force laws &
+  $\delta S=0$, form of $L$, admissible paths \\
+Primary objects & forces, reactions, accelerations & energies, symmetries, trajectories as a whole \\
+Constraint forces & computed directly; physical meaning of $\lambda_k$ & introduced as multipliers; meaning proved later \\
+Dissipation & trivial (virtual-work form) & awkward (needs doubled variables, time-dependent $L$, or is excluded) \\
+Nonholonomic constraints & natural (Route~A) & ambiguous (Route~B differs) \\
+Conservation laws & derived case by case & Noether's theorem: unified \\
+Generalization to fields and QM & indirect & direct (path integral, field actions) \\
+Typical misconception & ``the Lagrangian is just Newton in disguise'' & ``the particle chooses the least-action path'' \\
+\bottomrule
+\end{tabular}
+\caption{Logical structure of the two routes.}
+\label{routes}
+\end{table}
+
+\subsection{Newton first}
+
+\emph{Strengths.} Every step has a physical referent. Students see where
+the action comes from and, crucially, \emph{when it does not exist}.
+Constraint reactions are computed, not suppressed. The nonholonomic
+and dissipative cases are included without a change of philosophy.
+
+\emph{Weaknesses.} The passage to generalized coordinates is algebraically
+heavy, and the key identity
+$\frac{d}{dt}\partial_{q}\mathbf r=\partial_{\dot q}\dot{\mathbf r}$ looks
+like a trick. The reader emerges thinking Lagrangian mechanics is a
+\emph{computational device}, and misses that the action is a primary
+object in field theory and quantum mechanics.
+
+\subsection{Action first}
+
+\emph{Strengths.} Symmetry becomes the organizing principle:
+Noether's theorem explains energy, momentum and angular momentum at once.
+Coordinate independence is manifest: $\delta S=0$ does not know what
+coordinates are. The road to field theory and quantization is short.
+
+\emph{Weaknesses.} The phrase ``least action'' invites teleology
+(Section~\ref{least}). The student learns that dissipative systems are
+``not mechanics'' and that constraint reactions are an afterthought. Most
+damagingly, the nonholonomic case produces a \emph{wrong answer} that is
+indistinguishable, in form, from the right one; a student who has only
+been taught the variational principle will confidently apply the vakonomic
+equations to a rolling ball.
+
+\subsection{Conclusions}
+
+Both routes coincide for restricted but very large and important class of
+holonomic systems.  Newton-first route is probably better when classical 
+mechanics is seen as a part of CNT. Since this book is devoted to second
+role of classical mechanics as a base for quantum and relativistic theory
+we'll take the action-first route.
