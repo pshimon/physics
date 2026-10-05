@@ -68,370 +68,358 @@ well-defined phase space, a Hamiltonian, a consistent variational principle ---
 is itself a nontrivial achievement that fails, or becomes ambiguous, for entire
 classes of ordinary classical systems.
 
-It is worth pausing on the first role (classical mechanics as a part of classical
-non-relativistic theory) only long enough to insist that it is real.
-The three-body problem, the precession of orbits, the stability of the solar
-system, the dynamics of rigid bodies and gyroscopes, the propagation of waves in
-elastic media, the onset of turbulence, and the sensitive dependence on initial
-conditions studied by dynamical-systems theory are all substantial, still
-partially open, areas of physics conducted entirely within the classical
-framework. None of this material is a mere warm-up exercise for quantum mechanics,
-and a physicist could spend a full career inside it without ever needing $\hbar$.
-This book is not about that role. It is mentioned here only to make clear that
-when the rest of this book treats classical mechanics as a base to be generalized,
-it is not thereby claiming that this exhausts what classical mechanics is.
-
-
-\section{Nonholonomic Constraints}
-\label{cm:nh}
-
-A constraint of the form $f(q,t)=0$, where $q=(q^1,\dots,q^n)$ are
-generalized coordinates, is called \emph{holonomic}: it can be
-solved, at least locally, to eliminate one coordinate outright, and
-it reduces the dimension of the configuration space itself. A more
-general class of constraints is linear in the velocities,
-\begin{equation}
-  \sum_{i=1}^n a_i(q,t) \dot q^i + a_t(q,t) = 0,
-  \label{pfaffian}
-\end{equation}
-a so-called Pfaffian constraint. If the left-hand side of
-\eqref{pfaffian} happens to be the total time derivative of some
-function $f(q,t)$, the constraint is secretly holonomic in disguise.
-If it is not --- if no such $f$ exists --- the constraint is called
-\emph{nonholonomic}: it restricts the \emph{velocities} available at
-each point of $Q$, without restricting which \emph{configurations}
-are reachable.
-
-The canonical example is a coin (or disk) of radius $R$ rolling
-without slipping on a plane, with contact point $(x,y)$, heading
-angle $\phi$, and roll angle $\theta$ as coordinates. The
-rolling condition reads
-\begin{equation*}
-  \dot x = R\,\dot\theta\cos\phi ,\qquad
-  \dot y = R\,\dot\theta\sin\phi ,
-\end{equation*}
-which is not integrable: it constrains the instantaneous velocity to
-a two-dimensional subspace of the four-dimensional tangent space at
-each point, and yet, by alternating steering and rolling, the coin
-can be driven from \emph{any} configuration $(x,y,\phi)$ to any
-other. The instantaneous constraint is genuine, but it places no
-restriction whatsoever on the reachable set of configurations --- an
-instance of what control theorists call bracket-generating, or
-Chow--Rashevski\u{i}, controllability. This already runs against a
-piece of intuition carried over uncritically from the holonomic
-case, where a nontrivial velocity constraint always shrinks the
-accessible configuration space too.
-
-A second standard example, the \emph{Chaplygin sleigh}, makes an
-even sharper point.
-
-It is a rigid body sliding frictionlessly on a
-plane, with a knife edge that permits motion only along its own
-length (no sideways slip). The system conserves energy exactly ---
-there is no friction anywhere in the model --- and yet its reduced
-dynamics on the velocity variables is attracted to a fixed
-equilibrium: left alone, the sleigh asymptotically settles into
-straight-line motion with no rotation, knife edge trailing the
-center of mass~\cite{chaplygin}. This
-happens because the reduced equations of motion on the nonholonomic
-constraint surface, unlike those of an ordinary holonomic mechanical
-system, do not in general preserve phase-space (Liouville) volume,
-even though they do preserve energy. A perfectly conservative
-mechanical system can therefore display genuinely dissipative-looking
-long-time behaviour --- attracting fixed points, basins of
-attraction --- with no friction anywhere in the equations. Energy
-conservation, by itself, is not enough to rule out the qualitative
-signatures usually associated with dissipation once constraints stop
-being holonomic.
-
-For holonomic constraints, two routes to the equations of motion ---
-D'Alembert's principle (constraint forces do no virtual work, for
-virtual displacements compatible with the instantaneous constraint)
-and Hamilton's principle (the true path extremizes the action among
-\emph{all} paths satisfying the constraint) --- are provably
-equivalent. For nonholonomic (non-integrable, velocity-linear)
-constraints, this equivalence simply fails, and the failure is not a
-minor technicality.
-
-There are two natural-looking ways to generalize the variational
-treatment to a system with a nonholonomic constraint of the
-form~\eqref{pfaffian}.
-
+Classical mechanics is usually presented in one of two logical orders.
 \begin{description}
-  \item[Nonholonomic (Lagrange--d'Alembert, or Chetaev) mechanics.]
-  Impose the constraint directly on virtual displacements at each
-  instant, exactly as in the holonomic case, and only afterwards
-  derive equations of motion:
-  \begin{equation}
-    \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
-    - \frac{\partial L}{\partial q^i}
-    \;=\; \sum_a \lambda_a\, a_i^a(q),
-    \qquad
-    \sum_i a_i^a(q)\,\dot q^i + a_t^a(q) = 0 .
-    \label{lagrange-dalembert}
-  \end{equation}
-  \item[Vakonomic mechanics.] (The name --- "variational axiomatic
-  kind" --- was coined by Kozlov~\cite{kozlov}.)
-  Instead, treat the nonholonomic constraint as a genuine constraint
-  on the space of \emph{paths} from the outset, as one would an
-  isoperimetric constraint in the calculus of variations, and only
-  then extremize the action over that constrained set of paths.
+  \item[Newton first.] The postulates are the second law
+  $m\ddot{\mathbf r}_a=\mathbf F_a$ (together with a catalogue of force laws
+  and a statement about constraint reactions). Lagrange's equations, the
+  principle of least action and the Hamiltonian formalism are \emph{derived}.
+  This is the order of Goldstein \cite{Goldstein}, Arnold's \cite{Arnold-cm} first chapters, and most
+  introductory courses.
+  \item[Action first.] The postulate is Hamilton's principle,
+  $\delta S=0$ with $S=\int L\,dt$. Newton's equations are \emph{derived}, and
+  conservation laws follow from symmetries of $L$ via Noether's theorem. This
+  is the order of Landau and Lifshitz \cite{Landau-Lifshitz-1}, 
+        Lanczos \cite{Lanczos} and of much of modern field theory.
 \end{description}
 
-For holonomic constraints these two prescriptions coincide. For
-genuinely nonholonomic constraints they generically do not: it has
-been shown, for instance, that for the rolling coin on an inclined
-plane no nontrivial vakonomic solution reproduces the
-Lagrange--d'Alembert solution at
-all~\cite{zampieri}. This is not merely a
-mathematical curiosity to be settled by taste: Lewis and Murray
-built and instrumented a physical system --- a ball rolling without
-slipping on a rotating table --- specifically to adjudicate between
-the two theories, and found that the observed motion matches the
-Lagrange--d'Alembert (nonholonomic) prediction; they were unable to
-produce vakonomic simulations resembling the experimental data at
-all~\cite{lewis+murray}. The variational principle that looks like
-the most direct generalization of Hamilton's principle to velocity
-constraints is, for constraints realized by an actual rolling or
-sliding contact, simply the wrong physical theory.
+Both orders lead to the same equations for simple systems of point particles, 
+so it is
+tempting to regard the choice as a matter of taste. It is not. The two roads
+are \emph{not} mutually inverse once we leave the simplest class of systems:
+the road from Newton to the action requires hypotheses (potential forces,
+ideal constraints) that the road back silently assumes, and the two roads give
+\emph{different} answers for nonholonomic constraints. 
 
-This does not make vakonomic mechanics useless --- it correctly
-describes optimal-control and sub-Riemannian-geodesic problems, where
-the "constraint" genuinely is a restriction on the class of paths
-being optimized over, rather than a constraint enforced
-instant-by-instant by a physical reaction force. The moral is
-subtler and more interesting than "one theory is right and the other
-wrong": the bare constraint equation~\eqref{pfaffian}, by itself,
-does not determine the dynamics. The correct equations of motion
-depend on how the constraint is physically \emph{realized} ---
-information that is invisible at the level of the constraint
-equation alone, and that a first course in mechanics, built entirely
-on holonomic examples where this ambiguity cannot arise, gives no
-reason to expect.
+In the language of chapter \ref{rm}, the Newtonian laws are
+statements anchored in the real world: forces are measured, constraints are
+realized by hinges, rails and blades. The action is a construction of the ideal
+world: a functional whose extremals are, by design, trajectories. The
+paradoxes of this chapter all occur at the interface where one is converted
+into the other.
 
-\section{Bodies That Change Shape}
-\label{cm:shape}
+\subsection{From Newton to the action}
+\label{newton-to-action}
 
-Drop a cat, upside down, from rest. In free fall there is no
-external torque about the center of mass, so angular momentum is
-conserved --- and it starts, and remains, at zero. Naive intuition
-says that a body with identically zero angular momentum cannot
-rotate. And yet the cat lands on its feet, having reoriented itself
-by roughly $180^\circ$. The naive inference silently assumes a
-\emph{rigid} body; it simply does not apply to a body that can
-deform itself internally, and the cat's righting maneuver --- a
-sequence of twists of its front and back halves relative to one
-another --- is a real, controlled deformation, not a violation of
-any conservation law.
+\paragraph{d'Alembert's principle: the bridge}
 
-The clean way to see why this works, due to Shapere and
-Wilczek~\cite{shapere+wilczek} and to Montgomery's later "gauge
-theory of the falling cat"~\cite{montgomery}, is to separate a
-deformable body's configuration into its \emph{shape} $s$ (the
-internal, orientation-independent degrees of freedom --- relative
-joint angles, say) and an overall orientation $R\in SO(3)$ that fixes
-that shape in space. Locally, the full configuration space is a
-principal fiber bundle with structure group $SO(3)$ over shape space,
-and the requirement that total angular momentum stay identically
-zero throughout the motion is a linear relation between the shape
-velocity $\dot s$ and the angular velocity $\omega$ of the body,
+Consider $N$ particles with positions $\mathbf r_a$, masses $m_a$, subject to
+applied forces $\mathbf F_a$ and constraint reactions $\mathbf R_a$:
 \begin{equation}
-  \omega \;=\; -\,\mathcal A(s)\,\dot s ,
-  \label{connection}
+  m_a\ddot{\mathbf r}_a=\mathbf F_a+\mathbf R_a .
+  \label{newton}
 \end{equation}
-where $\mathcal A(s)$ is built from the shape-dependent inertia
-tensor and its couplings. This is precisely the data of a connection
-(a gauge potential) on the bundle: given any path $s(t)$ in shape
-space, \eqref{connection} lifts it uniquely to a path in the full
-configuration space, exactly as a connection lifts a path in the
-base of a fiber bundle to a horizontal path upstairs.
+The reactions $\mathbf R_a$ are unknown. Newtonian mechanics closes the system
+only by supplementing~\eqref{newton} with a statement about the
+\emph{nature} of constraint forces. The statement that makes the passage to
+Lagrangian mechanics possible is the following.
 
-The consequence that matters here is that if the shape returns
-exactly to where it started after a closed loop in shape space,
-$s(T) = s(0)$, the orientation need \emph{not} return to where it
-started. The net rotation accumulated around the loop is the
-\emph{holonomy} of the connection~\eqref{connection}, and for a
-small loop enclosing area $\Sigma$ it is governed, Stokes'-theorem
-style, by the curvature $\mathcal F = d\mathcal A + \mathcal
-A\wedge\mathcal A$ of that connection:
+\begin{quote}
+\textbf{Ideal constraints.} The reactions do no work on any \emph{virtual
+displacement}, that is, on any displacement $\delta\mathbf r_a$ compatible with
+the constraints at a frozen instant of time:
 \begin{equation}
-  \Delta R \;\approx\; \exp\!\left[\oint_{\partial\Sigma}\mathcal
-  A\right] \;\approx\; \exp\!\left[\int_{\Sigma}\mathcal F\right].
-  \label{holonomy}
+  \sum_a \mathbf R_a\cdot\delta\mathbf r_a = 0 .
+  \label{ideal}
 \end{equation}
-This is exactly the structure of a non-Abelian geometric (Berry,
-Wilczek--Zee) phase from quantum mechanics, and of Aharonov--Bohm
-holonomy in gauge theory --- reproduced in full by an entirely
-classical, entirely mechanical system. It is also, viewed from the
-vantage point of Section~\ref{cm:nh}, nothing but another
-instance of a nonholonomic constraint: "total angular momentum
-$\equiv 0$" is a Pfaffian relation between $\dot s$ and $\omega$ that
-fails to be integrable to any function of shape and orientation
-alone \emph{exactly when} the connection~\eqref{connection} has
-nonzero curvature. The falling-cat effect and the rolling coin are,
-formally, the same phenomenon in different clothing.
+\end{quote}
 
-The same structure governs self-propulsion in a highly viscous
-fluid, where inertia is negligible and net displacement over one
-cycle of body deformation is possible only if the cycle of shapes is
-genuinely non-reciprocal. This is Purcell's scallop theorem: a
-scallop that opens and closes through the \emph{same} sequence of
-shapes, forwards then backwards, achieves zero net displacement,
-because time-reversing the (inertia-free) equations of motion
-exactly reverses the trajectory. Net swimming is again a
-holonomy/geometric-phase effect in an appropriately defined shape
-bundle~\cite{shapere+wilczek-swim}.
-
-Perhaps the most striking illustration of the underlying idea is Jack
-Wisdom's result that a quasi-rigid body executing a cyclic sequence
-of internal shape changes in a curved \emph{spacetime} --- as
-prescribed by general relativity --- can achieve a net translation
-even in complete vacuum, with nothing to push against at
-all~\cite{wisdom}. The effect scales with the local spacetime
-curvature and with the extent of the body's internal motion; it is
-minuscule for any realistic body and is not a practical propulsion
-mechanism, but as a matter of principle it is "swimming" through
-spacetime using exactly the same holonomy mechanism as the falling
-cat, now realized by the genuine nonlinearity of general relativity
-rather than by a gauge potential on a shape bundle constructed by
-hand. Once again, an outcome that sounds like it must violate
-momentum conservation turns out to be perfectly consistent with
-conservation laws, provided one tracks correctly what "conservation"
-does and does not forbid for a body that is allowed to change shape.
-
-\section{Open Systems}
-\label{cm:open}
-
-Ordinary Newtonian mechanics implicitly assumes a fixed set of
-particles. Rockets, raindrops growing by accretion, chains lifted
-off a pile, and avalanches all violate that assumption: the mass $m$
-of the body under study is itself a function of time. The correct
-generalization of Newton's second law to such an \emph{open system}
---- worked out around the turn of the twentieth century by
-I.\,V.\ Meshchersky --- is
+Substituting~\eqref{ideal} into~\eqref{newton} eliminates the unknown
+reactions and gives d'Alembert's principle:
 \begin{equation}
-  m\,\frac{d\mathbf v}{dt} \;=\; \mathbf F_{\mathrm{ext}}
-  + \mathbf u\,\frac{dm}{dt} ,
-  \label{meshchersky}
+  \sum_a\bigl(m_a\ddot{\mathbf r}_a-\mathbf F_a\bigr)\cdot\delta\mathbf r_a=0
+  \qquad\text{for all virtual displacements.}
+  \label{dalembert}
 \end{equation}
-where $\mathbf u$ is the velocity of the incoming or outgoing mass
-\emph{relative to the body itself}, not relative to the lab frame.
-Setting $\mathbf F_{\mathrm{ext}}=0$ and integrating
-\eqref{meshchersky} with $\mathbf u$ constant and antiparallel to
-the direction of travel yields the Tsiolkovsky rocket equation,
+It is worth stressing that~\eqref{ideal} is \emph{not} a theorem of
+Newtonian mechanics. It is a constitutive assumption about hinges, smooth
+surfaces and rolling without slipping. For a frictionless rail it is true by
+the definition of ``frictionless''; for rolling contact it is an empirical
+statement about the contact force doing no work at the instantaneous point of
+contact; for a rough surface it is false.
+
+\paragraph{Generalized coordinates and Lagrange's equations}
+
+If the constraints are \emph{holonomic}, $f_k(\mathbf r_1,\dots,\mathbf r_N,t)=0$,
+we may choose independent generalized coordinates $q^1,\dots,q^n$ with
+$\mathbf r_a=\mathbf r_a(q,t)$. Virtual displacements are then arbitrary
+$\delta q^i$, and~\eqref{dalembert} becomes
 \begin{equation}
-  v(t) - v(0) \;=\; u\,\ln\frac{m(0)}{m(t)} .
-  \label{tsiolkovsky}
+  \sum_i\Bigl[\frac{d}{dt}\frac{\partial T}{\partial\dot q^i}
+  -\frac{\partial T}{\partial q^i}-Q_i\Bigr]\delta q^i=0,
+  \qquad Q_i=\sum_a\mathbf F_a\cdot\frac{\partial\mathbf r_a}{\partial q^i},
+  \label{lagrange-T}
 \end{equation}
- The
-term $\mathbf u\,\dot m$ in \eqref{meshchersky} looks, from the
-point of view of the rocket body alone, exactly like an applied
-force --- "thrust" --- and is routinely called one. But viewed as
-part of the larger \emph{closed} system consisting of the rocket
-\emph{together with} every parcel of exhaust it has ever ejected,
-whose total momentum is exactly conserved, there is no force there
-at all: only the ordinary transfer of momentum between two pieces of
-one conserved whole. What looks like a force is, once again, an
-artifact of insisting on an equation of motion for part of a system
-rather than for the whole of it.
-
-This is also a genuine pedagogical trap, worth flagging explicitly.
-It is tempting to write $\mathbf F = d(m\mathbf v)/dt = m\dot{\mathbf
-v} + \mathbf v\,\dot m$ and treat this directly as the equation of
-motion of the open body. That expression is correct as a statement
-about the rate of change of the momentum of the body \emph{alone},
-but it is not, in general, equivalent to \eqref{meshchersky} and
-gives the wrong dynamics unless the accreted or ejected mass happens
-to leave (or join) with zero velocity relative to the body, i.e.\
-$\mathbf u \equiv \mathbf v$ --- a special case, not the generic one,
-and not the one realized by a rocket engine, whose whole purpose is
-to eject mass at high relative velocity.
-
-
-A second, quite different kind of "openness" arises whenever a
-system exchanges energy with an environment that is not explicitly
-modelled --- friction, drag, radiation reaction. None of these
-forces derive from a potential in the ordinary sense, so the
-Lagrangian and Hamiltonian formalisms, built for closed and
-energy-conserving systems, do not apply directly. Two classical
-devices repair this.
-
-The first is Rayleigh's dissipation function $\mathcal
-F_{\mathrm{diss}}(\dot q)$, quadratic in the generalized velocities
-for linear damping, which modifies the Euler--Lagrange equations to
+the key algebraic step being the identity
+$\frac{d}{dt}\frac{\partial\mathbf r_a}{\partial q^i}
+=\frac{\partial\dot{\mathbf r}_a}{\partial q^i}$. Independence of the
+$\delta q^i$ gives $n$ equations. If moreover $Q_i=-\partial V/\partial q^i$
+(or, more generally, $Q_i=\frac{d}{dt}\frac{\partial U}{\partial\dot q^i}
+-\frac{\partial U}{\partial q^i}$ for a generalized potential $U$), then with
+$L=T-V$ we obtain
 \begin{equation}
-  \frac{d}{dt}\frac{\partial L}{\partial \dot q^i}
-  - \frac{\partial L}{\partial q^i}
-  \;=\; -\,\frac{\partial \mathcal F_{\mathrm{diss}}}{\partial \dot
-  q^i}.
-  \label{rayleigh}
+  \frac{d}{dt}\frac{\partial L}{\partial\dot q^i}-\frac{\partial L}{\partial q^i}=0 .
+  \label{EL}
 \end{equation}
-This correctly reproduces the (irreversible) equations of motion,
-but it is a hybrid: $\mathcal F_{\mathrm{diss}}$ is not itself part
-of a genuine, self-contained stationary-action principle for $L$
-alone.
 
-The second, due to Bateman (1931), is more radical and more
-illuminating: a fully conservative, symplectic Lagrangian \emph{can}
-be written for a damped oscillator, but only at the price of
-doubling the number of degrees of freedom. Introduce an auxiliary
-"mirror" coordinate $y$ alongside the physical coordinate $x$,
+\paragraph{From Lagrange's equations to an action}
+
+Equation~\eqref{dalembert} is a statement at one instant. To turn it into
+a statement about whole trajectories, integrate over $[t_0,t_1]$ and integrate
+the term $m_a\ddot{\mathbf r}_a\cdot\delta\mathbf r_a$ by parts, using
+$\delta\mathbf r_a(t_0)=\delta\mathbf r_a(t_1)=0$:
 \begin{equation}
-  L_{\mathrm{dual}}(x,\dot x,y,\dot y) \;=\;
-  m\,\dot x\,\dot y \;+\; \frac{\gamma}{2}\bigl(x\dot y - \dot x
-  y\bigr) \;-\; k\,xy ,
-  \label{bateman}
+  \int_{t_0}^{t_1}\Bigl(\delta T+\sum_a\mathbf F_a\cdot\delta\mathbf r_a\Bigr)dt=0 .
+  \label{integral-dalembert}
 \end{equation}
-whose Euler--Lagrange equations are precisely the damped oscillator,
-$\ddot x + (\gamma/m)\dot x + \omega_0^2 x = 0$, for the physical
-coordinate $x$, paired with a time-reversed, exponentially
-\emph{amplified} equation for $y$. The energy the
-physical oscillator loses is exactly the energy its mirror partner
-gains, so the doubled system is conservative even though either half
-alone is not. This is a small, entirely classical and elementary
-demonstration of an idea that later became central to the theory of
-open quantum systems: dissipation and irreversibility in a subsystem
-are not exceptions to an underlying conservative dynamics, but the
-generic appearance of a conservative dynamics once part of the full
-system --- here, quite literally, the mirror half --- has been
-discarded from the description.
-
-
-Not every attempt to write a closed-looking equation for an open
-system ends benignly. An accelerating point charge radiates, and by
-momentum conservation it must experience a recoil, or self-force, in
-consequence. Treating the charge \emph{in isolation} --- an open
-system in the strict sense, since the charge together with its own
-radiated field is really a system with infinitely many degrees of
-freedom, formally "integrated out" down to a single effective force
-term --- leads to the (nonrelativistic) Abraham--Lorentz equation,
+This is the \emph{Lagrange--d'Alembert principle}. It is valid for \emph{any}
+applied forces, including friction and driving. Only when
+$\sum_a\mathbf F_a\cdot\delta\mathbf r_a=-\delta V$ (or $\delta U$ with the
+appropriate velocity-dependent form) does the integrand become an exact
+variation and~\eqref{integral-dalembert} collapse into Hamilton's principle
 \begin{equation}
-  m\,\ddot{\mathbf x} \;=\; \mathbf F_{\mathrm{ext}} \;+\;
-  m\tau\,\dddot{\mathbf x} ,
-  \qquad
-  \tau \;=\; \frac{q^2}{6\pi\varepsilon_0\,m\,c^3}
-  \;=\; \frac{2}{3}\,\frac{r_e}{c},
-  \label{abraham-lorentz}
+  \delta S=0,\qquad S[q]=\int_{t_0}^{t_1}L(q,\dot q,t)\,dt .
+  \label{hamilton}
 \end{equation}
-where $r_e$ is the classical electron radius. Because
-\eqref{abraham-lorentz} is third order in position, it requires
-more initial data than position and velocity to determine a unique
-solution, and generic initial data produce \emph{runaway} solutions
-in which the self-acceleration grows without bound even with
-$\mathbf F_{\mathrm{ext}}=0$. Suppressing the runaway by hand forces
-the opposite pathology: the charge must begin accelerating
-\emph{before} an external force is switched on --- a small, short-lived,
-but genuinely acausal-looking pre-acceleration. (In practice, both
-pathologies signal that \eqref{abraham-lorentz} is being pushed
-outside its domain of validity, on timescales comparable to $\tau
-\sim 10^{-24}\,\mathrm s$; treated properly, as an effective equation
-valid only for slowly varying external forces --- via, e.g., the
-Landau--Lifshitz reduction of order --- the pathologies disappear.)
-The lesson is a cautionary complement to the rest of this section:
-"integrating out" the unmodelled part of an open system is not
-always harmless bookkeeping. Sometimes it is, as with the Meshchersky
-equation; sometimes, as here, it produces an equation that is simply
-malformed unless handled with real care.
+
+This is the first moral of the Newton-first road. The \emph{variational}
+principle is the special case of a more general \emph{virtual-work}
+principle, valid when the active forces are derivable from a (generalized)
+potential. Dissipative forces fit into~\eqref{integral-dalembert} but not
+into~\eqref{hamilton}; this is why friction is a nuisance for the
+action-first road and a non-event for the Newton-first road.
+
+\paragraph{Constraints on the Newton-first road}
+
+On this road constraints cost nothing conceptually. There are two equivalent
+techniques.
+
+\begin{enumerate}
+  \item \textbf{Elimination.} Solve the constraints, pass to $q^i$,
+  and write~\eqref{EL}. The reactions never appear.
+  \item \textbf{Multipliers.} Keep redundant coordinates $x^\mu$ and impose
+  $f_k(x)=0$. Because virtual displacements satisfy
+  $\partial_\mu f_k\,\delta x^\mu=0$, the vector $\mathbf R$ in~\eqref{ideal}
+  must be a combination of the gradients $\partial_\mu f_k$:
+  \begin{equation}
+    m\ddot x_\mu=F_\mu+\sum_k\lambda_k\,\partial_\mu f_k .
+    \label{multipliers}
+  \end{equation}
+  The multipliers $\lambda_k$ are \emph{the constraint reactions}, with direct
+  physical meaning (tension in a rod, normal force on a surface).
+\end{enumerate}
+
+The multiplier technique has a pedagogical advantage that is usually
+squandered: the multipliers answer questions about the real world
+(will the rope go slack? will the bead leave the surface?) that the reduced
+Lagrangian cannot.
+
+\begin{example}[Plane pendulum]\label{pendulum}
+Take coordinates $(x,y)$ with $y$ upward and the constraint
+$f=x^2+y^2-\ell^2=0$. Equation~\eqref{multipliers} reads
+\[
+  m\ddot x=2\lambda x,\qquad m\ddot y=-mg+2\lambda y .
+\]
+Writing $x=\ell\sin\theta$, $y=-\ell\cos\theta$ and projecting on the radial
+and tangential directions gives
+\[
+  \ell\ddot\theta=-g\sin\theta,\qquad
+  T:=-2\lambda\ell=m\bigl(\ell\dot\theta^{2}+g\cos\theta\bigr).
+\]
+The first is what elimination gives directly. The second is the tension, and
+the criterion $T>0$ tells us when a pendulum on a string (rather than a rod)
+stops behaving like a pendulum.
+\end{example}
+
+\subsection{From the action back to Newton}
+\label{action-to-newton}
+
+Now reverse the order. Postulate~\eqref{hamilton}, with $L=T-V$ and
+Cartesian coordinates for a free particle in a potential.
+
+\paragraph{The derivation, and what it uses}
+
+Let $q(t)\to q(t)+\varepsilon\,\eta(t)$ with $\eta(t_0)=\eta(t_1)=0$. Then
+\[
+  \frac{dS}{d\varepsilon}\Big|_0=\int_{t_0}^{t_1}
+  \Bigl(\frac{\partial L}{\partial q}-\frac{d}{dt}\frac{\partial L}{\partial\dot q}\Bigr)\eta\,dt=0
+  \quad\text{for all }\eta .
+\]
+The \emph{fundamental lemma of the calculus of variations} (the integrand is
+continuous and orthogonal to every test function, so it vanishes) gives the
+Euler--Lagrange equation~\eqref{EL}. For $L=\tfrac12m\dot q^2-V(q)$ this is
+$m\ddot q=-V'(q)$: Newton's second law.
+
+Four assumptions have been used silently.
+\begin{enumerate}
+  \item The functional \emph{has} the form $T-V$. Nothing in the principle
+  says so. Nature (or the teacher) supplies $L$.
+  \item Variations are taken with fixed endpoints in \emph{time and
+  position}. The motion is therefore determined by a boundary-value problem,
+  although Newton's law is an initial-value problem.
+  \item The word ``least'' is not justified. The principle is
+  \emph{stationarity}.
+  \item The variations $\eta$ range over all smooth functions: there are no
+  constraints on the admissible paths. Constraints are discussed in
+  subsection~\ref{constraints-variational}.
+\end{enumerate}
+
+\paragraph{Stationary, not least}
+\label{least}
+
+The traditional name ``principle of least action'' is misleading. For the
+harmonic oscillator $\ddot q=-\omega^2q$ the action of the true trajectory
+between $t_0$ and $t_1$ is a minimum if and only if $t_1-t_0<\pi/\omega$;
+beyond that the second variation acquires a negative direction, and the
+true path is a saddle. In general, a trajectory ceases to be a local minimum
+at the first \emph{conjugate point} (Jacobi). The geometric optics analogue is
+a caustic. On a sphere, the great circle between two points is minimal only
+up to the antipode.
+
+This matters pedagogically. A student told that ``the particle chooses the
+path of least action'' will naturally ask how it \emph{knows} the final point
+in advance. The honest answer is that it does not: the boundary-value
+formulation is an equivalent \emph{global description} of an \emph{initial-value}
+motion, and stationarity is the local property that survives. This is the
+point at which the action-first road most invites teleological language,
+precisely the sort of mixing of real-world causality and ideal-world logic
+that the  chapter \ref{rm} of this book warn against.
+
+\paragraph{The inverse problem and non-uniqueness}
+\label{inverse}
+
+The road from the equations of motion to a Lagrangian is not a function. Three
+observations:
+\begin{itemize}
+  \item $L$ and $L+\frac{d}{dt}F(q,t)$ give identical equations (the action
+  changes by boundary terms only).
+  \item $L$ and $cL$ give identical equations for any constant $c\neq0$.
+  \item Genuinely different Lagrangians can give the same equations. The
+  two-dimensional isotropic oscillator, for example, admits Lagrangians that
+  are not related by a total derivative or a constant factor.
+\end{itemize}
+The existence question (``is a given system of second-order equations
+Euler--Lagrange?'') is answered by the Helmholtz conditions: in particular a
+system $\ddot q^i=f^i(q,\dot q,t)$ with friction linear in the velocity,
+$\ddot q=-\gamma\dot q-\omega^2q$, is Euler--Lagrange only after an explicit
+time-dependent factor $e^{\gamma t/m}$ is introduced (the Caldirola--Kanai
+Lagrangian), and then the canonical momentum no longer equals the mechanical
+momentum. The dissipative world is not forbidden to the action, but it is not
+natural to it.
+
+\subsection{Constraints on the action-first road}
+\label{constraints-variational}
+
+\paragraph{Holonomic constraints: agreement}
+
+Suppose we vary $S$ over paths that satisfy $f_k(x)=0$ at every time.
+Introduce the augmented action
+\begin{equation}
+  \tilde S=\int\bigl[L(x,\dot x)+\lambda_k(t)\,f_k(x)\bigr]dt .
+  \label{aug-holonomic}
+\end{equation}
+Its Euler--Lagrange equations are precisely the multiplier
+equations~\eqref{multipliers}, with $\lambda_k$ as the (time-dependent)
+reaction forces. For holonomic constraints the two roads agree completely, and
+the multipliers play the same physical role.
+
+A conceptual remark: in the action-first road the multipliers are
+\emph{introduced to enforce a restriction on trial paths}. In the Newton-first
+road they are the \emph{forces that actually do the enforcing}. That the two
+coincide is a theorem, not a tautology; it follows from~\eqref{ideal}.
+
+
+\paragraph{Constraints as limits}
+\label{constraints-limits}
+
+A third answer to ``what is a constraint?'' replaces the idealization by a
+family of smooth models. A holonomic constraint $f=0$ is the limit
+$\kappa\to\infty$ of a stiff potential $V_\kappa=\tfrac12\kappa f^2$. The limit
+is delicate (see chapter \ref{lm}). If the initial position lies on the surface
+and the initial
+velocity is tangent to it, the motion converges to the d'Alembert motion on the
+surface (Rubin and Ungar). If the initial velocity has a normal component, the
+normal motion is a fast oscillation with a conserved action, and the limiting
+motion on the surface is governed by the original Hamiltonian \emph{plus an
+extra potential} that depends on that action. Rubin and Ungar 
+\cite{RubinUngar1957}proved this for
+codimension one; Takens \cite{Takens1980} treated the general case, 
+under a non-resonance
+condition on the frequencies of the normal oscillations. When that condition
+fails (frequencies crossing along the surface), there may be no differential
+equation on the surface governing the limiting motion at all.
+Similarly, a nonholonomic constraint of the type~\eqref{nonhol} is
+the limit of a large viscous friction $-\mu\,(a_i\dot q^i)\,a^i$ as
+$\mu\to\infty$, and \emph{this} limit reproduces Route~A (the
+Lagrange--d'Alembert equations), not Route~B.
+
+This is a clean illustration of the thesis that a theory is not a limit of
+another but a chart on it: the same rod, with the same symbol $f=0$, belongs
+to different physical charts depending on whether it is the limit of a stiff
+spring or the limit of a viscous friction.
+
+\subsection{Comparing the routes as pedagogy}
+\label{pedagogy}
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{3.1cm}p{5.6cm}p{5.6cm}@{}}
+\toprule
+ & \textbf{Newton $\to$ action} & \textbf{Action $\to$ Newton}\\
+\midrule
+Postulates & $m\ddot{\mathbf r}=\mathbf F$, ideal constraints, force laws &
+  $\delta S=0$, form of $L$, admissible paths \\
+Primary objects & forces, reactions, accelerations & energies, symmetries, trajectories as a whole \\
+Constraint forces & computed directly; physical meaning of $\lambda_k$ & introduced as multipliers; meaning proved later \\
+Dissipation & trivial (virtual-work form) & awkward (needs doubled variables, time-dependent $L$, or is excluded) \\
+Nonholonomic constraints & natural (Route~A) & ambiguous (Route~B differs) \\
+Conservation laws & derived case by case & Noether's theorem: unified \\
+Generalization to fields and QM & indirect & direct (path integral, field actions) \\
+Typical misconception & ``the Lagrangian is just Newton in disguise'' & ``the particle chooses the least-action path'' \\
+\bottomrule
+\end{tabular}
+\caption{Logical structure of the two routes.}
+\label{routes}
+\end{table}
+
+\paragraph{Newton first}
+
+\emph{Strengths.} Every step has a physical referent. Students see where
+the action comes from and, crucially, \emph{when it does not exist}.
+Constraint reactions are computed, not suppressed. The nonholonomic
+and dissipative cases are included without a change of philosophy.
+
+\emph{Weaknesses.} The passage to generalized coordinates is algebraically
+heavy, and the key identity
+$\frac{d}{dt}\partial_{q}\mathbf r=\partial_{\dot q}\dot{\mathbf r}$ looks
+like a trick. The reader emerges thinking Lagrangian mechanics is a
+\emph{computational device}, and misses that the action is a primary
+object in field theory and quantum mechanics.
+
+\paragraph{Action first}
+
+\emph{Strengths.} Symmetry becomes the organizing principle:
+Noether's theorem explains energy, momentum and angular momentum at once.
+Coordinate independence is manifest: $\delta S=0$ does not know what
+coordinates are. The road to field theory and quantization is short.
+
+\emph{Weaknesses.} The phrase ``least action'' invites teleology
+(subsection~\ref{least}). The student learns that dissipative systems are
+``not mechanics'' and that constraint reactions are an afterthought. Most
+damagingly, the nonholonomic case produces a \emph{wrong answer} that is
+indistinguishable, in form, from the right one; a student who has only
+been taught the variational principle will confidently apply the vakonomic
+equations to a rolling ball.
+
+\paragraph{Conclusions}
+
+Both routes coincide for restricted but very large and important class of
+holonomic systems.  Newton-first route is probably better when classical 
+mechanics is seen as a part of CNT. Since this book is devoted to second
+role of classical mechanics as a base for quantum and relativistic theory
+we'll take the action-first route.
+
 
 \section{EOM: Conditions and Problems}
 \label{cm:eom}
@@ -576,8 +564,6 @@ Regular / singular perturbation; multiple scales; averaging; KAM theorem \\
   of solutions'' (e.g., a fixed point losing stability via a Hopf
   bifurcation and handing off to a limit cycle, which can itself
   period-double into chaos).
-
-
 
 
 
