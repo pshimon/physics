@@ -1,0 +1,367 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+% ---------- theorem environments ----------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+% ---------- macros ----------
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Tor}{\mathbb{T}}
+\newcommand{\PB}[2]{\{#1,#2\}}
+\newcommand{\weq}{\approx}
+\newcommand{\FL}{\mathbb{F}\!L}
+\newcommand{\Sw}{\mathcal{S}}
+\DeclareMathOperator{\rank}{rank}
+
+\title{Coordinates and Momenta Are Not Equal Partners:\\
+Action--Angle Variables, Dirac's Constraints and Singular Lagrangians}
+\author{}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+The textbook statement that in phase space ``coordinates and momenta are on an equal footing'' is exact only for the symplectic form, that is, for the \emph{kinematics} of Hamiltonian mechanics. Once the data that turn a Hamiltonian system into a mechanical system are added --- the Legendre fibration $T^*Q\to Q$, a Hamiltonian with its integrals of motion, and the algebra of constraints --- coordinates and momenta play different roles. We discuss three manifestations of this asymmetry and show that they are aspects of one structure.
+(i)~In action--angle variables the momenta (actions) are constants of motion while the conjugate angles evolve; because the angles are periodic, no global canonical transformation can exchange the two.
+(ii)~For a singular Lagrangian the Legendre map is a bundle map over the configuration space, so primary constraints are always ``vertical'': they restrict momenta and never coordinates alone.
+(iii)~In Dirac's classification, in an adapted Darboux chart, first-class constraints are momenta whose conjugate coordinates are pure gauge, whereas second-class constraints come in conjugate $(q,p)$ pairs and are, together with the first-order action, where the symmetric picture survives.
+We conclude that the invariant distinction is not ``$q$ versus $p$'' but ``generator of a symmetry versus parameter along its orbit''.
+\end{abstract}
+
+%=====================================================================
+\section{Introduction}
+%=====================================================================
+
+It is a commonplace of analytical mechanics that the Hamiltonian formalism puts coordinates and momenta ``on an equal footing''. Three facts are usually quoted in support. First, canonical transformations are allowed to mix $q$ and $p$ freely; the exchange $(q,p)\mapsto(p,-q)$ is canonical. Second, Hamilton's equations $\dot q=\partial H/\partial p$, $\dot p=-\partial H/\partial q$ differ only by a sign. Third, in quantum mechanics the position and momentum representations are related by a Fourier transform and are equally good.
+
+Elementary experience in mechanics nevertheless suggests that the two kinds of variables are not interchangeable.
+For a free particle $p$ is constant and $q$ is not.
+For an integrable system with compact invariant sets there are canonical variables $(\theta,I)$ in which the \emph{momenta} $I$ (the action variables) are constants of motion while the \emph{coordinates} $\theta$ (the angles) change linearly in time; the opposite situation --- constant coordinates and evolving momenta --- is never presented as the normal form of regular motion.
+In gauge theories some momenta vanish identically while their conjugate coordinates are arbitrary functions of time.
+In the Lagrangian formalism the passage to momenta is the Legendre map $\dot q\mapsto p=\partial L/\partial\dot q$, which fails to be invertible exactly when the Lagrangian is singular.
+
+The purpose of this note is to show that these observations are not accidents but manifestations of a single fact: \emph{the folklore statement is true of the symplectic form, but a mechanical system carries structure beyond the symplectic form, and with respect to that structure $q$ and $p$ are inequivalent.}
+Our results, in the order in which they appear, are:
+\begin{itemize}
+\item[\textbf{R1}] The canonical transformations compatible with Lagrangian mechanics on a configuration space $Q$ form the small group $\mathrm{Diff}(Q)\ltimes Z^1(Q)$, which does not mix $q$ and $p$ (Proposition~\ref{prop:fibre}).
+\item[\textbf{R2}] In action--angle variables the exchange of an action and its angle is locally possible but globally obstructed (Theorem~\ref{thm:noconj}). The action--angle Lagrangian is regular iff the frequency map is a local diffeomorphism (Kolmogorov non-degeneracy).
+\item[\textbf{R3}] Primary constraints of a singular Lagrangian are always vertical: no primary constraint involves coordinates alone (Proposition~\ref{prop:vertical}).
+\item[\textbf{R4}] In Dirac's classification, first-class constraints are, in an adapted chart, momenta with pure-gauge conjugates, while second-class constraints come in conjugate pairs (Proposition~\ref{prop:normal}).
+\item[\textbf{R5}] The first-order action $\int(p\dot q-H)\,\dd t$ \emph{is} symmetric in $q$ and $p$ up to a boundary term; this is the sense in which the folklore is exactly right (Section~\ref{sec:first-order}).
+\end{itemize}
+
+\paragraph{Conventions and assumptions.}
+$Q$ is an $n$-dimensional smooth manifold, $\pi:T^*Q\to Q$ its cotangent bundle with local coordinates $(q^i,p_i)$, canonical one-form $\vartheta=p_i\,\dd q^i$ and symplectic form $\omega=\dd\vartheta=\dd p_i\wedge\dd q^i$. The Poisson bracket is $\PB fg=\partial_{q^i}f\,\partial_{p_i}g-\partial_{p_i}f\,\partial_{q^i}g$, so $\PB{q^i}{p_j}=\delta^i_j$ and $\dot f=\PB fH$. The flow of a function $f$ is $\dd g/\dd s=\PB gf$. Weak equality (on the constraint surface) is written $\weq$. We work with finitely many degrees of freedom and assume the usual constant-rank and irreducibility conditions of the Dirac--Bergmann theory \cite{gnh,ht}; field-theoretic examples are treated per spatial point.
+
+%=====================================================================
+\section{What is true: the symplectic statement}
+%=====================================================================
+
+\subsection{The exchange map and its consequences}
+
+The folklore statement is
+\begin{quote}
+\textbf{(F)} \emph{The variables $q$ and $p$ are equivalent: any canonical pair can be taken as ``coordinate'' and ``momentum'' in either order.}
+\end{quote}
+Its basis is the map
+\begin{equation}\label{eq:swap}
+\Sw:(q,p)\longmapsto(Q,P)=(p,-q),\qquad \Sw^*\omega=\dd P_i\wedge\dd Q^i=-\dd q^i\wedge\dd p_i=\omega ,
+\end{equation}
+which is a symplectomorphism of $\R^{2n}$. More generally, the linear canonical transformations form $\mathrm{Sp}(2n,\R)$, which contains maps that mix $q$'s and $p$'s arbitrarily, and by Darboux's theorem every function with non-vanishing differential is a coordinate of some local canonical chart \cite{arnold,am}. In quantum mechanics on $\R^n$ the map $\Sw$ is implemented by the Fourier transform. Hence for a particle on $\R^n$, without constraints, the \emph{kinematic} structure is exactly symmetric. Statement (F) is correct in this setting, and we do not dispute it there.
+
+What (F) does \emph{not} address is the extra structure that a mechanical system carries. The most basic piece is the \emph{polarisation} $\pi:T^*Q\to Q$ produced by the Legendre map of a Lagrangian $L(q,\dot q)$. Its fibres are the sets of momenta at a given configuration; $q$ labels the base, $p$ the fibre. The following statement makes precise how much of $\mathrm{Symp}(T^*Q)$ respects this structure.
+
+\begin{proposition}[fibre-preserving canonical transformations]\label{prop:fibre}
+Let $\Phi:T^*Q\to T^*Q$ be a symplectomorphism mapping every fibre $T^*_qQ$ onto a fibre. Then $\Phi=\hat\varphi\circ\tau_\alpha$, where $\varphi:Q\to Q$ is a diffeomorphism, $\hat\varphi$ is its cotangent lift, and $\tau_\alpha(q,p)=(q,p+\alpha(q))$ with $\alpha$ a \emph{closed} one-form on $Q$. In coordinates, $Q^a=\varphi^a(q)$ and $P_a=\frac{\partial q^i}{\partial Q^a}\,(p_i+\alpha_i(q))$.
+\end{proposition}
+
+\begin{proof}
+Let $\varphi$ be the diffeomorphism of $Q$ covered by $\Phi$. Cotangent lifts preserve $\vartheta$, hence $\omega$, so $\Psi=\hat\varphi^{-1}\circ\Phi$ is a symplectomorphism that covers the identity: $\Psi(q,p)=(q,\psi(q,p))$. The condition $\Psi^*\omega=\omega$ reads
+$\dd\psi_i\wedge\dd q^i=\dd p_i\wedge\dd q^i$. Comparing the coefficients of $\dd p_j\wedge\dd q^i$ gives $\partial\psi_i/\partial p_j=\delta_i^j$, hence $\psi_i=p_i+\alpha_i(q)$. The remaining terms give $(\partial_j\alpha_i-\partial_i\alpha_j)\,\dd q^j\wedge\dd q^i=0$, i.e.\ $\dd\alpha=0$.
+\end{proof}
+
+Thus the transformations under which Lagrangian mechanics on $Q$ is covariant --- point transformations $q\mapsto Q(q)$ and gauge shifts $p\mapsto p+\nabla f$ --- form the group $\mathrm{Diff}(Q)\ltimes Z^1(Q)$, a tiny subgroup of the symplectomorphisms. Under it $q$ transforms by an arbitrary diffeomorphism and $p$ as a covector (affinely, up to a closed shift); \emph{no element mixes them}. The exchange $\Sw$ lies outside this group, and it does not preserve the property of being Lagrangian-realisable: a Hamiltonian is \emph{regular} if $\det(\partial^2H/\partial p_i\partial p_j)\neq0$, and this property is invariant under $\mathrm{Diff}(Q)\ltimes Z^1(Q)$ but not under $\Sw$.
+
+\begin{remark}
+Time reversal $(q,p)\mapsto(q,-p)$ is anti-symplectic and is a symmetry of every mechanical Hamiltonian that is even in $p$; $q$ is even and $p$ odd under it. Conjugating by $\Sw$ turns it into $(Q,P)\mapsto(-Q,P)$, which is no longer ``reversal of velocities''. The equality (F) does not survive the requirement that the time-reversal structure be kept.
+\end{remark}
+
+\subsection{Two examples}
+
+\begin{example}[free particle]\label{ex:free}
+For $H=p^2/2m$ the momentum is conserved and $q$ grows linearly. Apply $\Sw$: $\tilde H=Q^2/2m$, with $\dot Q=0$ and $\dot P=-Q/m$. This is a perfectly good Hamiltonian system --- the free particle in disguise --- in which a \emph{coordinate} is conserved. But $\partial^2\tilde H/\partial P^2=0$: the velocity $\dot Q$ vanishes identically while $P$ is arbitrary, so $\tilde H$ is not the Legendre transform of any Lagrangian $L(Q,\dot Q)$. In symplectic geometry both descriptions are equally legitimate; only the first is a \emph{mechanical} one.
+\end{example}
+
+\begin{example}[harmonic oscillator]\label{ex:osc}
+Take $H=\tfrac12(p^2+q^2)$ and the action--angle chart
+\begin{equation}\label{eq:osc-aa}
+q=\sqrt{2I}\,\sin\theta,\qquad p=\sqrt{2I}\,\cos\theta,\qquad
+\dd p\wedge\dd q=\dd I\wedge\dd\theta,\qquad H=I,\qquad I=\frac1{2\pi}\oint p\,\dd q .
+\end{equation}
+Then $\PB\theta I=1$, $\dot I=0$, $\dot\theta=1$. The exchange $\Sw$ maps the oscillator to itself, and in the chart~\eqref{eq:osc-aa} it reads
+\[
+\Sw:(\theta,I)\longmapsto(\theta+\tfrac\pi2,\,I),
+\]
+because $Q=p=\sqrt{2I}\sin(\theta+\tfrac\pi2)$ and $P=-q=\sqrt{2I}\cos(\theta+\tfrac\pi2)$. So $\Sw$ is the time-$\pi/2$ flow. The perfect $q$--$p$ symmetry of the oscillator is nothing but the statement that the \emph{action} is invariant while the \emph{angle} can be rotated; $\Sw$ exchanges $q$ and $p$ but cannot exchange $I$ and $\theta$. (The chart is singular at the equilibrium $I=0$, like polar coordinates.)
+\end{example}
+
+%=====================================================================
+\section{Action--angle variables}
+%=====================================================================
+
+\subsection{The normal form of regular motion}
+
+\begin{theorem}[Liouville--Arnold \cite{arnold}]\label{thm:LA}
+Let $F_1=H,\dots,F_n$ be functions on a $2n$-dimensional symplectic manifold with $\PB{F_j}{F_k}=0$ and $\dd F_1\wedge\dots\wedge\dd F_n\neq0$ on a compact connected level set $M_f=\{F=f\}$. Then $M_f\cong\Tor^n$, and a neighbourhood of $M_f$ carries canonical coordinates $(\theta,I)\in\Tor^n\times U$, $U\subset\R^n$ open, with $\omega=\dd I_k\wedge\dd\theta_k$, such that $I=I(F)$; in particular $H=H(I)$. The actions are $I_k=\frac1{2\pi}\oint_{\gamma_k}p\,\dd q$ for a basis $\gamma_k$ of $H_1(M_f)$.
+\end{theorem}
+
+Hamilton's equations become
+\begin{equation}\label{eq:aa-eom}
+\dot I_k=0,\qquad \dot\theta_k=\nu_k(I):=\frac{\partial H}{\partial I_k},\qquad \theta(t)=\theta_0+\nu(I)\,t .
+\end{equation}
+Thus $n$ of the $2n$ canonical variables are constants of motion and the other $n$ evolve. This is the general form of regular bounded motion. Locally, the roles can be exchanged: on the universal cover $\R^n\times U$ the map $(\theta,I)\mapsto(Q,P)=(I,-\theta)$ is canonical and gives $H=H(Q)$, $\dot Q=0$, $\dot P=-\nu(Q)$ --- the same pattern as in Example~\ref{ex:free}. What forbids this exchange globally is the topology.
+
+\subsection{The global obstruction}
+
+\begin{theorem}[no global conjugate to a periodic action]\label{thm:noconj}
+On $\Tor^n\times U$ with $\PB{\theta_k}{I_l}=\delta_{kl}$ there is no smooth real function $\Theta$ with $\PB\Theta{I_k}=1$ for some $k$. Consequently no canonical transformation defined on all of $\Tor^n\times U$ takes the action $I_k$ to a coordinate.
+\end{theorem}
+
+\begin{proof}
+The flow of $I_k$ is $\theta_k\mapsto\theta_k+s$, with all other variables fixed, and it is periodic with period $2\pi$. Along it, $\dd\Theta/\dd s=\PB\Theta{I_k}=1$, so $\Theta$ would have to increase by $2\pi$ over a closed orbit --- a contradiction. If $(Q,P)$ were canonical with $Q_k=I_k$, then $\PB{Q_k}{P_k}=1$ gives $\PB{-P_k}{I_k}=1$, and $\Theta=-P_k$ would be such a function.
+\end{proof}
+
+\begin{remark}
+Topologically, the phase space $T^*\Tor^n=\Tor^n\times\R^n$ carries two Lagrangian fibrations: the vertical one, $\{\theta=\mathrm{const}\}$, with fibres $\R^n$ (the momenta), and the Liouville one, $\{I=\mathrm{const}\}$, with compact fibres $\Tor^n$. These fibres are not homeomorphic, so no symplectomorphism exchanges the two fibrations. The Hamiltonian selects the second fibration: $H$ is constant on its leaves and the motion is tangent to them.
+\end{remark}
+
+\subsection{Actions as Noether charges}
+
+The torus acts on $\Tor^n\times U$ by $\theta\mapsto\theta+s$; the action is Hamiltonian with momentum map $I:\Tor^n\times U\to\R^n$. The invariance of $H$ under it is equivalent to $H=H(I)$ and to the conservation of $I$. The actions are therefore Noether charges of the angle translations, formally identical to the conservation of $p_i$ for a cyclic coordinate $q^i$:
+\[
+\partial H/\partial q^i=0\ \Longrightarrow\ \dot p_i=0 .
+\]
+The reverse implication --- ``if $H$ does not depend on $p_i$ then $q^i$ is conserved'' --- is formally true ($\dot q^i=\partial H/\partial p_i=0$) but describes a Hamiltonian that is singular in the sense of Example~\ref{ex:free}. More generally, for a vector field $\xi$ on $Q$ that generates a symmetry, the cotangent lift has the conserved charge $J_\xi=p_i\,\xi^i(q)$, which is \emph{linear in the momenta}. A momentum is a \emph{generator}; a coordinate (an angle) is the \emph{parameter} along the orbit of that generator.
+
+\subsection{Link with singular Lagrangians: Kolmogorov non-degeneracy}\label{sec:kolmogorov}
+
+When does the action--angle Hamiltonian $H(I)$ possess a Lagrangian $L(\theta,\dot\theta)$? The Legendre map is $I\mapsto\dot\theta=\nu(I)=\partial H/\partial I$, a local diffeomorphism iff
+\begin{equation}\label{eq:kolmogorov}
+\det\frac{\partial\nu_k}{\partial I_l}=\det\frac{\partial^2H}{\partial I_k\,\partial I_l}\neq0 ,
+\end{equation}
+which is Kolmogorov's non-degeneracy condition \cite{arnold}. If~\eqref{eq:kolmogorov} holds then
+\[
+L=\mathcal L(\dot\theta)=\Bigl[I\cdot\dot\theta-H(I)\Bigr]_{I=\nu^{-1}(\dot\theta)},\qquad I=\frac{\partial\mathcal L}{\partial\dot\theta}.
+\]
+Hence \emph{every non-degenerate integrable system is, locally, a system on a torus all of whose coordinates are cyclic, and the actions are the Noether momenta of those cyclic coordinates.} If~\eqref{eq:kolmogorov} fails, the action--angle Lagrangian is singular. This happens for the harmonic oscillator, $H=\nu I$, and for the Kepler problem, whose Hamiltonian depends on one linear combination of the actions. In that case there is no $\mathcal L(\dot\theta)$ at all: $\dot\theta=\nu$ identically, and the only available Lagrangian is the first-order $I(\dot\theta-\nu)$, in which $I$ is a Lagrange multiplier. We return to this in Section~\ref{sec:first-order}.
+
+\subsection{Quantum remark}
+
+At the quantum level the same obstruction is the phase problem. The actions are quantised ($I_k=\hbar(n_k+\mu_k/4)$ in the semiclassical EBK scheme, with Maslov indices $\mu_k$), so $\hat I$ has a discrete spectrum, while only the exponentials $e^{\pm i\theta}$ make sense and act as shifts on the lattice of $n$. For the oscillator, with $n\ge0$, the exponential of the phase is not even unitary \cite{dirac27,sg64}. The Fourier duality is therefore between $\ell^2(\mathbb Z)$ and $L^2(S^1)$, not between two copies of $L^2(\R)$.
+
+%=====================================================================
+\section{Singular Lagrangians: the Legendre map}
+%=====================================================================
+
+Let $L:TQ\to\R$ and let
+\[
+\FL:TQ\to T^*Q,\qquad \FL(q,\dot q)=\Bigl(q,\ \frac{\partial L}{\partial\dot q}\Bigr)
+\]
+be the fibre derivative (Legendre map), with Hessian $W_{ij}=\partial^2L/\partial\dot q^i\partial\dot q^j$. The Lagrangian is \emph{regular} if $\det W\neq0$, so that $\FL$ is a local diffeomorphism; then $H(q,p)=p\,\dot q(q,p)-L$ and $H_{pp}=W^{-1}$, so $L$ regular iff $H$ regular. It is \emph{singular} if $\rank W=r<n$. We assume the \emph{almost regular} situation: $\Sigma_1:=\FL(TQ)$ is a submanifold and $\FL:TQ\to\Sigma_1$ is a submersion with connected fibres \cite{gnh}.
+
+\begin{proposition}[primary constraints are vertical]\label{prop:vertical}
+Let $L$ be almost regular with $\rank W=r$. Then:
+\begin{enumerate}
+\item[(i)] $\dim\Sigma_1=n+r$; locally $\Sigma_1$ is cut out by $n-r$ independent primary constraints $\phi_m(q,p)\weq0$.
+\item[(ii)] The projection $\pi|_{\Sigma_1}:\Sigma_1\to Q$ is a surjective submersion with fibres of dimension $r$.
+\item[(iii)] In particular, no primary constraint is a function of the coordinates alone: if $f(q)$ vanishes on $\Sigma_1$, then $f\equiv0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+In the coordinates $(q,\dot q)\mapsto(q,p)$ the differential of $\FL$ is block triangular,
+$\begin{psmallmatrix}1&0\\ \ast&W\end{psmallmatrix}$, and has rank $n+r$; this gives (i). Moreover $\FL$ covers the identity: $\pi\circ\FL=\pi_Q$, where $\pi_Q:TQ\to Q$ is a surjective submersion. Hence $\pi|_{\Sigma_1}$ is a surjective submersion, which gives (ii), and its fibres have dimension $\dim\Sigma_1-n=r$. For (iii): if $f(q)$ vanished on $\Sigma_1$, then, since $\pi(\Sigma_1)=Q$, $f$ would vanish on all of $Q$.
+\end{proof}
+
+Proposition~\ref{prop:vertical} is the asymmetry in its simplest form. All $n$ coordinates are independent variables; only $r$ of the $n$ momenta are. The constraint surface cuts the fibres of $T^*Q$ but never the base. The exchange $\Sw$ would turn a relation $\phi(q,p)=p_m-f(q,p_a)=0$ into a relation that no longer restricts a fibre and no longer descends from any Lagrangian.
+
+The velocities behave in the complementary way. The equations $p=\partial L/\partial\dot q$ determine only $r$ combinations of the velocities in terms of $(q,p)$; those along the null directions of $W$ remain undetermined, and the Euler--Lagrange equations $W_{ij}\ddot q^j=\dots$ cannot be solved for all accelerations. In the Hamiltonian description the undetermined velocities become the multipliers $u^m$ in
+\begin{equation}\label{eq:HT}
+H_T=H_c+u^m\phi_m,\qquad \dot q^i=\frac{\partial H_c}{\partial p_i}+u^m\frac{\partial\phi_m}{\partial p_i}.
+\end{equation}
+\emph{The momentum is constrained; its conjugate velocity is free.}
+
+%=====================================================================
+\section{Dirac's constraints}
+%=====================================================================
+
+\subsection{The algorithm and the two classifications}
+
+Dirac's procedure \cite{dirac50,dirac64} proceeds in steps. The primary constraints $\phi_m\weq0$ come from the Legendre map. Consistency of $\phi_m\weq0$ with the evolution generated by $H_T$ in~\eqref{eq:HT},
+\[
+\{\phi_m,H_c\}+u^{m'}\{\phi_m,\phi_{m'}\}\weq0 ,
+\]
+either fixes some multipliers or produces new, \emph{secondary} constraints; the procedure is iterated until it closes. The final set $\{\chi_A\}$ is classified as:
+\begin{itemize}
+\item \emph{first class}: $\PB{F}{\chi_A}\weq0$ for all $A$; these generate gauge transformations and leave their multipliers arbitrary;
+\item \emph{second class}: the matrix $C_{\alpha\beta}=\PB{\chi_\alpha}{\chi_\beta}$ is invertible on the subset of second-class constraints (which is therefore even in number); the multipliers are fixed by consistency and one passes to the Dirac bracket $\PB FG_D=\PB FG-\PB F{\chi_\alpha}(C^{-1})^{\alpha\beta}\PB{\chi_\beta}G$.
+\end{itemize}
+With $N_1$ first-class and $N_2$ second-class constraints the reduced phase space has dimension $2n-2N_1-N_2$.
+
+Two different dichotomies thus appear, \emph{primary vs.\ secondary} and \emph{first vs.\ second class}; both display the asymmetry.
+
+\subsection{A local normal form}
+
+\begin{proposition}[adapted chart]\label{prop:normal}
+Let $\Sigma\subset T^*Q$ be the final constraint surface, with $k$ first-class and $2m$ second-class constraints, and assume the constant-rank conditions of Section~1. Then near every point of $\Sigma$ there are canonical coordinates
+\[
+(q^a,p_a;\ Q^\alpha,P_\alpha;\ y^A,\eta_A),\qquad a\le k,\ \alpha\le m,\ A\le n-k-m,
+\]
+in which $\Sigma=\{p_a=0,\ Q^\alpha=0,\ P_\alpha=0\}$.
+\end{proposition}
+
+\begin{proof}[Sketch]
+The second-class constraints can be brought, by a symplectic Gram--Schmidt procedure, to canonical pairs $(Q^\alpha,P_\alpha)$. After adding suitable combinations of the second-class constraints, $\phi_a\to\phi_a-\PB{\phi_a}{\chi_\alpha}(C^{-1})^{\alpha\beta}\chi_\beta$, the first-class constraints commute with $Q^\alpha,P_\alpha$ and define a coisotropic submanifold of the symplectic leaf $\{Q=P=0\}$, to which the coisotropic normal form of Weinstein applies \cite{weinstein,gotay82}; see also \cite{ht}, Chapter~1.
+\end{proof}
+
+The chart separates three kinds of canonical pair:
+\begin{enumerate}
+\item[(a)] \emph{gauge pairs} $(q^a,p_a)$: the momentum is constrained to zero and the coordinate is unconstrained --- it is the parameter along the gauge orbit, and by~\eqref{eq:HT} its velocity $\dot q^a=u^a+\partial H_c/\partial p_a$ contains an arbitrary function $u^a(t)$;
+\item[(b)] \emph{second-class pairs} $(Q^\alpha,P_\alpha)$: \emph{both} members are set to zero, and the pair is invariant under the exchange $(Q,P)\mapsto(P,-Q)$;
+\item[(c)] \emph{physical pairs} $(y^A,\eta_A)$, with $n-k-m$ coordinates and as many momenta.
+\end{enumerate}
+Type~(a) is the integrable system of Section~3 with the frequency left undetermined: the constrained momentum $p_a\weq0$ plays the part of an action with a prescribed value, and its conjugate evolves at an arbitrary rate. Type~(b) is the symmetric case.
+
+\begin{remark}[how absolute is the asymmetry?]
+In purely symplectic terms the exchange $(\tilde q,\tilde p)=(p,-q)$ rewrites $\Sigma$ as $\{\tilde q^a=0\}$, which is again coisotropic. The normal form therefore does \emph{not} by itself distinguish $q$ from $p$. The distinction comes from the polarisation inherited from the Lagrangian: by Proposition~\ref{prop:vertical} the primary constraints are vertical, and the gauge transformations of the Lagrangian fields (shifts of $A_\mu$, reparametrisations of the worldline, \dots) are shifts of coordinates. The asymmetry is a property of the \emph{pair} (symplectic manifold, polarisation), not of the symplectic manifold alone. This is exactly why (F) is true at the level of kinematics and false for the mechanical system.
+\end{remark}
+
+\begin{remark}[a mechanical Gribov argument]
+Suppose that a first-class generator $\phi$ has periodic flow, as for actions. A gauge condition $\chi\weq0$ is admissible if the Faddeev--Popov factor $\PB\chi\phi=\dd\chi/\dd s$ does not vanish where $\chi=0$. Restricted to a closed orbit, $\chi$ is a smooth function on a circle; its transversal zeros come with alternating signs of $\dd\chi/\dd s$ and hence in even number. So any such condition that meets the orbit meets it at least twice, with opposite signs of the Faddeev--Popov factor. This is the same obstruction as in Theorem~\ref{thm:noconj}.
+\end{remark}
+
+\subsection{Examples}
+
+\begin{example}[a rigid link via a Lagrange multiplier]\label{ex:link}
+Let $L=\tfrac12\dot x^2+\tfrac12\dot z^2-y\,(x-z)$. Then $p_x=\dot x$, $p_z=\dot z$, $p_y=0$ and $H_c=\tfrac12p_x^2+\tfrac12p_z^2+y(x-z)$. The algorithm gives the chain
+\begin{align*}
+\phi_1&=p_y\weq0 &&\text{(primary)}\\
+\phi_2&=x-z\weq0 &&\text{from }\dot\phi_1=-(x-z)\\
+\phi_3&=p_x-p_z\weq0 &&\text{from }\dot\phi_2=p_x-p_z\\
+\phi_4&=y\weq0 &&\text{from }\dot\phi_3=-2y ,
+\end{align*}
+and $\dot\phi_4=u$ fixes the multiplier, $u\weq0$. The non-zero brackets are $\PB{\phi_1}{\phi_4}=-1$ and $\PB{\phi_2}{\phi_3}=2$, so all four constraints are second class and the reduced phase space has dimension $6-4=2$: a free particle of mass~2 at the common position. Note the alternation momentum-type, coordinate-type, momentum-type, coordinate-type: \emph{only the primary constraint is forced to be vertical} (Proposition~\ref{prop:vertical}); later constraints may involve coordinates alone. Each second-class pair, $(\phi_1,\phi_4)$ and $(\phi_2,\phi_3)$, contains one member of each type.
+\end{example}
+
+\begin{example}[Maxwell versus Proca]\label{ex:proca}
+Take signature $(-+++)$ and $\mathcal L=-\tfrac14F_{\mu\nu}F^{\mu\nu}-\tfrac12\kappa^2A_\mu A^\mu$. Then $\pi^0=0$ (primary), $\pi^i=\dot A_i-\partial_iA_0$, and up to a divergence
+\[
+\mathcal H_c=\tfrac12\pi^i\pi^i+\tfrac14F_{ij}F_{ij}+\tfrac12\kappa^2A_iA_i-A_0\,\partial_i\pi^i-\tfrac12\kappa^2A_0^2 .
+\]
+Consistency of $\pi^0\weq0$ gives $\dot\pi^0=\partial_i\pi^i+\kappa^2A_0$, i.e.\ the secondary constraint
+\[
+\chi=\partial_i\pi^i+\kappa^2A_0\weq0,\qquad \PB{\pi^0(\mathbf x)}{\chi(\mathbf y)}=-\kappa^2\,\delta^3(\mathbf x-\mathbf y).
+\]
+\emph{Maxwell} ($\kappa=0$): $\pi^0$ and $\partial_i\pi^i$ are both functions of momenta only and commute, so they are first class; $G[\epsilon]=\int\!\dd^3x\,(\dot\epsilon\,\pi^0-\epsilon\,\partial_i\pi^i)$ generates $\delta A_\mu=\partial_\mu\epsilon$, a pure shift of coordinates at fixed momenta. Gauge conditions ($A_0=0$, $\partial_iA_i=0$) are functions of coordinates. The count per point is $8-2\cdot2=4$, two polarisations.
+\emph{Proca} ($\kappa\neq0$): the secondary constraint contains the \emph{coordinate} $A_0$ and pairs with $\pi^0$ into a second-class pair, a $(q,p)$ pair of type~(b). The count is $8-2=6$, three polarisations.
+The mass term converts a gauge pair (asymmetric) into a second-class pair (symmetric).
+\end{example}
+
+\begin{example}[the relativistic particle and the Stueckelberg form]\label{ex:rel}
+With signature $(-+++)$ and $c=1$ let $L=-m\sqrt{-\dot x^\mu\dot x_\mu}$, where the dot is the derivative with respect to an arbitrary parameter $\tau$. The Hessian has the null vector $\dot x^\nu$ (as it must for a Lagrangian that is homogeneous of degree one in the velocities), so $\rank W=3$ and there is one primary constraint, the mass shell
+\[
+\phi=p^\mu p_\mu+m^2\weq0,\qquad H_c=0,\qquad H_T=\tfrac12u\,\phi,\quad \dot x^\mu=u\,p^\mu,\ \dot p_\mu=0 .
+\]
+It is first class and a function of momenta only, as Proposition~\ref{prop:vertical} requires; it generates $x^\mu\mapsto x^\mu+\epsilon\,p^\mu$ at fixed $p$, i.e.\ reparametrisations of the worldline. A gauge condition such as $\chi=x^0-\tau$ is a function of coordinates, with Faddeev--Popov factor $\PB\chi\phi=p^0\neq0$ on the mass shell.
+Compare the Stueckelberg form with an evolution parameter, $L_S=\tfrac12M\dot x^\mu\dot x_\mu$ \cite{stueck,hp73}. Now $W=M\eta_{\mu\nu}$ is non-degenerate, there are no constraints, $H=p^2/2M$, and $p^2$ is conserved without being fixed. The same worldlines are described, but in the singular formulation the mass is a \emph{constrained} value of a momentum, and in the regular formulation it is a \emph{conserved} one --- the two faces of the generator-versus-parameter asymmetry.
+\end{example}
+
+%=====================================================================
+\section{The first-order action: where the equality is exact}\label{sec:first-order}
+%=====================================================================
+
+It would be wrong to conclude that (F) has no content. Consider the phase-space action
+\begin{equation}\label{eq:first-order}
+S[q,p]=\int\bigl(p\,\dot q-H(q,p)\bigr)\,\dd t,\qquad
+S'[q,p]=-\int\bigl(q\,\dot p+H(q,p)\bigr)\,\dd t .
+\end{equation}
+Their difference is the boundary term $S-S'=[pq]$; both give Hamilton's equations, with
+\[
+\delta S=\int\bigl[\delta p\,(\dot q-H_p)-\delta q\,(\dot p+H_q)\bigr]\dd t+[p\,\delta q],\qquad
+\delta S'=\int\bigl[\ \dots\ \bigr]\dd t-[q\,\delta p].
+\]
+Thus, as far as the \emph{equations of motion} are concerned, the choice of which variable multiplies the velocity is a total derivative. It matters only for the boundary conditions: $S$ is stationary when $q$ is fixed at the end points, $S'$ when $p$ is.
+
+Regarded as a Lagrangian on the $2n$-dimensional configuration space $(q,p)$, $S$ is singular, because it is linear in the velocities. With momenta $\pi_q,\pi_p$ the Dirac analysis is immediate: $\phi_1=\pi_q-p\weq0$ and $\phi_2=\pi_p\weq0$, $H_c=H$, and $\PB{\phi_1}{\phi_2}=-1$, so the two constraints are second class and no further ones arise. The Dirac bracket is
+\[
+\PB qp_D=\PB qp-\PB q{\phi_\alpha}(C^{-1})^{\alpha\beta}\PB{\phi_\beta}p=1 ,
+\]
+so the Dirac bracket reproduces the canonical Poisson bracket \cite{fj88}. For $S'$ the constraints are $\pi_p+q\weq0$ and $\pi_q\weq0$: the two roles are swapped. The second-class pair $(\phi_1,\phi_2)$ is of type~(b) of Proposition~\ref{prop:normal}, so (F) is exactly the statement about second-class pairs.
+
+For $(\theta,I)$ the first-order form is $S=\int(I\dot\theta-H(I))\,\dd t$. The action $I$ appears without a velocity and is a Lagrange multiplier enforcing $\dot\theta=\nu(I)$, whose own Euler--Lagrange equation is $\dot I=0$. If $\det H_{II}\neq0$ it can be eliminated and one obtains the second-order Lagrangian $\mathcal L(\dot\theta)$ of Section~\ref{sec:kolmogorov}; if $\det H_{II}=0$ it cannot. This closes the circle between Sections~3 and~4.
+
+%=====================================================================
+\section{Synthesis}
+%=====================================================================
+
+Table~\ref{tab:three} puts the three manifestations side by side. In each column a \emph{momentum-like} object is distinguished; it is conserved, or constrained to a fixed value, and it generates a one-parameter group that shifts a \emph{conjugate coordinate-like} object.
+
+\begin{table}[ht]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{4.1cm}>{\raggedright\arraybackslash}p{4.1cm}@{}}
+\toprule
+ & \textbf{Action--angle} & \textbf{First-class constraint} & \textbf{Singular $L$ (primary)}\\
+\midrule
+Distinguished momentum & action $I_k$ & generator $\phi_a$ & combination $\phi_m(q,p)$ built from momenta\\
+Its value & constant, $\dot I_k=0$ & weakly zero & fixed by $\FL$ on $\Sigma_1$\\
+Conjugate coordinate & angle $\theta_k$ & gauge parameter $q^a$ & $q^m$ along the null directions of $W$\\
+Its evolution & $\dot\theta_k=\nu_k(I)$, fixed by $H$ & $\dot q^a=u^a+\partial_{p_a}H_c$, $u^a$ arbitrary & $\dot q^m$ not determined by $L$ (arbitrary if first class)\\
+Obstruction to exchange & periodic orbit: no global conjugate (Thm.~\ref{thm:noconj}) & compact orbit: no global gauge condition without copies & $\pi(\Sigma_1)=Q$: no constraint on $q$ alone (Prop.~\ref{prop:vertical})\\
+Where symmetry survives & locally (universal cover) & second-class pairs & first-order action\\
+\bottomrule
+\end{tabular}
+\caption{Three manifestations of one asymmetry.}\label{tab:three}
+\end{table}
+
+\paragraph{Corrected statement.}
+The following replaces (F).
+\begin{quote}
+\emph{The symplectic form is symmetric under the exchange of $q$ and $p$, and so are second-class constraint pairs and the first-order action. A mechanical system carries in addition (a) the Legendre fibration $T^*Q\to Q$, with respect to which only $\mathrm{Diff}(Q)\ltimes Z^1(Q)$ is admissible; (b) a Hamiltonian whose invariant tori are compact, so that conserved ``momenta'' (actions) have non-conserved, periodic conjugates; and (c) first-class constraints, which are momentum-type generators whose conjugates are pure gauge. Relative to this structure momenta are generators --- conserved or constrained --- and coordinates are parameters along their orbits.}
+\end{quote}
+The invariant dichotomy is therefore ``generator versus parameter'', which is defined by a group action and not by the symplectic form alone. For a particle on $\R^n$ without constraints, (F) is harmless as a statement about the Poisson algebra and the Fourier duality. Even there, however, the Hamiltonian decides which variables are constants of the motion (Examples~\ref{ex:free} and~\ref{ex:osc}), and whether the exchanged description is still Lagrangian. The cost of using (F) as a general principle is paid whenever the phase space is the cotangent bundle of something other than $\R^n$, whenever the Lagrangian is singular, or whenever one asks which variables are conserved.
+
+%=====================================================================
+\begin{thebibliography}{99}
+\bibitem{arnold} V.\,I.~Arnold, \emph{Mathematical Methods of Classical Mechanics}, 2nd ed., Springer, New York, 1989.
+\bibitem{am} R.~Abraham and J.\,E.~Marsden, \emph{Foundations of Mechanics}, 2nd ed., Benjamin/Cummings, Reading, 1978.
+\bibitem{dirac50} P.\,A.\,M.~Dirac, Generalized Hamiltonian dynamics, \emph{Can.\ J.\ Math.} \textbf{2} (1950) 129--148.
+\bibitem{dirac64} P.\,A.\,M.~Dirac, \emph{Lectures on Quantum Mechanics}, Belfer Graduate School of Science, Yeshiva University, New York, 1964.
+\bibitem{dirac27} P.\,A.\,M.~Dirac, The quantum theory of the emission and absorption of radiation, \emph{Proc.\ R.\ Soc.\ Lond.\ A} \textbf{114} (1927) 243--265.
+\bibitem{sg64} L.~Susskind and J.~Glogower, Quantum mechanical phase and time operator, \emph{Physics} \textbf{1} (1964) 49--61.
+\bibitem{gnh} M.\,J.~Gotay, J.\,M.~Nester and G.~Hinds, Presymplectic manifolds and the Dirac--Bergmann theory of constraints, \emph{J.\ Math.\ Phys.} \textbf{19} (1978) 2388--2399.
+\bibitem{ht} M.~Henneaux and C.~Teitelboim, \emph{Quantization of Gauge Systems}, Princeton University Press, Princeton, 1992.
+\bibitem{weinstein} A.~Weinstein, Symplectic manifolds and their Lagrangian submanifolds, \emph{Adv.\ Math.} \textbf{6} (1971) 329--346.
+\bibitem{gotay82} M.\,J.~Gotay, On coisotropic imbeddings of presymplectic manifolds, \emph{Proc.\ Amer.\ Math.\ Soc.} \textbf{84} (1982) 111--114.
+\bibitem{fj88} L.~Faddeev and R.~Jackiw, Hamiltonian reduction of unconstrained and constrained systems, \emph{Phys.\ Rev.\ Lett.} \textbf{60} (1988) 1692--1694.
+\bibitem{stueck} E.\,C.\,G.~Stueckelberg, \emph{Helv.\ Phys.\ Acta} \textbf{14} (1941) 322, 588.
+\bibitem{hp73} L.\,P.~Horwitz and C.~Piron, Relativistic dynamics, \emph{Helv.\ Phys.\ Acta} \textbf{46} (1973) 316--326.
+\end{thebibliography}
+
+\end{document}
