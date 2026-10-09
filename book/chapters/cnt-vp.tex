@@ -1,4 +1,4 @@
-\chapter{Variational Principles }
+\chapter[Variational Principles]{Variational Principles in Classical Mechanics}
 \label{vp}
 
 \begin{motto} \textbf{Motto.} A variational principle is not a single statement
@@ -20,19 +20,7 @@ time, the logical status of momentum, and the passage to quantum mechanics.
 This chapter lays the principles out side by side, proves the equivalences that
 hold, and is explicit about the ones that do not.
 
-\begin{definition} Let $Q$ be a configuration space and $q:[t_1,t_2]\to Q$ a
-    curve. A \emph{functional} is a map $F$ from curves to $\mathbb{R}$. Given
-    a one-parameter family of curves $q_\varepsilon(t)=q(t)+\varepsilon\,\delta
-    q(t) + O(\varepsilon^2)$ with $\delta q$ vanishing wherever the endpoints
-    are held fixed, the \emph{first variation} is 
-    \[ 
-    \delta F :=\left.\frac{d}{d\varepsilon}\right|_{\varepsilon=0} F[q_\varepsilon].
-    \] 
-    A curve is a \emph{stationary point} (extremal) of $F$ if $\delta F=0$ for
-    every admissible $\delta q$. 
-\end{definition}
-
-For $F[q]=\int_{t_1}^{t_2} L(q,\dot q,t)\,dt$ with fixed endpoints 
+For $S[q]=\int_{t_1}^{t_2} L(q,\dot q,t)\,dt$ with fixed endpoints 
 $\delta q(t_1)=\delta q(t_2)=0$, integration by parts gives
 \[
 \delta S = \int_{t_1}^{t_2}\left(\frac{\partial L}{\partial q^i}-
@@ -48,7 +36,7 @@ separately. Gauss's and Hertz's principles dispense with the interval
 altogether and vary only at a single instant.
 
 \section{Hamilton's principle}
-\label{sec:hamilton}
+\label{vp:hamilton}
 
 \begin{definition}
 \textbf{Hamilton's principle.} Among curves $q:[t_1,t_2]\to Q$ with 
@@ -77,14 +65,205 @@ system (the textbook example is a coin or sphere rolling without slipping). The
 discrepancy is not a paradox to be explained away: it is a sign that Hamilton's
 principle, in its integral, fixed-endpoint form, is simply not the right
 variational statement for a constraint that is imposed at the level of
-velocities rather than configurations. Section~\ref{sec:gauss} shows which
-principle \emph{is} the right one.
+velocities rather than configurations (see Appendix~\ref{ap} for more
+details.
+
+Hamilton's principle is usually presented as a convenient device for
+\emph{deriving} the equations of motion: postulate a Lagrangian, demand
+stationarity of the action, and the Euler--Lagrange equations follow. Taken at
+face value, however, ``$\delta S=0$'' is an honest problem in the calculus of
+variations, and that problem is not automatically well posed. Even in the
+classical, smooth setting it can fail to have a solution, or can have
+infinitely many; enlarging the class of admissible trial paths to genuinely
+nonsmooth objects breaks the classical formulation outright, and its natural
+repair --- replacing a single trajectory by a probability distribution over
+trajectories or over instantaneous velocities --- reproduces, in a precise and
+citable sense, the structure of quantum mechanics \footnote{It will be 
+discussed later in chapters on quantum mechanics.}. 
+
+The modern existence theory replaces the naive hope ``a continuous functional
+on a nice enough class attains its infimum'' with a precise recipe, the
+\emph{direct method}: take a minimizing sequence $q_n$, extract a subsequence
+converging in a suitable weak topology, and use lower semicontinuity of $S$
+along that convergence to conclude that the weak limit is again a minimizer.
+
+\begin{theorem}[Tonelli, informal statement]
+\label{tonelli}
+Let $L(t,q,v)$ be continuous, let $v\mapsto L(t,q,v)$ be convex for each $(t,q)$, and suppose the coercivity bound
+\[
+L(t,q,v) \;\ge\; \alpha\,|v|^p - \beta, \qquad \alpha>0,\ p>1,
+\]
+holds uniformly. Then $S[q]=\int_{t_1}^{t_2}L(t,q,\dot q)\,dt$ attains its infimum over the Sobolev class
+\[
+A_{W^{1,p}} = \bigl\{\, q\in W^{1,p}([t_1,t_2],\R^n) \;:\; q(t_1)=q_1,\ q(t_2)=q_2 \,\bigr\}.
+\]
+\end{theorem}
+
+The mechanism is standard functional analysis: coercivity gives a uniform bound
+on $\|\dot q_n\|_{L^p}$ along a minimizing sequence, hence weak compactness of
+$(q_n)$ in the reflexive space $W^{1,p}$ (Banach--Alaoglu plus
+Rellich--Kondrachov for the uniform convergence of $q_n$ itself); convexity of
+$L$ in $v$ gives weak lower semicontinuity of $S$ (essentially Jensen's
+inequality applied fiberwise); the two combine to show the weak limit $q^\ast$
+satisfies $S[q^\ast]\le \liminf S[q_n] = \inf S$, hence is a minimizer. For
+$L=\tfrac12 m|v|^2 - V(q)$ with $V$ bounded below, all the hypotheses hold with
+$p=2$, which is why classical mechanics ``always'' has a least-action
+trajectory in this sense --- but note carefully \emph{what} has been shown to
+exist: a $W^{1,2}$ (merely absolutely continuous, square-integrable-velocity)
+minimizer, not yet a $C^2$ solution of Newton's equation.
+
+Upgrading the Tonelli minimizer to an actual $C^2$ solution of the pointwise
+Euler--Lagrange ODE is a second, independent theorem (Tonelli regularity /
+Hilbert differentiability), which uses the strict Legendre condition
+$\partial^2 L/\partial v^2 > 0$ together with $L\in C^2$ to show, via a
+bootstrap argument, that any $W^{1,2}$
+minimizer is automatically $C^1$, and then $C^2$. The chain
+is exactly the two nontrivial theorems that classical mechanics tacitly invokes
+every time it treats ``$\delta S=0$'' as synonymous with ``$q$ obeys Newton's
+law.'' Both theorems can, and do, fail once their hypotheses (in particular
+strict convexity/coercivity in $v$, uniform in $q$) are relaxed --- which is
+precisely what happens once nonsmooth or singular Lagrangians, or genuinely
+nonsmooth trial paths, are allowed.
+
+\begin{example}[Conjugate points and geodesic multiplicity]
+Let $L=\tfrac12|\dot q|^2$ be the free-particle (geodesic) Lagrangian on the
+    round sphere $S^2$, and take $q(0)=N$ (north pole), $q(T)=S$ (south pole).
+    Every great semicircle joining $N$ to $S$ is a geodesic, hence a stationary
+    point of the length/energy functional, and (for $T$ equal to the time to
+    traverse a minimizing semicircle) each is a global minimizer. There is a
+    full circle's worth, $S^1$, of distinct global minimizers, parametrized by
+    the choice of meridian. The degeneracy is not a numerical accident; it is
+    forced by the conjugacy of $N$ and $S$ along every geodesic joining them
+    (Jacobi's theory of conjugate points), and it is the finite-dimensional,
+    entirely smooth ancestor of the multiplicity that reappears, with direct
+    physical consequences, in the semiclassical and field-theoretic settings
+    below.
+\end{example}
+\begin{example}[Weierstrass's non-existence example]
+\label{weierstrass}
+Consider
+\[
+J[y] \;=\; \int_{-1}^{1} x^2\, \dot y(x)^2\, dx, \qquad y(-1)=a,\ y(1)=b,\quad a\ne b,
+\]
+over continuous, piecewise-$C^1$ competitors. The family
+    \[y_n(x)=a+(b-a)\dfrac{\arctan(nx)+\arctan n}{2\arctan n}\] 
+    satisfies the
+    boundary conditions and $J[y_n]\to 0$, so $\inf J = 0$. But $J[y]=0$ forces
+    $\dot y=0$ almost everywhere on $(-1,1)\setminus\{0\}$, hence $y$ constant
+    on each side of $0$; continuity together with $a\ne b$ makes this
+    impossible. \emph{No admissible function attains the infimum.} This is
+    Weierstrass's 1870 counterexample to the unexamined form of Dirichlet's
+    principle, and the mechanism --- the coercivity weight $x^2$ degenerates at
+    the interior point $x=0$, so Tonelli's Theorem~\ref{tonelli} simply
+    does not apply there --- is exactly the kind of hypothesis failure that a
+    careless pass from ``postulate $L$'' to ``the extremal exists and is
+    smooth'' can hide.
+\end{example}
+
+\begin{example}[The Lavrentiev gap]
+\label{lavrentiev}
+Lavrentiev observed in 1926 that the infimum of a variational integral can
+    genuinely depend on which admissible class one integrates over, even for
+    perfectly smooth (polynomial) integrands. The cleanest version is Man\`ia's
+    example (1934):
+\[
+I[u] \;=\; \int_0^1 \bigl(u(x)^3-x\bigr)^2\, \dot u(x)^6\, dx, \qquad u(0)=0,\ u(1)=1.
+\]
+The function $u_\ast(x)=x^{1/3}$ lies in $W^{1,1}(0,1)$ and satisfies
+    $I[u_\ast]=0$, so $\inf_{W^{1,1}} I = 0$. Yet one can show there is
+    $\tau>0$ such that $I[u]\ge \tau$ for \emph{every} Lipschitz (equivalently
+    $W^{1,\infty}$, equivalently $C^1$) competitor satisfying the same boundary
+    data:
+\[
+0 \;=\; \inf_{u\in W^{1,1}} I[u] \;<\; \tau \;\le\; \inf_{u \in W^{1,\infty}} I[u].
+\]
+This \emph{Lavrentiev gap} is exactly the phenomenon the informal remark ``if
+    we allow nonsmooth functions as test trajectories we get something
+    different'' is pointing at, made rigorous: relaxing the admissible class
+    from Lipschitz to merely absolutely continuous paths does not just admit
+    new, rougher near-minimizers of the same infimum --- it can strictly lower
+    the infimum itself, so that no sequence of smooth trial paths can even
+    approximate the true minimum in value. Numerical and perturbative schemes
+    built on smooth trial functions are, for such functionals, provably blind
+    to the true minimizer.
+\end{example}
+
+Examples~\ref{weierstrass} and \ref{lavrentiev} both involve a Lagrangian
+that is degenerate (fails strict, uniform convexity/coercivity) somewhere in
+the domain; this is not a coincidence but essentially forced, since Tonelli's
+theorem \emph{rules out} both phenomena whenever its hypotheses hold uniformly.
+The moral is: to see genuinely new phenomena from
+admitting nonsmooth trial paths, one either needs a degenerate/non-convex
+Lagrangian, or one needs to change the notion of ``derivative'' altogether,
+which is the route taken by stochastic mechanics.
+
+If $q$ is merely continuous, or H\"older-$\alpha$ with $\alpha<1$, or a typical
+sample path of Brownian motion (a.s. nowhere differentiable, of unbounded
+variation on every subinterval), then $\dot q(t)$ does not exist as a function,
+and $S[q]=\int L(t,q,\dot q)\,dt$ is simply not defined by the classical
+formula. There are two structurally different ways to make sense of ``the
+variational problem over nonsmooth paths,'' and it is worth being explicit that
+they answer different questions.
+
+The first route stays within ordinary (non-stochastic) analysis but changes
+what counts as a ``solution.'' When $v\mapsto L(t,q,v)$ fails to be convex, a
+minimizing sequence $q_n$ of a variational problem can develop finer and finer
+oscillations in $\dot q_n$ without $S[q_n]$ converging to the value $S$ would
+take at any single limiting function; the correct limiting object is not a
+function but a \emph{Young measure} $\nu=(\nu_t)_{t}$, a family of probability
+measures on the velocity space $\R^n$ recording the limiting statistical
+distribution of the oscillating derivatives, with $\int v\,d\nu_t(v)=\dot q(t)$
+for the weak limit $q$ of $q_n$. The relaxed functional
+\[
+\bar S[q,\nu] \;=\; \int_{t_1}^{t_2}\!\! \int_{\R^n} L(t,q(t),v)\, d\nu_t(v)\, dt
+\]
+is minimized by $(q,\nu)$ where $\nu_t$ is concentrated on the set where the
+convex envelope $L^{\ast\ast}(t,q(t),\cdot)$ agrees with $L$, and $\bar S$'s
+infimum equals $\int L^{\ast\ast}(t,q,\dot q)\,dt$. The point to keep is
+structural: refusing to assume enough convexity/smoothness for a
+pointwise-defined minimizing velocity to exist forces the natural solution
+object to become a \emph{probability distribution over the instantaneous
+velocity at each time}, rather than a single value. This is not yet quantum
+mechanics --- the randomness here is a bookkeeping device for spatial
+oscillation in a deterministic optimization problem, not an actual stochastic
+process.
+
+Nelson's stochastic mechanics \footnote{See chapters on quantum mechanics.}
+takes the nonsmooth extension
+literally and dynamically: it posits that the trajectory of a quantum particle
+is an honest stochastic process $q(t)$, a.s.\ continuous but nowhere
+differentiable, satisfying an It\^o stochastic differential equation.
+Guerra and Morato showed that the least-action idea can
+be run, essentially unchanged in spirit, over this class of rough trial paths:
+extremize the \emph{expected} classical action
+\[
+\bar S[q(\cdot)]=\mathbb{E}\left[\int_{t_1}^{t_2} \Bigl(\tfrac12 m\, v(q(t),t)^2 
+- V(q(t))\Bigr)\,dt\right]
+\]
+over the class of finite-energy diffusions with the fixed, $\hbar$-determined
+roughness above, subject to the constraint that $q(\cdot)$ actually be such a
+diffusion (equivalently, subject to a stochastic form of Newton's second law.
+ The Euler--Lagrange equations of this stochastic
+variational problem are exactly the Madelung equations for $\rho$ and the phase
+$S$ of $\psi=\sqrt\rho\,e^{iS/\hbar}$, which recombine into the linear
+Schr\"odinger equation.
+
+This is the precise sense in which ``allowing nonsmooth test trajectories gives
+something like quantum mechanics'' can be made into a theorem rather than an
+analogy: replacing the admissible class $A_{C^1}$ (or $A_{W^{1,2}}$) 
+ by the class of diffusions with diffusion
+coefficient fixed at $\hbar/m$ --- i.e., by paths whose local roughness is
+dictated by Planck's constant --- turns Hamilton's principle into a variational
+\emph{derivation} of the Schr\"odinger equation instead of Newton's equation.
+The classical limit $\hbar\to 0$ shrinks the diffusion coefficient to zero, the
+sample paths become smooth again, and $Dq=D_\ast q=\dot q$ recovers the
+ordinary Euler--Lagrange equations.
 
 \section{Maupertuis' principle}
-\label{sec:maupertuis}
+\label{vp:maupertuis}
 
 \begin{definition}
-\label{def:maupertuis-old}
+\label{maupertuis-old}
 \textbf{Maupertuis' principle (principle of least action, abbreviated form).}
     Suppose $H$ has no explicit time dependence, so $E=H$ is conserved. Among
     curves in configuration space joining $q_1$ to $q_2$ that are compatible
@@ -98,8 +277,8 @@ stationary, where along each trial curve $p_i$ is fixed pointwise by the energy
 \end{definition}
 
 \begin{remark}[Jacobi's complaint]
-\label{rem:jacobi-complaint}
-Definition~\ref{def:maupertuis-old} constrains the energy \emph{pointwise} on every trial curve, $H(q,p)=E$, not merely on the true trajectory. Jacobi  objected, that the principle is presented in essentially every textbook so as to be nearly unintelligible, and the pointwise constraint is the reason why: it presupposes on trial curves the very energy conservation that Hamilton's principle only \emph{derives} for the true one, and in low dimension it leaves almost nothing left to vary (fixing $E=v^2/2$ for a free particle on a line, for instance, fixes the speed outright). 
+\label{jacobi-complaint}
+Definition~\ref{maupertuis-old} constrains the energy \emph{pointwise} on every trial curve, $H(q,p)=E$, not merely on the true trajectory. Jacobi  objected, that the principle is presented in essentially every textbook so as to be nearly unintelligible, and the pointwise constraint is the reason why: it presupposes on trial curves the very energy conservation that Hamilton's principle only \emph{derives} for the true one, and in low dimension it leaves almost nothing left to vary (fixing $E=v^2/2$ for a free particle on a line, for instance, fixes the speed outright). 
 \end{remark}
 
 \begin{theorem}[equivalence, isoenergetic case]
@@ -119,10 +298,10 @@ Maupertuis' principle is the natural one for questions about orbit \emph{shape}
 natural one for questions about time evolution.
 
 \section{Reciprocal principles and the generalized Maupertuis principle}
-\label{sec:reciprocal}
+\label{vp:reciprocal}
 
 Gray, Karl and Novikov repaired Maupertuis' principle by weakening the
-pointwise energy constraint of Definition~\ref{def:maupertuis-old} to a
+pointwise energy constraint of Definition~\ref{maupertuis-old} to a
 constraint on the trial curve's \emph{time-averaged} energy alone --- a
 constraint every trial curve can satisfy, and one that no longer presupposes
 what Hamilton's principle is supposed to derive.
@@ -151,7 +330,7 @@ duration $T$ free, splits into two independent statements: fixing $T$ recovers
 Hamilton's principle $(\delta S)_T=0$; fixing $\bar E$ instead gives the GMP
 $(\delta W)_{\bar E}=0$. The two are therefore equivalent to each other, and
 --- unlike the textbook Maupertuis principle of
-Definition~\ref{def:maupertuis-old} --- the GMP derives energy conservation for
+Definition~\ref{maupertuis-old} --- the GMP derives energy conservation for
 the true trajectory rather than assuming it, resolving Jacobi's complaint.
 
 \begin{definition}
@@ -173,7 +352,7 @@ The RMP is a principle of \emph{least (stationary) mean energy} at fixed action
 The four statements $(\delta \bar E)_W=0$, $(\delta W)_{\bar E}=0$, $(\delta
     S)_T=0$, and $(\delta T)_S=0$ are pairwise equivalent (each characterizes
     the same true trajectories): horizontal neighbors in
-    Figure~\ref{fig:square} are related by \emph{reciprocity} (swapping which
+    Figure~\ref{square} are related by \emph{reciprocity} (swapping which
     member of a conjugate pair is fixed and which is varied), and vertical
     neighbors by the \emph{Legendre} relation $\bar ET=W-S$.
 \end{theorem}
@@ -195,11 +374,11 @@ The four statements $(\delta \bar E)_W=0$, $(\delta W)_{\bar E}=0$, $(\delta
   \draw[arr] (gmp) -- node[lbl,right]{Legendre} (hp);
 \end{tikzpicture}
 \caption{The reciprocity--Legendre square of Gray, Karl and Novikov. Horizontal arrows swap what is held fixed and what is varied; vertical arrows exchange $(W,\bar E)$ for $(S,T)$ via $\bar ET=W-S$.}
-\label{fig:square}
+\label{square}
 \end{figure}
 
 \section{Jacobi's principle: geometrization}
-\label{sec:jacobi}
+\label{jacobi}
 
 For a natural system, $T=\tfrac12 g_{ij}(q)\dot q^i\dot q^j$ defines a
 Riemannian metric $g_{ij}$ on $Q$ (the mass metric), and $p_i\,dq^i =
@@ -211,7 +390,7 @@ W=\int 2(E-V)\,dt = \int \sqrt{2(E-V)}\;ds .
 \]
 
 \begin{definition}
-\label{def:jacobi-metric}
+\label{jacobi-metric}
 The \emph{Jacobi metric} is the conformal rescaling
 \[
 ds_J^2 := 2\big(E-V(q)\big)\,g_{ij}(q)\,dq^i\,dq^j,
@@ -234,10 +413,10 @@ illustration that ``geometrize first, quantize/perturb second'' is a genuine
 choice of route, not a cosmetic rewriting.
 
 \section{A genuine non-equivalence}
-\label{sec:nonequivalence}
+\label{nonequivalence}
 
 Every equivalence proved so far ---  the isoenergetic theorem, the
-reciprocity--Legendre square of Section~\ref{sec:reciprocal} --- is
+reciprocity--Legendre square of Section~\ref{vp:reciprocal} --- is
 \emph{local}: each relates a single given trajectory to itself, under different
 fixed/free bookkeeping. None of them says that the \emph{set} of trajectories
 obtained by prescribing $T$ in advance (Hamilton) coincides with the set
@@ -249,15 +428,15 @@ Hamilton's principle imposes no restriction on trial curves at all: $q(t)$ may
 pass through any point of $Q$, at any speed, en route from $q_1$ to $q_2$,
 since $L=T(\dot q)-V(q)$ is perfectly well defined however fast or slow a trial
 curve moves at a given $q$. The textbook Maupertuis principle
-(Definition~\ref{def:maupertuis-old}) is different in kind: $p$ along the trial
+(Definition~\ref{maupertuis-old}) is different in kind: $p$ along the trial
 curve is \emph{defined} by $H(q,p)=E$, so $T=E-V(q)$ must be $\ge0$ pointwise
 --- a trial curve can only exist within the classically allowed (Hill's) region
 $Q_E:=\{q\in Q: V(q)\le E\}$, exactly the domain restriction already flagged in
-the Jacobi metric of Definition~\ref{def:jacobi-metric}. If $q_1$ and $q_2$ lie
+the Jacobi metric of Definition~\ref{jacobi-metric}. If $q_1$ and $q_2$ lie
 in different path-components of $Q_E$ --- separated by a barrier taller than
 $E$ --- the textbook Maupertuis competition at that $E$ has no trial curves
 joining them at all, not merely no minimizer. The GMP of
-Section~\ref{sec:reciprocal} repairs this too: since only the \emph{mean}
+Section~\ref{vp:reciprocal} repairs this too: since only the \emph{mean}
 energy is fixed, a GMP trial curve is exactly as free as a Hamilton one,
 dipping in and out of $\{V>E\}$ as it pleases, provided the time-average works
 out to $\bar E$. But this freedom is only in the trial family: the actual
@@ -287,7 +466,7 @@ visible from the Hamilton side by fixing a single $T$ and solving once: each
 brake orbit has its own period, generically different from the others, so a
 fixed-$T$ search catches at most whichever one happens to match.
 
-None of this contradicts Section~\ref{sec:reciprocal}: trajectory by
+None of this contradicts Section~\ref{vp:reciprocal}: trajectory by
 trajectory, Hamilton's and Maupertuis'/GMP's principles remain exactly
 equivalent. What fails is the stronger, unstated assumption that fixing $T$ and
 fixing $E$ pose ``the same problem'' with the same solution count. Once
@@ -302,7 +481,7 @@ individual trajectories, and false, in general, of the two boundary-value
 \emph{problems}.
 
 \section{Gauss's principle of least constraint}
-\label{sec:gauss}
+\label{gauss}
 
 Hamilton's and Maupertuis' principles are \emph{integral} statements: they
 compare an entire trial curve against neighboring curves over a finite stretch
@@ -340,7 +519,7 @@ $\sum_a(m_a\ddot{\vec r}_a-\vec F_a)\cdot\delta\vec r_a=0$.
 Because Gauss's principle is imposed directly on the constraint manifold at the
 acceleration level, it reproduces the Lagrange--d'Alembert equations for a
 nonholonomic system \emph{by construction}, with no vakonomic detour. The
-mismatch flagged in Section~\ref{sec:hamilton} is therefore not a defect in
+mismatch flagged in Section~\ref{vp:hamilton} is therefore not a defect in
 mechanics but a mismatch of variational \emph{principles} to the constraint
 type: integral, fixed-endpoint principles (Hamilton, Maupertuis) are suited to
 holonomic constraints; the differential, instantaneous principle (Gauss)
@@ -357,12 +536,10 @@ r}_a|^2$ --- the same quantity Gauss minimizes, re-expressed --- is the
 \emph{Gibbs function} and $Q_r$ are the generalized forces conjugate to the
 quasi-velocities. Gibbs (1879) and, independently, Appell (1900) introduced
 this form because it handles constraints of arbitrarily general type, even
-nonlinear in the velocities, without ever introducing a Lagrange multiplier ---
-a second, independent route to the resolution Remark~\ref{rem:fragility}
-promised.
+nonlinear in the velocities, without ever introducing a Lagrange multiplier.
 
 \section{Hertz's principle of least curvature}
-\label{sec:hertz}
+\label{hertz}
 
 \begin{definition}
 \textbf{Hertz's principle} A system subject only to holonomic (``rigid'')
@@ -391,7 +568,7 @@ eventually explained away via hidden constrained (``cyclic'') degrees of
 freedom.
 
 \section{Herglotz's principle: a genuine variational principle for dissipation}
-\label{sec:herglotz}
+\label{herglotz}
 
 Every principle so far --- Hamilton's, Maupertuis'/GMP's, Jacobi's, Gauss's,
 Hertz's --- governs conservative, or at worst constrained-but-reversible,
@@ -467,14 +644,14 @@ and a decade later Bravetti, Cruz and Tapias recognized it as the variational
 principle native to \emph{contact}, rather than symplectic, geometry --- the
 natural geometric home for dissipative mechanics, exactly as symplectic
 geometry is the natural home for the conservative principles of
-Sections~\ref{sec:hamilton}--\ref{sec:hertz}. This is a second illustration of
-Section~\ref{sec:primacy}'s thesis, running in the opposite direction:
+Sections~\ref{vp:hamilton}--\ref{hertz}. This is a second illustration of
+Section~\ref{primacy}'s thesis, running in the opposite direction:
 friction was never in doubt as physics, and it took
 decades to notice that a single genuine variational principle --- not a
 patched-on dissipation function --- could be engineered to produce it.
 
 \section{Schwinger's action principles}
-\label{sec:schwinger}
+\label{schwinger}
 
 Every principle so far, once phase space is introduced, treats $p_i$ as
 \emph{derived}: $p_i:=\partial L/\partial\dot q^i$, fixed in terms of $q,\dot
@@ -516,7 +693,7 @@ two bracketed coefficients must vanish separately, and $\delta q^i(t_1)=\delta
 q^i(t_2)=0$ kills the boundary term.
 
 This is a different logical achievement from Hamilton's principle of
-Section~\ref{sec:hamilton}. There, only $q$ is varied and $p:=\partial
+Section~\ref{vp:hamilton}. There, only $q$ is varied and $p:=\partial
 L/\partial\dot q$ is a definition, so only the second Hamilton equation is
 derived --- the first is built into the definition of $p$ before variation ever
 starts. Here neither equation is assumed: treating $q$ and $p$ as coordinates
@@ -527,7 +704,7 @@ q^i$, free of any assumed relation between the two --- that Schwinger promotes
 to an operator statement next.
 
 \section{Marinov's phase action}
-\label{sec:marinov-phase-action}
+\label{marinov-phase-action}
 
 Hamilton--Jacobi theory demands more than solving a partial differential
 equation: constructing Hamilton's principal function $\mathcal A(Q,q_0;t)$ from
@@ -537,7 +714,7 @@ equation: constructing Hamilton's principal function $\mathcal A(Q,q_0;t)$ from
 requires a \emph{complete integral} --- an $f$-parameter family of solutions
 --- not merely an initial-value problem. And because the two-point
 boundary-value problem $q(0)=q_0$, $q(t)=Q$ generically has several solutions
-(Section~\ref{sec:nonequivalence}), $\mathcal A$ is generically
+(Section~\ref{nonequivalence}), $\mathcal A$ is generically
 \emph{multivalued}. Marinov (1979) replaced $\mathcal A$ with a genuinely
 different object, defined on phase space rather than on pairs of
 configurations, for which neither defect occurs.
@@ -569,7 +746,7 @@ Writing $z=(r,k)$ for the configuration and momentum parts of the midpoint,
 \]
 
 This identifies exactly where the multiplicity of
-Section~\ref{sec:nonequivalence} comes from: a Legendre transform of a
+Section~\ref{nonequivalence} comes from: a Legendre transform of a
 perfectly well-behaved, single-valued function can be, and generically is,
 multivalued --- the same mechanism that turns one thermodynamic potential into
 several branches of another. The bifurcations in $\mathcal A$ are an artifact
@@ -579,7 +756,8 @@ without ambiguity.
 
 On the true trajectory,
 \[
-\Phi(z;t) = \int_0^t\Big[H(X) - \tfrac12(X\circ\dot X)\Big]\,d\tau + (\xi\circ z), \qquad \xi\circ z:=\tilde\omega^{kl}\xi_kz_l,
+\Phi(z;t) = \int_0^t\Big[H(X) - \tfrac12(X\circ\dot X)\Big]\,d\tau + (\xi\circ z), 
+\qquad \xi\circ z:=\tilde\omega^{kl}\xi_kz_l,
 \]
 where $X(\tau)$ ranges over trajectories subject only to the \emph{midpoint}
 boundary condition $X(0)+X(t)=2z$ --- fixing not either endpoint individually,
@@ -594,74 +772,15 @@ minimum or maximum, among curves sharing its midpoint.
 
 The isotropic oscillator's phase action blows up at $\kappa t=\pi$ and every
 subsequent half-period, marking a genuinely new kind of singularity, distinct
-from the conjugate points of Section~\ref{sec:jacobi}: at $\kappa t=\pi$ the
+from the conjugate points of Section~\ref{jacobi}: at $\kappa t=\pi$ the
 oscillator sends every $\xi$ to $-\xi$, so the midpoint
 $z=\tfrac12(x(t)+\xi)=0$ regardless of $\xi$ --- every trajectory shares the
 same midpoint, the map trajectory$\mapsto z$ stops being invertible, and $\Phi$
 cannot remain a well-defined function of $z$ alone.
 
-\section{Summary and classification}
-\label{sec:summary}
-
-Table~\ref{tab:summary} cross-classifies every principle of this chapter along
-the same three axes used throughout: what is varied, what is held fixed versus
-left free, and whether the comparison is a differential (single-instant or
-single-operator) or an integral (whole-history) one.
-
-\begin{table}[ht]
-\centering
-\footnotesize
-\renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\textwidth}{@{}lXXXl@{}}
-\toprule
-Principle & Object varied & Held fixed & Free & Cl./qu. \\
-\midrule
-Fermat & $\int n\,ds$ & endpoints & path shape & optics \\
-Hamilton (HP) & $S=\int L\,dt$ & $q_1,q_2,t_1,t_2$ & --- & classical \\
-Hamilton, reciprocal (RHP) & $T$ & $q_1,q_2,S$ & $t_1,t_2$ & classical \\
-Maupertuis, textbook (MP) & $W=\int p\,dq$ & $q_1,q_2,E$ pointwise & transit time & classical \\
-Maupertuis, generalized (GMP) & $W=\int p\,dq$ & $q_1,q_2,\bar E$ & transit time & classical \\
-Maupertuis, reciprocal (RMP) & $\bar E$ & $q_1,q_2,W$ & transit time & classical \\
-Jacobi & $\int ds_J$ & $q_1,q_2,E$ & transit time & geometrized \\
-Gauss & $Z(\ddot q)$ & $q,\dot q$, instant & accelerations & differential \\
-Hertz & curvature & $q,\dot q$, instant, $V\!\equiv\!0$ & accelerations & differential \\
-Herglotz & $z(t_2)$ & $q_1,q_2,z(t_1)$ & --- & classical, dissipative \\
-Schwinger, classical & $\tilde S[q,p]$ & $q_1,q_2$ & all of $p(t)$ & phase-space \\
-Marinov, phase action & $\int[H-\tfrac12(X\circ\dot X)]d\tau$ & midpoint $z=\tfrac12(X(0){+}X(t))$, $t$ & --- & classical \\
-\bottomrule
-\end{tabularx}
-\caption{A cross-classification. ``Differential'' means the principle compares
-    alternatives at a single instant or as a single operator relation;
-    ``integral'' (the rest) means it compares whole trial histories over a
-    finite stretch.}
-\label{tab:summary}
-\end{table}
-
-
-\section{Extension to fields}
-
-Everything above generalizes, with $q^i(t)$ replaced by a field $\varphi^a(x)$
-on spacetime, by promoting Hamilton's principle to
-\[
-\delta\!\int L(\varphi,\partial_\mu\varphi)\,d^4x=0,
-\]
-giving the field Euler--Lagrange equations
-\[
-\partial_\mu\!\left(\frac{\partial L}{\partial(\partial_\mu\varphi^a)}\right)
-= \frac{\partial L}{\partial\varphi^a}.
-\]
-The Hamilton/Maupertuis distinction --- which coordinate plays the role of
-``time'' to be fixed versus freed --- becomes, in field theory, the question of
-treating one spacetime direction asymmetrically (ordinary Hamiltonian field
-theory) versus all of them symmetrically (the De Donder--Weyl covariant
-Hamiltonian formalism and multiple-integral calculus of variations, treated as
-their own chapter of this book). Gauss's and Hertz's differential principles do
-not obviously survive the passage to fields in a useful form, which is itself
-worth noting: instantaneous, finite-dimensional least-constraint reasoning does
-not have an established infinite-dimensional counterpart of comparable power.
 
 \section{Equations of motion are primary}
-\label{sec:primacy}
+\label{primacy}
 
 None of the principles in this chapter is more ``true'' than the others in the
 sense of better describing the real-world trajectory: for a holonomic,
@@ -673,7 +792,7 @@ the system in at time $t$?'' is answered most directly by Hamilton's principle.
 traversed?'' is answered most directly by Maupertuis' and Jacobi's. ``What
 happens to constraint forces at this instant?'' is Gauss's question. ``What are
 the possible outcomes of a measurement, and with what amplitude?'' is
-Schwinger's and Feynman's. Section~\ref{sec:nonequivalence} was the cautionary
+Schwinger's and Feynman's. Section~\ref{nonequivalence} was the cautionary
 half of that remark: the compatibility just described holds trajectory by
 trajectory, not problem by problem.
 
@@ -691,20 +810,6 @@ is the argument for it.
     content should be read into the word ``least.''
 \end{motto}
 
-\begin{remark}[underdetermination]
-Table~\ref{tab:summary} lists objects varied of genuinely different
-    mathematical kinds --- a time integral ($S$), a curve integral ($W$), a
-    pointwise quadratic form ($Z(\ddot q)$), an operator matrix element --- all
-    of which are stationary exactly on the solutions of the same equations of
-    motion. If any one of these were the law nature ``obeys,'' the others would
-    need explaining away; there is no principled way to prefer $\int L\,dt$
-    over $Z(\ddot q)$ as the fundamental fact and demote the other to derived
-    curiosity. What is invariant across all of them, and hence what deserves to
-    be called primary, is the one thing they all agree on: the equations of
-    motion themselves.
-\end{remark}
-
-\begin{remark}[Gauss and Hertz remove the teleology]
 A global, fixed-endpoint statement like Hamilton's principle can sound as
     though the system ``surveys'' every possible history between two moments
     before choosing the actual one --- historically the most seductive (and
@@ -716,29 +821,13 @@ A global, fixed-endpoint statement like Hamilton's principle can sound as
     comparison of histories. The same content that Hamilton's principle
     packages as ``compare the whole path'' is available, undiminished, as a
     purely local, instant-by-instant fact. Hertz's principle
-    (Section~\ref{sec:hertz}) is the same point in geometric dress: force-free
+    (Section~\ref{hertz}) is the same point in geometric dress: force-free
     motion is just the straightest available path, an entirely local notion of
     curvature. Nothing about the physics requires the global packaging; the
     global packaging is a choice of heuristic, not a discovery about how nature
     decides.
-\end{remark}
 
-\begin{remark}[fragility shows the direction of justification]
-Naively extremizing $\int L\,dt$ under a nonholonomic
-    constraint gives the \emph{wrong} equations of motion (the vakonomic ones);
-    the \emph{right} equations (Lagrange--d'Alembert) are fixed independently,
-    by direct mechanical reasoning about constraint forces and virtual work,
-    and it is against that independently-known target that the naive
-    variational guess is judged and rejected. Section~\ref{sec:gauss} was
-    accepted as ``the right principle'' \emph{because} it reproduces the
-    equations of motion known to be correct on other grounds --- not the other
-    way around. If a variational principle were itself the primary law, it
-    would never need to be repaired against a differential equation assumed to
-    be more trustworthy than it is.
-\end{remark}
-
-\begin{remark}[the equations of motion are the robust object]
-Section~\ref{sec:nonequivalence} showed that once a potential has several
+Section~\ref{nonequivalence} showed that once a potential has several
     minima, the variational \emph{problem} can fragment: the textbook
     Maupertuis competition can have an empty domain, the Generalized Maupertuis
     Principle's competition can fail to contain an extremal, and brake-orbit
@@ -748,10 +837,8 @@ Section~\ref{sec:nonequivalence} showed that once a potential has several
     solution, and never multiplies one; it is exactly as well behaved for ten
     wells as for one. The variational reformulation is the fragile,
     construction-dependent object; the differential law is the robust one.
-\end{remark}
 
-\begin{remark}[even ``derived versus assumed'' is bookkeeping]
-Section~\ref{sec:schwinger} made a further, sharper version of the
+Section~\ref{schwinger} made a further, sharper version of the
     same point at the classical level: whether $\dot q^i=\partial H/\partial
     p_i$ counts as a consequence of a variational principle or as a definition
     adopted before any variation is taken depends entirely on whether one
@@ -760,41 +847,12 @@ Section~\ref{sec:schwinger} made a further, sharper version of the
     themselves do not change; only the bookkeeping of which one gets called
     ``derived'' does. A fact about nature should not depend on which
     variational scaffold was used to reach it.
-\end{remark}
 
-\begin{remark}[the name itself overclaims]
 Even calling these ``least'' action is often simply false. Once a trajectory
     passes a conjugate point --- exactly where the curvature of the Jacobi
-    metric of Section~\ref{sec:jacobi} turns the second variation indefinite
+    metric of Section~\ref{jacobi} turns the second variation indefinite
     --- the stationary trajectory is a \emph{saddle} of $S$, not a minimum.
     Hamilton himself never claimed a minimum principle, only a stationary one;
     ``least action'' is a historical label surviving from a reading the
     mathematics does not support in general.
-\end{remark}
-
-The historical record backs this reading of the founders' own intentions, not
-merely a modern gloss on them. Maupertuis' 1746 memoir was titled, without
-irony, ``the laws of motion and of rest deduced from a metaphysical principle''
---- he offered least action as evidence of a providential economy in nature,
-not as a mathematical convenience. But d'Alembert, Lagrange, Hertz and Jacobi
---- three of whom are principal subjects of this very chapter --- explicitly
-rejected any ontological economy-of-nature behind their own principles,
-treating least action as what Panza and Goldstine call a figurative scientific
-model rather than a metaphysical discovery. Mach's \emph{Science of Mechanics}
-(1883) makes the case most sharply, in a chapter pointedly titled
-\emph{Theological, Animistic, and Mystical Points of View in Mechanics},
-followed immediately by one titled \emph{The Economy of Science}: for Mach,
-least-action-type statements are \emph{theorems} --- consequences, economically
-redescribing what is already contained in Newton's laws --- not
-\emph{principles} in the sense of directly-intuited primitive facts (his
-examples of genuine principles are the lever and virtual displacements). Their
-teleological gloss, Mach argued, was a product of a theologically-tempered era,
-not a discovery about how nature operates. Helmholtz, writing in the same
-period, offered the more constructive half of the same demotion: whatever their
-metaphysical status, least-action-type statements had proved, again and again,
-a powerful heuristic and leitmotif for finding the governing equations of new
-domains of physics before those equations were otherwise known --- exactly the
-role this book assigns them, and exactly why this chapter surveys so many of
-them side by side rather than picking one as ``the'' principle.
-
 

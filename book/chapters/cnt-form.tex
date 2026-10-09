@@ -1,290 +1,15 @@
-\chapter{Conservative Holonomic Systems}
-\label{chs}
+\chapter{Formulations of Classical Mechanics}
+\label{fm}
 
-
-\subsection{From Newton to the action}
-\label{newton-to-action}
-
-\paragraph{d'Alembert's principle: the bridge}
-
-Consider $N$ particles with positions $\mathbf r_a$, masses $m_a$, subject to
-applied forces $\mathbf F_a$ and constraint reactions $\mathbf R_a$:
-\begin{equation}
-  m_a\ddot{\mathbf r}_a=\mathbf F_a+\mathbf R_a .
-  \label{newton}
-\end{equation}
-The reactions $\mathbf R_a$ are unknown. Newtonian mechanics closes the system
-only by supplementing~\eqref{newton} with a statement about the
-\emph{nature} of constraint forces. The statement that makes the passage to
-Lagrangian mechanics possible is the following.
-
-\begin{quote}
-\textbf{Ideal constraints.} The reactions do no work on any \emph{virtual
-displacement}, that is, on any displacement $\delta\mathbf r_a$ compatible with
-the constraints at a frozen instant of time:
-\begin{equation}
-  \sum_a \mathbf R_a\cdot\delta\mathbf r_a = 0 .
-  \label{ideal}
-\end{equation}
-\end{quote}
-
-Substituting~\eqref{ideal} into~\eqref{newton} eliminates the unknown
-reactions and gives d'Alembert's principle:
-\begin{equation}
-  \sum_a\bigl(m_a\ddot{\mathbf r}_a-\mathbf F_a\bigr)\cdot\delta\mathbf r_a=0
-  \qquad\text{for all virtual displacements.}
-  \label{dalembert}
-\end{equation}
-It is worth stressing that~\eqref{ideal} is \emph{not} a theorem of
-Newtonian mechanics. It is a constitutive assumption about hinges, smooth
-surfaces and rolling without slipping. For a frictionless rail it is true by
-the definition of ``frictionless''; for rolling contact it is an empirical
-statement about the contact force doing no work at the instantaneous point of
-contact; for a rough surface it is false.
-
-\paragraph{Generalized coordinates and Lagrange's equations}
-
-If the constraints are \emph{holonomic}, $f_k(\mathbf r_1,\dots,\mathbf r_N,t)=0$,
-we may choose independent generalized coordinates $q^1,\dots,q^n$ with
-$\mathbf r_a=\mathbf r_a(q,t)$. Virtual displacements are then arbitrary
-$\delta q^i$, and~\eqref{dalembert} becomes
-\begin{equation}
-  \sum_i\Bigl[\frac{d}{dt}\frac{\partial T}{\partial\dot q^i}
-  -\frac{\partial T}{\partial q^i}-Q_i\Bigr]\delta q^i=0,
-  \qquad Q_i=\sum_a\mathbf F_a\cdot\frac{\partial\mathbf r_a}{\partial q^i},
-  \label{lagrange-T}
-\end{equation}
-the key algebraic step being the identity
-$\frac{d}{dt}\frac{\partial\mathbf r_a}{\partial q^i}
-=\frac{\partial\dot{\mathbf r}_a}{\partial q^i}$. Independence of the
-$\delta q^i$ gives $n$ equations. If moreover $Q_i=-\partial V/\partial q^i$
-(or, more generally, $Q_i=\frac{d}{dt}\frac{\partial U}{\partial\dot q^i}
--\frac{\partial U}{\partial q^i}$ for a generalized potential $U$), then with
-$L=T-V$ we obtain
-\begin{equation}
-  \frac{d}{dt}\frac{\partial L}{\partial\dot q^i}-\frac{\partial L}{\partial q^i}=0 .
-  \label{EL}
-\end{equation}
-
-\paragraph{From Lagrange's equations to an action}
-
-Equation~\eqref{dalembert} is a statement at one instant. To turn it into
-a statement about whole trajectories, integrate over $[t_0,t_1]$ and integrate
-the term $m_a\ddot{\mathbf r}_a\cdot\delta\mathbf r_a$ by parts, using
-$\delta\mathbf r_a(t_0)=\delta\mathbf r_a(t_1)=0$:
-\begin{equation}
-  \int_{t_0}^{t_1}\Bigl(\delta T+\sum_a\mathbf F_a\cdot\delta\mathbf r_a\Bigr)dt=0 .
-  \label{integral-dalembert}
-\end{equation}
-This is the \emph{Lagrange--d'Alembert principle}. It is valid for \emph{any}
-applied forces, including friction and driving. Only when
-$\sum_a\mathbf F_a\cdot\delta\mathbf r_a=-\delta V$ (or $\delta U$ with the
-appropriate velocity-dependent form) does the integrand become an exact
-variation and~\eqref{integral-dalembert} collapse into Hamilton's principle
-\begin{equation}
-  \delta S=0,\qquad S[q]=\int_{t_0}^{t_1}L(q,\dot q,t)\,dt .
-  \label{hamilton}
-\end{equation}
-
-This is the first moral of the Newton-first road. The \emph{variational}
-principle is the special case of a more general \emph{virtual-work}
-principle, valid when the active forces are derivable from a (generalized)
-potential. Dissipative forces fit into~\eqref{integral-dalembert} but not
-into~\eqref{hamilton}; this is why friction is a nuisance for the
-action-first road and a non-event for the Newton-first road.
-
-\paragraph{Constraints on the Newton-first road}
-
-On this road constraints cost nothing conceptually. There are two equivalent
-techniques.
-
-\begin{enumerate}
-  \item \textbf{Elimination.} Solve the constraints, pass to $q^i$,
-  and write~\eqref{EL}. The reactions never appear.
-  \item \textbf{Multipliers.} Keep redundant coordinates $x^\mu$ and impose
-  $f_k(x)=0$. Because virtual displacements satisfy
-  $\partial_\mu f_k\,\delta x^\mu=0$, the vector $\mathbf R$ in~\eqref{ideal}
-  must be a combination of the gradients $\partial_\mu f_k$:
-  \begin{equation}
-    m\ddot x_\mu=F_\mu+\sum_k\lambda_k\,\partial_\mu f_k .
-    \label{multipliers}
-  \end{equation}
-  The multipliers $\lambda_k$ are \emph{the constraint reactions}, with direct
-  physical meaning (tension in a rod, normal force on a surface).
-\end{enumerate}
-
-The multiplier technique has a pedagogical advantage that is usually
-squandered: the multipliers answer questions about the real world
-(will the rope go slack? will the bead leave the surface?) that the reduced
-Lagrangian cannot.
-
-\begin{example}[Plane pendulum]\label{pendulum}
-Take coordinates $(x,y)$ with $y$ upward and the constraint
-$f=x^2+y^2-\ell^2=0$. Equation~\eqref{multipliers} reads
-\[
-  m\ddot x=2\lambda x,\qquad m\ddot y=-mg+2\lambda y .
-\]
-Writing $x=\ell\sin\theta$, $y=-\ell\cos\theta$ and projecting on the radial
-and tangential directions gives
-\[
-  \ell\ddot\theta=-g\sin\theta,\qquad
-  T:=-2\lambda\ell=m\bigl(\ell\dot\theta^{2}+g\cos\theta\bigr).
-\]
-The first is what elimination gives directly. The second is the tension, and
-the criterion $T>0$ tells us when a pendulum on a string (rather than a rod)
-stops behaving like a pendulum.
-\end{example}
-
-\subsection{From the action back to Newton}
-\label{action-to-newton}
-
-Now reverse the order. Postulate~\eqref{hamilton}, with $L=T-V$ and
-Cartesian coordinates for a free particle in a potential.
-
-\paragraph{The derivation, and what it uses}
-
-Let $q(t)\to q(t)+\varepsilon\,\eta(t)$ with $\eta(t_0)=\eta(t_1)=0$. Then
-\[
-  \frac{dS}{d\varepsilon}\Big|_0=\int_{t_0}^{t_1}
-  \Bigl(\frac{\partial L}{\partial q}-\frac{d}{dt}\frac{\partial L}{\partial\dot q}\Bigr)\eta\,dt=0
-  \quad\text{for all }\eta .
-\]
-The \emph{fundamental lemma of the calculus of variations} (the integrand is
-continuous and orthogonal to every test function, so it vanishes) gives the
-Euler--Lagrange equation~\eqref{EL}. For $L=\tfrac12m\dot q^2-V(q)$ this is
-$m\ddot q=-V'(q)$: Newton's second law.
-
-Four assumptions have been used silently.
-\begin{enumerate}
-  \item The functional \emph{has} the form $T-V$. Nothing in the principle
-  says so. Nature (or the teacher) supplies $L$.
-  \item Variations are taken with fixed endpoints in \emph{time and
-  position}. The motion is therefore determined by a boundary-value problem,
-  although Newton's law is an initial-value problem.
-  \item The word ``least'' is not justified. The principle is
-  \emph{stationarity}.
-  \item The variations $\eta$ range over all smooth functions: there are no
-  constraints on the admissible paths. Constraints are discussed in
-  subsection~\ref{constraints-variational}.
-\end{enumerate}
-
-\paragraph{Stationary, not least}
-\label{least}
-
-The traditional name ``principle of least action'' is misleading. For the
-harmonic oscillator $\ddot q=-\omega^2q$ the action of the true trajectory
-between $t_0$ and $t_1$ is a minimum if and only if $t_1-t_0<\pi/\omega$;
-beyond that the second variation acquires a negative direction, and the
-true path is a saddle. In general, a trajectory ceases to be a local minimum
-at the first \emph{conjugate point} (Jacobi). The geometric optics analogue is
-a caustic. On a sphere, the great circle between two points is minimal only
-up to the antipode.
-
-This matters pedagogically. A student told that ``the particle chooses the
-path of least action'' will naturally ask how it \emph{knows} the final point
-in advance. The honest answer is that it does not: the boundary-value
-formulation is an equivalent \emph{global description} of an \emph{initial-value}
-motion, and stationarity is the local property that survives. This is the
-point at which the action-first road most invites teleological language,
-precisely the sort of mixing of real-world causality and ideal-world logic
-that the  chapter \ref{rm} of this book warn against.
-
-\paragraph{The inverse problem and non-uniqueness}
-\label{inverse}
-
-The road from the equations of motion to a Lagrangian is not a function. Three
-observations:
-\begin{itemize}
-  \item $L$ and $L+\frac{d}{dt}F(q,t)$ give identical equations (the action
-  changes by boundary terms only).
-  \item $L$ and $cL$ give identical equations for any constant $c\neq0$.
-  \item Genuinely different Lagrangians can give the same equations. The
-  two-dimensional isotropic oscillator, for example, admits Lagrangians that
-  are not related by a total derivative or a constant factor.
-\end{itemize}
-The existence question (``is a given system of second-order equations
-Euler--Lagrange?'') is answered by the Helmholtz conditions: in particular a
-system $\ddot q^i=f^i(q,\dot q,t)$ with friction linear in the velocity,
-$\ddot q=-\gamma\dot q-\omega^2q$, is Euler--Lagrange only after an explicit
-time-dependent factor $e^{\gamma t/m}$ is introduced (the Caldirola--Kanai
-Lagrangian), and then the canonical momentum no longer equals the mechanical
-momentum. The dissipative world is not forbidden to the action, but it is not
-natural to it.
-
-\subsection{Constraints on the action-first road}
-\label{constraints-variational}
-
-\paragraph{Holonomic constraints: agreement}
-
-Suppose we vary $S$ over paths that satisfy $f_k(x)=0$ at every time.
-Introduce the augmented action
-\begin{equation}
-  \tilde S=\int\bigl[L(x,\dot x)+\lambda_k(t)\,f_k(x)\bigr]dt .
-  \label{aug-holonomic}
-\end{equation}
-Its Euler--Lagrange equations are precisely the multiplier
-equations~\eqref{multipliers}, with $\lambda_k$ as the (time-dependent)
-reaction forces. For holonomic constraints the two roads agree completely, and
-the multipliers play the same physical role.
-
-A conceptual remark: in the action-first road the multipliers are
-\emph{introduced to enforce a restriction on trial paths}. In the Newton-first
-road they are the \emph{forces that actually do the enforcing}. That the two
-coincide is a theorem, not a tautology; it follows from~\eqref{ideal}.
-
-
-
-
-
-
-
-
-\section{Simple Systems}
-\label{chs:ss}
-
-Let us restrict ourselves with Conservative Holonomic Systems or
-more specifically with systems consisting of finite number of
-interacting point particles.
-There is a great number of books on the subject
-(see e.g\cite{Arnold-cm},\cite{Landau-Lifshitz-1},
-\cite{Lanczos},\cite{Goldstein}). 
-
-
-\paragraph{Constraints} 
-
-In addition to Newton's equations the motion of the system may be restricted by
-additional equations or inequalities. Constraints introduce two types of
-difficulties in the solution of mechanical problems. First, the coordinates
-$\bm x_j$ are no longer all independent, since they are connected by the
-equations of constraint; hence the equations of motion  are not all
-independent. Second, the forces of constraint  are not furnished a priori. They
-are among the unknowns of the problem and must be obtained from the solution we
-seek. Indeed, imposing constraints on the system  is simply another method of
-stating that there are forces present in the problem that cannot be specified
-directly but are known rather in terms of their effect on the motion of the
-system. There is no general method of solving (even numerically) these
-problems, they are tackled on case by case basis.
-
-For the moment we should restrict ourselves with so called holonomic
-constraints which have the form:
-\begin{equation}
-        f(\bm x_j,t)=0 \label {hol-const}
-\end{equation}
-
-
-In most of modern books the order is reversed: start from action and derive
-equations  of motion. I believe that least action principle  is nothing but
-(powerful) heuristic. Indeed, to compute action functional we should define
-explicitly {\em all} curves connecting given pair of points. This seems to be
-impossible or at least very difficult problem. Fortunately we do not need it.
-All what we really need is to set configuration space, choose Lagrange function
-\eqref{lagr3} and get equations of motion \eqref{lagr}. It does not matter at
-all if we have minimum, maximum, saddle point or whatever property of some
-functional.
-
+Classical mechanics is usually presented as the most settled part of
+physics: three laws, a variational principle, and a semester of
+worked examples. By the time a student reaches quantum theory or
+general relativity, mechanics has already receded into the
+background as a body of technique rather than a live subject. This
+impression is not wrong, exactly, but it is incomplete. 
 
 \section {(In)equivalence of the Formulations} 
-\label{chs:nf}
+\label{fm:nf}
 
 The Newtonian, Lagrangian, Hamiltonian, and Hamilton--Jacobi formulations of
 classical mechanics are routinely presented as equivalent packagings of a
@@ -826,3 +551,488 @@ directions.
 
 
 
+\section{Hertz's forceless mechanics }
+\label{frm:hertz}
+
+By the 1890s, several physicists --- Kirchhoff and Mach among them
+--- had grown uneasy with the status of \emph{force} as a
+fundamental concept of mechanics. Force is defined operationally
+through $F=ma$, but that same equation is routinely used to
+\emph{introduce} force, which makes the law read uncomfortably like
+a definition dressed up as an empirical statement. In his
+posthumously published \emph{Die Prinzipien der Mechanik in neuem
+Zusammenhange dargestellt} (1894), Heinrich Hertz proposed to remove
+the discomfort by removing force altogether: he set out to build the
+whole of mechanics from just three primitive notions --- space,
+time, and mass --- with no independent concept of force at
+all~\cite{hertz}.
+
+\subsection{The principle of the straightest path}
+
+Consider $N$ mass points with positions $\mathbf x_i\in\mathbb R^3$
+and masses $m_i$, and equip the $3N$-dimensional configuration space
+$Q$ with the natural mass-weighted (kinetic-energy) metric,
+\begin{equation}
+  ds^2 \;=\; \sum_{i=1}^N m_i\, d\mathbf x_i\cdot d\mathbf x_i,
+  \qquad
+  T \;=\; \frac12\left(\frac{ds}{dt}\right)^{\!2}.
+  \label{hertz-metric}
+\end{equation}
+Hertz's masses are never free in the naive sense: they are always
+tied together by \emph{rigid, workless connections} (idealized
+mechanical linkages that transmit force but do no work), which
+restrict the accessible configurations to some submanifold
+$\mathcal C\subset Q$. His fundamental postulate --- the
+\emph{principle of the straightest path}
+--- is then simply:
+
+\begin{quote}
+\emph{A system free of "force" moves along the straightest possible
+path compatible with its constraints, at constant speed.}
+\end{quote}
+
+"Straightest possible" is to be read literally, in the geometric
+sense: the representative point traces a \emph{geodesic} of the
+metric~\eqref{hertz-metric} restricted to $\mathcal C$, i.e.\ a
+curve whose acceleration (in the induced metric) is purely normal to
+$\mathcal C$ and is entirely accounted for by the constraint
+reaction. Formally, if the constraints are written $g_a(\mathbf
+x)=0$, $a=1,\dots,k$, the equations of motion are
+\begin{equation}
+  m_i\,\ddot{\mathbf x}_i \;=\; \sum_a \lambda_a\,
+  \frac{\partial g_a}{\partial \mathbf x_i},
+  \label{hertz-eom}
+\end{equation}
+with the multipliers $\lambda_a$ fixed by demanding $g_a(\mathbf
+x(t))\equiv 0$. There is nothing on the right-hand side of
+\eqref{hertz-eom} except constraint reactions: no applied-force
+term appears anywhere, by construction. Constant speed
+($|ds/dt|=\mathrm{const}$, i.e.\ constant kinetic energy) follows
+automatically, since ideal constraints do no work.
+
+\subsection{Hidden masses, or where "force" goes}
+
+Of course, ordinary bodies \emph{do} appear to exert forces on one
+another --- gravity, contact forces, and so on all look like genuine
+interactions between visible masses that are not rigidly connected
+to anything. Hertz's resolution was to posit \emph{hidden masses}:
+invisible mass points, rigidly linked to the visible ones (and, in
+his more speculative moments, identified with a mechanical
+aether), whose only role is to curve the constraint submanifold
+$\mathcal C$ in just the right way. If the full configuration space
+splits as $Q = Q_{\mathrm{vis}}\times Q_{\mathrm{hid}}$ and the
+\emph{complete} system --- visible plus hidden --- moves along a
+geodesic of $\mathcal C$, then projecting that geodesic motion down
+onto $Q_{\mathrm{vis}}$ alone generically produces a curve that is
+\emph{not} geodesic in the visible sector by itself: extra terms
+appear in its equation of motion that are, from the point of view of
+an observer with access only to $Q_{\mathrm{vis}}$, indistinguishable
+from the effect of an applied force~\cite{hertz}.
+
+This is a genuinely striking claim: on Hertz's account, force is not
+absent from experience, only absent from the fundamental ontology.
+Every observed force law would, in principle, be explained by some
+specific (if permanently unobservable) arrangement of hidden mass
+and rigid linkage. The same basic move --- explain an apparent force
+as the shadow, on a submanifold, of pure geometric (geodesic) motion
+in a larger space --- reappears twice in twentieth-century physics
+in far more successful forms: in Kaluza--Klein theory, where the
+electromagnetic force on a charged particle is recovered as geodesic
+motion in a five-dimensional space, and, far more importantly, in
+general relativity, where gravity itself --- which Newton had to
+treat as a force acting at a distance --- becomes geodesic motion of
+a free particle through curved four-dimensional spacetime, with no
+"force" required at all. Hertz did not anticipate curved spacetime;
+his geometry is Euclidean and the curvature is manufactured entirely
+by hidden extra coordinates. But the structural resemblance to
+Einstein's later, physically successful geometrization of gravity is
+close enough that Hertz's book is still read today chiefly for that
+reason, rather than as a working theory in its own
+right.
+
+\subsection{A second, more conservative geometrization}
+
+It is worth noting that ordinary, force-\emph{having} mechanics can
+also be written as a geodesic principle, without any hidden masses
+at all, via Jacobi's form of the principle of least action. For a
+conservative system with potential $V(\mathbf x)$ and fixed total
+energy $E$, the true trajectories are exactly the geodesics of the
+\emph{Jacobi metric}
+\begin{equation*}
+  ds_J^2 \;=\; 2\bigl(E-V(\mathbf x)\bigr)\, ds^2 ,
+\end{equation*}
+a conformal rescaling of the mass metric~\eqref{hertz-metric} by
+the local kinetic energy. So there are, in the end, two quite
+different ways to eliminate force from the description of a system
+governed by a potential: enlarge the configuration space with hidden
+coordinates and keep the metric flat (Hertz), or keep the visible
+configuration space as it is and let the metric itself become curved
+and energy-dependent (Jacobi). Both reproduce exactly the same
+observable trajectories. Neither is more "true" than the other; they
+are, in Hertz's own vocabulary, different \emph{images} of the same
+phenomena. That a concept as apparently basic as force can be made
+to evaporate --- twice over, in two structurally different ways ---
+without changing a single observable prediction is the real content
+of this section: it shows "force" to be a feature of a chosen
+representation of mechanics, not a fact about the world that every
+correct representation must contain.
+
+Hertz's own programme did not survive contact with its critics.
+Almost every contemporary reviewer, Boltzmann included, objected
+that positing a fresh, permanently unobservable mechanism of hidden
+masses for every distinct force law (gravitation, electromagnetism,
+\ldots) bought elegance at the price of testability, and the
+research programme was essentially abandoned within a generation. It
+survives today less as working physics than as an early, and
+unusually explicit, demonstration that mechanics has more than one
+internally consistent axiomatic foundation --- a lesson later put to
+far more productive use.
+
+\subsection{My Own Story}
+
+In the middle of the eighties I studied a problem of quantization
+\footnote{Later I describe this problem in more details}.
+I have noticed that usual Hamiltonian
+\[\mathcal{H}=\Sigma_1^n \frac{\vec p_j^2}{2 m_j} + U(\vec q_j) \quad j=1..n\]
+is equivalent to the Hamiltonian defined on expanded phase space 
+$(\vec p_j,p_{n+1},\vec q_j,q_{n+1})$:
+\begin{equation}
+   \label {lnf:hext}
+    \mathcal{\tilde H}=\Sigma_1^n \frac{\vec p_j^2}{2 m_j} + U(\vec q_j) \frac{p_{n+1}^2}{2 p_0^2},
+\end{equation}
+where $p_0$ is arbitrary constant of dimensionality of momentum. 
+Indeed, $p_{n+1}$ is integral of motion, fixing its value to be $p_0$ 
+we get $ \mathcal{H}=\mathcal{\tilde H}$.
+
+I knew nothing about Hertz's mechanics and called this 'effective mass 
+mechanics'. Fortunately due to a number of reasons I did not published
+my investigations and so escaped unintentional but clear plagiarism.
+
+
+\section{The Koopman Formulation of Classical Mechanics}
+\label{frm:koop}
+
+\newcommand{\PB}[2]{\{#1,#2\}} 
+\newcommand{\CL}{\widehat{\mathcal{L}}}
+
+Classical mechanics is
+a theory of nonlinear ordinary differential equations: Hamilton's equations
+$\dot q^i = \partial H/\partial p_i$, $\dot p_i = -\partial H/\partial q^i$
+generate, in general, a highly nonlinear flow on phase space. It is therefore a
+standing surprise, still under-advertised in most mechanics courses, that this
+same dynamics admits an exactly equivalent description in which the fundamental
+object evolves \emph{linearly}. This is the content of the Koopman formulation:
+instead of following the trajectory $x(t)=\phi_t(x_0)$ of a single point
+through phase space, one follows the evolution of an entire function $f$ (an
+``observable'') under composition with the flow, $f \mapsto f\circ\phi_t$.
+Composition with a fixed map is a linear operation on the vector space of
+functions, however wild the map $\phi_t$ itself may be. All of the nonlinearity
+of the dynamics is absorbed into the definition of a single linear operator, at
+the price of moving from a finite-dimensional phase space to an
+infinite-dimensional space of functions on it.
+
+This move was introduced by Koopman in 1931 \cite{koopman}, with the
+operator-theoretic machinery placed on a rigorous footing almost immediately
+afterward by von Neumann \cite{vonNeumann1932} and Stone \cite{stone}, and used
+by Koopman and von Neumann together to characterize the different levels of
+statistical irregularity (ergodicity, mixing) that a Hamiltonian system can
+exhibit, in terms of the spectrum of a single linear operator.
+The timing was not an accident: Koopman's paper
+is contemporaneous with -- and directly motivated by -- the controversy
+surrounding the ergodic hypothesis in statistical mechanics, which was resolved
+essentially simultaneously by von Neumann's mean ergodic theorem and Birkhoff's
+pointwise ergodic theorem. The operator picture turned the
+vague physical question ``does the time average of an observable equal its
+phase-space average?'' into a precise question about the point spectrum of a
+self-adjoint operator.
+
+\subsection{Phase space, Hamilton's equations, and the flow}
+
+Let phase space be $M=\mathbb R^{2n}$ with coordinates
+$x=(q^1,\dots,q^n,p_1,\dots,p_n)$ (everything below goes through, with the
+obvious modifications, for a general symplectic manifold $(M,\omega)$). Fix a
+Hamiltonian $H:M\to\mathbb R$, assumed smooth and, for simplicity, such that its flow
+is complete. Hamilton's equations
+\begin{equation}
+\dot q^i = \frac{\partial H}{\partial p_i}, 
+    \qquad \dot p_i = -\frac{\partial H}{\partial q^i}, \qquad i=1,\dots,n,
+\label{hameq}
+\end{equation}
+define a vector field $X_H$ on $M$ (the Hamiltonian vector field) and hence
+a one-parameter group of diffeomorphisms
+\begin{equation}
+\phi_t : M \to M, \qquad \frac{d}{d t}\phi_t(x) = X_H(\phi_t(x)), 
+    \qquad \phi_0=\mathrm{id}, \qquad \phi_t\circ\phi_s=\phi_{t+s}.
+\label{flow}
+\end{equation}
+The Poisson bracket of two functions $f,g:M\to\mathbb R$ is
+\begin{equation}
+\PB{f}{g} = \sum_{i=1}^n\left(\frac{\partial f}{\partial q^i}
+    \frac{\partial g}{\partial p_i}-\frac{\partial f}{\partial p_i}
+    \frac{\partial g}{\partial q^i}\right),
+\label{PBdef}
+\end{equation}
+with the sign convention fixed so that, for any smooth $f$, 
+its rate of change along a trajectory is
+\begin{equation}
+\dot f = \PB{f}{H}.
+\label{eom}
+\end{equation}
+(One checks directly from \eqref{PBdef} that 
+$\PB{q^i}{H}=\partial H/\partial p_i$ and 
+$\PB{p_i}{H}=-\partial H/\partial q^i$, reproducing \eqref{hameq}.)
+
+\begin{proposition}[Liouville's theorem]
+\label{liouville}
+The Hamiltonian vector field $X_H$ is divergence-free with respect to the 
+    Liouville measure $d\mu = \prod_{i=1}^n d q^i\,d p_i$, and 
+    consequently $\phi_t$ preserves $\mu$: $\mu(\phi_t(A))=\mu(A)$ 
+    for every measurable $A\subset M$.
+\end{proposition}
+\begin{proof}
+$\operatorname{div}X_H = \sum_i\left(\dfrac{\partial}{\partial q^i}
+    \dfrac{\partial H}{\partial p_i}+\dfrac{\partial}{\partial p_i}
+    \left(-\dfrac{\partial H}{\partial q^i}\right)\right)=
+    \sum_i\left(\dfrac{\partial^2 H}{\partial q^i\partial p_i}-
+    \dfrac{\partial^2 H}{\partial p_i\partial q^i}\right)=0$ 
+    by equality of mixed partials. Measure preservation then follows from 
+    Liouville's formula for the Jacobian of the flow of a vector field, 
+    $\det D\phi_t(x) = \exp\!\big(\int_0^t 
+    \operatorname{div}X_H(\phi_s(x))\,d s\big)=1$.
+\end{proof}
+
+This innocuous-looking fact is the load-bearing wall of everything that
+follows: it is the only place where the specifically \emph{Hamiltonian}
+character of the dynamics enters the Koopman construction, and it is exactly
+what will make the Koopman operator unitary rather than merely an isometry or a
+general (non-unitary) linear operator.
+
+An \emph{observable} is a (possibly complex-valued) function on phase space, 
+$f:M\to\mathbb C$. We work in the Hilbert space
+\begin{equation}
+\mathcal H = L^2(M,\mu), \qquad \langle f,g\rangle = 
+    \int_M \overline{f(x)}\,g(x)\,d\mu(x),
+\end{equation}
+of observables that are square-integrable with respect to the invariant
+Liouville measure. Physically, $L^2(M,\mu)$ is the natural home for observables
+when the system carries a normalizable invariant probability distribution
+(e.g.\ on a compact energy shell, with $\mu$ the corresponding microcanonical
+measure); this is the setting Koopman himself had in mind, motivated by
+statistical mechanics. Everything below extends to a general invariant measure
+$\mu$, and, with appropriate modifications, to non-invariant or infinite
+measures as well.
+
+\begin{definition}[Koopman operator]
+For each $t\in\mathbb R$, the Koopman operator $U_t:\mathcal H\to\mathcal H$ 
+    is defined by
+\begin{equation}
+(U_t f)(x) = f(\phi_t(x)), \qquad\text{i.e.}\qquad U_t f = f\circ\phi_t.
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Linearity and group law]
+\label{linear-group}
+For all $t,s\in\mathbb R$ and $f,g\in\mathcal H$, $a,b\in\mathbb C$:
+\begin{enumerate}
+\item $U_t(af+bg) = a\,U_tf+b\,U_tg$;
+\item $U_0=\mathrm{id}$ and $U_tU_s=U_{t+s}$; in particular 
+    $U_t^{-1}=U_{-t}$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(i) is immediate from the definition, since composition with a fixed map 
+    $\phi_t$ acts pointwise: $(U_t(af+bg))(x) = af(\phi_t(x))+bg(\phi_t(x))$.
+(ii) $(U_tU_sf)(x) = (U_sf)(\phi_t(x)) = f(\phi_s(\phi_t(x))) = f(\phi_{s+t}(x)) 
+    = (U_{s+t}f)(x)$, using the group law \eqref{flow} for the flow.
+\end{proof}
+
+Statement (i) is the entire point of the construction: $\phi_t$ can be an 
+arbitrarily complicated nonlinear diffeomorphism of $M$, yet its pullback 
+action $U_t$ on functions is exactly linear, with no approximation involved. 
+Statement (ii) says that $\{U_t\}_{t\in\mathbb R}$ is a one-parameter group of linear 
+operators on $\mathcal H$.
+
+\begin{proposition}[Unitarity]
+\label{unitary}
+For every $t\in\mathbb R$, $U_t$ is a unitary operator on $\mathcal H=L^2(M,\mu)$.
+\end{proposition}
+\begin{proof}
+For $f,g\in\mathcal H$,
+\begin{equation}
+\langle U_tf,U_tg\rangle = 
+    \int_M \overline{f(\phi_t(x))}\,g(\phi_t(x))\,d\mu(x).
+\end{equation}
+Substitute $y=\phi_t(x)$; since $\phi_t$ is a diffeomorphism with 
+    $\left|\det D\phi_t\right|=1$ by Proposition~\ref{liouville}, 
+    the measure transforms as $d\mu(x)=d\mu(y)$, so
+\begin{equation}
+\langle U_tf,U_tg\rangle = \int_M \overline{f(y)}\,g(y)\,d\mu(y) =
+    \langle f,g\rangle.
+\end{equation}
+Thus $U_t$ is an isometry; since it is also invertible 
+    (Proposition~\ref{linear-group}(ii), with inverse $U_{-t}$, 
+    itself an isometry by the same argument), $U_t$ is unitary.
+\end{proof}
+
+It is worth being explicit about what did the work: unitarity is \emph{not} an
+automatic feature of ``Koopman operators'' for arbitrary dynamical systems; it
+requires an invariant measure. For a general (e.g.\ dissipative) dynamical
+system with no invariant probability measure, the Koopman operator built the
+same way is still linear and still a composition operator, but it need not be
+unitary or even bounded on a naturally chosen $L^2$ space. It is Liouville's
+theorem, i.e.\ the specifically Hamiltonian structure of classical mechanics,
+that upgrades ``linear'' to ``unitary.''
+
+Finally, strong continuity ($t\mapsto U_tf$ continuous in $\mathcal H$ for each
+fixed $f$, under mild regularity of $H$ and $f$) makes $\{U_t\}$ a
+\emph{strongly continuous one-parameter unitary group}, which is precisely the
+hypothesis of Stone's theorem, taken up next.
+
+\begin{definition}[Generator]
+The (infinitesimal) generator of the Koopman group is the operator
+\begin{equation}
+Df := \left.\frac{d}{d t}\right|_{t=0} U_tf,
+\end{equation}
+defined on the (dense) domain of $f\in\mathcal H$ for which the limit 
+    exists in $\mathcal H$.
+\end{definition}
+
+By the chain rule and \eqref{eom},
+\begin{equation}
+(Df)(x) = \left.\frac{d}{d t}\right|_{t=0} 
+    f(\phi_t(x)) = X_H f(x) = \PB{f}{H}(x),
+\end{equation}
+so the generator is simply the Poisson bracket with $H$:
+\begin{equation}
+D = \PB{\,\cdot\,}{H}.
+\label{Ddef}
+\end{equation}
+Because $\phi_t$ is a flow, $D$ commutes with $U_t$ and one has, 
+formally,
+\begin{equation}
+U_t = e^{tD}, \qquad \frac{d}{d t}U_t = D\,U_t = U_t\,D.
+\label{Uexp}
+\end{equation}
+
+\begin{proposition}[Skew-adjointness of $D$]
+\label{skew}
+On functions vanishing at infinity (or, if $M$ is compact, with no further 
+    hypotheses), $D$ is skew-adjoint with respect to 
+    $\langle\,\cdot\,,\,\cdot\,\rangle$: $\langle Df,g\rangle =
+    -\langle f,Dg\rangle$ for all $f,g$ in the domain.
+\end{proposition}
+\begin{proof}
+Take $f,g$ real-valued and smooth with compact support, for definiteness 
+    (the general complex case follows by linearity, using that $D$ has real
+    coefficients so $D\bar f=\overline{Df}$). Integrating by parts twice in 
+    \eqref{PBdef} (once in $q^i$, once in $p_i$, discarding boundary terms) 
+    gives
+\begin{align}
+\int_M \PB{f}{H}\,g\,d\mu
+&= \sum_i\int_M\left(\frac{\partial f}{\partial q^i}\frac{\partial H}
+    {\partial p_i}-\frac{\partial f}{\partial p_i}\frac{\partial H}
+    {\partial q^i}\right)g\,d\mu \notag\\
+&= -\sum_i\int_M f\left(\frac{\partial^2H}{\partial q^i\partial p_i}g
+    +\frac{\partial H}{\partial p_i}\frac{\partial g}{\partial q^i}
+    -\frac{\partial^2H}{\partial p_i\partial q^i}g
+    -\frac{\partial H}{\partial q^i}\frac{\partial g}
+    {\partial p_i}\right)d\mu.
+\end{align}
+The two mixed-partial terms cancel identically, leaving
+\begin{equation}
+\int_M \PB{f}{H}\,g\,d\mu = -\int_M f\left(\sum_i\Big(\frac{\partial H}
+    {\partial p_i}\frac{\partial g}{\partial q^i}-
+    \frac{\partial H}{\partial q^i}\frac{\partial g}
+    {\partial p_i}\Big)\right)d\mu = \int_M f\,\PB{g}{H}\,d\mu,
+\end{equation}
+i.e.\ $\langle Df,g\rangle = -\langle f, Dg\rangle$ (the last relative sign is
+    exactly $-1$ because $\PB{g}{H}=-\PB{H}{g}$ is being compared to 
+    $D g = \PB{g}{H}$; the displayed identity already contains it).
+\end{proof}
+
+A skew-adjoint operator becomes self-adjoint (Hermitian) after multiplication 
+by $i$. Define the \emph{Liouvillian}
+\begin{equation}
+\boxed{\CL := -i D = -i\,\PB{\,\cdot\,}{H} = i\,\PB{H}{\,\cdot\,}.\ }
+\label{Liouvillian}
+\end{equation}
+By Proposition~\ref{skew}, $\CL^\dagger=(-i D)^\dagger = i D^\dagger = 
+i(-D)=-i D=\CL$: the Liouvillian is Hermitian. Combined with \eqref{Uexp}, 
+and since $D=i\CL$,
+\begin{equation}
+U_t = e^{tD} = e^{i t\CL}.
+\label{Ut-CL}
+\end{equation}
+This is precisely Stone's theorem \cite{stone} at work: a strongly continuous
+one-parameter \emph{unitary} group is always of the form $e^{i t A}$ for a
+unique self-adjoint (generally unbounded) operator $A$; here $A=\CL$, built
+entirely out of the classical Poisson bracket with $H$. Equation \eqref{Ut-CL}
+is the precise sense in which classical Hamiltonian evolution is ``already''
+Schr\"odinger-like, well before any quantization has taken place. Note,
+however, that conventions for the sign and placement of $i$ in $\CL$ vary
+across the literature; \eqref{Liouvillian} is fixed here purely so that
+\eqref{Ut-CL} and the density equation of the next section come out in the most
+familiar-looking form.
+
+
+The Koopman operator $U_t$ propagates \emph{observables} forward in time: it is
+the classical analogue of the Heisenberg picture. There is a dual,
+Schr\"odinger-like picture that propagates \emph{probability densities},
+obtained simply by taking the adjoint.
+
+\begin{definition}[Transfer, or Perron--Frobenius, operator]
+The operator $P_t := U_t^\dagger$ acting on densities 
+    $\rho\in\mathcal H$ is defined by duality,
+\begin{equation}
+\int_M (P_t\rho)\,f\,d\mu = \int_M \rho\,(U_tf)\,d\mu 
+    \qquad \text{for all } f\in\mathcal H.
+\end{equation}
+\end{definition}
+
+Since $U_t$ is unitary, $P_t = U_t^\dagger = U_t^{-1}=U_{-t}$, so $(P_t\rho)(x)
+= \rho(\phi_{-t}(x))$: the density at $x$ at time $t$ equals the density that
+was at the point $\phi_{-t}(x)$ that flowed \emph{into} $x$. This is exactly
+the statement that probability is transported (not created or destroyed) along
+the flow, consistent with Proposition~\ref{liouville}.
+
+Differentiating $P_t\rho = \rho\circ\phi_{-t}$ at $t=0$, the generator of $P_t$ 
+is $-D$, i.e.
+\begin{equation}
+\frac{\partial \rho_t}{\partial t} = -D\rho_t = -\PB{\rho_t}{H} = 
+    \PB{H}{\rho_t},
+\label{liouville-eq}
+\end{equation}
+which is exactly the classical Liouville equation, usually written 
+$\partial_t\rho+\PB{\rho}{H}=0$. Multiplying \eqref{liouville-eq} by $i$ and 
+using $D=i\CL$,
+\begin{equation}
+\boxed{\ i\,\frac{\partial \rho_t}{\partial t} = \CL\,\rho_t. \ }
+\label{kvn-density}
+\end{equation}
+This is a genuine Schr\"odinger-type equation for the classical phase-space
+density, with Hermitian ``Hamiltonian'' $\CL$: $\rho_t = e^{-i t \CL}\rho_0 =
+P_t\rho_0$. It is the direct forerunner of the Koopman--von Neumann equation. 
+
+\begin{remark}
+The two pictures are related exactly as in quantum mechanics: observables
+    evolve by $U_t=e^{i t\CL}$ (formally, $i\partial_tf_t = -\CL f_t$, the
+    classical Heisenberg equation, consistent with $\dot f=\PB{f}{H}$), while
+    densities evolve by the inverse/adjoint operator $P_t=e^{-i t\CL}$,
+    Eq.~\eqref{kvn-density}. The relative sign is the same
+    Heisenberg/Schr\"odinger duality familiar from quantum theory, here derived
+    from nothing more than the unitarity of $U_t$.
+\end{remark}
+
+The Koopman formulation adds no new physics to classical mechanics: every
+statement derivable in the operator language is, by construction, a restatement
+of Hamilton's equations. What it buys is a change of mathematical category,
+from nonlinear dynamics on a finite-dimensional manifold to linear operator
+theory on an infinite-dimensional Hilbert space, and that change of category is
+not free -- it is purchased with the invariant measure furnished by Liouville's
+theorem, which is what makes the Koopman operator unitary rather than merely
+linear. Once purchased, the machinery of spectral theory becomes directly
+applicable to a question -- how ergodic, or how mixing, is this system? -- that
+has no simple formulation in the original nonlinear language, and this is
+precisely the use Koopman, von Neumann, and Birkhoff made of it in the early
+1930s.
+ 
