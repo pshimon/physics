@@ -565,7 +565,7 @@ Zusammenhange dargestellt} (1894), Heinrich Hertz proposed to remove
 the discomfort by removing force altogether: he set out to build the
 whole of mechanics from just three primitive notions --- space,
 time, and mass --- with no independent concept of force at
-all~\cite{hertz}.
+all~\cite{Hertz1899}.
 
 \subsection{The principle of the straightest path}
 
@@ -627,7 +627,7 @@ onto $Q_{\mathrm{vis}}$ alone generically produces a curve that is
 \emph{not} geodesic in the visible sector by itself: extra terms
 appear in its equation of motion that are, from the point of view of
 an observer with access only to $Q_{\mathrm{vis}}$, indistinguishable
-from the effect of an applied force~\cite{hertz}.
+from the effect of an applied force~\cite{Hertz1899}.
 
 This is a genuinely striking claim: on Hertz's account, force is not
 absent from experience, only absent from the fundamental ontology.
@@ -712,8 +712,6 @@ my investigations and so escaped unintentional but clear plagiarism.
 \section{The Koopman Formulation of Classical Mechanics}
 \label{frm:koop}
 
-\newcommand{\PB}[2]{\{#1,#2\}} 
-\newcommand{\CL}{\widehat{\mathcal{L}}}
 
 Classical mechanics is
 a theory of nonlinear ordinary differential equations: Hamilton's equations
@@ -731,9 +729,9 @@ of the dynamics is absorbed into the definition of a single linear operator, at
 the price of moving from a finite-dimensional phase space to an
 infinite-dimensional space of functions on it.
 
-This move was introduced by Koopman in 1931 \cite{koopman}, with the
+This move was introduced by Koopman in 1931 \cite{Koopman1931}, with the
 operator-theoretic machinery placed on a rigorous footing almost immediately
-afterward by von Neumann \cite{vonNeumann1932} and Stone \cite{stone}, and used
+afterward by von Neumann \cite{Neumann1932} and Stone \cite{Stone1932}, and used
 by Koopman and von Neumann together to characterize the different levels of
 statistical irregularity (ergodicity, mixing) that a Hamiltonian system can
 exhibit, in terms of the spectrum of a single linear operator.
@@ -767,7 +765,7 @@ a one-parameter group of diffeomorphisms
 \end{equation}
 The Poisson bracket of two functions $f,g:M\to\mathbb R$ is
 \begin{equation}
-\PB{f}{g} = \sum_{i=1}^n\left(\frac{\partial f}{\partial q^i}
+\{f,g\} = \sum_{i=1}^n\left(\frac{\partial f}{\partial q^i}
     \frac{\partial g}{\partial p_i}-\frac{\partial f}{\partial p_i}
     \frac{\partial g}{\partial q^i}\right),
 \label{PBdef}
@@ -775,12 +773,12 @@ The Poisson bracket of two functions $f,g:M\to\mathbb R$ is
 with the sign convention fixed so that, for any smooth $f$, 
 its rate of change along a trajectory is
 \begin{equation}
-\dot f = \PB{f}{H}.
+\dot f = \{f,H\}.
 \label{eom}
 \end{equation}
 (One checks directly from \eqref{PBdef} that 
-$\PB{q^i}{H}=\partial H/\partial p_i$ and 
-$\PB{p_i}{H}=-\partial H/\partial q^i$, reproducing \eqref{hameq}.)
+$\{q^i,H\}=\partial H/\partial p_i$ and 
+$\{p_i,H\}=-\partial H/\partial q^i$, reproducing \eqref{hameq}.)
 
 \begin{proposition}[Liouville's theorem]
 \label{liouville}
@@ -900,11 +898,11 @@ defined on the (dense) domain of $f\in\mathcal H$ for which the limit
 By the chain rule and \eqref{eom},
 \begin{equation}
 (Df)(x) = \left.\frac{d}{d t}\right|_{t=0} 
-    f(\phi_t(x)) = X_H f(x) = \PB{f}{H}(x),
+    f(\phi_t(x)) = X_H f(x) = \{f,H\}(x),
 \end{equation}
 so the generator is simply the Poisson bracket with $H$:
 \begin{equation}
-D = \PB{\,\cdot\,}{H}.
+D = \{\cdot,H\}.
 \label{Ddef}
 \end{equation}
 Because $\phi_t$ is a flow, $D$ commutes with $U_t$ and one has, 
@@ -928,7 +926,7 @@ Take $f,g$ real-valued and smooth with compact support, for definiteness
     \eqref{PBdef} (once in $q^i$, once in $p_i$, discarding boundary terms) 
     gives
 \begin{align}
-\int_M \PB{f}{H}\,g\,d\mu
+\int_M \{f,H\}\,g\,d\mu
 &= \sum_i\int_M\left(\frac{\partial f}{\partial q^i}\frac{\partial H}
     {\partial p_i}-\frac{\partial f}{\partial p_i}\frac{\partial H}
     {\partial q^i}\right)g\,d\mu \notag\\
@@ -940,36 +938,36 @@ Take $f,g$ real-valued and smooth with compact support, for definiteness
 \end{align}
 The two mixed-partial terms cancel identically, leaving
 \begin{equation}
-\int_M \PB{f}{H}\,g\,d\mu = -\int_M f\left(\sum_i\Big(\frac{\partial H}
+\int_M \{f,H\}\,g\,d\mu = -\int_M f\left(\sum_i\Big(\frac{\partial H}
     {\partial p_i}\frac{\partial g}{\partial q^i}-
     \frac{\partial H}{\partial q^i}\frac{\partial g}
-    {\partial p_i}\Big)\right)d\mu = \int_M f\,\PB{g}{H}\,d\mu,
+    {\partial p_i}\Big)\right)d\mu = \int_M f\,\{g,H\}\,d\mu,
 \end{equation}
 i.e.\ $\langle Df,g\rangle = -\langle f, Dg\rangle$ (the last relative sign is
-    exactly $-1$ because $\PB{g}{H}=-\PB{H}{g}$ is being compared to 
-    $D g = \PB{g}{H}$; the displayed identity already contains it).
+    exactly $-1$ because $\{g,H\}=-\{H,g\}$ is being compared to 
+    $D g = \{g,H\}$; the displayed identity already contains it).
 \end{proof}
 
 A skew-adjoint operator becomes self-adjoint (Hermitian) after multiplication 
 by $i$. Define the \emph{Liouvillian}
 \begin{equation}
-\boxed{\CL := -i D = -i\,\PB{\,\cdot\,}{H} = i\,\PB{H}{\,\cdot\,}.\ }
+\boxed{\hat L := -i D = -i\,\{\cdot,H\} = i\,\{H,\cdot\}. }
 \label{Liouvillian}
 \end{equation}
-By Proposition~\ref{skew}, $\CL^\dagger=(-i D)^\dagger = i D^\dagger = 
-i(-D)=-i D=\CL$: the Liouvillian is Hermitian. Combined with \eqref{Uexp}, 
-and since $D=i\CL$,
+By Proposition~\ref{skew}, $\hat L^\dagger=(-i D)^\dagger = i D^\dagger = 
+i(-D)=-i D=\hat L$: the Liouvillian is Hermitian. Combined with \eqref{Uexp}, 
+and since $D=i\hat L$,
 \begin{equation}
-U_t = e^{tD} = e^{i t\CL}.
+U_t = e^{tD} = e^{i t\hat L}.
 \label{Ut-CL}
 \end{equation}
-This is precisely Stone's theorem \cite{stone} at work: a strongly continuous
+This is precisely Stone's theorem \cite{Stone1932} at work: a strongly continuous
 one-parameter \emph{unitary} group is always of the form $e^{i t A}$ for a
-unique self-adjoint (generally unbounded) operator $A$; here $A=\CL$, built
+unique self-adjoint (generally unbounded) operator $A$; here $A=\hat L$, built
 entirely out of the classical Poisson bracket with $H$. Equation \eqref{Ut-CL}
 is the precise sense in which classical Hamiltonian evolution is ``already''
 Schr\"odinger-like, well before any quantization has taken place. Note,
-however, that conventions for the sign and placement of $i$ in $\CL$ vary
+however, that conventions for the sign and placement of $i$ in $\hat L$ vary
 across the literature; \eqref{Liouvillian} is fixed here purely so that
 \eqref{Ut-CL} and the density equation of the next section come out in the most
 familiar-looking form.
@@ -998,26 +996,26 @@ the flow, consistent with Proposition~\ref{liouville}.
 Differentiating $P_t\rho = \rho\circ\phi_{-t}$ at $t=0$, the generator of $P_t$ 
 is $-D$, i.e.
 \begin{equation}
-\frac{\partial \rho_t}{\partial t} = -D\rho_t = -\PB{\rho_t}{H} = 
-    \PB{H}{\rho_t},
+\frac{\partial \rho_t}{\partial t} = -D\rho_t = -\{\rho_t,H\} = 
+    \{H,\rho_t\},
 \label{liouville-eq}
 \end{equation}
 which is exactly the classical Liouville equation, usually written 
-$\partial_t\rho+\PB{\rho}{H}=0$. Multiplying \eqref{liouville-eq} by $i$ and 
-using $D=i\CL$,
+$\partial_t\rho+\{\rho,H\}=0$. Multiplying \eqref{liouville-eq} by $i$ and 
+using $D=i\hat L$,
 \begin{equation}
-\boxed{\ i\,\frac{\partial \rho_t}{\partial t} = \CL\,\rho_t. \ }
+\boxed{\ i\,\frac{\partial \rho_t}{\partial t} = \hat L\,\rho_t. \ }
 \label{kvn-density}
 \end{equation}
 This is a genuine Schr\"odinger-type equation for the classical phase-space
-density, with Hermitian ``Hamiltonian'' $\CL$: $\rho_t = e^{-i t \CL}\rho_0 =
+density, with Hermitian ``Hamiltonian'' $\hat L$: $\rho_t = e^{-i t \hat L}\rho_0 =
 P_t\rho_0$. It is the direct forerunner of the Koopman--von Neumann equation. 
 
 \begin{remark}
 The two pictures are related exactly as in quantum mechanics: observables
-    evolve by $U_t=e^{i t\CL}$ (formally, $i\partial_tf_t = -\CL f_t$, the
-    classical Heisenberg equation, consistent with $\dot f=\PB{f}{H}$), while
-    densities evolve by the inverse/adjoint operator $P_t=e^{-i t\CL}$,
+    evolve by $U_t=e^{i t\hat L}$ (formally, $i\partial_tf_t = -\hat L f_t$, the
+    classical Heisenberg equation, consistent with $\dot f=\{f,H\}$), while
+    densities evolve by the inverse/adjoint operator $P_t=e^{-i t\hat L}$,
     Eq.~\eqref{kvn-density}. The relative sign is the same
     Heisenberg/Schr\"odinger duality familiar from quantum theory, here derived
     from nothing more than the unitarity of $U_t$.

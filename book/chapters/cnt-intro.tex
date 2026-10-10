@@ -1,5 +1,5 @@
 \chapter{Classical Mechanics}
-\label{cm}
+\label{ch:cm}
 
 {
 \setlength\epigraphwidth{0.6\textwidth}
@@ -66,20 +66,20 @@ classes of ordinary classical systems.
 \end{enumerate}
 
 This book is devoted to the second role of classical mechanics, some
-interesting problems beyond this role are briefly discussed in Appendix~\ref{ap}
+interesting problems beyond this role are briefly discussed in Appendices.
 
-Classical mechanics is usually presented in one of two logical orders.
+Classical mechanics is usually presented in one of two logical orders:
 \begin{description} \item[Newton first.] The postulates are equations of motion
             (together with a catalogue of force laws and a statement about
             constraint reactions). Lagrange's equations, the principle of least
             action and the Hamiltonian formalism are \emph{derived}. This is
-        the order of Goldstein \cite{Goldstein}, Arnold's \cite{Arnold-cm}
+        the order of Goldstein \cite{GoldsteinPooleSafko2000}, Arnold's \cite{Arnold1989}
     first chapters, and most introductory courses. 
 \item[Action first.] The
         postulate is Hamilton's principle, $\delta S=0$ with $S=\int L\,dt$.
         Newton's equations are \emph{derived}, and conservation laws follow
         from symmetries of $L$ via Noether's theorem. This is the order of
-        Landau and Lifshitz \cite{Landau-Lifshitz-1}, Lanczos \cite{Lanczos}
+        Landau and Lifshitz \cite{LandauLifshitz-1}, Lanczos \cite{Lanczos1970}
 and many others. 
 \end{description} 
 
@@ -123,13 +123,13 @@ reactions are an afterthought. Most damagingly, the nonholonomic case produces
 a \emph{wrong answer} that is indistinguishable, in form, from the right one.
 
 
-In section~\ref{cm:intro} I follow \cite{Arnold-cm} as more physical, later
+In section~\ref{sec:cm-intro} I follow \cite{Arnold1989} as more physical, later
 I shall use mainly second (action first) approach with some reservations.
 I see Hamilton's principle, $\delta S=0$ not as law of nature but as 
 powerful heuristic.
 
 \section{Introduction}
-\label{cm:intro}
+\label{sec:cm-intro}
 
 
 In Ideal world of classical mechanics space is three-dimensional  and euclidean
@@ -191,7 +191,7 @@ appear as a result of interaction with environment.
 
 Some forces can not be set explicitly they appear as a result of constraints
 imposed on the system and should be figured out form the prescribed movement
-(see Section~\ref{cm-const}).
+(see Section~\ref{sec:cm-const}).
 \begin{equation}
   \label {newton-eq-const}
     m_j \ddot {\bm x}_j={\bm F}_j({\bm x}_k,\dot {\bm x}_k,t) 
@@ -204,7 +204,7 @@ of some particular constraint. However the concept of a constraint force for an
 individual constraint is generally \emph{impossible to define}.
 
 Mathematics of  Cauchy problem (\ref{newton-eq},\ref{newton-ic}) 
-one can find in e.g. \cite{Arnold-ode}. Generally the unique solution exists if
+one can find in e.g. \cite{Arnold1992}. Generally the unique solution exists if
 all functions are smooth enough. However smoothness may be violated in 
 physically important cases, anyway functions $\bm x_j(t)$ should be continuous,
 $\bm v_j(t)$  may have finite jumps as a results of strong force acting for 
@@ -218,7 +218,7 @@ fixed initial velocities and final coordinates  (aiming) or fixed coordinates
 on both ends (boundary problem). Anyway when conditions are set at two
 different times  solution may be not unique (unless force is changing
 relatively slow) \footnote {I discovered this fact around 1980 and was very
-proud of myself until I found papers \cite{Maslov-1} and \cite{Maslov-2}.}.
+proud of myself until I found papers \cite{Maslov1962a} and \cite{Maslov1962b}.}.
 
 If we allow only potential forces i.e. 
 \begin{equation}
@@ -310,7 +310,7 @@ Two large class of methods are in use:
         and long times. Such integrators may calculate  coordinates and momenta
         at different times
 \end{enumerate}
-One can look for details in \cite{Hairer-Lubich-Wanner} for example.
+One can look for details in \cite{HairerLubichWanner2006} for example.
 
     \item [Boundary Value Problem (BVP)] Data at two or more distinct times/points,
   e.g. $x(t_0) = x_0$, $x(t_1) = x_1$ --- not a full state at one
@@ -358,7 +358,7 @@ One can look for details in \cite{Hairer-Lubich-Wanner} for example.
 \end{description}
 
 \section{Geometric Setup}
-\label{cm:geom}
+\label{sec:cm-geom}
 
 The configuration space of a mechanical system comprising $k$ particles is 
 \[   
@@ -561,7 +561,7 @@ action-angle variables and so we can  transform it to usual quadratic form, but
 the condition $  -S\le p \le S$ makes this transformation pure formal.
 
 \section{Constraints}
-\label{cm:const}
+\label{sec:cm-const}
 Constraints---restrictions on the positions and velocities a mechanical system may
 assume---are present in practically every realistic model.   A classification may be established along several independent axes: the order of the
 derivatives involved (geometric, kinematic, dynamic), integrability (holonomic,
@@ -646,7 +646,7 @@ spring or the limit of a viscous friction.
 
 %\textcolor{red}{ UPTOHERE}
 \section[Geometry vs Coordinates]{Geometric Elegance versus Coordinate Practice }
-\label{cm:geom-vs-coord}
+\label{sec:cm-geom-vs-coord}
 The geometric form tells, in advance and for
 free, which features of a set of equations of motion are physical
 and which are artifacts of a chart. It explains why canonical
@@ -753,7 +753,7 @@ working practice of mechanics has always required both, spoken
 fluently, and switched between as the problem at hand demands.
 
 \section{Symmetry}
-\label{cm:sym}
+\label{sec:cm-sym}
 
 Symmetry is often introduced to students as a single, monolithic idea: ``the
 Lagrangian is invariant under such-and-such transformation, therefore there is
