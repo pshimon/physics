@@ -105,6 +105,79 @@ canonical symplectic form $\omega = dp_i \wedge dq^i$, giving Hamiltonian
 mechanics its distinctive geometry: canonical transformations, Poisson
 brackets, Liouville's theorem, and so on.
 
+\paragraph{Degree-one homogeneous Lagrangians}
+Suppose that the Lagrangian is homogeneous of degree one in the velocities:
+\[L(q,\alpha\dot q)=\alpha L(q,\dot q),\qquad \alpha>0.\]
+Euler's theorem for homogeneous functions gives
+\[\dot q^i\frac{\partial L}{\partial\dot q^i}=L.\]
+Consequently the canonical Hamiltonian is identically zero:
+\[H_{\mathrm c}=p_i\dot q^i-L=0.\]
+
+This is not a defect of the Legendre transformation. It reveals that the
+parameter used to describe the trajectory has lost its physical significance.
+Indeed, consider the action \(S[q]=\int L(q,\dot q)\,d\lambda\).
+Make a monotonic change of parameter, \(\lambda\mapsto\lambda'\). The
+coordinate curve remains the same, but its coordinate velocities are rescaled.
+Since \(L\) is homogeneous of degree one, the change in \(L\) precisely
+compensates for the change in the integration measure:
+\(L d\lambda=L' d\lambda'\).
+Thus the action depends on the geometrical path, not on how quickly that path
+is traversed according to the arbitrary parameter.
+The distinction is between a path and a parametrized motion. Ordinary Newtonian
+mechanics generally determines both the trajectory and its evolution in time. A
+degree-one homogeneous action, by contrast, determines the path without
+necessarily determining its parametrization. 
+This is the central physical interpretation.
+Parameter invariance does not mean that physical time is always meaningless. It
+means that the particular parameter \(\lambda\) used in the action is not fixed
+by the action itself. A physical time can still be recovered from additional
+structure, a gauge choice, or an appropriate clock variable.
+\footnote{ Example: the relativistic free particle.}
+The vanishing canonical Hamiltonian does not mean that the physical energy
+vanishes. It means that the canonical generator associated with the arbitrary
+worldline parameter vanishes.
+\paragraph{Hamiltonians linear in momenta}
+ A Hamiltonian that is linear in the momenta generates a particular kind of
+ phase-space evolution and generally corresponds to a singular Legendre
+ transformation. Consider \(H(q,p)=a^i(q)p_i\).
+Hamilton's equations are
+\[
+\dot q^i=a^i(q), \quad \dot p_i=-p_j\frac{\partial a^j}{\partial q^i}.\]
+The first equation is independent of momentum. The configuration-space
+trajectory is prescribed by the vector field \(a^i(q)\), while the momentum
+evolves according to the linearized flow of that vector field.
+
+We used to the situation in which momentum determines velocity through a
+kinetic-energy relation such as \(p=m\dot q\). Instead, the velocity is
+prescribed directly by the configuration-space flow.
+Physically, this is not so exotic. In particular a lot of "usual" Hamiltonians
+are linear in momenta if represented by "angle-action" variables.
+Practical example is discussed in Paragraph~\ref{par:cm-spin}.
+(Section~\ref{sec:cm-geom})
+\paragraph{Hamiltonian flows and cotangent bundles}
+A vector field on configuration space,
+\[X=a^i(q)\frac{\partial}{\partial q^i},\]
+has a natural lift to the cotangent bundle. The function
+\(H_X(q,p)=p_i a^i(q)\) generates that lifted flow.
+Thus a Hamiltonian linear in momentum is the cotangent-bundle representative of
+a configuration-space vector field.
+This construction is important in several contexts:
+\begin{description}
+    \item [Geometrical mechanics:] lifting flows from configuration space to 
+        phase space.
+    \item [Symmetry:] momentum maps are often linear in momenta; their 
+        Hamiltonian flows implement symmetry transformations.
+    \item [Constrained systems:] multipliers and first-order actions impose 
+        relations between velocities and coordinates.
+    \item [Field theory and geometric optics:] first-order Hamiltonian 
+        formulations can encode transport along characteristic curves.
+\end{description}
+ One subtlety matters here: the Hamiltonian \(H_X=p_i a^i(q)\) is generally not
+a physical energy. It is the generator of the lifted flow. A symmetry
+generator, a constraint, and a physical energy may all be represented by
+Hamiltonian functions, but they have different physical roles.
+
+
 The precise statement licensing the textbook claim is the following.
 \begin{proposition}[Regular equivalence]
 \label{regular}
@@ -125,7 +198,8 @@ Let $$L: TQ\times\mathbb{R}\to\mathbb{R}$$
 \paragraph{Hamilton--Jacobi theory}
 A fourth formulation, historically inseparable from Hamilton's own work,
 replaces the $2n$ first-order equations~\eqref{Ham} by a single first-order
-partial differential equation for a scalar function. Define \emph{Hamilton's
+partial differential equation for a scalar function. 
+It is discussed in Chapter~\ref{ch:hj}. Define \emph{Hamilton's
 principal function} $S(q,t)$ as the action evaluated along the true trajectory
 of the system that starts at some fixed reference event $(q_0,t_0)$ and ends at
 $(q,t)$. Hamilton showed that, viewed as a function of its endpoint, $S$
