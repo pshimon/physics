@@ -1,0 +1,638 @@
+% =====================================================================
+%  Chapter: Two Ways to Lose a Degree of Freedom
+%  Reduction by constraints and reduction by symmetry
+%  Requires: amsmath, amssymb, amsthm, mathtools, enumitem, tikz, hyperref
+%  (the book-class preamble already loads these)
+% =====================================================================
+\providecommand{\rdpb}[2]{\{#1,#2\}}
+\providecommand{\rdDB}[2]{\{#1,#2\}_{\mathrm D}}
+\providecommand{\rdwk}{\mathrel{\approx}}
+\theoremstyle{definition}
+\newtheorem{rdexample}{Example}[chapter]
+\newtheorem{rdfact}{Fact}[chapter]
+\theoremstyle{remark}
+\newtheorem{rdremark}{Remark}[chapter]
+
+\chapter{Two Ways to Lose a Degree of Freedom}\label{rd:chap}
+
+\begin{quote}\itshape
+Reduction by constraints and reduction by symmetry both bring a system with $n$ degrees of freedom down to one with fewer. One of them changes the equations of motion and the other does not.
+\end{quote}
+
+%======================================================================
+\section{A sign that goes wrong}\label{rd:sec:sign}
+%======================================================================
+
+Two manoeuvres from the first weeks of a mechanics course look almost identical. In both we have a Lagrangian with two coordinates, $r$ and $\theta$; in both we want a one-dimensional problem for $r$ (or $\theta$); in both we get there by \emph{substituting a relation into the Lagrangian before varying}. In one case this is legitimate and in the other it gives the wrong answer.
+
+\paragraph{Manoeuvre one: the Kepler problem.} Take
+\begin{equation}\label{rd:Lkep}
+L=\tfrac12m(\dot r^2+r^2\dot\theta^2)+\frac kr .
+\end{equation}
+The angle $\theta$ is absent from $L$, so $p_\theta=mr^2\dot\theta=\mu$ is constant. The correct radial equation follows from the $r$-component of the Euler--Lagrange equations, $m\ddot r=mr\dot\theta^2-k/r^2$, and then using $\dot\theta=\mu/(mr^2)$:
+\begin{equation}\label{rd:kepcorrect}
+m\ddot r=+\frac{\mu^2}{mr^3}-\frac{k}{r^2}.
+\end{equation}
+The first term is the familiar centrifugal repulsion. Now try the shortcut: eliminate $\dot\theta$ from $L$ using $\dot\theta=\mu/(mr^2)$ and vary the resulting one-variable Lagrangian
+\begin{equation}\label{rd:Lnaive}
+\tilde L(r,\dot r)=\tfrac12m\dot r^2+\frac{\mu^2}{2mr^2}+\frac kr .
+\end{equation}
+Its Euler--Lagrange equation is
+\begin{equation}\label{rd:kepwrong}
+m\ddot r=-\frac{\mu^2}{mr^3}-\frac k{r^2},
+\end{equation}
+and the centrifugal term has the \emph{wrong sign}: the shortcut predicts that angular momentum pulls the particle inward. The cure that every textbook offers is to use the Routhian $R=L-\mu\dot\theta$ instead of $L$. We will see in Section~\ref{rd:sec:sym} why this works.
+
+\paragraph{Manoeuvre two: the pendulum.} A bob of mass $m$ at the end of a rigid rod of length $\ell$ is a particle in the plane constrained to the circle $r=\ell$. In polar coordinates, with $\theta$ measured from the downward vertical,
+\begin{equation}\label{rd:Lpend}
+L=\tfrac12m(\dot r^2+r^2\dot\theta^2)+mgr\cos\theta .
+\end{equation}
+We eliminate $r$ by substituting $r=\ell$, $\dot r=0$ \emph{into $L$ before varying}, obtaining $L_c=\tfrac12m\ell^2\dot\theta^2+mg\ell\cos\theta$, whose Euler--Lagrange equation $\ddot\theta=-(g/\ell)\sin\theta$ is correct. The very step that failed for the Kepler problem succeeds here.
+
+So when may we substitute a relation into $L$ before varying? The answer will turn out to be tied to a more important difference between the two cases. Check what happens to the equations of the \emph{unreduced} system. In the Kepler problem, the solutions of the reduced radial equation \eqref{rd:kepcorrect}, together with $\theta(t)$ reconstructed from $\dot\theta=\mu/(mr^2)$, are \emph{exactly} solutions of the original two-dimensional problem: nothing has been added or removed. For the pendulum, put $r=\ell$ into the radial equation of the free particle: $0=m\ell\dot\theta^2+mg\cos\theta$, which is false in general. The pendulum's motion is \emph{not} a solution of the free-particle problem; a force, the tension $T$ in the rod, acts radially to keep $r=\ell$. The pendulum equation is the equation of a \emph{different} dynamical system from the free particle.
+
+\medskip
+This is the whole subject of the chapter in miniature. We have two procedures that both ``lose a degree of freedom''.
+
+\begin{itemize}
+\item \textbf{Reduction by constraints} (the pendulum) \emph{imposes} a relation---here $r=\ell$---that is not a consequence of the dynamics. Reaction forces are introduced to enforce it, and the reduced system has different equations of motion from the system we started with.
+\item \textbf{Reduction by symmetry} (Kepler) \emph{exploits} a relation---here $p_\theta=\mu$---that \emph{is} a consequence of the dynamics (Noether's theorem). No force is introduced, and the reduced equations are exact consequences of the original ones.
+\end{itemize}
+
+In the language of this book, a constraint is an \emph{ideal-world} object: the rigid rod is an idealization of a very stiff real rod, and Section~\ref{rd:sec:stiff} will show what is gained and lost in the idealization. A symmetry reduction, by contrast, involves no idealization at all: it is a theorem about the equations we already have.
+
+\medskip
+The two procedures are used so often, and look so much alike in simple examples, that they are frequently identified. Statements such as ``a symmetry is a kind of constraint'' or ``a constraint is a kind of symmetry'' appear in the literature. We shall see in which sense each of them is true: in phase space both procedures are instances of a single geometric operation (Section~\ref{rd:sec:unified}), but the operation is applied to surfaces of a very different dynamical status.
+
+The plan is as follows. Section~\ref{rd:sec:con} treats constraints, through the pendulum; Section~\ref{rd:sec:sym} treats symmetries, through the Kepler problem and the rigid body; Section~\ref{rd:sec:sph} does both at once for the spherical pendulum; Section~\ref{rd:sec:unified} explains the common geometry and the one point where they differ; Section~\ref{rd:sec:dual} collects pitfalls, failure modes and a summary table. We rely on classical sources for the two halves of the story: d'Alembert, Lagrange and Dirac for constraints,\footnote{J.\ le Rond d'Alembert, \emph{Trait\'e de dynamique}, David, Paris, 1743; J.-L.\ Lagrange, \emph{M\'ecanique analytique}, Paris, 1788; P.\ G.\ Bergmann, Non-linear field theories, \emph{Phys.\ Rev.}\ \textbf{75} (1949) 680--685; P.\ A.\ M.\ Dirac, Generalized Hamiltonian dynamics, \emph{Canad.\ J.\ Math.}\ \textbf{2} (1950) 129--148; P.\ A.\ M.\ Dirac, \emph{Lectures on Quantum Mechanics}, Belfer Graduate School of Science, Yeshiva University, New York, 1964.} and Routh, Poincar\'e, Noether, Smale, Meyer, Marsden and Weinstein for symmetries.\footnote{E.\ J.\ Routh, \emph{A Treatise on the Stability of a Given State of Motion}, Macmillan, London, 1877; H.\ Poincar\'e, Sur une forme nouvelle des \'equations de la m\'ecanique, \emph{C.\ R.\ Acad.\ Sci.\ Paris} \textbf{132} (1901) 369--371; E.\ Noether, Invariante Variationsprobleme, \emph{Nachr.\ Ges.\ Wiss.\ G\"ottingen, Math.-Phys.\ Kl.}\ (1918) 235--257; S.\ Smale, Topology and mechanics I, II, \emph{Invent.\ Math.}\ \textbf{10} (1970) 305--331; \textbf{11} (1970) 45--64; K.\ R.\ Meyer, Symmetries and integrals in mechanics, in \emph{Dynamical Systems}, ed.\ M.\ M.\ Peixoto, Academic Press, New York, 1973, pp.\ 259--272; J.\ E.\ Marsden and A.\ Weinstein, Reduction of symplectic manifolds with symmetry, \emph{Rep.\ Math.\ Phys.}\ \textbf{5} (1974) 121--130.} The textbook treatments we have in mind are those of Arnold and of Marsden and Ratiu.\footnote{V.\ I.\ Arnold, \emph{Mathematical Methods of Classical Mechanics}, 2nd ed., Springer, New York, 1989; J.\ E.\ Marsden and T.\ S.\ Ratiu, \emph{Introduction to Mechanics and Symmetry}, 2nd ed., Springer, New York, 1999.}
+
+%======================================================================
+\section{Reduction by constraints: the pendulum}\label{rd:sec:con}
+%======================================================================
+
+\subsection{Three ways to write one pendulum}\label{rd:sec:pend3}
+
+\paragraph{(i) Restrict the Lagrangian.} This is what we did in Section~\ref{rd:sec:sign}. For a \emph{holonomic} constraint---a relation $f(q)=0$ among the coordinates---the configuration space shrinks to the submanifold $Q_c=\{f=0\}$ and the reduced Lagrangian is simply $L$ restricted to $TQ_c$. In adapted coordinates $(x^\alpha,y)$ with $Q_c=\{y=0\}$ this is $L_c(x,\dot x)=L(x,0,\dot x,0)$. The justification is d'Alembert's principle: the constraint force does no work in any displacement compatible with the constraint, so the equations for $x$ do not see it.
+
+\paragraph{(ii) Keep the force and solve for it.} We may instead keep both coordinates and write the full equations with a constraint force along the gradient of $f=r-\ell$:
+\begin{equation}\label{rd:lagmult}
+m\ddot r-mr\dot\theta^2-mg\cos\theta=\lambda,\qquad
+\frac{\mathrm d}{\mathrm dt}\big(mr^2\dot\theta\big)+mgr\sin\theta=0,\qquad r=\ell .
+\end{equation}
+Setting $r=\ell$, $\ddot r=0$ in the first equation gives the multiplier,
+\begin{equation}\label{rd:tension}
+\lambda=-T,\qquad T=m\ell\dot\theta^2+mg\cos\theta ,
+\end{equation}
+the tension of the rod. So the multiplier is not an extra unknown to be fought with: it is an \emph{algebraic} function of the reduced state $(\theta,\dot\theta)$. This will be a general feature.
+
+\paragraph{(iii) Go to phase space.} Here a new fact appears. The Hamiltonian is
+\begin{equation}\label{rd:Hpend}
+H=\frac1{2m}\Big(p_r^2+\frac{p_\theta^2}{r^2}\Big)-mgr\cos\theta
+\end{equation}
+on the four-dimensional space $T^*\mathbb R^2$, while the pendulum has a two-dimensional phase space $T^*S^1$. The relation $r=\ell$ removes only one dimension. Phase space has too many variables left: $(\theta,p_\theta,p_r)$. The extra condition is $p_r=0$, which says that the \emph{velocity must be tangent to the constraint}: if the bob is to stay on the circle, $\dot r=p_r/m$ must vanish. Hence:
+
+\begin{quote}
+\emph{A single holonomic constraint is two constraints in phase space}: $\chi_1=r-\ell=0$ and $\chi_2=p_r=0$.
+\end{quote}
+
+Their Poisson bracket is $\rdpb{\chi_1}{\chi_2}=\rdpb{r-\ell}{p_r}=1\neq0$. That is the crucial feature. A constraint whose bracket with the others vanishes would generate a symmetry of the constrained surface (we meet this in Section~\ref{rd:sec:unified}); a pair with nonvanishing bracket is a conjugate pair, which \emph{must be eliminated together}, and the symplectic structure that survives on the reduced space is not the restriction of the Poisson bracket to the functions on $T^*\mathbb R^2$ but a modified bracket, due to Dirac.
+
+\subsection{Dirac's bracket, computed}\label{rd:sec:dirac}
+
+Suppose we have constraint functions $\chi_A$ ($A=1,\dots,m$) whose matrix of brackets $C_{AB}=\rdpb{\chi_A}{\chi_B}$ is invertible on the constraint surface (``second class'' constraints in Dirac's terminology). The \emph{Dirac bracket} is
+\begin{equation}\label{rd:diracbracket}
+\rdDB FG=\rdpb FG-\sum_{A,B}\rdpb F{\chi_A}\,(C^{-1})^{AB}\,\rdpb{\chi_B}G .
+\end{equation}
+It has the properties we need: the constraints are Casimirs of it, $\rdDB F{\chi_A}=0$ for every $F$, and on the constraint surface it is the Poisson bracket of the induced symplectic structure. Let us see what it does in the simplest nontrivial setting: the pendulum written in \emph{Cartesian} coordinates $(x,y)$ with momenta $(p_x,p_y)$, where one cannot hide behind polar coordinates. The two constraints are
+\begin{equation}\label{rd:cartconstraints}
+f=\tfrac12(x^2+y^2-\ell^2)=0,\qquad
+\varphi=x\,p_x+y\,p_y=0 ,
+\end{equation}
+the second being $\mathbf x\cdot\mathbf p=0$: velocity perpendicular to the radius. Then $\rdpb f\varphi=x^2+y^2=\ell^2$, and the $2\times2$ matrix $C$ is $\ell^2$ times the standard antisymmetric matrix. Inserting this in \eqref{rd:diracbracket} gives
+\begin{equation}\label{rd:cartDB}
+\rdDB FG=\rdpb FG+\frac1{\ell^2}\Big(\rdpb Ff\rdpb\varphi G-\rdpb F\varphi\rdpb fG\Big).
+\end{equation}
+Evaluating on the coordinates and momenta (this is a short computation, which we checked symbolically):
+\begin{align}
+\rdDB x{p_x}&=\frac{y^2}{\ell^2}=1-n_x^2, &
+\rdDB y{p_y}&=\frac{x^2}{\ell^2}=1-n_y^2, \label{rd:cartDB1}\\
+\rdDB x{p_y}&=\rdDB y{p_x}=-n_xn_y, &
+\rdDB xy&=0, \\
+\rdDB {p_x}{p_y}&=-\frac{xp_y-yp_x}{\ell^2}=-\frac{p_\theta}{\ell^2}. &&\label{rd:cartDB2}
+\end{align}
+where $\mathbf n=\mathbf x/\ell$ is the unit radial vector. These brackets are rich in meaning.
+\begin{itemize}
+\item \emph{$\rdDB{q_i}{p_j}=\delta_{ij}-n_in_j$ is the projector onto the tangent space of the circle.} The Dirac bracket of position with momentum is the ordinary bracket \emph{with the radial direction deleted}. Position and momentum are no longer conjugate in the radial direction (indeed $\rdDB r{p_r}=0$), because the radial direction has been removed from the phase space.
+\item \emph{The momenta no longer commute.} $\rdDB{p_x}{p_y}=-p_\theta/\ell^2\neq0$: this is the imprint of the curvature of the constraint on the phase space of the pendulum. If the bob were on a straight wire the corresponding bracket would vanish.
+\item \emph{The polar variables are canonical.} With $\theta=\arctan(y/x)$ and $p_\theta=xp_y-yp_x$ one finds $\rdDB\theta{p_\theta}=1$, so that $(\theta,p_\theta)$ are canonical coordinates on the reduced phase space $T^*S^1$, and on the constraint surface the Hamiltonian becomes
+\[
+H_c=\frac{p_\theta^2}{2m\ell^2}-mg\ell\cos\theta ,\qquad \dot\theta=\frac{p_\theta}{m\ell^2},\quad \dot p_\theta=-mg\ell\sin\theta .
+\]
+\end{itemize}
+Note the lesson for what follows. In Cartesian coordinates, \emph{restricting $H$ to the circle and keeping the ordinary Poisson bracket would give the wrong dynamics}, because $\{p_x,p_y\}$ is not zero on the constrained system. We return to this pitfall in Section~\ref{rd:sec:dual}.
+
+\subsection{The constraint force}\label{rd:sec:force}
+
+The equations of motion in Dirac's theory are $\dot F=\rdDB FH$. Equivalently, they are the free Hamiltonian equations plus a force that keeps the system on the constraint surface. In the polar version of the example, with $\chi_1=r-\ell$, $\chi_2=p_r$ and $C^{-1}=\begin{psmallmatrix}0&-1\\1&0\end{psmallmatrix}$, the force is read off from the bracket of the constraints with $H$:
+\begin{equation}\label{rd:Tdirac}
+\rdpb{\chi_2}H=\rdpb{p_r}H=-\frac{\partial H}{\partial r}=\frac{p_\theta^2}{mr^3}+mg\cos\theta\ \overset{r=\ell}{=}\ m\ell\dot\theta^2+mg\cos\theta=T .
+\end{equation}
+The free flow would increase $p_r$ at the rate $T$ (centrifugal plus gravity). The constraint force $-T\,\partial/\partial p_r$ subtracts exactly this, so that $\dot p_r=0$ and the bob stays on the circle. We recover the rod tension \eqref{rd:tension}, now as the bracket $\rdpb{\chi_2}{H}$ of the constraint with the Hamiltonian.
+
+Two features are worth stating explicitly.
+\begin{enumerate}[label=(\alph*)]
+\item The constraint force is \emph{nonzero}. The reduced motion is not a motion of the unconstrained system.
+\item The force is recovered \emph{algebraically} from the reduced state: no integration is needed. In the next section we will see that, in symmetry reduction, the lost variables are recovered by \emph{quadrature}---by integration---instead.
+\end{enumerate}
+
+\subsection{How real is the constraint force? Stiff springs}\label{rd:sec:stiff}
+
+A rigid rod is an idealization. A real rod is a very stiff spring. Let us replace the constraint $r=\ell$ by the potential $\tfrac12k(r-\ell)^2$ and let $k\to\infty$. With the bob released from rest at $\theta_0=1.2$ rad and $r(0)=\ell$, $m=\ell=g=1$, the equations of the spring pendulum are
+\[
+\ddot r=r\dot\theta^2-\frac km(r-\ell)+g\cos\theta,\qquad
+\ddot\theta=-\frac{2\dot r\dot\theta}{r}-\frac gr\sin\theta ,
+\]
+which we integrated numerically for several values of $k$. Figure~\ref{rd:fig:stiff} compares the results with the rigid pendulum.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\begin{scope}[shift={(0,0)}]
+\draw[gray!60,very thin] (0,0) rectangle (6.0,4.0);
+\draw[gray!60] (0.000,0)--(0.000,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (1.200,0)--(1.200,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{2};
+\draw[gray!60] (2.400,0)--(2.400,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{4};
+\draw[gray!60] (3.600,0)--(3.600,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{6};
+\draw[gray!60] (4.800,0)--(4.800,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{8};
+\draw[gray!60] (6.000,0)--(6.000,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{10};
+\draw[gray!60] (0,0.667)--(-0.07,0.667) node[left,font=\scriptsize,inner sep=1pt,text=black]{-1};
+\draw[gray!60] (0,2.000)--(-0.07,2.000) node[left,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (0,3.333)--(-0.07,3.333) node[left,font=\scriptsize,inner sep=1pt,text=black]{1};
+\node[font=\small] at (3.0,-0.75) {$t$};
+\node[font=\small,rotate=90] at (-0.95,2.0) {$\theta(t)$};
+\begin{scope}\clip (0,0) rectangle (6.0,4.0);
+\draw[black,thick] plot coordinates {(0.000,3.600) (0.036,3.598) (0.074,3.591) (0.112,3.578) (0.150,3.561) (0.188,3.539) (0.226,3.512) (0.264,3.480) (0.300,3.446) (0.338,3.405) (0.376,3.359) (0.414,3.309) (0.452,3.254) (0.490,3.195) (0.528,3.132) (0.566,3.065) (0.602,2.998) (0.640,2.923) (0.678,2.845) (0.716,2.764) (0.754,2.680) (0.792,2.594) (0.830,2.505) (0.866,2.419) (0.904,2.326) (0.942,2.233) (0.980,2.138) (1.018,2.043) (1.056,1.947) (1.094,1.852) (1.132,1.758) (1.168,1.669) (1.206,1.577) (1.244,1.486) (1.282,1.397) (1.320,1.311) (1.358,1.227) (1.396,1.147) (1.432,1.073) (1.470,0.999) (1.508,0.928) (1.546,0.861) (1.584,0.799) (1.622,0.740) (1.660,0.686) (1.698,0.636) (1.734,0.593) (1.772,0.552) (1.810,0.516) (1.848,0.485) (1.886,0.458) (1.924,0.437) (1.962,0.420) (2.000,0.408) (2.036,0.402) (2.074,0.400) (2.112,0.403) (2.150,0.411) (2.188,0.424) (2.226,0.442) (2.264,0.465) (2.300,0.491) (2.338,0.523) (2.376,0.560) (2.414,0.602) (2.452,0.648) (2.490,0.699) (2.528,0.755) (2.566,0.814) (2.602,0.875) (2.640,0.942) (2.678,1.014) (2.716,1.089) (2.754,1.167) (2.792,1.249) (2.830,1.333) (2.866,1.416) (2.904,1.505) (2.942,1.596) (2.980,1.688) (3.018,1.782) (3.056,1.877) (3.094,1.972) (3.132,2.067) (3.168,2.158) (3.206,2.252) (3.244,2.345) (3.282,2.438) (3.320,2.528) (3.358,2.616) (3.396,2.702) (3.432,2.781) (3.470,2.861) (3.508,2.939) (3.546,3.012) (3.584,3.083) (3.622,3.149) (3.660,3.211) (3.698,3.269) (3.734,3.320) (3.772,3.369) (3.810,3.414) (3.848,3.454) (3.886,3.489) (3.924,3.520) (3.962,3.545) (4.000,3.566) (4.036,3.581) (4.074,3.592) (4.112,3.599) (4.150,3.600) (4.188,3.596) (4.226,3.587) (4.264,3.574) (4.300,3.556) (4.338,3.533) (4.376,3.504) (4.414,3.471) (4.452,3.434) (4.490,3.391) (4.528,3.344) (4.566,3.292) (4.602,3.239) (4.640,3.179) (4.678,3.115) (4.716,3.047) (4.754,2.975) (4.792,2.899) (4.830,2.820) (4.866,2.743) (4.904,2.658) (4.942,2.571) (4.980,2.481) (5.018,2.390) (5.056,2.297) (5.094,2.203) (5.132,2.108) (5.168,2.018) (5.206,1.923) (5.244,1.828) (5.282,1.733) (5.320,1.640) (5.358,1.548) (5.396,1.458) (5.432,1.375) (5.470,1.289) (5.508,1.206) (5.546,1.126) (5.584,1.050) (5.622,0.976) (5.660,0.907) (5.698,0.841) (5.734,0.783) (5.772,0.726) (5.810,0.672) (5.848,0.624) (5.886,0.580) (5.924,0.540) (5.962,0.506) (6.000,0.476)};
+\draw[blue!70!black,dashed] plot coordinates {(0.000,3.600) (0.036,3.598) (0.074,3.591) (0.112,3.578) (0.150,3.561) (0.188,3.540) (0.226,3.513) (0.264,3.482) (0.300,3.447) (0.338,3.406) (0.376,3.361) (0.414,3.311) (0.452,3.257) (0.490,3.199) (0.528,3.137) (0.566,3.071) (0.602,3.006) (0.640,2.933) (0.678,2.857) (0.716,2.777) (0.754,2.695) (0.792,2.610) (0.830,2.524) (0.866,2.440) (0.904,2.350) (0.942,2.260) (0.980,2.168) (1.018,2.076) (1.056,1.983) (1.094,1.890) (1.132,1.797) (1.168,1.709) (1.206,1.618) (1.244,1.529) (1.282,1.442) (1.320,1.357) (1.358,1.274) (1.396,1.193) (1.432,1.119) (1.470,1.043) (1.508,0.971) (1.546,0.903) (1.584,0.838) (1.622,0.777) (1.660,0.721) (1.698,0.669) (1.734,0.624) (1.772,0.580) (1.810,0.541) (1.848,0.506) (1.886,0.476) (1.924,0.451) (1.962,0.431) (2.000,0.416) (2.036,0.406) (2.074,0.401) (2.112,0.400) (2.150,0.405) (2.188,0.414) (2.226,0.428) (2.264,0.448) (2.300,0.470) (2.338,0.499) (2.376,0.532) (2.414,0.570) (2.452,0.613) (2.490,0.660) (2.528,0.711) (2.566,0.767) (2.602,0.824) (2.640,0.888) (2.678,0.956) (2.716,1.027) (2.754,1.101) (2.792,1.178) (2.830,1.258) (2.866,1.336) (2.904,1.421) (2.942,1.509) (2.980,1.598) (3.018,1.689) (3.056,1.781) (3.094,1.874) (3.132,1.966) (3.168,2.054) (3.206,2.146) (3.244,2.238) (3.282,2.329) (3.320,2.419) (3.358,2.509) (3.396,2.596) (3.432,2.677) (3.470,2.759) (3.508,2.839) (3.546,2.915) (3.584,2.988) (3.622,3.058) (3.660,3.125) (3.698,3.188) (3.734,3.244) (3.772,3.300) (3.810,3.350) (3.848,3.397) (3.886,3.438) (3.924,3.475) (3.962,3.507) (4.000,3.535) (4.036,3.557) (4.074,3.575) (4.112,3.588) (4.150,3.597) (4.188,3.600) (4.226,3.598) (4.264,3.592) (4.300,3.581) (4.338,3.565) (4.376,3.544) (4.414,3.518) (4.452,3.487) (4.490,3.452) (4.528,3.411) (4.566,3.366) (4.602,3.320) (4.640,3.267) (4.678,3.210) (4.716,3.149) (4.754,3.084) (4.792,3.015) (4.830,2.942) (4.866,2.870) (4.904,2.791) (4.942,2.709) (4.980,2.625) (5.018,2.540) (5.056,2.452) (5.094,2.363) (5.132,2.272) (5.168,2.185) (5.206,2.092) (5.244,1.999) (5.282,1.905) (5.320,1.812) (5.358,1.721) (5.396,1.630) (5.432,1.546) (5.470,1.458) (5.508,1.372) (5.546,1.288) (5.584,1.207) (5.622,1.128) (5.660,1.052) (5.698,0.979) (5.734,0.914) (5.772,0.850) (5.810,0.789) (5.848,0.732) (5.886,0.679) (5.924,0.630) (5.962,0.585) (6.000,0.545)};
+\draw[red!70!black] plot coordinates {(0.000,3.600) (0.036,3.598) (0.074,3.591) (0.112,3.578) (0.150,3.562) (0.188,3.540) (0.226,3.514) (0.264,3.484) (0.300,3.451) (0.338,3.413) (0.376,3.372) (0.414,3.327) (0.452,3.279) (0.490,3.228) (0.528,3.174) (0.566,3.118) (0.602,3.063) (0.640,3.002) (0.678,2.940) (0.716,2.876) (0.754,2.810) (0.792,2.742) (0.830,2.674) (0.866,2.607) (0.904,2.536) (0.942,2.463) (0.980,2.389) (1.018,2.315) (1.056,2.239) (1.094,2.163) (1.132,2.086) (1.168,2.013) (1.206,1.936) (1.244,1.858) (1.282,1.781) (1.320,1.704) (1.358,1.628) (1.396,1.552) (1.432,1.482) (1.470,1.408) (1.508,1.336) (1.546,1.265) (1.584,1.196) (1.622,1.129) (1.660,1.064) (1.698,1.001) (1.734,0.943) (1.772,0.884) (1.810,0.828) (1.848,0.775) (1.886,0.724) (1.924,0.677) (1.962,0.632) (2.000,0.591) (2.036,0.556) (2.074,0.522) (2.112,0.492) (2.150,0.466) (2.188,0.444) (2.226,0.427) (2.264,0.414) (2.300,0.407) (2.338,0.404) (2.376,0.406) (2.414,0.413) (2.452,0.425) (2.490,0.442) (2.528,0.464) (2.566,0.490) (2.602,0.519) (2.640,0.554) (2.678,0.592) (2.716,0.634) (2.754,0.679) (2.792,0.727) (2.830,0.777) (2.866,0.827) (2.904,0.882) (2.942,0.939) (2.980,0.998) (3.018,1.059) (3.056,1.121) (3.094,1.185) (3.132,1.251) (3.168,1.314) (3.206,1.382) (3.244,1.452) (3.282,1.523) (3.320,1.596) (3.358,1.670) (3.396,1.745) (3.432,1.817) (3.470,1.895) (3.508,1.973) (3.546,2.051) (3.584,2.130) (3.622,2.209) (3.660,2.288) (3.698,2.366) (3.734,2.439) (3.772,2.516) (3.810,2.591) (3.848,2.664) (3.886,2.735) (3.924,2.805) (3.962,2.872) (4.000,2.937) (4.036,2.996) (4.074,3.056) (4.112,3.113) (4.150,3.168) (4.188,3.220) (4.226,3.270) (4.264,3.316) (4.300,3.357) (4.338,3.397) (4.376,3.434) (4.414,3.468) (4.452,3.498) (4.490,3.523) (4.528,3.545) (4.566,3.562) (4.602,3.574) (4.640,3.582) (4.678,3.586) (4.716,3.584) (4.754,3.577) (4.792,3.565) (4.830,3.548) (4.866,3.527) (4.904,3.501) (4.942,3.471) (4.980,3.437) (5.018,3.399) (5.056,3.358) (5.094,3.313) (5.132,3.266) (5.168,3.220) (5.206,3.168) (5.244,3.115) (5.282,3.060) (5.320,3.002) (5.358,2.944) (5.396,2.883) (5.432,2.824) (5.470,2.760) (5.508,2.695) (5.546,2.627) (5.584,2.558) (5.622,2.487) (5.660,2.414) (5.698,2.340) (5.734,2.268) (5.772,2.190) (5.810,2.111) (5.848,2.032) (5.886,1.951) (5.924,1.871) (5.962,1.790) (6.000,1.710)};
+\end{scope}
+
+\end{scope}
+\begin{scope}[shift={(7.6,0)}]
+\draw[gray!60,very thin] (0,0) rectangle (6.0,4.0);
+\draw[gray!60] (0.000,0)--(0.000,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (1.714,0)--(1.714,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{1};
+\draw[gray!60] (3.429,0)--(3.429,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{2};
+\draw[gray!60] (5.143,0)--(5.143,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{3};
+\draw[gray!60] (0,0.364)--(-0.07,0.364) node[left,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (0,1.576)--(-0.07,1.576) node[left,font=\scriptsize,inner sep=1pt,text=black]{1};
+\draw[gray!60] (0,2.788)--(-0.07,2.788) node[left,font=\scriptsize,inner sep=1pt,text=black]{2};
+\draw[gray!60] (0,4.000)--(-0.07,4.000) node[left,font=\scriptsize,inner sep=1pt,text=black]{3};
+\node[font=\small] at (3.0,-0.75) {$t$};
+\node[font=\small,rotate=90] at (-0.95,2.0) {force};
+\begin{scope}\clip (0,0) rectangle (6.0,4.0);
+\draw[gray!70,thin] plot coordinates {(0.000,0.364) (0.008,0.366) (0.020,0.376) (0.032,0.394) (0.044,0.420) (0.056,0.454) (0.068,0.495) (0.080,0.542) (0.092,0.594) (0.100,0.631) (0.112,0.689) (0.124,0.750) (0.136,0.812) (0.148,0.874) (0.160,0.935) (0.172,0.994) (0.184,1.049) (0.196,1.099) (0.204,1.130) (0.216,1.171) (0.228,1.206) (0.240,1.233) (0.252,1.252) (0.264,1.263) (0.276,1.266) (0.288,1.260) (0.300,1.247) (0.308,1.233) (0.320,1.207) (0.332,1.174) (0.344,1.135) (0.356,1.091) (0.368,1.042) (0.380,0.990) (0.392,0.936) (0.404,0.881) (0.412,0.844) (0.424,0.790) (0.436,0.738) (0.448,0.689) (0.460,0.644) (0.472,0.605) (0.484,0.572) (0.496,0.546) (0.508,0.528) (0.516,0.520) (0.528,0.515) (0.540,0.519) (0.552,0.532) (0.564,0.553) (0.576,0.582) (0.588,0.619) (0.600,0.663) (0.612,0.713) (0.620,0.750) (0.632,0.810) (0.644,0.873) (0.656,0.940) (0.668,1.008) (0.680,1.076) (0.692,1.145) (0.704,1.211) (0.716,1.275) (0.724,1.315) (0.736,1.371) (0.748,1.422) (0.761,1.466) (0.773,1.503) (0.785,1.533) (0.797,1.555) (0.809,1.568) (0.821,1.573) (0.829,1.572) (0.841,1.563) (0.853,1.547) (0.865,1.524) (0.877,1.494) (0.889,1.458) (0.901,1.417) (0.913,1.373) (0.925,1.326) (0.933,1.293) (0.945,1.244) (0.957,1.195) (0.969,1.148) (0.981,1.103) (0.993,1.062) (1.005,1.026) (1.017,0.996) (1.029,0.972) (1.037,0.960) (1.049,0.949) (1.061,0.946) (1.073,0.951) (1.085,0.965) (1.097,0.988) (1.109,1.018) (1.121,1.057) (1.133,1.103) (1.141,1.138) (1.153,1.195) (1.165,1.257) (1.177,1.324) (1.189,1.394) (1.201,1.467) (1.213,1.541) (1.225,1.614) (1.237,1.687) (1.245,1.733) (1.257,1.801) (1.269,1.865) (1.281,1.923) (1.293,1.975) (1.305,2.020) (1.317,2.058) (1.329,2.088) (1.341,2.109) (1.349,2.119) (1.361,2.127) (1.373,2.126) (1.385,2.117) (1.397,2.101) (1.409,2.078) (1.421,2.049) (1.433,2.014) (1.445,1.975) (1.453,1.947) (1.465,1.903) (1.477,1.857) (1.489,1.812) (1.501,1.767) (1.513,1.724) (1.525,1.685) (1.537,1.650) (1.549,1.620) (1.557,1.603) (1.569,1.584) (1.581,1.572) (1.593,1.568) (1.605,1.573) (1.617,1.585) (1.629,1.606) (1.641,1.636) (1.653,1.674) (1.661,1.703) (1.673,1.753) (1.685,1.810) (1.697,1.872) (1.709,1.939) (1.721,2.010) (1.733,2.083) (1.745,2.158) (1.757,2.234) (1.765,2.283) (1.777,2.356) (1.789,2.427) (1.801,2.493) (1.813,2.555) (1.825,2.610) (1.837,2.659) (1.849,2.701) (1.861,2.735) (1.869,2.753) (1.881,2.772) (1.893,2.784) (1.905,2.786) (1.917,2.781) (1.929,2.768) (1.941,2.747) (1.953,2.720) (1.965,2.687) (1.973,2.662) (1.985,2.621) (1.997,2.577) (2.009,2.531) (2.021,2.484) (2.033,2.438) (2.045,2.393) (2.057,2.351) (2.065,2.325) (2.077,2.290) (2.089,2.260) (2.101,2.236) (2.113,2.220) (2.125,2.211) (2.137,2.210) (2.149,2.217) (2.161,2.233) (2.169,2.248) (2.181,2.277) (2.193,2.314) (2.205,2.359) (2.217,2.410) (2.229,2.467) (2.241,2.530) (2.254,2.596) (2.266,2.665) (2.274,2.712) (2.286,2.784) (2.298,2.856) (2.310,2.926) (2.322,2.993) (2.334,3.057) (2.346,3.116) (2.358,3.170) (2.370,3.216) (2.378,3.244) (2.390,3.278) (2.402,3.305) (2.414,3.322) (2.426,3.332) (2.438,3.332) (2.450,3.324) (2.462,3.308) (2.474,3.284) (2.482,3.265) (2.494,3.230) (2.506,3.189) (2.518,3.143) (2.530,3.094) (2.542,3.043) (2.554,2.990) (2.566,2.937) (2.578,2.885) (2.586,2.851) (2.598,2.804) (2.610,2.760) (2.622,2.721) (2.634,2.689) (2.646,2.662) (2.658,2.644) (2.670,2.633) (2.682,2.630) (2.690,2.633) (2.702,2.643) (2.714,2.663) (2.726,2.690) (2.738,2.724) (2.750,2.765) (2.762,2.813) (2.774,2.865) (2.786,2.922) (2.794,2.962) (2.806,3.024) (2.818,3.087) (2.830,3.150) (2.842,3.212) (2.854,3.272) (2.866,3.329) (2.878,3.381) (2.890,3.427) (2.898,3.455) (2.910,3.490) (2.922,3.518) (2.934,3.538) (2.946,3.549) (2.958,3.552) (2.970,3.546) (2.982,3.531) (2.994,3.508) (3.002,3.489) (3.014,3.453) (3.026,3.410) (3.038,3.362) (3.050,3.308) (3.062,3.251) (3.074,3.190) (3.086,3.128) (3.098,3.065) (3.106,3.023) (3.118,2.962) (3.130,2.904) (3.142,2.849) (3.154,2.799) (3.166,2.754) (3.178,2.716) (3.190,2.685) (3.202,2.662) (3.210,2.651) (3.222,2.641) (3.234,2.640) (3.246,2.647) (3.258,2.661) (3.270,2.684) (3.282,2.713) (3.294,2.749) (3.306,2.790) (3.314,2.821) (3.326,2.869) (3.338,2.920) (3.350,2.973) (3.362,3.027) (3.374,3.080) (3.386,3.131) (3.398,3.179) (3.410,3.223) (3.418,3.249) (3.430,3.284) (3.442,3.312) (3.454,3.333) (3.466,3.346) (3.478,3.351) (3.490,3.347) (3.502,3.334) (3.514,3.313) (3.522,3.294) (3.534,3.259) (3.546,3.217) (3.558,3.167) (3.570,3.111) (3.582,3.050) (3.594,2.985) (3.606,2.917) (3.618,2.846) (3.626,2.799) (3.638,2.727) (3.650,2.657) (3.662,2.589) (3.674,2.525) (3.686,2.465) (3.698,2.410) (3.710,2.362) (3.722,2.321) (3.730,2.297) (3.742,2.269) (3.755,2.249) (3.767,2.237) (3.779,2.234) (3.791,2.238) (3.803,2.251) (3.815,2.271) (3.827,2.297) (3.835,2.318) (3.847,2.354) (3.859,2.395) (3.871,2.438) (3.883,2.484) (3.895,2.531) (3.907,2.578) (3.919,2.623) (3.931,2.666) (3.939,2.692) (3.951,2.729) (3.963,2.759) (3.975,2.784) (3.987,2.802) (3.999,2.812) (4.011,2.814) (4.023,2.808) (4.031,2.799) (4.043,2.778) (4.055,2.749) (4.067,2.712) (4.079,2.667) (4.091,2.616) (4.103,2.557) (4.115,2.494) (4.127,2.425) (4.135,2.378) (4.147,2.305) (4.159,2.230) (4.171,2.155) (4.183,2.080) (4.195,2.008) (4.207,1.938) (4.219,1.873) (4.231,1.813) (4.239,1.777) (4.251,1.727) (4.263,1.685) (4.275,1.651) (4.287,1.625) (4.299,1.608) (4.311,1.599) (4.323,1.598) (4.335,1.605) (4.343,1.615) (4.355,1.634) (4.367,1.661) (4.379,1.693) (4.391,1.730) (4.403,1.771) (4.415,1.815) (4.427,1.860) (4.439,1.906) (4.447,1.936) (4.459,1.980) (4.471,2.021) (4.483,2.058) (4.495,2.090) (4.507,2.117) (4.519,2.137) (4.531,2.150) (4.543,2.155) (4.551,2.154) (4.563,2.145) (4.575,2.128) (4.587,2.103) (4.599,2.070) (4.611,2.028) (4.623,1.980) (4.635,1.925) (4.647,1.864) (4.655,1.821) (4.667,1.753) (4.679,1.682) (4.691,1.609) (4.703,1.535) (4.715,1.461) (4.727,1.389) (4.739,1.320) (4.751,1.255) (4.759,1.214) (4.771,1.157) (4.783,1.107) (4.795,1.064) (4.807,1.028) (4.819,1.001) (4.831,0.982) (4.843,0.972) (4.855,0.970) (4.863,0.974) (4.875,0.986) (4.887,1.005) (4.899,1.032) (4.911,1.064) (4.923,1.102) (4.935,1.145) (4.947,1.190) (4.959,1.238) (4.967,1.271) (4.979,1.320) (4.991,1.368) (5.003,1.414) (5.015,1.456) (5.027,1.495) (5.039,1.528) (5.051,1.555) (5.063,1.575) (5.071,1.585) (5.083,1.592) (5.095,1.591) (5.107,1.583) (5.119,1.565) (5.131,1.540) (5.143,1.507) (5.155,1.466) (5.167,1.418) (5.175,1.383) (5.187,1.326) (5.199,1.265) (5.211,1.199) (5.223,1.132) (5.235,1.063) (5.247,0.994) (5.260,0.926) (5.272,0.861) (5.280,0.819) (5.292,0.760) (5.304,0.705) (5.316,0.657) (5.328,0.616) (5.340,0.582) (5.352,0.556) (5.364,0.539) (5.376,0.530) (5.384,0.529) (5.396,0.534) (5.408,0.548) (5.420,0.569) (5.432,0.598) (5.444,0.633) (5.456,0.675) (5.468,0.721) (5.480,0.771) (5.488,0.806) (5.500,0.860) (5.512,0.915) (5.524,0.969) (5.536,1.023) (5.548,1.073) (5.560,1.120) (5.572,1.162) (5.584,1.198) (5.592,1.219) (5.604,1.244) (5.616,1.261) (5.628,1.271) (5.640,1.273) (5.652,1.266) (5.664,1.251) (5.676,1.228) (5.688,1.197) (5.696,1.173) (5.708,1.131) (5.720,1.083) (5.732,1.030) (5.744,0.973) (5.756,0.913) (5.768,0.851) (5.780,0.789) (5.792,0.727) (5.800,0.686) (5.812,0.628) (5.824,0.573) (5.836,0.523) (5.848,0.478) (5.860,0.440) (5.872,0.409) (5.884,0.386) (5.896,0.371) (5.904,0.365) (5.916,0.365) (5.928,0.372) (5.940,0.389) (5.952,0.413) (5.964,0.445) (5.976,0.484) (5.988,0.529) (6.000,0.580)};
+\draw[black,thick] plot coordinates {(0.000,0.803) (0.048,0.804) (0.100,0.808) (0.148,0.815) (0.200,0.824) (0.248,0.836) (0.300,0.851) (0.352,0.869) (0.400,0.888) (0.452,0.912) (0.500,0.936) (0.552,0.965) (0.604,0.996) (0.652,1.027) (0.704,1.064) (0.753,1.100) (0.805,1.141) (0.857,1.184) (0.905,1.227) (0.957,1.275) (1.005,1.321) (1.057,1.372) (1.109,1.426) (1.157,1.477) (1.209,1.534) (1.257,1.588) (1.309,1.648) (1.361,1.709) (1.409,1.767) (1.461,1.830) (1.509,1.889) (1.561,1.953) (1.613,2.017) (1.661,2.077) (1.713,2.142) (1.761,2.202) (1.813,2.266) (1.865,2.329) (1.913,2.387) (1.965,2.448) (2.013,2.504) (2.065,2.563) (2.117,2.620) (2.165,2.670) (2.217,2.723) (2.266,2.770) (2.318,2.818) (2.370,2.863) (2.418,2.901) (2.470,2.940) (2.518,2.973) (2.570,3.006) (2.622,3.034) (2.670,3.057) (2.722,3.078) (2.770,3.094) (2.822,3.107) (2.874,3.116) (2.922,3.121) (2.974,3.121) (3.022,3.118) (3.074,3.111) (3.122,3.100) (3.174,3.085) (3.226,3.065) (3.274,3.043) (3.326,3.016) (3.374,2.988) (3.426,2.954) (3.478,2.916) (3.526,2.878) (3.578,2.834) (3.626,2.791) (3.678,2.741) (3.730,2.689) (3.779,2.639) (3.831,2.583) (3.879,2.530) (3.931,2.470) (3.983,2.409) (4.031,2.352) (4.083,2.288) (4.131,2.229) (4.183,2.165) (4.235,2.100) (4.283,2.041) (4.335,1.976) (4.383,1.916) (4.435,1.852) (4.487,1.789) (4.535,1.731) (4.587,1.670) (4.635,1.614) (4.687,1.555) (4.739,1.498) (4.787,1.446) (4.839,1.391) (4.887,1.343) (4.939,1.292) (4.991,1.243) (5.039,1.201) (5.091,1.156) (5.139,1.117) (5.191,1.077) (5.243,1.040) (5.292,1.008) (5.344,0.976) (5.392,0.948) (5.444,0.921) (5.496,0.896) (5.544,0.876) (5.596,0.857) (5.644,0.842) (5.696,0.829) (5.748,0.818) (5.796,0.810) (5.848,0.805) (5.896,0.803) (5.948,0.803) (6.000,0.807)};
+\end{scope}
+
+\end{scope}
+\end{tikzpicture}
+
+\caption{Left: the angle $\theta(t)$ of the rigid pendulum (thick) and of the spring pendulum with $k=100$ (dashed) and $k=10$ (red). Right: the tension $T(t)=m\ell\dot\theta^2+mg\cos\theta$ of the rigid pendulum (thick) and the spring force $k(r-\ell)$ of the spring pendulum with $k=400$ (grey). The spring force oscillates rapidly around the tension.}\label{rd:fig:stiff}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{c|cccccc}
+$k$ & $10$ & $10^2$ & $10^3$ & $10^4$ & $10^5$ & $10^6$\\ \hline
+$\max_{0\le t\le10}|\theta_k-\theta_{\rm rigid}|$ & $1.1$ & $0.13$ & $1.3\times10^{-2}$ & $1.3\times10^{-3}$ & $1.3\times10^{-4}$ & $1.3\times10^{-5}$
+\end{tabular}
+\end{center}
+
+Two observations. First, the motion \emph{converges} to the rigid-pendulum motion, with an error of order $1/k$.\footnote{The $1/k$ rate has a transparent origin: the spring is stretched by $T/k$, so the bob effectively hangs from a rod of length $\ell+T/k$; the period error is then of order $1/k$ and the phase error accumulates over time.} This is the d'Alembert principle emerging from a physical model. Second, the \emph{force} does not converge pointwise. The spring force $k(r-\ell)$ oscillates around the tension $T(t)$ with an amplitude comparable to $T$ itself, and with frequency $\sqrt{k/m}$: only its \emph{time average} converges to the constraint force. (The initial displacement from the instantaneous equilibrium position $\ell+T(0)/k$ is $T(0)/k$, producing a force oscillation of amplitude $T(0)$ regardless of how large $k$ is.) The ideal constraint force is, in the limit, a weak limit of rattling real forces.
+
+This statement is a special case of a classical result of Rubin and Ungar,\footnote{H.\ Rubin and P.\ Ungar, Motion under a strong constraining force, \emph{Comm.\ Pure Appl.\ Math.}\ \textbf{10} (1957) 65--87.} and it comes with a caveat that bears on the philosophy of constraints. If the transverse oscillation (here the radial one) carries energy, that energy is an \emph{adiabatic invariant}, and in the limit it produces an additional effective potential for the motion along the constraint surface; the result depends on how the limit $k\to\infty$ is taken with respect to the initial data.\footnote{F.\ Takens, Motion under the influence of a strong constraining force, in \emph{Global Theory of Dynamical Systems}, Lecture Notes in Math.\ 819, Springer, Berlin, 1980, pp.\ 425--445; N.\ G.\ van Kampen and J.\ J.\ Lodder, Constraints, \emph{Amer.\ J.\ Phys.}\ \textbf{52} (1984) 419--424; N.\ G.\ van Kampen, Elimination of fast variables, \emph{Phys.\ Rep.}\ \textbf{124} (1985) 69--160.} The ideal constraint, with d'Alembert's principle, corresponds to the choice in which the transverse energy vanishes. \emph{Different microscopic realizations of the same ideal constraint can give different reduced dynamics.} The constraint is therefore, in the book's terminology, an idealization with an interpretive choice built in---which a symmetry never is.
+
+\subsection{Counting}\label{rd:sec:count}
+
+Each holonomic constraint removes \emph{two} dimensions of phase space, one coordinate and its conjugate momentum. For a particle in $\mathbb R^3$ constrained to the sphere $|\mathbf x|=\ell$, the constraint set in $T^*\mathbb R^3$ (six-dimensional) is
+\begin{equation}\label{rd:Ssph}
+S=\{|\mathbf x|^2=\ell^2,\ \mathbf x\cdot\mathbf p=0\},
+\end{equation}
+of dimension $6-2=4$, which is indeed the cotangent bundle $T^*S^2$ (we will use this in Section~\ref{rd:sec:sph}). More generally, $k$ independent holonomic constraints $f_a(q)=0$ are accompanied by $k$ conditions $\varphi_a=\sum_i\partial_if_a\,g^{ij}p_j=0$ (velocity tangent to the constraint manifold) and reduce phase-space dimension by $2k$. The matrix of brackets $\rdpb{f_a}{\varphi_b}=g^{ij}\partial_if_a\partial_jf_b$ is the Gram matrix of the gradients of the constraints in the kinetic-energy metric; it is invertible exactly when the gradients are linearly independent, which is the regularity condition on the constraints that appears in every textbook.
+
+\subsection{What this section does not cover: nonholonomic constraints}\label{rd:sec:nonhol}
+
+The constraints above are \emph{holonomic}: they restrict positions. Constraints that restrict velocities in a non-integrable way---a skate that may not slip sideways, a rolling ball---are \emph{nonholonomic} and need a separate treatment. The chapter on strange things in classical mechanics discusses them at length, including the controversy between the Lagrange--d'Alembert equations and the variational (``vakonomic'') ones. The only point we need here is negative: for nonholonomic constraints the reduced dynamics is \emph{not} Hamiltonian with respect to a symplectic form, and the reduction machinery of this chapter does not apply.\footnote{See V.\ I.\ Arnold, V.\ V.\ Kozlov and A.\ I.\ Neishtadt, \emph{Mathematical Aspects of Classical and Celestial Mechanics}, 3rd ed., Springer, Berlin, 2006; A.\ M.\ Bloch, P.\ S.\ Krishnaprasad, J.\ E.\ Marsden and R.\ M.\ Murray, Nonholonomic mechanical systems with symmetry, \emph{Arch.\ Rational Mech.\ Anal.}\ \textbf{136} (1996) 21--99.} In the presence of a symmetry, nonholonomic systems also behave differently from the holonomic ones: the momentum map is generally not conserved, and one needs the ``nonholonomic momentum equation'' of Bloch et al.
+
+%======================================================================
+\section{Reduction by symmetry: Kepler and the rigid body}\label{rd:sec:sym}
+%======================================================================
+
+\subsection{The Kepler problem: nothing is subtle in phase space}\label{rd:sec:kepham}
+
+Return to the Lagrangian \eqref{rd:Lkep}. In phase space it is the Hamiltonian
+\begin{equation}\label{rd:Hkep}
+H=\frac{p_r^2}{2m}+\frac{p_\theta^2}{2mr^2}-\frac kr .
+\end{equation}
+The coordinate $\theta$ does not appear, hence $\dot p_\theta=-\partial H/\partial\theta=0$, and the reduction takes one line: \emph{set $p_\theta=\mu$ in $H$ and forget $(\theta,p_\theta)$}. This leaves a system with one degree of freedom,
+\begin{equation}\label{rd:Hmu}
+H_\mu(r,p_r)=\frac{p_r^2}{2m}+V_{\rm eff}(r),\qquad V_{\rm eff}(r)=\frac{\mu^2}{2mr^2}-\frac kr,
+\end{equation}
+with the canonical bracket $\{r,p_r\}=1$. Hamilton's equations are $\dot r=p_r/m$ and $\dot p_r=\mu^2/(mr^3)-k/r^2$, i.e.\ exactly the correct equation \eqref{rd:kepcorrect}. The ``centrifugal potential'' $\mu^2/(2mr^2)$ is the energy of the angular motion expressed through the conserved momentum: it appears because $\mu$ is held fixed while $r$ varies, and not because any force of constraint is acting. The reduced motion is a genuine motion of the original system.
+
+\subsection{The Routhian and the explanation of the sign}\label{rd:sec:routh}
+
+To return to the Lagrangian formulation we must perform a Legendre transform of $H_\mu$ with respect to $p_r$: $R(r,\dot r)=p_r\dot r-H_\mu$, with $\dot r=p_r/m$, that is,
+\begin{equation}\label{rd:Routhian}
+R=\tfrac12m\dot r^2-V_{\rm eff}(r)=\tfrac12m\dot r^2-\frac{\mu^2}{2mr^2}+\frac kr .
+\end{equation}
+This is the \emph{Routhian}. In terms of the original Lagrangian, $R=L-\mu\dot\theta$ evaluated at $\dot\theta=\mu/(mr^2)$. Indeed $L=\tfrac12m\dot r^2+\mu^2/(2mr^2)+k/r$ there and $\mu\dot\theta=\mu^2/(mr^2)$, so that $R=\tfrac12m\dot r^2-\mu^2/(2mr^2)+k/r$, in agreement with \eqref{rd:Routhian}. Its Euler--Lagrange equation $m\ddot r=\mu^2/(mr^3)-k/r^2$ is the right one. Comparing with the naive Lagrangian \eqref{rd:Lnaive},
+\[
+\tilde L=R+\mu\dot\theta=R+\frac{\mu^2}{mr^2},
+\]
+so that $\tilde L$ and $R$ differ by $\mu\dot\theta$, and this single term accounts for the whole discrepancy: it is twice the centrifugal energy and flips its sign.
+
+Why is $\mu\dot\theta$ there? Consider all paths $(r(t),\theta(t))$ with $p_\theta=\mu$, so that $\theta$ is determined by $r$ via $\dot\theta=\mu/(mr^2)$. Along such a family the \emph{final angle} $\theta(t_1)$ changes when $r(t)$ is varied, whereas Hamilton's principle for the full system assumes that the end-point angles are fixed. The correct variational principle for $r$ alone is therefore not $\delta\int L\,\mathrm dt=0$ but $\delta\int(L-\mu\dot\theta)\,\mathrm dt=0$: the term $\mu\dot\theta$ is exactly the end-point correction $\mu\,\Delta\theta$ that converts a variational principle with fixed angle at the ends into one with fixed momentum. The Routhian is a partial Legendre transform in the cyclic variable. In the Hamiltonian picture there is no problem to begin with, because one never varies anything.
+
+\subsection{Reconstruction: the lost variable returns by quadrature}\label{rd:sec:recon}
+
+We have thrown away $\theta$ and need to know whether this loses information. It does not: given $r(t)$, the angle is recovered by integrating $\dot\theta=\mu/(mr^2)$, \[\theta(t)=\theta_0+\int_0^t\frac{\mu}{m\,r(t')^2}\,\mathrm dt'.\] For the Kepler problem we can do even better and eliminate time. With $u=1/r$ and $\mu=mr^2\dot\theta$ we have $\dot r=-(\mu/m)\,u'(\theta)$, and the energy $E=\tfrac12m\dot r^2+V_{\rm eff}$ becomes
+\begin{equation}\label{rd:Ebinet}
+E=\frac{\mu^2}{2m}\big(u'^2+u^2\big)-ku .
+\end{equation}
+Differentiating with respect to $\theta$ and dividing by $u'$ gives Binet's equation $u''+u=mk/\mu^2$, with the solution
+\begin{equation}\label{rd:conic}
+\frac1r=\frac{mk}{\mu^2}\Big(1+e\cos(\theta-\theta_0)\Big),\qquad
+e=\sqrt{1+\frac{2E\mu^2}{mk^2}},
+\end{equation}
+a conic section (one verifies, by inserting \eqref{rd:conic} in \eqref{rd:Ebinet}, that the $\cos\theta$ terms cancel and the constant term fixes the eccentricity). The reduced one-dimensional problem together with a single quadrature has produced the complete orbit.
+
+There is a conceptual point of general importance here. The critical points of $V_{\rm eff}$ are the circular orbits: $V_{\rm eff}'(r)=0$ gives $r_c=\mu^2/(mk)$ with $E=-mk^2/(2\mu^2)$. A circular orbit is a \emph{rest point of the reduced system} while the particle of the original system is moving around the circle with $\dot\theta=\mu/(mr_c^2)$. Such solutions are called \emph{relative equilibria}: equilibria up to the action of the symmetry group. Reduction turns the search for uniformly rotating solutions into the search for critical points of an effective potential. We will use this idea again for the spherical pendulum.
+
+\subsection{What the group does to the phase space}\label{rd:sec:fact}
+
+The geometric content of the procedure is easier to see in the Kepler problem than in any abstract formulation. The phase space is four-dimensional with the symplectic form $\omega=\mathrm dr\wedge\mathrm dp_r+\mathrm d\theta\wedge\mathrm dp_\theta$. The momentum map of the rotations is $J=p_\theta$. The level set $J^{-1}(\mu)=\{p_\theta=\mu\}$ is three-dimensional, and the restriction of $\omega$ to it is
+\begin{equation}\label{rd:omegarestr}
+\omega\big|_{p_\theta=\mu}=\mathrm dr\wedge\mathrm dp_r+\mathrm d\theta\wedge\underbrace{\mathrm dp_\theta}_{=0}=\mathrm dr\wedge\mathrm dp_r .
+\end{equation}
+A two-form on a three-dimensional space must be degenerate, and the \emph{direction of degeneracy} is the direction $\partial_\theta$ in which the symmetry group acts. This is the key: ``the symmetry orbits in the level set are the null directions of the restricted symplectic form''. Dividing the level set by the null direction---that is, forgetting $\theta$---gives a two-dimensional space with the nondegenerate form $\mathrm dr\wedge\mathrm dp_r$. The flow of $H$ preserves the level set (because $\{p_\theta,H\}=0$) and respects the group action (because $H$ is invariant), so it descends to the quotient: this is the reduced motion.
+
+The cost in dimension is $\dim M-2\dim G$: one dimension for fixing $p_\theta$ and one for forgetting $\theta$. The general statement, for a Lie group $G$ acting on a symplectic manifold $(M,\omega)$ with equivariant momentum map $J:M\to\mathfrak g^*$, is the theorem of Marsden and Weinstein and of Meyer. We state it as a fact, with the reasons given in the words above:
+
+\begin{rdfact}[Marsden--Weinstein--Meyer reduction]\label{rd:fact:MWM}
+Let $G$ act freely and properly on $(M,\omega)$ with equivariant momentum map $J$, let $\mu\in\mathfrak g^*$ and let $G_\mu\subset G$ be the isotropy group of $\mu$ under the coadjoint action. Then
+\begin{enumerate}[label=(\roman*)]
+\item the level set $J^{-1}(\mu)$ is a submanifold, invariant under the flow of every $G$-invariant Hamiltonian $H$;
+\item the null directions of $\omega$ restricted to $J^{-1}(\mu)$ are exactly the orbits of $G_\mu$, so $M_\mu=J^{-1}(\mu)/G_\mu$ carries a symplectic form $\omega_\mu$;
+\item the flow of $H$ descends to the Hamiltonian flow of $H_\mu$ on $M_\mu$, where $H_\mu\circ\pi_\mu=H|_{J^{-1}(\mu)}$;
+\item $\dim M_\mu=\dim M-\dim G-\dim G_\mu$.
+\end{enumerate}
+\end{rdfact}
+
+The reasons: (i) is Noether's theorem. For (ii): the Hamiltonian vector field of $J_\xi$ is the generator $\xi_M$ of the group action, so $\omega(\xi_M,v)=\mathrm dJ_\xi(v)=0$ for every $v$ tangent to the level set; if moreover $\xi_M$ itself is tangent to the level set, it lies in the null space. It is tangent to the level set exactly when $\xi$ preserves $\mu$, that is, $\xi\in\mathfrak g_\mu$. For abelian $G$ one has $G_\mu=G$ and all orbits qualify (as in the Kepler problem); for non-abelian $G$ only the isotropy group does, and this is what makes the rigid body interesting (Section~\ref{rd:sec:rigid}). Items (iii) and (iv) follow.\footnote{For proofs, see J.\ E.\ Marsden and A.\ Weinstein, Rep.\ Math.\ Phys.\ \textbf{5} (1974) 121--130; K.\ R.\ Meyer, loc.\ cit.; and the textbook accounts in Abraham--Marsden, \emph{Foundations of Mechanics}, 2nd ed., Benjamin/Cummings, Reading, 1978, and in Marsden--Ratiu, loc.\ cit.}
+
+\subsection{Gyroscopic terms: when the cyclic coordinate is entangled with the others}\label{rd:sec:gyro}
+
+In the Kepler problem the kinetic energy is diagonal in $(r,\theta)$. When the kinetic energy has cross terms between the symmetry coordinates $x^a$ and the remaining ``shape'' coordinates $r^\alpha$, $L=\tfrac12g_{\alpha\beta}\dot r^\alpha\dot r^\beta+g_{\alpha a}\dot r^\alpha\dot x^a+\tfrac12g_{ab}\dot x^a\dot x^b-V(r)$, the same procedure gives the Routhian
+\begin{equation}\label{rd:routhfull}
+R^\mu=\tfrac12\mathsf g_{\alpha\beta}\dot r^\alpha\dot r^\beta+\mu_aA^a_\alpha\dot r^\alpha-\Big(V+\tfrac12g^{ab}\mu_a\mu_b\Big),
+\end{equation}
+with $A^a_\alpha=g^{ab}g_{b\alpha}$ (the \emph{mechanical connection}) and $\mathsf g_{\alpha\beta}=g_{\alpha\beta}-g_{\alpha a}g^{ab}g_{b\beta}$ (here $g^{ab}$ is the inverse of the matrix $g_{ab}$). The term linear in $\dot r$ is a gauge potential on shape space with ``magnetic field'' $B_\mu=\mu_a\,\mathrm dA^a$: the reduced system is a particle moving on shape space in a field proportional to the conserved momentum. The $\mu$-dependent magnetic term is the origin of the geometric phases in rigid-body and falling-cat problems (see the chapters on shape-changing bodies and the Hannay angle); it is also how reduction can produce terms which look like forces---gyroscopic forces---but are not forces of constraint.
+
+A simple test of \eqref{rd:routhfull} is a charge $e$ in a uniform magnetic field $B$, in the plane, in the symmetric gauge: $L=\tfrac12m(\dot r^2+r^2\dot\theta^2)+\tfrac12eBr^2\dot\theta$. The coordinate $\theta$ is cyclic, $p_\theta=mr^2\dot\theta+\tfrac12eBr^2=\mu$, and the Routhian is
+\begin{equation}\label{rd:landau}
+R^\mu=\tfrac12m\dot r^2-\frac{(\mu-\tfrac12eBr^2)^2}{2mr^2},\qquad
+V_{\rm eff}=\frac{\mu^2}{2mr^2}-\frac{eB\mu}{2m}+\frac{e^2B^2r^2}{8m}.
+\end{equation}
+The field adds a harmonic confinement $e^2B^2r^2/(8m)$ to the centrifugal barrier, plus a constant. (With one shape coordinate there is no two-form on shape space, so no magnetic field can show up in the reduced equation; its only effect is on the effective potential.)
+
+\subsection{Non-abelian symmetry: the rigid body}\label{rd:sec:rigid}
+
+The free rigid body involves both procedures, in sequence. We follow it closely because the non-abelian case is where the isotropy group $G_\mu$ in Fact~\ref{rd:fact:MWM} earns its keep.
+
+\paragraph{Step one: constraints.} A body made of $N\ge3$ non-collinear particles with all mutual distances fixed has $3N-6$ independent holonomic constraints. By Section~\ref{rd:sec:count} they reduce the phase space $T^*\mathbb R^{3N}$ (dimension $6N$) to $T^*SE(3)$ (dimension $12$). Passing to the centre-of-mass frame is a symmetry reduction by the abelian group of translations, and leaves $T^*SO(3)$ of dimension $6$. We shall describe the configuration by a rotation matrix $A\in SO(3)$ mapping body coordinates to space coordinates, $\mathbf x_{\rm space}=A\,\mathbf x_{\rm body}$. The \emph{body angular velocity} $\Omega$ is defined by $\dot A=A\hat\Omega$, with $\hat\Omega\mathbf v=\Omega\times\mathbf v$, and the Lagrangian is $L=\tfrac12\Omega\cdot I\Omega$ with the (constant) inertia tensor $I=\operatorname{diag}(I_1,I_2,I_3)$.
+
+\paragraph{Step two: symmetry.} The Lagrangian is invariant under $A\mapsto BA$ for any rotation $B$ (a rotation of the laboratory), because $\Omega=A^{-1}\dot A$ is unchanged. The Noether integral is the \emph{spatial angular momentum}
+\begin{equation}\label{rd:Lspace}
+\boldsymbol\mu=A\,\Pi,\qquad \Pi=I\Omega\ \ (\text{body angular momentum}).
+\end{equation}
+So far this looks like Kepler. But the three components $\mu_a$ of the momentum map do not commute: $\rdpb{\mu_a}{\mu_b}=\epsilon_{abc}\mu_c$. We cannot set all three equal to constants as if they were three independent momenta of three cyclic coordinates. What can we do? Take $\boldsymbol\mu=(0,0,\mu)$ (choose the $z$-axis along $\boldsymbol\mu$). The three constraints $\mu_a-\mu_a^{(0)}=0$ have the bracket matrix
+\begin{equation}\label{rd:Sigma}
+\Sigma_{ab}=\rdpb{\mu_a-\mu^{(0)}_a}{\mu_b-\mu^{(0)}_b}\ \rdwk\ \epsilon_{abc}\mu^{(0)}_c=\begin{pmatrix}0&\mu&0\\-\mu&0&0\\0&0&0\end{pmatrix}
+\end{equation}
+on the constraint surface, a matrix of rank $2$ (for $\mu\neq0$; checked symbolically). Reading it as in Section~\ref{rd:sec:dirac}:
+\begin{itemize}
+\item $\mu_1$ and $\mu_2$ form a conjugate pair: \emph{second class}, to be eliminated by a Dirac bracket, removing two dimensions;
+\item $\mu_3$ commutes with all others on the surface: \emph{first class}. Its flow is a rotation of the body about $\boldsymbol\mu$, which leaves everything on the surface unchanged, and must be divided out. This removes two dimensions: one for the constraint, one for the gauge orbit.
+\end{itemize}
+The total is $6-2-2=2$, in agreement with Fact~\ref{rd:fact:MWM}(iv): $\dim M_\mu=6-\dim SO(3)-\dim SO(2)=2$, the isotropy group $G_\mu=SO(2)$ being the rotations about $\boldsymbol\mu$. The first-class direction is precisely the one in $\mathfrak g_\mu$, the rotation about $\boldsymbol\mu$, as in Fact~\ref{rd:fact:MWM}(ii).
+
+\paragraph{What the reduced space is.} Since $A$ is orthogonal, $|\Pi|=|\boldsymbol\mu|$ is fixed. After the quotient, the only thing left of the orientation is the \emph{direction of the fixed vector $\boldsymbol\mu$ as seen from the body}, namely $\Pi/|\Pi|\in S^2$. The reduced space is the sphere
+\begin{equation}\label{rd:sphere}
+M_\mu=\{\Pi\in\mathbb R^3:\ |\Pi|=|\boldsymbol\mu|\},
+\end{equation}
+with symplectic form equal to the area form divided by $|\mu|$ (the area of the sphere being $4\pi|\mu|^2$, its symplectic volume is $4\pi|\mu|$). It is a coadjoint orbit of $SO(3)$, an example of what Fact~\ref{rd:fact:MWM}(ii) means when $G_\mu\neq G$.
+
+\paragraph{Euler's equations from conservation.} The dynamics on $M_\mu$ is Euler's. Differentiating $\boldsymbol\mu=A\Pi$ with $\dot{\boldsymbol\mu}=0$ and $\dot A=A\hat\Omega$,
+\[
+0=\dot A\Pi+A\dot\Pi=A\big(\Omega\times\Pi+\dot\Pi\big)\quad\Longrightarrow\quad
+\dot\Pi=\Pi\times\Omega=\Pi\times I^{-1}\Pi .
+\]
+In components,
+\begin{equation}\label{rd:Euler}
+\dot\Pi_1=\frac{I_2-I_3}{I_2I_3}\Pi_2\Pi_3,\qquad
+\dot\Pi_2=\frac{I_3-I_1}{I_3I_1}\Pi_3\Pi_1,\qquad
+\dot\Pi_3=\frac{I_1-I_2}{I_1I_2}\Pi_1\Pi_2 .
+\end{equation}
+One checks at once that $|\Pi|^2$ and $H=\tfrac12\sum\Pi_i^2/I_i$ are conserved. Euler's equations are Hamiltonian, with the (Lie--Poisson) bracket $\rdpb{\Pi_i}{\Pi_j}=-\epsilon_{ijk}\Pi_k$ whose Casimir function---one that commutes with everything---is $|\Pi|^2$. The sphere \eqref{rd:sphere} is a symplectic leaf of this bracket.
+
+\paragraph{Stability of rotation: the tennis racket.} The rotations about the principal axes are the fixed points $\Pi=\pm|\mu|\mathbf e_i$ of the reduced system (relative equilibria of the body). Linearizing \eqref{rd:Euler} at $\Pi=|\mu|\mathbf e_i$ gives eigenvalues $\lambda=\pm|\mu|\,\sqrt{-(I_i-I_j)(I_i-I_k)}\big/\big(I_i\sqrt{I_jI_k}\big)$ (where $\{i,j,k\}=\{1,2,3\}$; checked symbolically), that is,
+\[
+\lambda^2=-\frac{\mu^2(I_i-I_j)(I_i-I_k)}{I_i^2I_jI_k}.
+\]
+If $I_i$ is the largest or the smallest moment, $(I_i-I_j)(I_i-I_k)>0$ and $\lambda^2<0$: stable oscillations. If $I_i$ is the intermediate one, $\lambda^2>0$ and the fixed point is a saddle. Reduction explains this geometrically. Take $I_1<I_2<I_3$ and view the sphere along the intermediate axis; the front hemisphere has $\Pi_2=\sqrt{\mu^2-\Pi_1^2-\Pi_3^2}$, and the energy as a function of $(\Pi_1,\Pi_3)$ is
+\begin{equation}\label{rd:Eproj}
+H=\tfrac12\Big[\Big(\tfrac1{I_1}-\tfrac1{I_2}\Big)\Pi_1^2+\Big(\tfrac1{I_3}-\tfrac1{I_2}\Big)\Pi_3^2+\frac{\mu^2}{I_2}\Big].
+\end{equation}
+The two coefficients have \emph{opposite signs}, because $I_2$ is intermediate; the level sets are therefore hyperbolas, and the one through the centre---the fixed point $\mathbf e_2$---is a pair of crossing lines: the separatrix $H=\mu^2/(2I_2)$. The other fixed points $\pm\mathbf e_1,\pm\mathbf e_3$ lie at the extrema of $H$ and are surrounded by closed curves. Figure~\ref{rd:fig:polhode} shows this picture for $I=(1,2,3)$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\draw[gray!60] (3.0,3.0) circle (3.0);
+\draw[green!50!black,thin] plot coordinates {(2.400,5.939) (2.460,5.904) (2.520,5.872) (2.580,5.844) (2.640,5.819) (2.700,5.798) (2.760,5.781) (2.820,5.767) (2.880,5.757) (2.940,5.752) (3.000,5.750) (3.060,5.752) (3.120,5.757) (3.180,5.767) (3.240,5.781) (3.300,5.798) (3.360,5.819) (3.420,5.844) (3.480,5.872) (3.540,5.904) (3.600,5.939)};
+\draw[green!50!black,thin] plot coordinates {(2.400,0.061) (2.460,0.096) (2.520,0.128) (2.580,0.156) (2.640,0.181) (2.700,0.202) (2.760,0.219) (2.820,0.233) (2.880,0.243) (2.940,0.248) (3.000,0.250) (3.060,0.248) (3.120,0.243) (3.180,0.233) (3.240,0.219) (3.300,0.202) (3.360,0.181) (3.420,0.156) (3.480,0.128) (3.540,0.096) (3.600,0.061)};
+\draw[green!50!black,thin] plot coordinates {(1.920,5.796) (1.980,5.728) (2.040,5.662) (2.100,5.598) (2.160,5.537) (2.220,5.479) (2.280,5.424) (2.340,5.372) (2.400,5.324) (2.460,5.279) (2.520,5.239) (2.580,5.202) (2.640,5.170) (2.700,5.142) (2.760,5.120) (2.820,5.102) (2.880,5.089) (2.940,5.081) (3.000,5.078) (3.060,5.081) (3.120,5.089) (3.180,5.102) (3.240,5.120) (3.300,5.142) (3.360,5.170) (3.420,5.202) (3.480,5.239) (3.540,5.279) (3.600,5.324) (3.660,5.372) (3.720,5.424) (3.780,5.479) (3.840,5.537) (3.900,5.598) (3.960,5.662) (4.020,5.728) (4.080,5.796)};
+\draw[green!50!black,thin] plot coordinates {(1.920,0.204) (1.980,0.272) (2.040,0.338) (2.100,0.402) (2.160,0.463) (2.220,0.521) (2.280,0.576) (2.340,0.628) (2.400,0.676) (2.460,0.721) (2.520,0.761) (2.580,0.798) (2.640,0.830) (2.700,0.858) (2.760,0.880) (2.820,0.898) (2.880,0.911) (2.940,0.919) (3.000,0.922) (3.060,0.919) (3.120,0.911) (3.180,0.898) (3.240,0.880) (3.300,0.858) (3.360,0.830) (3.420,0.798) (3.480,0.761) (3.540,0.721) (3.600,0.676) (3.660,0.628) (3.720,0.576) (3.780,0.521) (3.840,0.463) (3.900,0.402) (3.960,0.338) (4.020,0.272) (4.080,0.204)};
+\draw[green!50!black,thin] plot coordinates {(1.643,5.674) (1.703,5.583) (1.763,5.493) (1.823,5.404) (1.883,5.317) (1.942,5.230) (2.002,5.146) (2.062,5.063) (2.123,4.982) (2.183,4.904) (2.243,4.828) (2.303,4.755) (2.362,4.685) (2.422,4.619) (2.482,4.557) (2.542,4.499) (2.603,4.447) (2.663,4.401) (2.723,4.361) (2.782,4.327) (2.843,4.302) (2.902,4.284) (2.963,4.274) (3.022,4.273) (3.083,4.281) (3.143,4.297) (3.203,4.320) (3.263,4.352) (3.322,4.390) (3.382,4.435) (3.442,4.486) (3.502,4.542) (3.562,4.603) (3.623,4.668) (3.683,4.737) (3.743,4.809) (3.803,4.885) (3.863,4.963) (3.923,5.043) (3.983,5.125) (4.042,5.209) (4.103,5.295) (4.162,5.382) (4.223,5.471) (4.282,5.560) (4.343,5.651)};
+\draw[green!50!black,thin] plot coordinates {(1.643,0.326) (1.703,0.417) (1.763,0.507) (1.823,0.596) (1.883,0.683) (1.942,0.770) (2.002,0.854) (2.062,0.937) (2.123,1.018) (2.183,1.096) (2.243,1.172) (2.303,1.245) (2.362,1.315) (2.422,1.381) (2.482,1.443) (2.542,1.501) (2.603,1.553) (2.663,1.599) (2.723,1.639) (2.782,1.673) (2.843,1.698) (2.902,1.716) (2.963,1.726) (3.022,1.727) (3.083,1.719) (3.143,1.703) (3.203,1.680) (3.263,1.648) (3.322,1.610) (3.382,1.565) (3.442,1.514) (3.502,1.458) (3.562,1.397) (3.623,1.332) (3.683,1.263) (3.743,1.191) (3.803,1.115) (3.863,1.037) (3.923,0.957) (3.983,0.875) (4.042,0.791) (4.103,0.705) (4.162,0.618) (4.223,0.529) (4.282,0.440) (4.343,0.349)};
+\draw[blue!70!black,thin] plot coordinates {(4.626,0.487) (4.595,0.547) (4.565,0.608) (4.534,0.668) (4.504,0.727) (4.474,0.787) (4.444,0.847) (4.414,0.907) (4.385,0.968) (4.355,1.028) (4.326,1.088) (4.298,1.148) (4.269,1.208) (4.241,1.268) (4.213,1.328) (4.186,1.388) (4.159,1.447) (4.132,1.508) (4.106,1.567) (4.081,1.627) (4.056,1.688) (4.031,1.748) (4.007,1.808) (3.984,1.868) (3.961,1.927) (3.939,1.987) (3.918,2.047) (3.898,2.107) (3.878,2.167) (3.860,2.228) (3.842,2.288) (3.826,2.348) (3.811,2.407) (3.797,2.468) (3.784,2.527) (3.772,2.588) (3.763,2.647) (3.754,2.708) (3.747,2.768) (3.742,2.828) (3.738,2.888) (3.735,2.948) (3.735,3.007) (3.736,3.067) (3.739,3.127) (3.743,3.188) (3.749,3.248) (3.756,3.308) (3.765,3.368) (3.775,3.428) (3.787,3.488) (3.800,3.548) (3.814,3.608) (3.830,3.667) (3.846,3.728) (3.864,3.787) (3.883,3.848) (3.903,3.907) (3.923,3.968) (3.944,4.027) (3.967,4.088) (3.989,4.147) (4.013,4.208) (4.037,4.268) (4.062,4.328) (4.087,4.388) (4.113,4.447) (4.139,4.508) (4.166,4.567) (4.193,4.627) (4.220,4.688) (4.248,4.748) (4.276,4.808) (4.305,4.867) (4.334,4.928) (4.363,4.988) (4.392,5.048) (4.421,5.107) (4.451,5.168) (4.481,5.228) (4.511,5.287) (4.542,5.348) (4.572,5.407) (4.603,5.468)};
+\draw[blue!70!black,thin] plot coordinates {(1.374,0.487) (1.405,0.547) (1.435,0.608) (1.466,0.668) (1.496,0.727) (1.526,0.787) (1.556,0.847) (1.586,0.907) (1.615,0.968) (1.645,1.028) (1.674,1.088) (1.702,1.148) (1.731,1.208) (1.759,1.268) (1.787,1.328) (1.814,1.388) (1.841,1.447) (1.868,1.508) (1.894,1.567) (1.919,1.627) (1.944,1.688) (1.969,1.748) (1.993,1.808) (2.016,1.868) (2.039,1.927) (2.061,1.987) (2.082,2.047) (2.102,2.107) (2.122,2.167) (2.140,2.228) (2.158,2.288) (2.174,2.348) (2.189,2.407) (2.203,2.468) (2.216,2.527) (2.228,2.588) (2.237,2.647) (2.246,2.708) (2.253,2.768) (2.258,2.828) (2.262,2.888) (2.265,2.948) (2.265,3.007) (2.264,3.067) (2.261,3.127) (2.257,3.188) (2.251,3.248) (2.244,3.308) (2.235,3.368) (2.225,3.428) (2.213,3.488) (2.200,3.548) (2.186,3.608) (2.170,3.667) (2.154,3.728) (2.136,3.787) (2.117,3.848) (2.097,3.907) (2.077,3.968) (2.056,4.027) (2.033,4.088) (2.011,4.147) (1.987,4.208) (1.963,4.268) (1.938,4.328) (1.913,4.388) (1.887,4.447) (1.861,4.508) (1.834,4.567) (1.807,4.627) (1.780,4.688) (1.752,4.748) (1.724,4.808) (1.695,4.867) (1.666,4.928) (1.637,4.988) (1.608,5.048) (1.579,5.107) (1.549,5.168) (1.519,5.228) (1.489,5.287) (1.458,5.348) (1.428,5.407) (1.397,5.468)};
+\draw[blue!70!black,thin] plot coordinates {(4.895,0.683) (4.870,0.743) (4.847,0.803) (4.823,0.863) (4.800,0.922) (4.777,0.983) (4.754,1.042) (4.732,1.102) (4.710,1.162) (4.689,1.222) (4.668,1.282) (4.648,1.343) (4.628,1.403) (4.609,1.463) (4.590,1.523) (4.572,1.583) (4.554,1.643) (4.537,1.703) (4.520,1.763) (4.504,1.823) (4.489,1.883) (4.474,1.942) (4.460,2.002) (4.447,2.062) (4.434,2.123) (4.422,2.183) (4.411,2.243) (4.401,2.303) (4.391,2.362) (4.382,2.422) (4.375,2.482) (4.367,2.542) (4.361,2.603) (4.356,2.663) (4.351,2.723) (4.348,2.782) (4.345,2.843) (4.343,2.902) (4.342,2.963) (4.342,3.022) (4.342,3.083) (4.344,3.143) (4.347,3.203) (4.350,3.263) (4.354,3.322) (4.360,3.382) (4.366,3.442) (4.373,3.502) (4.380,3.562) (4.389,3.623) (4.398,3.683) (4.408,3.743) (4.419,3.803) (4.431,3.863) (4.443,3.923) (4.457,3.983) (4.470,4.042) (4.485,4.103) (4.500,4.162) (4.516,4.223) (4.532,4.282) (4.549,4.343) (4.567,4.402) (4.585,4.463) (4.604,4.522) (4.623,4.583) (4.643,4.643) (4.663,4.703) (4.684,4.763) (4.705,4.822) (4.727,4.883) (4.749,4.942) (4.771,5.002) (4.794,5.062) (4.817,5.123) (4.841,5.183) (4.864,5.242) (4.889,5.303)};
+\draw[blue!70!black,thin] plot coordinates {(1.105,0.683) (1.130,0.743) (1.153,0.803) (1.177,0.863) (1.200,0.922) (1.223,0.983) (1.246,1.042) (1.268,1.102) (1.290,1.162) (1.311,1.222) (1.332,1.282) (1.352,1.343) (1.372,1.403) (1.391,1.463) (1.410,1.523) (1.428,1.583) (1.446,1.643) (1.463,1.703) (1.480,1.763) (1.496,1.823) (1.511,1.883) (1.526,1.942) (1.540,2.002) (1.553,2.062) (1.566,2.123) (1.578,2.183) (1.589,2.243) (1.599,2.303) (1.609,2.362) (1.618,2.422) (1.625,2.482) (1.633,2.542) (1.639,2.603) (1.644,2.663) (1.649,2.723) (1.652,2.782) (1.655,2.843) (1.657,2.902) (1.658,2.963) (1.658,3.022) (1.658,3.083) (1.656,3.143) (1.653,3.203) (1.650,3.263) (1.646,3.322) (1.640,3.382) (1.634,3.442) (1.627,3.502) (1.620,3.562) (1.611,3.623) (1.602,3.683) (1.592,3.743) (1.581,3.803) (1.569,3.863) (1.557,3.923) (1.543,3.983) (1.530,4.042) (1.515,4.103) (1.500,4.162) (1.484,4.223) (1.468,4.282) (1.451,4.343) (1.433,4.402) (1.415,4.463) (1.396,4.522) (1.377,4.583) (1.357,4.643) (1.337,4.703) (1.316,4.763) (1.295,4.822) (1.273,4.883) (1.251,4.942) (1.229,5.002) (1.206,5.062) (1.183,5.123) (1.159,5.183) (1.136,5.242) (1.111,5.303)};
+\draw[blue!70!black,thin] plot coordinates {(5.224,0.990) (5.206,1.050) (5.189,1.110) (5.172,1.170) (5.155,1.230) (5.139,1.290) (5.123,1.350) (5.108,1.410) (5.093,1.470) (5.079,1.530) (5.065,1.590) (5.051,1.650) (5.038,1.710) (5.026,1.770) (5.014,1.830) (5.003,1.890) (4.992,1.950) (4.982,2.010) (4.972,2.070) (4.963,2.130) (4.954,2.190) (4.946,2.250) (4.939,2.310) (4.932,2.370) (4.926,2.430) (4.920,2.490) (4.915,2.550) (4.911,2.610) (4.907,2.670) (4.904,2.730) (4.901,2.790) (4.899,2.850) (4.898,2.910) (4.897,2.970) (4.897,3.030) (4.898,3.090) (4.899,3.150) (4.901,3.210) (4.904,3.270) (4.907,3.330) (4.911,3.390) (4.915,3.450) (4.920,3.510) (4.926,3.570) (4.932,3.630) (4.939,3.690) (4.946,3.750) (4.954,3.810) (4.963,3.870) (4.972,3.930) (4.982,3.990) (4.992,4.050) (5.003,4.110) (5.014,4.170) (5.026,4.230) (5.038,4.290) (5.051,4.350) (5.065,4.410) (5.079,4.470) (5.093,4.530) (5.108,4.590) (5.123,4.650) (5.139,4.710) (5.155,4.770) (5.172,4.830) (5.189,4.890) (5.206,4.950) (5.224,5.010)};
+\draw[blue!70!black,thin] plot coordinates {(0.776,0.990) (0.794,1.050) (0.811,1.110) (0.828,1.170) (0.845,1.230) (0.861,1.290) (0.877,1.350) (0.892,1.410) (0.907,1.470) (0.921,1.530) (0.935,1.590) (0.949,1.650) (0.962,1.710) (0.974,1.770) (0.986,1.830) (0.997,1.890) (1.008,1.950) (1.018,2.010) (1.028,2.070) (1.037,2.130) (1.046,2.190) (1.054,2.250) (1.061,2.310) (1.068,2.370) (1.074,2.430) (1.080,2.490) (1.085,2.550) (1.089,2.610) (1.093,2.670) (1.096,2.730) (1.099,2.790) (1.101,2.850) (1.102,2.910) (1.103,2.970) (1.103,3.030) (1.102,3.090) (1.101,3.150) (1.099,3.210) (1.096,3.270) (1.093,3.330) (1.089,3.390) (1.085,3.450) (1.080,3.510) (1.074,3.570) (1.068,3.630) (1.061,3.690) (1.054,3.750) (1.046,3.810) (1.037,3.870) (1.028,3.930) (1.018,3.990) (1.008,4.050) (0.997,4.110) (0.986,4.170) (0.974,4.230) (0.962,4.290) (0.949,4.350) (0.935,4.410) (0.921,4.470) (0.907,4.530) (0.892,4.590) (0.877,4.650) (0.861,4.710) (0.845,4.770) (0.828,4.830) (0.811,4.890) (0.794,4.950) (0.776,5.010)};
+\draw[blue!70!black,thin] plot coordinates {(5.510,1.357) (5.497,1.417) (5.484,1.477) (5.472,1.537) (5.461,1.597) (5.450,1.657) (5.439,1.718) (5.429,1.778) (5.419,1.838) (5.409,1.898) (5.400,1.958) (5.392,2.018) (5.384,2.078) (5.377,2.138) (5.370,2.198) (5.363,2.258) (5.357,2.317) (5.351,2.377) (5.346,2.438) (5.342,2.498) (5.338,2.558) (5.334,2.618) (5.331,2.678) (5.329,2.737) (5.327,2.797) (5.325,2.857) (5.324,2.917) (5.324,2.978) (5.324,3.037) (5.324,3.098) (5.326,3.157) (5.327,3.218) (5.329,3.277) (5.332,3.338) (5.335,3.397) (5.339,3.458) (5.343,3.518) (5.348,3.578) (5.353,3.638) (5.358,3.697) (5.365,3.757) (5.371,3.817) (5.378,3.877) (5.386,3.938) (5.394,3.998) (5.403,4.058) (5.412,4.117) (5.421,4.178) (5.431,4.238) (5.442,4.298) (5.452,4.357) (5.464,4.417) (5.475,4.478) (5.488,4.537) (5.500,4.598)};
+\draw[blue!70!black,thin] plot coordinates {(0.490,1.357) (0.503,1.417) (0.516,1.477) (0.528,1.537) (0.539,1.597) (0.550,1.657) (0.561,1.718) (0.571,1.778) (0.581,1.838) (0.591,1.898) (0.600,1.958) (0.608,2.018) (0.616,2.078) (0.623,2.138) (0.630,2.198) (0.637,2.258) (0.643,2.317) (0.649,2.377) (0.654,2.438) (0.658,2.498) (0.662,2.558) (0.666,2.618) (0.669,2.678) (0.671,2.737) (0.673,2.797) (0.675,2.857) (0.676,2.917) (0.676,2.978) (0.676,3.037) (0.676,3.098) (0.674,3.157) (0.673,3.218) (0.671,3.277) (0.668,3.338) (0.665,3.397) (0.661,3.458) (0.657,3.518) (0.652,3.578) (0.647,3.638) (0.642,3.697) (0.635,3.757) (0.629,3.817) (0.622,3.877) (0.614,3.938) (0.606,3.998) (0.597,4.058) (0.588,4.117) (0.579,4.178) (0.569,4.238) (0.558,4.298) (0.548,4.357) (0.536,4.417) (0.525,4.478) (0.512,4.537) (0.500,4.598)};
+\draw[blue!70!black,thin] plot coordinates {(5.765,1.845) (5.757,1.905) (5.749,1.965) (5.742,2.025) (5.735,2.085) (5.728,2.145) (5.722,2.205) (5.717,2.265) (5.711,2.325) (5.707,2.385) (5.702,2.445) (5.698,2.505) (5.695,2.565) (5.692,2.625) (5.689,2.685) (5.687,2.745) (5.686,2.805) (5.684,2.865) (5.684,2.925) (5.683,2.985) (5.683,3.045) (5.684,3.105) (5.685,3.165) (5.686,3.225) (5.688,3.285) (5.691,3.345) (5.693,3.405) (5.697,3.465) (5.700,3.525) (5.704,3.585) (5.709,3.645) (5.714,3.705) (5.719,3.765) (5.725,3.825) (5.731,3.885) (5.738,3.945) (5.745,4.005) (5.753,4.065) (5.761,4.125)};
+\draw[blue!70!black,thin] plot coordinates {(0.235,1.845) (0.243,1.905) (0.251,1.965) (0.258,2.025) (0.265,2.085) (0.272,2.145) (0.278,2.205) (0.283,2.265) (0.289,2.325) (0.293,2.385) (0.298,2.445) (0.302,2.505) (0.305,2.565) (0.308,2.625) (0.311,2.685) (0.313,2.745) (0.314,2.805) (0.316,2.865) (0.316,2.925) (0.317,2.985) (0.317,3.045) (0.316,3.105) (0.315,3.165) (0.314,3.225) (0.312,3.285) (0.309,3.345) (0.307,3.405) (0.303,3.465) (0.300,3.525) (0.296,3.585) (0.291,3.645) (0.286,3.705) (0.281,3.765) (0.275,3.825) (0.269,3.885) (0.262,3.945) (0.255,4.005) (0.247,4.065) (0.239,4.125)};
+\draw[blue!70!black,thin] plot coordinates {(5.908,2.272) (5.903,2.333) (5.899,2.393) (5.895,2.453) (5.891,2.513) (5.888,2.573) (5.885,2.633) (5.883,2.692) (5.881,2.752) (5.880,2.812) (5.878,2.873) (5.878,2.933) (5.878,2.993) (5.878,3.053) (5.878,3.113) (5.879,3.173) (5.881,3.233) (5.882,3.292) (5.885,3.353) (5.887,3.412) (5.890,3.473) (5.894,3.532) (5.898,3.593) (5.902,3.652) (5.907,3.713)};
+\draw[blue!70!black,thin] plot coordinates {(0.092,2.272) (0.097,2.333) (0.101,2.393) (0.105,2.453) (0.109,2.513) (0.112,2.573) (0.115,2.633) (0.117,2.692) (0.119,2.752) (0.120,2.812) (0.122,2.873) (0.122,2.933) (0.122,2.993) (0.122,3.053) (0.122,3.113) (0.121,3.173) (0.119,3.233) (0.118,3.292) (0.115,3.353) (0.113,3.412) (0.110,3.473) (0.106,3.532) (0.102,3.593) (0.098,3.652) (0.093,3.713)};
+\draw[red!70!black,thick] plot coordinates {(1.504,0.408) (1.654,0.669) (1.805,0.929) (1.955,1.190) (2.105,1.450) (2.256,1.711) (2.406,1.971) (2.556,2.232) (2.707,2.492) (2.857,2.753) (3.008,3.013) (3.158,3.273) (3.308,3.534) (3.459,3.794) (3.609,4.055) (3.759,4.315) (3.910,4.576) (4.060,4.836) (4.211,5.097) (4.361,5.357)};
+\draw[red!70!black,thick] plot coordinates {(1.504,5.592) (1.654,5.331) (1.805,5.071) (1.955,4.810) (2.105,4.550) (2.256,4.289) (2.406,4.029) (2.556,3.768) (2.707,3.508) (2.857,3.247) (3.008,2.987) (3.158,2.727) (3.308,2.466) (3.459,2.206) (3.609,1.945) (3.759,1.685) (3.910,1.424) (4.060,1.164) (4.211,0.903) (4.361,0.643)};
+\fill (6.000,3.000) circle (0.05) node[left,font=\small]{$\mathbf e_1$};
+\fill (0.000,3.000) circle (0.05) node[right,font=\small]{$-\mathbf e_1$};
+\fill (3.000,6.000) circle (0.05) node[above,font=\small]{$\mathbf e_3$};
+\fill (3.000,0.000) circle (0.05) node[below,font=\small]{$-\mathbf e_3$};
+\fill[red!70!black] (3.000,3.000) circle (0.06) node[above right,font=\small]{$\mathbf e_2$};
+\draw[->,>=stealth,black] (5.268,4.169)--(5.232,3.931);
+\draw[->,>=stealth,black] (0.732,1.831)--(0.768,2.069);
+\draw[->,>=stealth,black] (3.698,5.619)--(3.502,5.481);
+\draw[->,>=stealth,black] (2.302,0.381)--(2.498,0.519);
+\draw[->,>=stealth,black] (4.354,3.270)--(4.346,3.030);
+\end{tikzpicture}
+
+\caption{Phase portrait of the reduced free rigid body, $I=(1,2,3)$, $|\mu|=1$: the sphere $|\Pi|=1$ seen along the intermediate axis $\mathbf e_2$ (front hemisphere $\Pi_2>0$, horizontal axis $\Pi_1$, vertical axis $\Pi_3$). Level sets of the energy are hyperbolas; blue: $H>H_{\rm sep}$ (circulation around $\pm\mathbf e_1$); green: $H<H_{\rm sep}$ (around $\pm\mathbf e_3$); red: the separatrix $H=\mu^2/(2I_2)$, through the saddle $\mathbf e_2$. Arrows show the direction of motion on the front hemisphere; on the back hemisphere the same curves are traversed in the opposite direction.}\label{rd:fig:polhode}
+\end{figure}
+
+\paragraph{Reconstruction.} Given $\Pi(t)$, the orientation $A(t)$ is obtained by integrating $\dot A=A\hat\Omega$ with $\Omega=I^{-1}\Pi$, a quadrature, as before. For a periodic motion of $\Pi$ (a closed curve on the sphere) the body returns to the same orientation relative to $\boldsymbol\mu$ up to a rotation about $\boldsymbol\mu$, and this phase is the sum of a dynamic part $2ET/|\mu|$ and a geometric part given by the solid angle enclosed by the curve on the sphere.\footnote{R.\ Montgomery, How much does the rigid body rotate? A Berry's phase from the 18th century, \emph{Amer.\ J.\ Phys.}\ \textbf{59} (1991) 394--398; J.\ E.\ Marsden, R.\ Montgomery and T.\ S.\ Ratiu, Reduction, symmetry, and phases in mechanics, \emph{Mem.\ Amer.\ Math.\ Soc.}\ \textbf{88} (1990), no.~436. The mechanics of Euler's rotation equations is in L.\ Euler, Du mouvement de rotation des corps solides autour d'un axe variable, \emph{M\'em.\ Acad.\ Sci.\ Berlin} \textbf{14} (1758, printed 1765) 154--193.} This is the geometric phase that links the free rigid body with the falling cat and the Hannay angle.
+
+%======================================================================
+\section{Both at once: the spherical pendulum}\label{rd:sec:sph}
+%======================================================================
+
+The spherical pendulum is the simplest system in which both procedures act and one can watch what each of them does to the equations.
+
+\subsection{The sequence $6\to4\to2$}\label{rd:sec:sph64}
+
+A bob of mass $m$ in the gravitational field is constrained to the sphere $|\mathbf x|=\ell$. Starting from $T^*\mathbb R^3$ with $H=|\mathbf p|^2/(2m)+mgz$:
+
+\begin{enumerate}
+\item \emph{Constraints.} The condition $|\mathbf x|=\ell$ is accompanied by $\mathbf x\cdot\mathbf p=0$, and together they define the four-dimensional set \eqref{rd:Ssph}, $S\cong T^*S^2$. In spherical coordinates, with $\vartheta$ measured from the downward vertical,
+\begin{equation}\label{rd:HS}
+H_S=\frac{p_\vartheta^2}{2m\ell^2}+\frac{p_\varphi^2}{2m\ell^2\sin^2\vartheta}-mg\ell\cos\vartheta .
+\end{equation}
+The tension is a nonzero constraint force.
+\item \emph{Symmetry.} The rotations about the vertical axis leave $H_S$ invariant ($\varphi$ is cyclic), with momentum map $J=p_\varphi=xp_y-yp_x$. Fixing $p_\varphi=\mu\neq0$ and forgetting $\varphi$ gives the two-dimensional reduced system with
+\begin{equation}\label{rd:Hmusph}
+H_\mu=\frac{p_\vartheta^2}{2m\ell^2}+V_\mu(\vartheta),\qquad V_\mu(\vartheta)=\frac{\mu^2}{2m\ell^2\sin^2\vartheta}-mg\ell\cos\vartheta .
+\end{equation}
+\end{enumerate}
+The dimension count is $6\xrightarrow{\ \text{2 second-class constraints}\ }4\xrightarrow{\ \text{1 abelian symmetry}\ }2$. The two terms of $V_\mu$ have a different origin: the gravitational term is the original potential, restricted to the sphere; the centrifugal-like term $\mu^2/(2m\ell^2\sin^2\vartheta)$ is the cyclic coordinate's contribution, as for Kepler. They are unrelated to the constraint force: the tension $T$ does not appear in \eqref{rd:Hmusph}. (Compare Section~\ref{rd:sec:rotating} below, where a centrifugal term does come from a constraint.)
+
+Figure~\ref{rd:fig:sph} shows $V_\mu$ for $m=\ell=g=1$ and $\mu=0.8$, together with a trajectory started at $\vartheta_0=1.1$ rad with $p_\vartheta=0$ (energy $E=-0.0507$). The potential tends to infinity at both poles, $\vartheta\to0,\pi$, so the polar angle oscillates between the two turning points $\vartheta=0.760$ and $\vartheta=1.100$. The azimuth $\varphi$ is reconstructed from $\dot\varphi=\mu/(m\ell^2\sin^2\vartheta)$ and the trajectory seen from above is the familiar rosette, between two circles of radii $\ell\sin0.760=0.689\ell$ and $\ell\sin1.100=0.891\ell$.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\begin{scope}[shift={(0,0)}]
+\draw[gray!60,very thin] (0,0) rectangle (6.0,4.0);
+\draw[gray!60] (0.300,0)--(0.300,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{0.5};
+\draw[gray!60] (1.800,0)--(1.800,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{1};
+\draw[gray!60] (3.300,0)--(3.300,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{1.5};
+\draw[gray!60] (4.800,0)--(4.800,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{2};
+\draw[gray!60] (0,0.632)--(-0.07,0.632) node[left,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (0,1.684)--(-0.07,1.684) node[left,font=\scriptsize,inner sep=1pt,text=black]{0.5};
+\draw[gray!60] (0,2.737)--(-0.07,2.737) node[left,font=\scriptsize,inner sep=1pt,text=black]{1};
+\draw[gray!60] (0,3.789)--(-0.07,3.789) node[left,font=\scriptsize,inner sep=1pt,text=black]{1.5};
+\node[font=\small] at (3.0,-0.75) {$\vartheta$};
+\node[font=\small,rotate=90] at (-0.95,2.0) {$V_\mu(\vartheta)$};
+\begin{scope}\clip (0,0) rectangle (6.0,4.0);
+\draw[black,thick] plot coordinates {(0.150,2.297) (0.170,2.209) (0.189,2.125) (0.209,2.044) (0.228,1.968) (0.248,1.895) (0.267,1.825) (0.287,1.758) (0.307,1.694) (0.326,1.633) (0.346,1.575) (0.365,1.519) (0.385,1.465) (0.404,1.414) (0.424,1.365) (0.443,1.318) (0.463,1.273) (0.483,1.230) (0.502,1.189) (0.522,1.149) (0.541,1.111) (0.561,1.075) (0.580,1.040) (0.600,1.007) (0.620,0.975) (0.639,0.945) (0.659,0.916) (0.678,0.888) (0.698,0.861) (0.717,0.835) (0.737,0.811) (0.757,0.787) (0.776,0.765) (0.796,0.744) (0.815,0.723) (0.835,0.704) (0.854,0.685) (0.874,0.667) (0.893,0.650) (0.913,0.634) (0.933,0.619) (0.952,0.604) (0.972,0.590) (0.991,0.577) (1.011,0.564) (1.030,0.552) (1.050,0.541) (1.070,0.530) (1.089,0.520) (1.109,0.511) (1.128,0.502) (1.148,0.494) (1.167,0.486) (1.187,0.479) (1.207,0.472) (1.226,0.465) (1.246,0.460) (1.265,0.454) (1.285,0.449) (1.304,0.445) (1.324,0.441) (1.343,0.437) (1.363,0.434) (1.383,0.431) (1.402,0.428) (1.422,0.426) (1.441,0.424) (1.461,0.423) (1.480,0.422) (1.500,0.421) (1.520,0.420) (1.539,0.420) (1.559,0.420) (1.578,0.421) (1.598,0.422) (1.617,0.423) (1.637,0.424) (1.657,0.426) (1.676,0.428) (1.696,0.430) (1.715,0.432) (1.735,0.435) (1.754,0.438) (1.774,0.441) (1.793,0.444) (1.813,0.448) (1.833,0.452) (1.852,0.456) (1.872,0.460) (1.891,0.465) (1.911,0.469) (1.930,0.474) (1.950,0.479) (1.970,0.485) (1.989,0.490) (2.009,0.496) (2.028,0.502) (2.048,0.508) (2.067,0.514) (2.087,0.520) (2.107,0.527) (2.126,0.534) (2.146,0.541) (2.165,0.548) (2.185,0.555) (2.204,0.562) (2.224,0.570) (2.243,0.578) (2.263,0.585) (2.283,0.593) (2.302,0.602) (2.322,0.610) (2.341,0.618) (2.361,0.627) (2.380,0.635) (2.400,0.644) (2.420,0.653) (2.439,0.662) (2.459,0.671) (2.478,0.681) (2.498,0.690) (2.517,0.700) (2.537,0.709) (2.557,0.719) (2.576,0.729) (2.596,0.739) (2.615,0.749) (2.635,0.759) (2.654,0.770) (2.674,0.780) (2.693,0.791) (2.713,0.801) (2.733,0.812) (2.752,0.823) (2.772,0.834) (2.791,0.845) (2.811,0.856) (2.830,0.867) (2.850,0.878) (2.870,0.890) (2.889,0.901) (2.909,0.913) (2.928,0.924) (2.948,0.936) (2.967,0.948) (2.987,0.960) (3.007,0.971) (3.026,0.984) (3.046,0.996) (3.065,1.008) (3.085,1.020) (3.104,1.032) (3.124,1.045) (3.143,1.057) (3.163,1.070) (3.183,1.083) (3.202,1.095) (3.222,1.108) (3.241,1.121) (3.261,1.134) (3.280,1.147) (3.300,1.160) (3.320,1.173) (3.339,1.186) (3.359,1.199) (3.378,1.213) (3.398,1.226) (3.417,1.239) (3.437,1.253) (3.457,1.266) (3.476,1.280) (3.496,1.294) (3.515,1.307) (3.535,1.321) (3.554,1.335) (3.574,1.349) (3.593,1.363) (3.613,1.377) (3.633,1.391) (3.652,1.405) (3.672,1.419) (3.691,1.433) (3.711,1.447) (3.730,1.462) (3.750,1.476) (3.770,1.490) (3.789,1.505) (3.809,1.519) (3.828,1.534) (3.848,1.549) (3.867,1.563) (3.887,1.578) (3.907,1.593) (3.926,1.608) (3.946,1.623) (3.965,1.637) (3.985,1.652) (4.004,1.667) (4.024,1.682) (4.043,1.698) (4.063,1.713) (4.083,1.728) (4.102,1.743) (4.122,1.759) (4.141,1.774) (4.161,1.789) (4.180,1.805) (4.200,1.820) (4.220,1.836) (4.239,1.851) (4.259,1.867) (4.278,1.883) (4.298,1.899) (4.317,1.914) (4.337,1.930) (4.357,1.946) (4.376,1.962) (4.396,1.978) (4.415,1.994) (4.435,2.010) (4.454,2.027) (4.474,2.043) (4.493,2.059) (4.513,2.075) (4.533,2.092) (4.552,2.108) (4.572,2.125) (4.591,2.141) (4.611,2.158) (4.630,2.175) (4.650,2.192) (4.670,2.208) (4.689,2.225) (4.709,2.242) (4.728,2.259) (4.748,2.276) (4.767,2.294) (4.787,2.311) (4.807,2.328) (4.826,2.346) (4.846,2.363) (4.865,2.381) (4.885,2.398) (4.904,2.416) (4.924,2.434) (4.943,2.452) (4.963,2.470) (4.983,2.488) (5.002,2.506) (5.022,2.524) (5.041,2.543) (5.061,2.561) (5.080,2.580) (5.100,2.599) (5.120,2.617) (5.139,2.636) (5.159,2.655) (5.178,2.674) (5.198,2.694) (5.217,2.713) (5.237,2.733) (5.257,2.752) (5.276,2.772) (5.296,2.792) (5.315,2.812) (5.335,2.832) (5.354,2.853) (5.374,2.873) (5.393,2.894) (5.413,2.915) (5.433,2.936) (5.452,2.957) (5.472,2.979) (5.491,3.001) (5.511,3.022) (5.530,3.045) (5.550,3.067) (5.570,3.089) (5.589,3.112) (5.609,3.135) (5.628,3.158) (5.648,3.182) (5.667,3.206) (5.687,3.230) (5.707,3.254) (5.726,3.279) (5.746,3.303) (5.765,3.329) (5.785,3.354) (5.804,3.380) (5.824,3.406) (5.843,3.433) (5.863,3.460) (5.883,3.487) (5.902,3.515) (5.922,3.543) (5.941,3.572) (5.961,3.601) (5.980,3.631) (6.000,3.661)};
+\draw[blue!70!black,dashed] plot coordinates {(0.150,0.525) (0.170,0.525) (0.189,0.525) (0.209,0.525) (0.228,0.525) (0.248,0.525) (0.267,0.525) (0.287,0.525) (0.307,0.525) (0.326,0.525) (0.346,0.525) (0.365,0.525) (0.385,0.525) (0.404,0.525) (0.424,0.525) (0.443,0.525) (0.463,0.525) (0.483,0.525) (0.502,0.525) (0.522,0.525) (0.541,0.525) (0.561,0.525) (0.580,0.525) (0.600,0.525) (0.620,0.525) (0.639,0.525) (0.659,0.525) (0.678,0.525) (0.698,0.525) (0.717,0.525) (0.737,0.525) (0.757,0.525) (0.776,0.525) (0.796,0.525) (0.815,0.525) (0.835,0.525) (0.854,0.525) (0.874,0.525) (0.893,0.525) (0.913,0.525) (0.933,0.525) (0.952,0.525) (0.972,0.525) (0.991,0.525) (1.011,0.525) (1.030,0.525) (1.050,0.525) (1.070,0.525) (1.089,0.525) (1.109,0.525) (1.128,0.525) (1.148,0.525) (1.167,0.525) (1.187,0.525) (1.207,0.525) (1.226,0.525) (1.246,0.525) (1.265,0.525) (1.285,0.525) (1.304,0.525) (1.324,0.525) (1.343,0.525) (1.363,0.525) (1.383,0.525) (1.402,0.525) (1.422,0.525) (1.441,0.525) (1.461,0.525) (1.480,0.525) (1.500,0.525) (1.520,0.525) (1.539,0.525) (1.559,0.525) (1.578,0.525) (1.598,0.525) (1.617,0.525) (1.637,0.525) (1.657,0.525) (1.676,0.525) (1.696,0.525) (1.715,0.525) (1.735,0.525) (1.754,0.525) (1.774,0.525) (1.793,0.525) (1.813,0.525) (1.833,0.525) (1.852,0.525) (1.872,0.525) (1.891,0.525) (1.911,0.525) (1.930,0.525) (1.950,0.525) (1.970,0.525) (1.989,0.525) (2.009,0.525) (2.028,0.525) (2.048,0.525) (2.067,0.525) (2.087,0.525) (2.107,0.525) (2.126,0.525) (2.146,0.525) (2.165,0.525) (2.185,0.525) (2.204,0.525) (2.224,0.525) (2.243,0.525) (2.263,0.525) (2.283,0.525) (2.302,0.525) (2.322,0.525) (2.341,0.525) (2.361,0.525) (2.380,0.525) (2.400,0.525) (2.420,0.525) (2.439,0.525) (2.459,0.525) (2.478,0.525) (2.498,0.525) (2.517,0.525) (2.537,0.525) (2.557,0.525) (2.576,0.525) (2.596,0.525) (2.615,0.525) (2.635,0.525) (2.654,0.525) (2.674,0.525) (2.693,0.525) (2.713,0.525) (2.733,0.525) (2.752,0.525) (2.772,0.525) (2.791,0.525) (2.811,0.525) (2.830,0.525) (2.850,0.525) (2.870,0.525) (2.889,0.525) (2.909,0.525) (2.928,0.525) (2.948,0.525) (2.967,0.525) (2.987,0.525) (3.007,0.525) (3.026,0.525) (3.046,0.525) (3.065,0.525) (3.085,0.525) (3.104,0.525) (3.124,0.525) (3.143,0.525) (3.163,0.525) (3.183,0.525) (3.202,0.525) (3.222,0.525) (3.241,0.525) (3.261,0.525) (3.280,0.525) (3.300,0.525) (3.320,0.525) (3.339,0.525) (3.359,0.525) (3.378,0.525) (3.398,0.525) (3.417,0.525) (3.437,0.525) (3.457,0.525) (3.476,0.525) (3.496,0.525) (3.515,0.525) (3.535,0.525) (3.554,0.525) (3.574,0.525) (3.593,0.525) (3.613,0.525) (3.633,0.525) (3.652,0.525) (3.672,0.525) (3.691,0.525) (3.711,0.525) (3.730,0.525) (3.750,0.525) (3.770,0.525) (3.789,0.525) (3.809,0.525) (3.828,0.525) (3.848,0.525) (3.867,0.525) (3.887,0.525) (3.907,0.525) (3.926,0.525) (3.946,0.525) (3.965,0.525) (3.985,0.525) (4.004,0.525) (4.024,0.525) (4.043,0.525) (4.063,0.525) (4.083,0.525) (4.102,0.525) (4.122,0.525) (4.141,0.525) (4.161,0.525) (4.180,0.525) (4.200,0.525) (4.220,0.525) (4.239,0.525) (4.259,0.525) (4.278,0.525) (4.298,0.525) (4.317,0.525) (4.337,0.525) (4.357,0.525) (4.376,0.525) (4.396,0.525) (4.415,0.525) (4.435,0.525) (4.454,0.525) (4.474,0.525) (4.493,0.525) (4.513,0.525) (4.533,0.525) (4.552,0.525) (4.572,0.525) (4.591,0.525) (4.611,0.525) (4.630,0.525) (4.650,0.525) (4.670,0.525) (4.689,0.525) (4.709,0.525) (4.728,0.525) (4.748,0.525) (4.767,0.525) (4.787,0.525) (4.807,0.525) (4.826,0.525) (4.846,0.525) (4.865,0.525) (4.885,0.525) (4.904,0.525) (4.924,0.525) (4.943,0.525) (4.963,0.525) (4.983,0.525) (5.002,0.525) (5.022,0.525) (5.041,0.525) (5.061,0.525) (5.080,0.525) (5.100,0.525) (5.120,0.525) (5.139,0.525) (5.159,0.525) (5.178,0.525) (5.198,0.525) (5.217,0.525) (5.237,0.525) (5.257,0.525) (5.276,0.525) (5.296,0.525) (5.315,0.525) (5.335,0.525) (5.354,0.525) (5.374,0.525) (5.393,0.525) (5.413,0.525) (5.433,0.525) (5.452,0.525) (5.472,0.525) (5.491,0.525) (5.511,0.525) (5.530,0.525) (5.550,0.525) (5.570,0.525) (5.589,0.525) (5.609,0.525) (5.628,0.525) (5.648,0.525) (5.667,0.525) (5.687,0.525) (5.707,0.525) (5.726,0.525) (5.746,0.525) (5.765,0.525) (5.785,0.525) (5.804,0.525) (5.824,0.525) (5.843,0.525) (5.863,0.525) (5.883,0.525) (5.902,0.525) (5.922,0.525) (5.941,0.525) (5.961,0.525) (5.980,0.525) (6.000,0.525)};
+\end{scope}
+\fill[red!70!black] (1.080,0.525) circle (0.07);\fill[red!70!black] (2.099,0.525) circle (0.07);\node[font=\scriptsize,blue!70!black,above right] at (4.0,0.525) {$E$};
+\end{scope}
+\begin{scope}[shift={(8.2,0)}]
+\draw[gray!60,very thin] (0,0) rectangle (4.0,4.0);
+\draw[gray!60] (0.000,0)--(0.000,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{-1};
+\draw[gray!60] (2.000,0)--(2.000,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (4.000,0)--(4.000,-0.07) node[below,font=\scriptsize,inner sep=1pt,text=black]{1};
+\draw[gray!60] (0,0.000)--(-0.07,0.000) node[left,font=\scriptsize,inner sep=1pt,text=black]{-1};
+\draw[gray!60] (0,2.000)--(-0.07,2.000) node[left,font=\scriptsize,inner sep=1pt,text=black]{0};
+\draw[gray!60] (0,4.000)--(-0.07,4.000) node[left,font=\scriptsize,inner sep=1pt,text=black]{1};
+\node[font=\small] at (2.0,-0.75) {$x/\ell$};
+\node[font=\small,rotate=90] at (-0.95,2.0) {$y/\ell$};
+\begin{scope}\clip (0,0) rectangle (4.0,4.0);
+\draw[black,very thin] plot coordinates {(3.782,2.000) (3.780,2.090) (3.771,2.179) (3.754,2.286) (3.733,2.374) (3.701,2.477) (3.668,2.562) (3.621,2.661) (3.576,2.742) (3.515,2.835) (3.458,2.909) (3.383,2.994) (3.314,3.060) (3.241,3.123) (3.147,3.192) (3.064,3.245) (2.958,3.302) (2.865,3.343) (2.749,3.385) (2.649,3.413) (2.525,3.438) (2.419,3.452) (2.289,3.460) (2.179,3.459) (2.047,3.449) (1.936,3.432) (1.825,3.408) (1.694,3.371) (1.586,3.331) (1.459,3.275) (1.357,3.221) (1.238,3.148) (1.144,3.081) (1.036,2.993) (0.952,2.913) (0.858,2.812) (0.786,2.723) (0.721,2.631) (0.650,2.515) (0.599,2.417) (0.546,2.295) (0.510,2.193) (0.476,2.068) (0.455,1.964) (0.439,1.840) (0.434,1.737) (0.436,1.615) (0.445,1.515) (0.464,1.397) (0.487,1.302) (0.516,1.210) (0.558,1.103) (0.598,1.017) (0.654,0.919) (0.706,0.842) (0.774,0.754) (0.835,0.686) (0.913,0.610) (0.982,0.551) (1.070,0.487) (1.146,0.439) (1.225,0.396) (1.323,0.351) (1.407,0.319) (1.510,0.288) (1.598,0.268) (1.705,0.252) (1.795,0.244) (1.904,0.242) (1.995,0.247) (2.105,0.261) (2.196,0.279) (2.304,0.308) (2.393,0.339) (2.480,0.377) (2.583,0.430) (2.666,0.480) (2.762,0.549) (2.839,0.613) (2.926,0.697) (2.995,0.773) (3.071,0.871) (3.130,0.959) (3.194,1.070) (3.240,1.167) (3.281,1.269) (3.322,1.395) (3.349,1.503) (3.373,1.637) (3.385,1.750) (3.390,1.888) (3.387,2.003) (3.373,2.141) (3.354,2.256) (3.322,2.391) (3.288,2.502) (3.238,2.631) (3.189,2.736) (3.134,2.836) (3.061,2.951) (2.994,3.042) (2.907,3.144) (2.830,3.223) (2.732,3.310) (2.647,3.375) (2.541,3.446) (2.449,3.497) (2.337,3.550) (2.242,3.587) (2.146,3.617) (2.030,3.645) (1.933,3.660) (1.817,3.670) (1.721,3.672) (1.607,3.665) (1.514,3.653) (1.404,3.631) (1.315,3.606) (1.212,3.569) (1.128,3.532) (1.032,3.482) (0.955,3.434) (0.881,3.382) (0.798,3.314) (0.732,3.252) (0.659,3.174) (0.602,3.104) (0.540,3.015) (0.494,2.938) (0.444,2.841) (0.409,2.758) (0.373,2.654) (0.349,2.566) (0.331,2.475) (0.317,2.364) (0.311,2.270) (0.313,2.156) (0.322,2.061) (0.340,1.946) (0.363,1.850) (0.399,1.736) (0.436,1.642) (0.489,1.532) (0.541,1.442) (0.612,1.338) (0.677,1.254) (0.749,1.173) (0.843,1.082) (0.927,1.011) (1.035,0.932) (1.131,0.872) (1.251,0.807) (1.355,0.760) (1.485,0.711) (1.596,0.679) (1.732,0.648) (1.846,0.630) (1.985,0.618) (2.101,0.616) (2.216,0.621) (2.353,0.637) (2.465,0.657) (2.596,0.690) (2.702,0.725) (2.825,0.775) (2.923,0.824) (3.035,0.889) (3.123,0.949) (3.222,1.027) (3.298,1.097) (3.369,1.171) (3.446,1.265) (3.504,1.346) (3.565,1.447) (3.610,1.533) (3.655,1.640) (3.686,1.729) (3.714,1.839) (3.732,1.930) (3.744,2.041) (3.748,2.132) (3.746,2.242) (3.737,2.332) (3.723,2.422) (3.698,2.527) (3.672,2.613) (3.633,2.714) (3.595,2.795) (3.543,2.889) (3.494,2.965) (3.430,3.052) (3.371,3.120) (3.294,3.197) (3.225,3.258) (3.153,3.314) (3.060,3.375) (2.979,3.421) (2.878,3.469) (2.789,3.503) (2.679,3.537) (2.585,3.559) (2.469,3.577) (2.370,3.585) (2.249,3.586) (2.147,3.580) (2.024,3.563) (1.922,3.542) (1.819,3.514) (1.698,3.470) (1.598,3.427) (1.481,3.365) (1.386,3.307) (1.276,3.228) (1.189,3.156) (1.089,3.061) (1.011,2.976) (0.924,2.868) (0.858,2.773) (0.798,2.674) (0.734,2.550) (0.687,2.444) (0.641,2.314) (0.610,2.203) (0.582,2.069) (0.566,1.957) (0.557,1.823) (0.557,1.713) (0.566,1.581) (0.581,1.474) (0.608,1.349) (0.638,1.248) (0.673,1.150) (0.724,1.038) (0.771,0.949) (0.836,0.847) (0.894,0.768) (0.970,0.679) (1.038,0.611) (1.124,0.536) (1.200,0.479) (1.294,0.418) (1.375,0.374) (1.458,0.335) (1.561,0.295) (1.648,0.269) (1.753,0.244) (1.843,0.230) (1.950,0.220) (2.040,0.219) (2.148,0.224) (2.237,0.234) (2.343,0.254) (2.430,0.277) (2.533,0.312) (2.616,0.346) (2.698,0.387) (2.793,0.442) (2.869,0.494) (2.957,0.563) (3.026,0.626) (3.104,0.709) (3.165,0.783) (3.232,0.877) (3.282,0.961) (3.336,1.067) (3.375,1.160) (3.408,1.256) (3.440,1.375) (3.459,1.478) (3.474,1.604) (3.479,1.711) (3.475,1.842) (3.465,1.951) (3.443,2.083) (3.417,2.192) (3.376,2.322) (3.334,2.429) (3.275,2.553) (3.219,2.654) (3.157,2.752) (3.074,2.864) (2.998,2.952) (2.901,3.052) (2.815,3.129) (2.706,3.213) (2.612,3.277) (2.494,3.345) (2.394,3.395) (2.270,3.445) (2.166,3.479) (2.061,3.506) (1.934,3.529) (1.829,3.541) (1.704,3.546) (1.602,3.542) (1.480,3.530) (1.382,3.512) (1.267,3.483) (1.174,3.452) (1.068,3.407) (0.982,3.365) (0.885,3.306) (0.808,3.253) (0.736,3.195) (0.655,3.120) (0.592,3.053) (0.523,2.969) (0.471,2.895) (0.415,2.802) (0.373,2.722) (0.331,2.623) (0.301,2.538) (0.272,2.434) (0.254,2.346) (0.240,2.239) (0.234,2.149) (0.234,2.058) (0.242,1.950) (0.255,1.859) (0.278,1.751) (0.304,1.662) (0.343,1.556) (0.382,1.470) (0.436,1.370) (0.488,1.288) (0.558,1.194) (0.623,1.120) (0.693,1.048) (0.785,0.968) (0.867,0.906) (0.972,0.838) (1.064,0.787) (1.181,0.734) (1.283,0.695) (1.409,0.657) (1.517,0.633) (1.650,0.613) (1.763,0.603) (1.900,0.601) (2.015,0.607) (2.129,0.621) (2.266,0.646) (2.379,0.675) (2.511,0.719) (2.618,0.762) (2.743,0.823) (2.842,0.881) (2.956,0.957) (3.046,1.026) (3.147,1.116) (3.224,1.196) (3.296,1.279) (3.374,1.384) (3.432,1.474) (3.492,1.586) (3.536,1.681) (3.579,1.797) (3.607,1.895) (3.632,2.013) (3.646,2.111) (3.653,2.228) (3.653,2.324) (3.644,2.439) (3.629,2.532) (3.609,2.624) (3.578,2.731) (3.545,2.817) (3.499,2.917) (3.456,2.997) (3.397,3.089) (3.343,3.161) (3.273,3.243) (3.210,3.307) (3.129,3.379) (3.058,3.434) (2.984,3.484) (2.890,3.538) (2.809,3.578) (2.709,3.619) (2.622,3.647) (2.516,3.674) (2.425,3.690) (2.315,3.702) (2.221,3.705) (2.108,3.701) (2.014,3.690) (1.900,3.669) (1.806,3.645) (1.712,3.614) (1.601,3.568) (1.511,3.523) (1.405,3.460) (1.320,3.400) (1.221,3.321) (1.143,3.248) (1.055,3.153) (0.986,3.067) (0.910,2.958) (0.853,2.862) (0.801,2.762) (0.747,2.636) (0.709,2.528) (0.671,2.395) (0.648,2.281) (0.629,2.143) (0.621,2.027) (0.621,1.888) (0.629,1.773) (0.648,1.636) (0.671,1.524) (0.708,1.393) (0.745,1.287) (0.789,1.184) (0.850,1.067) (0.906,0.973) (0.981,0.868) (1.048,0.786) (1.134,0.694) (1.210,0.624) (1.306,0.549) (1.389,0.492) (1.492,0.432) (1.581,0.389) (1.670,0.353) (1.780,0.317) (1.872,0.294) (1.983,0.275) (2.075,0.266) (2.186,0.263) (2.278,0.267) (2.386,0.279) (2.476,0.295) (2.581,0.322) (2.666,0.351) (2.766,0.392) (2.847,0.432) (2.924,0.476) (3.014,0.536) (3.085,0.591) (3.166,0.663) (3.229,0.728) (3.300,0.811) (3.354,0.885) (3.412,0.978) (3.456,1.060) (3.502,1.162) (3.534,1.250) (3.561,1.341) (3.585,1.454) (3.599,1.550) (3.607,1.668) (3.606,1.768) (3.597,1.888) (3.582,1.990) (3.555,2.111) (3.524,2.212) (3.479,2.331) (3.433,2.429) (3.370,2.544) (3.309,2.637) (3.243,2.727) (3.155,2.829) (3.075,2.911) (2.972,3.002) (2.881,3.072) (2.765,3.150) (2.665,3.207) (2.540,3.269) (2.432,3.312) (2.301,3.356) (2.189,3.384) (2.054,3.409) (1.941,3.422) (1.828,3.428) (1.694,3.426) (1.584,3.416) (1.455,3.396) (1.350,3.372) (1.228,3.334) (1.130,3.296) (1.017,3.243) (0.928,3.193) (0.828,3.126) (0.749,3.065) (0.675,3.000) (0.594,2.917) (0.532,2.843) (0.465,2.751) (0.415,2.671) (0.362,2.573) (0.325,2.488) (0.288,2.384) (0.263,2.296) (0.241,2.190) (0.229,2.100) (0.222,1.992) (0.222,1.902) (0.228,1.813) (0.242,1.706) (0.260,1.618) (0.289,1.514) (0.319,1.429) (0.363,1.330) (0.405,1.249) (0.462,1.156) (0.515,1.081) (0.586,0.996) (0.650,0.928) (0.720,0.865) (0.809,0.794) (0.888,0.740) (0.988,0.681) (1.076,0.638) (1.187,0.593) (1.283,0.563) (1.402,0.534) (1.504,0.517) (1.629,0.505) (1.736,0.502) (1.865,0.508) (1.973,0.521) (2.082,0.541) (2.211,0.575) (2.318,0.610) (2.444,0.662) (2.547,0.713) (2.667,0.782) (2.762,0.847) (2.872,0.932) (2.959,1.010) (3.056,1.109) (3.131,1.198) (3.200,1.290) (3.275,1.405) (3.331,1.505) (3.388,1.628) (3.429,1.732) (3.468,1.859) (3.493,1.965) (3.513,2.093) (3.523,2.200) (3.525,2.326) (3.519,2.430) (3.504,2.551) (3.484,2.650) (3.458,2.747) (3.419,2.858) (3.380,2.948) (3.327,3.050) (3.277,3.131) (3.211,3.223) (3.151,3.294) (3.074,3.374) (3.005,3.436) (2.919,3.503) (2.843,3.554) (2.765,3.599) (2.668,3.647) (2.585,3.681) (2.483,3.716) (2.396,3.738) (2.290,3.758) (2.200,3.768) (2.092,3.773) (2.002,3.771) (1.894,3.760) (1.804,3.746) (1.697,3.720) (1.609,3.693) (1.522,3.659) (1.420,3.611) (1.337,3.565) (1.242,3.502) (1.165,3.443) (1.077,3.364) (1.008,3.293) (0.931,3.201) (0.871,3.118) (0.806,3.013) (0.757,2.920) (0.714,2.823) (0.671,2.702) (0.641,2.597) (0.614,2.468) (0.599,2.357) (0.590,2.223) (0.591,2.109) (0.601,1.972) (0.617,1.858) (0.645,1.723) (0.677,1.611) (0.724,1.480) (0.770,1.374) (0.823,1.270) (0.894,1.152) (0.960,1.057) (1.045,0.951) (1.122,0.868) (1.220,0.775) (1.306,0.705) (1.413,0.629) (1.505,0.573) (1.619,0.514) (1.716,0.472) (1.815,0.438) (1.934,0.405) (2.033,0.385) (2.152,0.370) (2.251,0.365) (2.368,0.368) (2.464,0.377) (2.576,0.396) (2.668,0.418) (2.775,0.452) (2.861,0.487) (2.960,0.535) (3.040,0.580) (3.116,0.631) (3.202,0.697) (3.269,0.757) (3.345,0.834) (3.403,0.902) (3.468,0.989) (3.516,1.064) (3.568,1.159) (3.606,1.241) (3.644,1.342) (3.670,1.429) (3.695,1.535) (3.709,1.626) (3.717,1.717) (3.719,1.829) (3.714,1.922) (3.700,2.035) (3.681,2.129) (3.651,2.240) (3.618,2.332) (3.570,2.441) (3.524,2.530) (3.459,2.633) (3.398,2.717) (3.332,2.797) (3.244,2.888) (3.164,2.960) (3.061,3.040) (2.970,3.101) (2.854,3.168) (2.753,3.217) (2.627,3.268) (2.519,3.303) (2.385,3.337) (2.271,3.357) (2.133,3.373) (2.017,3.378) (1.901,3.376) (1.762,3.364) (1.648,3.346) (1.514,3.316) (1.404,3.283) (1.277,3.236) (1.175,3.189) (1.058,3.125) (0.965,3.067) (0.860,2.989) (0.779,2.919) (0.703,2.846) (0.620,2.752) (0.557,2.670) (0.490,2.569) (0.441,2.481) (0.390,2.374) (0.356,2.282) (0.322,2.171) (0.301,2.078) (0.284,1.966) (0.277,1.873) (0.276,1.761) (0.282,1.669) (0.294,1.579) (0.315,1.471) (0.339,1.384) (0.375,1.282) (0.411,1.199) (0.460,1.103) (0.507,1.026) (0.569,0.938) (0.626,0.869) (0.699,0.790) (0.765,0.728) (0.835,0.671) (0.924,0.608) (1.003,0.560) (1.101,0.509) (1.186,0.473) (1.292,0.436) (1.383,0.411) (1.495,0.390) (1.591,0.378) (1.708,0.373) (1.807,0.375) (1.926,0.387) (2.026,0.404) (2.126,0.428) (2.245,0.466) (2.343,0.505) (2.458,0.561) (2.552,0.615) (2.662,0.688) (2.749,0.757) (2.849,0.846) (2.928,0.928) (3.016,1.032) (3.084,1.125) (3.147,1.222) (3.214,1.343) (3.263,1.449) (3.313,1.579) (3.348,1.689) (3.380,1.824) (3.398,1.938) (3.412,2.074) (3.415,2.188) (3.410,2.323) (3.397,2.433) (3.374,2.563) (3.347,2.668) (3.314,2.771) (3.266,2.889) (3.220,2.983) (3.157,3.090) (3.100,3.174) (3.025,3.268) (2.957,3.341) (2.872,3.421) (2.796,3.482) (2.702,3.548) (2.621,3.596) (2.537,3.639) (2.435,3.682) (2.347,3.712) (2.241,3.740) (2.151,3.757) (2.043,3.770) (1.953,3.775) (1.845,3.772) (1.755,3.764) (1.649,3.747) (1.561,3.727) (1.458,3.696) (1.374,3.664) (1.292,3.626) (1.197,3.575) (1.120,3.526) (1.032,3.461) (0.962,3.401) (0.883,3.323) (0.821,3.253) (0.753,3.163) (0.701,3.083) (0.645,2.982) (0.604,2.894) (0.568,2.802) (0.533,2.688) (0.511,2.589) (0.492,2.468) (0.484,2.364) (0.483,2.238) (0.490,2.131) (0.507,2.003) (0.530,1.896) (0.566,1.768) (0.603,1.662) (0.658,1.538) (0.711,1.437) (0.770,1.339) (0.850,1.226) (0.922,1.136) (1.017,1.034) (1.102,0.954) (1.209,0.866) (1.303,0.799) (1.421,0.726) (1.522,0.673) (1.647,0.618) (1.753,0.580) (1.882,0.543) (1.990,0.521) (2.098,0.505) (2.227,0.496) (2.333,0.495) (2.458,0.504) (2.561,0.519) (2.681,0.545) (2.777,0.573) (2.889,0.615) (2.978,0.655) (3.080,0.711) (3.161,0.764) (3.237,0.820) (3.322,0.894) (3.388,0.960) (3.461,1.043) (3.516,1.117) (3.576,1.209) (3.620,1.288) (3.665,1.386) (3.698,1.470) (3.729,1.574) (3.750,1.661) (3.767,1.767) (3.775,1.857) (3.778,1.947) (3.773,2.055) (3.763,2.145) (3.744,2.252) (3.721,2.340) (3.687,2.445) (3.651,2.531) (3.602,2.631) (3.554,2.712) (3.489,2.805) (3.429,2.880) (3.363,2.952) (3.277,3.033) (3.200,3.095) (3.101,3.165) (3.013,3.217) (2.902,3.273) (2.806,3.314) (2.684,3.354) (2.580,3.381) (2.451,3.405) (2.341,3.417) (2.207,3.423) (2.095,3.420) (1.981,3.410) (1.846,3.388) (1.733,3.363) (1.600,3.323) (1.492,3.282) (1.365,3.224) (1.263,3.168) (1.146,3.094) (1.053,3.026) (0.948,2.937) (0.866,2.858) (0.790,2.775) (0.707,2.670) (0.644,2.578) (0.578,2.465) (0.530,2.368) (0.481,2.250) (0.448,2.150) (0.418,2.030) (0.400,1.929) (0.388,1.808) (0.385,1.709) (0.390,1.591) (0.401,1.494) (0.418,1.400) (0.447,1.289) (0.477,1.200) (0.520,1.097) (0.562,1.014) (0.618,0.920) (0.670,0.845) (0.739,0.760) (0.800,0.694) (0.879,0.619) (0.949,0.563) (1.022,0.510) (1.114,0.454) (1.193,0.412) (1.292,0.368) (1.377,0.338) (1.481,0.308) (1.570,0.289) (1.678,0.274) (1.770,0.268) (1.880,0.269) (1.973,0.276) (2.085,0.292) (2.177,0.312) (2.269,0.339) (2.378,0.380) (2.468,0.420) (2.572,0.477) (2.657,0.532) (2.754,0.605) (2.832,0.673) (2.921,0.762) (2.990,0.843) (3.067,0.947) (3.126,1.038) (3.180,1.135) (3.236,1.256) (3.276,1.361) (3.316,1.491) (3.342,1.603) (3.364,1.739) (3.375,1.854) (3.379,1.993) (3.374,2.109) (3.359,2.248) (3.338,2.362) (3.304,2.496) (3.269,2.605) (3.227,2.711) (3.169,2.834) (3.114,2.931) (3.041,3.042) (2.974,3.129) (2.888,3.226) (2.812,3.301) (2.716,3.383) (2.632,3.445) (2.528,3.510) (2.438,3.558) (2.347,3.599) (2.236,3.640) (2.143,3.667) (2.029,3.690) (1.935,3.703) (1.822,3.710) (1.729,3.709) (1.618,3.700) (1.527,3.687) (1.420,3.663) (1.333,3.636) (1.231,3.598) (1.149,3.560) (1.070,3.518) (0.979,3.460) (0.906,3.407) (0.824,3.338) (0.759,3.275) (0.687,3.195) (0.631,3.124) (0.570,3.034) (0.525,2.955) (0.476,2.856) (0.442,2.771) (0.407,2.665) (0.385,2.573) (0.368,2.480) (0.357,2.366) (0.353,2.270) (0.358,2.152) (0.369,2.054) (0.391,1.936) (0.417,1.837) (0.457,1.720) (0.498,1.624) (0.556,1.511) (0.612,1.419) (0.674,1.329) (0.756,1.227) (0.832,1.145) (0.930,1.053) (1.018,0.981) (1.130,0.902) (1.228,0.842) (1.351,0.778) (1.458,0.732) (1.589,0.685) (1.700,0.653) (1.836,0.624) (1.951,0.608) (2.065,0.599) (2.202,0.597) (2.315,0.604) (2.449,0.621) (2.558,0.643) (2.685,0.677) (2.787,0.713) (2.905,0.764) (2.999,0.812) (3.105,0.878) (3.189,0.938) (3.267,1.002) (3.355,1.085) (3.421,1.158) (3.494,1.250) (3.548,1.330) (3.605,1.429) (3.646,1.514) (3.687,1.618) (3.715,1.707) (3.741,1.814) (3.756,1.905) (3.767,2.013) (3.769,2.104) (3.766,2.194) (3.754,2.302) (3.738,2.390) (3.712,2.495) (3.685,2.580) (3.645,2.680) (3.605,2.761) (3.552,2.855) (3.501,2.930) (3.434,3.017) (3.373,3.085) (3.308,3.150) (3.223,3.222) (3.148,3.277) (3.052,3.338) (2.968,3.383) (2.862,3.430) (2.770,3.463) (2.656,3.496) (2.558,3.516) (2.437,3.531) (2.334,3.537) (2.209,3.536) (2.104,3.527) (1.998,3.511) (1.871,3.482) (1.766,3.451) (1.641,3.404) (1.539,3.357) (1.420,3.292) (1.324,3.230) (1.213,3.148) (1.125,3.074) (1.026,2.977) (0.948,2.890) (0.876,2.799) (0.797,2.684) (0.738,2.585) (0.676,2.462) (0.632,2.356) (0.588,2.228) (0.559,2.119) (0.534,1.988) (0.521,1.879) (0.514,1.749) (0.516,1.641) (0.528,1.515) (0.545,1.412) (0.568,1.311) (0.604,1.195) (0.641,1.101) (0.692,0.994) (0.740,0.909) (0.804,0.812) (0.863,0.737) (0.939,0.653) (1.007,0.588) (1.092,0.516) (1.167,0.462) (1.245,0.414) (1.342,0.362) (1.424,0.326) (1.526,0.288) (1.613,0.263) (1.718,0.241) (1.807,0.228) (1.914,0.220) (2.004,0.220) (2.112,0.227) (2.202,0.239) (2.308,0.260) (2.396,0.285) (2.482,0.315) (2.583,0.359) (2.666,0.401) (2.761,0.460) (2.838,0.514) (2.926,0.587) (2.996,0.654) (3.074,0.741) (3.135,0.818) (3.201,0.918) (3.251,1.006) (3.296,1.098) (3.342,1.214) (3.374,1.315) (3.404,1.439) (3.422,1.546) (3.435,1.677) (3.438,1.787) (3.432,1.922) (3.419,2.034) (3.395,2.169) (3.366,2.280) (3.323,2.411) (3.279,2.519) (3.229,2.623) (3.161,2.745) (3.097,2.841) (3.013,2.952) (2.937,3.038) (2.840,3.135) (2.754,3.210) (2.646,3.291) (2.553,3.352) (2.438,3.417) (2.339,3.463) (2.219,3.509)};
+\end{scope}
+
+\end{scope}
+\end{tikzpicture}
+
+\caption{Spherical pendulum with $m=\ell=g=1$, $\mu=0.8$, $\vartheta(0)=1.1$, $p_\vartheta(0)=0$. Left: the effective potential $V_\mu(\vartheta)$ and the energy level $E$ with the two turning points. Right: the trajectory of the bob projected on the horizontal plane (time interval $0\le t\le60$), reconstructed from $\dot\varphi=\mu/\sin^2\vartheta$.}\label{rd:fig:sph}
+\end{figure}
+
+The precession of the rosette is a pure \emph{reconstruction} effect. Integrating $\dot\varphi$ over one period of $\vartheta$ (period $3.395$ in the units $\sqrt{\ell/g}$ for this motion) gives $\Delta\varphi=4.337$ rad $=1.38\pi$ per oscillation of $\vartheta$. The small-oscillation formula \eqref{rd:precession} derived below, evaluated at the relative equilibrium $\vartheta_0=0.912$ that belongs to the same $\mu$, gives $4.31$ rad.
+
+\subsection{Relative equilibria: the conical pendulum}\label{rd:sec:conical}
+
+The critical points of $V_\mu$ are the relative equilibria, bob moving uniformly on a horizontal circle (the conical pendulum). Setting $V_\mu'(\vartheta_0)=0$,
+\[
+-\frac{\mu^2\cos\vartheta_0}{m\ell^2\sin^3\vartheta_0}+mg\ell\sin\vartheta_0=0
+\quad\Longleftrightarrow\quad
+\mu^2=\frac{m^2g\ell^3\sin^4\vartheta_0}{\cos\vartheta_0},
+\]
+and since $\dot\varphi=\mu/(m\ell^2\sin^2\vartheta_0)$,
+\begin{equation}\label{rd:conical}
+\dot\varphi^2=\frac{g}{\ell\cos\vartheta_0},
+\end{equation}
+the textbook result for the conical pendulum, here obtained as a statement about critical points of the effective potential. Note that this does not depend on $m$ and that it is valid only in the lower hemisphere, $\cos\vartheta_0>0$. The second derivative gives the frequency of small oscillations of $\vartheta$ about the relative equilibrium (checked symbolically):
+\begin{equation}\label{rd:omegatheta}
+\omega_\vartheta^2=\frac{V_\mu''(\vartheta_0)}{m\ell^2}=\frac g\ell\Big(3\cos\vartheta_0+\frac1{\cos\vartheta_0}\Big),
+\qquad\frac{\omega_\vartheta^2}{\dot\varphi^2}=1+3\cos^2\vartheta_0 .
+\end{equation}
+Consequently, during one period of the radial oscillation the azimuth advances by
+\begin{equation}\label{rd:precession}
+\Delta\varphi=2\pi\,\frac{\dot\varphi}{\omega_\vartheta}=\frac{2\pi}{\sqrt{1+3\cos^2\vartheta_0}} .
+\end{equation}
+For small oscillations near the bottom ($\vartheta_0\to0$) this is $\pi$: the projected path is a closed ellipse after half an azimuthal turn, as for the isotropic harmonic oscillator in the plane, to which the spherical pendulum reduces there. For larger $\vartheta_0$ the advance exceeds $\pi$ (it is $2\pi$ at $\vartheta_0=\pi/2$ in this formula) and the ellipse precesses. Applied to the motion of Figure~\ref{rd:fig:sph}, whose amplitude is not small, the formula is still accurate to about $0.6\%$ (previous subsection).
+
+\subsection{Does the order matter?}\label{rd:sec:order}
+
+We performed the constraint first and the symmetry second. Suppose we reduce by the symmetry first, in $T^*\mathbb R^3$ itself. Cylindrical coordinates $(\rho,\varphi,z)$ give $H=\frac1{2m}(p_\rho^2+p_z^2)+\frac{\mu^2}{2m\rho^2}+mgz$ on the four-dimensional reduced space $\{(\rho,z,p_\rho,p_z)\}$. The constraint $\rho^2+z^2=\ell^2$ is now a pair of second-class constraints in this reduced space (the radial position and the radial momentum in the $(\rho,z)$-plane); setting $\rho=\ell\sin\vartheta$, $z=-\ell\cos\vartheta$ yields back exactly \eqref{rd:Hmusph}. The two operations \emph{commute} here, as they do whenever the constraint surface is invariant under the symmetry group: the constraint surface $S$ is then a symplectic submanifold on which the group acts with the restricted momentum map, and the reduced constraint surface sits inside $M_\mu$ as a symplectic submanifold. This is why the rigid body could be handled in two steps in the previous section.
+
+\subsection{The poles and the atlas}\label{rd:sec:poles}
+
+The potential \eqref{rd:Hmusph} is singular at the poles, and one may ask what happens for $\mu=0$. For $\mu=0$ the bob moves in a vertical plane through the axis, passes through the bottom, and the polar angle $\vartheta\ge0$ is replaced by a signed angle running through $0$ to negative values. In the language of reduction: the rotation group acts \emph{freely} on $T^*S^2$ except at the pole, where it leaves the position fixed; for $\mu=0$ the level set $J^{-1}(0)$ passes through points with nontrivial isotropy and $J^{-1}(0)/G$ is not a manifold near them. Near the bottom, $T^*S^2\simeq\mathbb R^4$ with $(\mathbf x,\mathbf p)$, $J=x\wedge p$, $J^{-1}(0)=\{\mathbf x\parallel\mathbf p\}$; by a rotation one can take both along the $x$-axis, and the only remaining identification is the rotation by $\pi$, $(x,p)\sim(-x,-p)$. The reduced space near the bottom is $\mathbb R^2/\mathbb Z_2$: a cone, with a singular point at the bottom of the sphere.\footnote{The general theory of such quotients: R.\ Sjamaar and E.\ Lerman, Stratified symplectic spaces and reduction, \emph{Ann.\ of Math.}\ \textbf{134} (1991) 375--422.}
+
+This is the book's recurring theme in a small system. For $\mu\ne0$ the reduced space is the manifold $T^*(0,\pi)$, with one coordinate chart $\vartheta\in(0,\pi)$ and an effective potential whose infinite walls keep the motion away from the poles. For $\mu=0$ the reduced space is a different kind of object, a cone with a singular point, in which the infinite wall of the effective potential has become an \emph{identification} of boundary points: a trajectory that arrives at $\vartheta=0$ with $p_\vartheta<0$ re-emerges with $p_\vartheta>0$. The dynamics of the family $M_\mu$ has a limit as $\mu\to0$, but the reduced spaces do not: a smooth family of manifolds degenerates into a singular space, and no single chart describes all the reduced motions across $\mu=0$.
+
+%======================================================================
+\section{The same equation, different forces}\label{rd:sec:unified}
+%======================================================================
+
+\subsection{One geometric operation}\label{rd:sec:oneop}
+
+In phase space the two procedures turn out to be applications of one and the same operation, which can be described in two steps:
+\begin{enumerate}
+\item \emph{Restrict} the symplectic form $\omega$ to the constraint surface $C$.
+\item If the restricted form is degenerate, \emph{divide} $C$ by its null directions.
+\end{enumerate}
+We have already carried it out three times.
+
+\begin{itemize}
+\item \emph{Pendulum.} $C=\{r=\ell,\ p_r=0\}\subset T^*\mathbb R^2$. On $C$, $\mathrm dr=\mathrm dp_r=0$ and $\omega|_C=\mathrm d\theta\wedge\mathrm dp_\theta$, which is nondegenerate: there is nothing to divide by. The reduction is a pure \emph{restriction}.
+\item \emph{Kepler.} $C=\{p_\theta=\mu\}$. Here \eqref{rd:omegarestr} shows $\omega|_C=\mathrm dr\wedge\mathrm dp_r$, degenerate along $\partial_\theta$. One \emph{divides} by $\theta$-translations.
+\item \emph{Rigid body.} $C=\{\boldsymbol\mu=\boldsymbol\mu^{(0)}\}\subset T^*SO(3)$: three constraints, but the restricted form has a \emph{one}-dimensional null direction (the rotation about $\boldsymbol\mu$), as the matrix \eqref{rd:Sigma} of rank $2$ shows.
+\end{itemize}
+
+The bookkeeping rule is Dirac's: a set of constraints $\chi_A$ is decomposed into \emph{first-class} ones (vanishing bracket with all the others on $C$) and \emph{second-class} ones (the rest, forming an invertible matrix of brackets). Each first-class constraint costs two dimensions (the constraint and the null direction it generates); each second-class constraint costs one. Table~\ref{rd:tab:count} lists the examples of this chapter.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|c|c|c|c}
+system & phase space & first class & second class & reduced space\\ \hline
+plane pendulum & $4$ & $0$ & $2$ \;($r-\ell,\ p_r$) & $4-2=2$\\
+Kepler & $4$ & $1$ \;($p_\theta-\mu$) & $0$ & $4-2=2$\\
+rigid body & $6$ & $1$ \;($\mu_3$) & $2$ \;($\mu_1,\mu_2$) & $6-2-2=2$\\
+spherical pendulum & $6$ & $1$ \;($p_\varphi-\mu$) & $2$ \;($|\mathbf x|-\ell,\ \mathbf x\!\cdot\!\mathbf p$) & $6-2-2=2$
+\end{tabular}
+\caption{Constraint counting for the systems of this chapter. A first-class constraint costs $2$ dimensions, a second-class one costs $1$.}\label{rd:tab:count}
+\end{table}
+
+For the constraints $J_a-\mu_a$ of a symmetry reduction, the matrix of brackets is $c^c_{ab}\mu_c$ (the structure constants contracted with $\mu$). Its kernel is the isotropy algebra $\mathfrak g_\mu$ and its rank is $\dim G-\dim G_\mu$. So there are $\dim G_\mu$ first-class and $\dim G-\dim G_\mu$ second-class constraints among the $J_a-\mu_a$, and the Dirac count $2\dim G_\mu+(\dim G-\dim G_\mu)=\dim G+\dim G_\mu$ reproduces the dimension formula of Fact~\ref{rd:fact:MWM}. For abelian groups all the constraints are first class. In this sense symmetry reduction is a special case of Dirac's theory of constraints; this part of the statement ``a symmetry is a kind of constraint'' is correct. The converse is not: a holonomic constraint is second class, it generates no symmetry, and there is nothing to quotient by.
+
+\subsection{What separates the two: does the free flow respect the surface?}\label{rd:sec:consist}
+
+Both procedures solve the same equation on $C$: find a vector field $X$ tangent to $C$ with
+\begin{equation}\label{rd:sameeq}
+\iota_X\big(\omega|_C\big)=\mathrm d\big(H|_C\big).
+\end{equation}
+It is equivalent to ask that $X=X_H+\sum_A\lambda^AX_{\chi_A}$ for some functions $\lambda^A$ chosen so that $X$ is tangent to $C$: $X_H$ is the free Hamiltonian flow, and $F_C=\sum_A\lambda^AX_{\chi_A}$ is the constraint force. Tangency requires $\rdpb{\chi_B}{H}+\sum_A\lambda^A\rdpb{\chi_B}{\chi_A}=0$ on $C$. The consequences are as follows.
+
+\begin{itemize}
+\item If $\rdpb{\chi_B}H\rdwk0$ for all $B$ (the surface is \emph{invariant under the free flow}), then $\lambda^A=0$ is a solution: $X=X_H$ and \emph{no force is needed}. This is what happens for $C=J^{-1}(\mu)$ with an invariant $H$, because $\rdpb{J_a}{H}=0$ \emph{identically}: this is Noether's theorem. The reduced trajectories are projections of genuine trajectories.
+\item If $\rdpb{\chi_B}H\not\approx0$, the force is nonzero. For second-class constraints it is uniquely determined, $\lambda^A=-(C^{-1})^{AB}\rdpb{\chi_B}H$. In the pendulum $\rdpb{p_r}{H}=T\neq0$, and the force is the tension.
+\end{itemize}
+
+The same holonomic constraint can therefore be force-free for one system and not for another. A free particle in $\mathbb R^3$ constrained to a plane through the origin moves exactly as a free particle (the plane is invariant under the free flow, $F_C=0$); the same particle constrained to a sphere is accelerated by the constraint force at once, since the free flow leaves the sphere. It is the \emph{dynamics} that decides, and symmetry constraints are special in that they are consistent with the dynamics for \emph{every} invariant Hamiltonian, not just for a special one.
+
+Here the distinction between conserved quantities that come from symmetries and those that do not, which recurs throughout this book, shows its face once more. A constraint surface $C=\{\chi=0\}$ for which $\chi$ is a constant of motion is consistent with the flow whatever its origin; Noether integrals are the ones guaranteed to be so for a whole class of Hamiltonians at once. The reduction by the flow of $H$ itself---fix the energy and divide by the flow---is treated in Section~\ref{rd:sec:gauge}.
+
+\subsection{Two centrifugal potentials}\label{rd:sec:rotating}
+
+A reduced Hamiltonian may contain a term that looks like a centrifugal potential and yet its origin may be a constraint, not a symmetry. A bead of mass $m$ slides without friction on a circular hoop of radius $a$ which rotates with prescribed constant angular velocity $\Omega$ about a vertical diameter; $\theta$ is the angle of the bead from the downward vertical. The kinetic energy contains the velocity of the hoop, $T=\tfrac12ma^2(\dot\theta^2+\Omega^2\sin^2\theta)$, so
+\begin{equation}\label{rd:Lhoop}
+L=\tfrac12ma^2\dot\theta^2+\tfrac12ma^2\Omega^2\sin^2\theta+mga\cos\theta,\qquad
+\ddot\theta=\Big(\Omega^2\cos\theta-\frac ga\Big)\sin\theta .
+\end{equation}
+The equation of motion is that of a particle in the potential $U(\theta)=-\tfrac12ma^2\Omega^2\sin^2\theta-mga\cos\theta$. The first term has the shape of a centrifugal potential; it produces a pitchfork bifurcation, with the equilibrium at the bottom becoming unstable when $\Omega^2>g/a$ and new equilibria appearing at $\cos\theta_0=g/(a\Omega^2)$. In appearance this is the same story as for the Kepler problem or the spherical pendulum. But look at the energies.
+
+\begin{itemize}
+\item The sum $E=T+V=\tfrac12ma^2\dot\theta^2+\tfrac12ma^2\Omega^2\sin^2\theta-mga\cos\theta$ is \emph{not conserved}: the constraint force does work on the bead, because the hoop moves. (Equivalently, someone must supply energy to keep $\Omega$ constant.)
+\item The quantity conserved is the Jacobi integral $h=\dot\theta\,\partial L/\partial\dot\theta-L=\tfrac12ma^2\dot\theta^2+U(\theta)=E-ma^2\Omega^2\sin^2\theta$, which is \emph{not} the energy.
+\end{itemize}
+For Kepler or for the spherical pendulum the reduced Hamiltonian $H_\mu$ \emph{is} the energy: no agent does work. The ``centrifugal'' term of a symmetry reduction comes from the conserved momentum at fixed $\mu$; the ``centrifugal'' term of the hoop comes from the kinetic energy of a prescribed motion of the constraint. A quick test: does the term survive in the \emph{unreduced} equations of the free system? For Kepler it does (the term $mr\dot\theta^2$), whereas for the hoop it exists only because the constraint moves. (We have used a time-dependent, ``rheonomic'', constraint here; d'Alembert's principle applies with virtual displacements taken at a frozen time.)
+
+%======================================================================
+\section{Pitfalls, failure modes and a scorecard}\label{rd:sec:dual}
+%======================================================================
+
+\subsection{The dual pitfalls}\label{rd:sec:pitfalls}
+
+We have met two mistakes, one on each side of the Legendre transform.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|p{4.9cm}|p{4.9cm}}
+ & holonomic constraint $r=\ell$ & conserved momentum $p_\theta=\mu$\\ \hline
+Lagrangian & substitute in $L$: \textbf{correct} & substitute $\dot\theta(\mu)$ in $L$: \textbf{wrong} (need the Routhian $L-\mu\dot\theta$)\\ \hline
+Hamiltonian & substitute in $H$: \textbf{wrong} (need $p_r=0$ too and the Dirac bracket) & substitute in $H$: \textbf{correct}
+\end{tabular}
+\end{center}
+
+The explanation is almost philosophical. A holonomic constraint is a condition on \emph{positions}, and positions are the natural variables of the Lagrangian: restricting $L$ to the submanifold $TQ_c$ is a meaningful operation. A conserved momentum is a condition on \emph{momenta}, the natural variables of the Hamiltonian: restricting $H$ to a level set of $p_\theta$ is meaningful. The Legendre transform exchanges the two, and the cost of transporting a constraint across it is the Dirac bracket in one direction and the Routhian in the other.
+
+The mistake in the Hamiltonian column of the pendulum is subtle. One may think that restricting $H$ to the circle suffices. But the Hamiltonian equations need the \emph{derivatives} of $H$, including those transversal to the circle, and $H|_C$ does not know them: two Hamiltonians equal on $C$ but different off $C$ generate different flows. The Dirac bracket removes this ambiguity: the constraints are its Casimirs, so $\rdDB FH$ is unchanged under $H\to H+\sum u^A\chi_A$, and depends on $H|_C$ only.
+
+\subsection{Failure modes}\label{rd:sec:failure}
+
+Both procedures require a regularity assumption, in each case a constancy of rank.
+
+\paragraph{Dependent constraints.} The circle can be described by $f=r-\ell$ or by $f=(r-\ell)^2$. For the second description $\mathrm df=2(r-\ell)\,\mathrm dr$ vanishes on the circle, the matrix $\rdpb f\varphi$ is zero, and the formalism of Section~\ref{rd:sec:dirac} breaks down, even though the geometry (the circle) is the same. The multiplier rule needs $0$ to be a \emph{regular value} of $f$: the regularity is a property of the description, not just of the surface. A genuine failure is a mechanism at a singular configuration, such as a planar linkage whose links become collinear, where the configuration space is not a manifold and the number of independent constraints drops.
+
+\paragraph{Non-free actions.} Symmetry reduction requires the group to act freely (or at least with constant isotropy type) on $J^{-1}(\mu)$. Where this fails, as at the poles of the sphere for $\mu=0$ (Section~\ref{rd:sec:poles}), the quotient is a stratified space with singular points. Both difficulties amount to the failure of constant rank: of the matrix of brackets in the one case and of the orbit dimension in the other.
+
+\subsection{Gauge systems, parametrization and energy surfaces}\label{rd:sec:gauge}
+
+Where the two procedures meet most closely is in \emph{first-class} constraints that are required by the theory, i.e.\ in gauge systems. In a gauge theory the constraint surface is fixed by the theory (for example Gauss's law, which is the vanishing of the momentum map of the gauge group), the null directions are gauge orbits, and the reduced space is the true phase space of the theory. Dirac's analysis of such constraints is the model for what we have called restrict-and-divide.\footnote{P.\ A.\ M.\ Dirac, Lectures on Quantum Mechanics, loc.\ cit.; M.\ J.\ Gotay, J.\ M.\ Nester and G.\ Hinds, Presymplectic manifolds and the Dirac--Bergmann theory of constraints, \emph{J.\ Math.\ Phys.}\ \textbf{19} (1978) 2388--2399.}
+
+A simple instance is a system $(M,\omega,H)$ treated in an extended phase space with time $t$ and its conjugate $p_t$ as variables. The single constraint $p_t+H=0$ is first class, since a single function has zero bracket with itself, and its null direction is $X_H+\partial_t$: the space-time trajectory. Dividing by this direction identifies all the points of a trajectory, leaving the space of \emph{motions}, which has the dimension of the original phase space. Time reparametrization is the gauge freedom.
+
+A second instance is the reduction by the flow of $H$ itself: let $G=\mathbb R$ act by the flow of $X_H$, with momentum map $H$. Fixing $H=E$ and dividing by the flow gives $H^{-1}(E)/\mathbb R$, the space of unparametrized trajectories of energy $E$, of dimension $\dim M-2$ (assuming no rest points or closed orbits). For a mechanical Hamiltonian these trajectories are the geodesics of Jacobi's metric $(E-V)g$:\footnote{C.\ G.\ J.\ Jacobi, \emph{Vorlesungen \"uber Dynamik}, Reimer, Berlin, 1866.} this is the content of Jacobi's form of the principle of least action, which is discussed in the chapter on variational principles. Here is a case in which symmetry reduction and Dirac's first-class reduction coincide.
+
+The mathematics, however, does not distinguish what the physics does. In a gauge theory the constraint value is not a choice but is dictated (typically $\mu=0$) and states on the same gauge orbit are physically \emph{identical}: the unreduced phase space is redundant. For a physical symmetry such as rotations, every $\mu$ is allowed, and points of the same group orbit are physically \emph{distinct} states (a rotated pendulum is a different pendulum) which evolve by the same law. Noether's first theorem concerns the second situation, her second theorem the first.
+
+\subsection{The scorecard}\label{rd:sec:score}
+
+\begin{table}[ht]
+\centering\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{p{2.4cm}|p{5.5cm}|p{5.5cm}}
+ & \textbf{Constraints (holonomic)} & \textbf{Symmetry (momentum map)}\\ \hline
+Status & imposed from outside; idealization of stiff forces; different realizations may give different limits & consequence of the dynamics (Noether); $\mu$ labels a sector of the system\\ \hline
+Effect on solutions & $X=X_H+F_C$, $F_C\neq0$: reduced solutions are \emph{not} solutions of the unreduced system & $F_C=0$: reduced solutions are projections of solutions of the unreduced system\\ \hline
+Surface in phase space & $\{f=0,\ \varphi=0\}$ & $J^{-1}(\mu)$\\ \hline
+Dirac class & second & $\dim G_\mu$ first, $\dim G-\dim G_\mu$ second (abelian: all first)\\ \hline
+Operation & restriction & restriction, then quotient by $G_\mu$\\ \hline
+Dimension removed & $2k$ for $k$ constraints & $\dim G+\dim G_\mu$ (abelian: $2\dim G$)\\ \hline
+Parameters & none & $\mu\in\mathfrak g^*$: a family of reduced spaces\\ \hline
+Information lost & normal variables (fixed by hypothesis); the force is recovered \emph{algebraically} & group variables, recovered by \emph{quadrature}, with a geometric phase\\ \hline
+Lagrangian side & restrict $L$ (trivial) & Routhian $L-\mu\dot x$ (naive substitution wrong)\\ \hline
+Hamiltonian side & Dirac bracket (naive restriction wrong) & set $p=\mu$ (abelian); quotient\\ \hline
+Failure & dependent constraints; rank of $\{f,\varphi\}$ drops & non-free action; singular $\mu$: stratified spaces\\ \hline
+Nonholonomic version & Lagrange--d'Alembert; not symplectic & Noether modified; nonholonomic momentum equation
+\end{tabular}
+\caption{Reduction by constraints versus reduction by symmetry.}\label{rd:tab:score}
+\end{table}
+
+%======================================================================
+\section{Summary}\label{rd:sec:summary}
+%======================================================================
+
+We have put side by side two operations that lose a degree of freedom. The mathematical machine is common: restrict the symplectic form to a surface, then divide out the null directions of the restricted form. The difference lies in the \emph{surface}. A surface generated by a symmetry is, by Noether's theorem, invariant under the dynamics, hence its reduced system is an exact consequence of the original one. A surface imposed by a constraint is not; maintaining it requires a force, which changes the system. The first is a theorem about the equations we have; the second is a modelling decision, a stiff force replaced by a hard wall, that comes with an interpretive choice built in.
+
+A rule of thumb that has served us in all the examples: \emph{if you are eliminating a variable using a conservation law you derived, you are doing symmetry reduction, and no new force appears; if you are eliminating a variable using a relation you were given, you are doing constraint reduction, and the equations of motion have changed.} The pitfalls on the two sides of the Legendre transform, the dependence of the reduced space on $\mu$ for symmetries and its absence for constraints, the recovery of lost data by quadrature versus algebra, and the singular strata where both fail, all follow from this one distinction.
+
+\medskip
+\noindent\textbf{Further reading.} The geometry of reduction by symmetries is the subject of the books of Abraham and Marsden, of Marsden and Ratiu and of Ortega and Ratiu;\footnote{R.\ Abraham and J.\ E.\ Marsden, \emph{Foundations of Mechanics}, 2nd ed., Benjamin/Cummings, 1978; J.\ E.\ Marsden and T.\ S.\ Ratiu, \emph{Introduction to Mechanics and Symmetry}, 2nd ed., Springer, 1999; J.-P.\ Ortega and T.\ S.\ Ratiu, \emph{Momentum Maps and Hamiltonian Reduction}, Birkh\"auser, Boston, 2004.} the geometric formulation of Dirac's constraints in terms of presymplectic manifolds is that of Gotay, Nester and Hinds, and the treatment of reduction for systems with both constraints and symmetries (including the nonholonomic case) was given by Marle and by Bloch, Krishnaprasad, Marsden and Murray.\footnote{C.-M.\ Marle, Reduction of constrained mechanical systems and stability of relative equilibria, \emph{Comm.\ Math.\ Phys.}\ \textbf{174} (1995) 295--318.} For the stiff-constraint limit see Rubin and Ungar, Takens, and van Kampen, cited above.
