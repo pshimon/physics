@@ -1,5 +1,5 @@
 \chapter{Reduction in Classical Mechanics}
-\label{ch:reduction}
+\label{ch:rd}
 
 The word ``reduction'' occurs in classical mechanics in two conceptually distinct
 contexts.  In the first, a mechanical system possesses a symmetry, and one
@@ -31,6 +31,101 @@ define a genuine reduced phase space through restriction and a modified
 therefore real, but it is mediated by gauge symmetry and presymplectic
 geometry rather than being an identity between the two notions.
 
+
+\section{A sign that goes wrong}
+\label{sec:rd-sign}
+
+Two manoeuvres from the first weeks of a mechanics course look
+almost identical. In both we have a Lagrangian with two
+coordinates, $r$ and $\theta$; in both we want a one-dimensional
+problem for $r$ (or $\theta$); in both we get there by
+\emph{substituting a relation into the Lagrangian before varying}.
+In one case this is legitimate and in the other it gives the wrong
+answer.
+
+\paragraph{Manoeuvre one: the Kepler problem.} Take
+\begin{equation}\label{rd:Lkep}
+L=\tfrac12m(\dot r^2+r^2\dot\theta^2)+\frac kr .
+\end{equation}
+The angle $\theta$ is absent from $L$, so
+$p_\theta=mr^2\dot\theta=\mu$ is constant. The correct radial
+equation follows from the $r$-component of the Euler--Lagrange
+equations, $m\ddot r=mr\dot\theta^2-k/r^2$, and then using
+$\dot\theta=\mu/(mr^2)$:
+\begin{equation}\label{rd:kepcorrect}
+m\ddot r=+\frac{\mu^2}{mr^3}-\frac{k}{r^2}.
+\end{equation}
+The first term is the familiar centrifugal repulsion. Now try the
+shortcut: eliminate $\dot\theta$ from $L$ using
+$\dot\theta=\mu/(mr^2)$ and vary the resulting one-variable
+Lagrangian
+\begin{equation}\label{rd:Lnaive}
+\tilde L(r,\dot r)=\tfrac12m\dot r^2+\frac{\mu^2}{2mr^2}+\frac kr .
+\end{equation}
+Its Euler--Lagrange equation is
+\begin{equation}\label{rd:kepwrong}
+m\ddot r=-\frac{\mu^2}{mr^3}-\frac k{r^2},
+\end{equation}
+and the centrifugal term has the \emph{wrong sign}: the shortcut
+predicts that angular momentum pulls the particle inward. The cure
+that every textbook offers is to use the Routhian
+$R=L-\mu\dot\theta$ instead of $L$. We will see in
+Section~\ref{rd:sec:sym} why this works.
+
+\paragraph{Manoeuvre two: the pendulum.} A bob of mass $m$ at the
+end of a rigid rod of length $\ell$ is a particle in the plane
+constrained to the circle $r=\ell$. In polar coordinates, with
+$\theta$ measured from the downward vertical,
+\begin{equation}\label{rd:Lpend}
+L=\tfrac12m(\dot r^2+r^2\dot\theta^2)+mgr\cos\theta .
+\end{equation}
+We eliminate $r$ by substituting $r=\ell$, $\dot r=0$ \emph{into
+$L$ before varying}, obtaining
+$L_c=\tfrac12m\ell^2\dot\theta^2+mg\ell\cos\theta$, whose
+Euler--Lagrange equation $\ddot\theta=-(g/\ell)\sin\theta$ is
+correct. The very step that failed for the Kepler problem succeeds
+here.
+
+So when may we substitute a relation into $L$ before varying? The
+answer will turn out to be tied to a more important difference
+between the two cases. Check what happens to the equations of the
+\emph{unreduced} system. In the Kepler problem, the solutions of
+the reduced radial equation \eqref{rd:kepcorrect}, together with
+$\theta(t)$ reconstructed from $\dot\theta=\mu/(mr^2)$, are
+\emph{exactly} solutions of the original two-dimensional problem:
+nothing has been added or removed. For the pendulum, put $r=\ell$
+into the radial equation of the free particle:
+$0=m\ell\dot\theta^2+mg\cos\theta$, which is false in general. The
+pendulum's motion is \emph{not} a solution of the free-particle
+problem; a force, the tension $T$ in the rod, acts radially to
+keep $r=\ell$. The pendulum equation is the equation of a
+\emph{different} dynamical system from the free particle.
+
+This is the whole subject of the chapter in miniature. We have two
+procedures that both ``lose a degree of freedom''.
+
+\begin{itemize}
+\item \textbf{Reduction by constraints} (the pendulum)
+    \emph{imposes} a relation---here $r=\ell$---that is not a
+        consequence of the dynamics. Reaction forces are
+        introduced to enforce it, and the reduced system has
+        different equations of motion from the system we started
+        with.
+\item \textbf{Reduction by symmetry} (Kepler) \emph{exploits} a
+    relation---here $p_\theta=\mu$---that \emph{is} a consequence
+        of the dynamics (Noether's theorem). No force is
+        introduced, and the reduced equations are exact
+        consequences of the original ones.
+\end{itemize}
+
+The two procedures are used so often, and look so much alike in
+simple examples, that they are frequently identified. Statements
+such as ``a symmetry is a kind of constraint'' or ``a constraint
+is a kind of symmetry'' appear in the literature. We shall see in
+which sense each of them is true: in phase space both procedures
+are instances of a single geometric operation
+(Section~\ref{rd:sec:unified}), but the operation is applied to
+surfaces of a very different dynamical status.
 
 \section{Introduction}
 

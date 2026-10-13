@@ -1,0 +1,648 @@
+% =====================================================================
+% Chapter: Maxwell's equations, the wave equation, and the boundary
+%          terms we usually discard
+%
+% Requires: amsmath, amssymb; a class with \chapter (book/report).
+%
+% Conventions
+%   Sections 1-3 : SI units.
+%   Sections 4-8 : Heaviside-Lorentz units, c = eps_0 = mu_0 = 1,
+%                  metric (+,-,-,-), A^mu = (phi, A),
+%                  F^{0i} = -E^i,  F^{ij} = -eps^{ijk} B^k.
+% =====================================================================
+
+\chapter[Maxwell's equations and boundary terms]{Maxwell's equations, the wave equation, and the boundary terms we usually discard}
+\label{ch:maxwell-boundary}
+
+%----------------------------------------------------------------------
+\section[Two textbook statements]{Two textbook statements that do not sit comfortably together}
+\label{sec:mb-intro}
+
+Every textbook on electrodynamics contains the following two statements.
+
+\begin{enumerate}
+\item Maxwell's equations imply that the fields (and, in a suitable gauge,
+the potentials) satisfy the wave equation. Without sources this equation
+still has non-trivial solutions: light.
+\item Maxwell's equations follow from a least-action principle. One varies
+the potentials, integrates by parts, ``neglects the total divergence'',
+and reads off the field equations.
+\end{enumerate}
+
+Both statements are correct. Placed side by side, however, they hide a
+tension. A source-free solution of a linear hyperbolic equation can be
+different from zero only if \emph{something} is different from zero on the
+boundary of the region in which we solve it. The variational principle, on
+the other hand, is derived by throwing the boundary away.
+
+The thesis of this chapter is that these are \emph{one fact seen from two
+sides}. The total divergences that we discard in the action are precisely
+the place where the source-free solutions of the wave equation---what
+quantum theory calls photons---are visible to the action at all. Discarding
+them is harmless for obtaining the field equations. It is not harmless for
+what the field equations \emph{cannot} tell us: which free radiation is
+present, what the symplectic structure of the theory is, and in which
+direction time runs.
+
+The plan is as follows. Sections~\ref{sec:mb-maxwell} and~\ref{sec:mb-wave}
+recall Maxwell's equations and derive the wave equation, paying attention
+to what is lost on the way. Section~\ref{sec:mb-anatomy} splits every
+solution into a particular and a homogeneous part and shows that the
+homogeneous part is controlled by boundary data. Section~\ref{sec:mb-action}
+turns to the action and examines exactly which divergences are dropped and
+why. Sections~\ref{sec:mb-symplectic} and~\ref{sec:mb-arrow} show what
+those divergences contain: the symplectic structure (hence the photon
+number) and the arrow of time (hence radiation reaction).
+
+%----------------------------------------------------------------------
+\section{Maxwell's equations}
+\label{sec:mb-maxwell}
+
+In SI units, with $c^2=1/(\varepsilon_0\mu_0)$,
+\begin{align}
+\nabla\cdot\mathbf E &= \rho/\varepsilon_0, &
+\nabla\times\mathbf B-\frac1{c^2}\,\partial_t\mathbf E &= \mu_0\mathbf J,
+\label{eq:mb-max-a}\\
+\nabla\cdot\mathbf B &= 0, &
+\nabla\times\mathbf E+\partial_t\mathbf B &= 0 .
+\label{eq:mb-max-b}
+\end{align}
+There are eight scalar equations for six unknown field components, so the
+system is overdetermined. It is nevertheless consistent, for two reasons.
+
+First, the divergence equations are conditions on the \emph{data}, not on
+the dynamics. Taking the divergence of the two curl equations and using
+the divergence equations gives
+\begin{equation}
+\partial_t\rho+\nabla\cdot\mathbf J=0,\qquad
+\partial_t(\nabla\cdot\mathbf B)=0,
+\label{eq:mb-consistency}
+\end{equation}
+so if the constraints $\nabla\cdot\mathbf E=\rho/\varepsilon_0$ and
+$\nabla\cdot\mathbf B=0$ hold at one instant, and charge is conserved, they
+hold at all later instants. Second, only the two curl equations contain time
+derivatives; they are the evolution equations.
+
+Charge conservation is not an additional assumption: it is a necessary
+condition for the sourced equations to have any solution at all.
+
+%----------------------------------------------------------------------
+\section{From Maxwell's equations to the wave equation}
+\label{sec:mb-wave}
+
+\subsection{Wave equations for the fields}
+
+Apply $\nabla\times$ to Faraday's law and use
+$\nabla\times(\nabla\times\mathbf E)=\nabla(\nabla\cdot\mathbf E)-\nabla^2\mathbf E$
+together with Amp\`ere's law:
+\begin{equation}
+\Box\,\mathbf E=-\frac1{\varepsilon_0}\nabla\rho-\mu_0\,\partial_t\mathbf J,
+\qquad
+\Box\,\mathbf B=\mu_0\,\nabla\times\mathbf J,
+\qquad
+\Box\equiv\frac1{c^2}\partial_t^2-\nabla^2 .
+\label{eq:mb-wave-fields}
+\end{equation}
+The second equation follows in the same way from Amp\`ere's law and
+$\nabla\cdot\mathbf B=0$.
+
+These equations are a \emph{consequence} of Maxwell's equations, not an
+equivalent reformulation. Differentiating raises the order, and the extra
+solutions are spurious. For example, $\mathbf E=\hat{\mathbf x}\cos(kz-\omega t)$
+and $\mathbf B=\hat{\mathbf x}\cos(kz-\omega t)/c$ solve the two homogeneous
+wave equations separately, but they violate Faraday's law, because
+$\nabla\times\mathbf E$ points along $\hat{\mathbf y}$ while $\partial_t\mathbf B$
+points along $\hat{\mathbf x}$. Two copies of a wave equation know nothing
+about each other; it is the first-order system that couples $\mathbf E$ to
+$\mathbf B$. Whenever we use the wave equation we must remember to impose
+the first-order equations on the data.
+
+\subsection{Potentials and gauge}
+
+Equations~\eqref{eq:mb-max-b} are solved identically by
+\begin{equation}
+\mathbf B=\nabla\times\mathbf A,\qquad
+\mathbf E=-\nabla\phi-\partial_t\mathbf A .
+\label{eq:mb-potentials}
+\end{equation}
+The remaining equations~\eqref{eq:mb-max-a} become
+\begin{align}
+-\nabla^2\phi-\partial_t(\nabla\cdot\mathbf A)&=\rho/\varepsilon_0,\\
+\Box\mathbf A+\nabla\!\left(\nabla\cdot\mathbf A+\frac1{c^2}\partial_t\phi\right)&=\mu_0\mathbf J .
+\end{align}
+The potentials are not unique: $\mathbf A\to\mathbf A+\nabla\chi$,
+$\phi\to\phi-\partial_t\chi$ leaves $\mathbf E$ and $\mathbf B$ unchanged. In
+the Lorenz gauge
+\begin{equation}
+\nabla\cdot\mathbf A+\frac1{c^2}\partial_t\phi=0
+\quad\Longleftrightarrow\quad
+\partial_\mu A^\mu=0,\qquad A^\mu=(\phi/c,\mathbf A),
+\label{eq:mb-lorenz}
+\end{equation}
+the four equations decouple into four wave equations,
+\begin{equation}
+\Box A^\mu=\mu_0 J^\mu,\qquad J^\mu=(c\rho,\mathbf J).
+\label{eq:mb-wave-A}
+\end{equation}
+
+Two remarks will matter later.
+
+\begin{enumerate}
+\item Applying $\partial_\mu$ to~\eqref{eq:mb-wave-A} and using
+$\partial_\mu J^\mu=0$ gives $\Box(\partial_\mu A^\mu)=0$. The Lorenz
+condition is therefore itself a \emph{homogeneous wave equation}: it holds
+for all times if $\partial_\mu A^\mu$ and its time derivative vanish on one
+initial surface. It is a condition on the data.
+\item The Lorenz condition is preserved by a further gauge transformation
+if and only if $\Box\chi=0$. The residual gauge freedom is itself a
+homogeneous solution of the wave equation.
+\end{enumerate}
+
+So even the ambiguity in the description of the field lives in the space of
+source-free solutions. This is the first hint that the homogeneous equation
+is not an afterthought.
+
+%----------------------------------------------------------------------
+\section{Anatomy of the solutions: particular and homogeneous}
+\label{sec:mb-anatomy}
+
+\subsection{Superposition and the Laplace analogy}
+
+Because~\eqref{eq:mb-wave-A} is linear, every solution is
+\begin{equation}
+A^\mu=A^\mu_{\rm p}+A^\mu_{\rm h},\qquad
+\Box A^\mu_{\rm p}=\mu_0J^\mu,\qquad \Box A^\mu_{\rm h}=0 .
+\label{eq:mb-split}
+\end{equation}
+The particular part is generated by the sources. The homogeneous part is
+generated by nothing in the region under consideration.
+
+An analogy from electrostatics is instructive. A solution of
+$\nabla^2\phi=0$ in a region $\Omega$ vanishes identically if $\phi=0$ on
+$\partial\Omega$ (maximum principle); the uniform field inside a capacitor
+exists only because the plates carry non-zero boundary values. A free
+solution is the shadow of its boundary data. The wave equation obeys the
+same logic, with one difference: the ``boundary'' now includes the initial
+surface, and since the equation is second order in time the data on it
+consist of two functions (the field and its time derivative; for Maxwell's
+equations, $\mathbf E$ and $\mathbf B$).
+
+\subsection{Green functions}
+
+With the convention $\Box G=\delta(t)\,\delta^3(\mathbf x)$ there are two
+natural Green functions,
+\begin{equation}
+G_{\rm ret}(\mathbf x,t)=\frac{\delta(t-r/c)}{4\pi r},\qquad
+G_{\rm adv}(\mathbf x,t)=\frac{\delta(t+r/c)}{4\pi r},
+\qquad r=|\mathbf x| .
+\label{eq:mb-green}
+\end{equation}
+Each gives a particular solution, $A^\mu_{\rm ret/adv}=\mu_0\,G_{\rm ret/adv}*J^\mu$.
+Their difference
+\begin{equation}
+G_{\rm ret}-G_{\rm adv}=\frac{\delta(t-r/c)-\delta(t+r/c)}{4\pi r}
+\label{eq:mb-pauli-jordan}
+\end{equation}
+satisfies $\Box(G_{\rm ret}-G_{\rm adv})=0$ everywhere, including at $r=0$,
+where it is regular as a distribution (it behaves as $-\delta'(t)/2\pi c$).
+Hence $A_{\rm ret}-A_{\rm adv}$ is a perfectly good homogeneous solution,
+generated by the sources but source-free as a field. We will meet it again
+in Section~\ref{sec:mb-arrow}.
+
+\subsection{Plane waves}
+
+In a region free of charges one may choose $\phi=0$, $\nabla\cdot\mathbf A=0$,
+and the general homogeneous solution is
+\begin{equation}
+\begin{split}
+\mathbf A_{\rm h}(\mathbf x,t)=\int\!\frac{d^3k}{(2\pi)^3}\sum_{\lambda=1,2}
+\Big[a_\lambda(\mathbf k)\,&\boldsymbol\varepsilon_\lambda(\mathbf k)\,
+e^{i(\mathbf k\cdot\mathbf x-\omega_k t)}+\text{c.c.}\Big],\\
+&\omega_k=c|\mathbf k|,\qquad
+\mathbf k\cdot\boldsymbol\varepsilon_\lambda=0 .
+\end{split}
+\label{eq:mb-modes}
+\end{equation}
+There are two polarizations per wave vector. This is the content of the
+word ``photon'' at the classical level: the amplitudes $a_\lambda(\mathbf k)$
+are free data, unconstrained by any source.
+
+\subsection{No wave without data}
+
+\begin{quote}
+\textbf{Proposition 1 (no wave without data).} Let $\mathbf E,\mathbf B$
+solve the source-free Maxwell equations near the surface $t=t_0$. If
+$\mathbf E=\mathbf B=0$ on the ball $|\mathbf x-\mathbf x_0|<R$ at $t=t_0$,
+then $\mathbf E=\mathbf B=0$ throughout the cone
+$|\mathbf x-\mathbf x_0|<R-c|t-t_0|$.
+\end{quote}
+
+\emph{Proof.} Let $u=\tfrac12(\varepsilon_0E^2+B^2/\mu_0)$ and
+$\mathbf S=\mathbf E\times\mathbf B/\mu_0$. Poynting's theorem for a ball
+whose radius shrinks at speed $c$ gives
+\begin{equation}
+\frac{d}{dt}\int_{|\mathbf x-\mathbf x_0|<R-c(t-t_0)}\!\! u\,d^3x
+=-\oint\big(\mathbf S\cdot\mathbf n+c\,u\big)\,d\sigma\le0,
+\end{equation}
+since $|\mathbf S|\le c\,u$. The energy is non-negative and starts at zero,
+so it stays zero. $\square$
+
+The consequence is exactly the statement of the introduction. A non-trivial
+homogeneous solution is one whose Cauchy data $(\mathbf E,\mathbf B)$ do
+not vanish somewhere on every spacelike slice; equivalently, in a
+scattering situation, one that carries incoming radiation from past
+infinity, or outgoing radiation to future infinity. In particular, ``no
+incoming radiation'' is a \emph{boundary condition}, and it is the one
+that turns the retarded solution into the solution of a physical problem.
+
+\medskip
+\noindent
+\textbf{Caveat on what counts as data.} Proposition~1 concerns Cauchy data
+(the field \emph{and} its time derivative on one slice). Data of a different
+kind, for example the field alone on two different time slices, do not
+suffice; we will see in Section~\ref{sec:mb-example} a non-trivial
+solution that vanishes on the \emph{entire} boundary of a space-time box.
+This distinction turns out to be central.
+
+%----------------------------------------------------------------------
+\section{The action principle and the term we discard}
+\label{sec:mb-action}
+
+From here on we use Heaviside--Lorentz units with $c=\varepsilon_0=\mu_0=1$
+and the conventions listed at the head of the chapter.
+
+\subsection{The variation of the action}
+
+Take
+\begin{equation}
+S[A]=\int_V d^4x\Big[-\tfrac14F_{\mu\nu}F^{\mu\nu}-J^\mu A_\mu\Big],
+\qquad F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu ,
+\label{eq:mb-action}
+\end{equation}
+on a space-time region $V$. Since $\delta(-\tfrac14F^2)=-F^{\mu\nu}\partial_\mu\delta A_\nu$,
+integration by parts gives
+\begin{equation}
+\delta S=\int_V d^4x\,\big(\partial_\mu F^{\mu\nu}-J^\nu\big)\,\delta A_\nu
+\;-\;\oint_{\partial V}d\Sigma_\mu\,F^{\mu\nu}\,\delta A_\nu .
+\label{eq:mb-variation}
+\end{equation}
+The first term yields the field equations $\partial_\mu F^{\mu\nu}=J^\nu$.
+The second is the total divergence we ``neglect''. For
+$V=[t_1,t_2]\times\Omega$ it splits into a contribution from the two time
+slices and one from the spatial boundary:
+\begin{equation}
+\oint_{\partial V}\!d\Sigma_\mu F^{\mu\nu}\delta A_\nu
+=\Big[\int_\Omega d^3x\;\mathbf E\cdot\delta\mathbf A\Big]_{t_1}^{t_2}
++\int_{t_1}^{t_2}\!dt\oint_{\partial\Omega}\!d\sigma\;
+\mathbf n\cdot\big(\mathbf E\,\delta\phi+\delta\mathbf A\times\mathbf B\big).
+\label{eq:mb-boundary-split}
+\end{equation}
+In the language of Hamiltonian mechanics, the first piece is
+$-\int\boldsymbol\pi\cdot\delta\mathbf A$ with $\boldsymbol\pi=-\mathbf E$ the
+momentum conjugate to $\mathbf A$: the boundary term is ``momentum times
+variation of the coordinate'', as in $[p\,\delta q]_{t_1}^{t_2}$ in
+particle mechanics. In the covariant multiple-integral (De~Donder--Weyl)
+language it is the pairing $\pi^{\mu\nu}\delta A_\nu$ with the covariant
+momenta $\pi^{\mu\nu}=\partial L/\partial(\partial_\mu A_\nu)=-F^{\mu\nu}$.
+The field strength \emph{is} the momentum.
+
+\subsection{What ``$\delta A=0$ on the boundary'' actually assumes}
+
+The usual argument sets $\delta A_\nu=0$ on $\partial V$ and the surface
+term disappears. Three observations on this step.
+
+\begin{enumerate}
+\item \textbf{What vanishes is the variation, not the field.} The
+background field $A$ may be non-zero on $\partial V$. The term
+$\mathbf E\cdot\delta\mathbf A$ vanishes because $\delta\mathbf A=0$, not
+because $\mathbf E=0$. The photon content, if any, sits in $\mathbf E$ and
+is invisible to this step.
+
+\item \textbf{Fixing $A$ at both ends is a two-point problem.} Physical
+problems are initial-value problems: we know the past and want the future.
+Holding $A$ fixed at $t_1$ \emph{and} $t_2$ asks for something we do not
+know in advance, and the two-point problem for a wave equation need not
+have a solution, nor a unique one (Section~\ref{sec:mb-example}). In
+particle mechanics the same issue is hidden by the fact that Hamilton's
+principle is used only to \emph{derive} the equations of motion.
+
+\item \textbf{Spatial infinity is subtler than it looks.} For sources that
+were switched on at a finite time the retarded field vanishes at fixed $t$
+as $r\to\infty$ (the radiation has not arrived yet), so the spatial term
+vanishes on every finite time slab. But radiation falls off only as $1/r$
+while the area of a sphere grows as $r^2$, so surface integrals of
+quadratic expressions such as $\delta\mathbf A\times\mathbf B$ over a
+sphere in the radiation zone are $O(1)$, not zero. The energy that leaves
+the system crosses precisely such spheres.
+\end{enumerate}
+
+\subsection{On shell, the free action is a pure divergence}
+
+The identity $F_{\mu\nu}F^{\mu\nu}=2F^{\mu\nu}\partial_\mu A_\nu$ gives
+\begin{equation}
+-\tfrac14F^2=-\tfrac12\partial_\mu\big(F^{\mu\nu}A_\nu\big)
++\tfrac12\big(\partial_\mu F^{\mu\nu}\big)A_\nu .
+\end{equation}
+On a solution, $\partial_\mu F^{\mu\nu}=J^\nu$, so
+\begin{equation}
+S_{\rm on\text{-}shell}
+=-\tfrac12\int_V d^4x\,J^\mu A_\mu
+-\tfrac12\oint_{\partial V}d\Sigma_\mu\,F^{\mu\nu}A_\nu .
+\label{eq:mb-onshell}
+\end{equation}
+For the free field ($J=0$) the on-shell action is \emph{entirely} a
+boundary term. If we discard divergences in the action, every free solution
+has the same action, namely zero. The first term in~\eqref{eq:mb-onshell}
+is the familiar ``half of $-J\!\cdot\!A$'' of the Coulomb interaction energy;
+with $A=A_{\rm p}+A_{\rm h}$ it contains $A_{\rm h}$ only through its
+coupling to the sources (exchange of energy with free radiation). The
+\emph{self}-action of the free radiation is a pure divergence.
+
+Note the two different divergences in play, and the two different
+neglects they correspond to:
+\begin{itemize}
+\item the surface term in $\delta S$, eq.~\eqref{eq:mb-variation}, which
+we drop to derive the field equations (harmless for the equations, but it
+discards the symplectic potential, see Section~\ref{sec:mb-symplectic});
+\item the surface term in $S$ itself, eq.~\eqref{eq:mb-onshell}, which is
+dropped whenever one evaluates the action on solutions (this discards the
+free-field part completely).
+\end{itemize}
+
+\subsection{Worked example: a standing wave in a cavity}
+\label{sec:mb-example}
+
+Take a single polarization between perfectly conducting walls at $x=0$ and
+$x=\ell$. Then $A\equiv A_y(x,t)$, the Lagrangian per unit transverse area
+is $L=\tfrac12(A_t^2-A_x^2)$, and the boundary condition is $A=0$ at the
+walls. Write $\Box=\partial_t^2-\partial_x^2$. Then
+\begin{equation}
+L=\tfrac12\partial_\mu\big(A\,\partial^\mu A\big)-\tfrac12A\,\Box A
+=\tfrac12\big[\partial_t(AA_t)-\partial_x(AA_x)\big]\quad\text{on shell.}
+\end{equation}
+Consider the mode $A=a\sin(kx)\cos(\omega t+\delta)$ with
+$\omega=k=n\pi/\ell$. The $x$-divergence integrates to zero (walls), and
+\begin{equation}
+S=\int_0^T\!dt\int_0^\ell\!dx\,L
+=\tfrac12\Big[\int_0^\ell\!dx\,AA_t\Big]_0^T
+=-\frac{a^2\omega\ell}{8}\Big[\sin(2\omega T+2\delta)-\sin2\delta\Big].
+\label{eq:mb-cavity-action}
+\end{equation}
+One checks by direct integration of $\tfrac12(A_t^2-A_x^2)$ that this is
+correct. Three lessons follow.
+
+\begin{enumerate}
+\item The on-shell action of a perfectly healthy, non-trivial free
+solution is non-zero and consists of a boundary term at $t=0$ and $t=T$
+only. Dropping divergences would assign it the value $0$.
+\item Taking $\delta=\pi/2$ gives $A=-a\sin(kx)\sin(\omega t)$, which
+vanishes at $t=0$. It also vanishes at $t=T$ whenever $\omega T=m\pi$. For
+$T=m\ell/n$ (any rational multiple of $\ell$) there is a non-trivial
+solution with $A=0$ on the \emph{whole boundary} of the space-time
+rectangle. The fixed-endpoint variational problem is degenerate there: the
+second variation has a null direction. This is the field-theoretic analogue
+of a conjugate point in Jacobi's theory.
+\item The resolution of the apparent paradox is that fixing $A$ is only
+half of the Cauchy data. Here $A_t=-\omega a\sin kx\cos\omega t\neq0$ at
+$t=0$: the momentum $\mathbf E$ is non-zero, and it multiplies
+$\delta A=0$ in the discarded term. The photon is hiding in the factor that
+multiplies the vanishing variation.
+\end{enumerate}
+
+\subsection[Wave equation from a shifted Lagrangian]{The same wave equation from a Lagrangian that differs by a divergence}
+
+The identity
+\begin{equation}
+\begin{split}
+-\tfrac14F_{\mu\nu}F^{\mu\nu}
+&=-\tfrac12\partial_\mu A_\nu\partial^\mu A^\nu+\tfrac12(\partial_\mu A^\mu)^2
++\partial_\mu K^\mu,\\
+K^\mu&=\tfrac12\big(A_\nu\partial^\nu A^\mu-A^\mu\partial_\nu A^\nu\big),
+\end{split}
+\label{eq:mb-feynman}
+\end{equation}
+shows that Maxwell's Lagrangian plus the gauge-fixing term
+$-\tfrac12(\partial_\mu A^\mu)^2$ equals $-\tfrac12\partial_\mu
+A_\nu\partial^\mu A^\nu$ up to the divergence $\partial_\mu K^\mu$. After
+discarding $\partial_\mu K^\mu$, the Lagrangian
+\begin{equation}
+L_{\rm F}=-\tfrac12\partial_\mu A_\nu\,\partial^\mu A^\nu-J^\mu A_\mu
+\end{equation}
+gives $\Box A^\nu=J^\nu$ directly, four decoupled wave equations. This is
+the cleanest derivation of the wave equation from an action, and it is made
+possible by dropping a divergence. The price is that the Lorenz condition
+is no longer implied by the equations of motion; it must be imposed on the
+free solutions, where it is a homogeneous wave equation with its own
+boundary data (Section~\ref{sec:mb-wave}, remark~1), exactly the
+Gupta--Bleuler condition of the quantum theory.
+
+%----------------------------------------------------------------------
+\section[The discarded term: symplectic structure]{What the discarded term contains: symplectic structure and photons}
+\label{sec:mb-symplectic}
+
+The boundary term at a time slice is
+$\Theta[\delta A]=-\int d^3x\,\mathbf E\cdot\delta\mathbf A$. Its exterior
+derivative on the space of solutions is the symplectic form. Concretely,
+for two source-free solutions $A_1,A_2$ define the current
+\begin{equation}
+j^\mu[A_1,A_2]=F_1^{\mu\nu}A_{2\nu}-F_2^{\mu\nu}A_{1\nu}.
+\end{equation}
+Using $\partial_\mu F^{\mu\nu}=0$ and $F^{\mu\nu}\partial_\mu A_\nu=\tfrac12F^{\mu\nu}F_{\mu\nu}$,
+\begin{equation}
+\partial_\mu j^\mu=\tfrac12F_1^{\mu\nu}F_{2\mu\nu}-\tfrac12F_2^{\mu\nu}F_{1\mu\nu}=0 .
+\end{equation}
+The charge of this current,
+\begin{equation}
+\Omega(A_1,A_2)=\int d^3x\,\big(\mathbf E_1\cdot\mathbf A_2-\mathbf E_2\cdot\mathbf A_1\big),
+\label{eq:mb-symplectic}
+\end{equation}
+is therefore independent of the slice. It is gauge invariant for
+$\nabla\cdot\mathbf E=0$, because $\Omega(A,\nabla\chi)=-\int\chi\,\nabla\cdot\mathbf E=0$.
+Up to a convention-dependent sign, $\Omega$ is the exterior derivative of
+the boundary term. The boundary term we discard in~\eqref{eq:mb-variation}
+\emph{is} the symplectic potential, and the conserved symplectic form is
+what remains of it after one more variation. This is the structure on which
+canonical quantization rests (the ``covariant phase space'' of Crnkovi\'c--Witten
+and Lee--Wald).
+
+Evaluate $\Omega$ on the plane waves $A_{\mathbf k,\lambda}=\boldsymbol\varepsilon_\lambda e^{i(\mathbf k\cdot\mathbf x-\omega t)}$.
+A short computation gives
+\begin{equation}
+\Omega\big(A_{\mathbf k\lambda},A^{*}_{\mathbf k'\lambda'}\big)
+=2i\omega_k\,(2\pi)^3\delta^3(\mathbf k-\mathbf k')\,\delta_{\lambda\lambda'},
+\qquad
+\Omega\big(A_{\mathbf k\lambda},A_{\mathbf k'\lambda'}\big)=0 .
+\end{equation}
+In the mode amplitudes $a_\lambda(\mathbf k)$ of~\eqref{eq:mb-modes} the
+symplectic form is therefore diagonal, so $a_\lambda$ and $a_\lambda^*$ are
+canonically conjugate up to normalization. Quantization replaces them by
+annihilation and creation operators. For one mode in a box of volume $V$
+the time-averaged field energy is $2\omega^2|a|^2V$, which gives
+\begin{equation}
+N=\frac{2\,\omega\,V\,|a|^2}{\hbar}
+\end{equation}
+quanta of energy $\hbar\omega$. The photon number is therefore read off
+from $\Omega$, that is, from the divergence term of the action, and from
+nowhere else.
+
+It is worth stressing that this is more than the on-shell value of $S$. For
+a traveling plane wave in a periodic box, $E^2=B^2$ pointwise, so
+$L=\tfrac12(E^2-B^2)=0$ and the on-shell action vanishes even with the
+boundary term kept (Exercise~\ref{ex:mb-plane}). The wave nevertheless
+carries photons. The information is not in the \emph{value} of the
+boundary term but in its \emph{variation}.
+
+%----------------------------------------------------------------------
+\section{The action cannot tell past from future}
+\label{sec:mb-arrow}
+
+Insert the solution $A^\mu=G*J^\mu$ of $\Box A^\mu=J^\mu$ into the first
+term of~\eqref{eq:mb-onshell}:
+\begin{equation}
+S_{\rm eff}[J]=-\tfrac12\int\!\!\int d^4x\,d^4y\;J^\mu(x)\,G(x-y)\,J_\mu(y).
+\end{equation}
+The integrand is symmetric under $x\leftrightarrow y$, so only the
+symmetric part of $G$ contributes. The retarded and advanced Green
+functions give the \emph{same} $S_{\rm eff}$, equal to the one built from
+\begin{equation}
+G_{\rm sym}=\tfrac12\big(G_{\rm ret}+G_{\rm adv}\big).
+\end{equation}
+This is the origin of the Fokker--Schwarzschild--Tetrode action: a
+variational principle for charges that interact directly, time-symmetrically.
+Nothing in it distinguishes retarded from advanced.
+
+The difference between the retarded solution and the time-symmetric one is
+\begin{equation}
+A_{\rm ret}=A_{\rm sym}+A_{\rm rad},\qquad
+A_{\rm rad}=\tfrac12\big(A_{\rm ret}-A_{\rm adv}\big),
+\label{eq:mb-dirac}
+\end{equation}
+and by~\eqref{eq:mb-pauli-jordan} $A_{\rm rad}$ is a source-free solution,
+regular on the worldline of the source. It is non-zero, and it is
+homogeneous: exactly the kind of object that the action sees only through
+boundary terms. Dirac showed that evaluated on the worldline of a point
+charge it yields the radiation-reaction force, which for slow motion is
+\begin{equation}
+\mathbf F_{\rm rr}=\frac{q^2}{6\pi}\,\frac{d^3\mathbf x}{dt^3}
+\qquad(\text{Heaviside--Lorentz, }c=1),
+\end{equation}
+the Abraham--Lorentz force. The arrow of time in electrodynamics thus does
+not come from the action. It comes from the choice $A_{\rm h}=A_{\rm in}=0$
+in the past, which is a boundary condition on the homogeneous solution. The
+Wheeler--Feynman absorber theory attempts to derive that condition from the
+requirement of complete absorption in the future, again a statement about
+boundary data.
+
+\subsection*{A remark on the two worlds}
+
+In the terminology of this book the situation is a clean example of two
+worlds that should not be mixed. Causality, ``what has actually been
+radiated'' and ``what we see in a detector'' belong to the real world. The
+variational principle, with its fixed endpoints and discarded divergences,
+is a construction of the ideal world: time-symmetric, and blind to
+boundary data by design. If one asks the ideal-world construction to
+reproduce a real-world fact (the retarded, causal behavior of radiation, or
+the number of photons in a beam), it cannot. The information was removed in
+the step ``neglect the divergence'', and has to be put back in by hand as a
+boundary condition. The pattern is the same as in the other examples of this book: a
+rigorous derivation inside the ideal world is asked a question that belongs
+to the real world.
+
+The remedy is not to abandon the action but to keep track of the term
+that was discarded. Modern formulations do this in different ways. The
+covariant phase space keeps the symplectic potential. The closed-time-path
+(Schwinger--Keldysh) formulation, applied to classical mechanics by Galley,
+doubles the variables so that the action can be varied with initial data
+only, and the boundary term at the final time cancels between the two
+copies. Both are ways of declining to discard the divergence.
+
+%----------------------------------------------------------------------
+\section[Other discarded divergences]{Other places where discarded divergences matter}
+\label{sec:mb-others}
+
+\begin{itemize}
+\item \textbf{Stress tensor.} The canonical energy--momentum tensor of the
+Maxwell field is not symmetric, and the Belinfante symmetric tensor differs
+from it by a divergence. The total four-momentum agrees if the surface term
+vanishes. For radiation, which falls only as $1/r$, the corresponding
+surface integrals for \emph{angular momentum} do not vanish automatically,
+and the split into ``spin'' and ``orbital'' parts of the angular
+momentum of light is sensitive to which surface terms are discarded.
+\item \textbf{The $\theta$-term.} The Lagrangian $\theta\,F_{\mu\nu}\tilde F^{\mu\nu}$ is a pure divergence,
+\begin{equation*}
+F_{\mu\nu}\tilde F^{\mu\nu}=2\,\partial_\mu\big(\varepsilon^{\mu\nu\rho\sigma}A_\nu\partial_\rho A_\sigma\big),
+\end{equation*}
+proportional to $\mathbf E\cdot\mathbf B$ (the sign depends on the convention
+for $\varepsilon^{0123}$). It changes no local field equation. It matters,
+however, for non-trivial boundary data or topology (Chern--Simons terms,
+instantons), where the divergence cannot be integrated away.
+\item \textbf{Gravity.} The Einstein--Hilbert action is second order in
+derivatives of the metric; the boundary term that makes the variational
+principle well posed with fixed boundary metric (Gibbons--Hawking--York) is
+a divergence that cannot be dropped.
+\end{itemize}
+
+%----------------------------------------------------------------------
+\section{Summary}
+\label{sec:mb-summary}
+
+\begin{enumerate}
+\item The wave equation is a consequence of Maxwell's equations. Its
+solutions split as $A=A_{\rm p}+A_{\rm h}$ into a part driven by the
+sources and a source-free part.
+\item By Proposition~1, a non-trivial homogeneous solution is
+non-trivial because its Cauchy data, or its data at infinity, are
+non-zero. Free radiation is the boundary data of the problem.
+\item In the action principle the boundary data enter only through
+divergences: the boundary term of $\delta S$ (the symplectic potential,
+$\mathbf E\cdot\delta\mathbf A$) and the boundary term of the on-shell
+action (the whole of the free-field action).
+\item ``Neglecting the divergence'' is harmless for deriving the field
+equations, but it is equivalent to switching off the physics carried by the
+homogeneous solutions: the symplectic structure and hence the photon
+number, the distinction between retarded and advanced solutions, and
+radiation reaction.
+\item The statement ``$\delta A=0$ on the boundary'' fixes only half of
+the Cauchy data. The other half, $\mathbf E$, multiplies the vanishing
+variation, and this is where the photons are hiding.
+\end{enumerate}
+
+%----------------------------------------------------------------------
+\section*{Exercises}
+
+\begin{enumerate}
+\item Show that the Lorenz condition, once satisfied together with its
+time derivative on an initial surface, holds for all times when
+$\partial_\mu J^\mu=0$. Show that the residual gauge transformations
+satisfy $\Box\chi=0$.
+\item Verify that $\partial_\mu j^\mu=0$ for the symplectic current
+and that $\Omega(A,\nabla\chi)=0$ when $\nabla\cdot\mathbf E=0$.
+\item Verify~\eqref{eq:mb-cavity-action} by integrating $\tfrac12(A_t^2-A_x^2)$
+directly. For which $T$ does the Dirichlet problem $A=0$ on the whole
+boundary of $[0,\ell]\times[0,T]$ have a non-trivial solution? Relate your
+answer to Jacobi's conjugate points.
+\item\label{ex:mb-plane} Show that for a circularly polarized plane wave
+in a periodic box the Lagrangian density vanishes identically, hence so
+does the on-shell action including the boundary term, while the symplectic norm
+$i\,\Omega(A^{(-)},A^{(+)})$ of its positive-frequency part $A^{(+)}$ is non-zero.
+\item Derive the identity~\eqref{eq:mb-feynman} and show that the Lorenz
+condition $\partial_\mu A^\mu=0$ follows from $\Box A^\mu=J^\mu$ only up to
+a homogeneous solution.
+\item Show that $G_{\rm ret}-G_{\rm adv}$ is regular at $r=0$, and
+compute the force $\mathbf F_{\rm rr}$ on a slowly moving charge from
+$A_{\rm rad}=\tfrac12(A_{\rm ret}-A_{\rm adv})$.
+\end{enumerate}
+
+%----------------------------------------------------------------------
+\section*{Notes and further reading}
+
+The treatment of the wave equation and the Green functions follows the
+standard accounts in Jackson and in Landau and Lifshitz (Vol.~2). The
+decomposition~\eqref{eq:mb-dirac} and the radiation-reaction force are due
+to Dirac (1938); the time-symmetric action and the absorber condition to
+Wheeler and Feynman (1945, 1949). The covariant phase space is described by
+Crnkovi\'c and Witten (1987) and Lee and Wald (1990). Galley (2013) gives
+the initial-value formulation of the action principle with doubled
+variables.
+% TODO: add \ref to the De Donder--Weyl / multiple-integral chapter
+% (Sec. 4.1: covariant momenta pi^{mu nu} = -F^{mu nu}).
