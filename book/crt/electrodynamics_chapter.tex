@@ -1,0 +1,699 @@
+% ============================================================
+%  Chapter: Classical Electrodynamics
+%  Gaussian units, metric signature (+,-,-,-)
+%  Needs only amsmath, amssymb.  Everything between
+%  "CHAPTER BEGINS" and "CHAPTER ENDS" can be \input into the book.
+% ============================================================
+\documentclass[11pt,a4paper]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.6cm}
+\setlength{\emergencystretch}{3em}
+
+\begin{document}
+
+% ---------------------- CHAPTER BEGINS ----------------------
+\chapter[Classical Electrodynamics]{Classical Electrodynamics: Fields, Sources, Gauges, and Relativity}
+\label{ch:ed}
+
+Classical electrodynamics is the first field theory, the first relativistic theory
+(Maxwell's equations were Lorentz covariant decades before anyone knew it), and the
+first gauge theory. It is also a theory about which one can ask deceptively simple
+questions that receive several different, equally correct, answers:
+\emph{How many degrees of freedom does the electromagnetic field have? Is the Coulomb
+field a degree of freedom? Is the vector potential ``real''? Does the choice of gauge
+matter? Does the instantaneous Coulomb potential violate causality?}
+The answers depend on what is being counted and in which formulation. The apparent
+paradoxes appear exactly when statements about the \emph{real world} (what can be
+measured, what propagates causally) are mixed with statements about the \emph{ideal
+world} of a particular mathematical representation (potentials, gauge conditions,
+point charges). This chapter tries to keep the two apart.
+
+%----------------------------------------------------------------
+\section{Conventions}
+\label{sec:conventions}
+
+\paragraph{Units.} Gaussian units are used throughout: no $\varepsilon_0,\mu_0$, Coulomb's
+law reads $\mathbf F=q_1q_2\,\hat{\mathbf r}/r^2$, and the speed of light appears
+explicitly wherever magnetic effects are compared with electric ones. The Lorentz force,
+the energy density and the Poynting vector are
+\begin{equation}
+\mathbf F=q\Bigl(\mathbf E+\frac{\mathbf v}{c}\times\mathbf B\Bigr),\qquad
+u=\frac{E^2+B^2}{8\pi},\qquad
+\mathbf S=\frac{c}{4\pi}\,\mathbf E\times\mathbf B ,
+\end{equation}
+and the field momentum density is $\mathbf S/c^2$.
+
+\paragraph{Metric.} $g_{\mu\nu}=\mathrm{diag}(+1,-1,-1,-1)$. Greek indices run over
+$0,1,2,3$, Latin ones over $1,2,3$; $x^\mu=(ct,\mathbf x)$, and
+$a\cdot b=a_\mu b^\mu=a^0b^0-\mathbf a\cdot\mathbf b$. Derivatives:
+\begin{equation}
+\partial_\mu\equiv\frac{\partial}{\partial x^\mu}=\Bigl(\frac1c\partial_t,\;\nabla\Bigr),\qquad
+\partial^\mu=\Bigl(\frac1c\partial_t,\;-\nabla\Bigr),\qquad
+\Box\equiv\partial_\mu\partial^\mu=\frac1{c^2}\partial_t^2-\nabla^2 .
+\end{equation}
+Four-vectors used below:
+\begin{equation}
+A^\mu=(\phi,\mathbf A),\quad j^\mu=(c\rho,\mathbf j),\quad k^\mu=(\omega/c,\mathbf k),\quad
+u^\mu=\gamma(c,\mathbf v).
+\end{equation}
+The Levi-Civita symbol is normalized as $\epsilon^{0123}=+1$.
+
+%----------------------------------------------------------------
+\section{Maxwell's equations as a dynamical system}
+\label{sec:maxwell}
+
+In three-dimensional notation Maxwell's equations are
+\begin{align}
+\nabla\cdot\mathbf E&=4\pi\rho, &
+\nabla\times\mathbf B-\frac1c\frac{\partial\mathbf E}{\partial t}&=\frac{4\pi}{c}\,\mathbf j,
+\label{eq:maxwell-inh}\\
+\nabla\cdot\mathbf B&=0, &
+\nabla\times\mathbf E+\frac1c\frac{\partial\mathbf B}{\partial t}&=0 .
+\label{eq:maxwell-hom}
+\end{align}
+There are eight equations for six unknown functions $\mathbf E,\mathbf B$, and they are
+of two quite different kinds. The two curl equations contain $\partial_t\mathbf E$ and
+$\partial_t\mathbf B$: they are six \emph{evolution equations}, first order in time.
+The two divergence equations contain no time derivatives at all: they are
+\emph{constraints} on the data $\mathbf E(0,\mathbf x),\mathbf B(0,\mathbf x)$ at any
+instant.
+
+The constraints must be compatible with the evolution. Taking the divergence of the
+evolution equations gives
+\begin{align}
+\partial_t(\nabla\cdot\mathbf B)&=-c\,\nabla\cdot(\nabla\times\mathbf E)=0,\\
+\partial_t(\nabla\cdot\mathbf E-4\pi\rho)&=-4\pi\bigl(\partial_t\rho+\nabla\cdot\mathbf j\bigr).
+\label{eq:constraint-propagation}
+\end{align}
+So $\nabla\cdot\mathbf B=0$ is automatically preserved, while Gauss's law is preserved
+\emph{if and only if the charge is conserved}, $\partial_t\rho+\nabla\cdot\mathbf j=0$.
+This is the first appearance of a theme that returns in
+Secs.~\ref{sec:sources} and~\ref{sec:gauges}: consistency of the field equations
+demands a conserved source.
+
+\subsection*{Covariant form}
+
+Define the field-strength tensor $F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu$.
+With $\mathbf E=-\nabla\phi-\frac1c\partial_t\mathbf A$ and $\mathbf B=\nabla\times\mathbf A$ one finds
+$F_{0i}=E^i$ and $F_{ij}=-\epsilon_{ijk}B^k$, that is
+\begin{equation}
+F^{\mu\nu}=\begin{pmatrix}
+0&-E_x&-E_y&-E_z\\
+E_x&0&-B_z&B_y\\
+E_y&B_z&0&-B_x\\
+E_z&-B_y&B_x&0
+\end{pmatrix}.
+\end{equation}
+Equations (\ref{eq:maxwell-inh})--(\ref{eq:maxwell-hom}) become
+\begin{equation}
+\partial_\mu F^{\mu\nu}=\frac{4\pi}{c}\,j^\nu,\qquad
+\partial_\mu\tilde F^{\mu\nu}=0,\qquad
+\tilde F^{\mu\nu}=\tfrac12\epsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}.
+\label{eq:maxwell-cov}
+\end{equation}
+The dual $\tilde F$ is obtained from $F$ by $\mathbf E\to\mathbf B$, $\mathbf B\to-\mathbf E$.
+The second equation is equivalent to
+$\partial_\lambda F_{\mu\nu}+\partial_\mu F_{\nu\lambda}+\partial_\nu F_{\lambda\mu}=0$
+and is an \emph{identity} once $F$ is written through a potential. Applying $\partial_\nu$
+to the first equation and using the antisymmetry of $F^{\mu\nu}$ gives
+\begin{equation}
+\partial_\mu j^\mu=0 ,
+\label{eq:continuity}
+\end{equation}
+so charge conservation is not an extra assumption: it follows from the field equations.
+The force on a charge, and the two independent Lorentz invariants of the field, are
+\begin{equation}
+\frac{dp^\mu}{d\tau}=\frac qc F^{\mu\nu}u_\nu,\qquad
+F_{\mu\nu}F^{\mu\nu}=2(B^2-E^2),\qquad
+F_{\mu\nu}\tilde F^{\mu\nu}=-4\,\mathbf E\cdot\mathbf B .
+\label{eq:invariants}
+\end{equation}
+
+\subsection*{Action}
+
+For a prescribed source $j^\mu(x)$ the equations follow from
+$S=\int dt\,d^3x\,\mathcal L=\frac1c\int d^4x\,\mathcal L$ with
+\begin{equation}
+\mathcal L=-\frac1{16\pi}F_{\mu\nu}F^{\mu\nu}-\frac1c\,j_\mu A^\mu
+=\frac1{8\pi}\bigl(E^2-B^2\bigr)-\rho\phi+\frac1c\,\mathbf j\cdot\mathbf A .
+\label{eq:lagrangian}
+\end{equation}
+Indeed $\partial\mathcal L/\partial(\partial_\mu A_\nu)=-F^{\mu\nu}/4\pi$ and
+$\partial\mathcal L/\partial A_\nu=-j^\nu/c$, so the Euler--Lagrange equations
+reproduce $\partial_\mu F^{\mu\nu}=4\pi j^\nu/c$. The potentials, not the
+fields, are the variables of the action principle.
+
+%----------------------------------------------------------------
+\section{How many degrees of freedom?}
+\label{sec:dof}
+
+The electromagnetic field has \textbf{two} degrees of freedom per spatial point (two
+polarizations per wave vector), that is, four phase-space dimensions per point.
+The number is not obvious from the Lagrangian~(\ref{eq:lagrangian}), which contains four
+functions $A^\mu$, nor from the equations, which contain six functions $\mathbf E,\mathbf B$.
+It can be established in four independent ways, and it is instructive to see that they agree.
+
+\subsection{Counting Cauchy data}
+
+A \emph{degree of freedom} is a pair (coordinate, momentum): two free functions of
+the spatial variables in the initial data. For the field the initial data are
+$\mathbf E(0,\mathbf x)$ and $\mathbf B(0,\mathbf x)$: six functions, subject to the two constraints
+$\nabla\cdot\mathbf B=0$ and $\nabla\cdot\mathbf E=4\pi\rho$. Hence $6-2=4$ free functions,
+that is two degrees of freedom. By the evolution equations and
+Eq.~(\ref{eq:constraint-propagation}) nothing else is needed: the data determine the field
+at all later times.
+
+The same statement can be phrased with the Helmholtz decomposition. Any (sufficiently
+decaying) vector field splits uniquely into a longitudinal (curl-free) part and a transverse
+(divergence-free) part, $\mathbf E=\mathbf E_L+\mathbf E_T$. The magnetic field is purely
+transverse, $\mathbf B=\mathbf B_T$. Gauss's law involves only $\mathbf E_L$ and fixes it
+completely in terms of the charge density at the same instant,
+\begin{equation}
+\mathbf E_L(t,\mathbf x)=\int d^3x'\,\rho(t,\mathbf x')\,
+\frac{\mathbf x-\mathbf x'}{|\mathbf x-\mathbf x'|^3}.
+\label{eq:EL}
+\end{equation}
+What is free is therefore $\mathbf E_T$ and $\mathbf B$: two transverse vector fields,
+each with two independent components, i.e.\ $2+2=4$ functions.
+\emph{The Coulomb field is not a degree of freedom: it is slaved to the sources.}
+
+\subsection{Counting with the Hamiltonian (Dirac) analysis}
+
+Take $\phi=A^0$ and $A^i$ as coordinates. The Lagrangian~(\ref{eq:lagrangian}) contains
+$\partial_t\mathbf A$ (through $\mathbf E$) but not $\partial_t\phi$, so the canonical momenta are
+\begin{equation}
+\boldsymbol\Pi=\frac{\partial\mathcal L}{\partial(\partial_t\mathbf A)}=-\frac{\mathbf E}{4\pi c},
+\qquad
+\Pi^0=\frac{\partial\mathcal L}{\partial(\partial_t\phi)}=0 .
+\label{eq:momenta}
+\end{equation}
+The vanishing of $\Pi^0$ is a \emph{primary constraint}. Performing the Legendre
+transform, using $\mathbf E=-4\pi c\,\boldsymbol\Pi$,
+\begin{equation}
+H=\int d^3x\Bigl[\,2\pi c^2\,\Pi^2+\frac1{8\pi}(\nabla\times\mathbf A)^2
+-\frac1c\,\mathbf j\cdot\mathbf A+\phi\,\bigl(\rho+c\,\nabla\!\cdot\!\boldsymbol\Pi\bigr)\Bigr]
+\;(+\text{ a term }\textstyle\int u\,\Pi^0 ).
+\label{eq:hamiltonian}
+\end{equation}
+Requiring that $\Pi^0\approx0$ be preserved in time, $\partial_t\Pi^0=-\delta H/\delta\phi\approx0$,
+generates the \emph{secondary constraint}
+\begin{equation}
+G\equiv\nabla\cdot\boldsymbol\Pi+\frac\rho c\approx0
+\quad\Longleftrightarrow\quad
+\nabla\cdot\mathbf E=4\pi\rho ,
+\label{eq:gauss-constraint}
+\end{equation}
+which is Gauss's law. Its own time derivative is
+$\partial_tG=\frac1c(\partial_t\rho+\nabla\cdot\mathbf j)$, so no further constraints appear
+if and only if the current is conserved. The potential $\phi$ enters $H$ linearly, as a
+Lagrange multiplier enforcing $G\approx0$: its time evolution is not determined by the
+equations of motion.
+
+Both $\Pi^0\approx0$ and $G\approx0$ commute with each other and with $H$ on the constraint
+surface: they are \emph{first class}. The functional $G[\lambda]=\int\lambda\,G\,d^3x$ generates
+$\delta\mathbf A=-\nabla\lambda$, a gauge transformation. Each first-class constraint removes
+two phase-space dimensions (one by restricting to the constraint surface, one by quotienting
+along the gauge orbit), so per spatial point
+\begin{equation}
+\underbrace{8}_{(A^\mu,\Pi_\mu)}-2\times\underbrace{2}_{\text{first-class constraints}}=4
+\;\;\Longrightarrow\;\;2\ \text{degrees of freedom}.
+\end{equation}
+
+\subsection{Counting in a gauge: plane waves}
+
+In vacuum in the Lorenz gauge $\partial_\mu A^\mu=0$ (Sec.~\ref{sec:gauges}) every component
+obeys $\Box A^\mu=0$. A plane wave $A^\mu=\varepsilon^\mu e^{-ik\cdot x}$ requires
+\begin{equation}
+k^2=0,\qquad k\cdot\varepsilon=0,\qquad\varepsilon^\mu\sim\varepsilon^\mu+\alpha k^\mu .
+\end{equation}
+The first condition is the dispersion relation $\omega=c|\mathbf k|$; the second is the gauge
+condition; the third is the residual gauge freedom. Of the four components of
+$\varepsilon^\mu$ one is removed by the gauge condition and one by the residual gauge
+freedom: $4-1-1=2$. For $k^\mu=(\omega/c)(1,0,0,1)$ the physical polarizations are
+$\varepsilon^\mu=(0,1,0,0)$ and $(0,0,1,0)$; the ``scalar'' and ``longitudinal''
+polarizations combine into $\varepsilon^\mu\propto k^\mu$, which is pure gauge.
+In the Coulomb gauge $\nabla\cdot\mathbf A=0$ the count is even simpler: $\phi$ is determined
+by $\rho$ and $\mathbf A$ has $3-1=2$ components. In the temporal gauge $\phi=0$
+one has $3$ components of $\mathbf A$ minus one for Gauss's law: again two.
+All gauges agree, as they must, since the number is gauge independent.
+
+\subsection{Counting by experiment: the Rayleigh--Jeans law}
+
+The number two is a real-world quantity. Expand the transverse field in a box of volume $V$ in
+normal modes $\mathbf k,\lambda$ ($\lambda=1,2$ labels the polarization); each mode is a harmonic
+oscillator of frequency $\omega_k=ck$, and the field energy $\int(E^2+B^2)/8\pi$ is a sum of
+independent oscillator energies. The number of modes with wave vector in $d^3k$ is
+$2V\,d^3k/(2\pi)^3$. By equipartition each oscillator carries mean energy $k_BT$ (kinetic plus
+potential), so the energy density of thermal radiation in $d\omega$ is
+\begin{equation}
+u(\omega)\,d\omega=\frac{\omega^2}{\pi^2c^3}\,k_BT\,d\omega .
+\end{equation}
+The low-frequency limit of the measured black-body spectrum agrees with this
+formula, including the factor $2$ from the two polarizations. At high frequency the formula
+fails catastrophically (the total energy diverges): this is the failure not of the count
+but of the \emph{idealization} that a continuous field has infinitely many degrees of freedom,
+each of which can be thermally excited. The remedy lies outside classical electrodynamics.
+
+\subsection{Remarks and caveats}
+
+\begin{enumerate}
+\item \emph{``Two'' is a local count.} The field has $2\times\infty$ degrees of freedom: two
+per point, or equivalently two per mode $\mathbf k$. Boundaries, conductors, or non-trivial
+topology of the region change the spectrum of modes and may add finitely many global static
+modes, but they do not change the local number.
+\item \emph{Two versus four.} ``Two degrees of freedom'' means a two-dimensional configuration
+space per point and a four-dimensional phase space per point. A bare ``four'' is
+therefore ambiguous: it can mean the four components of $A^\mu$ or the four phase-space dimensions
+per point, and neither is the number of degrees of freedom.
+\item \emph{Covariant momenta.} In the De Donder--Weyl approach, where all four derivatives
+$\partial_\mu A_\nu$ are treated on the same footing as momenta, the polymomenta are
+$p^{\mu\nu}=\partial\mathcal L/\partial(\partial_\mu A_\nu)=-F^{\mu\nu}/4\pi$. Only the antisymmetric
+part of $\partial_\mu A_\nu$ enters $\mathcal L$, so the Legendre map is singular here too:
+so the covariant Legendre map is singular as well.
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{p{4.2cm}p{3.6cm}p{5.4cm}}
+\hline
+Method & Count & What is removed from the naive count \\
+\hline
+Cauchy data $(\mathbf E,\mathbf B)$ & $6-2=4=2\times2$ & $\nabla\cdot\mathbf B=0$, Gauss's law \\
+Dirac analysis & $(8-2\cdot2)/2=2$ & $\Pi^0\approx0$, Gauss's law (both first class) \\
+Lorenz-gauge plane wave & $4-1-1=2$ & Lorenz condition, residual gauge freedom \\
+Coulomb gauge & $3-1=2$ & $\nabla\cdot\mathbf A=0$; $\phi$ slaved to $\rho$ \\
+Black-body spectrum & $2$ polarizations & measured (low-frequency tail) \\
+\hline
+\end{tabular}
+\end{center}
+
+%----------------------------------------------------------------
+\section{The role of sources}
+\label{sec:sources}
+
+\subsection{What a source does}
+
+Maxwell's equations with a prescribed source are linear, so the general solution is a particular
+solution plus a solution of the homogeneous (source-free) equations. In the Lorenz gauge, with the
+retarded Green function,
+\begin{equation}
+A^\mu(t,\mathbf x)=\frac1c\int d^3x'\,
+\frac{j^\mu\bigl(t-|\mathbf x-\mathbf x'|/c,\;\mathbf x'\bigr)}{|\mathbf x-\mathbf x'|}
+\;+\;A^\mu_{\text{free}}(t,\mathbf x),
+\label{eq:retarded}
+\end{equation}
+where $A^\mu_{\text{free}}$ carries the two degrees of freedom of Sec.~\ref{sec:dof} and
+is fixed by the initial or incoming radiation. Sources play three distinct roles.
+
+\begin{enumerate}
+\item \emph{They constrain.} Gauss's law ties the longitudinal electric field to the instantaneous
+charge density, Eq.~(\ref{eq:EL}). A source does not add a degree of freedom; it determines a part
+of the field that would otherwise vanish.
+\item \emph{They drive.} Expand the transverse potential in a box as
+$\mathbf A(t,\mathbf x)=\sum_{\mathbf k,\lambda}a_{\mathbf k\lambda}(t)\,\boldsymbol\varepsilon_\lambda(\mathbf k)\,e^{i\mathbf k\cdot\mathbf x}$.
+The amplitudes obey, in the Coulomb gauge,
+\begin{equation}
+\ddot a_{\mathbf k\lambda}+\omega_k^2\,a_{\mathbf k\lambda}=4\pi c\;j_{\mathbf k\lambda}(t),
+\end{equation}
+where $j_{\mathbf k\lambda}$ is the corresponding Fourier component of the transverse current:
+driven oscillators. The energy exchange is expressed by Poynting's theorem
+\begin{equation}
+\partial_t u+\nabla\cdot\mathbf S=-\,\mathbf j\cdot\mathbf E .
+\end{equation}
+Radiation is the part of the driven response that escapes to infinity.
+\item \emph{They must be conserved.} Equation~(\ref{eq:continuity}) is a necessary consistency
+condition (Sec.~\ref{sec:maxwell}), and it is equivalent to the gauge invariance of the coupling:
+under $A_\mu\to A_\mu+\partial_\mu\chi$ the interaction term changes by
+$\delta S=\frac1{c^2}\int d^4x\,\chi\,\partial_\mu j^\mu$ (up to boundary terms), which vanishes
+for all $\chi$ precisely when $j^\mu$ is conserved. A massless vector field cannot be coupled
+consistently to a non-conserved current.
+\end{enumerate}
+
+The retarded solution is a choice, not a theorem. Maxwell's equations are invariant under time
+reversal and the advanced Green function gives an equally good solution. The statement that
+radiation is \emph{emitted} by accelerated sources, rather than absorbed from the future, is a
+boundary condition imposed from the real world (cosmology and thermodynamics) and not a property
+of the equations.
+
+\subsection{Free versus driven fields: one field, two bookkeepings}
+\label{sec:free-vs-driven}
+
+Equation~(\ref{eq:retarded}) suggests two kinds of field: ``free'' radiation, which propagates
+without sources (the photons), and ``driven'' fields tied to the sources (Coulomb, induction). Yet
+free radiation does not appear from nowhere: it was emitted by sources somewhere in the past,
+and in any real solution the two kinds are inseparably mixed. There is one field $F_{\mu\nu}$ and one
+equation; ``free'' and ``driven'' are two ways of bookkeeping the same solution. What is real is a
+distinction between regimes, which can be stated precisely.
+
+\paragraph{The split depends on a boundary condition.} The same total field can be written with either
+Green function,
+\begin{equation}
+A=A_{\rm ret}[j]+A_{\rm in}=A_{\rm adv}[j]+A_{\rm out},\qquad
+A_{\rm out}-A_{\rm in}=A_{\rm ret}[j]-A_{\rm adv}[j].
+\end{equation}
+What is called ``free'' depends on the Green function chosen, and also on the reference time: a free wave
+present at $t_0$ is the earlier retarded field of sources that acted before $t_0$. If the field vanishes in the
+remote past, $A_{\rm in}=0$ (a statement about the universe, not about the equations), then no free
+field is added by hand at all: every photon is part of the field driven by remote sources.
+
+\paragraph{The forced oscillator.} In the Coulomb gauge each transverse mode obeys
+$\ddot a+\omega_k^2a=4\pi c\,j(t)$ (Sec.~\ref{sec:sources}), with the causal solution
+\begin{equation}
+a(t)=\frac{4\pi c}{\omega_k}\int_{-\infty}^{t}\!dt'\,\sin\omega_k(t-t')\,j(t').
+\end{equation}
+The ``driven'' and ``free'' parts are contained in one expression. After the source has been switched off,
+the oscillator keeps ringing with amplitude $|a|=(4\pi c/\omega_k)\,|\tilde j(\omega_k)|$, where
+$\tilde j(\omega)=\int dt\,j(t)\,e^{-i\omega t}$: only the component of the source at the mode's own
+frequency $\omega_k=c|\mathbf k|$ leaves a free remnant. A slowly varying source, whose spectrum does not
+reach $\omega_k$, produces an adiabatic response $a\simeq4\pi c\,j/\omega_k^2$ that follows the source and returns
+its energy.
+
+\paragraph{On-shell versus off-shell.} The same statement in Fourier space is Lorentz invariant. With
+$A(x)=\int\!\frac{d^4k}{(2\pi)^4}A(k)e^{-ik\cdot x}$ the Lorenz-gauge equation gives
+$A(k)=-\frac{4\pi}c\,j(k)/k^2$ with $k^2=(k^0)^2-|\mathbf k|^2$, and the retarded prescription
+$k^0\to k^0+i\varepsilon$ yields
+\begin{equation}
+\tfrac12\bigl(A_{\rm ret}+A_{\rm adv}\bigr)(k)=-\frac{4\pi}{c}\,\mathrm{PV}\frac1{k^2}\,j(k),\qquad
+\tfrac12\bigl(A_{\rm ret}-A_{\rm adv}\bigr)(k)=\frac{4\pi}{c}\,i\pi\,\mathrm{sgn}(k^0)\,\delta(k^2)\,j(k).
+\end{equation}
+The first part is off-shell ($k^2\ne0$): it is the field bound to the source, and it is common to the
+retarded and advanced solutions. The second part (Dirac's \emph{radiation field}) is supported on the light cone
+$k^2=0$; it is a solution of the \emph{homogeneous} equation, since $k^2\delta(k^2)=0$, and yet it is determined
+entirely by the sources, namely by the spectral weight of $j(k)$ on the light cone. The radiated four-momentum is,
+up to a positive constant,
+\begin{equation}
+P^\mu_{\rm rad}\;\propto\;-\!\int\frac{d^3k}{|\mathbf k|}\,k^\mu\,j^*_\nu(k)\,j^\nu(k)\Big|_{k^0=c|\mathbf k|}
+\end{equation}
+(non-negative, since $k\cdot j=0$ on the cone forces $j^*_\nu j^\nu\le0$). A general source has weight both on and off the cone,
+which is why the two parts are ``freely mixed''. A uniformly moving charge has $j^\mu(k)\propto u^\mu\delta(k\cdot u)$,
+which vanishes on the cone for $\mathbf k\ne0$ (in the rest frame $k^0=0$, so $k^2=-|\mathbf k|^2<0$):
+it has no on-shell content and cannot radiate, in any frame. This is the classical shadow of the quantum
+distinction between real photons, which are on-shell and leave the source as asymptotic states, and virtual photons,
+which are off-shell and bind the source to its field.
+
+\paragraph{``Source-free'' does not identify a photon.} The Coulomb field of a charge satisfies the vacuum
+equations at every point outside the charge, so being source-free at a point is a local statement
+about $j(x)$ and says nothing about radiation. What distinguishes radiation is that energy detaches irreversibly
+and reaches infinity: fields falling as $1/R$, a finite flux $R^2\,\mathbf S\cdot\hat{\mathbf n}$ through large spheres at
+fixed retarded time, and $E^2-B^2\to0$, $\mathbf E\cdot\mathbf B\to0$. At infinity the distinction is sharp. At finite
+distance it is a convention: for an oscillating dipole the $1/R^3$, $1/R^2$ and $1/R$ terms belong to a single
+solution, with a crossover at $R\sim\lambda$ and no sharp line.
+
+\paragraph{Why the split is nevertheless useful.} The equations are hyperbolic: in a region where $j=0$, the
+data on its boundary determine the field inside, so the field there can be predicted without knowing which
+sources produced it. This is what makes ``emitter $\to$ propagation $\to$ detector'' factorize. It also makes the
+field a genuine dynamical entity: a wave in flight carries energy and momentum, which keeps the conservation laws
+local rather than action at a distance. The Wheeler--Feynman absorber theory removes the free field altogether:
+every charge produces $\tfrac12(A_{\rm ret}+A_{\rm adv})$, and radiation emerges from the half-difference fields
+of the absorber, provided the universe is a perfect absorber. That condition is the same cosmological boundary
+condition as $A_{\rm in}=0$, in different language.
+
+In the vocabulary of this book: the ``free photon'' is an ideal-world object, the on-shell part of the
+spectrum, or the boundary data of a region. Its real-world content is the boundary condition on the universe and the
+absorption in the detector. The paradox of two types of field arises when a bookkeeping device (the split of one
+solution) is mistaken for a classification of the field itself.
+
+\subsection{Dynamical sources}
+
+When the sources are charged particles, the field and matter must be solved for together. For
+particles with charges $e_a$ and masses $m_a$,
+\begin{equation}
+S=-\sum_a m_ac\!\int\! d\tau_a-\frac1c\sum_a e_a\!\int\! A_\mu\,dx_a^\mu-\frac1{16\pi c}\!\int\!F_{\mu\nu}F^{\mu\nu}\,d^4x ,
+\end{equation}
+which is the action~(\ref{eq:lagrangian}) with
+$j^\mu(x)=c\sum_a e_a\int dx_a^\mu\,\delta^{(4)}(x-x_a)$. Varying the particle trajectories gives
+the Lorentz force; varying $A_\mu$ gives Maxwell's equations. The system then has $3N$ particle
+degrees of freedom plus the two-per-point of the field.
+
+In an expansion in $1/c$ the field degrees of freedom can be eliminated order by order. To
+$O(c^{-2})$ one obtains the Darwin Lagrangian, a Lagrangian for the particles alone,
+\begin{equation}
+L=\sum_a\Bigl(\tfrac12m_av_a^2+\frac{m_av_a^4}{8c^2}\Bigr)
+-\sum_{a<b}\frac{e_ae_b}{r_{ab}}
++\sum_{a<b}\frac{e_ae_b}{2c^2r_{ab}}\Bigl[\mathbf v_a\cdot\mathbf v_b+(\mathbf v_a\cdot\mathbf n_{ab})(\mathbf v_b\cdot\mathbf n_{ab})\Bigr],
+\end{equation}
+with $\mathbf n_{ab}$ the unit vector from $b$ to $a$. The Darwin
+Lagrangian contains only instantaneous interactions. Radiation first appears at $O(c^{-3})$ and
+is dissipative: it cannot be represented by a local-in-time Lagrangian of the particles alone,
+and the field's degrees of freedom return as soon as radiation matters.
+
+\subsection{Point sources: an ideal-world object}
+
+A point charge is a mathematical idealization, and the difficulties of classical electrodynamics
+that are traditionally blamed on the field are all difficulties of this idealization.
+\begin{itemize}
+\item The field energy of a point charge diverges: for a charged shell of radius $a$,
+\[
+U=\int\frac{E^2}{8\pi}\,d^3x=\frac{e^2}{2a}\;\longrightarrow\;\infty\quad(a\to0).
+\]
+\item The field momentum of a charge moving slowly is $\mathbf p_{\rm em}=\tfrac43\,(U/c^2)\,\mathbf v$,
+not $(U/c^2)\,\mathbf v$ (the ``$4/3$ problem''): the Coulomb field alone is not a closed relativistic system,
+and non-electromagnetic (Poincar\'e) stresses are needed to hold the charge together.
+\item The self-consistent equation of motion of a point charge is the Abraham--Lorentz--Dirac equation,
+\begin{equation}
+m\frac{du^\mu}{d\tau}=\frac ec F^{\mu\nu}_{\rm ext}u_\nu
++\frac{2e^2}{3c^3}\Bigl[\frac{d^2u^\mu}{d\tau^2}+\frac{u^\mu}{c^2}\frac{du^\nu}{d\tau}\frac{du_\nu}{d\tau}\Bigr],
+\end{equation}
+which is third order in time and so has runaway solutions (acceleration growing exponentially
+with no applied force) and, if the runaways are excluded, pre-acceleration (the particle
+responds to a force before it is applied, on a time scale $\sim e^2/mc^3$).
+\end{itemize}
+None of these is a failure of Maxwell's equations. The length scale at which they matter is the
+classical electron radius $r_e=e^2/mc^2\approx2.8\times10^{-13}\,\mathrm{cm}$, which is smaller than
+the reduced Compton wavelength $\hbar/mc=r_e/\alpha$ by the factor $\alpha$ (the fine-structure
+constant): quantum effects dominate well before the idealization of a point charge can be tested.
+
+%----------------------------------------------------------------
+\section{Gauges}
+\label{sec:gauges}
+
+\subsection{Gauge invariance and what it means}
+
+The transformation
+\begin{equation}
+A_\mu\to A_\mu+\partial_\mu\chi
+\qquad\Bigl(\phi\to\phi+\frac1c\partial_t\chi,\ \ \mathbf A\to\mathbf A-\nabla\chi\Bigr)
+\label{eq:gauge}
+\end{equation}
+with an arbitrary function $\chi(t,\mathbf x)$ leaves $F_{\mu\nu}$, hence $\mathbf E$, $\mathbf B$, the
+Lorentz force, and the stress--energy tensor unchanged. The action changes by a boundary term
+for a conserved source. Because $\chi$ is an arbitrary function of all four coordinates, one combination of the
+components of $A^\mu$ is unphysical at each point; Gauss's law removes a second one, and this is why
+four components of $A^\mu$ describe only two degrees of freedom (Sec.~\ref{sec:dof}).
+
+The existence of this redundancy is not a curiosity: it is the price paid for describing a two-component
+massless field with a local four-component object $A_\mu$ (Sec.~\ref{sec:relativity}). It is
+also the Lagrangian counterpart of the first-class constraints of Sec.~\ref{sec:dof}:
+$\Pi^0\approx0$ and $G\approx0$ generate gauge transformations, with the arbitrary function
+$u=\partial_t\phi$ in Eq.~(\ref{eq:hamiltonian}) representing the freedom to choose the gauge
+at each instant. Mathematically, it is the structure described by
+Noether's second theorem: a symmetry depending on an arbitrary function gives an \emph{identity} among
+the equations of motion, here $\partial_\nu(\partial_\mu F^{\mu\nu})\equiv0$, instead of a conservation law.
+
+\subsection{Gauge fixing}
+
+To solve the equations one must impose a condition that selects one representative of each gauge
+orbit. A gauge condition is admissible if it can be reached from any $A'_\mu$ by some
+$\chi$. The three most useful choices are as follows.
+
+\begin{center}
+\begin{tabular}{p{2.0cm}p{3.3cm}p{2.9cm}p{5.0cm}}
+\hline
+Gauge & Condition & Residual freedom & Features \\
+\hline
+Lorenz & $\partial_\mu A^\mu=0$, i.e.\ $\frac1c\partial_t\phi+\nabla\cdot\mathbf A=0$ &
+$\Box\chi=0$ &
+$\Box A^\mu=\frac{4\pi}c j^\mu$: four decoupled wave equations, manifestly covariant, retarded
+solutions. Contains unphysical polarizations. \\[2pt]
+Coulomb (radiation) & $\nabla\cdot\mathbf A=0$ &
+$\nabla^2\chi=0$ ($\chi=0$ for decaying fields) &
+$\nabla^2\phi=-4\pi\rho$ (instantaneous), $\Box\mathbf A=\frac{4\pi}c\mathbf j_T$. Only the two
+transverse polarizations; not covariant. \\[2pt]
+Temporal (Weyl) & $\phi=0$ & $\chi=\chi(\mathbf x)$ (time independent) &
+Gauss's law no longer follows from the equations of motion and must be imposed on the initial data. \\
+\hline
+\end{tabular}
+\end{center}
+
+The Lorenz gauge\footnote{Named after Ludvig Lorenz, not Hendrik Lorentz.} is reached from any $A'_\mu$
+by solving $\Box\chi=-\partial_\mu A'^\mu$; the Coulomb gauge by solving $\nabla^2\chi=\nabla\cdot\mathbf A'$.
+In the Lorenz gauge the field equation $\partial_\mu F^{\mu\nu}=4\pi j^\nu/c$ reads
+$\Box A^\nu-\partial^\nu(\partial_\mu A^\mu)=4\pi j^\nu/c$, and the second term drops out.
+Conservation of the current makes the condition self-consistent: $\Box(\partial_\mu A^\mu)=\frac{4\pi}c\partial_\mu j^\mu=0$,
+so if $\partial_\mu A^\mu$ and its time derivative vanish initially, they vanish forever.
+In the Coulomb gauge the transverse current is
+$\mathbf j_T=\mathbf j-\frac1{4\pi}\nabla\partial_t\phi$, with $\phi$ the instantaneous Coulomb potential.
+
+\subsection{What is gauge-dependent, and what is real?}
+
+Gauge-invariant (measurable, real-world): $\mathbf E$, $\mathbf B$, the force on a charge, $u$, $\mathbf S$,
+and the kinetic momentum $m\gamma\mathbf v$. Gauge-dependent (belonging to the ideal world of a
+representation): $\phi$, $\mathbf A$, the canonical momentum $\mathbf p=m\gamma\mathbf v+\frac ec\mathbf A$,
+the choice of which part of $\mathbf E$ is ``longitudinal'', and all statements about the
+propagation of $\phi$.
+
+This apparently settles that $\mathbf A$ is a mathematical convenience. The Aharonov--Bohm effect
+shows that the truth is more subtle: the gauge-invariant integral $\oint\mathbf A\cdot d\mathbf l=\Phi$
+(the enclosed flux) has observable consequences in regions where $\mathbf E=\mathbf B=0$, but only in
+quantum mechanics. In the classical theory, everything measurable is a function of $F_{\mu\nu}$
+(locally) and of such holonomies (globally), while the potentials are needed to formulate the action
+principle with sources and to couple the field to quantum matter.
+
+\subsection{The Coulomb gauge and causality}
+
+In the Coulomb gauge $\phi$ responds \emph{instantaneously} to the charge density,
+\begin{equation}
+\phi(t,\mathbf x)=\int d^3x'\,\frac{\rho(t,\mathbf x')}{|\mathbf x-\mathbf x'|}.
+\end{equation}
+This is not a violation of causality. The measurable field is $\mathbf E=-\nabla\phi-\frac1c\partial_t\mathbf A=\mathbf E_L+\mathbf E_T$;
+each of $\mathbf E_L$ and $\mathbf E_T$ contains an instantaneous, non-local piece, and
+these pieces cancel in the sum. A direct proof is by gauge invariance: $\mathbf E$ and $\mathbf B$
+computed in the Coulomb gauge coincide with those computed from the retarded Lorenz-gauge solution
+(\ref{eq:retarded}), which propagates strictly at speed $c$. The ``paradox'' arises from reading a
+bookkeeping device (the split of $\mathbf E$ into $\mathbf E_L$ and $\mathbf E_T$, and the
+potential $\phi$) as a physical signal.
+
+%----------------------------------------------------------------
+\section{Relativity}
+\label{sec:relativity}
+
+\subsection{Electrodynamics is a relativistic theory}
+
+Maxwell's equations are not invariant under Galilean boosts, but they are invariant under the
+Poincar\'e group: $F^{\mu\nu}$ transforms as a tensor, $j^\mu$ as a vector. The electric and magnetic
+fields are not separate entities; they are components of one object, and for a boost with velocity
+$\mathbf v=c\boldsymbol\beta$ (frame $S'$ moving with velocity $\mathbf v$ relative to $S$)
+\begin{equation}
+\mathbf E'_\parallel=\mathbf E_\parallel,\quad
+\mathbf B'_\parallel=\mathbf B_\parallel,\quad
+\mathbf E'_\perp=\gamma\bigl(\mathbf E+\boldsymbol\beta\times\mathbf B\bigr)_\perp,\quad
+\mathbf B'_\perp=\gamma\bigl(\mathbf B-\boldsymbol\beta\times\mathbf E\bigr)_\perp .
+\end{equation}
+Example: a charge at rest in $S'$ has $\mathbf B'=0$. In $S$ it moves with velocity $\mathbf v$ and
+\begin{equation}
+\mathbf B=\boldsymbol\beta\times\mathbf E
+\end{equation}
+exactly (not only to first order in $v/c$), where $\mathbf E$ is the (flattened) electric
+field of the moving charge. A ``magnetic'' field is the electric field seen by an observer in motion,
+and conversely. Only the invariants (\ref{eq:invariants}) are frame independent: $E^2-B^2$ and
+$\mathbf E\cdot\mathbf B$. A field with $E^2=B^2$ and $\mathbf E\cdot\mathbf B=0$ (a plane wave)
+has these values in every frame: it cannot be transformed into a pure electric or pure magnetic
+field.
+
+\subsection{Why two degrees of freedom and why a gauge: the little group}
+
+A relativistic one-particle state is labeled by the momentum $k^\mu$ and an irreducible representation of
+the little group, the subgroup of Lorentz transformations that fix $k^\mu$. For $k^2=m^2c^2>0$ this is the
+rotation group $SO(3)$, so a massive spin-1 particle has $3$ states. For $k^2=0$, $k\ne0$ (a wave moving
+at the speed of light) it is the Euclidean group $ISO(2)$ of the plane. Requiring a finite number of
+polarization states forces the two translations of $ISO(2)$ to act trivially, leaving only the
+rotation about $\mathbf k$ by an angle $\theta$: states of helicity $\pm1$ acquire phases
+$e^{\pm i\theta}$. The two helicities are the two circular polarizations of light. The field $\mathbf E+i\mathbf B$
+(Riemann--Silberstein vector), which obeys $i\partial_t(\mathbf E+i\mathbf B)=c\nabla\times(\mathbf E+i\mathbf B)$
+in vacuum, makes the same point: positive- and negative-helicity solutions decouple.
+
+The vector potential $A_\mu$, however, is a four-component object transforming under the full Lorentz
+group. A local, covariant description of a two-state massless particle in terms of $A_\mu$ is possible only
+if the surplus components are redundant, which is the content of gauge invariance:
+under a Lorentz transformation the potential transforms as
+\begin{equation}
+A'^\mu(x')=\Lambda^\mu{}_\nu A^\nu(x)+\partial'^\mu\chi(x)
+\end{equation}
+with a compensating gauge transformation $\chi$ when the gauge condition is not Lorentz invariant.
+For the Coulomb gauge this is exactly what happens: $\nabla\cdot\mathbf A=0$ is not a covariant
+statement, so a boost carries one into a different gauge. The theory is relativistic; the
+\emph{description} in this gauge is not manifestly so. Likewise the split $\mathbf E=\mathbf E_L+\mathbf E_T$
+is frame dependent, and with it all statements about ``instantaneous'' pieces.
+
+\paragraph{The massive alternative.} If the gauge symmetry is broken by a mass term,
+\begin{equation}
+\mathcal L_{\rm Proca}=-\frac1{16\pi}F_{\mu\nu}F^{\mu\nu}+\frac{\mu^2}{8\pi}A_\mu A^\mu-\frac1cj_\mu A^\mu,
+\qquad
+\partial_\mu F^{\mu\nu}+\mu^2A^\nu=\frac{4\pi}cj^\nu ,
+\end{equation}
+($\mu$ an inverse length), then for a conserved current $\partial_\nu A^\nu=0$ follows automatically,
+no gauge freedom remains, and the field has $4-1=3$ degrees of freedom: the third is the longitudinal
+polarization. The static potential becomes Yukawa, $\phi=e^{-\mu r}/r$. Gauge invariance, a conserved
+current, masslessness, the $1/r$ Coulomb law, and two (not three) polarizations are
+thus facets of one structure, and experimental bounds on $\mu$ are among the most precise tests of it.
+
+\subsection{Energy and momentum}
+
+The gauge-invariant, symmetric stress--energy tensor of the field is
+\begin{equation}
+T^{\mu\nu}=\frac1{4\pi}\Bigl[F^{\mu\alpha}F_\alpha{}^{\nu}+\tfrac14g^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}\Bigr],
+\qquad
+\partial_\mu T^{\mu\nu}=-\frac1c F^{\nu\lambda}j_\lambda .
+\end{equation}
+Its components are $T^{00}=u$, $T^{0i}=S^i/c$ and $T^{ij}=$ the Maxwell stress tensor (with a sign
+reflecting the choice of signature); the $\nu=0$ component of the divergence equation is Poynting's theorem,
+the $\nu=i$ components say that the field loses momentum at the rate of the Lorentz force density
+acting on the sources. It is traceless, $T^\mu{}_\mu=0$, which is
+the reflection of masslessness (and of the radiation equation of state $P=u/3$). The
+free-field energy and momentum $P^\mu=\int T^{0\mu}d^3x$ form a four-vector.
+
+The tensor $T^{\mu\nu}$ is conserved only in the absence of sources: the field exchanges energy and momentum
+with them. The $4/3$ problem of Sec.~\ref{sec:sources} is a symptom of this: the energy and momentum of the
+Coulomb field of a charge, taken alone, do not form a four-vector without the contribution of the
+stresses that hold the charge together.
+
+\subsection{Causality and the light cone}
+
+In $3+1$ dimensions the retarded Green function of $\Box$ is supported \emph{on} the light cone (the
+integrand in Eq.~(\ref{eq:retarded}) is evaluated at the retarded time only). Signals therefore propagate at exactly
+$c$, sharply, without a wake (Huygens' principle). This is a statement about $\mathbf E$ and $\mathbf B$,
+the gauge-invariant fields: they are the observables whose causal propagation matters. Statements
+about the propagation of $\phi$ and $\mathbf A$ in a given gauge are statements about a representation.
+
+%----------------------------------------------------------------
+\section{Summary}
+\label{sec:ed-summary}
+
+\begin{itemize}
+\item The electromagnetic field has \emph{two degrees of freedom per point}: $6$ field components minus
+$2$ constraints, or $8$ canonical variables minus $2\times2$ for two first-class constraints, or
+$2$ polarizations per wave vector. The number is confirmed by the low-frequency black-body spectrum.
+\item \emph{Sources} do not add degrees of freedom. They fix the longitudinal (Coulomb) part of
+$\mathbf E$ through Gauss's law, drive the two radiative degrees of freedom, and must be conserved for
+the equations to be consistent. The retarded solution is a boundary condition imposed by the real world,
+not a consequence of the equations, and the split into ``free'' and ``driven'' fields is bookkeeping:
+radiation is the on-shell part of the response to the sources, and no separate kind of field exists. Point sources are ideal-world objects whose pathologies
+(divergent self-energy, the $4/3$ problem, runaway solutions) say nothing against Maxwell's equations.
+\item \emph{Gauge invariance} is the redundancy of describing two degrees of freedom by four functions
+$A_\mu$; it corresponds to first-class constraints, makes the coupling to sources require current
+conservation, and ensures that only $\mathbf E$ and $\mathbf B$ (and holonomies of $\mathbf A$) are
+physical. The Lorenz, Coulomb and temporal gauges are different, equally valid, descriptions of the same
+physics; claims of acausality in the Coulomb gauge are artifacts of reading $\phi$ as a signal.
+\item \emph{Relativity} is built into the theory: $F^{\mu\nu}$ is a tensor, the little group of a massless
+particle has two helicities, a covariant local description with $A_\mu$ requires gauge invariance, and
+the same count with a mass term gives three. Massless, gauge invariant, two polarizations, conserved
+charge and Coulomb's $1/r$ law form one package.
+\end{itemize}
+
+\subsection*{Problems}
+
+\begin{enumerate}
+\item Verify Eq.~(\ref{eq:invariants}): $F_{\mu\nu}F^{\mu\nu}=2(B^2-E^2)$ and
+$F_{\mu\nu}\tilde F^{\mu\nu}=-4\,\mathbf E\cdot\mathbf B$. Show that if $E^2-B^2>0$ in one frame
+there is no frame in which the field is purely magnetic.
+\item Show that the Lorenz condition is preserved by the evolution (Sec.~\ref{sec:gauges}), and
+find the one place where charge conservation is needed.
+\item Perform the Hamiltonian analysis of the Proca field. Show that $\Pi^0\approx0$ and the secondary
+constraint (which now contains a term proportional to $\mu^2\phi$) are \emph{second class}, and that the
+number of degrees of freedom is $(8-2)/2=3$.
+\item Compute the momentum of the electromagnetic field of a thin charged shell of radius $a$
+moving slowly with velocity $\mathbf v$, and verify the factor $4/3$ in $\mathbf p_{\rm em}=\tfrac43U\mathbf v/c^2$.
+\item (Optional.) For the standing-wave modes of a cubic cavity of side $L$ with perfectly conducting walls, count
+the modes below a frequency $\omega$ and compare with the factor $\omega^2/\pi^2c^3$ in the
+Rayleigh--Jeans formula.
+\item Show that after a source $j(t)$ of finite duration has been switched off, the mode $a_{\mathbf k\lambda}$ rings with
+amplitude $(4\pi c/\omega_k)|\tilde j(\omega_k)|$, and that a Gaussian pulse of duration $T\gg1/\omega_k$ leaves an exponentially
+small remnant. What does this say about the emission of a photon of frequency $\omega_k$ by a slowly varying current?
+\item Verify that $\tfrac12(A_{\rm ret}-A_{\rm adv})$ solves the homogeneous equation, and that for a charge at rest or in
+uniform motion it vanishes identically.
+\end{enumerate}
+% ----------------------- CHAPTER ENDS -----------------------
+
+\end{document}

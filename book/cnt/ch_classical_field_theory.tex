@@ -1,0 +1,834 @@
+% =====================================================================
+%  Chapter: Classical Non-Relativistic Field Theory
+%  Needs:  amsmath, amssymb, amsthm (environments: definition, example,
+%          remark, theorem), booktabs.  See chapter_standalone.tex.
+% =====================================================================
+\providecommand{\fd}[2]{\frac{\delta #1}{\delta #2}}
+\providecommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\providecommand{\PB}[2]{\{#1,\,#2\}}
+\providecommand{\dd}{\mathrm{d}}
+\providecommand{\ii}{\mathrm{i}}
+\providecommand{\Lag}{\mathcal{L}}
+\providecommand{\Ham}{\mathcal{H}}
+\providecommand{\Imag}{\operatorname{Im}}
+\providecommand{\eps}{\varepsilon}
+
+\chapter{Classical Non-Relativistic Field Theory}
+\label{ch:cnr-field}
+
+A mechanical system with finitely many degrees of freedom is described by a
+handful of functions of time. A \emph{field} attaches one such degree of
+freedom---or several---to every point of space, so that the state of the system
+at a given instant is itself a function, $\phi(\mathbf{x})$. Vibrating strings
+and membranes, elastic solids, fluids, the Newtonian gravitational potential,
+ferromagnets, and Bose--Einstein condensates in the mean-field regime are all
+described this way, and none of them needs relativity or quantisation to be
+formulated. This chapter develops the general machinery---Lagrangian and
+Hamiltonian formalisms, the variational principle, Noether's theorem, and
+spontaneous symmetry breaking---in this \emph{classical, non-relativistic}
+setting. ``Classical'' means that the fields are ordinary functions, not
+operators; ``non-relativistic'' means that time is absolute and the relevant
+symmetry group is the Galilean one, not the Poincar\'e group.
+
+Two reasons make this setting worth a chapter of its own. First, nearly every
+concept that is later presented as characteristic of relativistic or quantum field
+theory---Goldstone modes, conserved currents, constraints, the role of
+canonical conjugates---already appears here, in a form where the physical
+meaning is easy to see. Second, because time and space are not on the same
+footing, some phenomena show up in a cleaner form (or only) in the
+non-relativistic case; the classification of Goldstone modes in
+Section~\ref{sec:ssb} is the most striking example.
+
+\section{From a chain of oscillators to a field}
+\label{sec:chain}
+
+\subsection{The continuum limit}
+
+Consider an infinite chain of identical point masses~$m$ at rest positions
+$x_j = ja$, joined by springs of stiffness~$\kappa$. Let $q_j(t)$ be the
+longitudinal displacement of the $j$th mass. The Lagrangian is
+\begin{equation}
+  L=\sum_j\Big[\tfrac12 m\,\dot q_j^{\,2}-\tfrac12\kappa\,(q_{j+1}-q_j)^2\Big],
+  \label{eq:chain-L}
+\end{equation}
+and the equations of motion are $m\ddot q_j=\kappa\,(q_{j+1}-2q_j+q_{j-1})$.
+Plane waves $q_j\propto e^{\ii(kja-\omega t)}$ give the dispersion relation
+\begin{equation}
+  \omega^2=\frac{4\kappa}{m}\sin^2\frac{ka}{2}.
+  \label{eq:chain-disp}
+\end{equation}
+
+Now write $q_j(t)=\phi(ja,t)$ for a smooth function $\phi(x,t)$. Then
+$q_{j+1}-q_j=a\,\phi_x+O(a^2)$ and $\sum_j a\to\int\!\dd x$, so that
+\begin{equation}
+  L\;\longrightarrow\;\int\!\dd x\,\Big[\tfrac12\rho\,\phi_t^{\,2}-\tfrac12\tau\,\phi_x^{\,2}\Big],
+  \qquad \rho=\frac{m}{a},\quad \tau=\kappa a .
+  \label{eq:string-L}
+\end{equation}
+The integrand is the \emph{Lagrangian density} of the string: $\rho$ is the mass
+per unit length and $\tau$ the tension. The dispersion relation becomes
+$\omega=c|k|$ with $c=\sqrt{\tau/\rho}$.
+
+\begin{remark}[The continuum limit is a coarse-graining]
+The limit $a\to0$ with $\rho$ and $\tau$ held fixed means $m\to0$ and
+$\kappa\to\infty$: the number of degrees of freedom per unit length diverges, and
+the top of the spectrum, $\omega_{\max}=2\sqrt{\kappa/m}=2c/a$, is pushed to
+infinity. Expanding \eqref{eq:chain-disp} gives
+$\omega^2=c^2k^2\,(1-k^2a^2/12+\dots)$ (Exercise~\ref{ex:chain}), so the field
+description is faithful only for $ka\ll1$. The field $\phi(x,t)$ is thus a
+lower-resolution description of the chain: the continuum is an idealisation
+that is excellent for long wavelengths and wrong, in a controlled way, for
+short ones. We shall meet two further manifestations of this in
+Sections~\ref{sec:action} and~\ref{sec:discrete}.
+\end{remark}
+
+\subsection{Setting and notation}
+
+We write $x^\mu=(t,x^i)$ with $\mu=0,1,\dots,d$ and $i=1,\dots,d$, and denote
+fields by $\phi^a(x^\mu)$, where $a$ labels components (a real scalar, the three
+components of a displacement, the real and imaginary parts of a complex
+field, \dots). Derivatives are $\phi^a_{,\mu}\equiv\partial_\mu\phi^a$, with
+$\phi^a_{,0}=\phi^a_t$, and repeated indices are summed. \emph{No metric is
+used:} the notation resembles that of relativistic field theory, but space and
+time play different roles. Time is absolute; space is Euclidean; the kinematic
+symmetries of an isolated system form the Galilei group of translations,
+rotations and boosts.
+
+A caveat worth stating at the outset: the wave equation
+$\phi_{tt}=c^2\phi_{xx}$ is \emph{not} Galilei invariant. The medium that carries
+the wave singles out a rest frame. Galilean invariance of the full system is
+recovered only when the motion of the medium is itself a dynamical field, as
+for the fluid of Section~\ref{sec:fluid}.
+
+\section{Lagrangian formalism}
+\label{sec:lagrangian}
+
+\subsection{Action and field equations}
+
+A \emph{local} classical field theory is specified by a Lagrangian density
+$\Lag(\phi^a,\phi^a_{,\mu};x^\mu)$ that depends on the fields and their first
+derivatives (higher derivatives are discussed below). The action over a region
+$[t_1,t_2]\times\Omega$ is
+\begin{equation}
+  S[\phi]=\int_{t_1}^{t_2}\!\dd t\int_\Omega\!\dd^dx\;\Lag(\phi^a,\phi^a_{,\mu};x^\mu).
+  \label{eq:action}
+\end{equation}
+Let $\phi^a\to\phi^a+\eps\eta^a$, where the variation $\eta^a$ vanishes at
+$t=t_1$ and $t=t_2$. Integrating by parts,
+\begin{equation}
+  \delta S=\eps\int\!\dd t\,\dd^dx\;\mathcal{E}_a\,\eta^a
+  +\eps\oint\!\Big(\pd{\Lag}{\phi^a_{,\mu}}\,\eta^a\Big)\,\dd\Sigma_\mu ,
+  \qquad
+  \mathcal{E}_a\equiv\pd{\Lag}{\phi^a}-\partial_\mu\!\Big(\pd{\Lag}{\phi^a_{,\mu}}\Big).
+  \label{eq:variation}
+\end{equation}
+The boundary term involves $\eta^a$ on the time slices, where it vanishes, and
+on the spatial boundary $\partial\Omega$. Requiring $\delta S=0$ for all
+admissible $\eta^a$ gives the \emph{Euler--Lagrange equations}
+\begin{equation}
+  \partial_t\!\Big(\pd{\Lag}{\phi^a_t}\Big)+\partial_i\!\Big(\pd{\Lag}{\phi^a_{,i}}\Big)-\pd{\Lag}{\phi^a}=0 .
+  \label{eq:EL}
+\end{equation}
+If $\eta^a$ is \emph{not} required to vanish on $\partial\Omega$, the
+boundary term must vanish as well, which yields \emph{natural boundary
+conditions}: $n_i\,\partial\Lag/\partial\phi^a_{,i}=0$ on $\partial\Omega$. For
+the string \eqref{eq:string-L} this is $\phi_x=0$, the condition for a free end;
+fixing $\phi$ at the end (Dirichlet condition) is the clamped end.
+
+If $\Lag$ depends on higher derivatives, \eqref{eq:EL} generalises to
+$\mathcal{E}_a=\pd{\Lag}{\phi^a}-\partial_\mu\pd{\Lag}{\phi^a_{,\mu}}
++\partial_\mu\partial_\nu\pd{\Lag}{\phi^a_{,\mu\nu}}-\dots=0$. For the
+Euler--Bernoulli beam, $\Lag=\tfrac12\rho\,w_t^2-\tfrac12 EI\,w_{xx}^2$, this gives
+$\rho\,w_{tt}+EI\,w_{xxxx}=0$.
+
+\begin{remark}[Non-uniqueness]
+Adding a total divergence, $\Lag\to\Lag+\partial_\mu F^\mu(\phi,x)$, changes
+$S$ only by boundary terms and leaves \eqref{eq:EL} unchanged. The Lagrangian
+density is therefore not determined by the equations of motion; this freedom
+reappears in Noether's theorem (Section~\ref{sec:noether}) and in the
+Hamiltonian treatment of first-order systems (Section~\ref{sec:constraints}).
+\end{remark}
+
+\subsection{A gallery of examples}
+
+\begin{example}[Wave field]
+For $\Lag=\tfrac12\rho\,\phi_t^2-\tfrac12\tau\,|\nabla\phi|^2-U(\phi)$,
+\eqref{eq:EL} reads $\rho\,\phi_{tt}-\tau\nabla^2\phi+U'(\phi)=0$. With $U=0$ this is
+the wave equation; with $U=\mu^2(1-\cos\phi)$ it is the sine-Gordon equation.
+\end{example}
+
+\begin{example}[Elastic solid]
+\label{ex:elastic}
+Let $u_i(\mathbf{x},t)$ be the displacement from a reference configuration and
+$\varepsilon_{ij}=\tfrac12(\partial_iu_j+\partial_ju_i)$ the small-strain
+tensor. With elastic moduli $C_{ijkl}$,
+\[
+  \Lag=\tfrac12\rho\,\dot u_i\dot u_i-\tfrac12 C_{ijkl}\,\varepsilon_{ij}\varepsilon_{kl}
+  \quad\Longrightarrow\quad
+  \rho\,\ddot u_j=\partial_i\sigma_{ij},\qquad \sigma_{ij}=C_{ijkl}\varepsilon_{kl}.
+\]
+For an isotropic solid with Lam\'e constants $\lambda$ and $G$ this is
+$\rho\,\ddot{\mathbf{u}}=(\lambda+G)\nabla(\nabla\!\cdot\!\mathbf{u})+G\nabla^2\mathbf{u}$, with a
+longitudinal wave speed $c_L=\sqrt{(\lambda+2G)/\rho}$ and a transverse one
+$c_T=\sqrt{G/\rho}$.
+\end{example}
+
+\begin{example}[Schr\"odinger field]
+\label{ex:schrodinger}
+A complex field $\psi(\mathbf{x},t)$, treated with $\psi$ and $\psi^*$ as
+independent, with
+\begin{equation}
+  \Lag=\frac{\ii\hbar}{2}\big(\psi^*\psi_t-\psi\,\psi^*_t\big)
+  -\frac{\hbar^2}{2m}\nabla\psi^*\!\cdot\!\nabla\psi-V(\mathbf{x})|\psi|^2-\frac g2|\psi|^4 .
+  \label{eq:GP-L}
+\end{equation}
+Varying $\psi^*$ in \eqref{eq:EL} gives the nonlinear Schr\"odinger
+(Gross--Pitaevskii) equation
+\begin{equation}
+  \ii\hbar\,\psi_t=-\frac{\hbar^2}{2m}\nabla^2\psi+V\psi+g|\psi|^2\psi .
+  \label{eq:GP}
+\end{equation}
+Here $\psi$ is a classical field and $\hbar$ merely a constant with the
+dimensions of action; the same equation describes mean-field condensates, the
+paraxial propagation of light in a Kerr medium, and the envelope of deep-water
+waves. The Lagrangian is \emph{first order} in time, a feature with important
+consequences (Sections~\ref{sec:constraints} and~\ref{sec:ssb}). Using
+$\tfrac{\ii\hbar}{2}(\psi^*\psi_t-\psi\psi^*_t)$ rather than $\ii\hbar\,\psi^*\psi_t$
+makes $\Lag$ real; the two differ by a total time derivative.
+\end{example}
+
+\begin{example}[Newtonian gravity and electrostatics]
+\label{ex:gravity}
+For a prescribed mass density $\rho_m$, take the potential $\Phi$ as the field:
+\begin{equation}
+  \Lag=-\frac{1}{8\pi G}|\nabla\Phi|^2-\rho_m\Phi
+  \quad\Longrightarrow\quad
+  \nabla^2\Phi=4\pi G\rho_m .
+\end{equation}
+There is no $\Phi_t$ in $\Lag$: the field has no dynamics of its own and is
+determined \emph{instantaneously} by the sources. In Hamiltonian language
+it is a constraint, not an evolving degree of freedom. Solving it,
+$\Phi=-G\!\int\rho_m(\mathbf{x}')/|\mathbf{x}-\mathbf{x}'|\,\dd^3x'$, and
+substituting back eliminates the field and leaves Newton's
+action-at-a-distance interaction between the sources. (The field energy
+$-\frac{1}{8\pi G}\int|\nabla\Phi|^2$ is negative, in contrast to
+the electrostatic case.)
+\end{example}
+
+\subsection{Eulerian versus Lagrangian description: the ideal fluid}
+\label{sec:fluid}
+
+A fluid can be described in two ways. In the \emph{Eulerian} description the
+fields are the density $\rho(\mathbf{x},t)$ and velocity $\mathbf{v}(\mathbf{x},t)$
+at a fixed point of space. In the \emph{Lagrangian} (material) description one
+labels fluid elements by $\boldsymbol\alpha$ (say, their position at $t=0$) and
+takes as the field the position $\mathbf{X}(\boldsymbol\alpha,t)$ of the element
+$\boldsymbol\alpha$ at time $t$. Mass conservation fixes the density:
+$\rho(\mathbf{X},t)=\rho_0(\boldsymbol\alpha)/J$, with
+$J=\det(\partial X_i/\partial\alpha_j)$. For a barotropic fluid with specific
+internal energy $e(\rho)$ and pressure $p=\rho^2e'(\rho)$, the action
+\begin{equation}
+  S[\mathbf{X}]=\int\!\dd t\,\dd^3\alpha\;\rho_0(\boldsymbol\alpha)
+  \Big[\tfrac12|\partial_t\mathbf{X}|^2-e\big(\rho_0/J\big)\Big]
+  \label{eq:fluid-action}
+\end{equation}
+is an ordinary field theory in $(\boldsymbol\alpha,t)$. Using
+$\delta J=J\,\partial(\delta X_i)/\partial x_i$ and
+$\delta[\rho_0\,e(\rho_0/J)]=-p\,\delta J$,
+\[
+  \delta S=\int\!\dd t\,\dd^3\alpha\,\big[\rho_0\,\partial_t\mathbf{X}\!\cdot\!\partial_t\delta\mathbf{X}+p\,\delta J\big]
+  =-\int\!\dd t\,\dd^3\alpha\,\big[\rho_0\,\partial_t^2\mathbf{X}+J\nabla p\big]\!\cdot\!\delta\mathbf{X},
+\]
+so that $\rho\,\partial_t^2\mathbf{X}=-\nabla p$, which is Euler's equation
+$\partial_t\mathbf{v}+(\mathbf{v}\!\cdot\!\nabla)\mathbf{v}=-\nabla p/\rho$ in
+disguise.
+
+One can also try the Eulerian density $\Lag=\tfrac12\rho v^2-\rho e(\rho)$ directly,
+but then the variations of $\rho$ and $\mathbf{v}$ are \emph{not} independent: they
+must be those induced by a displacement $\boldsymbol\xi$ of the fluid elements,
+$\delta\rho=-\nabla\!\cdot(\rho\boldsymbol\xi)$ and
+$\delta\mathbf{v}=\partial_t\boldsymbol\xi+(\mathbf{v}\!\cdot\!\nabla)\boldsymbol\xi
+-(\boldsymbol\xi\!\cdot\!\nabla)\mathbf{v}$ (Lin's constraints). Treating
+$\rho$ and $\mathbf{v}$ as free fields, without the constraints, gives wrong
+equations. Which variables are ``the'' fields is therefore a genuine choice, and
+it matters again in Sections~\ref{sec:poisson} and~\ref{sec:noether}.
+
+\section{``Least'' action: what the principle does and does not say}
+\label{sec:action}
+
+\subsection{Stationary, not minimal}
+
+Hamilton's principle asserts that the physical history makes $S$ \emph{stationary}
+among histories with the same boundary data. The traditional name ``principle
+of least action'' suggests a minimum; for particles this is true only for
+sufficiently short time intervals, and for fields it is \emph{never} true.
+
+Take the string \eqref{eq:string-L} on $[0,L]$ with fixed ends over a time
+interval $[0,T]$. Since $S$ is quadratic, for a solution $\phi_0$ and
+a variation $\eta$ vanishing on the boundary,
+\[
+  S[\phi_0+\eta]-S[\phi_0]=\int_0^T\!\!\dd t\int_0^L\!\!\dd x\,\Big[\tfrac12\rho\,\eta_t^2-\tfrac12\tau\,\eta_x^2\Big].
+\]
+For $\eta=\eps\sin(m\pi t/T)\sin(n\pi x/L)$ the right-hand side equals
+\begin{equation}
+  \frac{\pi^2\eps^2\rho L}{8T}\Big[m^2-\Big(\frac{n\,c\,T}{L}\Big)^2\Big].
+  \label{eq:second-var}
+\end{equation}
+It is positive for $n<mL/(cT)$ and negative for $n>mL/(cT)$. Because $n$ can be
+arbitrarily large in the continuum, the stationary point is a \emph{saddle},
+for every $T>0$: the kinetic term pushes the action up for rapid time
+dependence, the gradient term pushes it down for rapid spatial dependence. The
+particle result is recovered on the chain \eqref{eq:chain-L}, whose spectrum is
+bounded by $\omega_{\max}$: the action is a local minimum for
+$T<\pi/\omega_{\max}=\pi a/2c$, a window that closes as $a\to0$.
+
+\subsection{Boundary-value versus initial-value problems}
+
+Hamilton's principle is a \emph{boundary-value} problem in time: the fields are
+prescribed at $t_1$ and $t_2$. Physical causality is an \emph{initial-value}
+problem: $\phi$ and $\phi_t$ are prescribed at $t_1$ and the future follows. The
+two are equivalent only locally. For the fixed-end string, the choice
+$\phi(x,0)=\phi(x,T)=0$ admits the non-trivial solution
+$\phi=\sin(n\pi x/L)\sin(n\pi ct/L)$ whenever $cT/L$ is rational, i.e.\ for a
+\emph{dense} set of values of~$T$; at such times the boundary-value problem has
+no unique solution even though the initial-value problem is perfectly
+well-posed. The variational principle is a statement about the whole history,
+that is, it belongs to the mathematical formulation; the initial-value problem is
+what a physical process actually does. The equivalence of the two is a theorem about
+short times, not a metaphysical identity.
+
+\section{Hamiltonian formalism}
+\label{sec:hamiltonian}
+
+\subsection{Functional derivatives}
+
+A functional $F[\phi]$ has a functional derivative $\delta F/\delta\phi^a(\mathbf{x})$
+defined by
+\begin{equation}
+  \delta F=\int\!\dd^dx\;\fd{F}{\phi^a(\mathbf{x})}\,\delta\phi^a(\mathbf{x}),
+\end{equation}
+so that $\delta\phi(\mathbf{x})/\delta\phi(\mathbf{y})=\delta(\mathbf{x}-\mathbf{y})$.
+For $F=\int f(\phi,\nabla\phi)\,\dd^dx$ one finds
+$\delta F/\delta\phi^a=\partial f/\partial\phi^a-\partial_i(\partial f/\partial\phi^a_{,i})$;
+for instance $F=\int\tfrac12\tau\phi_x^2\,\dd x$ has $\delta F/\delta\phi=-\tau\phi_{xx}$.
+This is the same combination as in \eqref{eq:EL}: the Euler--Lagrange expression
+\emph{is} the functional derivative of the action.
+
+\subsection{Canonical form}
+
+Singling out time, regard the instantaneous configuration
+$\phi^a(\cdot,t)$ as a point in an infinite-dimensional configuration space. Spatial
+derivatives are then \emph{parameters of position in that space}, not independent
+velocities; this is the traditional 3+1 split. (An alternative, in which all
+derivatives $\phi^a_{,\mu}$ are given conjugate momenta, is the
+De~Donder--Weyl formalism, discussed in its own chapter.) The canonical momentum
+density, Hamiltonian density and Hamiltonian are
+\begin{equation}
+  \pi_a=\pd{\Lag}{\phi^a_t},\qquad
+  \Ham=\pi_a\phi^a_t-\Lag,\qquad
+  H[\phi,\pi]=\int\!\Ham\,\dd^dx ,
+\end{equation}
+with $\phi^a_t$ eliminated in favour of $\pi_a$ (assuming $\pi_a$ can be
+inverted for $\phi^a_t$; see Section~\ref{sec:constraints} for when it cannot).
+The variation of $H$ gives
+$\delta H/\delta\pi_a=\phi^a_t$ directly, because the terms involving
+$\delta\phi_t$ cancel by the definition of $\pi_a$; and
+$\delta H/\delta\phi^a=-(\partial\Lag/\partial\phi^a-\partial_i\,\partial\Lag/\partial\phi^a_{,i})=-\partial_t\pi_a$
+by the Euler--Lagrange equations. Thus
+\begin{equation}
+  \phi^a_t=\fd{H}{\pi_a},\qquad \pi_{a,t}=-\fd{H}{\phi^a}.
+  \label{eq:hamilton}
+\end{equation}
+Equivalently, \eqref{eq:hamilton} follows from stationarity of the phase-space
+action $\int\dd t\,\big[\int\pi_a\phi^a_t\,\dd^dx-H\big]$ under independent
+variations of $\phi^a$ and $\pi_a$. For the string, $\pi=\rho\phi_t$,
+$\Ham=\pi^2/2\rho+\tfrac12\tau\phi_x^2$ and \eqref{eq:hamilton} gives
+$\phi_t=\pi/\rho$, $\pi_t=\tau\phi_{xx}$.
+
+\subsection{Poisson brackets}
+\label{sec:poisson}
+
+The \emph{Poisson bracket} of two functionals is
+\begin{equation}
+  \PB{F}{G}=\int\!\dd^dz\;\Big[\fd{F}{\phi^a(\mathbf{z})}\fd{G}{\pi_a(\mathbf{z})}
+  -\fd{F}{\pi_a(\mathbf{z})}\fd{G}{\phi^a(\mathbf{z})}\Big],
+  \label{eq:PB}
+\end{equation}
+so that $\PB{\phi^a(\mathbf{x})}{\pi_b(\mathbf{y})}=\delta^a_b\,\delta(\mathbf{x}-\mathbf{y})$
+and the time evolution of any functional is $\dot F=\PB{F}{H}+\partial_tF$. The
+bracket is antisymmetric, satisfies the Leibniz rule and the Jacobi identity,
+and a conserved functional is one that Poisson-commutes with $H$ (if it has
+no explicit time dependence). Conversely, every functional $Q$ generates a flow
+$\delta\phi^a=\eps\PB{\phi^a}{Q}$; if $Q$ is conserved this flow maps solutions
+to solutions. For example $P_j=-\int\pi_a\partial_j\phi^a\,\dd^dx$ satisfies
+$\PB{\phi^a(\mathbf{x})}{P_j}=-\partial_j\phi^a(\mathbf{x})$ and generates
+spatial translations. This is the Hamiltonian face of Noether's theorem
+(Section~\ref{sec:noether}).
+
+\subsection{First-order Lagrangians and constraints}
+\label{sec:constraints}
+
+The Schr\"odinger field \eqref{eq:GP-L} cannot be treated this way, because
+its Lagrangian is linear in the time derivatives. The momenta are
+$\pi_\psi=\tfrac{\ii\hbar}2\psi^*$ and $\pi_{\psi^*}=-\tfrac{\ii\hbar}2\psi$: they are
+not independent of the fields, so the map $\phi_t\mapsto\pi$ is not invertible.
+Following Dirac, one has the \emph{primary constraints}
+\begin{equation}
+  \chi=\pi_\psi-\tfrac{\ii\hbar}{2}\psi^*\approx0,\qquad
+  \bar\chi=\pi_{\psi^*}+\tfrac{\ii\hbar}{2}\psi\approx0 ,
+\end{equation}
+and the canonical Hamiltonian is $H=\int\big[\tfrac{\hbar^2}{2m}|\nabla\psi|^2+V|\psi|^2+\tfrac g2|\psi|^4\big]\dd^3x$
+(the velocity terms cancel exactly). The constraints do not Poisson-commute:
+$\PB{\chi(\mathbf{x})}{\bar\chi(\mathbf{y})}=-\ii\hbar\,\delta(\mathbf{x}-\mathbf{y})\neq0$,
+so they are \emph{second class}. They can be eliminated by passing to the Dirac bracket
+$\PB{A}{B}_D=\PB{A}{B}-\PB{A}{\chi_a}(C^{-1})^{ab}\PB{\chi_b}{B}$,
+$C_{ab}=\PB{\chi_a}{\chi_b}$, which gives
+\begin{equation}
+  \PB{\psi(\mathbf{x})}{\psi^*(\mathbf{y})}_D=-\frac{\ii}{\hbar}\,\delta(\mathbf{x}-\mathbf{y}),
+  \qquad
+  \psi_t=\PB{\psi}{H}_D=-\frac{\ii}{\hbar}\fd{H}{\psi^*},
+\end{equation}
+which is \eqref{eq:GP}. In real variables $\psi=(q+\ii p)/\sqrt{2\hbar}$ this is
+the canonical bracket $\PB{q(\mathbf{x})}{p(\mathbf{y})}=\delta(\mathbf{x}-\mathbf{y})$:
+the real and imaginary parts of $\psi$ are canonically conjugate to each other. The
+configuration space and the momentum space are \emph{the same space}. Such
+``coordinate = momentum'' structure is the generic situation for first-order
+Lagrangians and underlies the unusual Goldstone counting of
+Section~\ref{sec:ssb}.
+
+\subsection{Beyond canonical coordinates: the fluid}
+
+In Eulerian variables the fluid has no canonical coordinates at all. With
+momentum density $\mathbf{M}=\rho\mathbf{v}$, the Hamiltonian is
+$H=\int\big[|\mathbf{M}|^2/2\rho+\rho\,e(\rho)\big]\dd^3x$, and the bracket is
+\begin{equation}
+  \PB{F}{G}=-\int\!\dd^3x\,\Big[\rho\big(F_{\mathbf M}\!\cdot\!\nabla G_\rho-G_{\mathbf M}\!\cdot\!\nabla F_\rho\big)
+  +\mathbf{M}\!\cdot\!\big((F_{\mathbf M}\!\cdot\!\nabla)G_{\mathbf M}-(G_{\mathbf M}\!\cdot\!\nabla)F_{\mathbf M}\big)\Big],
+  \label{eq:lie-poisson}
+\end{equation}
+with $F_\rho\equiv\delta F/\delta\rho$ etc. This is a Lie--Poisson bracket (the
+dual of the Lie algebra of vector fields acting on densities); it is degenerate,
+with Casimir invariants such as the helicity $\int\mathbf{v}\!\cdot\!(\nabla\times\mathbf{v})\,\dd^3x$
+for barotropic flow. One checks directly that
+$\rho_t=\PB{\rho}{H}=-\nabla\!\cdot(\rho\mathbf{v})$ and
+$M_{i,t}=\PB{M_i}{H}=-\partial_ip-\partial_j(\rho v_iv_j)$ (Exercise~\ref{ex:lp}).
+The lesson is that the Hamiltonian structure of a field theory depends on which
+variables are used: canonical in Lagrangian labels, non-canonical in Eulerian
+ones.
+
+\section{Symmetries and conservation laws}
+\label{sec:noether}
+
+\subsection{Noether's theorem}
+
+Consider an infinitesimal change of the fields at a fixed point,
+$\delta\phi^a=\eps\,\Phi^a(x,\phi,\partial\phi)$, such that the Lagrangian changes
+by a total divergence, $\delta\Lag=\eps\,\partial_\mu K^\mu$ (a \emph{variational
+symmetry}). Using \eqref{eq:variation} off shell,
+\[
+  \delta\Lag=\eps\,\mathcal{E}_a\Phi^a+\eps\,\partial_\mu\!\Big(\pd{\Lag}{\phi^a_{,\mu}}\Phi^a\Big),
+\]
+and therefore
+\begin{equation}
+  \partial_\mu J^\mu=-\mathcal{E}_a\Phi^a,\qquad
+  J^\mu=\pd{\Lag}{\phi^a_{,\mu}}\,\Phi^a-K^\mu .
+  \label{eq:noether}
+\end{equation}
+On solutions $\mathcal{E}_a=0$, so $\partial_tJ^0+\partial_iJ^i=0$: a local conservation
+law. The \emph{charge} $Q=\int J^0\,\dd^dx$ is constant if the flux through the boundary
+vanishes (fields decay at infinity or satisfy periodic boundary conditions).
+In the canonical formalism $Q=\int(\pi_a\Phi^a-K^0)\,\dd^dx$, and (for transformations
+not involving $\pi$) $\PB{\phi^a}{Q}=\Phi^a$: the charge generates the symmetry that
+produced it. Two features should be noted. First, $J^\mu$ is defined only up
+to the addition of identically conserved quantities
+$\partial_\nu B^{[\mu\nu]}$, an ambiguity linked to the non-uniqueness of $\Lag$.
+Second, the theorem gives \emph{local} conservation laws: not just that $Q$ is
+constant but how it flows.
+
+\subsection{Spacetime translations and rotations}
+
+For translations $x^\nu\to x^\nu+\eps$ one has $\Phi^a=-\phi^a_{,\nu}$ and
+$K^\mu=-\delta^\mu_\nu\Lag$ (when $\Lag$ has no explicit $x^\nu$-dependence).
+The associated currents form the \emph{canonical energy--momentum tensor}
+\begin{equation}
+  T^\mu{}_\nu=\pd{\Lag}{\phi^a_{,\mu}}\,\phi^a_{,\nu}-\delta^\mu_\nu\Lag,
+  \qquad
+  \partial_\mu T^\mu{}_\nu=-\left.\pd{\Lag}{x^\nu}\right|_{\rm expl}.
+\end{equation}
+Its components are
+\begin{align}
+  T^0{}_0&=\Ham &&\text{energy density},\nonumber\\
+  T^i{}_0&=\pd{\Lag}{\phi^a_{,i}}\,\phi^a_t &&\text{energy flux},\nonumber\\
+  p_j&=-T^0{}_j=-\pi_a\,\phi^a_{,j} &&\text{momentum density},\nonumber\\
+  \Pi_{ij}&=-T^i{}_j=\delta_{ij}\Lag-\pd{\Lag}{\phi^a_{,i}}\,\phi^a_{,j} &&\text{momentum flux (stress)}.\nonumber
+\end{align}
+Thus $\partial_t\Ham+\partial_iT^i{}_0=0$ and $\partial_tp_j+\partial_i\Pi_{ij}=0$ when
+$\Lag$ has no explicit dependence on $t$ or $\mathbf{x}$. For the string, $p=-\rho\phi_t\phi_x$ and
+$\Pi=\tfrac12\rho\phi_t^2+\tfrac12\tau\phi_x^2$; a travelling wave $\phi=f(x-ct)$ carries momentum
+$\rho c f'^2>0$ in the direction of propagation, as it should.
+
+For a scalar field with a rotation-invariant $\Lag$, the tensor $\Pi_{ij}$ is symmetric, so
+$\partial_t(\epsilon_{ijk}x_jp_k)+\partial_l(\epsilon_{ijk}x_j\Pi_{lk})=\epsilon_{ijk}\Pi_{jk}=0$: the angular
+momentum $\mathbf{L}=\int\mathbf{x}\times\mathbf{p}\,\dd^3x$ is conserved. For
+fields with several components, such as the elastic displacement, the symmetry of
+the stress tensor is equivalent to conservation of the \emph{total} angular momentum, which includes a
+``spin'' part in addition to the orbital $\mathbf{x}\times\mathbf{p}$.
+
+\subsection{Internal symmetries and the Galilei boost}
+
+For the Schr\"odinger field, $\psi\to e^{\ii\alpha}\psi$ leaves \eqref{eq:GP-L} invariant
+($K^\mu=0$). Applying \eqref{eq:noether} with $\Phi=\ii\psi$, and dividing by the
+constant $-\hbar$, gives
+\begin{equation}
+  \partial_t|\psi|^2+\nabla\!\cdot\mathbf{j}=0,\qquad
+  \mathbf{j}=\frac{\hbar}{m}\Imag(\psi^*\nabla\psi),
+\end{equation}
+and the conserved number $N=\int|\psi|^2\dd^3x$ (so that $M=mN$ is the mass).
+The momentum density is $\mathbf{p}=m\mathbf{j}$.
+
+Galilean boosts act as
+\begin{equation}
+  \psi'(\mathbf{x},t)=\exp\!\Big[\tfrac{\ii m}{\hbar}\big(\mathbf{v}\!\cdot\!\mathbf{x}-\tfrac12v^2t\big)\Big]\,
+  \psi(\mathbf{x}-\mathbf{v}t,t),
+  \label{eq:boost}
+\end{equation}
+and map solutions of \eqref{eq:GP} (with $V=0$) to solutions. The conserved charge is
+$\mathbf{K}=m\!\int\!\mathbf{x}|\psi|^2\dd^3x-t\,\mathbf{P}$, where
+$\mathbf{P}=\int\mathbf{p}\,\dd^3x$: its conservation, $\dot{\mathbf{K}}=m\!\int\!\mathbf{j}\,\dd^3x-\mathbf{P}=0$,
+says that the centre of mass moves uniformly. Using the Dirac bracket one finds, with
+$M=m\!\int\!|\psi|^2$,
+\begin{equation}
+  \PB{K_i}{P_j}=M\,\delta_{ij},\qquad \PB{\psi}{P_j}=-\partial_j\psi,
+  \qquad \PB{\psi}{K_i}=-\frac{\ii m}{\hbar}\,x_i\psi \quad(t=0).
+\end{equation}
+The right-hand side of the first relation is not a generator but a number: the
+Poisson representation of the Galilei algebra is a \emph{central extension} by the
+mass (Bargmann). This is the classical, rather than quantum, origin of the
+statement that Galilean boosts are represented ``projectively''---the phase factor
+in \eqref{eq:boost} is already there in the field theory.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Symmetry & Action on solutions & Conserved charge\\
+\midrule
+Time translation & $\phi(\mathbf{x},t)\to\phi(\mathbf{x},t-s)$ & $H=\int\Ham\,\dd^dx$\\
+Space translation & $\phi(\mathbf{x},t)\to\phi(\mathbf{x}-\mathbf{b},t)$ & $\mathbf{P}=\int\mathbf{p}\,\dd^dx$\\
+Rotation (scalar field) & $\phi(\mathbf{x},t)\to\phi(R^{-1}\mathbf{x},t)$ & $\mathbf{L}=\int\mathbf{x}\times\mathbf{p}\,\dd^3x$\\
+Phase rotation ($\psi$) & $\psi\to e^{\ii\alpha}\psi$ & $N=\int|\psi|^2\,\dd^3x$\\
+Galilei boost ($\psi$) & Eq.~\eqref{eq:boost} & $\mathbf{K}=m\int\mathbf{x}|\psi|^2\dd^3x-t\mathbf{P}$\\
+\bottomrule
+\end{tabular}
+\caption{Symmetries of a non-relativistic field theory and their Noether charges.}
+\label{tab:noether}
+\end{table}
+
+\subsection{Local symmetries}
+
+If the parameters of a symmetry are allowed to be arbitrary functions of
+spacetime, Noether's \emph{second} theorem applies: the Euler--Lagrange
+expressions satisfy identities, the equations of motion do not determine the
+fields uniquely, and the Hamiltonian formalism acquires (first-class) constraints.
+Two instances occur in this chapter. The Schr\"odinger field coupled to a prescribed
+electromagnetic potential through $\partial_t\to\partial_t+\tfrac{\ii q}{\hbar}\Phi$,
+$\nabla\to\nabla-\tfrac{\ii q}{\hbar}\mathbf{A}$ is invariant under
+$\psi\to e^{\ii q\lambda/\hbar}\psi$, $\Phi\to\Phi-\lambda_t$,
+$\mathbf{A}\to\mathbf{A}+\nabla\lambda$ for any function $\lambda(\mathbf{x},t)$. And
+the fluid action \eqref{eq:fluid-action} is invariant under volume-preserving
+relabellings of the fluid elements, $\boldsymbol\alpha\to\boldsymbol\alpha'(\boldsymbol\alpha)$
+with $\rho_0$ unchanged: the infinite family of conservation laws that results is
+Kelvin's circulation theorem.
+
+\section{Spontaneous symmetry breaking}
+\label{sec:ssb}
+
+\subsection{What is broken}
+
+Let a group $G$ act on the fields and leave the action invariant, so that
+if $\phi$ is a solution then so is $g\cdot\phi$. A particular solution $\phi_0$
+\emph{breaks the symmetry spontaneously} if $g\cdot\phi_0\neq\phi_0$ for some
+$g\in G$ while $\phi_0$ is nevertheless a state of the system of special standing:
+a stable, lowest-energy solution (possibly at fixed values of other conserved
+charges). The unbroken subgroup $H\subset G$ is the stabiliser of $\phi_0$, and the
+family of equivalent ground states is the orbit $G/H$, the \emph{vacuum manifold}.
+
+The existence of non-symmetric solutions is not in itself remarkable: a travelling
+wave is not translation invariant either. What is special is that the
+non-symmetric solution is a \emph{ground state} and that the symmetry connects it
+to a continuous family of other ground states with the same energy. In
+Hamiltonian language, $\phi_0$ breaks the symmetry generated by $Q$ if the
+Hamiltonian vector field of $Q$ does not vanish at $\phi_0$.
+
+\subsection{Goldstone's theorem for static potentials}
+
+Suppose the potential energy density $U(\phi)$ is invariant under
+$\phi\to e^{\eps T}\phi$, where $T$ is a generator of $G$. Differentiating
+$U(e^{\eps T}\phi)=U(\phi)$ gives $U'(\phi)\,T\phi=0$ for all $\phi$; differentiating
+once more gives $U''(\phi)\,T\phi+U'(\phi)\,T=0$. At a minimum $U'(\phi_0)=0$, so
+\begin{equation}
+  U''(\phi_0)\,T\phi_0=0 .
+\end{equation}
+If $T\phi_0\neq0$---the symmetry is broken---the matrix of second derivatives
+has a zero eigenvector, i.e.\ a flat direction along the vacuum manifold. A
+uniform shift along it costs no energy, and a slowly varying one costs energy
+only through gradients, which is why long-wavelength excitations along the
+vacuum manifold have frequencies $\omega(k)\to0$ as $k\to0$: these are the
+\emph{Goldstone modes}.
+
+\subsection{Example: a U(1) breaking in the Schr\"odinger field}
+
+Return to \eqref{eq:GP-L} with $V=0$ and $g>0$. Write the stationary solutions as
+$\psi=e^{-\ii\mu t/\hbar}\chi$. In terms of $\chi$ the Lagrangian is the same
+with an extra term $+\mu|\chi|^2$, so the potential is
+$U(\chi)=\tfrac g2|\chi|^4-\mu|\chi|^2$: the Mexican hat. Its minima form the
+circle
+\begin{equation}
+  |\chi|^2=n_0\equiv\mu/g,\qquad \chi=\sqrt{n_0}\,e^{\ii\theta_0},\quad\theta_0\in[0,2\pi),
+\end{equation}
+on which the phase symmetry $\psi\to e^{\ii\alpha}\psi$ acts by $\theta_0\to\theta_0+\alpha$. The
+symmetry is broken, with $U(1)\to\{1\}$ and vacuum manifold $S^1$. Two remarks:
+(i)~in terms of the original field the ground state is time-dependent, $\psi=\sqrt{n_0}e^{\ii\theta_0-\ii\mu t/\hbar}$,
+so \emph{time translation} is broken as well, but the combination of time translation
+and phase rotation that leaves it fixed survives; the evolution of the shifted field $\chi$ is generated
+by $H-\mu N$. (ii)~Equivalently, $\mu=gn_0$ is the Lagrange multiplier that enforces
+a fixed $N$ when minimising the energy.
+
+To find the Goldstone mode use the Madelung variables $\chi=\sqrt\rho\,e^{\ii\theta}$:
+\begin{equation}
+  \Lag=-\hbar\rho\,\theta_t-\frac{\hbar^2}{2m}\Big[\rho(\nabla\theta)^2+\frac{(\nabla\rho)^2}{4\rho}\Big]
+  -\frac g2\rho^2+\mu\rho .
+  \label{eq:madelung-L}
+\end{equation}
+The first term shows that $\rho$ and $\hbar\theta$ are canonically conjugate, up to
+sign: \emph{the phase $\theta$---the coordinate along the vacuum manifold---is conjugate to
+the Noether charge density $\rho$ of the broken symmetry.} The field equations are
+\begin{equation}
+  \rho_t+\nabla\!\cdot\!\Big(\rho\,\frac{\hbar}{m}\nabla\theta\Big)=0,\qquad
+  \hbar\theta_t=\mu-g\rho-\frac{\hbar^2}{2m}(\nabla\theta)^2+\frac{\hbar^2}{2m}\frac{\nabla^2\sqrt\rho}{\sqrt\rho}.
+\end{equation}
+So the fluid velocity is $\mathbf{v}=(\hbar/m)\nabla\theta$, necessarily irrotational. Linearising around $\rho=n_0$,
+$\theta=\theta_0+\varphi$, $\rho=n_0+\delta\rho$ gives
+$\delta\rho_t=-(\hbar n_0/m)\nabla^2\varphi$ and
+$\hbar\varphi_t=-g\,\delta\rho+(\hbar^2/4mn_0)\nabla^2\delta\rho$, whence for plane waves
+\begin{equation}
+  \omega(k)=\sqrt{c_s^2k^2+\Big(\frac{\hbar k^2}{2m}\Big)^2},\qquad c_s=\sqrt{\frac{gn_0}{m}}=\sqrt{\frac{\mu}{m}} .
+  \label{eq:bogoliubov}
+\end{equation}
+This is the Bogoliubov dispersion relation. For $k\to0$ it is linear,
+$\omega\simeq c_s k$: the Goldstone mode is a sound wave (a phonon of the
+superfluid), a long-wavelength modulation of the phase. For
+$k\gg mc_s/\hbar$ it crosses over to the free-particle form $\hbar k^2/2m$. Note that
+there is only \emph{one} mode, not the two (Goldstone plus ``amplitude'') of the corresponding
+relativistic model: the amplitude fluctuation $\delta\rho$ is not an independent degree
+of freedom but the momentum conjugate to the phase.
+
+\subsection{Topological consequences}
+
+Because the vacuum manifold is a circle, a field configuration can wind around it. The
+phase $\theta$ increases by $2\pi n$ around a closed loop, which by $\mathbf{v}=(\hbar/m)\nabla\theta$ means a
+quantised circulation $\oint\mathbf{v}\!\cdot\!\dd\mathbf{l}=2\pi\hbar n/m$: a vortex. This
+is a classical result about the field: the quantisation of circulation here comes from the
+topology of $S^1$, not from the quantisation of a field operator. In one dimension, a
+solution of the stationary equation for $\chi$ (that is, \eqref{eq:GP} in the frame where the ground state is static)
+that connects the two vacua $\pm\sqrt{n_0}$ is the dark soliton,
+\begin{equation}
+  \chi(x)=\sqrt{n_0}\,\tanh\!\big(x/\ell\big),\qquad \ell=\frac{\hbar}{\sqrt{m\mu}},
+\end{equation}
+which one verifies by direct substitution.
+
+\subsection{Example: the ferromagnet and type-B Goldstone modes}
+
+Let $\mathbf{n}(\mathbf{x},t)$ be a unit vector field (the direction of the local magnetisation) with
+spin density $s$ and exchange stiffness $J>0$. The equation of motion is the Landau--Lifshitz equation
+\begin{equation}
+  s\,\partial_t\mathbf{n}=-J\,\mathbf{n}\times\nabla^2\mathbf{n},
+\end{equation}
+which preserves $|\mathbf{n}|=1$ and conserves the total spin $\mathbf{S}=s\!\int\!\mathbf{n}\,\dd^3x$, the Noether charge of
+rotations. The ground state $\mathbf{n}=\hat{\mathbf{z}}$ breaks $SO(3)$ to $SO(2)$: two generators are broken.
+Linearise with $\mathbf{n}\simeq(u,v,1)$. The Lagrangian becomes, in a suitable sign convention for
+the first-order geometric (Berry-phase) term,
+\begin{equation}
+  \Lag\simeq\frac s2\,(u\,v_t-v\,u_t)-\frac J2\big[(\nabla u)^2+(\nabla v)^2\big],
+\end{equation}
+with field equations $s\,u_t=J\nabla^2v$ and $s\,v_t=-J\nabla^2u$. For $w=u+\ii v$ these reduce to
+$s\,w_t=-\ii J\nabla^2w$, so there is a single mode,
+\begin{equation}
+  |\omega|=\frac{J}{s}\,k^2 ,
+\end{equation}
+which is circularly polarised (the sign of $\omega$ fixes the handedness).
+
+\emph{Two broken generators give only one Goldstone mode, and its dispersion is
+quadratic.} The reason is the first-order structure noted in Section~\ref{sec:constraints}: $u$ and $sv$ are
+canonically conjugate to one another, so the two ``Goldstone fields'' constitute a
+single degree of freedom. The criterion is that the broken charges do not
+commute in the ground state: $\PB{S_x}{S_y}=\pm S_z=\pm sV\neq0$ (the sign depends on conventions). The relevant counting,
+proved for quantum systems by Watanabe and Murayama and also following from
+the linearised classical dynamics, is: if $n_A$ is the number of modes with linear
+dispersion (type~A) and $n_B$ the number with quadratic dispersion (type~B), then
+\begin{equation}
+  n_A+2n_B=N_{\rm broken},\qquad n_A+n_B=N_{\rm broken}-\tfrac12\operatorname{rank}\rho_{ab},
+  \qquad \rho_{ab}\equiv\frac1V\PB{Q_a}{Q_b}\Big|_{\phi_0} .
+\end{equation}
+For the superfluid $N_{\rm broken}=1$ and $\rho=0$, so $n_A=1$; for the ferromagnet
+$N_{\rm broken}=2$ and $\operatorname{rank}\rho=2$, so $n_B=1$ and $n_A=0$. Adding an
+easy-axis anisotropy that explicitly breaks $SO(3)$ to $SO(2)$ opens a gap
+(Exercise~\ref{ex:gap}). In a relativistic theory the question of $n_A$ versus $n_B$ does not arise in this form: in a
+Lorentz-invariant vacuum the charge densities have vanishing expectation values, so $\rho_{ab}=0$
+and all Goldstone modes are linear.
+
+\subsection{Example: the elastic solid}
+
+The displacement $\mathbf{u}$ of a solid is the Goldstone field of broken translations:
+the crystal picks out a reference lattice, which breaks the translation
+(and rotation) invariance of the laws, while the action
+depends on $\mathbf{u}$ only through its gradients. The shift symmetry
+$\mathbf{u}\to\mathbf{u}+\mathbf{b}$ is the signal. The three broken translations give three
+type-A phonon branches ($c_L$ and two $c_T$ in three dimensions, Example~\ref{ex:elastic}). The broken
+rotations produce no additional independent modes, since a rotation of the
+lattice is already encoded in the antisymmetric part of $\partial_iu_j$.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lllll@{}}
+\toprule
+System & Symmetry & Vacuum manifold & Goldstone mode & Dispersion\\
+\midrule
+Elastic solid & translations & lattice shifts & displacement $\mathbf{u}$ & $\omega=c_{L,T}\,k$\\
+Superfluid (GP) & $U(1)$ & $S^1$ & phase $\theta$ & $\omega\simeq c_sk$\\
+Ferromagnet & $SO(3)\to SO(2)$ & $S^2$ & transverse spin $(u,v)$ & $\omega=(J/s)k^2$\\
+\bottomrule
+\end{tabular}
+\caption{Goldstone modes of three classical non-relativistic field theories.}
+\label{tab:goldstone}
+\end{table}
+
+\subsection{Remarks on scope}
+
+Three points should be kept in mind. First, \emph{explicit} breaking---tilting the
+Mexican hat, or adding an anisotropy---turns the Goldstone modes into
+pseudo-Goldstone modes with a gap, as in Exercise~\ref{ex:gap}. Second, in a
+deterministic classical theory there is no tunnelling and no fluctuation: the
+degenerate ground states are simply different solutions, and ``choosing'' one
+costs nothing mystical. Once thermal or quantum fluctuations are included, the
+existence of an ordered state depends on the dimension (the Mermin--Wagner
+theorem forbids continuous symmetry breaking at finite temperature for $d\le2$,
+and quantum fluctuations impose similar restrictions at zero temperature in many low-dimensional
+systems), and the infinite-volume
+limit becomes essential; it is an idealisation, of the same kind as the
+continuum limit of Section~\ref{sec:chain}, and care is needed about which statements
+survive for finite systems. Third, the interplay with
+conservation laws is subtle: it is the Noether charge density that is conjugate
+to the Goldstone field (Eq.~\eqref{eq:madelung-L}), and it is the commutator of
+charges in the ground state that determines the dispersion.
+
+\section{Discretisation: the field becomes a lattice again}
+\label{sec:discrete}
+
+Numerical work reverses the construction of Section~\ref{sec:chain}. Replace
+$\phi(x,t)$ by values $\phi^n_j$ on a grid $(j\Delta x,n\Delta t)$ and the action by a
+discrete action. For the string,
+\begin{equation}
+  S_d=\sum_{n,j}\Big[\frac{\rho\,\Delta x}{2\Delta t}\big(\phi^{n+1}_j-\phi^n_j\big)^2
+  -\frac{\tau\,\Delta t}{2\Delta x}\big(\phi^n_{j+1}-\phi^n_j\big)^2\Big].
+\end{equation}
+Demanding $\partial S_d/\partial\phi^n_j=0$ gives the leapfrog scheme
+\begin{equation}
+  \phi^{n+1}_j=2\phi^n_j-\phi^{n-1}_j+r^2\big(\phi^n_{j+1}-2\phi^n_j+\phi^n_{j-1}\big),
+  \qquad r=\frac{c\,\Delta t}{\Delta x}.
+  \label{eq:leapfrog}
+\end{equation}
+This is a \emph{variational integrator}: it is the discrete Euler--Lagrange equation of a
+discrete action, so it preserves the discrete symplectic structure exactly, and the
+energy is not conserved exactly but oscillates with a bounded error. Internal
+symmetries of the continuum action that survive discretisation (a phase rotation
+$\psi\to e^{\ii\alpha}\psi$, say) give exact discrete conservation laws;
+continuous spacetime translations do not, which is why energy and momentum are only
+approximately conserved. Substituting plane waves gives the numerical
+dispersion relation
+\begin{equation}
+  \sin\frac{\omega\Delta t}{2}=r\,\sin\frac{k\Delta x}{2},
+\end{equation}
+which is \eqref{eq:chain-disp} with $\omega$ replaced by $(2/\Delta t)\sin(\omega\Delta t/2)$, and shows that
+$r\le1$ is needed for real $\omega$ at all $k$ (the Courant--Friedrichs--Lewy
+condition). The discretised field \emph{is} the chain of oscillators of
+Section~\ref{sec:chain}, now with spacing $\Delta x$: numerical solution of a field
+equation means, in effect, solving a mechanical problem with a very large but finite number of degrees of
+freedom. A minimal implementation in C, with periodic boundaries and
+\texttt{r2} equal to $r^2$:
+\begin{verbatim}
+void leapfrog(int n, double r2, const double *restrict pm,
+              const double *restrict p, double *restrict pp)
+{
+    for (int j = 0; j < n; j++) {
+        int jp = (j + 1) % n, jm = (j + n - 1) % n;
+        pp[j] = 2.0*p[j] - pm[j] + r2*(p[jp] - 2.0*p[j] + p[jm]);
+    }
+}
+\end{verbatim}
+The first step needs $\phi^{-1}$, which one obtains from the initial velocity
+$v_0$ as $\phi^{-1}_j=\phi^0_j-\Delta t\,v_{0,j}+\tfrac12r^2\,(\phi^0_{j+1}-2\phi^0_j+\phi^0_{j-1})$.
+
+\section*{Exercises}
+\addcontentsline{toc}{section}{Exercises}
+
+\begin{enumerate}
+\item\label{ex:chain} Expand $(q_{j+1}-q_j)^2$ to fourth order in $a$ and show that, up to total derivatives,
+$L=\int\dd x\,[\tfrac12\rho\phi_t^2-\tfrac12\tau\phi_x^2+\tfrac{\tau a^2}{24}\phi_{xx}^2]$.
+Derive the field equation and verify $\omega^2=c^2k^2(1-k^2a^2/12)$ to this order.
+
+\item Verify \eqref{eq:second-var}. Show that for the chain \eqref{eq:chain-L} with fixed ends the
+second variation of the action is positive for $T<\pi/\omega_{\max}$.
+
+\item Derive the Euler--Lagrange equations for the elastic Lagrangian of Example~\ref{ex:elastic}, show that $\sigma_{ij}$
+may be taken symmetric, and derive $c_L$ and $c_T$ for the isotropic solid.
+
+\item Verify that the Lagrangian \eqref{eq:GP-L} with $V=0$ is invariant under the boost \eqref{eq:boost}
+up to a total divergence, and find $K^\mu$.
+
+\item Compute the Dirac bracket $\PB{\psi}{\psi^*}_D$ of Section~\ref{sec:constraints} explicitly. Show that
+$q=\sqrt{\hbar/2}(\psi+\psi^*)$ and $p=-\ii\sqrt{\hbar/2}(\psi-\psi^*)$ satisfy $\PB{q}{p}_D=\delta$.
+
+\item\label{ex:lp} Using \eqref{eq:lie-poisson}, verify the two equations $\rho_t=\PB{\rho}{H}$ and
+$M_{i,t}=\PB{M_i}{H}$ given in the text. Show that the helicity is a Casimir for barotropic flow.
+
+\item Obtain the Bogoliubov dispersion \eqref{eq:bogoliubov} directly from \eqref{eq:GP}
+by writing $\chi=\sqrt{n_0}+a\,e^{\ii(kx-\omega t)}+b^*e^{-\ii(kx-\omega t)}$. Estimate the crossover
+wavenumber and the healing length $\ell$ for $\mu/\hbar=2\pi\times1\,$kHz and $m=87\,$u.
+
+\item\label{ex:gap} Add an anisotropy energy density $\tfrac{D}{2}(u^2+v^2)$ to the ferromagnet. Show that the
+magnon acquires the gap $|\omega|=(Jk^2+D)/s$, and explain why this is consistent with the Goldstone argument.
+
+\item Derive the numerical dispersion relation of the leapfrog scheme \eqref{eq:leapfrog} and the
+CFL condition $r\le1$. Compare the numerical group velocity with $c$ for $k\Delta x\ll1$.
+
+\item Show that, for the free Schr\"odinger field, rescaling $\psi\to\lambda^{d/2}\psi(\lambda\mathbf{x},\lambda^2t)$
+is a symmetry of the free field ($g=0$); find the associated conserved
+charge. For which dimension $d$ does the symmetry survive when $g\neq0$?
+\end{enumerate}
+
+\section*{Notes and further reading}
+\addcontentsline{toc}{section}{Notes and further reading}
+
+The classical sources are Goldstein, Poole and Safko, \emph{Classical Mechanics}
+(3rd ed., 2002), Ch.~13, and Landau and Lifshitz, \emph{Theory of Elasticity}
+and \emph{Fluid Mechanics}. Noether's theorems are in E.~Noether, \emph{Invariante
+Variationsprobleme}, Nachr.\ Ges.\ Wiss.\ G\"ottingen (1918); a modern account is
+Y.~Kosmann-Schwarzbach, \emph{The Noether Theorems} (2011), and a systematic treatment of
+symmetries of differential equations is in P.~Olver, \emph{Applications of Lie
+Groups to Differential Equations} (2nd ed., 1993). The Hamiltonian treatment of
+fluids and the Lie--Poisson bracket are reviewed in P.~J.~Morrison, Rev.\ Mod.\ Phys.\
+\textbf{70}, 467 (1998), and R.~Salmon, Ann.\ Rev.\ Fluid Mech.\ \textbf{20}, 225 (1988),
+including the connection between relabelling symmetry and Kelvin's theorem.
+Constrained systems are treated in P.~A.~M.~Dirac, \emph{Lectures on Quantum
+Mechanics} (1964). For the mathematics of continuum mechanics see J.~Marsden and
+T.~Hughes, \emph{Mathematical Foundations of Elasticity}. Goldstone modes originate
+with Nambu (Phys.\ Rev.\ \textbf{117}, 648, 1960) and Goldstone (Nuovo Cimento
+\textbf{19}, 154, 1961); the non-relativistic counting is in H.~Watanabe and
+H.~Murayama, Phys.\ Rev.\ Lett.\ \textbf{108}, 251602 (2012). The Bogoliubov
+spectrum is from N.~N.~Bogoliubov, J.\ Phys.\ (USSR) \textbf{11}, 23 (1947), and
+is treated in Pitaevskii and Stringari, \emph{Bose--Einstein Condensation} (2003). On
+variational integrators see J.~Marsden and M.~West, Acta Numerica \textbf{10}, 357
+(2001), and Hairer, Lubich and Wanner, \emph{Geometric Numerical Integration}.
