@@ -1,0 +1,533 @@
+\chapter{Mathematics}
+\label{ch:math}
+\section{Foliations vs Fibrations} %gemini
+\label{sec:math-fvsf}
+
+While both fibrations and foliations are mathematical concepts used in
+differential geometry and topology to decompose complex spaces into simpler,
+lower-dimensional pieces, they approach this "slicing" in fundamentally
+different ways.
+The easiest way to understand the distinction is that a fibration is a strictly
+organized, global structure, while a foliation is a purely local slicing rule
+that can lead to wild and complex global behaviors.
+Here is a breakdown of the differences.
+
+\paragraph{Fibration: The Global Bundle}
+A fibration (specifically a fiber bundle) is a way of projecting a large space
+down to a smaller space, such that every point in the smaller space corresponds
+to an identical "fiber" in the large space.
+
+ You have a total space $ E $, a base space $B$, and a continuous map $p:E
+ \to B$. If you pick any point in the base space $B$, its preimage (the
+ "fiber" above it) looks exactly like a standard space $F$. Furthermore,
+ locally, the total space must look exactly like the product of the base and
+ the fiber ( $B \times F$). Every single fiber in the entire space is 
+ topologically identical (homeomorphic).
+
+Analogy: Think of a hairbrush. The base space is the plastic handle. The fibers are the bristles. Every bristle is identical, and they are organized perfectly over the base.
+
+Classic Example: The Möbius strip is a fibration (a fiber bundle). The base space 
+$B$ is a circle, and the fiber $F$ is a line segment. As you travel around the
+circle, the line segments twist, but every single vertical "slice" of the
+Möbius strip is an identical line segment.
+
+\paragraph{Foliation: The Local Layers}
+A foliation is a way of completely filling an 
+$n$-dimensional manifold with a set of disjoint, connected, 
+$p$-dimensional submanifolds called leaves.
+ There is no global map to a base space. Instead, a foliation is defined by
+ local coordinate charts.
+If you zoom in anywhere on the manifold, it must look like a stack of parallel
+planes (specifically, it locally looks like $\mathbb{R}^p \times \mathbb{R}^{n-p}$, where the 
+$\mathbb{R}^p$ slices are the leaves).
+
+ Because the rule is only local, the global behavior of the leaves can be
+ chaotic. Leaves do not have to be topologically identical to one another. Some
+ leaves might be compact (like a sphere or a torus), while a neighboring leaf
+ might be infinitely long and wrap around the compact leaf forever without ever
+ closing in on itself.
+
+Analogy: Think of the flaky layers inside a croissant, or the grain lines in a
+block of wood. Locally, it just looks like stacked parallel layers. Globally,
+those layers can swirl, merge, or spiral in ways that cannot be mapped neatly
+to a 2D base.
+
+Classic Example: The Reeb foliation of a 3-dimensional sphere. It slices the 3D
+sphere into 2D leaves. One single leaf is a closed torus (a donut shape)
+sitting inside the sphere. Every other leaf is an infinite, non-compact flat
+plane that spirals around and endlessly approaches the surface of that torus.
+
+
+\begin{table}[h]
+    \centering
+    \caption{The Key Differences Summarized}
+    \begin{tabular}{p{0.2\textwidth} p{0.4\textwidth} p{0.4\textwidth}}
+        \toprule
+        Feature	&Fibration	&Foliation\\
+        \midrule
+        Defining characteristic&	A global projection map to a base space. &	A local decomposition into parallel slices.\\
+        Uniformity&	All fibers are topologically identical. &	Leaves can be drastically different from one another globally.\\
+        Base Space&	Exists. The fibers are parameterized by a base manifold.&	Does not exist. You cannot generally create a sensible "space of leaves".\\
+        Relationship&	Every locally trivial fibration automatically creates a foliation (the fibers serve as the leaves).	&Most foliations do not come from fibrations, because their leaves are not uniform and spiral chaotically.\\
+  \bottomrule    
+  \end{tabular}  
+\end{table}
+
+
+In short, if a space is a fibration, it is highly organized and every slice is
+the same. If a space has a foliation, it merely means it is made of layers that
+never intersect, but those layers are free to stretch, spiral, and differ from
+one another across the whole space.
+
+\section{FT on manifold}
+\label{sec:math-ftm}
+
+There is a fundamental distinction between Fourier analysis in Euclidean space
+and harmonic analysis on manifolds. It becomes particularly important when
+constructing Wigner functions, Weyl quantization, or phase-space descriptions
+of quantum mechanics.
+
+The central idea is that a manifold does not possess a global linear structure,
+but each of its tangent spaces does. Consequently, Fourier transformation can
+be defined naturally on individual tangent spaces, while the geometry tells us
+how these local transforms are related.
+
+There are three principal ways to generalize Fourier analysis:
+\begin{enumerate}
+   \item Spectral Fourier analysis: replace plane waves by eigenfunctions of a
+       geometrically defined operator, usually the Laplace–Beltrami operator.
+   \item Tangent-space Fourier analysis: perform ordinary Fourier
+       transformation in \(T_xM\), with momenta belonging to \(T_x^*M\). This
+        is especially relevant to Wigner functions.
+   \item  Group-theoretic Fourier analysis: when the manifold has sufficient
+       symmetry, use representations of its symmetry group.
+
+\end{enumerate}
+These constructions are related, but they answer different physical questions.
+
+\subsection{What exactly fails on a manifold?}
+In Euclidean space,
+\[
+\widetilde f(p)=\int_{\mathbb R^n}
+f(x)e^{-ip\cdot x/\hbar}\,d^nx.
+\]
+Several structures are hidden in this familiar expression.
+First, all points are identified with elements of a single vector space. 
+Second, the quantity
+\[
+p\cdot x
+\]
+is a canonical pairing of a vector with a covector. 
+Third, translations form an Abelian group,
+\[
+x\mapsto x+a,
+\]
+whose irreducible unitary representations are the plane waves
+\[
+\chi_p(a)=e^{ip\cdot a/\hbar}.
+\]
+Indeed,
+\[
+\chi_p(a+b)=\chi_p(a)\chi_p(b).
+\]
+Thus Fourier analysis is fundamentally connected to the representation theory of translations.
+
+On a general manifold \(M\), however:
+\begin{enumerate}
+   \item There is no canonical difference \(x-y\) between two points.
+   \item The cotangent spaces \(T_x^*M\) and \(T_y^*M\) are different vector
+       spaces, with no canonical identification.
+   \item There is generally no transitive Abelian translation group.
+\end{enumerate}
+This means that a globally defined Fourier transform with a single momentum
+variable \(p\in\mathbb R^n\), behaving exactly as in Euclidean space, is not
+naturally available.
+
+But notice something important:
+\[
+\boxed{
+T_xM\text{ is linear, and }T_x^*M
+\text{ is its canonical dual.}
+}
+\]
+The pairing
+\[
+\langle p,v\rangle=p_\mu v^\mu,
+\qquad
+v\in T_xM,\quad p\in T_x^*M,
+\]
+is perfectly well defined and coordinate independent.
+We therefore have a natural Fourier transform at every point of the manifold,
+without requiring a global identification of tangent spaces.
+
+\subsection{ A geometric Fourier transform using the exponential map}
+Let \(M\) be an \(n\)-dimensional Riemannian manifold with metric \(g\) and
+Levi-Civita connection.
+At every \(x\in M\), the exponential map provides a relation between tangent
+vectors and points of the manifold:
+\[
+\exp_x:T_xM\longrightarrow M.
+\]
+For \(v\in T_xM\), the point
+\[
+y=\exp_x(v)
+\]
+is reached by following the geodesic beginning at \(x\) with initial tangent
+\(v\), for affine parameter one.
+Locally, we can reverse this relation:
+\[
+v=\log_x(y)=\exp_x^{-1}(y).
+\]
+This is the geometric replacement for \(y-x\).
+
+We can consequently define a local Fourier transform centered at \(x\):
+\[
+\boxed{
+\mathcal F_x[f](p)
+=
+\int_{T_xM}
+e^{-i\langle p,v\rangle/\hbar}
+\chi_x(v)f(\exp_xv)\,d v_x.
+}
+\]
+Here \(p\in T_x^*M\), \(d v_x\) is the volume measure induced by the metric on
+\(T_xM\), and \(\chi_x(v)\) is a cutoff restricting the integral to a region
+where the exponential map is one-to-one.
+This expression has several desirable properties.
+It is coordinate independent: \(\langle p,v\rangle\) is a scalar, and both the
+exponential map and the measure are geometrically defined.
+It reduces locally to ordinary Fourier analysis when \(M=\mathbb R^n\).
+Most importantly, no subtraction of manifold points is required. We subtract,
+or Fourier-transform, tangent vectors instead.
+
+One must nevertheless distinguish two constructions. The Fourier transform of a
+function \(F(x,v)\) on the tangent bundle \(TM\), taken separately in each
+vector space \(T_xM\), is intrinsically defined once a fiber measure is chosen.
+The transformation above, which starts with a function \(f\) on \(M\),
+additionally uses a connection through \(\exp_x\).
+Thus the geometry supplies precisely the structure missing from the ordinary
+Fourier formula.
+
+\subsection{Geometric Wigner functions}
+This is where the tangent-space approach becomes especially useful.
+Recall the standard Wigner function on \(\mathbb R^n\):
+\[
+W_\psi(x,p)
+=
+\frac{1}{(2\pi\hbar)^n}
+\int_{\mathbb R^n}
+e^{-ip\cdot v/\hbar}
+\psi(x+v/2)\psi^*(x-v/2)\,d^nv.
+\]
+The problem is not the Fourier transformation itself. It is the appearance of
+\[
+x+\frac v2,\qquad x-\frac v2.
+\]
+These Euclidean operations assume an affine structure.
+
+The geometric replacement
+Let \(x\in M\), \(v\in T_xM\), and define
+\[
+x_+=\exp_x(v/2),\qquad
+x_-=\exp_x(-v/2).
+\]
+These points lie symmetrically along a geodesic passing through \(x\).
+
+For a scalar wavefunction, a locally defined geometric Wigner function is
+\[
+\boxed{
+W_\psi(x,p)=
+\frac{1}{(2\pi\hbar)^n}
+\int_{T_xM}
+e^{-i\langle p,v\rangle/\hbar}
+\psi(x_+)\psi^*(x_-)
+A(x,v)\chi_x(v)\,dv_x.
+}
+\]
+The ingredients are geometric:
+\[
+x\in M,\qquad
+v\in T_xM,\qquad
+p\in T_x^*M.
+\]
+The real, even factor \(A(x,v)\), normalized by \(A(x,0)=1\), allows for
+geometric density corrections. The cutoff \(\chi_x\), also even and equal to
+one at the origin, confines the construction to a normal neighborhood.
+
+For a normalized scalar wavefunction with \(A(x,0)=1\), integration over
+momentum gives the correct local position density:
+\[
+\int_{T_x^*M}W_\psi(x,p)\,dp_x
+=
+|\psi(x)|^2.
+\]
+This follows immediately because
+\[
+\frac{1}{(2\pi\hbar)^n}
+\int_{T_x^*M}
+e^{-i\langle p,v\rangle/\hbar}\,dp_x
+=
+\delta_x(v).
+\]
+Here the dual momentum measure is normalized consistently with the
+tangent-space measure.
+
+However, the position marginal alone does not determine the correct geometric
+Wigner transform. Additional requirements, such as invertibility,
+self-adjointness of Weyl quantization, and an appropriate Hilbert–Schmidt
+identity, distinguish different prescriptions for \(A\).
+
+A particularly useful treatment is the balanced geodesic Weyl calculus
+developed by Dereziński, Latosiński and Siemssen. Their construction uses
+half-densities and the Van Vleck–Morette determinant, rather than simply
+replacing Euclidean displacements with geodesic displacements. 
+
+\paragraph{Why curvature enters?}
+The Van Vleck–Morette determinant can be expressed through Synge's world function
+\[
+\sigma(x,y)=\frac12 d(x,y)^2
+\]
+in a sufficiently small geodesically convex neighborhood:
+\[
+\Delta(x,y)=
+\frac{
+\left|\det[-\nabla_\mu\nabla_{\nu'}\sigma(x,y)]\right|
+}{
+\sqrt{|g(x)|}\sqrt{|g(y)|}
+}.
+\]
+The primes distinguish differentiation at \(y\) from differentiation at \(x\).
+This quantity measures how geodesic separation and volume elements differ from
+their Euclidean counterparts. It equals one on the diagonal and in flat
+Euclidean space, but generally receives curvature corrections.
+In this way, curvature enters geometric Fourier analysis not by changing the
+elementary exponential \(e^{-i\langle p,v\rangle/\hbar}\), but through the
+relation between tangent-space displacements and actual manifold geometry.
+
+\subsection{Why this construction is not automatically global}
+There remains a fundamental difficulty.
+The exponential map need not be globally one-to-one. Two distinct tangent
+vectors may arrive at the same point, and two manifold points may be joined by
+multiple geodesics.
+
+Consider the sphere \(S^2\). Between antipodal points there are infinitely many
+minimizing geodesics. Which one should determine the midpoint and the
+displacement vector of a Wigner transform?
+There is no geometrically distinguished answer.
+A local construction works in geodesically convex neighborhoods. A global
+construction requires additional choices, restrictions, or a different
+formulation.
+
+There are special manifolds for which this difficulty disappears. For example,
+on a complete, simply connected Riemannian manifold of nonpositive sectional
+curvature, the Cartan–Hadamard theorem guarantees that every exponential map is
+a global diffeomorphism. Unique geodesics then make a global midpoint
+construction possible.
+Even there, the resulting transform is not necessarily equivalent to ordinary
+Euclidean Fourier analysis, since curvature remains present.
+A key distinction is therefore:
+Coordinate independence does not imply the existence of a unique global Fourier
+transform.
+
+\subsection{Spectral Fourier analysis: a different solution}
+Suppose \(M\) is a compact Riemannian manifold without boundary.
+The Laplace–Beltrami operator has an orthonormal eigenbasis:
+\[
+-\Delta_g\phi_k=\lambda_k\phi_k.
+\]
+We may define
+\[
+\widetilde f_k
+=
+\int_M f(x)\phi_k^*(x)\,d\mu_g(x)
+\]
+and reconstruct
+\[
+f(x)=\sum_k\widetilde f_k\phi_k(x),
+\]
+with convergence in \(L^2(M)\).
+This is a genuine global generalization of Fourier series.
+
+For a simple physical example, consider a particle constrained to move on a
+sphere of radius \(R\).
+The appropriate global basis consists of spherical harmonics:
+\[
+\phi_{\ell m}=Y_{\ell m}(\theta,\varphi),
+\]
+and
+\[
+-\Delta_{S^2}Y_{\ell m}
+=
+\frac{\ell(\ell+1)}{R^2}Y_{\ell m}.
+\]
+Consequently, the kinetic-energy eigenvalues are
+\[
+E_\ell=\frac{\hbar^2}{2mR^2}\ell(\ell+1).
+\]
+We have a perfectly good global Fourier-like representation without a global
+linear configuration space.
+But notice the difference: the labels \(\ell,m\) do not form an ordinary
+momentum vector, and the degeneracy label \(m\) requires a choice of
+angular-momentum axis.
+
+The spectral expansion gives a global decomposition into modes. It does not
+directly describe a local momentum covector at a given point.
+This distinction is central in phase-space quantum mechanics.
+
+For further discussion, Feichtinger, Führ and Pesenson's Geometric
+Space-Frequency Analysis on Manifolds develops the relationship between
+spectral frequencies and localization on Riemannian manifolds.
+
+\subsection{Group Fourier transforms}
+There is another possibility when \(M\) is itself a Lie group, or when it is a
+homogeneous space.
+For a compact Lie group \(G\), the Fourier transform is naturally formulated in
+terms of irreducible unitary representations \(\pi\):
+\[
+\widehat f(\pi)
+=
+\int_G f(g)\pi(g)^\dagger\,dg.
+\]
+Unlike the Abelian Fourier transform, \(\widehat f(\pi)\) is generally
+matrix-valued.
+The Peter–Weyl theorem supplies the corresponding completeness and inversion
+theory.
+
+The circle \(S^1\) is particularly instructive. Although it does not have the
+global linear structure of \(\mathbb R\), it is an Abelian Lie group, and
+ordinary Fourier series work globally:
+\[
+f(\theta)=\sum_{m\in\mathbb Z}f_m e^{im\theta},
+\]
+\[
+f_m=\frac{1}{2\pi}
+\int_0^{2\pi}f(\theta)e^{-im\theta}\,d\theta.
+\]
+The momentum spectrum is discrete:
+\[
+L_z=m\hbar.
+\]
+This shows that the absence of global linear structure is not, by itself, fatal
+to global Fourier analysis. An appropriate group structure may replace it.
+
+The Wigner function for a quantum rotor must accordingly be adapted to angular
+position and angular momentum. Its classical phase space is the cylinder
+\(T^*S^1\), not the Euclidean plane. 
+
+\subsection{The deeper point: phase space remains global}
+Perhaps the most important observation for classical and quantum mechanics is
+that the cotangent bundle
+\[
+T^*M
+\]
+exists globally, regardless of whether \(M\) has a global linear structure.
+It possesses a canonical one-form
+\[
+\vartheta=p_i\,dx^i
+\]
+and canonical symplectic form
+\[
+\omega=-d\vartheta=dx^i\wedge dp_i.
+\]
+Although these expressions use local coordinates, the underlying differential
+forms are globally defined.
+Thus the classical phase space is perfectly legitimate without a global
+identification
+\[
+T^*M\cong M\times\mathbb R^n.
+\]
+
+This suggests a particularly useful physical viewpoint.
+The momentum of a particle at \(x\) is not an element of some universal
+momentum vector space. It is a covector
+\[
+p\in T_x^*M.
+\]
+If a semiclassical wavefunction is locally written as
+\[
+\psi(x)=a(x)e^{iS(x)/\hbar},
+\]
+then its local momentum is precisely
+\[
+p=dS.
+\]
+The phase function \(S\) need not be globally single-valued, and a single
+smooth phase may break down at caustics. The cotangent bundle nevertheless
+remains well defined.
+
+This also explains an advantage of the Wigner approach: it starts from the
+two-point density kernel,
+\[
+\rho(x,y)=\psi(x)\psi^*(y),
+\]
+rather than presupposing a globally smooth phase \(S\).
+Multiple semiclassical branches and interference can therefore be described
+without requiring a single-valued Hamilton–Jacobi action everywhere.
+
+\subsection{An additional geometric ingredient: parallel transport}
+For scalar wavefunctions, the product \(\psi(x_+)\psi^*(x_-)\) makes sense
+mathematically. But difficulties appear if wavefunctions carry spin or gauge
+degrees of freedom.
+Suppose, for example, that
+\[
+\psi(x)\in E_x
+\]
+where \(E\to M\) is a vector bundle.
+Then \(\psi(x_+)\) and \(\psi(x_-)\) belong to different fibers. We cannot
+directly construct an endomorphism of a single fiber from them.
+
+The natural remedy is parallel transport.
+Let
+\[
+U(x,y):E_y\longrightarrow E_x
+\]
+denote parallel transport along the chosen geodesic.
+Define transported states
+\[
+\Psi_\pm(x,v)=U(x,x_\pm)\psi(x_\pm).
+\]
+Now both vectors belong to \(E_x\), and their outer product
+\[
+\Psi_+(x,v)\Psi_-(x,v)^\dagger
+\]
+is an operator on that common fiber.
+Fourier transformation of this object over \(T_xM\) gives a matrix-valued,
+bundle-covariant Wigner function.
+
+This construction unifies the geometry of the configuration manifold with that
+of the internal spin or gauge bundle.
+Such tangent-bundle constructions have been developed for quantum fields in
+curved spacetime with external Yang–Mills fields; see Fonarev, Wigner Function
+and Quantum Kinetic Theory in Curved Space-Time and External Fields, Journal of
+Mathematical Physics 35, 2105–2129 (1994). 
+
+\subsection{The most important distinction}
+We should not seek a single construction called the Fourier transform on a
+manifold.
+Instead, there are two different physical objectives.
+\paragraph{A global representation of wavefunctions}
+Spectral theory, harmonic analysis, and group representations give global mode
+decompositions. These are useful for solving wave equations, finding energy
+spectra, and constructing propagators.
+
+\paragraph{A local position–momentum description}
+Tangent-space Fourier transforms, geodesic Wigner functions, and
+pseudodifferential symbols give functions on \(T^*M\). These are useful for
+semiclassical dynamics, kinetic theory, and describing local momentum
+distributions.
+
+The second objective is particularly close to classical Hamiltonian mechanics.
+The central construction can be summarized as
+\[
+\boxed{
+\begin{gathered}
+\text{Two-point kernel on }M\times M\\
+\big\downarrow\quad \text{geodesic midpoint}\\
+\text{Function on }TM\\
+\big\downarrow\quad\text{fiberwise Fourier transform}\\
+\text{Function on }T^*M.
+\end{gathered}
+}
+\]
+This is the natural geometric replacement for the ordinary Wigner transformation.
+

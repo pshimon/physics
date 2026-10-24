@@ -1,0 +1,1745 @@
+% =====================================================================
+% Chapter: Mass as a Momentum in a Hidden Dimension
+%          Galilean Spacetime as a Null Reduction
+%
+% Requires: amsmath, amssymb, amsthm, booktabs
+% All theorem-like environments and labels carry the prefix "nr"
+% (null reduction) so they do not collide with the rest of the book.
+% =====================================================================
+
+\theoremstyle{plain}
+\newtheorem{nrprop}{Proposition}[chapter]
+\theoremstyle{definition}
+\newtheorem{nrdef}[nrprop]{Definition}
+\theoremstyle{remark}
+\newtheorem{nrrem}[nrprop]{Remark}
+\theoremstyle{plain}
+
+\chapter[Mass as a Momentum in a Hidden Dimension]{Mass as a Momentum in a Hidden Dimension:\\ Galilean Spacetime as a Null Reduction}
+\label{ch:nr}
+
+%---------------------------------------------------------------------
+\section{Introduction}
+%---------------------------------------------------------------------
+
+Mass is the most familiar and, in a sense, the least explained quantity of
+mechanics. In Newtonian practice it is a positive number attached to a body.
+Once one asks what role it plays in the \emph{symmetry} structure of the
+theory, two very different answers appear, depending on which kinematics one
+uses.
+
+In Galilean mechanics, mass is a \emph{central charge}: it appears on the
+right-hand side of the Poisson bracket of the boost charge with the momentum,
+$\{K_i,P_j\}=m\,\delta_{ij}$, and it cannot be removed by any redefinition of
+the generators. In relativistic mechanics there is no such term. The
+Poincar\'e algebra has no non-trivial central extension, and mass is instead
+the value of a \emph{Casimir invariant}, the squared length of the
+four-momentum. The two statements look unrelated, and the textbook way of
+connecting them (the limit $c\to\infty$) is a limit of algebras, which hides
+what is going on geometrically.
+
+This chapter shows that both statements are two faces of one construction.
+Galilean spacetime is the space of orbits of a \emph{null} translation in a
+Minkowski space with one more spatial dimension, and mass is the momentum
+conjugate to the null coordinate. Nothing is approximated, no parameter is sent
+to infinity, and the central extension of the Galilei algebra becomes an
+ordinary translation generator of a larger, perfectly honest, geometry.
+
+\paragraph{What will be established.}
+\begin{enumerate}
+\item In Galilean mechanics the mass enters the Poisson algebra of conserved
+      charges as a non-trivial central term. It cannot be removed, and it is
+      the algebraic trace of the fact that the Lagrangian is only
+      \emph{quasi}-invariant under boosts (Section~\ref{sec:nr-galilei}).
+\item Galilean spacetime is the quotient of $\mathbb{R}^{d+1,1}$ by the flow of
+      a null parallel vector field $\xi$; the quotient inherits exactly the
+      Galilean structure, absolute time plus Euclidean slices, and nothing more
+      (Section~\ref{sec:nr-geometry}).
+\item Free Newtonian motion is the projection of null geodesics. Mass is the
+      conserved momentum $p_s$ along $\xi$, and the Newtonian action equals
+      $-m$ times the displacement of the null coordinate
+      (Section~\ref{sec:nr-dynamics}).
+\item The Bargmann group, the central extension of the Galilei group, is the
+      stabiliser of $\xi$ in the Poincar\'e group of the ambient space. The
+      cocycle is realised as a shift of the extra coordinate
+      (Section~\ref{sec:nr-symmetry}).
+\item Newtonian gravity, and the universality of free fall, follow from adding
+      one term to the ambient metric (Section~\ref{sec:nr-gravity}).
+\item The same mathematics is already present in relativistic light-front
+      dynamics, where the Casimir of the Bargmann group is the Poincar\'e mass
+      squared (Section~\ref{sec:nr-lightfront}), and it differs in kind from
+      the $c\to\infty$ contraction (Section~\ref{sec:nr-limit}).
+\item It is used in practice to couple Galilean systems to background fields,
+      in the quantum Hall effect, and in non-relativistic holography, where
+      the Schr\"odinger spacetime is a null-reduction geometry
+      (Section~\ref{sec:nr-applications}).
+\end{enumerate}
+
+\paragraph{Conventions.}
+Latin indices $i,j,\dots=1,\dots,d$ label space ($d=3$ in the physical case;
+we keep $d$ general because the counting is instructive). Greek indices
+label the $d+2$ coordinates $(x^i,t,s)$ of the ambient space. Poisson brackets
+are $\{A,B\}=\partial_{q}A\,\partial_{p}B-\partial_{p}A\,\partial_{q}B$.
+The reduced Planck constant appears only in Section~\ref{sec:nr-quantum}, where
+$\hbar=1$. The ambient geometry contains no speed of light; the only place
+where $c$ appears is Section~\ref{sec:nr-limit}.
+
+%---------------------------------------------------------------------
+\section{Mass as a central charge in Galilean mechanics}
+\label{sec:nr-galilei}
+%---------------------------------------------------------------------
+
+\subsection{Boosts and the quasi-invariance of the Lagrangian}
+
+Take a free particle, $L=\tfrac12 m\dot{\mathbf{x}}^2$. Under a Galilean boost
+with constant velocity $\mathbf{u}$,
+$\mathbf{x}\mapsto\mathbf{x}'=\mathbf{x}+\mathbf{u}t$, $t'=t$, the velocity
+shifts by $\mathbf{u}$ and
+\begin{equation}
+  L(\dot{\mathbf{x}}')
+  = \tfrac12 m(\dot{\mathbf{x}}+\mathbf{u})^2
+  = L + m\,\mathbf{u}\cdot\dot{\mathbf{x}} + \tfrac12 m u^2
+  = L + \frac{\mathrm{d}}{\mathrm{d}t}\Bigl(m\,\mathbf{u}\cdot\mathbf{x}
+      + \tfrac12 m u^2 t\Bigr).
+  \label{nr:quasi}
+\end{equation}
+The Lagrangian is not invariant, but it changes by a total time derivative
+$\mathrm{d}F_{\mathbf u}/\mathrm{d}t$, so the action changes only by boundary
+terms and the equations of motion are invariant. This is called
+\emph{quasi-invariance}. The function
+$F_{\mathbf u}=m\,\mathbf{u}\cdot\mathbf{x}+\tfrac12 m u^2 t$
+is proportional to $m$, and we will see that it carries the whole of the
+central extension.
+
+Noether's theorem extends to quasi-symmetries. If under
+$\delta\mathbf{x}=\boldsymbol{\varepsilon}\,t$ one has
+$\delta L=\mathrm{d}F/\mathrm{d}t$ with $F=m\,\boldsymbol{\varepsilon}\cdot\mathbf{x}$
+(the part of \eqref{nr:quasi} linear in $\mathbf u$), the conserved quantity is
+$Q=\mathbf{p}\cdot\delta\mathbf{x}-F=\boldsymbol{\varepsilon}\cdot(t\,\mathbf{p}-m\mathbf{x})$.
+Up to sign, the conserved boost charge is
+\begin{equation}
+  \mathbf{K}=m\,\mathbf{x}-t\,\mathbf{p},\qquad
+  \frac{\mathrm{d}\mathbf{K}}{\mathrm{d}t}
+  =\frac{\partial\mathbf{K}}{\partial t}+\{\mathbf{K},H\}
+  =-\mathbf{p}+\mathbf{p}=0 .
+  \label{nr:Kcons}
+\end{equation}
+Its conservation is the statement $\mathbf{x}(t)=\mathbf{x}_0+(\mathbf{p}/m)t$:
+the free motion with $\mathbf{p}=m\mathbf{v}$. Note where the mass came from.
+The term $-t\mathbf{p}$ comes from the transformation of the coordinates, but
+the term $m\mathbf{x}$ comes \emph{entirely} from the total derivative $F$. The
+mass sits in the boost charge only through the amount by which the Lagrangian
+fails to be invariant.
+
+\subsection{The Poisson algebra of conserved charges}
+
+The ten Noether charges of a free particle in $d=3$ (in general
+$\tfrac12 d(d-1)+2d+1$ of them) are
+\begin{equation}
+  P_i=p_i,\quad H=\frac{\mathbf{p}^2}{2m},\quad
+  J_{ij}=x_ip_j-x_jp_i,\quad K_i=m\,x_i-t\,p_i ,
+  \label{nr:charges}
+\end{equation}
+and, trivially, the mass $M=m$ as a number that commutes with everything. With
+$\{x_i,p_j\}=\delta_{ij}$ one finds directly
+\begin{align}
+  \{K_i,P_j\} &= \{m x_i,p_j\} = m\,\delta_{ij}, \label{nr:KP}\\
+  \{K_i,H\}   &= \Bigl\{m x_i,\frac{\mathbf{p}^2}{2m}\Bigr\} = p_i = P_i, \label{nr:KH}\\
+  \{K_i,K_j\} &= 0, \qquad \{P_i,H\}=0,\qquad \{M,\cdot\,\}=0, \label{nr:KK}
+\end{align}
+while the rotations $J_{ij}$ act on the indices of $P_i$ and $K_i$ as on
+vectors. Equations \eqref{nr:KP}--\eqref{nr:KK} are the \emph{Bargmann}
+algebra. If one removes $M$ and sets $\{K_i,P_j\}=0$ one obtains the Galilei
+Lie algebra, whose abstract bracket is
+\begin{equation}
+  [K_i,P_j]=0,\qquad [K_i,H]=P_i ,
+  \label{nr:galilei}
+\end{equation}
+with the same rotation relations. The map $X\mapsto Q_X$ from the Galilei
+algebra to the charges \eqref{nr:charges} is therefore \emph{not} a Lie algebra
+homomorphism: $Q_{[K_i,P_j]}=Q_0=0$, but $\{Q_{K_i},Q_{P_j}\}=m\delta_{ij}\neq0$.
+
+\subsection{The term cannot be removed}
+
+The defect of the homomorphism property has a precise name. For any
+action of a Lie algebra $\mathfrak{g}$ on a phase space with charges $Q_X$,
+\begin{equation}
+  \Theta(X,Y)\;:=\;\{Q_X,Q_Y\}-Q_{[X,Y]}
+  \label{nr:theta}
+\end{equation}
+is a constant (it Poisson-commutes with everything) whenever the
+$\mathfrak{g}$-action is Hamiltonian, and it is a \emph{2-cocycle}: it is
+antisymmetric and satisfies the Jacobi-compatibility condition
+$\Theta([X,Y],Z)+\text{cyclic}=0$. This is Souriau's formulation: the moment
+map of the action is not equivariant, and the failure of equivariance is the
+cocycle $\Theta$. For the free particle the only non-zero component is
+$\Theta(K_i,P_j)=m\,\delta_{ij}$.
+
+One may try to absorb a cocycle by adding constants to the charges,
+$Q_X\mapsto Q_X+\lambda(X)$ with $\lambda$ a linear functional. This changes
+$\Theta$ by $\lambda([X,Y])$, a \emph{coboundary}.
+
+\begin{nrprop}\label{nr:prop-nontrivial}
+The cocycle $\Theta(K_i,P_j)=m\,\delta_{ij}$ of the Galilei algebra is not a
+coboundary for $m\neq0$.
+\end{nrprop}
+\begin{proof}
+A coboundary has the form $\Theta(X,Y)=\lambda([X,Y])$. By \eqref{nr:galilei},
+$[K_i,P_j]=0$, so every coboundary vanishes on $(K_i,P_j)$, whereas
+$\Theta(K_i,P_j)=m\delta_{ij}\neq0$.
+\end{proof}
+
+So no shift of the charges can remove the mass from the algebra. In the
+language of cohomology, the second cohomology group of the Galilei algebra for
+$d=3$ is one-dimensional, and mass is its generator (Bargmann 1954,
+L\'evy-Leblond 1963).
+
+\begin{nrrem}[Why the relativistic case is different]
+In the Poincar\'e algebra the corresponding bracket is not zero:
+$[K_i,P_j]=\delta_{ij}H/c^2$ (up to a convention-dependent sign). A candidate
+central term $\kappa\,\delta_{ij}$ in this bracket is then a coboundary: it is
+absorbed by the constant shift $H\mapsto H+c^2\kappa$. In fact all
+second cohomology of the $3{+}1$ Poincar\'e algebra vanishes, so there is no
+central extension at all. The mass cannot appear as a central charge in
+relativity; it appears as the value of a Casimir function (Section~\ref{sec:nr-lightfront}).
+This is a precise form of the fact that in relativity there is no separately
+conserved, additive ``mass'' to be split off from the energy: the generator $H$
+of time translations already contains the rest energy, and the algebra leaves no
+room for a second, independent central generator.
+\end{nrrem}
+
+\begin{nrrem}[A second extension in $d=2$]
+For $d=2$ spatial dimensions the Galilei algebra admits a second, ``exotic''
+central extension, in which the boosts do not commute,
+$\{K_1,K_2\}=\theta$ (L\'evy-Leblond; see also Duval and Horv\'athy). It plays no
+role below.
+\end{nrrem}
+
+\subsection{Composite systems: additivity and internal energy}
+
+For $N$ particles with masses $m_a$ the same computation gives
+\begin{equation}
+  \mathbf{K}=\sum_a m_a\mathbf{x}_a-t\,\mathbf{P},\qquad
+  \{K_i,P_j\}=M\,\delta_{ij},\quad M=\sum_a m_a .
+  \label{nr:Mtotal}
+\end{equation}
+The central charge of a composite system is the \emph{sum} of the central
+charges of its constituents, and it does not depend on how they interact: for
+any interaction potential depending only on relative positions, $M$ remains the
+sum of the bare masses. Writing the centre of mass as
+$\mathbf{X}=\sum_a m_a\mathbf{x}_a/M$, one has $\mathbf{K}=M(\mathbf{X}-t\mathbf{V})$
+with $\mathbf{V}=\mathbf{P}/M$, and the energy splits as
+\begin{equation}
+  H=\frac{\mathbf{P}^2}{2M}+H_{\rm int},
+  \label{nr:Hint}
+\end{equation}
+where $H_{\rm int}$ depends only on relative variables. One checks that
+$\{X_i,H_{\rm int}\}=0$ and $\{P_i,H_{\rm int}\}=0$, hence $H_{\rm int}$
+commutes with all of $\mathbf{K}$ and $\mathbf{P}$.
+
+The Bargmann algebra has the following independent Casimir functions for $d=3$:
+\begin{equation}
+  M,\qquad
+  C=2MH-\mathbf{P}^2=2M\,H_{\rm int},\qquad
+  \mathbf{S}^2,\quad \mathbf{S}=\mathbf{J}-\frac1M\,\mathbf{K}\times\mathbf{P},
+  \label{nr:Casimirs}
+\end{equation}
+where $J_k=\tfrac12\epsilon_{kij}J_{ij}$. For instance, from \eqref{nr:KP} and
+\eqref{nr:KH},
+\[
+  \{K_i,2MH-\mathbf{P}^2\}=2M P_i-2P_j\,M\delta_{ij}=0 .
+\]
+Similarly $\{K_i,S_j\}=\epsilon_{ijk}K_k-\epsilon_{ijk}K_k=0$ and
+$\{P_i,S_j\}=0$, so $\mathbf{S}$ (the internal angular momentum) commutes with
+boosts and translations and $\mathbf{S}^2$ is a Casimir. In Souriau's
+classification, the elementary Galilean systems (the coadjoint orbits of the
+Bargmann group) are labelled by three numbers: the mass $M$, the internal
+energy $U=H_{\rm int}$, and the spin $|\mathbf{S}|$.
+
+\subsection{The quantum shadow: Bargmann's superselection rule}
+
+The central term has a classical meaning and a quantum consequence. Let
+$T_{\mathbf a}$ be a spatial translation and $B_{\mathbf v}$ a boost. As
+transformations of Galilean spacetime they commute, since
+$\mathbf{x}\mapsto\mathbf{x}+\mathbf{a}+\mathbf{v}t$ is the same in either
+order. In a quantum theory in which \eqref{nr:KP} is realised, the
+corresponding unitary operators satisfy
+$B_{\mathbf v}T_{\mathbf a}B_{\mathbf v}^{-1}T_{\mathbf a}^{-1}=e^{\pm i m\,\mathbf{v}\cdot\mathbf{a}}$
+(with $\hbar=1$): a pure phase, allowed because states are rays. This phase
+depends on $m$. If a state were a superposition of components with different
+masses $m_1\ne m_2$, the group commutator, which acts as the identity on
+spacetime, would multiply the two components by different phases and so map
+the state to a different ray. Hence superpositions of states with different
+masses cannot be physical states: mass is a superselection label. We will see
+in Section~\ref{sec:nr-quantum} where this phase comes from geometrically.
+
+%---------------------------------------------------------------------
+\section{The geometry of the null reduction}
+\label{sec:nr-geometry}
+%---------------------------------------------------------------------
+
+\subsection{The ambient space}
+
+Let $\tilde M=\mathbb{R}^{d+2}$ carry coordinates $(x^1,\dots,x^d,t,s)$ and the
+flat metric
+\begin{equation}
+  g=\delta_{ij}\,\mathrm{d}x^i\mathrm{d}x^j+2\,\mathrm{d}t\,\mathrm{d}s .
+  \label{nr:metric}
+\end{equation}
+This is Minkowski space $\mathbb{R}^{d+1,1}$ (signature $d+1$ plus signs and
+one minus sign; $d=3$ gives five dimensions) written in null coordinates for a
+plane. Explicitly, with ordinary Minkowski coordinates $X^0$ and $X^{d+1}$,
+\begin{equation}
+  t=\frac{X^{d+1}+X^0}{\sqrt2},\qquad s=\frac{X^{d+1}-X^0}{\sqrt2},\qquad
+  -(\mathrm{d}X^0)^2+(\mathrm{d}X^{d+1})^2=2\,\mathrm{d}t\,\mathrm{d}s .
+  \label{nr:nullcoords}
+\end{equation}
+The inverse metric has $g^{ij}=\delta^{ij}$, $g^{ts}=g^{st}=1$ and all other
+components zero. Dimensionally, $t$ is a time and $s$ has the dimensions
+of $(\text{length})^2/\text{time}$, so that $\mathrm{d}t\,\mathrm{d}s$ is a
+length squared. No speed of light has entered.
+
+\subsection{A null Killing vector and the quotient}
+
+Consider the vector field
+\begin{equation}
+  \xi=\frac{\partial}{\partial s}.
+  \label{nr:xi}
+\end{equation}
+Its properties are the following.
+\begin{itemize}
+\item It is \emph{null}: $g(\xi,\xi)=g_{ss}=0$.
+\item It is a \emph{Killing} vector: the components of $g$ do not depend on $s$,
+      so $\mathcal{L}_\xi g=0$.
+\item It is \emph{parallel}: all Christoffel symbols vanish in these
+      coordinates, so $\nabla\xi=0$.
+\item Its dual one-form is $\xi^\flat=g(\xi,\cdot)=\mathrm{d}t$.
+\end{itemize}
+The flow of $\xi$ moves a point along the $s$-direction at fixed $(\mathbf{x},t)$.
+The orbit space is
+\begin{equation}
+  M=\tilde M/\mathbb{R}\;\cong\;\mathbb{R}^{d+1}\ni(\mathbf{x},t),\qquad
+  \pi:\tilde M\to M,\quad \pi(\mathbf{x},t,s)=(\mathbf{x},t).
+  \label{nr:quotient}
+\end{equation}
+We call $M$ the \emph{base}, or Galilean spacetime, and $\pi$ the null
+reduction. The question is which parts of the ambient geometry survive the
+quotient.
+
+\subsection{The induced Galilean structure}
+
+\begin{nrprop}\label{nr:prop-induced}
+The following structures on $\tilde M$ descend to $M$:
+\begin{enumerate}
+\item the \emph{clock form} $\tau=\xi^\flat=\mathrm{d}t$;
+\item a positive-definite metric $h$ on the vectors annihilated by $\tau$,
+      namely $h=\delta_{ij}\mathrm{d}x^i\mathrm{d}x^j$ on each slice $t=\text{const}$.
+\end{enumerate}
+The spacetime metric $g$ itself does not descend.
+\end{nrprop}
+\begin{proof}
+(1) $\tau(\xi)=g(\xi,\xi)=0$ and $\mathcal{L}_\xi\tau=0$, so $\tau$ is a basic
+form, i.e.\ the pull-back of a form on $M$.
+(2) Let $V,W$ be tangent vectors on $M$ with $\tau(V)=\tau(W)=0$, and let
+$\tilde V,\tilde W$ be lifts to $\tilde M$. The lifts are determined only up to
+adding multiples of $\xi$. Then
+\[
+  g(\tilde V+a\xi,\tilde W+b\xi)
+  =g(\tilde V,\tilde W)+a\,\tau(W)+b\,\tau(V)+ab\,g(\xi,\xi)
+  =g(\tilde V,\tilde W),
+\]
+so $h(V,W):=g(\tilde V,\tilde W)$ is well defined. For a general vector, say
+$V=\partial_t$, the term $a\,\tau(W)$ does not vanish and $g(\tilde V,\tilde W)$
+depends on the choice of lift, so $g$ does not descend.
+\end{proof}
+
+Equivalently, in terms of covectors: the inverse metric restricted to covectors
+annihilating $\xi$ (those with $p_s=0$) is $g^{-1}(p,p)=\mathbf{p}^2$, a
+degenerate ``cometric'' $h^{\mu\nu}=\delta^{ij}$ on $M$ of rank $d$ whose kernel
+is spanned by $\tau$.
+
+The pair $(\tau,h)$ is precisely Galilean (Newton--Cartan) structure on flat
+spacetime: there is an absolute time function $t$, the notion of
+simultaneity is given by $\tau=0$, and each instantaneous space carries a
+Euclidean geometry. There is no spacetime interval and no light cone. The
+degeneracy of $h$ ($\partial_t$ is in its kernel) is the geometric statement
+that no spatial distance is defined between events at different times.
+
+\subsection{Why the vector must be null}
+
+If instead $\xi$ were spacelike or timelike, $g(\xi,\xi)\neq0$, the tensor
+\begin{equation}
+  \hat g=g-\frac{\xi^\flat\otimes\xi^\flat}{g(\xi,\xi)}
+  \label{nr:KKtensor}
+\end{equation}
+would be basic and non-degenerate, and the reduction would be the familiar
+Kaluza--Klein one: a Lorentzian (or Riemannian) metric on the quotient plus a
+gauge field $\xi^\flat/g(\xi,\xi)$ (the connection form of the fibration). For a
+null $\xi$ the denominator in \eqref{nr:KKtensor} vanishes and the construction
+fails. What replaces the non-degenerate metric is the pair $(\tau,h)$ of
+Proposition~\ref{nr:prop-induced}: the one-form $\xi^\flat$, which in
+Kaluza--Klein theory is merely the gauge potential, becomes an independent
+geometric datum (the clock), and the metric becomes degenerate. Nullness of
+$\xi$ is what turns ``spacetime with a metric'' into ``absolute time with
+Euclidean slices''.
+
+\begin{nrdef}[Bargmann structure]
+A \emph{Bargmann structure} is a triple $(\tilde M,g,\xi)$ with $g$ a Lorentzian
+metric and $\xi$ a nowhere-vanishing null vector field with $\nabla\xi=0$
+(Duval, Burdet, K\"unzle and Perrin 1985). Its quotient by the flow of $\xi$ is
+a Newton--Cartan spacetime. What has been described above is the flat case.
+\end{nrdef}
+
+%---------------------------------------------------------------------
+\section[Null geodesics and the origin of mass]{Dynamics: null geodesics and the origin of mass}
+\label{sec:nr-dynamics}
+%---------------------------------------------------------------------
+
+\subsection{The Hamiltonian of null geodesics}
+
+The phase space of a geodesic in $\tilde M$ is the cotangent bundle
+$T^*\tilde M$, with canonical coordinates $(\mathbf{x},t,s)$ and conjugate
+momenta $(\mathbf{p},p_t,p_s)$. Geodesics are the flows of the Hamiltonian
+$\tilde{\mathcal{H}}=\tfrac12 g^{\mu\nu}p_\mu p_\nu$, and null geodesics lie
+on the constraint surface $\tilde{\mathcal{H}}=0$. From \eqref{nr:metric},
+\begin{equation}
+  \tilde{\mathcal{H}}=\tfrac12\,\mathbf{p}^2+p_t\,p_s .
+  \label{nr:Htilde}
+\end{equation}
+With an affine parameter $\lambda$, Hamilton's equations are
+\begin{equation}
+  \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}\lambda}=\mathbf{p},\quad
+  \frac{\mathrm{d}t}{\mathrm{d}\lambda}=p_s,\quad
+  \frac{\mathrm{d}s}{\mathrm{d}\lambda}=p_t,\quad
+  \frac{\mathrm{d}\mathbf{p}}{\mathrm{d}\lambda}=0,\quad
+  \frac{\mathrm{d}p_t}{\mathrm{d}\lambda}=0,\quad
+  \frac{\mathrm{d}p_s}{\mathrm{d}\lambda}=0 .
+  \label{nr:hamiltonEq}
+\end{equation}
+The last equation is Noether's theorem for the Killing vector $\xi$: the
+coordinate $s$ is cyclic, so its conjugate momentum $p_s$ is conserved. This
+conserved quantity is the mass,
+\begin{equation}
+  m\;:=\;p_s .
+  \label{nr:mass}
+\end{equation}
+
+\subsection{Recovering Newtonian motion}
+
+Since $\mathrm{d}t/\mathrm{d}\lambda=m\neq0$, the coordinate $t$ is a good
+parameter along the curve (take $m>0$ for future-directed motion). Define the
+Galilean energy by $p_t=-E$. Then:
+\begin{itemize}
+\item The constraint $\tilde{\mathcal{H}}=0$ gives
+      \begin{equation}
+        E=\frac{\mathbf{p}^2}{2m},
+        \label{nr:dispersion}
+      \end{equation}
+      the Newtonian free-particle dispersion relation.
+\item $\mathrm{d}\mathbf{x}/\mathrm{d}t=\mathbf{p}/m$ and $\mathbf{p}=\text{const}$:
+      uniform motion with $\mathbf{p}=m\mathbf{v}$.
+\item The hidden coordinate evolves as
+      \begin{equation}
+        \frac{\mathrm{d}s}{\mathrm{d}t}=\frac{p_t}{p_s}=-\frac{E}{m}=-\tfrac12\mathbf{v}^2 .
+        \label{nr:sdot}
+      \end{equation}
+\end{itemize}
+Thus the projection $\pi$ of every null geodesic with $p_s=m\neq0$ is a
+Newtonian free trajectory. The mass is not a parameter put into the geometry
+by hand: all particles move in the same geometry \eqref{nr:metric}, and
+different masses correspond to different values of a conserved momentum, much
+as different charges in Kaluza--Klein theory correspond to different momenta
+along the circle. A null geodesic with $p_s=0$ has $\mathrm{d}t/\mathrm{d}\lambda=0$
+and, by the constraint, $\mathbf{p}=0$: it just slides along $\xi$ and does not
+describe a Galilean particle.
+
+There is one more reading of $m$. From \eqref{nr:hamiltonEq},
+$m=\mathrm{d}t/\mathrm{d}\lambda$: the mass is the rate at which the absolute
+time elapses per unit of the affine parameter of the null geodesic.
+
+\subsection{The Newtonian action is $-m\,\Delta s$}
+
+Integrating \eqref{nr:sdot} along a trajectory from $(\mathbf{x}_1,t_1)$ to
+$(\mathbf{x}_2,t_2)$,
+\begin{equation}
+  \Delta s=-\int_{t_1}^{t_2}\tfrac12\mathbf{v}^2\,\mathrm{d}t
+  =-\frac1m\int_{t_1}^{t_2}\tfrac12 m\mathbf{v}^2\,\mathrm{d}t
+  =-\frac{S}{m},
+  \qquad\text{i.e.}\qquad S=-m\,\Delta s .
+  \label{nr:action}
+\end{equation}
+The hidden coordinate is minus the Newtonian action per unit mass, accumulated
+along the motion. This one equation explains the quasi-invariance \eqref{nr:quasi}
+geometrically. The ambient isometries (Section~\ref{sec:nr-symmetry}) act on the
+\emph{whole} point $(\mathbf{x},t,s)$ and preserve the null curve, so they
+preserve $\Delta s$ between two points of $\tilde M$. But the action of a boost
+on the coordinate $s$ shifts it by a function $f(\mathbf{x},t)$ of the base
+point, so when the two end points are expressed in terms of the base coordinates
+alone, the Newtonian action $-m\Delta s$ changes by $-m[f(2)-f(1)]$: a boundary
+term. This is the total derivative $\mathrm{d}F_{\mathbf u}/\mathrm{d}t$ of
+\eqref{nr:quasi}, recovered as a coordinate effect in the fibre.
+
+\subsection{Counting: the reduced phase space}
+
+The phase space $T^*\tilde M$ has dimension $2(d+2)=2d+4$. The null-reduction
+imposes two constraints that Poisson-commute with each other:
+$p_s=m$ (generating translations of $s$) and $\tilde{\mathcal{H}}=0$
+(generating reparametrisations along the geodesic). Both are first class, so
+each removes two dimensions: one by the constraint itself, one by quotienting
+along its flow. The reduced space has dimension $2d+4-4=2d$. Its points are
+complete null geodesics modulo shifts of $s$, i.e.\ Newtonian motions, labelled
+by $(\mathbf{x},\mathbf{p})$ at a fixed time. This is the usual phase space of a
+Newtonian particle, obtained here as the \emph{space of motions} in the sense of
+Souriau.
+
+%---------------------------------------------------------------------
+\section[The Bargmann group in the Poincar\'e group]{The Bargmann group inside the Poincar\'e group}
+\label{sec:nr-symmetry}
+%---------------------------------------------------------------------
+
+\subsection{Killing vectors that commute with $\xi$}
+
+The Killing vectors of the flat metric \eqref{nr:metric} are the generators
+of the ambient Poincar\'e group $ISO(d+1,1)$,
+\begin{equation}
+  Y=a^\mu\partial_\mu+\omega^\mu{}_\nu\,x^\nu\partial_\mu,\qquad
+  \omega_{\mu\nu}=g_{\mu\alpha}\omega^\alpha{}_\nu=-\omega_{\nu\mu},
+  \label{nr:killing}
+\end{equation}
+with $x^\mu=(x^i,t,s)$ and $d+2+\tfrac12(d+2)(d+1)$ parameters. We ask for those
+that preserve the null direction, $[\xi,Y]=0$. Since $\xi=\partial_s$ this means
+that the components of $Y$ do not depend on $s$, i.e.\ $\omega^\mu{}_s=0$ for all
+$\mu$, which in terms of the lowered components says
+\begin{equation}
+  \omega_{\mu s}=0\quad\text{for all }\mu
+  \quad(\text{hence also }\omega_{s\mu}=0).
+  \label{nr:omegacond}
+\end{equation}
+The surviving antisymmetric components are $\omega_{ij}$ (rotations, $\tfrac12 d(d-1)$
+of them), $\omega_{it}=-\omega_{ti}$ ($d$ of them), and $\omega_{tt}=0$ by
+antisymmetry. Raising an index with $g^{ts}=1$ gives $\omega^s{}_\nu=\omega_{t\nu}$
+and $\omega^t{}_\nu=\omega_{s\nu}=0$: time is not rotated into anything, as
+appropriate for absolute time. Writing $v_i=\omega_{it}$, the surviving vector
+fields are
+\begin{equation}
+  P_i=\partial_i,\quad H=\partial_t,\quad M=\partial_s,\quad
+  J_{ij}=x_i\partial_j-x_j\partial_i,\quad
+  B_i=t\,\partial_i-x_i\,\partial_s .
+  \label{nr:vf}
+\end{equation}
+Their number is
+\begin{equation}
+  \underbrace{d}_{P_i}+\underbrace{1}_{H}+\underbrace{1}_{M}
+  +\underbrace{\tfrac12 d(d-1)}_{J_{ij}}+\underbrace{d}_{B_i}
+  =\tfrac12 d(d-1)+2d+2 ,
+  \label{nr:dim}
+\end{equation}
+which is $11$ for $d=3$. As a cross-check, the orbit of a null vector under the
+Poincar\'e group of $\tilde M$ is the $(d+1)$-dimensional null cone, so the
+stabiliser of $\xi$ has dimension
+$\dim ISO(d+1,1)-(d+1)=\tfrac12(d+2)(d+3)-(d+1)$, which equals \eqref{nr:dim}:
+for $d=3$, $15-4=11$.
+
+\subsection{The algebra}
+
+The non-vanishing commutators of the vector fields \eqref{nr:vf} are
+\begin{equation}
+  [B_i,P_j]=\delta_{ij}\,M,\qquad [B_i,H]=-P_i,\qquad
+  [B_i,B_j]=0,\qquad [M,\,\cdot\,]=0,
+  \label{nr:vfalgebra}
+\end{equation}
+together with the standard rotation relations. For example,
+\[
+  [B_i,P_j]=[t\partial_i-x_i\partial_s,\partial_j]=\delta_{ij}\,\partial_s .
+\]
+This is the Bargmann algebra \eqref{nr:KP}--\eqref{nr:KK}, but now every
+generator is a genuine vector field on $\tilde M$ and the bracket is the
+ordinary Lie bracket. The central element $M=\partial_s$ is central
+\emph{by construction}: we imposed $[\xi,Y]=0$. In the language of the
+introduction, the group of symmetries of the ambient space that preserve the
+null vector is a central extension
+\begin{equation}
+  1\;\longrightarrow\;\mathbb{R}\xrightarrow{\;\;s\text{-shifts}\;\;}
+  \text{Bargmann}\;\longrightarrow\;\text{Galilei}\;\longrightarrow\;1 ,
+  \label{nr:exact}
+\end{equation}
+because the quotient by the $s$-shifts acts on $M$ as the Galilei group.
+
+The conserved charges of null geodesics are $Q_Y=p_\mu Y^\mu$, and a short
+calculation gives $\{Q_Y,Q_Z\}=-Q_{[Y,Z]}$. The sign is absorbed by defining
+\begin{align*}
+  P_i&=p_i=Q_{\partial_i}, & H&=-p_t=-Q_{\partial_t},\\
+  M&=p_s=Q_{\partial_s}, & K_i&=x_ip_s-t\,p_i=-Q_{B_i},
+\end{align*}
+for which one finds directly the brackets \eqref{nr:KP}--\eqref{nr:KK} with
+$m$ replaced by $M=p_s$, for instance
+\[
+  \{K_i,P_j\}=\{x_ip_s,p_j\}=p_s\,\delta_{ij}=M\,\delta_{ij}.
+\]
+On the surface $p_s=m$ these are exactly the Galilean charges of
+Section~\ref{sec:nr-galilei}: $K_i=m\,x_i-t\,p_i$. The cocycle of
+Section~\ref{sec:nr-galilei}, a constant $m\,\delta_{ij}$ that appeared as an
+unexplained obstruction, is now the Poisson bracket of the two functions
+$x_ip_s$ and $p_j$. It is an ordinary bracket in a bigger phase space.
+
+\subsection{Finite transformations and the group commutator}
+
+Exponentiating \eqref{nr:vf}, the Bargmann group acts on $\tilde M$ by
+\begin{equation}
+  \begin{aligned}
+    \mathbf{x}&\mapsto R\,\mathbf{x}+\mathbf{v}\,t+\mathbf{a},\\
+    t&\mapsto t+b,\\
+    s&\mapsto s-\mathbf{v}\cdot R\,\mathbf{x}-\tfrac12 v^2\,t+c,
+  \end{aligned}
+  \label{nr:finite}
+\end{equation}
+with $R\in SO(d)$. That this preserves \eqref{nr:metric} follows from
+$\mathrm{d}\mathbf{x}'=R\,\mathrm{d}\mathbf{x}+\mathbf{v}\,\mathrm{d}t$ and
+$\mathrm{d}s'=\mathrm{d}s-\mathbf{v}\cdot R\,\mathrm{d}\mathbf{x}-\tfrac12 v^2\mathrm{d}t$:
+\begin{align*}
+  \mathrm{d}\mathbf{x}'^2+2\,\mathrm{d}t\,\mathrm{d}s'
+  &=\bigl(\mathrm{d}\mathbf{x}^2+2\,\mathbf{v}\cdot R\,\mathrm{d}\mathbf{x}\,\mathrm{d}t+v^2\mathrm{d}t^2\bigr)\\
+  &\quad+\bigl(2\,\mathrm{d}t\,\mathrm{d}s-2\,\mathbf{v}\cdot R\,\mathrm{d}\mathbf{x}\,\mathrm{d}t-v^2\mathrm{d}t^2\bigr)\\
+  &=\mathrm{d}\mathbf{x}^2+2\,\mathrm{d}t\,\mathrm{d}s .
+\end{align*}
+Now compare a boost and a translation. Let $T_{\mathbf a}$ be $\mathbf{x}\mapsto
+\mathbf{x}+\mathbf{a}$ and $B_{\mathbf v}$ the pure boost. Applying $T_{\mathbf a}$
+first and then $B_{\mathbf v}$ gives
+$(\mathbf{x},t,s)\mapsto(\mathbf{x}+\mathbf{a}+\mathbf{v}t,\;t,\;s-\mathbf{v}\cdot(\mathbf{x}+\mathbf{a})-\tfrac12 v^2t)$,
+whereas the opposite order gives
+$(\mathbf{x}+\mathbf{v}t+\mathbf{a},\;t,\;s-\mathbf{v}\cdot\mathbf{x}-\tfrac12 v^2t)$.
+The two results agree in $(\mathbf{x},t)$ and differ in $s$ by $-\mathbf{v}\cdot\mathbf{a}$:
+\begin{equation}
+  B_{\mathbf v}\,T_{\mathbf a}\;=\;Z\bigl(-\mathbf{v}\cdot\mathbf{a}\bigr)\;T_{\mathbf a}\,B_{\mathbf v},
+  \label{nr:groupcomm}
+\end{equation}
+where $Z(c)$ is the translation by $c$ in $s$, a central element. On the base
+space, boosts and translations commute; on the ambient space their commutator is
+a shift of the hidden coordinate by $-\mathbf{v}\cdot\mathbf{a}$. This is the
+group-level form of $\{K_i,P_j\}=m\delta_{ij}$, and, acting on $e^{ims}$, it is
+the phase $e^{-im\,\mathbf{v}\cdot\mathbf{a}}$ of Bargmann's superselection
+argument.
+
+\subsection{The Casimirs, seen from the ambient space}
+
+The Poincar\'e Casimir of the ambient space,
+$g^{\mu\nu}p_\mu p_\nu=\mathbf{p}^2+2p_tp_s=\mathbf{P}^2-2MH$ in terms of the
+charges above, is invariant under the whole Poincar\'e group and in particular
+under the Bargmann subgroup. Comparing with \eqref{nr:Casimirs},
+\begin{equation}
+  C\;=\;2MH-\mathbf{P}^2\;=\;-\,g^{\mu\nu}p_\mu p_\nu .
+  \label{nr:CasimirAmbient}
+\end{equation}
+The Galilean internal-energy Casimir is minus the squared length of the
+ambient momentum. For null geodesics $C=0$. A particle of ambient rest mass
+$\mu$ has $C=\mu^2$, i.e.\ internal energy $U=\mu^2/2M$. We return to this in
+Section~\ref{sec:nr-lightfront}.
+
+%---------------------------------------------------------------------
+\section{Newtonian gravity: the Eisenhart--Duval lift}
+\label{sec:nr-gravity}
+%---------------------------------------------------------------------
+
+The flat Bargmann structure becomes a theory of dynamics with forces by
+deforming the metric while keeping $\xi=\partial_s$. Take a function
+$\Phi(\mathbf{x},t)$ and set
+\begin{equation}
+  g_\Phi=\delta_{ij}\,\mathrm{d}x^i\mathrm{d}x^j+2\,\mathrm{d}t\,\mathrm{d}s
+        -2\,\Phi(\mathbf{x},t)\,\mathrm{d}t^2 .
+  \label{nr:gPhi}
+\end{equation}
+Still $g(\xi,\xi)=0$ and nothing depends on $s$, so $\xi$ is null and Killing. Its
+dual is still $\xi^\flat=\mathrm{d}t$, which is closed; a Killing vector whose
+dual is closed is parallel, so $\nabla\xi=0$ and \eqref{nr:gPhi} is a
+Bargmann structure. The inverse metric is
+\begin{equation}
+  g^{ij}=\delta^{ij},\qquad g^{ts}=1,\qquad g^{ss}=2\Phi,\qquad
+  \text{all others }0 .
+  \label{nr:ginv}
+\end{equation}
+(This is a plane-fronted wave with parallel rays, a Brinkmann pp-wave, and
+this way of encoding Newtonian trajectories as geodesics of a metric one
+dimension up is due to Eisenhart (1929); its identification with the Bargmann
+structure is due to Duval, Burdet, K\"unzle and Perrin (1985) and
+Duval, Gibbons and Horv\'athy (1991).)
+
+\subsection{Null geodesics are Newtonian trajectories}
+
+The null-geodesic Hamiltonian is
+\begin{equation}
+  \tilde{\mathcal{H}}=\tfrac12\,\mathbf{p}^2+p_tp_s+\Phi\,p_s^2 ,
+  \label{nr:HtildePhi}
+\end{equation}
+and Hamilton's equations with affine parameter $\lambda$ read
+\begin{equation}
+  \begin{aligned}
+  \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}\lambda}&=\mathbf{p}, &
+  \frac{\mathrm{d}t}{\mathrm{d}\lambda}&=p_s, &
+  \frac{\mathrm{d}s}{\mathrm{d}\lambda}&=p_t+2\Phi\,p_s,\\
+  \frac{\mathrm{d}\mathbf{p}}{\mathrm{d}\lambda}&=-p_s^2\,\nabla\Phi, &
+  \frac{\mathrm{d}p_t}{\mathrm{d}\lambda}&=-p_s^2\,\partial_t\Phi, &
+  \frac{\mathrm{d}p_s}{\mathrm{d}\lambda}&=0 .
+  \end{aligned}
+  \label{nr:hamiltonPhi}
+\end{equation}
+As before $p_s=m$ is conserved and $\mathrm{d}t/\mathrm{d}\lambda=m$. Dividing
+by $m$ to pass to the parameter $t$, and setting $p_t=-E$:
+\begin{align}
+  \frac{\mathrm{d}\mathbf{x}}{\mathrm{d}t}&=\frac{\mathbf{p}}{m},
+  &\frac{\mathrm{d}\mathbf{p}}{\mathrm{d}t}&=-m\,\nabla\Phi,
+  &E&=\frac{\mathbf{p}^2}{2m}+m\,\Phi,
+  \label{nr:newton}\\
+  \frac{\mathrm{d}E}{\mathrm{d}t}&=m\,\partial_t\Phi,
+  &\frac{\mathrm{d}s}{\mathrm{d}t}&=-\Bigl(\tfrac12\mathbf{v}^2-\Phi\Bigr)=-\frac{L}{m},
+  &L&=\tfrac12 m\mathbf{v}^2-m\Phi .
+  \label{nr:sL}
+\end{align}
+The first line is Newton's second law in the gravitational potential $\Phi$;
+the second line says that along the motion $s$ is again minus the action per
+unit mass, now for the full Lagrangian $L$. The relation $S=-m\Delta s$ of
+\eqref{nr:action} holds with the interaction included. (The constraint
+$\tilde{\mathcal{H}}=0$ gives the expression for $E$, and the expression for
+$\mathrm{d}s/\mathrm{d}t$ uses $\mathrm{d}s/\mathrm{d}\lambda=p_t+2\Phi m$ with
+$E=\mathbf{p}^2/2m+m\Phi$.)
+
+\subsection{Universality of free fall}
+
+The acceleration $\mathrm{d}^2\mathbf{x}/\mathrm{d}t^2=-\nabla\Phi$ in
+\eqref{nr:newton} does not contain $m$. This is the equivalence principle, and
+here it is automatic. All particles follow the null geodesics of one metric. A
+null geodesic is fixed as a curve by a point and a direction, while its
+affine parametrisation is free up to $\lambda\mapsto a\lambda+b$. The mass is
+the value of $\mathrm{d}t/\mathrm{d}\lambda$, i.e.\ it merely records \emph{which}
+affine scale is used. Two particles of different masses starting at the same
+point with the same velocity trace out the same curve; they differ only in the
+normalisation of the tangent vector, and hence of the momentum
+$\mathbf{p}=m\mathbf{v}$. The statement ``gravitational and inertial mass are
+equal'' becomes the statement that the same number $p_s$ is both the charge
+that couples the particle to $g_\Phi$ and the factor relating its momentum to
+its velocity.
+
+\subsection{Field equation}
+
+The Ricci tensor of $g_\Phi$ has a single non-zero component. A direct
+computation gives
+\begin{equation}
+  R_{\mu\nu}=\bigl(\nabla^2\Phi\bigr)\,\tau_\mu\tau_\nu,\qquad \tau=\mathrm{d}t,
+  \label{nr:Ricci}
+\end{equation}
+where $\nabla^2$ is the spatial Laplacian. With the convention in which
+positive-energy matter satisfies $R_{\mu\nu}k^\mu k^\nu\ge0$ for null $k$,
+Poisson's equation $\nabla^2\Phi=4\pi G\rho$ is therefore equivalent to
+\begin{equation}
+  R_{\mu\nu}=4\pi G\,\rho\;\tau_\mu\tau_\nu ,
+  \label{nr:field}
+\end{equation}
+an Einstein-type equation in the ambient space. For curved
+Newton--Cartan geometries with closed clock form, $\mathrm{d}\tau=0$, Duval et
+al.\ showed that the theory is described by Bargmann structures subject to an
+equation of this type. For geometries with gravitational time dilation
+($\mathrm{d}\tau\neq0$), the Newton--Cartan equations coupled to matter are not
+obtained from a null reduction in this simple way (see the 2023 review of
+non-relativistic gravity, arXiv:2212.11309).
+
+\begin{nrrem}[Gauge fields and non-inertial frames]
+Adding a one-form $A=A_i\mathrm{d}x^i$ to the metric,
+$g=\delta_{ij}\mathrm{d}x^i\mathrm{d}x^j+2\,\mathrm{d}t(\mathrm{d}s+A_i\mathrm{d}x^i)-2U\,\mathrm{d}t^2$,
+leads to $g^{si}=-A_i$, $g^{ss}=2U+\mathbf{A}^2$ and to the
+Hamiltonian $\tfrac12(\mathbf{p}-p_s\mathbf{A})^2+p_tp_s+Up_s^2$, i.e.\ to
+$E=(\mathbf{p}-m\mathbf{A})^2/2m+mU$. This is minimal coupling with a coupling
+constant proportional to $m$: the same universality of the
+charge-to-mass ratio, which is why a term of this kind describes Coriolis
+and magnetic-type forces that are felt equally by every mass, but not
+a general electromagnetic coupling with an independent charge.
+\end{nrrem}
+
+%---------------------------------------------------------------------
+\section{The quantum epilogue}
+\label{sec:nr-quantum}
+%---------------------------------------------------------------------
+
+Set $\hbar=1$. The massless wave equation on $\tilde M$ is
+\begin{equation}
+  g^{\mu\nu}\partial_\mu\partial_\nu\Phi=\bigl(\nabla^2+2\,\partial_t\partial_s\bigr)\Phi=0 .
+  \label{nr:wave}
+\end{equation}
+Because $\partial_s$ is a symmetry, one may Fourier-decompose
+\begin{equation}
+  \Phi=\int\mathrm{d}m\;e^{\,ims}\,\psi_m(\mathbf{x},t),
+\end{equation}
+and each sector evolves independently. For a single sector, $\partial_s\to im$ and \eqref{nr:wave} becomes
+\begin{equation}
+  i\,\partial_t\psi=-\frac{1}{2m}\nabla^2\psi ,
+  \label{nr:schrodinger}
+\end{equation}
+the free Schr\"odinger equation, with $m$ the eigenvalue of $-i\partial_s$. If
+the wave equation carries a mass term, $(g^{\mu\nu}\partial_\mu\partial_\nu-\mu^2)\Phi=0$,
+the same reduction gives $i\partial_t\psi=(-\nabla^2+\mu^2)\psi/2m$, i.e.\ an
+internal energy $U=\mu^2/2m$, in agreement with \eqref{nr:CasimirAmbient}.
+
+\subsection{Where the boost phase comes from}
+
+The ambient field transforms as a scalar under the isometry \eqref{nr:finite},
+$\Phi'(x')=\Phi(x)$. Take a pure boost, $\mathbf{x}'=\mathbf{x}+\mathbf{v}t$,
+$s'=s-\mathbf{v}\cdot\mathbf{x}-\tfrac12v^2t$. Then
+$\psi'(\mathbf{x}',t)\,e^{ims'}=\psi(\mathbf{x},t)\,e^{ims}$ gives
+\begin{equation}
+  \psi'(\mathbf{x}',t)
+  =e^{\,im(\mathbf{v}\cdot\mathbf{x}+\frac12v^2t)}\psi(\mathbf{x},t)
+  =e^{\,im(\mathbf{v}\cdot\mathbf{x}'-\frac12v^2t)}\,\psi(\mathbf{x}'-\mathbf{v}t,\,t).
+  \label{nr:boostphase}
+\end{equation}
+This is the familiar Galilean transformation of the wave function. In the usual
+presentation the phase $e^{im(\mathbf{v}\cdot\mathbf{x}-\frac12v^2t)}$ is
+added by hand to make the Schr\"odinger equation covariant, and one says that
+the Galilei group acts only projectively. Here the phase is the plain geometric
+statement that the boost shifts the coordinate $s$ by
+$-\mathbf{v}\cdot\mathbf{x}-\tfrac12v^2t$, which is the same function
+$f(\mathbf{x},t)$ that produced the total derivative in \eqref{nr:quasi}. The
+group commutator \eqref{nr:groupcomm} acts on $e^{ims}$ as multiplication by
+$e^{-im\,\mathbf{v}\cdot\mathbf{a}}$, which is the phase of Bargmann's
+superselection argument in Section~\ref{sec:nr-galilei}.
+
+\begin{nrrem}[Quantised mass]
+If the null coordinate is made periodic, $s\sim s+2\pi R$ (a null
+identification, the starting point of discrete light-cone quantisation), then
+$e^{ims}$ is single valued only for $m=n/R$, $n\in\mathbb{Z}$. Mass becomes
+quantised in integer units of $1/R$, and additivity of the mass becomes
+additivity of the integer $n$ (``number of quanta''). This is the logic by
+which particle number appears in discrete light-cone quantisation.
+\end{nrrem}
+
+%---------------------------------------------------------------------
+\section[Relativistic light-front dynamics]{The same mathematics inside relativistic dynamics: the light front}
+\label{sec:nr-lightfront}
+%---------------------------------------------------------------------
+
+The construction does not require inventing a fifth dimension. Take $d=2$ in
+\eqref{nr:metric}. Then $\tilde M=\mathbb{R}^{2,1}\times\mathbb{R}$ is the
+ordinary four-dimensional Minkowski space $\mathbb{R}^{3,1}$ with coordinates
+$(x^1,x^2,t,s)$ related to the Minkowski coordinates by \eqref{nr:nullcoords}
+(with $X^3\equiv X^{d+1}$ and $d+1=3$): in the usual terminology of light-front
+quantisation,
+\[
+  t=x^+=\frac{X^0+X^3}{\sqrt2},\qquad s=-x^-=\frac{X^3-X^0}{\sqrt2},
+\]
+and the transverse plane is $(x^1,x^2)=\mathbf{x}_\perp$. A direct computation
+of the conjugate momenta gives
+\begin{equation}
+  M=p_s=P^+=\frac{P^0+P^3}{\sqrt2},\qquad
+  H=-p_t=P^-=\frac{P^0-P^3}{\sqrt2}.
+  \label{nr:lfmomenta}
+\end{equation}
+Thus the \emph{light-front momentum $P^+$ plays the role of the Galilean mass}
+and the \emph{light-front Hamiltonian $P^-$ plays the role of the Galilean
+energy}, in a $2{+}1$-dimensional Galilean world with time $x^+$.
+
+\subsection{Relativistic mass is the Bargmann Casimir}
+
+A relativistic particle of rest mass $\mu$ in $\mathbb{R}^{3,1}$ satisfies
+$g^{\mu\nu}p_\mu p_\nu=-\mu^2$, that is $\mathbf{p}_\perp^2+2p_tp_s=-\mu^2$, or
+\begin{equation}
+  P^-=\frac{\mathbf{p}_\perp^2+\mu^2}{2P^+}.
+  \label{nr:lfdispersion}
+\end{equation}
+This is a Galilean particle of mass $M=P^+$ in two space dimensions whose
+internal energy is $U=\mu^2/2M$. Comparing with \eqref{nr:CasimirAmbient},
+\begin{equation}
+  \underbrace{2MH-\mathbf{P}^2}_{\text{Bargmann Casimir } C}
+  \;=\;\underbrace{\mu^2}_{\text{Poincar\'e Casimir}} .
+  \label{nr:twoCasimirs}
+\end{equation}
+The two roles of mass of the introduction meet in a single equation. The
+Poincar\'e Casimir $\mu^2$ of the $3{+}1$-dimensional theory is, from the point
+of view of the transverse $2{+}1$ Galilean subtheory, the combination
+$2MH-\mathbf{P}^2$ (twice the mass times the internal energy), while the
+\emph{central charge} of the Galilean subalgebra is the light-front momentum
+$P^+$.
+
+\subsection{The Bargmann group inside the Poincar\'e group}
+
+Dirac (1949) classified the ``forms of relativistic dynamics'' by the subgroup
+of the Poincar\'e group that leaves a hypersurface invariant. For the light
+front $x^+=0$ this \emph{kinematical subgroup} has seven generators in
+$3{+}1$ dimensions: $P^+$, $P_1$, $P_2$, $J_{12}$, the two transverse boosts
+$E_i=J_{+i}$, and the longitudinal boost $K_3$; the Hamiltonian $P^-$ is
+\emph{dynamical}. The Bargmann group of $d=2$ (which has $\tfrac12\cdot2\cdot1+4+2=7$
+generators by \eqref{nr:dim}) consists of $P^+$, $P_1$, $P_2$, $J_{12}$, $E_1$, $E_2$
+and $P^-$. It differs from the front-form kinematical subgroup only in that
+$P^-$ is included and the longitudinal boost $K_3$ is not: $K_3$ rescales
+$\xi$, $(t,s)\mapsto(\lambda t,s/\lambda)$, so it does not stabilise the vector
+$\xi$ (it only preserves its direction), and it acts by $(M,H)\mapsto(\lambda M,H/\lambda)$.
+The transverse boosts $E_i$ satisfy $\{E_i,P_j\}=\delta_{ij}P^+$ and are
+\emph{exactly} Galilean boosts. This is why light-front relativistic dynamics
+has an exact Galilean invariance in the transverse plane, and why the
+``infinite momentum frame'' calculations of the 1960s look nonrelativistic.
+
+\begin{nrrem}[Which spacetime is the parent?]
+The null reduction relates a Galilean world in $d$ space dimensions to a
+relativistic world in $d+1$ space dimensions, not to the relativistic world in
+$d$ space dimensions. The physical $3{+}1$ Galilean particle is a sector of
+massless motion in $4{+}1$ Minkowski space; the light-front picture of an
+actual $3{+}1$ relativistic particle gives a $2{+}1$ Galilean particle. We keep
+this distinction in view in the next section.
+\end{nrrem}
+
+%---------------------------------------------------------------------
+\section{Extension, contraction, reduction}
+\label{sec:nr-limit}
+%---------------------------------------------------------------------
+
+There are now three distinct ways in which the Bargmann algebra, and with it the
+Galilean mass, is connected to the rest of mechanics. They are often run
+together, so we separate them.
+
+\subsection{The contraction route}
+
+Restore the speed of light. The relativistic free particle of rest mass $\mu$ has
+$E=\sqrt{\mathbf{p}^2c^2+\mu^2c^4}$ and boost charge
+$\mathbf{K}=E\,\mathbf{x}/c^2-t\,\mathbf{p}$. A direct calculation gives the
+Poisson algebra
+\begin{equation}
+  \{K_i,P_j\}=\delta_{ij}\,\frac{E}{c^2},\qquad
+  \{K_i,E\}=P_i,\qquad
+  \{K_i,K_j\}=-\frac{1}{c^2}\,\epsilon_{ijk}J_k ,
+  \label{nr:poincare}
+\end{equation}
+with $\{P_i,E\}=0$ and the usual rotation relations. If one simply lets
+$c\to\infty$ in the structure constants, the right-hand sides of the first and
+third relations vanish, and one obtains the Galilei algebra \eqref{nr:galilei}
+\emph{without} a central term. The mass has disappeared, because the
+bracket $\{K_i,P_j\}$ is $E/c^2$, and $E\to\infty$ as $c\to\infty$.
+
+To keep the central term one must keep track of the large part of the
+energy. Adjoin to the Poincar\'e algebra a generator $Z$ that commutes with
+everything (this is an extra input, it is not present in the Poincar\'e algebra)
+and set
+\begin{equation}
+  E=c^2Z+H' .
+  \label{nr:Esplit}
+\end{equation}
+The relations \eqref{nr:poincare} become
+\begin{equation}
+  \{K_i,P_j\}=\delta_{ij}\Bigl(Z+\frac{H'}{c^2}\Bigr),\qquad
+  \{K_i,H'\}=P_i,\qquad
+  \{K_i,K_j\}=-\frac{\epsilon_{ijk}J_k}{c^2}.
+  \label{nr:contraction}
+\end{equation}
+In the limit $c\to\infty$ at fixed $Z$, $H'$, $\mathbf{P}$, $\mathbf{K}$, $\mathbf{J}$ these become
+\begin{equation}
+  \{K_i,P_j\}=Z\,\delta_{ij},\qquad \{K_i,H'\}=P_i,\qquad \{K_i,K_j\}=0 ,
+  \label{nr:contractionlimit}
+\end{equation}
+which is the Bargmann algebra with $M=Z$. On an irreducible representation
+of mass $\mu$ one takes $Z=\mu$; then
+\begin{equation}
+  \begin{aligned}
+  H'&=E-\mu c^2=\frac{\mathbf{p}^2}{2\mu}-\frac{\mathbf{p}^4}{8\mu^3c^2}+\cdots
+     \;\longrightarrow\;\frac{\mathbf{p}^2}{2\mu},\\
+  \mathbf{K}&=\Bigl(\mu+\frac{H'}{c^2}\Bigr)\mathbf{x}-t\,\mathbf{p}
+     \;\longrightarrow\;\mu\,\mathbf{x}-t\,\mathbf{p}.
+  \end{aligned}
+  \label{nr:expansion}
+\end{equation}
+This is the sense of the statement ``the central charge is the large-$c$ limit
+of the Casimir (rest energy)$/c^2$'': it is exact on each irreducible
+representation, but at the level of algebras it requires the extra generator
+$Z$. Moreover the limit is singular in the technical sense of a
+contraction (In\"on\"u and Wigner 1953; Bacry and L\'evy-Leblond 1968): for every
+finite $c$ the algebra is Poincar\'e$\oplus\mathbb{R}$, containing the
+simple Lorentz algebra $\mathfrak{so}(3,1)$, while the limit contains the
+abelian boosts, an algebra of a different isomorphism class. The relativistic
+algebra is a deformation of the Bargmann algebra with parameter $1/c^2$, not
+the other way round.
+
+\subsection{Three routes compared}
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{0.13\linewidth}p{0.29\linewidth}p{0.20\linewidth}p{0.27\linewidth}@{}}
+\toprule
+\textbf{Route} & \textbf{Operation} & \textbf{Mass appears as} & \textbf{Relation between the two kinematics}\\
+\midrule
+Extension &
+Central extension of the Galilei algebra by the cocycle $\Theta(K_i,P_j)=m\delta_{ij}$ &
+Central charge $M$, fixed by hand in the extension &
+Internal to Galilean mechanics; no relativity involved\\
+Contraction &
+$c\to\infty$ of the Poincar\'e algebra plus an adjoined central generator, $E=c^2Z+H'$ &
+Casimir $\mu$, which becomes the value of the central charge $Z$ &
+Limit of a family of algebras (singular, expansion in $1/c^2$); same spacetime dimension\\
+Reduction &
+Quotient of $\mathbb{R}^{d+1,1}$ by a null parallel vector $\xi$; Bargmann group $=$ stabiliser of $\xi$ &
+Momentum $p_s$ conjugate to the null coordinate &
+Exact, no parameter and no error terms; the parent spacetime has one more space dimension\\
+\bottomrule
+\end{tabular}
+\caption{Three connections between the Bargmann algebra and other structures in
+mechanics.}
+\label{tab:nr-routes}
+\end{table}
+
+The reduction differs in kind from the contraction in three respects.
+First, it produces the central generator instead of requiring it as an input:
+$M=\partial_s$ exists because the ambient space has a coordinate $s$.
+Second, it contains no limit and no small parameter: the Newtonian
+dispersion $E=\mathbf{p}^2/2m$ in \eqref{nr:dispersion} is exact for null
+geodesics, whereas \eqref{nr:expansion} is an asymptotic expansion. Third, the
+relativistic parent is a different spacetime. The contraction compares the
+Galilean theory in $d$ space dimensions with the relativistic theory in the
+\emph{same} $d$ dimensions. The reduction compares it with the
+\emph{massless} sector of a relativistic theory in $d+1$ dimensions, and
+Section~\ref{sec:nr-lightfront} shows that a massive relativistic particle in
+$d+1$ dimensions appears as a Galilean particle in $d$ dimensions with internal
+energy $\mu^2/2M$. The two relations are compatible, since both lead to the
+same Bargmann algebra, but they say different things.
+
+%---------------------------------------------------------------------
+\section[Klein--Rumer five-dimensional optics]{The spacelike precursor: Klein and Rumer's five-dimensional optics}
+\label{sec:nr-rumer}
+%---------------------------------------------------------------------
+
+The idea that mechanics is optics in one more dimension, with the extra
+coordinate related to the action, is older than the Bargmann construction. It
+goes back to Hamilton's optical--mechanical analogy and, in its five-dimensional
+form, to Klein (1926), who took a \emph{massless} wave in five dimensions and
+obtained the Hamilton--Jacobi equation of a four-dimensional particle in the ray
+limit. Rumer developed it as ``5-optics'' (1949, 1956): the action is
+treated as a fifth coordinate, so that a mechanics problem becomes a problem of
+ray propagation in a space of coordinates, time and action, with the geometrical
+5-optics the ray limit of a wave 5-optics. The programme was continued, in a
+different mathematical setting, by Keller's START (space--time--action) theory.
+In this section we compare it with the null reduction. We use Klein's form of
+the construction (units $c=1$); the details of Rumer's own formulation, which we
+know only from secondary sources, are not reproduced, and the reader should
+consult the primary works listed at the end of the chapter.
+
+%.....................................................................
+\subsection{Eikonal in an extended space}
+%.....................................................................
+
+Let $\tilde M$ carry a metric $g$ and a Killing vector $\xi$ with coordinate $y$
+along it, so $\xi=\partial_y$. A wave $\Psi=e^{i\Theta/\hbar}$ satisfying
+$\Box\Psi=0$ has, in the ray limit $\hbar\to0$, the eikonal equation
+$g^{AB}\partial_A\Theta\,\partial_B\Theta=0$: surfaces of constant phase are
+null hypersurfaces and rays are null geodesics. If $\Theta=p_y\,y+S(x^\mu)$,
+with $p_y$ the (conserved) momentum along $\xi$, the eikonal equation becomes a
+Hamilton--Jacobi equation for $S$ on the quotient, with $p_y$ appearing as a
+parameter. The two cases to compare differ only in the nature of $\xi$.
+
+\paragraph{Case A: spacelike $\xi$ (Klein, Rumer).}
+Take $g=-\mathrm{d}t^2+\mathrm{d}\mathbf{x}^2+\mathrm{d}y^2$ and
+$\Theta=m\,y+S(\mathbf{x},t)$ with $m=p_y>0$. The eikonal equation is
+\begin{equation}
+  -(\partial_tS)^2+(\nabla S)^2+m^2=0 ,
+  \label{nr:HJrel}
+\end{equation}
+the relativistic Hamilton--Jacobi equation of a particle of mass $m$: the rest
+mass is the momentum along the extra direction. On a null ray,
+$\mathrm{d}y^2=\mathrm{d}t^2-\mathrm{d}\mathbf{x}^2=\mathrm{d}\tau^2$, so $y$
+advances along the ray by the proper time, and the relativistic free action is
+\begin{equation}
+  S_{\rm rel}=-m\int\mathrm{d}\tau=-m\,\Delta y .
+  \label{nr:Srel}
+\end{equation}
+
+\paragraph{Case B: null $\xi$ (this chapter).}
+Take $g=\mathrm{d}\mathbf{x}^2+2\,\mathrm{d}t\,\mathrm{d}s$ and
+$\Theta=m\,s+S(\mathbf{x},t)$. The eikonal equation is
+\begin{equation}
+  \partial_tS+\frac{(\nabla S)^2}{2m}=0 ,
+  \label{nr:HJGal}
+\end{equation}
+the free Newtonian Hamilton--Jacobi equation (with $\Phi$ added as in
+\eqref{nr:gPhi}, one gets $\partial_tS+(\nabla S)^2/2m+m\Phi=0$), and
+$S=-m\,\Delta s$ by \eqref{nr:action}.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}p{0.20\linewidth}p{0.36\linewidth}p{0.36\linewidth}@{}}
+\toprule
+ & \textbf{Klein--Rumer (spacelike)} & \textbf{Bargmann (null)}\\
+\midrule
+Extra direction $\xi$ & $g(\xi,\xi)>0$ & $g(\xi,\xi)=0$\\
+Left on the quotient & Lorentzian metric plus a gauge field & clock form and degenerate spatial metric\\
+Mass & $p_y$, with $E^2=\mathbf{p}^2+p_y^2$ & $p_s$, with $E=\mathbf{p}^2/2p_s$\\
+Hamilton--Jacobi equation & \eqref{nr:HJrel} & \eqref{nr:HJGal}\\
+Action along a ray & $-m\,\Delta y$, $y=$ proper time & $-m\,\Delta s$\\
+\bottomrule
+\end{tabular}
+\caption{The same eikonal construction with a spacelike and a null extra direction.}
+\label{tab:nr-rumer}
+\end{table}
+
+%.....................................................................
+\subsection{What the two constructions share}
+%.....................................................................
+
+\paragraph{The action is mass times a coordinate.}
+In both cases the action is $-m$ times the displacement of the extra coordinate,
+$S=-m\,\Delta\chi$ with $\chi=y$ or $\chi=s$. If the fifth coordinate
+is taken to be the action itself, as in Rumer's 5-optics, then $x^5=S=-m\chi$,
+and the coordinate of a particle depends on its mass. If one divides
+by $m$, as here, the coordinate is the action per unit mass and \emph{all
+particles live in one geometry}, with the mass appearing as a conserved
+momentum.
+
+\paragraph{The action is defined up to a function.}
+Rumer emphasised that the action is defined only up to $S\mapsto S+f(x^\mu)$.
+In the spacelike case, with $g=g_{\mu\nu}\mathrm{d}x^\mu\mathrm{d}x^\nu+(\mathrm{d}y+A_\mu\mathrm{d}x^\mu)^2$,
+the redefinition $y\mapsto y+\lambda(x)$ is the gauge transformation
+$A_\mu\mapsto A_\mu-\partial_\mu\lambda$. In the null case it is the same
+freedom, $s\mapsto s+\lambda(\mathbf{x},t)$, with the same gauge-transformation
+interpretation (Section~\ref{sec:nr-applications}); the Galilean boost is the
+particular choice $\lambda=-\mathbf{v}\cdot\mathbf{x}-\tfrac12v^2t$, and the
+cocycle of Section~\ref{sec:nr-galilei} is its trace.
+In both constructions the field $A$ couples with strength proportional to the
+momentum along $\xi$, so the charge-to-mass ratio is fixed by the geometry. This
+is the well-known obstacle to reading $A_\mu$ in Kaluza--Klein theory as the
+electromagnetic potential of ordinary particles with independent charges; in
+the null case the same universality is the equivalence principle, and one reads
+$A$ as a gravito-inertial potential (Section~\ref{sec:nr-gravity}).
+
+\paragraph{Ray and wave.}
+The geometrical (ray) limit of the five-dimensional massless wave equation is
+\eqref{nr:HJrel} in Case~A and \eqref{nr:HJGal} in Case~B; the wave equation
+itself gives the Klein--Gordon equation and the Schr\"odinger equation
+(Section~\ref{sec:nr-quantum}), respectively. This is Rumer's ``geometrical 5-optics
+as a limit of wave 5-optics'' in both settings.
+
+%.....................................................................
+\subsection{One light cone, two slicings}
+%.....................................................................
+
+Both cases are projections of massless motion in the same flat space
+$\mathbb{R}^{d+1,1}$, differing in which Killing direction is used to form the
+quotient. A spacelike quotient gives relativistic mechanics of massive particles
+in $d$ space dimensions; a null quotient gives Newtonian mechanics. The two are
+related at the level of the action. Along a Case~A ray, expanding
+$\mathrm{d}\tau=\sqrt{1-v^2}\,\mathrm{d}t$,
+\begin{equation}
+  -m\,\Delta(y-t)=S_{\rm rel}+m\,\Delta t
+  =\int\Bigl(\tfrac12mv^2+\tfrac18mv^4+\cdots\Bigr)\mathrm{d}t ,
+  \label{nr:restsub}
+\end{equation}
+whose leading term is the Galilean action $-m\,\Delta s$ of Case~B. Replacing $y$
+by $y-t$, which is the null coordinate up to normalisation, subtracts the rest
+action $-m\,\Delta t$, in the same way as the substitution
+$\Psi=e^{-imt}\psi$ takes the Klein--Gordon equation to the Schr\"odinger equation
+and as the split $E=c^2Z+H'$ does in \eqref{nr:Esplit}. This is a correspondence at
+leading order, not an identification: the exact null time is $(t+y)/\sqrt2$,
+which differs from $t$ at the order of the relativistic corrections, and the
+null reduction has no corrections because it is a different quotient, not an
+expansion of the first. The precise sense in which a null direction is a limit
+of boosted spacelike directions is the one used in discrete light-cone
+quantisation (Seiberg 1997).
+
+%.....................................................................
+\subsection{Status and an objection}
+%.....................................................................
+
+Rumer's 5-optics remains a niche tradition. What survives in the mainstream is
+its structure, under other names: Kaluza--Klein reduction (Case~A), and the
+Eisenhart--Duval lift and Bargmann structures (Case~B). Keller's START theory
+continues the idea with the five-dimensional homogeneous space of the conformal
+group $O(4,2)$ (spaces of anti-de Sitter or de Sitter type, bounded by the
+conformally compactified Minkowski space), a geometry that resembles the one used in
+holography; we note the resemblance but do not claim any established
+relation to Section~\ref{sec:nr-holography}.
+
+One objection raised in the literature (Redington 1997) is that a quantity
+identified with a coordinate should not behave as an extensive variable, which
+would exclude the action. The extra coordinate $s$ used here is conjugate to the
+extensive total mass, so it is intensive, in the way the chemical potential is
+conjugate to the particle number; the action $S=-m\,s$ is extensive. This is an
+observation about the present construction and is not taken from the cited work.
+It also fits the reading of Section~\ref{sec:nr-observable}: $s$ is a bookkeeping
+coordinate, and the physical content is the conserved extensive quantity $m$.
+
+%---------------------------------------------------------------------
+\section{What is observable in the construction}
+\label{sec:nr-observable}
+%---------------------------------------------------------------------
+
+The reduction can be read in two ways, and it is worth stating which parts of
+the geometry are accessible to measurement and which are not.
+
+The base $M$ and its structure $(\tau,h)$ are what the Newtonian theory
+speaks about: clocks, rulers, trajectories $\mathbf{x}(t)$, momenta
+$\mathbf{p}=m\mathbf{v}$, and the conserved mass $m=p_s$, which is measured by
+inertia, for example by the response to a standard force. All of these are
+functions on the base or on the reduced phase space of Section~\ref{sec:nr-dynamics}.
+
+The coordinate $s$ is not of this kind. By \eqref{nr:action} it is minus the
+Newtonian action per unit mass, accumulated along a motion. The action is
+defined only up to boundary terms and, as the boost transformation
+\eqref{nr:finite} shows, even the \emph{value} of the difference $\Delta s$
+between two points of the base depends on the frame in which the end
+points are described, because a boost shifts $s$ by a function of position and
+time. No instrument measures $s$. What can be measured is its conjugate momentum,
+and the way in which $s$ enters physics is through the quasi-invariance of the
+action and the phase $e^{ims}$ of quantum states. In this reading, the extra
+dimension is an organising device: it packages the cocycle of
+Section~\ref{sec:nr-galilei} into a geometry, and the physical content is
+entirely in the quotient together with the conserved number $m$.
+
+The relation between the Galilean theory and the ambient relativistic theory
+is therefore of the type \emph{projection}: $\pi:\tilde M\to M$ forgets the
+metric and the coordinate $s$, and keeps the clock, the spatial metric, and the
+momentum along the forgotten direction. It is exact, in the sense that the
+projected null geodesics are \emph{precisely} Newtonian trajectories, and it
+differs in this respect from a limiting relation, which holds only up to terms
+that vanish in the limit. It is a statement about the structure of the theory,
+not a claim that the Newtonian particle ``really'' moves in five dimensions.
+
+%---------------------------------------------------------------------
+\section[Applications]{Applications: where the construction is used}
+\label{sec:nr-applications}
+%---------------------------------------------------------------------
+
+Up to now the null reduction has reorganised facts about Galilean mechanics
+that were already known. This section shows three places where the
+reorganisation does real work in current research. They have a common
+mechanism. A Galilean system coupled to background fields is the same thing as a
+massless field on a Bargmann space; the extra coordinate then supplies
+the particle-number symmetry and the Galilean boosts automatically, and the
+background fields are components of one higher-dimensional metric. We work out
+one example in each case. Results that are quoted from the literature
+rather than derived here are marked as such.
+
+%.....................................................................
+\subsection{Coupling a Galilean field to background fields}
+%.....................................................................
+
+A Galilean-invariant quantum field theory is easy to write in flat space and
+awkward to put on a curved or time-dependent background: the Lorentz-covariant
+recipe of replacing $\eta_{\mu\nu}$ by $g_{\mu\nu}$ is not available, because
+there is no spacetime metric (Section~\ref{sec:nr-geometry}). The null reduction
+supplies the recipe. Take the Bargmann metric with the gauge field and the
+potential of Section~\ref{sec:nr-gravity},
+\begin{equation}
+  g_{A,U}=\delta_{ij}\,\mathrm{d}x^i\mathrm{d}x^j
+  +2\,\mathrm{d}t\,\bigl(\mathrm{d}s+A_i\,\mathrm{d}x^i\bigr)-2U\,\mathrm{d}t^2 ,
+  \label{nr:gAU}
+\end{equation}
+with $A_i(\mathbf{x},t)$ and $U(\mathbf{x},t)$ arbitrary. Its determinant is $\det g=-1$, and its inverse
+has the components
+\begin{equation}
+  g^{ij}=\delta^{ij},\quad g^{ts}=1,\quad g^{si}=-A_i,\quad
+  g^{ss}=\mathbf{A}^2+2U,\quad\text{all others }0 .
+  \label{nr:ginvAU}
+\end{equation}
+
+\begin{nrprop}\label{nr:prop-reducedaction}
+Let $\Phi$ be a complex scalar on $(\tilde M,g_{A,U})$ with the massless action
+$S[\Phi]=-\int\mathrm{d}^dx\,\mathrm{d}t\,\mathrm{d}s\,\sqrt{-g}\,g^{\mu\nu}\partial_\mu\bar\Phi\,\partial_\nu\Phi$.
+For $\Phi=e^{\,ims}\psi(\mathbf{x},t)$ the action per unit length of $s$, divided by $2m$, is
+\begin{equation}
+  \begin{aligned}
+  S[\psi]&=\int\mathrm{d}t\,\mathrm{d}^dx\;\Bigl[
+  \frac{i}{2}\bigl(\bar\psi\,\partial_t\psi-\psi\,\partial_t\bar\psi\bigr)
+  -\frac{1}{2m}\,\bigl|D_i\psi\bigr|^2-m\,U\,|\psi|^2\Bigr],\\
+  D_i&=\partial_i-i\,m\,A_i .
+  \end{aligned}
+  \label{nr:schLag}
+\end{equation}
+\end{nrprop}
+\begin{proof}
+Since $\sqrt{-g}=1$, only $g^{\mu\nu}\partial_\mu\bar\Phi\partial_\nu\Phi$ matters. With $\partial_s\Phi=im\Phi$
+and $\partial_s\bar\Phi=-im\bar\Phi$, the four types of term in \eqref{nr:ginvAU} give
+\begin{align*}
+  g^{ij}&:\quad \partial_i\bar\psi\,\partial_i\psi,\\
+  g^{ts}&:\quad im\bigl(\psi\,\partial_t\bar\psi-\bar\psi\,\partial_t\psi\bigr),\\
+  g^{si}&:\quad -im\,A_i\bigl(\psi\,\partial_i\bar\psi-\bar\psi\,\partial_i\psi\bigr),\\
+  g^{ss}&:\quad m^2\bigl(\mathbf{A}^2+2U\bigr)|\psi|^2 .
+\end{align*}
+The first, third and the $\mathbf{A}^2$ part of the fourth combine into
+$|D_i\psi|^2=|\partial_i\psi|^2+imA_i(\bar\psi\partial_i\psi-\psi\partial_i\bar\psi)+m^2\mathbf{A}^2|\psi|^2$.
+Hence $-g^{\mu\nu}\partial_\mu\bar\Phi\partial_\nu\Phi=-|D_i\psi|^2+im(\bar\psi\partial_t\psi-\psi\partial_t\bar\psi)-2m^2U|\psi|^2$,
+and dividing by $2m$ gives \eqref{nr:schLag}.
+\end{proof}
+
+Equation \eqref{nr:schLag} is the Schr\"odinger Lagrangian for a particle of
+mass $m$ in a potential $mU$ and a gauge field $mA_i$: \emph{the mass is the
+charge of the $U(1)$ that comes from translations of $s$}. Three consequences
+follow at once.
+\begin{enumerate}
+\item \emph{Gauge invariance.} A change of fibre coordinate
+$s\mapsto s'=s+\lambda(\mathbf{x},t)$ preserves the form of $g_{A,U}$ with
+$A_i\mapsto A_i-\partial_i\lambda$ and $U\mapsto U+\partial_t\lambda$, and
+$\Phi'(x')=\Phi(x)$ gives $\psi\mapsto e^{-im\lambda}\psi$. This is the usual
+gauge transformation with charge $m$ and gauge potential $(A_i,-U)$.
+\item \emph{Boosts are free.} For $A=U=0$ the metric is flat and the
+Galilean boosts \eqref{nr:finite} are isometries; \eqref{nr:boostphase}
+is then their action on $\psi$. In the curved case, any diffeomorphism of
+$\tilde M$ that preserves $\xi$ acts as a symmetry, with no further input.
+\item \emph{Universality.} The same $A_i$ and $U$ couple to every mass in
+the proportion $m$, so these background fields describe gravitational and
+inertial effects (potentials, Coriolis forces, accelerating frames), not
+arbitrary electromagnetism.
+\end{enumerate}
+In the language of Newton--Cartan geometry the data $(\mathrm{d}t,\;h,\;A_\mu)$
+are the clock form, the spatial metric and the $U(1)$ connection; this is the
+statement, due to Son and Wingate (2006) for the unitary Fermi gas and
+placed on a general footing by Jensen, that Galilean field theories couple to
+Newton--Cartan geometry with a particle-number gauge field, and that
+the cleanest way to implement the required boost symmetry is to obtain the
+background by null reduction.
+
+%.....................................................................
+\subsection{The quantum Hall problem}
+\label{sec:nr-qhe}
+%.....................................................................
+
+Take $d=2$, $U=0$ and a uniform field $B=\partial_xA_y-\partial_yA_x>0$, for instance
+$\mathbf{A}=\tfrac12B(-y,x)$, and set $\hbar=1$. The reduced Hamiltonian is
+$H=\boldsymbol{\pi}^2/2m$ with kinetic momentum $\boldsymbol{\pi}=\mathbf{p}-m\mathbf{A}$.
+
+\begin{nrprop}[Landau levels]\label{nr:prop-landau}
+The spectrum of $H=\boldsymbol{\pi}^2/2m$ is
+\begin{equation}
+  E_n=B\bigl(n+\tfrac12\bigr),\qquad n=0,1,2,\dots,
+  \label{nr:landau}
+\end{equation}
+independent of $m$, and each level has $mB/2\pi$ states per unit area.
+\end{nrprop}
+\begin{proof}
+From $[x_i,p_j]=i\delta_{ij}$ one finds $[\pi_x,\pi_y]=imB$. Define
+$a=(\pi_x+i\pi_y)/\sqrt{2mB}$. Then $[a,a^\dagger]=1$ and
+$a^\dagger a=(\boldsymbol\pi^2-mB)/(2mB)$, so
+$H=\boldsymbol\pi^2/2m=B\,(a^\dagger a+\tfrac12)$.
+For the degeneracy, define guiding-centre operators
+$R_x=x+\pi_y/mB$, $R_y=y-\pi_x/mB$. They commute with $\boldsymbol\pi$
+and, hence, with $H$; and $[R_x,R_y]=-i\ell^2$ with $\ell^2=1/mB$. Each state
+therefore occupies a phase-space cell $2\pi\ell^2$ in the guiding-centre plane,
+which gives $1/2\pi\ell^2=mB/2\pi$ states per unit area.
+\end{proof}
+
+The level spacing $B$ does not depend on $m$. This is the equivalence principle
+again: the ``charge'' in the Lorentz force is the mass, so the ratio of charge
+to mass, which fixes the cyclotron frequency $eB/m$ of a real electron,
+equals one for every particle of the geometry. The filling factor of a state
+with number density $n$ is $\nu=2\pi n/mB$.
+
+\begin{nrprop}[Kohn's theorem]\label{nr:prop-kohn}
+Let $N$ particles with masses $m_a$ and charge equal to mass move in the uniform field $B$ with
+$H=\sum_a\boldsymbol\pi_a^2/2m_a+V$, where $V$ depends only on the differences
+$\mathbf{x}_a-\mathbf{x}_b$ and is otherwise arbitrary. Then
+$H=\boldsymbol\Pi^2/2M+H_{\rm rel}$ with $\boldsymbol\Pi=\sum_a\boldsymbol\pi_a$,
+$M=\sum_am_a$ and $[\boldsymbol\Pi,H_{\rm rel}]=0$, so the centre of mass has the
+spectrum \eqref{nr:landau} whatever $V$ is. In particular a uniform
+oscillating force excites the system only at the frequency $B$.
+\end{nrprop}
+\begin{proof}
+Write $\tilde{\boldsymbol\pi}_a=\boldsymbol\pi_a-(m_a/M)\boldsymbol\Pi$, so that
+$\sum_a\tilde{\boldsymbol\pi}_a=0$. Because $[\pi_{b,x},\pi_{a,y}]=im_aB\,\delta_{ab}$,
+\[
+  [\Pi_x,\tilde\pi_{a,y}]=im_aB-\frac{m_a}{M}\,[\Pi_x,\Pi_y]
+  =im_aB-\frac{m_a}{M}\,iMB=0 ,
+\]
+and likewise for the other components. The cross term in
+$\sum_a\boldsymbol\pi_a^2/2m_a$ is proportional to $\boldsymbol\Pi\cdot\sum_a\tilde{\boldsymbol\pi}_a=0$, so
+$\sum_a\boldsymbol\pi_a^2/2m_a=\boldsymbol\Pi^2/2M+\sum_a\tilde{\boldsymbol\pi}_a^2/2m_a$.
+Also $[\boldsymbol\Pi,\mathbf{x}_a-\mathbf{x}_b]=0$, so $V$ commutes with $\boldsymbol\Pi$. Therefore
+$H_{\rm rel}=\sum_a\tilde{\boldsymbol\pi}_a^2/2m_a+V$ commutes with $\boldsymbol\Pi$, and
+the centre-of-mass part obeys $[\Pi_x,\Pi_y]=iMB$, which is the Landau problem for mass $M$:
+spectrum $B(n+\tfrac12)$. A uniform force couples to
+$\sum_am_a\mathbf{x}_a$, which is a linear combination of $\boldsymbol\Pi$ and the
+total guiding centre $\sum_am_a\mathbf{R}_a$ (the $\mathbf{R}_a$ defined particle by
+particle as in Proposition~\ref{nr:prop-landau}); the latter commutes with $H$,
+so only the centre-of-mass oscillator is excited.
+\end{proof}
+
+This is the statement that the cyclotron resonance of an interacting electron
+gas is not shifted by interactions (Kohn 1961). In the present picture it is
+the Galilean boost charge $\mathbf{K}=\sum_am_a\mathbf{x}_a-t\mathbf{P}$ at work:
+its central charge is $M$, the total of the charges, which is why the argument
+needs the same charge-to-mass ratio for all particles.
+
+\paragraph{Hall conductivity at zero wavenumber.}
+Add a uniform acceleration field $\mathbf{a}=-\nabla U$. A classical particle
+drifts with the velocity $\mathbf{v}_d$ that cancels the total force, $\mathbf{a}+\mathbf{v}_d\times B\hat{\mathbf z}=0$, i.e.
+$\mathbf{v}_d=\mathbf{a}\times\hat{\mathbf z}/B$. The quantum statement is exact
+for any Galilean-invariant state. A boost by $\mathbf{v}_d$ is a symmetry of the
+ambient space, and it maps the fields $(\mathbf{a},B)$ to $(\mathbf{a}+\mathbf{v}_d\times B\hat{\mathbf z},B)=(0,B)$. In the boosted frame there is
+only the magnetic field, and a gapped uniform state carries no current;
+back in the original frame the whole fluid moves at $\mathbf{v}_d$. The
+number current is therefore
+\begin{equation}
+  \mathbf{j}=n\,\mathbf{v}_d=\frac{n}{B}\,\mathbf{a}\times\hat{\mathbf z},
+  \qquad \sigma_H=\frac{n}{B}=\frac{\nu\,m}{2\pi},
+  \label{nr:sigmaH}
+\end{equation}
+the quantised Hall conductivity. Here $\sigma_H$ relates the number current to the
+acceleration field; multiplying by the charge squared (the charge is $e=m$)
+gives the electric $\sigma_{xy}=\nu e^2/h$ in the usual units. The value is fixed by the boost
+symmetry alone and does not depend on the interactions that produce a gapped state
+at a given $\nu$.
+
+\paragraph{Beyond zero wavenumber (results quoted from the literature).}
+At finite wavenumber $q$ the boost argument no longer fixes the answer, and
+the extra structure is where the Newton--Cartan formalism is used in current
+work. Hoyos and Son (2012) and Bradlyn, Goldstein and Read (2012) showed that the
+$q^2$ correction to the Hall conductivity has a coefficient related to the
+\emph{Hall viscosity} $\eta_H$, the non-dissipative part of the stress response
+to shear. For quantum Hall states $\eta_H=\tfrac12\hbar\,n\,\bar s$, with $\bar s$ the
+mean orbital spin per particle (Read 2009), and the combination $2\bar s$ is
+the topological ``shift'' of the state on a sphere. Son (2013) proposed that the
+lowest Landau level, obtained as the limit $m\to0$ at fixed charge with
+$g$-factor $2$ (a Zeeman-like term then puts the lowest Landau level at exactly zero energy), is described by an effective field theory
+built on Newton--Cartan geometry. The $m\to0$ limit is smooth in
+this formulation. Geracie, Son, Wu and Wu (2015) then used the resulting
+diffeomorphism Ward identities to relate the leading wavenumber dependence of
+the Hall conductivity to the shift, to derive sum rules for the stress-tensor
+spectral densities, and to obtain an inequality between the $k^4$ coefficient
+of the projected static structure factor and the shift. We do not reproduce
+these derivations here; the point for this chapter is that the symmetry
+structure they exploit is the one that the null reduction makes manifest.
+
+%.....................................................................
+\subsection{Schr\"odinger spacetime and non-relativistic holography}
+\label{sec:nr-holography}
+%.....................................................................
+
+In the holographic correspondence a quantum field theory is described by gravity in
+a space with one more dimension. For theories with Schr\"odinger symmetry, the
+symmetry of the free Schr\"odinger equation and of many strongly interacting
+systems such as cold atoms at unitarity (Son and Wingate 2006; Nishida and Son
+2007), a gravity dual is obtained by a null construction. With
+$\mathbf{x}\in\mathbb{R}^d$, a radial coordinate $z>0$, and our $(t,s)$,
+\begin{equation}
+  g_{\rm Sch}=\frac{L^2}{z^2}\Bigl(\mathrm{d}\mathbf{x}^2+\mathrm{d}z^2
+  +2\,\mathrm{d}t\,\mathrm{d}s-\frac{\mathrm{d}t^2}{z^2}\Bigr).
+  \label{nr:sch}
+\end{equation}
+(In the literature $s=-\xi$ and the metric is written
+$L^2[-\mathrm{d}t^2/z^4+(-2\,\mathrm{d}t\,\mathrm{d}\xi+\mathrm{d}\mathbf{x}^2+\mathrm{d}z^2)/z^2]$; a
+coefficient $\beta^2$ in front of $\mathrm{d}t^2/z^4$ can be set to $1$ by
+rescaling $(t,s)\mapsto(at,s/a)$.) The metric has $d+3$ dimensions.
+
+\begin{nrprop}[Structure and symmetries of Schr\"odinger spacetime]\label{nr:prop-sch}
+Let $g_{\rm Sch}$ be the metric \eqref{nr:sch} on $\tilde M_{\rm Sch}=\{(\mathbf{x},t,s,z):z>0\}$.
+\begin{enumerate}
+\item The bracket in \eqref{nr:sch} is the Eisenhart--Duval metric
+\eqref{nr:gPhi}, with $d+1$ space dimensions (the coordinates $\mathbf{x}$ and $z$)
+and the potential $\Phi=1/(2z^2)$; the full metric \eqref{nr:sch} is
+$L^2/z^2$ times it. In particular $\xi=\partial_s$ is a null Killing vector
+and the quotient by $\xi$ carries a Galilean structure.
+\item The following maps are isometries (for every $d$; checked by direct
+substitution):
+\begin{align*}
+  \text{boosts:}\quad & \mathbf{x}\mapsto\mathbf{x}+\mathbf{v}t,\quad
+     s\mapsto s-\mathbf{v}\cdot\mathbf{x}-\tfrac12v^2t,\\
+  \text{dilatations:}\quad & (t,\mathbf{x},z,s)\mapsto(\lambda^2t,\lambda\mathbf{x},\lambda z,s),\\
+  \text{special conformal:}\quad & (t,\mathbf{x},z)\mapsto\frac{(t,\mathbf{x},z)}{1+ct},\\
+     & s\mapsto s+\frac{c}{2}\,\frac{\mathbf{x}^2+z^2}{1+ct}.
+\end{align*}
+Together with translations of $t,\mathbf{x},s$ and rotations of $\mathbf{x}$ they generate
+the Schr\"odinger group, of dimension $\tfrac12d(d-1)+2d+4$ ($13$ for $d=3$).
+\end{enumerate}
+\end{nrprop}
+\begin{proof}
+(1) The factor in brackets is $\mathrm{d}\mathbf{x}^2+\mathrm{d}z^2+2\,\mathrm{d}t\,\mathrm{d}s-2\Phi\,\mathrm{d}t^2$
+with $-2\Phi=-1/z^2$. (2) Boosts do not change $z$ or $t$ and preserve
+$\mathrm{d}\mathbf{x}^2+2\,\mathrm{d}t\,\mathrm{d}s$ by the computation after
+\eqref{nr:finite}. Under dilatation, $\mathrm{d}\mathbf{x}^2/z^2$, $\mathrm{d}z^2/z^2$, $\mathrm{d}t\,\mathrm{d}s/z^2$
+and $\mathrm{d}t^2/z^4$ each scale by $\lambda^0$. The special conformal case is a
+direct, if longer, substitution.
+\end{proof}
+
+The dynamical exponent $2$ (time scales as the square of length) is built
+into the dilatation, as in a free Schr\"odinger particle. The Schr\"odinger group is
+the centraliser of $\partial_s$ in the conformal group of the flat ambient
+space $\mathbb{R}^{d+1,1}$ of this chapter (Burdet, Perrin and Sorba 1973; Duval and
+Horv\'athy 2009), which is why Schr\"odinger symmetry and the null reduction
+go together. The boundary $z\to0$ carries the coordinates $(t,\mathbf{x},s)$ and the
+boundary theory is a Galilean field theory in $d$ space dimensions whose particle
+number is the momentum along $s$.
+
+\begin{nrprop}[A scalar field in Schr\"odinger spacetime]\label{nr:prop-schscalar}
+A scalar of bulk mass $\mu$, $(\Box-\mu^2)\Phi=0$, with dependence
+$\Phi=e^{-i\omega t+ims+i\mathbf{k}\cdot\mathbf{x}}\phi(z)$ obeys
+\begin{equation}
+  z^2\phi''-(d+1)\,z\,\phi'-\bigl(q^2z^2+m^2+\mu^2L^2\bigr)\phi=0,
+  \qquad q^2:=\mathbf{k}^2-2m\omega .
+  \label{nr:radial}
+\end{equation}
+Its solution that decays into the bulk is $\phi=z^{(d+2)/2}K_\nu(qz)$ with
+\begin{equation}
+  \nu=\sqrt{\tfrac14(d+2)^2+m^2+\mu^2L^2},
+  \label{nr:nu}
+\end{equation}
+which is oscillatory for $q^2<0$.
+\end{nrprop}
+\begin{proof}
+The inverse metric is $g^{ij}=g^{zz}=(z^2/L^2)\delta^{ij}$, $g^{ts}=z^2/L^2$,
+$g^{ss}=1/L^2$, and $\sqrt{-g}=(L/z)^{d+3}$. In
+$\Box\Phi=(\sqrt{-g})^{-1}\partial_\mu(\sqrt{-g}\,g^{\mu\nu}\partial_\nu\Phi)$
+the $z$-derivatives give $(z^2/L^2)\bigl[\phi''-(d+1)\phi'/z\bigr]$, the $\mathbf{x}$-derivatives
+give $-(z^2/L^2)\mathbf{k}^2\phi$, the mixed term $2g^{ts}\partial_t\partial_s$ gives
+$+2(z^2/L^2)\,m\omega\,\phi$, and $g^{ss}\partial_s^2$ gives $-(m^2/L^2)\phi$.
+Multiplying $(\Box-\mu^2)\Phi=0$ by $L^2$ gives \eqref{nr:radial}. With
+$\phi=z^{a}f$, $a=\tfrac12(d+2)$, it becomes the modified Bessel equation of order
+$\nu$ with $\nu^2=a^2+m^2+\mu^2L^2$.
+\end{proof}
+
+Three things can be read from \eqref{nr:radial}--\eqref{nr:nu}.
+\begin{enumerate}
+\item \emph{The Galilean dispersion is the bulk light cone.} The solution changes
+character at $q^2=0$, i.e.\ at $\omega=\mathbf{k}^2/2m$. This is the null
+condition $\mathbf{p}^2+2p_tp_s=0$ of the ambient space, with $p_t=-\omega$ and
+$p_s=m$ (Section~\ref{sec:nr-dynamics}): a free Galilean particle of mass $m$ is a null
+ray of the ambient geometry, and the continuum of the boundary two-point
+function begins on that dispersion curve.
+\item \emph{Correlators and dimensions.} The standard holographic prescription
+(compare the coefficients of $z^{\frac12(d+2)\mp\nu}$ in $K_\nu$) gives the
+retarded two-point function of the dual operator, for non-integer $\nu$, as
+$G(\omega,\mathbf{k})\propto(\mathbf{k}^2-2m\omega)^{\nu}$ up to contact terms,
+with scaling dimension
+$\Delta=\tfrac12(d+2)+\nu$, in the sense that
+$G$ scales with weight $2\Delta-(d+2)=2\nu$ under the dilatation with $[t]=-2$,
+$[\mathbf{x}]=-1$. The dimension depends on $m$ through the $\mathrm{d}t^2/z^4$ term:
+operators carrying different particle number have different dimensions. In
+the boundary theory the dimension of an operator equals the energy of the
+corresponding state in a harmonic trap, in units of the trap frequency (the
+operator--state correspondence of Nishida and Son 2007).
+\item \emph{Superselection and particle number.} Each value of the momentum
+$m$ along $s$ gives an independent sector, the holographic form of Bargmann's mass
+superselection rule. If $s$ is made periodic, $m$ is quantised, as in
+Section~\ref{sec:nr-quantum}, and $m$ counts particles.
+\end{enumerate}
+
+\begin{nrrem}[Status of the construction]
+The metric \eqref{nr:sch} is not a vacuum solution of Einstein's equations in
+$d+3$ dimensions: it requires matter, for example a massive vector field
+along $\mathrm{d}t$ (Son 2008; Balasubramanian and McGreevy 2008). It should be
+regarded as a solvable model with the right symmetries, not as the known dual of
+a particular atomic system. Its use has been to compute
+transport and thermodynamic properties of non-relativistic conformal
+systems at strong coupling and to explore the geometry (Newton--Cartan
+boundary, torsion, related Lifshitz duals obtained by further reduction; see
+the review by Taylor 2016). In this application the null direction $s$ is still the
+particle-number direction of the chapter, and the new, emergent
+direction is the radial coordinate $z$. The distinction between the two is
+what the observability discussion of the preceding section would
+lead one to expect.
+\end{nrrem}
+
+%---------------------------------------------------------------------
+\section{Summary}
+\label{sec:nr-summary}
+%---------------------------------------------------------------------
+
+\begin{enumerate}
+\item The free Galilean particle has a Lagrangian that is quasi-invariant under
+boosts, $\delta L=\mathrm{d}F/\mathrm{d}t$ with $F\propto m$; the Noether
+charges therefore close on a central extension, $\{K_i,P_j\}=m\delta_{ij}$
+\eqref{nr:KP}. The extension is cohomologically non-trivial
+(Proposition~\ref{nr:prop-nontrivial}).
+\item Galilean spacetime is the orbit space of the null parallel vector field
+$\xi=\partial_s$ on $\mathbb{R}^{d+1,1}$ with $g=\mathrm{d}\mathbf{x}^2+2\,\mathrm{d}t\,\mathrm{d}s$. The
+quotient inherits a clock one-form and a degenerate spatial metric
+(Proposition~\ref{nr:prop-induced}) and nothing else.
+\item Mass is $p_s$, conserved because $\xi$ is Killing. Free null geodesics
+project to uniform motion with $E=\mathbf{p}^2/2m$ \eqref{nr:dispersion}, and
+$S=-m\,\Delta s$ \eqref{nr:action}.
+\item The isometries of $\tilde M$ commuting with $\xi$ form the Bargmann group,
+of dimension $\tfrac12d(d-1)+2d+2$ \eqref{nr:dim}. The cocycle is realised as a shift
+of $s$ in the group commutator of a boost and a translation \eqref{nr:groupcomm}.
+\item The deformation $-2\Phi\,\mathrm{d}t^2$ of the metric produces Newtonian
+gravity with universal free fall \eqref{nr:newton}, and $R_{\mu\nu}=\nabla^2\Phi\,\tau_\mu\tau_\nu$
+\eqref{nr:Ricci}. Quantum mechanically the same structure gives the
+Schr\"odinger equation and the boost phase \eqref{nr:boostphase}.
+\item The Bargmann Casimir $2MH-\mathbf{P}^2$ is the squared mass of the
+ambient Poincar\'e group \eqref{nr:twoCasimirs}; the central charge of the
+Galilean algebra is the light-front momentum $P^+$.
+\item The reduction is an exact projection with no limit involved, and differs
+from the $c\to\infty$ contraction (Table~\ref{tab:nr-routes}).
+\item The null reduction has a spacelike counterpart in Klein's and Rumer's
+five-dimensional optics: the same eikonal construction in the same flat space with a
+spacelike extra direction gives relativistic mechanics, and in both cases the action is
+$-m$ times the displacement along the extra coordinate
+(Table~\ref{tab:nr-rumer}, Section~\ref{sec:nr-rumer}).
+\item In applications, a Galilean field theory on a background is a massless field
+on a Bargmann space: mass becomes a $U(1)$ charge and boosts come for free
+(Proposition~\ref{nr:prop-reducedaction}); the quantum Hall problem has $m$-independent
+Landau levels and an interaction-independent cyclotron resonance
+(Propositions~\ref{nr:prop-landau}, \ref{nr:prop-kohn}); and non-relativistic holography
+uses Schr\"odinger spacetime \eqref{nr:sch}, whose boundary dispersion is the ambient null
+cone (Proposition~\ref{nr:prop-schscalar}).
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\section{Problems}
+%---------------------------------------------------------------------
+
+\begin{enumerate}
+\item \textbf{Oscillator.} Take $d=1$ and $\Phi=\tfrac12\omega^2x^2$ in
+\eqref{nr:gPhi}. Show that the projected null geodesics satisfy
+$\ddot x=-\omega^2x$ with no dependence on $m$. For $x(t)=A\cos\omega t$ show
+that
+\[
+  s(t)=s_0+\tfrac14 A^2\omega\,\sin 2\omega t .
+\]
+Deduce that $s$ returns to its initial value after one period, and that the
+time average of the Lagrangian over a period vanishes. (This is the virial
+theorem for the harmonic oscillator, $\langle T\rangle=\langle V\rangle$,
+read as periodicity of $s$.)
+
+\item \textbf{Many particles.} Let $N$ particles be described by coordinates
+$(\mathbf{x}_a,s_a)$, $a=1,\dots,N$, with a common time $t$, and let the
+Bargmann group act diagonally, $\mathbf{x}_a\mapsto\mathbf{x}_a+\mathbf{v}t$,
+$s_a\mapsto s_a-\mathbf{v}\cdot\mathbf{x}_a-\tfrac12v^2t$. Show that the total
+charges are $K_i=\sum_a(x_{a,i}\,p_{s_a}-t\,p_{a,i})$, $P_i=\sum_a p_{a,i}$,
+$M=\sum_a p_{s_a}$, and that $\{K_i,P_j\}=M\delta_{ij}$. Conclude that the mass
+of the composite is the sum of the masses, independently of interactions
+depending on relative positions.
+
+\item \textbf{Boosts and time translations.} Let $T_b$ be the translation
+$t\mapsto t+b$ and $B_{\mathbf v}$ the boost with $R=1$ in \eqref{nr:finite}.
+Show that
+\[
+  B_{\mathbf v}\,T_b=T_{\mathbf{v}b}\;Z\bigl(-\tfrac12v^2b\bigr)\;T_b\,B_{\mathbf v},
+\]
+where $T_{\mathbf a}$ is a spatial translation and $Z(c)$ the shift of $s$ by $c$.
+On the base $M$ the commutator of a boost and a time translation is a spatial
+translation by $\mathbf{v}b$; on $\tilde M$ there is, in addition, a shift of
+$s$ by $-\tfrac12 v^2b$. Compare the latter with the term $\tfrac12mu^2t$ in
+$F_{\mathbf u}$ of \eqref{nr:quasi}.
+
+\item \textbf{Spin Casimir.} In $d=3$, with the Poisson algebra
+\eqref{nr:KP}--\eqref{nr:KK} and the rotation relations
+$\{J_i,K_j\}=\epsilon_{ijk}K_k$, $\{J_i,P_j\}=\epsilon_{ijk}P_k$ (where
+$J_k=\tfrac12\epsilon_{kij}J_{ij}$), verify that
+$\mathbf{S}=\mathbf{J}-M^{-1}\,\mathbf{K}\times\mathbf{P}$ satisfies
+$\{K_i,S_j\}=0$ and $\{P_i,S_j\}=0$, hence that $\mathbf{S}^2$ is a Casimir
+function of the Bargmann algebra.
+
+\item \textbf{Spacelike reduction.} In $\mathbb{R}^{d+1,1}$ with
+$g=-\mathrm{d}t^2+\mathrm{d}\mathbf{x}^2+\mathrm{d}y^2$, show that null geodesics with
+$p_y=m$ have $\mathrm{d}y=\mathrm{d}\tau$ and $E=\sqrt{\mathbf{p}^2+m^2}$, and verify
+\eqref{nr:restsub}. Show that the null coordinate $s=(y-t)/\sqrt2$ together with
+$t'=(y+t)/\sqrt2$ turns $g$ into \eqref{nr:metric}, and find the relation between the
+spacelike and null momenta, $p_s=(p_y+E)/\sqrt2$ and $E'=-p_{t'}=(E-p_y)/\sqrt2$.
+For slow motion with $p_y=m$, show that $E'\approx\mathbf{p}^2/(2\sqrt2\,m)=\mathbf{p}^2/2p_s$ with
+$p_s\approx\sqrt2\,m$.
+
+\item \textbf{Schr\"odinger isometries.} For $d=1$, verify that the special conformal map
+of Proposition~\ref{nr:prop-sch} preserves \eqref{nr:sch}, and that the opposite sign
+of the shift in $s$ does not. Compute the Killing vectors that generate the
+three families, and check the commutator of the dilatation generator with the
+generator of time translations.
+
+\item \textbf{Radial equation.} Derive \eqref{nr:radial} for $d=2$. Show that for
+$q^2>0$ the decaying solution behaves as $z^{\frac12(d+2)-\nu}$ near $z=0$ with
+a coefficient of $z^{\frac12(d+2)+\nu}$ proportional to $q^{2\nu}$, and explain why this
+gives $G\propto(\mathbf{k}^2-2m\omega)^\nu$.
+
+\item \textbf{Landau problem with an acceleration field.} In the setting of
+Proposition~\ref{nr:prop-landau}, add $U=-\mathbf{a}\cdot\mathbf{x}$ and show that, after
+shifting $\boldsymbol\pi$ by a constant,
+$H=B(a^\dagger a+\tfrac12)-\tfrac12m\,v_d^2-m\,\mathbf{a}\cdot\mathbf{R}$ with $v_d=a/B$, and
+that the guiding centre drifts at $\mathbf{v}_d=\mathbf{a}\times\hat{\mathbf z}/B$.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+\section*{Notes and references}
+%---------------------------------------------------------------------
+
+The classification of ray representations of the Galilei group, the
+central extension and the mass superselection rule are due to
+Bargmann~(1954) and L\'evy-Leblond~(1963); the geometric formulation in terms of
+moment maps and cocycles is Souriau's~(1970). The use of an extra dimension to
+turn Newtonian trajectories into geodesics goes back to Eisenhart~(1929). Its
+relation to Newton--Cartan theory (Cartan 1923/24; K\"unzle 1972) via
+\emph{Bargmann structures} was established by Duval, Burdet, K\"unzle and
+Perrin~(1985), and developed by Duval, Gibbons and Horv\'athy~(1991). The
+light-front viewpoint is Dirac's~(1949), and null identifications are the basis
+of discrete light-cone quantisation (see Seiberg 1997). Klein's five-dimensional wave equation and Rumer's
+5-optics, which treats the action as a coordinate, are the spacelike precursor of
+this construction (Section~\ref{sec:nr-rumer}). The applications of
+Section~\ref{sec:nr-applications} follow Son and Wingate (2006), Jensen (arXiv:1408.6855),
+Son (2008, 2013), Balasubramanian and McGreevy (2008) and Geracie, Son, Wu and Wu
+(2015); the derivations given there of Propositions~\ref{nr:prop-reducedaction}--\ref{nr:prop-schscalar}
+are elementary and are written out for completeness.
+
+\begin{itemize}
+\item V.~Bargmann, On unitary ray representations of continuous groups,
+      \emph{Ann.\ Math.} \textbf{59} (1954) 1.
+\item J.-M.~L\'evy-Leblond, Galilei group and nonrelativistic quantum mechanics,
+      \emph{J.\ Math.\ Phys.} \textbf{4} (1963) 776.
+\item J.-M.~L\'evy-Leblond, Galilei group and Galilean invariance, in
+      \emph{Group Theory and Its Applications}, Vol.~II, ed.\ E.~M.~Loebl
+      (Academic Press, 1971).
+\item J.-M.~Souriau, \emph{Structure des syst\`emes dynamiques} (Dunod, 1970).
+\item L.~P.~Eisenhart, Dynamical trajectories and geodesics,
+      \emph{Ann.\ Math.} \textbf{30} (1929) 591.
+\item \'E.~Cartan, Sur les vari\'et\'es \`a connexion affine et la th\'eorie de la
+      relativit\'e g\'en\'eralis\'ee, \emph{Ann.\ \'Ec.\ Norm.\ Sup.}
+      \textbf{40} (1923) 325 and \textbf{41} (1924) 1.
+\item H.~P.~K\"unzle, Galilei and Lorentz structures on space-time:
+      comparison of the corresponding geometry and physics,
+      \emph{Ann.\ Inst.\ H.\ Poincar\'e A} \textbf{17} (1972) 337.
+\item C.~Duval, G.~Burdet, H.~P.~K\"unzle and M.~Perrin, Bargmann structures and
+      Newton--Cartan theory, \emph{Phys.\ Rev.\ D} \textbf{31} (1985) 1841.
+\item C.~Duval, G.~W.~Gibbons and P.~Horv\'athy, Celestial mechanics, conformal
+      structures, and gravitational waves, \emph{Phys.\ Rev.\ D} \textbf{43}
+      (1991) 3907.
+\item E.~In\"on\"u and E.~P.~Wigner, On the contraction of groups and their
+      representations, \emph{Proc.\ Natl.\ Acad.\ Sci.\ USA} \textbf{39} (1953) 510.
+\item H.~Bacry and J.-M.~L\'evy-Leblond, Possible kinematics,
+      \emph{J.\ Math.\ Phys.} \textbf{9} (1968) 1605.
+\item P.~A.~M.~Dirac, Forms of relativistic dynamics,
+      \emph{Rev.\ Mod.\ Phys.} \textbf{21} (1949) 392.
+\item T.~Kaluza, Zum Unit\"atsproblem der Physik, \emph{Sitzungsber.\ Preuss.\ Akad.\ Wiss.}
+      (1921) 966.
+\item O.~Klein, Quantentheorie und f\"unfdimensionale Relativit\"atstheorie,
+      \emph{Z.\ Phys.} \textbf{37} (1926) 895.
+\item Yu.~B.~Rumer, Action as a space coordinate (in Russian),
+      \emph{Zh.\ Eksp.\ Teor.\ Fiz.} \textbf{19} (1949); and
+      \emph{Issledovaniya po 5-optike} (Studies on 5-optics) (Gostekhizdat,
+      Moscow, 1956).
+\item N.~Redington, On the significance of the fifth coordinate in Wesson's
+      version of Kaluza--Klein theory, arXiv:gr-qc/9701062 (1997).
+\item START in a five-dimensional conformal domain (on Keller's START theory and
+      Rumer's 5-optics), arXiv:1111.5540.
+\item N.~Seiberg, Why is the Matrix model correct?,
+      \emph{Phys.\ Rev.\ Lett.} \textbf{79} (1997) 3577.
+\item D.~T.~Son and M.~Wingate, General coordinate invariance and conformal
+      invariance in nonrelativistic physics: unitary Fermi gas,
+      \emph{Ann.\ Phys.} \textbf{321} (2006) 197.
+\item Y.~Nishida and D.~T.~Son, Nonrelativistic conformal field theories,
+      \emph{Phys.\ Rev.\ D} \textbf{76} (2007) 086004.
+\item D.~T.~Son, Toward an AdS/cold atoms correspondence: a geometric
+      realization of the Schr\"odinger symmetry, \emph{Phys.\ Rev.\ D}
+      \textbf{78} (2008) 046003.
+\item K.~Balasubramanian and J.~McGreevy, Gravity duals for non-relativistic CFTs,
+      \emph{Phys.\ Rev.\ Lett.} \textbf{101} (2008) 061601.
+\item G.~Burdet, M.~Perrin and P.~Sorba, About the non-relativistic structure of
+      the conformal algebra, \emph{Commun.\ Math.\ Phys.} \textbf{34} (1973) 85.
+\item C.~Duval and P.~A.~Horv\'athy, Non-relativistic conformal symmetries and
+      Newton--Cartan structures, \emph{J.\ Phys.\ A} \textbf{42} (2009) 465206.
+\item K.~Jensen, On the coupling of Galilean-invariant field theories to curved
+      spacetime, arXiv:1408.6855 (published in \emph{SciPost Phys.}, 2018).
+\item W.~Kohn, Cyclotron resonance and de Haas--van Alphen oscillations of an
+      interacting electron gas, \emph{Phys.\ Rev.} \textbf{123} (1961) 1242.
+\item C.~Hoyos and D.~T.~Son, Hall viscosity and electromagnetic response,
+      \emph{Phys.\ Rev.\ Lett.} \textbf{108} (2012) 066805.
+\item B.~Bradlyn, M.~Goldstein and N.~Read, Kubo formulas for viscosity: Hall
+      viscosity, Ward identities, and the relation with conductivity,
+      \emph{Phys.\ Rev.\ B} \textbf{86} (2012) 245309.
+\item N.~Read, Non-Abelian adiabatic statistics and Hall viscosity in quantum Hall
+      states and $p_x+ip_y$ paired superfluids, \emph{Phys.\ Rev.\ B}
+      \textbf{79} (2009) 045308.
+\item D.~T.~Son, Newton--Cartan geometry and the quantum Hall effect,
+      arXiv:1306.0638.
+\item M.~Geracie, D.~T.~Son, C.~Wu and S.-F.~Wu, Spacetime symmetries of the
+      quantum Hall effect, \emph{Phys.\ Rev.\ D} \textbf{91} (2015) 045030.
+\item M.~Taylor, Lifshitz holography, arXiv:1512.03554.
+\end{itemize}
