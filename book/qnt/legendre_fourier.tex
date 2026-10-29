@@ -1,0 +1,439 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+% ---------- macros ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\hb}{\hbar}
+\newcommand{\op}[1]{\hat{#1}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Hess}{\operatorname{Hess}}
+\newcommand{\ext}{\operatorname*{ext}}
+\newcommand{\Pois}[2]{\{#1,#2\}}
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\braket}[2]{\langle #1|#2\rangle}
+\newcommand{\FT}{\mathcal{F}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{From Legendre to Fourier:\\[2pt]
+How Quantization Turns a Classical Duality into a Unitary One}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In classical mechanics the passage between ``velocity'' and ``momentum'' variables, and more generally between different generating functions of a canonical transformation, is carried out by the \emph{Legendre transform}. In quantum mechanics the passage between the position and the momentum representation is carried out by the \emph{Fourier transform}. These two operations look unrelated: one is nonlinear and defined by an extremum, the other is linear and defined by an integral. This article explains in detail why they are in fact two faces of the same structure. The key is the oscillatory ansatz $\psi=a\,\ee^{\ii S/\hb}$: applying the stationary-phase method to the Fourier integral shows that, as $\hb\to0$, the Fourier transform acts on the phase $S$ as a Legendre transform, on the amplitude $a$ as a Jacobian (half-density), and contributes an additional Maslov phase from the signature of the Hessian. We derive this statement with proofs, check it on exactly solvable examples (a chirp, the Airy function, the harmonic oscillator), show how it organises the four types of generating functions, the Hamilton--Jacobi / Schr\"odinger correspondence, the Hamiltonian-to-Lagrangian passage in the path integral and the time--energy duality, and explain what is exact (the metaplectic and Weyl--Heisenberg structure) and what is only asymptotic. We close with the ``dequantization'' picture, in which the Legendre transform is the Fourier transform of idempotent (tropical) analysis, and with a short remark on polarizations in geometric quantization.
+\end{abstract}
+
+\tableofcontents
+
+% =====================================================================
+\section{Introduction and overview}
+% =====================================================================
+
+Textbook classical mechanics uses the Legendre transform in two places that look different at first sight. The Hamiltonian is the Legendre transform of the Lagrangian with respect to the velocities,
+\begin{equation}
+H(q,p)=\ext_{v}\bigl[\,p\,v-L(q,v)\,\bigr],\qquad p=\frac{\partial L}{\partial v},
+\end{equation}
+and the various generating functions $F_1(q,Q),\dots,F_4(p,P)$ of a canonical transformation are related to each other by Legendre transforms in some of their arguments \cite{Arnold,Goldstein,LL1}. Textbook quantum mechanics uses the Fourier transform to pass from the wave function $\psi(x)$ in the position representation to the wave function $\varphi(p)$ in the momentum representation \cite{Dirac,LL3},
+\begin{equation}
+\varphi(p)=\frac{1}{\sqrt{2\pi\hb}}\int_{\R}\ee^{-\ii p x/\hb}\,\psi(x)\,\dd x .
+\end{equation}
+Both operations exchange the roles of a coordinate and a momentum, and both are involutive up to a sign. It is natural to suspect that quantization --- the replacement of classical phase-space functions by operators --- sends the first to the second. This is indeed the case, but the correspondence is not an identity: it is an \emph{asymptotic} one, and it has several non-obvious ingredients (nonlinearity versus linearity, multivaluedness and caustics, a phase correction known as the Maslov index). The purpose of this article is to spell all of that out.
+
+\paragraph{Summary of the main point.}
+Write a wave function in the form $\psi(x)=a(x)\,\ee^{\ii S(x)/\hb}$, where $S$ is real. Then, for $\hb\to0$,
+\begin{equation}\label{eq:main}
+\varphi(p)\;\simeq\;\sum_{j}\;\frac{a(x_j)}{\sqrt{|\det \Hess S(x_j)|}}\;\ee^{\ii\frac{\pi}{4}\sgn \Hess S(x_j)}\;\ee^{-\ii S^*_j(p)/\hb},
+\end{equation}
+where the sum runs over the solutions $x_j$ of $\nabla S(x_j)=p$ and $S_j^*(p)=p\cdot x_j-S(x_j)$ is the corresponding branch of the Legendre transform of $S$. In words: the \emph{phase} of $\varphi$ is minus the Legendre transform of the phase of $\psi$, the \emph{amplitude} is transformed with the Jacobian of the Legendre map, and one adds the signature phase. This is Theorem~\ref{thm:main} below. Table~\ref{tab:dictionary} in Section~\ref{sec:dictionary} collects the resulting dictionary.
+
+\paragraph{Conventions.}
+We work in $n$ degrees of freedom, with $x,p\in\R^n$; $\hb>0$ is Planck's constant; $\Hess S=(\partial^2S/\partial x_i\partial x_j)$. The unitary Fourier transform is $\FT\psi(p)=(2\pi\hb)^{-n/2}\int\ee^{-\ii p\cdot x/\hb}\psi(x)\,\dd x$. The symbol $\ext$ means ``value at a stationary point''; when the function is strictly convex (concave) it coincides with $\sup$ ($\inf$). The Legendre transform of a function $f$ is $f^*(p)=\ext_x\,[\,p\cdot x-f(x)\,]$.
+
+% =====================================================================
+\section{The classical side: Legendre transform and generating functions}
+% =====================================================================
+
+\subsection{The Legendre transform}
+
+\begin{definition}
+Let $f:\R^n\to\R$ be smooth and strictly convex ($\Hess f>0$). Its Legendre transform is
+\begin{equation}
+f^*(p)=\sup_{x}\,[\,p\cdot x-f(x)\,]=p\cdot x(p)-f\bigl(x(p)\bigr),\qquad \nabla f\bigl(x(p)\bigr)=p .
+\end{equation}
+\end{definition}
+
+The map $x\mapsto p=\nabla f(x)$ is a diffeomorphism onto its image because its Jacobian $\Hess f$ is positive definite. The following properties are standard \cite{Arnold,Rockafellar,Zia}.
+
+\begin{enumerate}[label=(L\arabic*),leftmargin=*]
+\item \textbf{Gradient inversion.} Differentiating $f^*(p)=p\cdot x(p)-f(x(p))$ and using $\nabla f(x(p))=p$ gives $\nabla f^*(p)=x(p)$ (the terms containing $\partial x/\partial p$ cancel). Thus $\nabla f^*=(\nabla f)^{-1}$.
+\item \textbf{Hessian inversion.} Differentiating once more, $\Hess f^*(p)=\bigl[\Hess f(x(p))\bigr]^{-1}$.
+\item \textbf{Involution.} $f^{**}=f$ (for convex lower semicontinuous $f$; Fenchel--Moreau).
+\item \textbf{Young's inequality.} $f(x)+f^*(p)\ge p\cdot x$, with equality iff $p=\nabla f(x)$.
+\item \textbf{Shifts and tilts.} If $g(x)=f(x-a)$ then $g^*(p)=f^*(p)+p\cdot a$. If $g(x)=f(x)+p_0\cdot x$ then $g^*(p)=f^*(p-p_0)$.
+\item \textbf{Sums and infimal convolution.} With $(f\,\square\,g)(x)=\inf_y[f(x-y)+g(y)]$ one has $(f\,\square\,g)^*=f^*+g^*$.
+\item \textbf{Quadratic forms.} If $f(x)=\tfrac12 x\cdot Ax$ with $A>0$, then $f^*(p)=\tfrac12 p\cdot A^{-1}p$.
+\end{enumerate}
+
+\paragraph{Geometric meaning.}
+In one dimension, $f^*(p)$ is minus the intercept with the vertical axis of the tangent line to the graph of $f$ having slope $p$. Equivalently, the graph of $f$ is the envelope of the family of its tangent lines, and $f^*$ encodes that family. This is why the Legendre transform loses no information for convex $f$: the family of tangents is a different but equivalent description of the same curve. In more invariant language, the Legendre transform does not really act on functions but on \emph{Lagrangian submanifolds} of $T^*\R^n$ (Section~\ref{sec:lagrangian}): the same $n$-dimensional surface $\{(x,\nabla f(x))\}=\{(\nabla f^*(p),p)\}$ can be described as a graph over the $x$-space with generating function $f$, or as a graph over the $p$-space with generating function $f^*$.
+
+\paragraph{Non-convex case.}
+If $f$ is not convex, the equation $\nabla f(x)=p$ may have several solutions, or none; the map $x\mapsto\nabla f(x)$ folds, and $f^*$ becomes a multivalued function with branches $f^*_j(p)=p\cdot x_j(p)-f(x_j(p))$ meeting at \emph{cusps/swallowtails} (the singularities of the front, called caustics in optics) \cite{Arnold,Duistermaat}. The Legendre--Fenchel transform, defined with $\sup$, selects the dominant branch and returns the convex hull of the full multivalued object \cite{Rockafellar,Touchette}. As we will see, the Fourier transform does \emph{not} discard the other branches: it superposes all of them with definite phases.
+
+\subsection{Lagrangian and Hamiltonian}
+
+For a mechanical system with Lagrangian $L(q,v)$ strictly convex in $v$, the momentum is $p=\partial L/\partial v$ and
+\begin{equation}
+H(q,p)=p\cdot v(q,p)-L\bigl(q,v(q,p)\bigr),\qquad L(q,v)=p(q,v)\cdot v-H\bigl(q,p(q,v)\bigr),\quad v=\frac{\partial H}{\partial p}.
+\end{equation}
+By (L2), $\partial^2H/\partial p^2=(\partial^2L/\partial v^2)^{-1}$, which is the familiar statement that the inverse mass matrix is the Hessian of the kinetic energy in the momenta. The Euler--Lagrange equations become Hamilton's equations. Thermodynamics offers the same structure: the free energy $F(T)$ is (minus) the Legendre transform of the internal energy $U(S)$ with respect to the entropy, $F=U-TS$ with $T=\partial U/\partial S$ \cite{Callen,Zia}; we will meet its statistical counterpart in Section~\ref{sec:laplace}.
+
+\subsection{Canonical transformations, generating functions and Lagrangian submanifolds}\label{sec:lagrangian}
+
+Phase space $T^*\R^n=\R^{2n}$ carries the symplectic form $\omega=\sum_i\dd p_i\wedge\dd q_i$ (sign conventions vary), and the Poisson bracket $\Pois{f}{g}=\sum_i(\partial_{q_i}f\,\partial_{p_i}g-\partial_{p_i}f\,\partial_{q_i}g)$. A diffeomorphism $(q,p)\mapsto(Q,P)$ is \emph{canonical} if it preserves $\omega$, equivalently $\sum p\,\dd q-\sum P\,\dd Q$ is closed, hence locally exact. Writing it as $\dd F_1$ gives the \emph{type-1 generating function}
+\begin{equation}
+p=\frac{\partial F_1}{\partial q}(q,Q),\qquad P=-\frac{\partial F_1}{\partial Q}(q,Q).
+\end{equation}
+Legendre-transforming in $Q$ (so that $P$ becomes an independent variable) gives the \emph{type-2 generating function}
+\begin{equation}\label{eq:F2}
+F_2(q,P)=F_1(q,Q)+Q\cdot P,\qquad p=\frac{\partial F_2}{\partial q},\quad Q=\frac{\partial F_2}{\partial P},
+\end{equation}
+and similarly one obtains $F_3(p,Q)$ and $F_4(p,P)$ by transforming in $q$ and in both \cite{Goldstein,Arnold}. The four generating functions are all Legendre transforms of one another, on the appropriate branches.
+
+A fixed function $S(x)$ defines the \emph{Lagrangian submanifold} $L_S=\{(x,p):p=\nabla S(x)\}\subset T^*\R^n$ ($n$-dimensional, with $\omega|_{L_S}=0$). The Hamilton--Jacobi theory is the statement that a canonical transformation sending a Hamiltonian $H$ to zero is generated by a solution of
+\begin{equation}
+\frac{\partial S}{\partial t}+H\bigl(x,\nabla S\bigr)=0.
+\end{equation}
+Using the other polarization, the same $L_S$ may be written as $\{(x,p):x=-\nabla G(p)\}$ with $G(p)=S(x)-p\cdot x=-S^*(p)$ (on a given branch). The Legendre transform is thus the change of the generating function of a Lagrangian submanifold when one swaps the roles of the base coordinate: $x\leftrightarrow p$.
+
+\subsection{Principal function versus characteristic function: time and energy}\label{sec:timeenergy}
+
+Hamilton's principal function $S(q,q';t)=\int_0^t L\,\dd\tau$ along the classical path from $q'$ to $q$ in time $t$ satisfies $\partial S/\partial t=-E$, $\partial S/\partial q=p$, $\partial S/\partial q'=-p'$. For conserved energy, Hamilton's characteristic function (the abbreviated action) $W(q,q';E)=\int_{q'}^{q}p\cdot\dd q$ satisfies
+\begin{equation}\label{eq:WLegendre}
+W(q,q';E)=S(q,q';t)+E\,t,\qquad E=-\frac{\partial S}{\partial t},\qquad t=\frac{\partial W}{\partial E},
+\end{equation}
+so $W$ is the Legendre transform of $S$ with respect to the pair $(t,E)$. This is a Legendre transform of exactly the same kind as in (\ref{eq:F2}), with time and energy playing the roles of coordinate and momentum \cite{LL1,Gutzwiller}.
+
+
+% =====================================================================
+\section{The quantum side: Heisenberg algebra and the Fourier transform}
+% =====================================================================
+
+\subsection{Representations of the canonical commutation relations}
+
+Quantization replaces the commutative algebra of phase-space functions by the Heisenberg algebra generated by $\op x_i,\op p_j$ with $[\op x_i,\op p_j]=\ii\hb\,\delta_{ij}$. The relations are realised on $L^2(\R^n)$ in two familiar ways:
+\begin{align}
+\text{position representation:}&\quad \op x=x\cdot,\quad \op p=-\ii\hb\nabla_x \quad\text{acting on }\psi(x),\\
+\text{momentum representation:}&\quad \op x=+\ii\hb\nabla_p,\quad \op p=p\cdot\quad\text{acting on }\varphi(p).
+\end{align}
+That these are \emph{the same} representation, up to unitary equivalence, is a theorem. In its exponentiated (Weyl) form, which avoids domain problems with unbounded operators, one considers the unitary groups $U(\xi)=\ee^{\ii\xi\cdot\op x/\hb}$, $V(\eta)=\ee^{\ii\eta\cdot\op p/\hb}$ satisfying $U(\xi)V(\eta)=\ee^{-\ii\xi\cdot\eta/\hb}V(\eta)U(\xi)$ \cite{Hall,Folland}.
+
+\begin{theorem}[Stone--von Neumann \cite{Stone,vonNeumann}]\label{thm:SvN}
+Every strongly continuous irreducible unitary representation of the Weyl relations on a Hilbert space is unitarily equivalent to the Schr\"odinger representation on $L^2(\R^n)$.
+\end{theorem}
+
+The unitary operator that intertwines the position and momentum representations is, by definition, the Fourier transform:
+\begin{equation}
+\varphi=\FT\psi,\qquad \FT\op x\,\FT^{-1}=\ii\hb\nabla_p,\quad \FT\op p\,\FT^{-1}=p\cdot .
+\end{equation}
+Indeed, integrating by parts, $\FT(-\ii\hb\nabla\psi)(p)=p\,\FT\psi(p)$, and $\FT(x\psi)(p)=\ii\hb\nabla_p\FT\psi(p)$. By Plancherel's theorem $\FT$ is unitary on $L^2(\R^n)$, so the Born rule is representation independent: $\int|\psi|^2\dd x=\int|\varphi|^2\dd p$. Physically, $\varphi(p)=\braket{p}{\psi}$ with $\braket{x}{p}=(2\pi\hb)^{-n/2}\ee^{\ii p\cdot x/\hb}$ \cite{Dirac}. The kernel of $\FT$ is the pure phase $\ee^{-\ii p\cdot x/\hb}$; in Section~\ref{sec:kernels} we will see that this phase is $\ee^{\ii F/\hb}$ with $F=-p\cdot x$ the generating function of the classical quarter turn (\ref{eq:quarterturn}).
+
+\subsection{The Fourier transform as the quantization of a rotation of phase space}\label{sec:HOFT}
+
+Consider the linear canonical transformation
+\begin{equation}\label{eq:quarterturn}
+R:\ (x,p)\longmapsto (Q,P)=(p,-x).
+\end{equation}
+It is a rotation by $\pi/2$ in each $(x_i,p_i)$-plane and is the time-$\pi/2$ map of the flow of the harmonic oscillator $H=\tfrac12(p^2+x^2)$, since $x(t)=x\cos t+p\sin t$, $p(t)=-x\sin t+p\cos t$. In the quantum theory, the oscillator has $\op H=\hb(\op N+\tfrac12)$ with eigenfunctions the Hermite functions $h_k$, and one has, in units $m=\omega=1$,
+\begin{equation}\label{eq:FTHermite}
+\FT\,h_k=(-\ii)^k\,h_k\qquad\Longrightarrow\qquad \FT=\ee^{-\ii\frac{\pi}{2}\op N}=\ee^{\ii\pi/4}\,\ee^{-\ii\frac{\pi}{2\hb}\op H}.
+\end{equation}
+Thus \emph{the Fourier transform is, up to a constant phase, the quantum evolution operator of the harmonic oscillator for a quarter of a period}, in the same way that (\ref{eq:quarterturn}) is the classical evolution for a quarter period \cite{Namias,Moshinsky,deGosson1}. The fractional Fourier transform $\ee^{-\ii\alpha\op N}$ is the quantum version of the rotation by an arbitrary angle $\alpha$, and its kernel is the Mehler kernel,
+\begin{equation}\label{eq:Mehler}
+K_\alpha(x,y)=\frac{1}{\sqrt{2\pi\ii\hb\sin\alpha}}\exp\left\{\frac{\ii}{2\hb\sin\alpha}\Bigl[(x^2+y^2)\cos\alpha-2xy\Bigr]\right\}
+\end{equation}
+(up to a constant phase depending on convention), which for $\alpha=\pi/2$ reduces to $(2\pi\ii\hb)^{-1/2}\ee^{-\ii xy/\hb}$, i.e.\ to the Fourier kernel. Note that the phase in (\ref{eq:Mehler}) is $\ii/\hb$ times
+\begin{equation}\label{eq:F1rot}
+F_1(x,y)=\frac{(x^2+y^2)\cos\alpha-2xy}{2\sin\alpha},
+\end{equation}
+which is exactly the type-1 generating function of the rotation by angle $\alpha$: one checks that $\partial F_1/\partial x=(x\cos\alpha-y)/\sin\alpha$ and $-\partial F_1/\partial y=(x-y\cos\alpha)/\sin\alpha$ are the final and initial momenta of the classical trajectory joining $y$ to $x$. Already here the pattern we want to prove in general is visible: \emph{the quantum kernel of a canonical transformation is the exponential of $\ii/\hb$ times its generating function}, with an amplitude $|\det\partial^2F_1/\partial x\,\partial y|^{1/2}/\sqrt{2\pi\hb}$ (here $|\sin\alpha|^{-1/2}/\sqrt{2\pi\hb}$).
+
+\subsection{Linear canonical transformations: exact quantization}
+
+More generally, every linear symplectic map $M\in Sp(2n,\R)$ is implemented by a unitary operator $\mu(M)$ on $L^2(\R^n)$ (unique up to sign, i.e.\ a representation of the metaplectic double cover $Mp(2n,\R)$), such that $\mu(M)^{-1}\,\op z\,\mu(M)=M\op z$ for $\op z=(\op x,\op p)$ \cite{Weil,Folland,deGosson2}. For such maps the correspondence between classical and quantum is \emph{exact}: kernels have the form (amplitude)$\times\ee^{\ii F/\hb}$ with $F$ a quadratic form, and Gaussian integrals involve no approximation. The Fourier transform is the simplest nontrivial element of this family. For nonlinear canonical transformations no unitary operator implements them exactly (see Section~\ref{sec:exact}), and only the semiclassical correspondence below survives.
+
+% =====================================================================
+\section{The bridge: stationary phase turns Fourier into Legendre}\label{sec:bridge}
+% =====================================================================
+
+\subsection{WKB states and the Hamilton--Jacobi equation}
+
+A state is called a \emph{WKB} (or Lagrangian) state if $\psi(x)=a(x)\,\ee^{\ii S(x)/\hb}$ with $a,S$ independent of $\hb$ or having a regular expansion in $\hb$ \cite{Maslov,MaslovFedoriuk,Littlejohn}. Substituting into the time-dependent Schr\"odinger equation $\ii\hb\,\partial_t\psi=(-\tfrac{\hb^2}{2m}\Delta+V)\psi$ and collecting powers of $\hb$ gives, at order $\hb^0$, the Hamilton--Jacobi equation $\partial_tS+\tfrac{1}{2m}|\nabla S|^2+V=0$, and at order $\hb^1$ the transport equation $\partial_t a^2+\nabla\cdot(a^2\nabla S/m)=0$, i.e.\ continuity of the probability density $\rho=a^2$ along the classical flow \cite{LL3,Berry}. The momentum field of the state is $p=\nabla S(x)$: the state is concentrated, in phase space, on the Lagrangian submanifold $L_S=\{(x,\nabla S(x))\}$ of Section~\ref{sec:lagrangian}. Passing to the momentum representation means looking at the \emph{same} state through the other polarization, and the claim is that the new description is given by the Legendre transform of $S$.
+
+\subsection{The main theorem}
+
+\begin{theorem}[Fourier transform of a WKB state]\label{thm:main}
+Let $a\in C_c^\infty(\R^n)$ and $S\in C^\infty(\R^n;\R)$, and $\psi_\hb(x)=a(x)\,\ee^{\ii S(x)/\hb}$. Let $p\in\R^n$ be such that the critical equation $\nabla S(x)=p$ has finitely many solutions $x_1(p),\dots,x_N(p)$ in $\operatorname{supp}a$, all non-degenerate, $\det\Hess S(x_j)\neq0$. Then, as $\hb\to0$,
+\begin{equation}\label{eq:mainthm}
+\FT\psi_\hb(p)=\sum_{j=1}^N\frac{a(x_j)}{\sqrt{|\det\Hess S(x_j)|}}\;\ee^{\ii\frac{\pi}{4}\sgn\Hess S(x_j)}\;\ee^{-\frac{\ii}{\hb}S_j^*(p)}\;\bigl(1+O(\hb)\bigr),
+\end{equation}
+where $S_j^*(p)=p\cdot x_j(p)-S(x_j(p))$ is the $j$-th branch of the Legendre transform of $S$ and $\sgn$ denotes the signature (number of positive minus number of negative eigenvalues). If there is no solution of $\nabla S(x)=p$, then $\FT\psi_\hb(p)=O(\hb^\infty)$. The estimate is uniform for $p$ in compact sets on which the critical points remain non-degenerate.
+\end{theorem}
+
+\begin{proof}
+We have $\FT\psi_\hb(p)=(2\pi\hb)^{-n/2}\int a(x)\ee^{\ii\Phi_p(x)/\hb}\,\dd x$ with phase $\Phi_p(x)=S(x)-p\cdot x$. Its gradient is $\nabla S(x)-p$, so its critical points are the solutions of $\nabla S(x)=p$, its Hessian is $\Hess S$, and the critical value at $x_j$ is $\Phi_p(x_j)=S(x_j)-p\cdot x_j=-S^*_j(p)$. By the stationary phase lemma \cite{Hormander1,Stein,Wong}, for a compactly supported amplitude and non-degenerate critical points,
+\begin{equation}
+\int a(x)\,\ee^{\ii\Phi(x)/\hb}\,\dd x=\sum_j(2\pi\hb)^{n/2}\,\frac{a(x_j)\,\ee^{\ii\Phi(x_j)/\hb}\,\ee^{\ii\frac\pi4\sgn\Hess\Phi(x_j)}}{\sqrt{|\det\Hess\Phi(x_j)|}}\bigl(1+O(\hb)\bigr),
+\end{equation}
+and the integral is $O(\hb^\infty)$ if there are no critical points, by repeated integration by parts. Dividing by $(2\pi\hb)^{n/2}$ gives (\ref{eq:mainthm}).
+\end{proof}
+
+\begin{remark}[Reading the theorem]\label{rem:reading}
+Equation (\ref{eq:mainthm}) says three things.
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item \textbf{Phase.} If $\psi=\ee^{\ii S/\hb}$ has classical momentum $p=\nabla S(x)$, then $\FT\psi\sim\ee^{\ii\tilde S/\hb}$ with $\tilde S(p)=-S^*(p)=S(x)-p\cdot x$, and $\nabla_p\tilde S=-x$. This is precisely the classical quarter turn $(x,p)\mapsto(Q,P)=(p,-x)$ of (\ref{eq:quarterturn}) acting on the Lagrangian submanifold $L_S$: the image of $L_S$ is the graph $P=\nabla\tilde S(Q)$ with $\tilde S=-S^*$. Equivalently (passive reading), the very same submanifold $L_S$ is described in the momentum representation as $x=-\nabla_p\tilde S(p)$.
+\item \textbf{Amplitude.} By (L2), $|\det\Hess S|^{-1/2}=|\det\Hess S^*|^{1/2}$. The amplitude transforms as a \emph{half-density}: this is exactly what is needed to conserve probability, because the change of variables $p=\nabla S(x)$ has Jacobian $|\det\Hess S|$, so $|\FT\psi|^2\dd p=a^2\,\dd x$ on each branch. The Legendre transform is thus the classical transport of the density $a^2\dd x$ from the $x$-polarization to the $p$-polarization.
+\item \textbf{Maslov phase.} The factor $\ee^{\ii\frac\pi4\sgn\Hess S}$ has no classical analogue. It is a purely quantum correction, which accumulates (as $\ee^{-\ii\pi\mu/2}$, where $\mu$ is the \emph{Maslov index}) each time one passes through a caustic, i.e.\ a point where $\det\Hess S=0$ and the Legendre map folds \cite{Maslov,MaslovFedoriuk,Keller,Duistermaat}.
+\end{enumerate}
+\end{remark}
+
+\subsection{Examples}
+
+\begin{example}[Chirp: exact quadratic case]\label{ex:chirp}
+Let $\psi(x)=\ee^{\ii a x^2/(2\hb)}$, $a\in\R\setminus\{0\}$ (not normalisable, but the Fourier transform exists as a tempered distribution and the computation is a Fresnel integral). Then
+\begin{equation}
+\FT\psi(p)=\frac{1}{\sqrt{2\pi\hb}}\int\ee^{\frac{\ii}{2\hb}(ax^2-2px)}\,\dd x=\frac{1}{\sqrt{|a|}}\,\ee^{\ii\frac\pi4\sgn a}\,\ee^{-\ii\frac{p^2}{2a\hb}} .
+\end{equation}
+On the other hand $S(x)=\tfrac12ax^2$ has $S^*(p)=p^2/(2a)$ by (L7), $\Hess S=a$, and (\ref{eq:mainthm}) gives the same expression \emph{exactly}, with no $O(\hb)$ correction. This is the general fact that for quadratic phases the stationary-phase approximation is an identity, which is the content of the exactness of the metaplectic representation.
+\end{example}
+
+\begin{example}[Airy function: a fold caustic]\label{ex:Airy}
+Take $n=1$, $S(x)=x^3/3$, $a\equiv1$ (cut off far away; the oscillatory integral converges as an improper integral). Then $S'(x)=x^2=p$ has two solutions $x_\pm=\pm\sqrt p$ for $p>0$, none for $p<0$, and they merge at $p=0$, where $S''(0)=0$. The exact transform is an Airy function: substituting $x=\hb^{1/3}t$ and using $\mathrm{Ai}(z)=\frac1{2\pi}\int\ee^{\ii(t^3/3+zt)}\dd t$,
+\begin{equation}
+\FT\psi(p)=\frac{1}{\sqrt{2\pi\hb}}\int\ee^{\frac{\ii}{\hb}(\frac{x^3}{3}-px)}\dd x=\sqrt{2\pi}\,\hb^{-1/6}\,\mathrm{Ai}\bigl(-p\,\hb^{-2/3}\bigr).
+\end{equation}
+For $p>0$ the Legendre branches are $S_\pm^*(p)=p x_\pm-x_\pm^3/3=\pm\tfrac23p^{3/2}$, with $S''(x_\pm)=\pm2\sqrt p$, hence Maslov phases $\ee^{\pm\ii\pi/4}$ and amplitudes $(2\sqrt p)^{-1/2}$. Theorem~\ref{thm:main} gives, writing $\theta=\tfrac23p^{3/2}/\hb$,
+\begin{equation}
+\FT\psi(p)\simeq\frac{1}{\sqrt2\,p^{1/4}}\Bigl[\ee^{\ii\frac\pi4-\ii\theta}+\ee^{-\ii\frac\pi4+\ii\theta}\Bigr]=\sqrt2\,p^{-1/4}\cos\bigl(\theta-\tfrac\pi4\bigr).
+\end{equation}
+The well-known asymptotics $\mathrm{Ai}(-z)\sim\pi^{-1/2}z^{-1/4}\sin(\tfrac23z^{3/2}+\tfrac\pi4)$ with $z=p\hb^{-2/3}$ give the exact same expression $\sqrt2\,p^{-1/4}\sin(\theta+\tfrac\pi4)=\sqrt2\,p^{-1/4}\cos(\theta-\tfrac\pi4)$, so the two Legendre branches interfere with a relative phase $\pi/2$ coming from the Maslov indices. For $p<0$ there is no classical point and the wave function is exponentially small (the Airy function decays), and at $p=0$ the amplitude $p^{-1/4}$ of the naive formula diverges while the true wave function is finite, of size $\hb^{-1/6}$: this is the caustic \cite{Berry,Duistermaat}.
+\end{example}
+
+\begin{example}[Real Gaussian: a first glimpse of the Laplace version]\label{ex:gauss}
+For $\psi(x)=\ee^{-f(x)}$ with $f(x)=x^2/(2\sigma^2)$ one has exactly $\FT\psi(p)=(\sigma/\sqrt\hb)\,\ee^{-\sigma^2p^2/(2\hb^2)}$. In the wave number $k=p/\hb$ this says $-\ln\FT\psi=f^*(k)+\text{const}$ with $f^*(k)=\sigma^2k^2/2$ by (L7): the logarithm of a Gaussian is a quadratic form, and the Fourier transform of a Gaussian is the Gaussian built on the inverse quadratic form. This is the same mechanism as in the theorem, but with a \emph{real} exponent (see Section~\ref{sec:laplace}), where Maslov phases are absent and, for non-quadratic $f$, only the dominant branch of the Legendre transform survives.
+\end{example}
+
+\subsection{Caustics, multivaluedness and why Fourier is richer than Legendre}\label{sec:caustics}
+
+Example~\ref{ex:Airy} shows the essential difference between the two transforms in the non-convex regime. The Legendre transform $S^*$ of a non-convex $S$ is multivalued with branch points at caustics; the Legendre--Fenchel transform with a $\sup$ picks the upper envelope and is a convex function. The Fourier transform, on the other hand, adds \emph{all} branches, each with its own phase $\ee^{-\ii S^*_j/\hb}$ and its own Maslov index, so that interference appears; it also stays finite at the caustic, where it is described by a uniform approximation (Airy for a fold, Pearcey for a cusp, etc.) \cite{Duistermaat,Berry,Arnold}. The correct global geometric object on which the stationary-phase analysis lives is not the graph of a function but the whole Lagrangian submanifold $L$; locally, on each piece where $L$ projects diffeomorphically to the $x$- or to the $p$-space, it has a generating function, and Maslov's canonical operator patches together the local expressions using the Fourier transform to change polarization and the Maslov index to fix the phases \cite{Maslov,MaslovFedoriuk,Hormander2}.
+
+\subsection{Generating functions as quantum kernels}\label{sec:kernels}
+
+Dirac observed that the transformation functions between representations are the quantum counterparts of the classical generating functions of contact transformations: the kernel of a unitary operator $U$ implementing a canonical transformation $(Q,P)\mapsto(q,p)$ (initial $\mapsto$ final) with type-1 generating function $F_1(q,Q)$, $p=\partial F_1/\partial q$, $P=-\partial F_1/\partial Q$, is, semiclassically \cite{Dirac27,Dirac,VanVleck,Schulman,Gutzwiller},
+\begin{equation}\label{eq:VanVleck}
+\bra{q}U\ket{Q}\;\simeq\;\frac{1}{(2\pi\ii\hb)^{n/2}}\,\Bigl|\det\frac{\partial^2F_1}{\partial q\,\partial Q}\Bigr|^{1/2}\;\ee^{\frac{\ii}{\hb}F_1(q,Q)}
+\end{equation}
+(up to Maslov phases). This is the Van Vleck formula; for quadratic $F_1$ it is exact, as in (\ref{eq:Mehler}). Now, to change from the representation $\ket{Q}$ to the representation $\ket{P}$ one uses $\braket{Q}{P}=(2\pi\hb)^{-n/2}\ee^{\ii Q\cdot P/\hb}$, i.e.\ a Fourier transform in the variable $Q$:
+\begin{equation}
+\bra{q}U\ket{P}=\int\bra{q}U\ket{Q}\braket{Q}{P}\,\dd Q\;\simeq\;\int A(q,Q)\,\ee^{\frac{\ii}{\hb}\bigl[F_1(q,Q)+Q\cdot P\bigr]}\dd Q .
+\end{equation}
+The phase is $F_1+Q\cdot P$; its critical point with respect to $Q$ is $P=-\partial F_1/\partial Q$ (the classical relation), and its critical value is, by (\ref{eq:F2}),
+\begin{equation}
+F_2(q,P)=\bigl[F_1(q,Q)+Q\cdot P\bigr]_{Q=Q(q,P)} .
+\end{equation}
+Hence \emph{the Fourier transform in the argument $Q$ of the kernel produces, by stationary phase, the Legendre transform that links the generating functions of type 1 and type 2}. The amplitudes also fit together: stationary phase contributes a factor $|\det\partial^2F_1/\partial Q^2|^{-1/2}$ (and a Maslov phase $\ee^{\ii\frac\pi4\sgn(\partial^2F_1/\partial Q^2)}$), and since $\partial Q/\partial q|_P=-(\partial^2F_1/\partial Q^2)^{-1}\partial^2F_1/\partial Q\,\partial q$, one finds $|\det\partial^2F_2/\partial q\,\partial P|^{1/2}=|\det\partial^2F_1/\partial q\,\partial Q|^{1/2}\,|\det\partial^2F_1/\partial Q^2|^{-1/2}$, as it should be. Similarly the types 3 and 4 correspond to Fourier transforms in $q$, or in both $q$ and $Q$. In summary:
+\begin{center}
+\emph{classical generating functions are related by Legendre transforms;\ \ the corresponding quantum kernels are related by Fourier transforms.}
+\end{center}
+\noindent Theorem~\ref{thm:main} is the special case in which the classical transformation is the quarter turn (\ref{eq:quarterturn}), $(Q,P)\mapsto(q,p)=(P,-Q)$, with $F_1(q,Q)=-q\cdot Q$ and kernel $\ee^{-\ii q\cdot Q/\hb}$, which is the kernel of $\FT$ (its inverse $\FT^{-1}$ corresponds to $F_1=+q\cdot Q$).
+
+
+% =====================================================================
+\section{Dynamics: path integrals, time and energy}
+% =====================================================================
+
+\subsection{From the phase-space to the Lagrangian path integral}
+
+Split the evolution operator into $N$ short steps $\varepsilon=t/N$ and insert complete sets of position and momentum states \cite{Feynman48,FeynmanHibbs,Schulman}. A single short-time factor is, for a Hamiltonian written in a suitable ordering,
+\begin{equation}\label{eq:shorttime}
+\bra{x_{k+1}}\ee^{-\ii\varepsilon\op H/\hb}\ket{x_k}\simeq\int\frac{\dd p_k}{(2\pi\hb)^n}\exp\Bigl\{\frac{\ii}{\hb}\Bigl[p_k\cdot(x_{k+1}-x_k)-\varepsilon H(p_k,x_k)\Bigr]\Bigr\}.
+\end{equation}
+This is the Fourier transform with respect to $p_k$ of the function $\ee^{-\ii\varepsilon H/\hb}$: the integral over momenta \emph{is} the change of representation between $\ket p$ and $\ket x$. For $H=p^2/2m+V(x)$ the integral is Gaussian, hence exact:
+\begin{equation}
+\int\frac{\dd p}{2\pi\hb}\,\ee^{\frac{\ii}{\hb}\left[p\,\Delta x-\varepsilon\frac{p^2}{2m}\right]}=\sqrt{\frac{m}{2\pi\ii\hb\varepsilon}}\;\exp\Bigl\{\frac{\ii\varepsilon}{\hb}\,\frac{m}{2}\Bigl(\frac{\Delta x}{\varepsilon}\Bigr)^2\Bigr\},
+\end{equation}
+where we completed the square, $p\,\Delta x-\varepsilon p^2/2m=-\frac{\varepsilon}{2m}(p-m\Delta x/\varepsilon)^2+\frac{m\,\Delta x^2}{2\varepsilon}$. The result is $\ee^{\ii\varepsilon L/\hb}$ with $L=\tfrac m2v^2-V$, $v=\Delta x/\varepsilon$. In general, the phase in (\ref{eq:shorttime}) is $\tfrac{\varepsilon}{\hb}\,[p\cdot v-H(p,x)]$ and its stationary point in $p$ is exactly the Legendre transform that defines the Lagrangian, $L(x,v)=\ext_p[p\cdot v-H(p,x)]$. Thus:
+\begin{center}
+\emph{the Hamiltonian-to-Lagrangian passage in the path integral is the integral over $p$ (a Fourier transform) evaluated by stationary phase (a Legendre transform).}
+\end{center}
+For $H$ quadratic in $p$ with $x$-independent mass matrix this is an identity; for general $H(p,x)$ the $p$-integral is no longer Gaussian, and replacing it by its stationary-phase value reproduces the Lagrangian path integral only up to $O(\hb)$ corrections (a measure factor $|\det\partial^2L/\partial v^2|^{1/2}$ and operator-ordering terms), so that the phase-space form (\ref{eq:shorttime}) should then be regarded as the fundamental one \cite{Feynman48,Schulman}. This is also the sense in which Dirac's early remark that the transformation function $\bra{q_{t+\varepsilon}}\ket{q_t}$ ``corresponds to'' $\ee^{\ii\varepsilon L/\hb}$ \cite{Dirac33} should be understood.
+
+\subsection{Time and energy}
+
+The time--energy pair obeys the same pattern. The energy-domain Green function is the half-sided Fourier (Laplace) transform of the propagator,
+\begin{equation}
+G(q,q';E)=\frac{1}{\ii\hb}\int_0^\infty K(q,q';t)\,\ee^{\ii Et/\hb}\,\dd t,\qquad K(q,q';t)\simeq A(q,q';t)\,\ee^{\frac{\ii}{\hb}S(q,q';t)} .
+\end{equation}
+The phase of the integrand is $[S(q,q';t)+Et]/\hb$, whose stationary point in $t$ is $\partial S/\partial t=-E$, and whose critical value is the characteristic function $W(q,q';E)=S+Et$ of (\ref{eq:WLegendre}). Hence the Legendre transform of Section~\ref{sec:timeenergy} is again the stationary-phase image of a Fourier transform, now between the time and energy representations; the sum over classical paths at fixed energy with phases $\ee^{\ii W_j/\hb}$, amplitudes given by the determinants of second derivatives of $W$, and Maslov indices is the semiclassical Green function of Gutzwiller \cite{Gutzwiller}. Taking the trace, i.e.\ Fourier transforming the density of states $\sum_k\delta(E-E_k)$ to $\operatorname{Tr}\,\ee^{-\ii\op Ht/\hb}$, leads to the Gutzwiller trace formula, with periodic orbits and their actions $\oint p\,\dd q$ playing the role of the critical points.
+
+% =====================================================================
+\section{The real-exponent limit: Laplace, thermodynamics and large deviations}\label{sec:laplace}
+% =====================================================================
+
+If one replaces the oscillatory exponent $\ee^{\ii\Phi/\hb}$ by a real one, $\ee^{-f/\varepsilon}$, stationary phase becomes the Laplace method and the Fourier transform becomes the Laplace transform. The analogue of Theorem~\ref{thm:main} is Varadhan's lemma \cite{Varadhan,Touchette}: for a suitable function $f$,
+\begin{equation}
+\lim_{\varepsilon\to0}\varepsilon\ln\int\ee^{[\,p\cdot x-f(x)\,]/\varepsilon}\,\dd x=\sup_x\,[\,p\cdot x-f(x)\,]=f^*(p),
+\end{equation}
+the Legendre--Fenchel transform. Only the dominant branch survives, because there is no phase to produce interference, and for non-convex $f$ one obtains the convex hull. In statistical mechanics the partition function $Z(\beta)=\int\ee^{s(E)-\beta E}\dd E$ (with $k_B=1$ and $s=\ln g$ the entropy) gives $\beta F(\beta)=-\ln Z\simeq\inf_E[\beta E-s(E)]$, so the free energy is the Legendre transform of the entropy \cite{Callen,Touchette,Zia}. 
+
+The oscillatory and the real case are connected by Wick rotation $t\mapsto-\ii\hb\beta$: the propagator $\ee^{-\ii\op Ht/\hb}$ becomes $\ee^{-\beta\op H}$, the Fourier transform in the energy variable becomes a Laplace transform, and $\operatorname{Tr}\,\ee^{-\ii\op Ht/\hb}$ becomes the partition function. Thus the passage \emph{Fourier $\leftrightarrow$ Legendre} (for $\hb\to0$ with oscillations) and the passage \emph{Laplace $\leftrightarrow$ Legendre--Fenchel} (for $\varepsilon\to0$ with decay) are the same mechanism, which explains why the two Legendre transforms --- the one of mechanics ($L\leftrightarrow H$, $S\leftrightarrow W$) and the one of thermodynamics ($U\leftrightarrow F$) --- are formally identical \cite{Zia}.
+
+% =====================================================================
+\section{What is exact and what is only asymptotic}\label{sec:exact}
+% =====================================================================
+
+\subsection{Weyl quantization is a Fourier transform on phase space}
+
+The Fourier transform appears at a second, more fundamental level. The Weyl--Wigner quantization \cite{Weyl,Wigner,Groenewold,Moyal} of a classical observable $A(x,p)=\int a(\xi,\eta)\,\ee^{\ii(\xi\cdot x+\eta\cdot p)/\hb}\,\dd\xi\,\dd\eta$, written as a Fourier integral of plane waves on phase space, is
+\begin{equation}
+\op A=\int a(\xi,\eta)\,W(\xi,\eta)\,\dd\xi\,\dd\eta,\qquad W(\xi,\eta)=\ee^{\ii(\xi\cdot\op x+\eta\cdot\op p)/\hb},
+\end{equation}
+that is, one keeps the Fourier coefficients $a(\xi,\eta)$ of the symbol and replaces the classical plane waves by the corresponding Weyl operators. The Weyl operators obey the Heisenberg-group law
+\begin{equation}
+W(z)W(z')=\ee^{-\frac{\ii}{2\hb}\sigma(z,z')}\,W(z+z'),\qquad \sigma(z,z')=\xi\cdot\eta'-\eta\cdot\xi',
+\end{equation}
+so that products of operators correspond to a \emph{twisted} convolution of the Fourier coefficients, equivalently to the Moyal product of symbols,
+\begin{equation}
+A\star B=AB+\frac{\ii\hb}{2}\Pois AB+O(\hb^2).
+\end{equation}
+The classical limit is the commutative pointwise product, and the first quantum correction is the Poisson bracket \cite{Groenewold,Moyal,Folland,Hall,Howe}. The Wigner function, the Weyl symbol of the density matrix, is the symplectic Fourier transform of the characteristic function $\operatorname{Tr}[\rho\,W(\xi,\eta)]$. The position-to-momentum Fourier transform $\FT$ of Section~\ref{sec:HOFT} is the very simple element of this structure that exchanges $\op x\to\op p$, $\op p\to-\op x$.
+
+\subsection{Exact for linear maps, asymptotic for nonlinear ones}
+
+By the metaplectic theory recalled in Section~\ref{sec:HOFT}, every \emph{linear} canonical transformation is implemented by a unitary operator \emph{exactly}, in the sense that $\mu(M)^{-1}\op z\,\mu(M)=M\op z$ and the corresponding kernels are exactly $\ee^{\ii F/\hb}$ times a determinant prefactor with $F$ quadratic. For a \emph{nonlinear} canonical transformation $\chi$ one can still build a unitary operator $U_\chi$ (a Fourier integral operator \cite{Hormander2}), whose kernel is (\ref{eq:VanVleck}) at leading order, but the implementation of the transformation is only asymptotic: Egorov's theorem \cite{Egorov} states that $U_\chi^{-1}\,\mathrm{Op}(A)\,U_\chi=\mathrm{Op}(A\circ\chi)+O(\hb)$. This is not a technical accident: by the Groenewold--van Hove theorem \cite{Groenewold}, there is no quantization map on all polynomials in $(x,p)$ that sends Poisson brackets exactly to commutators, so that the group of all canonical transformations cannot be represented unitarily; only the affine symplectic group (and its double cover) can \cite{Folland,deGosson2}. In the language of this article: \emph{the Fourier transform is exact because the quarter turn is linear; the Legendre transform of a non-quadratic function is the leading-order shadow of the Fourier transform}, and corrections of relative order $\hb$ involve higher derivatives of $S$ and of $a$, which can be computed from the asymptotic series of the stationary phase method \cite{Hormander1,Wong,Stein}.
+
+\subsection{Why a nonlinear map can come from a linear one}
+
+The Fourier transform is linear in $\psi$, while $S\mapsto-S^*$ is nonlinear (already $(S_1+S_2)^*\neq S_1^*+S_2^*$). There is no contradiction: the phase is $S=-\ii\hb\ln\psi$ and the logarithm turns the \emph{superposition principle} into a nonlinear statement in the limit $\hb\to0$, in which only the dominant (or, with phases, all stationary) contributions matter. The same mechanism is behind the Hopf--Cole transformation, which linearises the viscous Burgers equation into the heat equation \cite{Hopf,Cole}: in the same way, the nonlinear first-order Hamilton--Jacobi equation arises from the linear Schr\"odinger equation. The dictionary below shows how the algebraic properties of the Fourier transform --- translation, modulation, convolution theorem, Gaussians, Plancherel --- turn exactly into those (L1)--(L7) of the Legendre transform:
+\emph{multiplication of wave functions $\to$ addition of phases}; \emph{convolution $\psi_1*\psi_2$ $\to$ extremal convolution $S_1\,\square\,S_2=\ext_y[S_1(x-y)+S_2(y)]$}; since $\FT(\psi_1*\psi_2)=(2\pi\hb)^{n/2}\FT\psi_1\,\FT\psi_2$ and phases add, $(S_1\,\square\,S_2)^*=S_1^*+S_2^*$, which is (L6).
+
+\subsection{Dequantization: Legendre as the Fourier transform of idempotent analysis}
+
+Maslov and collaborators have formalised this ``logarithmic limit''. Setting $a\oplus_\varepsilon b=\varepsilon\ln(\ee^{a/\varepsilon}+\ee^{b/\varepsilon})$, $a\otimes b=a+b$ and letting $\varepsilon\to0$, the field of real numbers with the usual operations degenerates into the idempotent semiring $(\R,\max,+)$ \cite{Litvinov,KolokoltsovMaslov}. Under this \emph{Maslov dequantization}, linear algebra over $(\R,+,\times)$ becomes linear algebra over $(\R,\max,+)$, the Laplace/Fourier transform $f\mapsto\varepsilon\ln\int\ee^{(p\cdot x-f)/\varepsilon}$ becomes the Legendre--Fenchel transform, convolution becomes infimal convolution, and linearity is preserved in the idempotent sense. In this picture the Legendre transform is \emph{the} Fourier transform of the tropical/idempotent world, and the Heisenberg equation, i.e.\ $\op p=-\ii\hb\nabla$, degenerates into the Hamilton--Jacobi relation $p=\nabla S$. Quantization is then the inverse operation, a deformation from the idempotent semiring back to the ring of complex numbers in which $\hb$ plays the role of the deformation parameter, and in which the new phenomena --- interference between branches, Maslov indices, tunnelling --- appear.
+
+\subsection{A remark on polarizations}
+
+In geometric quantization \cite{Kostant,Souriau,Woodhouse,GuilleminSternberg} one starts from the symplectic manifold $T^*\R^n$ and a \emph{polarization}, i.e.\ a choice of a Lagrangian foliation: the vertical polarization $\{x=\text{const}\}$ gives the position representation, the polarization $\{p=\text{const}\}$ gives the momentum representation. The two Hilbert spaces are identified by the BKS pairing, and for these two polarizations it reduces to the Fourier transform, with the square root of the density ($\tfrac12$-forms, i.e.\ the factor $|\det\Hess S|^{-1/2}$) and the metaplectic correction accounting for the Maslov phases. Seen this way, the classical Legendre transform is the classical shadow of this pairing: it records how a Lagrangian submanifold, defined independently of any polarization, is represented by a generating function in each of the two polarizations. This view is developed in detail in \cite{Woodhouse,GuilleminSternberg,deGosson1}; here we only note that it is consistent with all the formulas derived above.
+
+% =====================================================================
+\section{Dictionary and conclusions}\label{sec:dictionary}
+% =====================================================================
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.46\textwidth}}
+\toprule
+\textbf{Classical (Legendre)} & \textbf{Quantum (Fourier), $\hb\to0$}\\
+\midrule
+Function $S(x)$, Lagrangian manifold $L_S=\{p=\nabla S\}$ & State $\psi=a\,\ee^{\ii S/\hb}$ concentrated on $L_S$\\
+$S^*(p)=\ext_x[p\cdot x-S(x)]$, $\nabla S^*=(\nabla S)^{-1}$ & $\FT\psi\simeq\sum_j(\dots)\,\ee^{-\ii S_j^*(p)/\hb}$ (Theorem~\ref{thm:main})\\
+$\Hess S^*=(\Hess S)^{-1}$; Jacobian $|\det\Hess S|$ of $x\mapsto\nabla S$ & Amplitude transforms as half-density $|\det\Hess S|^{-1/2}$; $\int|\psi|^2=\int|\varphi|^2$\\
+Fold/cusp of $x\mapsto\nabla S(x)$ (caustic) & Airy/Pearcey functions; Maslov phase $\ee^{\ii\frac\pi4\sgn\Hess S}$\\
+Several branches $S^*_j$; $\sup$ keeps only the convex hull & All branches added with phases: interference\\
+$S\mapsto S+p_0\cdot x$ gives $S^*(p-p_0)$; $S(x-a)$ gives $S^*+p\cdot a$ & Momentum boost $\leftrightarrow$ translation in $p$; translation $\leftrightarrow$ phase $\ee^{-\ii p\cdot a/\hb}$\\
+$(S_1\square S_2)^*=S_1^*+S_2^*$ & Convolution theorem; phases add\\
+$S=\tfrac12x\cdot Ax\ \mapsto\ S^*=\tfrac12p\cdot A^{-1}p$ & Chirp $\leftrightarrow$ chirp; exact (Fresnel) formula\\
+Four types of generating functions $F_1,\dots,F_4$ & Kernels $\bra q U\ket Q,\ \bra q U\ket P,\dots$ related by Fourier transforms in $Q$, $q$\\
+$H\leftrightarrow L$ (velocity $\leftrightarrow$ momentum) & Phase-space path integral $\to$ Lagrangian path integral ($p$-integral)\\
+$S(t)\leftrightarrow W(E)$, $W=S+Et$ & Propagator $\to$ energy Green function ($t$-integral)\\
+Quarter turn $R:(x,p)\mapsto(p,-x)$ & $\FT=\ee^{-\ii\pi\op N/2}$, a quarter of an oscillator period\\
+Real exponent: $F\leftrightarrow U$ (thermodynamics) & Laplace transform; Wick rotation; Varadhan lemma\\
+Poisson bracket $\Pois AB$ & Commutator: $[\op A,\op B]=\ii\hb\,\widehat{\Pois AB}+O(\hb^2)$\\
+\bottomrule
+\end{tabular}
+\caption{Dictionary between the classical Legendre structure and the quantum Fourier structure.}\label{tab:dictionary}
+\end{table}
+
+The conclusion is that quantization does not replace the Legendre transform by a different, unrelated transformation: it \emph{linearises} it. The Fourier transform is the exact, linear, unitary object defined on the Hilbert space; the Legendre transform is what the Fourier transform looks like on the exponents when $\hb\to0$. The correspondence is controlled by three pieces of data --- the Legendre branches (phase), the Hessian determinant (amplitude) and the Hessian signature (Maslov phase) --- and it extends, through generating functions and Van Vleck kernels, from the single pair $(x,p)$ to arbitrary canonical transformations, to the path integral and to the time--energy pair. It is exact precisely in the quadratic (linear-symplectic, metaplectic) case, and for the rest it is the first term of an asymptotic series. In the opposite direction, the Legendre transform is the Fourier transform of an idempotent semiring, which one reaches by letting $\hb\to0$ (or $\varepsilon\to0$) and dropping the phases.
+
+% =====================================================================
+\begin{thebibliography}{99}
+% =====================================================================
+\bibitem{Arnold} V.~I. Arnold, \emph{Mathematical Methods of Classical Mechanics}, 2nd ed., Graduate Texts in Mathematics \textbf{60}, Springer, New York (1989).
+\bibitem{Goldstein} H.~Goldstein, C.~Poole and J.~Safko, \emph{Classical Mechanics}, 3rd ed., Addison--Wesley (2002).
+\bibitem{LL1} L.~D. Landau and E.~M. Lifshitz, \emph{Mechanics}, 3rd ed., Pergamon Press (1976).
+\bibitem{LL3} L.~D. Landau and E.~M. Lifshitz, \emph{Quantum Mechanics (Non-relativistic Theory)}, 3rd ed., Pergamon Press (1977).
+\bibitem{Dirac} P.~A.~M. Dirac, \emph{The Principles of Quantum Mechanics}, 4th ed., Oxford University Press (1958).
+\bibitem{Dirac27} P.~A.~M. Dirac, The physical interpretation of the quantum dynamics, \emph{Proc. R. Soc. Lond. A} \textbf{113}, 621--641 (1927).
+\bibitem{Dirac33} P.~A.~M. Dirac, The Lagrangian in quantum mechanics, \emph{Phys. Z. Sowjetunion} \textbf{3}, 64--72 (1933).
+\bibitem{Feynman48} R.~P. Feynman, Space-time approach to non-relativistic quantum mechanics, \emph{Rev. Mod. Phys.} \textbf{20}, 367--387 (1948).
+\bibitem{FeynmanHibbs} R.~P. Feynman and A.~R. Hibbs, \emph{Quantum Mechanics and Path Integrals}, McGraw--Hill (1965).
+\bibitem{Schulman} L.~S. Schulman, \emph{Techniques and Applications of Path Integration}, Wiley (1981).
+\bibitem{Zia} R.~K.~P. Zia, E.~F. Redish and S.~R. McKay, Making sense of the Legendre transform, \emph{Am. J. Phys.} \textbf{77}, 614--622 (2009).
+\bibitem{Rockafellar} R.~T. Rockafellar, \emph{Convex Analysis}, Princeton University Press (1970).
+\bibitem{Callen} H.~B. Callen, \emph{Thermodynamics and an Introduction to Thermostatistics}, 2nd ed., Wiley (1985).
+\bibitem{Touchette} H.~Touchette, The large deviation approach to statistical mechanics, \emph{Phys. Rep.} \textbf{478}, 1--69 (2009).
+\bibitem{Varadhan} S.~R.~S. Varadhan, Asymptotic probabilities and differential equations, \emph{Commun. Pure Appl. Math.} \textbf{19}, 261--286 (1966).
+\bibitem{Weyl} H.~Weyl, Quantenmechanik und Gruppentheorie, \emph{Z. Phys.} \textbf{46}, 1--33 (1927).
+\bibitem{Stone} M.~H. Stone, Linear transformations in Hilbert space. III. Operational methods and group theory, \emph{Proc. Natl. Acad. Sci. USA} \textbf{16}, 172--175 (1930).
+\bibitem{vonNeumann} J.~von Neumann, Die Eindeutigkeit der Schr\"odingerschen Operatoren, \emph{Math. Ann.} \textbf{104}, 570--578 (1931).
+\bibitem{Wigner} E.~P. Wigner, On the quantum correction for thermodynamic equilibrium, \emph{Phys. Rev.} \textbf{40}, 749--759 (1932).
+\bibitem{Groenewold} H.~J. Groenewold, On the principles of elementary quantum mechanics, \emph{Physica} \textbf{12}, 405--460 (1946).
+\bibitem{Moyal} J.~E. Moyal, Quantum mechanics as a statistical theory, \emph{Proc. Camb. Phil. Soc.} \textbf{45}, 99--124 (1949).
+\bibitem{Folland} G.~B. Folland, \emph{Harmonic Analysis in Phase Space}, Annals of Mathematics Studies \textbf{122}, Princeton University Press (1989).
+\bibitem{Hall} B.~C. Hall, \emph{Quantum Theory for Mathematicians}, Graduate Texts in Mathematics \textbf{267}, Springer (2013).
+\bibitem{Howe} R.~Howe, On the role of the Heisenberg group in harmonic analysis, \emph{Bull. Amer. Math. Soc.} \textbf{3}, 821--843 (1980).
+\bibitem{Weil} A.~Weil, Sur certains groupes d'op\'erateurs unitaires, \emph{Acta Math.} \textbf{111}, 143--211 (1964).
+\bibitem{Moshinsky} M.~Moshinsky and C.~Quesne, Linear canonical transformations and their unitary representations, \emph{J. Math. Phys.} \textbf{12}, 1772--1780 (1971).
+\bibitem{Namias} V.~Namias, The fractional order Fourier transform and its application to quantum mechanics, \emph{J. Inst. Maths Applics} \textbf{25}, 241--265 (1980).
+\bibitem{deGosson1} M.~de Gosson, \emph{The Principles of Newtonian and Quantum Mechanics}, Imperial College Press (2001).
+\bibitem{deGosson2} M.~de Gosson, \emph{Symplectic Geometry and Quantum Mechanics}, Birkh\"auser (2006).
+\bibitem{VanVleck} J.~H. Van Vleck, The correspondence principle in the statistical interpretation of quantum mechanics, \emph{Proc. Natl. Acad. Sci. USA} \textbf{14}, 178--188 (1928).
+\bibitem{Gutzwiller} M.~C. Gutzwiller, \emph{Chaos in Classical and Quantum Mechanics}, Springer (1990).
+\bibitem{Keller} J.~B. Keller, Corrected Bohr--Sommerfeld quantum conditions for nonseparable systems, \emph{Ann. Phys. (N.Y.)} \textbf{4}, 180--188 (1958).
+\bibitem{Maslov} V.~P. Maslov, \emph{Th\'eorie des perturbations et m\'ethodes asymptotiques}, Dunod, Paris (1972); Russian original, Moscow State University (1965).
+\bibitem{MaslovFedoriuk} V.~P. Maslov and M.~V. Fedoriuk, \emph{Semi-Classical Approximation in Quantum Mechanics}, Reidel, Dordrecht (1981).
+\bibitem{Littlejohn} R.~G. Littlejohn, The semiclassical evolution of wave packets, \emph{Phys. Rep.} \textbf{138}, 193--291 (1986).
+\bibitem{Berry} M.~V. Berry and K.~E. Mount, Semiclassical approximations in wave mechanics, \emph{Rep. Prog. Phys.} \textbf{35}, 315--397 (1972).
+\bibitem{Duistermaat} J.~J. Duistermaat, Oscillatory integrals, Lagrange immersions and unfolding of singularities, \emph{Commun. Pure Appl. Math.} \textbf{27}, 207--281 (1974).
+\bibitem{Hormander1} L.~H\"ormander, \emph{The Analysis of Linear Partial Differential Operators I}, Springer (1983), Section~7.7.
+\bibitem{Hormander2} L.~H\"ormander, Fourier integral operators. I, \emph{Acta Math.} \textbf{127}, 79--183 (1971).
+\bibitem{Stein} E.~M. Stein, \emph{Harmonic Analysis: Real-Variable Methods, Orthogonality, and Oscillatory Integrals}, Princeton University Press (1993), Chap.~VIII.
+\bibitem{Wong} R.~Wong, \emph{Asymptotic Approximations of Integrals}, SIAM (2001).
+\bibitem{Egorov} Yu.~V. Egorov, On canonical transformations of pseudodifferential operators, \emph{Uspekhi Mat. Nauk} \textbf{24}(5), 235--236 (1969).
+\bibitem{Kostant} B.~Kostant, Quantization and unitary representations, in \emph{Lectures in Modern Analysis and Applications III}, Lecture Notes in Mathematics \textbf{170}, Springer (1970), pp.~87--208.
+\bibitem{Souriau} J.-M. Souriau, \emph{Structure des syst\`emes dynamiques}, Dunod, Paris (1970).
+\bibitem{Woodhouse} N.~M.~J. Woodhouse, \emph{Geometric Quantization}, 2nd ed., Oxford University Press (1992).
+\bibitem{GuilleminSternberg} V.~Guillemin and S.~Sternberg, \emph{Geometric Asymptotics}, American Mathematical Society (1977); \emph{Symplectic Techniques in Physics}, Cambridge University Press (1984).
+\bibitem{Litvinov} G.~L. Litvinov, Maslov dequantization, idempotent and tropical mathematics: a brief introduction, \emph{J. Math. Sci.} \textbf{140}, 426--444 (2007).
+\bibitem{KolokoltsovMaslov} V.~N. Kolokoltsov and V.~P. Maslov, \emph{Idempotent Analysis and Its Applications}, Kluwer (1997).
+\bibitem{Hopf} E.~Hopf, The partial differential equation $u_t+uu_x=\mu u_{xx}$, \emph{Commun. Pure Appl. Math.} \textbf{3}, 201--230 (1950).
+\bibitem{Cole} J.~D. Cole, On a quasi-linear parabolic equation occurring in aerodynamics, \emph{Quart. Appl. Math.} \textbf{9}, 225--236 (1951).
+\end{thebibliography}
+
+\end{document}
