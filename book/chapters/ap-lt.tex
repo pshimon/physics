@@ -5,7 +5,7 @@ The Legendre transform replaces a function by a description in terms of its
 \emph{slope}. It is the mathematical engine behind the passage from the
 Lagrangian to the Hamiltonian formulation of mechanics, behind the family of
 thermodynamic potentials, behind convex duality in optimization, and behind
-the large-deviation description of statistical fluctuations.  This article
+the large-deviation description of statistical fluctuations.  This appendix
 develops the transform from first principles.  We start with the smooth
 one-dimensional case and explain \emph{why} the definition has the form it
 has, give its geometric meaning (tangent intercepts, envelopes, areas under
@@ -19,7 +19,6 @@ short section on numerical computation, and remarks on the geometric
 background and on generalisations.
 
 \section{Introduction}
-% =================================================================
 
 Suppose a physical or mathematical quantity is described by a function
 $y=f(x)$, and that the \emph{derivative} $p=f'(x)$ is the variable that we can
@@ -49,7 +48,6 @@ Physicists often use the opposite sign, $f(x)-px$ evaluated at the stationary
 point (for instance $F=U-TS$ in thermodynamics, which equals $-U^*(T)$); we
 will point out each such sign when it matters.
 \section{The one-dimensional smooth case}\label{sec:1d}
-% =================================================================
 
 \subsection{The problem the transform solves}
 
@@ -384,7 +382,7 @@ For every proper $f$:
   \item $f^*$ is convex and lower semicontinuous (it is a pointwise supremum
         of affine functions of $p$), whether or not $f$ is convex.
   \item (Fenchel--Young) $f(x)+f^*(p)\ge\ip{p}{x}$ for all $x,p$.
-  \item $f\le g\mathbb{R}ightarrow f^*\ge g^*$ (order reversal), and $f^{**}\le f$.
+  \item $f\le g\Rightarrow f^*\ge g^*$ (order reversal), and $f^{**}\le f$.
 \end{enumerate}
 \end{proposition}
 

@@ -1,0 +1,1561 @@
+% ==========================================================================
+%  Chapter: Maxwell's equations in vacuum
+%  Conventions: Gaussian units; metric signature (+,-,-,-); x^0 = ct.
+%  Packages needed in the master preamble: amsmath, amssymb, amsthm,
+%  booktabs, tikz.  Theorem-like environments used: theorem, proposition,
+%  definition, remark, example, problem (defined below if missing).
+% ==========================================================================
+
+\makeatletter
+\@ifundefined{theorem}{\newtheorem{theorem}{Theorem}[chapter]}{}
+\@ifundefined{proposition}{\newtheorem{proposition}{Proposition}[chapter]}{}
+\theoremstyle{definition}
+\@ifundefined{definition}{\newtheorem{definition}{Definition}[chapter]}{}
+\@ifundefined{example}{\newtheorem{example}{Example}[chapter]}{}
+\@ifundefined{problem}{\newtheorem{problem}{Problem}[chapter]}{}
+\theoremstyle{remark}
+\@ifundefined{remark}{\newtheorem{remark}{Remark}[chapter]}{}
+\theoremstyle{plain}
+\makeatother
+
+\providecommand{\vE}{\mathbf{E}}
+\providecommand{\vB}{\mathbf{B}}
+\providecommand{\vA}{\mathbf{A}}
+\providecommand{\vj}{\mathbf{j}}
+\providecommand{\vk}{\mathbf{k}}
+\providecommand{\vx}{\mathbf{x}}
+\providecommand{\vn}{\mathbf{n}}
+\providecommand{\vS}{\mathbf{S}}
+\providecommand{\vg}{\mathbf{g}}
+\providecommand{\vv}{\mathbf{v}}
+\providecommand{\vK}{\mathbf{K}}
+\providecommand{\vF}{\mathbf{F}}
+\providecommand{\vf}{\mathbf{f}}
+\providecommand{\vy}{\mathbf{y}}
+\providecommand{\vbeta}{\boldsymbol{\beta}}
+\providecommand{\grad}{\boldsymbol{\nabla}}
+\providecommand{\curl}{\boldsymbol{\nabla}\!\times}
+\providecommand{\divg}{\boldsymbol{\nabla}\!\cdot}
+\providecommand{\dd}{\mathrm{d}}
+\providecommand{\ii}{\mathrm{i}}
+\providecommand{\pa}{\partial}
+\providecommand{\Ftil}{\tilde F}
+
+\chapter{Maxwell's Equations in Vacuum}
+\label{ch:maxwell-vacuum}
+
+The Maxwell equations are the oldest field theory that survived the
+arrival of relativity without a single change of content, and for that
+reason they are the natural laboratory for every general notion of field
+theory: constraints, gauge freedom, counting of degrees of freedom,
+well-posedness of initial and boundary problems, causal structure,
+conformal and duality symmetry.  In this chapter we treat them in full,
+in the simplest setting---empty space, with the charges and currents
+regarded as given sources---and we try to keep three questions apart
+that are often blurred in textbooks:
+\begin{enumerate}
+\item \emph{What do the equations say?}\ \ (Sections~\ref{sec:mx-eqs}--\ref{sec:mx-geom}):
+  the equations in three-dimensional and covariant form, their
+  variational origin, and their geometry.
+\item \emph{How much freedom does a solution have?}\ \ (Section~\ref{sec:mx-dof}):
+  the number of degrees of freedom, counted in several independent ways.
+\item \emph{What data single out a solution?}\ \ (Sections~\ref{sec:mx-free}--\ref{sec:mx-num}):
+  initial-value, source, boundary, exterior and other problems, and the
+  question of when each is well posed.
+\end{enumerate}
+Along the way we flag, in remarks, the places where an object of the
+\emph{ideal world} of the model (unbounded space, point source, perfect
+conductor, field without sources) is silently identified with
+an object of the \emph{real world} of experiments.
+
+% ==========================================================================
+\section{Scope and conventions}\label{sec:mx-conv}
+% ==========================================================================
+
+\subsection{What ``in vacuum'' means}
+
+``In vacuum'' means that the only fields are $\vE$ and $\vB$; there are no
+auxiliary fields $\mathbf D,\mathbf H$, no polarization or magnetization,
+no constitutive relations.  Charges and currents may be present, but they
+are the \emph{microscopic} ones: a charge density $\rho(t,\vx)$ and a
+current density $\vj(t,\vx)$, given functions (or distributions) that
+satisfy the continuity equation.  The equations are then the
+Maxwell--Lorentz equations.  The special case $\rho=0,\ \vj=0$ is the
+\emph{free} (source-free) field; it is of special importance, because the
+general solution is a particular solution with sources plus a free
+field, and the free fields carry all the dynamical information (the
+``degrees of freedom'') of the theory.
+
+\subsection{Conventions}
+
+\begin{itemize}
+\item \textbf{Units.}  Gaussian: $\vE$ and $\vB$ have the same dimension,
+  Coulomb's law reads $F=q_1q_2/r^2$, the Lorentz force on a point charge
+  is $\vF=q\,(\vE+\vv\times\vB/c)$, and $c$ appears explicitly.  The
+  dictionary to SI is
+  \begin{center}
+  \begin{tabular}{@{}ccccccc@{}}
+  \toprule
+  $\vE_{\mathrm G}$ & $\vB_{\mathrm G}$ & $\rho_{\mathrm G}$ & $\vj_{\mathrm G}$ & $\varphi_{\mathrm G}$ & $\vA_{\mathrm G}$ & $c^2$\\
+  \midrule
+  $\sqrt{4\pi\varepsilon_0}\,\vE_{\mathrm{SI}}$ &
+  $\sqrt{4\pi/\mu_0}\,\vB_{\mathrm{SI}}$ &
+  $\rho_{\mathrm{SI}}/\sqrt{4\pi\varepsilon_0}$ &
+  $\vj_{\mathrm{SI}}/\sqrt{4\pi\varepsilon_0}$ &
+  $\sqrt{4\pi\varepsilon_0}\,\varphi_{\mathrm{SI}}$ &
+  $\sqrt{4\pi/\mu_0}\,\vA_{\mathrm{SI}}$ &
+  $1/\mu_0\varepsilon_0$\\
+  \bottomrule
+  \end{tabular}
+  \end{center}
+\item \textbf{Metric.}  $\eta_{\mu\nu}=\eta^{\mu\nu}=\operatorname{diag}(+1,-1,-1,-1)$;
+  $x^\mu=(ct,\vx)$, $x_\mu=(ct,-\vx)$.  Greek indices run over $0,1,2,3$,
+  Latin ones over $1,2,3$; repeated indices are summed.  Spatial
+  vectors have components $V^i$ and are \emph{not} distinguished from
+  $V_i$ when written in three-dimensional notation ($V_i\equiv V^i$).
+\item \textbf{Derivatives.}  $\pa_\mu=\pa/\pa x^\mu=(c^{-1}\pa_t,\grad)$,
+  $\pa^\mu=(c^{-1}\pa_t,-\grad)$, and
+  $\Box=\pa_\mu\pa^\mu=c^{-2}\pa_t^2-\nabla^2$.
+\item \textbf{Levi-Civita symbol.}  $\varepsilon^{0123}=+1$, hence
+  $\varepsilon_{0123}=-1$ (because $\det\eta=-1$).
+\item \textbf{Sources and potentials.}  $j^\mu=(c\rho,\vj)$ and
+  $A^\mu=(\varphi,\vA)$.
+\end{itemize}
+
+% ==========================================================================
+\section{The equations in three-dimensional form}\label{sec:mx-eqs}
+% ==========================================================================
+
+\subsection{The four equations and the force law}
+
+\begin{subequations}\label{eq:maxwell-3d}
+\begin{align}
+\divg\vE &= 4\pi\rho, \label{eq:gauss-E}\\
+\divg\vB &= 0, \label{eq:gauss-B}\\
+\curl\vE + \frac1c\,\frac{\pa\vB}{\pa t} &= 0, \label{eq:faraday}\\
+\curl\vB - \frac1c\,\frac{\pa\vE}{\pa t} &= \frac{4\pi}{c}\,\vj. \label{eq:ampere}
+\end{align}
+\end{subequations}
+Equations \eqref{eq:gauss-B} and \eqref{eq:faraday} are \emph{homogeneous}
+(they do not contain the sources), while \eqref{eq:gauss-E} and
+\eqref{eq:ampere} are \emph{inhomogeneous}.  The field acts back on the
+charges through the Lorentz force; its density is
+\begin{equation}\label{eq:force-density}
+\vf=\rho\,\vE+\frac1c\,\vj\times\vB ,
+\end{equation}
+and for a point charge $q$ with velocity $\vv$ it gives
+$\vF=q(\vE+\vv\times\vB/c)$.
+
+\begin{remark}[Real world vs.\ ideal world: what $\vE$ and $\vB$ are]
+The fields are not ``seen''; operationally they are \emph{defined} by
+the force law: $\vE$ and $\vB$ at a point are the vectors that, inserted
+into $q(\vE+\vv\times\vB/c)$, reproduce the measured force on a small test
+charge. Causality and experimental support belong to this operational
+level.  The partial differential equations \eqref{eq:maxwell-3d} are a
+statement in the ideal world of the model: they speak about fields at
+every point of an idealized continuum and for all times, including
+regions and moments where no test charge was ever placed.  Maxwell's
+equations without the force law are a mathematical theory without a
+physical referent; the force law without the equations is a rule
+without dynamics.  Both are needed, and in what follows we shall always
+regard $\rho,\vj$ as given when we solve for the fields, even though in
+reality the force law couples them back.
+\end{remark}
+
+\subsection{Structure: constraints and evolution equations}
+
+The four equations are not on the same footing.  Equations
+\eqref{eq:gauss-E} and \eqref{eq:gauss-B} contain no time derivatives:
+they are \emph{constraints} on the field at a given instant.
+Equations \eqref{eq:faraday} and \eqref{eq:ampere} are first-order
+\emph{evolution equations}: they give $\pa_t\vB$ and $\pa_t\vE$ in terms
+of the instantaneous fields,
+\begin{equation}\label{eq:evolution}
+\frac{\pa\vE}{\pa t}=c\,\curl\vB-4\pi\vj,\qquad
+\frac{\pa\vB}{\pa t}=-c\,\curl\vE .
+\end{equation}
+The central structural fact is that the evolution equations
+\emph{propagate} the constraints.  Taking the divergence of
+\eqref{eq:faraday} and using $\divg\curl\equiv0$,
+\begin{equation}\label{eq:propagate-B}
+\frac{\pa}{\pa t}\,(\divg\vB)=0 ,
+\end{equation}
+and taking the divergence of \eqref{eq:ampere},
+\begin{equation}\label{eq:propagate-E}
+\frac{\pa}{\pa t}\,(\divg\vE-4\pi\rho)
+=-4\pi\Big(\frac{\pa\rho}{\pa t}+\divg\vj\Big).
+\end{equation}
+Therefore: (i) if the constraints hold at $t=0$ they hold for all $t$, and
+(ii) the \emph{system is consistent only if the sources satisfy the
+continuity equation}
+\begin{equation}\label{eq:continuity}
+\frac{\pa\rho}{\pa t}+\divg\vj=0\qquad\Longleftrightarrow\qquad
+\pa_\mu j^\mu=0 .
+\end{equation}
+Historically this is the reason for Maxwell's displacement current
+$-c^{-1}\pa_t\vE$ in \eqref{eq:ampere}: without it the divergence of
+Ampère's law would force $\divg\vj=0$ for all time-dependent charge
+distributions.  Charge conservation is thus not an extra postulate but a
+\emph{compatibility condition} of the field equations.
+
+\subsection{Integral form and jump conditions}
+
+For a fixed volume $V$ with boundary $\pa V$ and a fixed surface $\Sigma$
+with boundary $\pa\Sigma$, \eqref{eq:maxwell-3d} is equivalent (for
+sufficiently regular fields) to
+\begin{align}
+\oint_{\pa V}\vE\cdot\dd\mathbf a&=4\pi Q_V,&
+\oint_{\pa V}\vB\cdot\dd\mathbf a&=0,\\
+\oint_{\pa\Sigma}\vE\cdot\dd\boldsymbol\ell&=-\frac1c\frac{\dd}{\dd t}\int_\Sigma\vB\cdot\dd\mathbf a,&
+\oint_{\pa\Sigma}\vB\cdot\dd\boldsymbol\ell&=\frac1c\frac{\dd}{\dd t}\int_\Sigma\vE\cdot\dd\mathbf a+\frac{4\pi}{c}\int_\Sigma\vj\cdot\dd\mathbf a .
+\end{align}
+The integral form is the more fundamental one when the fields are not
+differentiable.  Applied to thin pillboxes and loops across a surface
+$\mathcal S$ with unit normal $\vn$ that carries a surface charge density
+$\sigma$ and a surface current density $\vK$, it yields the jump
+conditions
+\begin{equation}\label{eq:jump}
+\vn\cdot[\vE]=4\pi\sigma,\quad
+\vn\times[\vE]=0,\quad
+\vn\cdot[\vB]=0,\quad
+\vn\times[\vB]=\frac{4\pi}{c}\vK ,
+\end{equation}
+where $[\,\cdot\,]$ is the value on the side into which $\vn$ points minus
+the value on the other side.  These will be the boundary conditions of
+Section~\ref{sec:mx-bvp}.
+
+\subsection{Energy, momentum and angular momentum}
+
+Define the energy density, the Poynting vector, the momentum density, and
+the Maxwell stress tensor
+\begin{equation}\label{eq:densities}
+u=\frac{\vE^2+\vB^2}{8\pi},\qquad
+\vS=\frac{c}{4\pi}\,\vE\times\vB,\qquad
+\vg=\frac{\vS}{c^2},\qquad
+\sigma_{ij}=\frac1{4\pi}\Big[E_iE_j+B_iB_j-\tfrac12\delta_{ij}(\vE^2+\vB^2)\Big].
+\end{equation}
+From \eqref{eq:maxwell-3d} one derives the \emph{Poynting theorem} (using the identity
+$\divg(\vE\times\vB)=\vB\cdot\curl\vE-\vE\cdot\curl\vB$) and the
+\emph{momentum balance}
+\begin{equation}\label{eq:poynting}
+\frac{\pa u}{\pa t}+\divg\vS=-\vj\cdot\vE,\qquad
+\frac{\pa g_i}{\pa t}-\pa_j\sigma_{ij}=-f_i ,
+\end{equation}
+with $\vf$ from \eqref{eq:force-density}.  The right-hand sides are the
+work done by the field on the charges and the force exerted on them: in
+the source-free case $u,\vS$ and $\vg$, $\sigma_{ij}$ obey exact local
+conservation laws.  The angular-momentum density is $\vx\times\vg$, and
+it obeys a conservation law (without sources) because $\sigma_{ij}$ is
+symmetric.  The total energy, momentum and angular momentum
+\begin{equation}
+W=\int u\,\dd^3x,\qquad \mathbf P=\int\vg\,\dd^3x,\qquad
+\mathbf J=\int \vx\times\vg\,\dd^3x
+\end{equation}
+are conserved for the free field (with appropriate fall-off at infinity).
+The positivity $u\ge0$ and the inequality
+\begin{equation}\label{eq:S-bound}
+|\vS|\le c\,u ,
+\end{equation}
+which follows from $|\vE\times\vB|\le|\vE||\vB|\le\tfrac12(\vE^2+\vB^2)$,
+are the two elementary facts from which well-posedness and finite
+propagation speed will be derived in Section~\ref{sec:mx-cauchy}.
+
+% ==========================================================================
+\section{Covariant formulation and the action}\label{sec:mx-cov}
+% ==========================================================================
+
+\subsection{The field-strength tensor}
+
+The six components of $\vE$ and $\vB$ are assembled into the
+antisymmetric tensor $F_{\mu\nu}$.  With $A_\mu=(\varphi,-\vA)$,
+\begin{equation}\label{eq:potentials}
+F_{\mu\nu}=\pa_\mu A_\nu-\pa_\nu A_\mu ,\qquad
+\vE=-\grad\varphi-\frac1c\frac{\pa\vA}{\pa t},\qquad
+\vB=\curl\vA ,
+\end{equation}
+so that $F_{0i}=E_i$ and $F_{ij}=-\varepsilon_{ijk}B_k$.  In matrix form
+(row index $\mu$, column index $\nu$):
+\begin{equation}\label{eq:Fmatrix}
+F^{\mu\nu}=\begin{pmatrix}
+0&-E_x&-E_y&-E_z\\
+E_x&0&-B_z&B_y\\
+E_y&B_z&0&-B_x\\
+E_z&-B_y&B_x&0
+\end{pmatrix},\qquad
+\Ftil^{\mu\nu}\equiv\tfrac12\varepsilon^{\mu\nu\rho\sigma}F_{\rho\sigma}=\begin{pmatrix}
+0&-B_x&-B_y&-B_z\\
+B_x&0&E_z&-E_y\\
+B_y&-E_z&0&E_x\\
+B_z&E_y&-E_x&0
+\end{pmatrix}.
+\end{equation}
+The dual tensor $\Ftil^{\mu\nu}$ is obtained from $F^{\mu\nu}$ by the
+\emph{duality substitution} $\vE\to\vB,\ \vB\to-\vE$.
+
+Relative to an observer with four-velocity $u^\mu$, $u_\mu u^\mu=1$
+(dimensionless normalization), the electric and magnetic fields are the
+four-vectors
+\begin{equation}\label{eq:EB-observer}
+E^\mu=F^{\mu\nu}u_\nu,\qquad B^\mu=\Ftil^{\mu\nu}u_\nu,\qquad
+F^{\mu\nu}=E^\mu u^\nu-E^\nu u^\mu+\varepsilon^{\mu\nu\rho\sigma}u_\rho B_\sigma .
+\end{equation}
+For $u^\mu=(1,\mathbf 0)$ these are $E^\mu=(0,\vE)$, $B^\mu=(0,\vB)$.  The
+splitting into ``electric'' and ``magnetic'' is therefore
+observer-dependent: only $F_{\mu\nu}$ is a frame-independent object.
+Under a boost to a frame moving with velocity $c\vbeta$ relative to the
+original one (with $\gamma=(1-\beta^2)^{-1/2}$),
+\begin{equation}\label{eq:boost}
+\vE'_\parallel=\vE_\parallel,\quad \vB'_\parallel=\vB_\parallel,\qquad
+\vE'_\perp=\gamma(\vE+\vbeta\times\vB)_\perp,\quad
+\vB'_\perp=\gamma(\vB-\vbeta\times\vE)_\perp ,
+\end{equation}
+where $\parallel,\perp$ refer to $\vbeta$.  A purely electric field in
+one frame is therefore magnetic in another; and the Lorentz force law
+takes the covariant form $\dd p^\mu/\dd\tau=(e/c)\,F^{\mu\nu}u_\nu$ (here
+$u^\nu=\dd x^\nu/\dd\tau$ with $u^2=c^2$).
+
+\subsection{Equations of motion}
+
+With $j^\mu=(c\rho,\vj)$ the four equations \eqref{eq:maxwell-3d} collapse
+into two:
+\begin{equation}\label{eq:maxwell-cov}
+\pa_\mu F^{\mu\nu}=\frac{4\pi}{c}\,j^\nu,\qquad
+\pa_\mu\Ftil^{\mu\nu}=0
+\quad\Longleftrightarrow\quad
+\pa_\lambda F_{\mu\nu}+\pa_\mu F_{\nu\lambda}+\pa_\nu F_{\lambda\mu}=0 .
+\end{equation}
+(For $\nu=0$ the first gives \eqref{eq:gauss-E}, for $\nu=i$ it gives
+\eqref{eq:ampere}; the second gives \eqref{eq:gauss-B} and
+\eqref{eq:faraday}.)  The second equation is the \emph{Bianchi identity};
+it is the integrability condition for the existence of $A_\mu$ and
+holds identically once $F_{\mu\nu}=\pa_\mu A_\nu-\pa_\nu A_\mu$.  The
+continuity equation follows from the first by antisymmetry:
+$\pa_\nu\pa_\mu F^{\mu\nu}\equiv0\Rightarrow\pa_\nu j^\nu=0$.
+
+\subsection{Invariants}
+
+There are two independent quadratic Lorentz invariants,
+\begin{equation}\label{eq:invariants}
+F_{\mu\nu}F^{\mu\nu}=2(\vB^2-\vE^2),\qquad
+F_{\mu\nu}\Ftil^{\mu\nu}=-4\,\vE\cdot\vB .
+\end{equation}
+The first is a scalar, the second a pseudoscalar.
+
+\subsection{Gauge freedom and the Lorenz gauge}
+
+The potential is not determined by $F_{\mu\nu}$: for any function
+$\chi(x)$,
+\begin{equation}\label{eq:gauge}
+A^\mu\to A^\mu+\pa^\mu\chi\qquad\Longleftrightarrow\qquad
+\varphi\to\varphi+\frac1c\,\pa_t\chi,\quad \vA\to\vA-\grad\chi,
+\end{equation}
+leaves $\vE$ and $\vB$ unchanged.  The first equation of
+\eqref{eq:maxwell-cov} becomes $\Box A^\nu-\pa^\nu(\pa_\mu A^\mu)=\tfrac{4\pi}{c}j^\nu$.
+In the \emph{Lorenz gauge} $\pa_\mu A^\mu=c^{-1}\pa_t\varphi+\divg\vA=0$,
+\begin{equation}\label{eq:lorenz-wave}
+\Box A^\mu=\frac{4\pi}{c}\,j^\mu,\qquad \pa_\mu A^\mu=0 ,
+\end{equation}
+four decoupled wave equations.  A residual gauge freedom $\Box\chi=0$
+remains.
+
+\subsection{Stress--energy tensor}
+
+The symmetric, gauge-invariant, traceless tensor
+\begin{equation}\label{eq:T}
+T^{\mu\nu}=\frac1{4\pi}\Big(-F^{\mu\alpha}F^{\nu}{}_{\alpha}+\tfrac14\,\eta^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}\Big),\qquad
+T^\mu{}_\mu=0,
+\end{equation}
+has components $T^{00}=u$, $T^{0i}=S^i/c$, $T^{ij}=-\sigma_{ij}$, and
+satisfies
+\begin{equation}\label{eq:T-conservation}
+\pa_\mu T^{\mu\nu}=-\frac1c\,F^{\nu\lambda}j_\lambda\equiv-f^\nu,\qquad
+f^\mu=\Big(\frac{\vj\cdot\vE}{c},\ \rho\vE+\frac1c\vj\times\vB\Big),
+\end{equation}
+which contains both equations of \eqref{eq:poynting}.  Tracelessness
+reflects the absence of any length scale in the theory and is the origin
+of its conformal invariance (Section~\ref{sec:mx-geom}).
+
+\subsection{Action principle}
+
+Let $\dd^4x=c\,\dd t\,\dd^3x$.  The field equations are the
+Euler--Lagrange equations of
+\begin{equation}\label{eq:action}
+S=-\frac1{16\pi c}\int F_{\mu\nu}F^{\mu\nu}\,\dd^4x-\frac1{c^2}\int j^\mu A_\mu\,\dd^4x
+=\int\dd t\,\dd^3x\ \mathcal L,\qquad
+\mathcal L=\frac{\vE^2-\vB^2}{8\pi}-\rho\varphi+\frac1c\,\vj\cdot\vA .
+\end{equation}
+Indeed, $\pa\mathcal L/\pa(\pa_\mu A_\nu)=-F^{\mu\nu}/4\pi$ and
+$\pa\mathcal L/\pa A_\nu=-j^\nu/c$, so
+$\pa_\mu\big[\pa\mathcal L/\pa(\pa_\mu A_\nu)\big]=\pa\mathcal L/\pa A_\nu$
+reads $\pa_\mu F^{\mu\nu}=(4\pi/c)j^\nu$; the homogeneous equations are
+identities of the ansatz $F=\dd A$.  Under \eqref{eq:gauge} the action
+changes by $\delta S=-c^{-2}\int j^\mu\pa_\mu\chi\,\dd^4x
+=c^{-2}\int\chi\,\pa_\mu j^\mu\,\dd^4x+\text{boundary term}$, which vanishes
+when the current is conserved.  Gauge invariance of the action and
+conservation of the source are the same statement; this is the first
+(and simplest) instance of Noether's second theorem:
+$\pa_\nu\big(\delta S/\delta A_\nu\big)\equiv0$ is an \emph{identity} among
+the Euler--Lagrange expressions, so the four field equations are not
+independent.
+
+% ==========================================================================
+\section{Geometry of the field}\label{sec:mx-geom}
+% ==========================================================================
+
+\subsection{Minkowski space and the light cone}
+
+The arena is Minkowski space $(\mathbb R^{1,3},\eta)$.  The set
+$x^2=c^2t^2-|\vx|^2=0$ is the light cone; points with $x^2>0$ are
+timelike, with $x^2<0$ spacelike, separated from the origin.  The
+\emph{causal structure}---who can influence whom---is defined by the
+cones, and the Poincaré group is the group of transformations that
+preserve $\eta$.  We shall see that the Maxwell equations are
+\emph{hyperbolic} with characteristics exactly the light cones, so that
+disturbances propagate on and inside the cone, and that this single
+geometric fact is behind uniqueness, finite propagation speed and
+Huygens' principle.
+
+\subsection{Differential-form language}
+
+Since $F_{\mu\nu}$ is antisymmetric, it is naturally a 2-form,
+\begin{equation}
+\begin{aligned}
+F&=\tfrac12F_{\mu\nu}\,\dd x^\mu\wedge\dd x^\nu
+=E_i\,\dd x^0\wedge\dd x^i-\tfrac12\varepsilon_{ijk}B_k\,\dd x^i\wedge\dd x^j,\\
+A&=A_\mu\,\dd x^\mu=\varphi\,\dd x^0-\vA\cdot\dd\vx,\qquad F=\dd A .
+\end{aligned}
+\end{equation}
+Let $\star$ be the Hodge operator of $\eta$ with the orientation
+$\varepsilon_{0123}=-1$ and define $(\star F)_{\mu\nu}=\tfrac12\varepsilon_{\mu\nu\rho\sigma}F^{\rho\sigma}=\Ftil_{\mu\nu}$ and
+$(\star J)_{\mu\nu\rho}=\varepsilon_{\mu\nu\rho\sigma}j^\sigma$.  The Maxwell
+equations are then simply
+\begin{equation}\label{eq:forms}
+\dd F=0,\qquad \dd{\star F}=\frac{4\pi}{c}\,{\star J},\qquad\text{hence}\qquad \dd{\star J}=0 .
+\end{equation}
+(One checks directly: $(\dd{\star F})_{123}=\divg\vE$ and
+$(\star J)_{123}=c\rho$, so that \eqref{eq:gauss-E} is the $123$ component;
+$(\dd{\star F})_{012}=c^{-1}\pa_tE_z-(\curl\vB)_z$ and
+$(\star J)_{012}=-j_z$ give the $z$-component of \eqref{eq:ampere}.)  The
+metric enters only through $\star$, so the only metric information
+used by the dynamics is the \emph{conformal class} of $\eta$ (see
+below).  Equations \eqref{eq:forms} make the following geometric facts
+transparent:
+\begin{itemize}
+\item $\dd F=0$ is a statement of \emph{topology}: it makes no
+  reference to the metric or to sources, and by Stokes' theorem it says
+  that $\int_{\pa\mathcal C}F=0$ for the boundary of every
+  three-dimensional region $\mathcal C$ of spacetime; this packages
+  Faraday's law and $\oint\vB\cdot\dd\mathbf a=0$.
+\item $\dd{\star F}=(4\pi/c)\star J$ is the only equation that contains
+  dynamics (the metric) and sources.
+\item $\dd{\star J}=0$ is charge conservation, obtained from $\dd^2=0$.
+\item By the Poincaré lemma, $\dd F=0$ implies $F=\dd A$ \emph{locally}, and
+  $A$ is determined up to $A\to A+\dd\chi$: this is the gauge freedom.
+  Globally, $F=\dd A$ requires that the periods of $F$ over all closed
+  2-cycles vanish, so the space of closed-but-not-exact fields is the
+  second de Rham cohomology $H^2$ of the spacetime manifold.
+\end{itemize}
+
+\begin{remark}[The potential as a connection]
+Geometrically $A$ is a connection on a principal $U(1)$ bundle and $F$
+its curvature; a charged particle with charge $e$ transported around a
+closed loop $\gamma$ acquires the phase factor $\exp\!\big(\tfrac{\ii e}{\hbar c}\oint_\gamma A\big)$.  On a space with a non-contractible loop (a long solenoid
+region excluded from space) $F=0$ outside, yet $\oint A\neq0$: the
+gauge-invariant content of $A$ is not only $F$ but the holonomies.  In
+classical electrodynamics only $F$ is observable, and the ``gauge
+freedom'' is the absence of a physical referent for the extra
+information in $A$; the Aharonov--Bohm effect shows that the limit of
+validity of this statement lies at the quantum level.
+\end{remark}
+
+\subsection{Complex (self-dual) formulation}
+
+Because $\star\star=-1$ on 2-forms in Lorentzian signature, $\star$ has
+eigenvalues $\pm\ii$ and $F$ splits into a self-dual and an anti-self-dual
+part, which are complex conjugates of each other.  In three-dimensional
+language this is the \emph{Riemann--Silberstein vector}
+\begin{equation}\label{eq:RS}
+\mathbf F=\vE+\ii\vB,\qquad
+\divg\mathbf F=4\pi\rho,\qquad
+\ii\,\pa_t\mathbf F=c\,\curl\mathbf F-4\pi\ii\,\vj .
+\end{equation}
+Two real vector equations have become one complex vector equation, of
+Schr\"odinger form.  Under a rotation $\mathbf F$ transforms as a
+vector; under a boost along the unit vector $\vn$ with rapidity
+$\eta$ ($\tanh\eta=\beta$),
+\begin{equation}
+\mathbf F'_\parallel=\mathbf F_\parallel,\qquad
+\mathbf F'_\perp=\cosh\eta\,\mathbf F_\perp-\ii\sinh\eta\;\vn\times\mathbf F_\perp ,
+\end{equation}
+which is a complex rotation about $\vn$ by the imaginary angle $\ii\eta$.
+Thus $SO(3,1)^\uparrow_+\cong SO(3,\mathbb C)$ acts on $\mathbf F\in\mathbb C^3$:
+the six real components of the field form \emph{one} complex vector of the
+complexified rotation group.  The two invariants \eqref{eq:invariants}
+are the real and imaginary parts of the only invariant of
+$SO(3,\mathbb C)$,
+\begin{equation}
+\mathbf F\cdot\mathbf F=(\vE^2-\vB^2)+2\ii\,\vE\cdot\vB .
+\end{equation}
+In two-spinor language the same statement is that $F_{\mu\nu}$
+corresponds to a symmetric spinor $\phi_{AB}$ (three complex components)
+and its conjugate, in the representation $(1,0)\oplus(0,1)$ of
+$SL(2,\mathbb C)$; the source-free equations are $\nabla^{AA'}\phi_{AB}=0$.
+
+\subsection{Algebraic classification of fields}
+
+Let $I_1=\vE^2-\vB^2$ and $I_2=\vE\cdot\vB$.  The matrix
+$F^\mu{}_\nu$ has characteristic polynomial
+$\det(\lambda-F^\mu{}_\nu)=\lambda^4-I_1\lambda^2-I_2^2$.  Consequently:
+\begin{itemize}
+\item \textbf{Non-null fields} ($I_1\ne0$ or $I_2\ne0$).  If $I_2\neq0$ there is a frame in which
+  $\vE\parallel\vB$, with
+  $E^2=\tfrac12\big(\sqrt{I_1^2+4I_2^2}+I_1\big)$ and
+  $B^2=\tfrac12\big(\sqrt{I_1^2+4I_2^2}-I_1\big)$; the eigenvalues of
+  $F^\mu{}_\nu$ are $\{\pm E,\ \pm\ii B\}$ (a boost eigenplane and a
+  rotation eigenplane).  If $I_2=0$, $I_1>0$ there is a frame with
+  $\vB=0$ (purely electric); if $I_2=0$, $I_1<0$ there is a frame with
+  $\vE=0$ (purely magnetic).
+\item \textbf{Null fields} ($I_1=I_2=0$): $\vE\perp\vB$ and $|\vE|=|\vB|$ in
+  every frame; no frame exists in which the field vanishes or is purely
+  electric or magnetic.  $F_{\mu\nu}=k_\mu a_\nu-k_\nu a_\mu$ for a null
+  vector $k^\mu$ (the \emph{principal null direction}), which is the
+  direction of $\vE\times\vB$.  Plane electromagnetic waves are null
+  fields; a boost changes their frequency and amplitude but never their
+  null character.
+\end{itemize}
+For a continuous solution the set of non-null points is open, so the
+classification partitions spacetime into an open region where the field
+is non-null and a closed set where it is null; a plane wave lies
+entirely in the second.
+
+\subsection{Symmetries}
+
+\paragraph{Poincaré invariance.}  The equations are covariant under the ten-parameter
+Poincaré group; Noether's theorem applied to \eqref{eq:action} yields
+$P^\mu$ (four charges: $W/c,\ \mathbf P$) and $M^{\mu\nu}$ (six:
+angular momentum $\mathbf J$ and the boost charges
+$\mathbf K=\int(\vx\,u-t\,\vS)\,\dd^3x$).
+
+\paragraph{Conformal invariance.}  Because $T^\mu{}_\mu=0$ (equivalently
+because $\star$ on 2-forms in four dimensions depends only on the
+conformal class of the metric), the free Maxwell equations are invariant under
+the conformal group $SO(4,2)$ (fifteen parameters: the ten Poincaré
+transformations, one dilatation, four special conformal transformations)
+with $F_{\mu\nu}$ of conformal weight two.  This extends the conserved
+charges to fifteen.  It is a four-dimensional accident: it fails
+in any other dimension for the standard Maxwell action.
+
+\paragraph{Duality.}  In the absence of sources,
+$\vE\to\vE\cos\theta+\vB\sin\theta,\ \vB\to\vB\cos\theta-\vE\sin\theta$
+maps solutions into solutions; in the complex notation \eqref{eq:RS}
+it is $\mathbf F\to e^{-\ii\theta}\mathbf F$, a $U(1)$ which commutes
+with the whole Poincaré group but does \emph{not} come from a
+manifestly covariant local symmetry of the Lagrangian \eqref{eq:action}
+(the potentials $A_\mu$ transform non-locally).  The conserved quantity
+is the \emph{helicity}, the difference between the numbers of
+positive- and negative-helicity photons, written in the mode amplitudes
+of Section~\ref{sec:mx-free} as $\int\dd^3k\,(2\pi)^{-3}(|b_+|^2-|b_-|^2)$.  Electric sources break duality unless magnetic charges are added, so
+that the pair of charges rotates together with $(\vE,\vB)$.  No magnetic
+charge has been observed: the absence of monopoles, i.e.\
+\eqref{eq:gauss-B}, is an \emph{empirical} statement, while the
+equation $\dd F=0$ is the \emph{ideal-world} encoding of it.
+
+% ==========================================================================
+\section{Counting the degrees of freedom}\label{sec:mx-dof}
+% ==========================================================================
+
+\subsection{What is being counted}
+
+``How many degrees of freedom does the electromagnetic field have?'' has
+a single answer, \emph{two per point of space}, but the number is
+reached by subtracting from larger numbers that are all natural to
+quote ($6$ field components, $4$ potentials, $8$ equations), and the
+subtractions are easily confused.  We distinguish three notions.
+\begin{enumerate}
+\item The number of \emph{components} of the unknown fields ($6$ for
+  $(\vE,\vB)$, $4$ for $A^\mu$).
+\item The number of \emph{free functions of the three space variables}
+  in the general solution, i.e.\ the size of the freely specifiable
+  Cauchy data.  For the Maxwell field this is $4$.
+\item The number of \emph{degrees of freedom} $N$: half the previous
+  number, when the dynamics is first order in time and the free data
+  come in canonically conjugate pairs $(q,p)$.  For the Maxwell field
+  $N=2$.
+\end{enumerate}
+The factor of two between (2) and (3) is the familiar one between the
+number of initial data of a second-order equation (position and
+velocity) and its number of degrees of freedom.  We now count in
+several independent ways; they all give $N=2$.
+
+\subsection{\texorpdfstring{Counting in terms of $\vE$ and $\vB$}{Counting in terms of E and B}}
+
+There are $6$ unknown functions and $8$ equations \eqref{eq:maxwell-3d}.
+Two relations reduce the number of independent equations:
+\begin{align}
+\divg\big[\text{\eqref{eq:faraday}}\big]-\frac1c\,\pa_t\big[\text{\eqref{eq:gauss-B}}\big]&\equiv0
+&&\text{(an \emph{identity}: $\divg\curl\equiv0$),}\\
+\divg\big[\text{\eqref{eq:ampere}}\big]+\frac1c\,\pa_t\big[\text{\eqref{eq:gauss-E}}\big]
+&=-\frac{4\pi}{c}\big(\pa_t\rho+\divg\vj\big)
+&&\text{(a \emph{compatibility condition} on the sources).}
+\end{align}
+Thus the $8$ equations contain $8-1-1=6$ independent conditions for $6$
+unknowns: the system is determined, not overdetermined.  Concretely,
+there are $6$ evolution equations \eqref{eq:evolution} and $2$
+constraints.  The constraints are first integrals of the evolution
+(Section~\ref{sec:mx-eqs}); hence the free Cauchy data are
+\begin{equation}
+\underbrace{6}_{\vE,\ \vB}-\underbrace{2}_{\text{constraints}}=4
+\quad\text{functions on a spatial slice}=2\ \text{degrees of freedom}\times(q,p).
+\end{equation}
+
+\subsection{Fourier (characteristic) analysis}
+
+Insert $\vE,\vB\propto e^{\ii(\vk\cdot\vx-\omega t)}$ into the source-free
+evolution equations \eqref{eq:evolution}:
+\begin{equation}\label{eq:eigen}
+\omega\,\vE=-c\,\vk\times\vB,\qquad \omega\,\vB=c\,\vk\times\vE .
+\end{equation}
+Eliminating $\vB$ gives $\omega^2\vE=c^2\big[k^2\vE-\vk(\vk\cdot\vE)\big]$.
+The $6\times6$ system therefore has the eigenfrequencies
+\begin{equation}
+\omega=+ck\ (\times2),\qquad \omega=-ck\ (\times2),\qquad \omega=0\ (\times2).
+\end{equation}
+For $\omega=\pm ck$ the eigenvectors are transverse, $\vE\perp\vk$,
+$\vB=\pm\hat{\vk}\times\vE$: two polarizations for each sign of the
+frequency.  The two eigenvectors with $\omega=0$ are the longitudinal
+ones, $\vE\parallel\vk$, $\vB\parallel\vk$: they are precisely the
+Fourier components of $\divg\vE$ and $\divg\vB$, i.e.\ the \emph{constraints},
+and the vanishing frequency is the Fourier-space statement of
+\eqref{eq:propagate-B}--\eqref{eq:propagate-E}: \emph{constraint
+violations do not propagate; they are frozen}.  Of the six modes, four
+propagate: $2$ polarizations $\times$ $(\pm\omega)$.  Reality of the
+field relates the mode at $(\vk,\omega)$ to the one at
+$(-\vk,-\omega)$, so per wave vector $\vk$ there remain two independent
+complex amplitudes, i.e.\ four real numbers, i.e.\ $2$ degrees of
+freedom.
+
+\subsection{Counting with potentials}
+
+The potentials have $4$ components, of which two are removed:
+\begin{itemize}
+\item \textbf{Lorenz gauge.}  The four wave equations \eqref{eq:lorenz-wave}
+  are subject to $\pa_\mu A^\mu=0$ ($-1$) and have the residual gauge
+  freedom $\Box\chi=0$ ($-1$): $4-1-1=2$.  For a plane wave
+  $A^\mu=\epsilon^\mu e^{-\ii k\cdot x}$ with $k^2=0$ the Lorenz condition
+  $k_\mu\epsilon^\mu=0$ admits three polarization vectors (including
+  $\epsilon^\mu\propto k^\mu$, since $k$ is null), and the residual gauge
+  transformation $\epsilon^\mu\to\epsilon^\mu+\alpha k^\mu$ removes one:
+  $3-1=2$.  The ``timelike'' and ``longitudinal'' photons are the two
+  that are not physical.
+\item \textbf{Coulomb (radiation) gauge.}  $\divg\vA=0$.  Then $\varphi$ obeys
+  the Poisson equation $\nabla^2\varphi=-4\pi\rho$ and is not an independent
+  dynamical variable, while $\vA=\vA_\perp$ has $3-1=2$ independent
+  components.
+\end{itemize}
+
+\subsection{Hamiltonian counting (Dirac--Bergmann)}
+
+With $\mathcal L$ from \eqref{eq:action} the canonical momenta are
+\begin{equation}
+\Pi^i=\frac{\pa\mathcal L}{\pa\dot A^i}=-\frac{E^i}{4\pi c},\qquad
+\Pi_\varphi=\frac{\pa\mathcal L}{\pa\dot\varphi}=0 .
+\end{equation}
+The vanishing of $\Pi_\varphi$ is a \emph{primary constraint}.  The
+canonical Hamiltonian is
+\begin{equation}\label{eq:H-can}
+H=\int\dd^3x\Big[\frac{\vE^2+\vB^2}{8\pi}-\frac1c\,\vj\cdot\vA-\varphi\,\mathcal G\Big],\qquad
+\mathcal G\equiv\frac{\divg\vE}{4\pi}-\rho ,
+\end{equation}
+after an integration by parts; $\varphi$ appears linearly, as a
+\emph{Lagrange multiplier}.  Preservation of $\Pi_\varphi\approx0$,
+$\dot\Pi_\varphi=-\delta H/\delta\varphi=\mathcal G\approx0$, gives the
+\emph{secondary constraint}: Gauss's law.  Further, $\dot{\mathcal G}=0$
+holds by virtue of \eqref{eq:continuity}, so the algorithm terminates.
+All brackets among the constraints vanish, so both are
+\emph{first class}.  With the phase space $(A^\mu,\Pi_\mu)$ of
+dimension $8$ per point,
+\begin{equation}
+N=\frac12\big(8-2\times 2\big)=2 ,
+\end{equation}
+since each first-class constraint removes two phase-space dimensions:
+one by restricting to the constraint surface, one by identifying the
+points of a gauge orbit.  The first-class constraint $\mathcal G$ generates gauge
+transformations: for
+$G[\lambda]=c^{-1}\!\int\lambda\,\mathcal G\,\dd^3x$ and the canonical bracket
+$\{A^i(\vx),E^j(\vy)\}=-4\pi c\,\delta^{ij}\delta^3(\vx-\vy)$,
+$\delta_\lambda\vA=\{\vA,G[\lambda]\}=\grad\lambda$ (and
+$\delta_\lambda\varphi=-c^{-1}\pa_t\lambda$ through $\Pi_\varphi$),
+which is \eqref{eq:gauge} with $\chi=-\lambda$.  The physical phase space is the
+quotient of the surface $\{\mathcal G=0\}$ by these transformations; its
+symplectic form
+\begin{equation}
+\Omega=\int\dd^3x\ \delta\Pi^i\wedge\delta A^i
+=-\frac1{4\pi c}\int\dd^3x\ \delta E^i\wedge\delta A^i
+\end{equation}
+is well defined on it because gauge directions are null vectors of $\Omega$
+restricted to $\{\mathcal G=0\}$.  Decomposing
+$\vE=\vE_\parallel+\vE_\perp$, $\vA=\vA_\parallel+\vA_\perp$ (Helmholtz),
+$\mathcal G=0$ fixes $\vE_\parallel=-\grad\varphi_C$ with
+$\nabla^2\varphi_C=-4\pi\rho$, and $\vA_\parallel$ is pure gauge, leaving
+the canonical pairs $(\vA_\perp,\ -\vE_\perp/4\pi c)$.  The energy then
+splits,
+\begin{equation}\label{eq:H-split}
+H=\int\dd^3x\,\frac{\vE_\perp^2+\vB^2}{8\pi}\ +\ \frac12\int\rho\,\varphi_C\,\dd^3x\ -\ \frac1c\int\vj\cdot\vA_\perp\,\dd^3x ,
+\end{equation}
+into radiation energy, Coulomb energy (instantaneous, determined by
+the instantaneous charges), and interaction.  (Here the Coulomb gauge $\vA_\parallel=0$ was used; the term
+$-\varphi\,\mathcal G$ vanishes on the constraint surface, and
+$\int\vE_\parallel^2\,\dd^3x/8\pi=\tfrac12\int\rho\,\varphi_C\,\dd^3x$.)
+
+\subsection{Group-theoretic counting and the massive comparison}
+
+In the particle language, the quanta of the free field are massless
+particles of spin $1$.  A massless one-particle state with momentum
+$k^\mu=(\omega/c,0,0,k)$ is classified by the little group $ISO(2)$ of
+the Euclidean plane; finite-component representations that are
+physically acceptable have the translations acting trivially and are
+labelled by the helicity $h$.  The photon has $h=\pm1$: \emph{two}
+states, regardless of the four components of $A^\mu$.  A
+Lorentz-covariant vector field cannot describe a massless helicity
+$\pm1$ particle without a redundancy; the gauge freedom is exactly that
+redundancy.
+
+Contrast the massive (Proca) field, $\pa_\mu F^{\mu\nu}+\kappa^2A^\nu=(4\pi/c)j^\nu$ with
+$\kappa=mc/\hbar$: there is no gauge freedom, the divergence gives
+$\kappa^2\pa_\nu A^\nu=0$ (for conserved $j$) as a genuine \emph{constraint}, so
+$4-1=3$ degrees of freedom, matching the little group $SO(3)$ of a massive
+particle.  The gap between $3$ and $2$ is the longitudinal mode.  It decouples
+from conserved currents as $m\to0$, so the massless limit of
+observables is smooth, although the number of degrees of freedom jumps
+from $3$ to $2$; its absence is equivalent to gauge invariance.
+
+\subsection{Summary of the counts}
+
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Method & Start & Subtract & Result\\
+\midrule
+Cauchy data for $(\vE,\vB)$ & $6$ functions & $2$ constraints & $4=2\times(q,p)$\\
+Fourier / characteristics & $6$ eigenmodes & $2$ with $\omega=0$ (constraints) & $4=2\times(\pm\omega)$\\
+Lorenz gauge & $4$ components & Lorenz condition, residual gauge & $2$\\
+Coulomb gauge & $4$ components & $\varphi$ slaved, $\divg\vA=0$ & $2$\\
+Dirac--Bergmann & $8$ phase-space dim. & $2$ first-class constraints ($2\times2$) & $4=2\times 2$\\
+Representation theory & --- & little group $ISO(2)$, $h=\pm1$ & $2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==========================================================================
+\section{Free solutions}\label{sec:mx-free}
+% ==========================================================================
+
+\subsection{Wave equations and their limitation}
+
+Taking the curl of \eqref{eq:faraday} and \eqref{eq:ampere} and using
+\eqref{eq:gauss-E}, \eqref{eq:gauss-B} one finds
+\begin{equation}\label{eq:wave-EB}
+\Box\vE=-4\pi\Big(\grad\rho+\frac1{c^2}\,\pa_t\vj\Big),\qquad
+\Box\vB=\frac{4\pi}{c}\,\curl\vj ,
+\end{equation}
+so in vacuum each Cartesian component of $\vE,\vB$ obeys the wave
+equation with speed $c$.  The converse is false, and the point is
+important: the wave equations are \emph{consequences} of Maxwell's
+equations, not equivalents.  A second-order equation for a vector field has
+data $(\vE_0,\dot\vE_0)$: $6$ functions for $\vE$ and $6$ for $\vB$;
+Maxwell's equations fix $\dot\vE_0$ and $\dot\vB_0$ in terms of the curls
+of the other field and impose two divergence conditions, cutting the
+twelve data to four.
+
+\subsection{Plane waves}
+
+The simplest free solutions are
+$\vE=\operatorname{Re}\,[\mathbf e\,e^{\ii(\vk\cdot\vx-\omega t)}]$ with
+\begin{equation}\label{eq:plane}
+\omega=c|\vk|,\qquad \vk\cdot\mathbf e=0,\qquad
+\vB=\hat{\vk}\times\vE,\qquad \vS=c\,u\,\hat{\vk}.
+\end{equation}
+The field is transverse and null ($I_1=I_2=0$), the energy flows at speed $c$
+along $\hat{\vk}$, and $|\vS|=cu$ saturates the bound \eqref{eq:S-bound}.
+Let $\mathbf e_1,\mathbf e_2,\hat{\vk}$ be a right-handed orthonormal
+triple.  The circular polarization (\emph{helicity}) vectors
+\begin{equation}
+\mathbf e_\pm=\frac{\mathbf e_1\pm\ii\,\mathbf e_2}{\sqrt2},\qquad
+\ii\,\vk\times\mathbf e_\pm=\pm k\,\mathbf e_\pm ,\qquad
+\mathbf e_\lambda^*\cdot\mathbf e_{\lambda'}=\delta_{\lambda\lambda'},
+\end{equation}
+diagonalize the curl and the generator of rotations about $\hat{\vk}$;
+with the convention $e^{\ii(\vk\cdot\vx-\omega t)}$ the vector
+$\mathbf e_+$ rotates counter-clockwise about $\hat{\vk}$, i.e.\ has
+positive helicity.  A general polarization (ellipse) is a complex
+combination of $\mathbf e_+$ and $\mathbf e_-$.
+
+\subsection{General solution in the Coulomb gauge}
+
+In the radiation gauge with $\rho=0,\vj=0$ one has $\varphi=0$,
+$\divg\vA=0$, $\Box\vA=0$, and the general real solution is
+\begin{equation}\label{eq:modes}
+\vA(t,\vx)=\int\!\frac{\dd^3k}{(2\pi)^3}\sum_{\lambda=\pm}\sqrt{\frac{2\pi c}{k}}\Big[b_\lambda(\vk)\,\mathbf e_\lambda(\vk)\,e^{\ii(\vk\cdot\vx-\omega t)}+\text{c.c.}\Big],
+\end{equation}
+which gives
+\begin{align}
+\vE&=\int\!\frac{\dd^3k}{(2\pi)^3}\sum_\lambda\ii\sqrt{2\pi ck}\Big[b_\lambda\,\mathbf e_\lambda e^{\ii(\vk\cdot\vx-\omega t)}-\text{c.c.}\Big],\\
+\vB&=\int\!\frac{\dd^3k}{(2\pi)^3}\sum_\lambda\lambda\sqrt{2\pi ck}\Big[b_\lambda\,\mathbf e_\lambda e^{\ii(\vk\cdot\vx-\omega t)}+\text{c.c.}\Big].
+\end{align}
+All three $\vk$ components range over $\mathbb R^3$: the negative-frequency
+term at $\vk$ is the complex conjugate of the positive-frequency term at
+$-\vk$, so there is no double counting.  The two complex functions
+$b_\pm(\vk)$ of three variables, i.e.\ four real functions, are the free data.  Substitution into
+\eqref{eq:densities} and the orthogonality of the $e^{\ii\vk\cdot\vx}$
+(the terms $\propto b\,b$ cancel between $\vE^2$ and $\vB^2$) gives the
+conserved quantities in diagonal form:
+\begin{equation}\label{eq:W-P-S}
+W=\int\!\frac{\dd^3k}{(2\pi)^3}\sum_\lambda\omega\,|b_\lambda|^2,\qquad
+\mathbf P=\int\!\frac{\dd^3k}{(2\pi)^3}\sum_\lambda\vk\,|b_\lambda|^2,\qquad
+\mathbf J_{\rm spin}=\int\!\frac{\dd^3k}{(2\pi)^3}\sum_\lambda\lambda\,\hat{\vk}\,|b_\lambda|^2 .
+\end{equation}
+Since $\dot b_\lambda=-\ii\omega\,b_\lambda$ follows from $H=W$, the
+canonical bracket is $\{b_\lambda(\vk),b^*_{\lambda'}(\vk')\}=-\ii(2\pi)^3\delta_{\lambda\lambda'}\delta^3(\vk-\vk')$.
+Each pair $(\vk,\lambda)$ is an independent harmonic oscillator, with
+\emph{action variable} $|b_\lambda|^2$ and \emph{angle variable}
+$\arg b_\lambda$; the free field is an integrable system with an
+infinite set of conserved action variables, the energy, momentum and
+helicity being linear combinations of them.  For each mode $\vk|b|^2=(\omega|b|^2/c)\,\hat{\vk}$: momentum equals
+energy$/c$ along $\hat{\vk}$, the mode-by-mode form of $\vS=cu\hat{\vk}$.
+
+\subsection{Spherical waves}
+
+For solutions with definite angular momentum $(\ell,m)$, $\ell\ge1$, a
+complete set is given by two families built on vector spherical
+harmonics: \emph{electric} (TM, $B_r=0$) and \emph{magnetic} (TE, $E_r=0$),
+distinguished by parity $(-1)^{\ell}$ and $(-1)^{\ell+1}$.  There is no
+$\ell=0$ radiating solution: a spherically symmetric configuration
+produces no radiation (Gauss's law and symmetry force $\vB=0$ and the
+Coulomb field), an analogue of Birkhoff's theorem in
+electrodynamics; the reason there are exactly two independent families
+for each $(\ell,m)$ is again the two helicities.
+
+% ==========================================================================
+\section{The initial-value (Cauchy) problem}\label{sec:mx-cauchy}
+% ==========================================================================
+
+\subsection{Statement of the problem}
+
+\begin{quote}
+\textbf{Problem.}  Given $\rho(t,\vx)$ and $\vj(t,\vx)$ satisfying
+\eqref{eq:continuity} and fields $\vE_0(\vx),\vB_0(\vx)$ at $t=0$
+satisfying $\divg\vE_0=4\pi\rho(0,\cdot)$ and $\divg\vB_0=0$, find $\vE,\vB$ for all
+$t$ solving \eqref{eq:maxwell-3d}.
+\end{quote}
+The data are specified on the spacelike hyperplane $t=0$, the evolution
+equations \eqref{eq:evolution} are first order in $t$, and the
+constraints are preserved by \eqref{eq:propagate-B}--\eqref{eq:propagate-E}.  It remains to decide whether the
+problem is well posed (in the sense of Hadamard: existence, uniqueness,
+continuous dependence on the data).
+
+\subsection{Symmetric hyperbolic form and well-posedness}
+
+Write $u=(\vE,\vB)^{\mathsf T}\in\mathbb R^6$.  Then \eqref{eq:evolution} is
+\begin{equation}\label{eq:symhyp}
+\pa_t u=\sum_{b=1}^{3}A^b\,\pa_b u-4\pi\,(\vj,\mathbf 0)^{\mathsf T},\qquad
+(A^b)_{E_aB_c}=(A^b)_{B_cE_a}=c\,\varepsilon_{abc},
+\end{equation}
+all other entries of $A^b$ being zero.  (Indeed
+$\pa_tE_a=c\,\varepsilon_{abc}\pa_bB_c$ and
+$\pa_tB_c=-c\,\varepsilon_{cba}\pa_bE_a=c\,\varepsilon_{abc}\pa_bE_a$.)
+Each $A^b$ is a \emph{real symmetric} constant matrix.  A first-order system with
+real symmetric constant coefficient matrices is \emph{symmetric
+hyperbolic} (Friedrichs).  Its principal symbol for a covector
+$\xi$ is $\sum_bA^b\xi_b$, with eigenvalues $0,0,\pm c|\xi|,\pm c|\xi|$:
+the characteristic speeds are $0$ and $\pm c$, the zero speed again being the
+constraint sector, and the maximal speed is $c$.  The operator
+$\mathcal A=\sum A^b\pa_b$ is skew-adjoint on
+$L^2(\mathbb R^3;\mathbb R^6)$,
+\begin{equation}
+\langle u,\mathcal Au\rangle=c\int(\vE\cdot\curl\vB-\vB\cdot\curl\vE)\,\dd^3x
+=c\int\divg(\vB\times\vE)\,\dd^3x=0,
+\end{equation}
+so $\mathcal A$ generates a unitary group (Stone's theorem) and the energy
+$W=\|u\|^2_{L^2}/8\pi$ is conserved for $\vj=0$.  Duhamel's formula
+handles the source.
+
+\begin{theorem}[Well-posedness in $H^s$]\label{thm:wellposed}
+Let $s\ge0$, $(\vE_0,\vB_0)\in H^s(\mathbb R^3)^6$ and
+$\vj\in L^1_{\rm loc}(\mathbb R;H^s(\mathbb R^3)^3)$.  Then there is a unique
+solution $u\in C(\mathbb R;H^s)$ of \eqref{eq:symhyp} with
+$u(0)=(\vE_0,\vB_0)$, depending continuously on the data, and
+\begin{equation}\label{eq:energy-estimate}
+\|u(t)\|_{H^s}\le\|u(0)\|_{H^s}+4\pi\Big|\int_0^t\|\vj(\tau)\|_{H^s}\,\dd\tau\Big| .
+\end{equation}
+If, in addition, a charge density $\rho$ with $\pa_t\rho+\divg\vj=0$ is
+given and the constraints \eqref{eq:gauss-E}, \eqref{eq:gauss-B} hold at
+$t=0$, then they hold for all $t$.
+\end{theorem}
+\noindent\emph{Proof sketch.}  Differentiating $\tfrac12\|u\|^2$ and using
+skew-adjointness of $\mathcal A$,
+$\tfrac12\,\dd_t\|u\|^2=-4\pi\int\vj\cdot\vE\,\dd^3x\le4\pi\|\vj\|\,\|u\|$,
+so $\dd_t\|u\|\le4\pi\|\vj\|$, which integrates to
+\eqref{eq:energy-estimate} for $s=0$.  Because the coefficients are
+constant, $\mathcal A$ commutes with $\pa^\alpha$, so the same estimate
+holds for every Sobolev norm.  Existence follows from Stone's theorem
+and Duhamel, $u(t)=e^{t\mathcal A}u_0-4\pi\int_0^te^{(t-\tau)\mathcal A}(\vj(\tau),\mathbf0)\,\dd\tau$,
+uniqueness from the estimate applied to the difference of two
+solutions.  Propagation of constraints is \eqref{eq:propagate-B}--\eqref{eq:propagate-E}.
+$\square$
+
+The estimate expresses stability: small changes of the data and of
+the sources produce small changes of the solution, with no loss of
+derivatives, and with a growth that is at most linear in time for
+bounded sources.
+
+\subsection{Finite propagation speed and domain of dependence}
+
+The $L^2$ theory proves more: information propagates at speed at most $c$.
+Let $B(\vx_0,R-ct)$ be the ball of radius $R-ct$ around $\vx_0$, and
+$W_R(t)=\int_{B(\vx_0,R-ct)}u\,\dd^3x$ its energy.  Then, using
+\eqref{eq:poynting} and the fact that the boundary recedes at speed $c$,
+\begin{equation}
+\frac{\dd W_R}{\dd t}
+=-\oint_{\pa B}\big(\vS\cdot\vn+c\,u\big)\,\dd a-\int_{B}\vj\cdot\vE\,\dd^3x
+\le-\int_B\vj\cdot\vE\,\dd^3x ,
+\end{equation}
+since $\vS\cdot\vn+cu\ge0$ by \eqref{eq:S-bound}.
+
+\begin{proposition}[Domain of dependence]\label{prop:local-energy}
+If $\vj=0$ in the cone $\mathcal D=\{(t,\vx):|\vx-\vx_0|<R-c|t|\}$ and
+$\vE_0=\vB_0=0$ on $B(\vx_0,R)$, then $\vE=\vB=0$ throughout $\mathcal D$.
+Equivalently, the fields at $(t,\vx)$ depend only on the data in the
+ball $B(\vx,c|t|)$ and on the sources inside the backward light cone of
+$(t,\vx)$.
+\end{proposition}
+\noindent\emph{Proof.}  $W_R(0)=0$, $W_R\ge0$ and $\dd W_R/\dd t\le0$, hence
+$W_R\equiv0$ for $0\le t<R/c$; the case $t<0$ follows from time
+reversal (last subsection of this section).  $\square$
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[>=stealth,scale=1.0]
+\draw[->] (-4,0) -- (4.3,0) node[right] {$\vx$};
+\draw[->] (0,-0.1) -- (0,3.6) node[above] {$ct$};
+\fill[gray!20] (-3,0) -- (3,0) -- (0,3) -- cycle;
+\draw[very thick] (-3,0) -- (3,0);
+\draw[thick] (-3,0) -- (0,3) -- (3,0);
+\node at (0,0.95) {$\mathcal D$};
+\node[below] at (-3,0) {$\vx_0-R$};
+\node[below] at (3,0) {$\vx_0+R$};
+\node[below left] at (0,0) {$\vx_0$};
+\fill (0,3) circle (1.5pt);
+\node[above right] at (0.05,3) {$ct=R$};
+\node[right] at (3.15,0.55) {data on $t=0$};
+\draw[->,thin] (3.15,0.55) -- (2.6,0.07);
+\end{tikzpicture}
+\caption{Domain of dependence $\mathcal D$ of the ball $B(\vx_0,R)$: if the data vanish on the
+thick segment (and there are no sources in $\mathcal D$), the solution vanishes in the shaded
+cone, whose sides are light rays.}\label{fig:domain}
+\end{figure}
+
+Proposition~\ref{prop:local-energy} is the PDE statement of
+\emph{relativistic causality} for the free field: the light cone is the
+boundary of the domain of dependence, and $c$ is the universal maximal speed
+at which $\vE,\vB$ can carry information.
+
+\subsection{Explicit solution and Huygens' principle}
+
+For $\vj=0$ each Cartesian component of $\vE,\vB$ solves the wave
+equation $u_{tt}=c^2\nabla^2u$ with data $(u_0,u_1)$ obtained from
+the evolution equations: $\dot\vE_0=c\curl\vB_0$, $\dot\vB_0=-c\curl\vE_0$.
+Kirchhoff's formula gives, for $t>0$,
+\begin{equation}\label{eq:kirchhoff}
+\begin{aligned}
+\vE(t,\vx)&=\pa_t\big[t\,M_{ct}\vE_0\big](\vx)+c\,t\,M_{ct}\big[\curl\vB_0\big](\vx),\\
+\vB(t,\vx)&=\pa_t\big[t\,M_{ct}\vB_0\big](\vx)-c\,t\,M_{ct}\big[\curl\vE_0\big](\vx),
+\end{aligned}
+\qquad
+M_rf(\vx)=\frac1{4\pi}\oint_{|\boldsymbol\omega|=1}f(\vx+r\boldsymbol\omega)\,\dd\Omega .
+\end{equation}
+Thus the fields at $(t,\vx)$ depend \emph{only on the data on the sphere
+$|\vx'-\vx|=ct$}, not on the ball inside it: this is the \emph{strong
+Huygens principle}.  A localized pulse is received as a localized pulse,
+with a sharp front and a sharp rear, and no tail.  In three space
+dimensions this holds because the dimension is odd and larger than one;
+it fails in two (e.g.\ a line source) and for the Maxwell
+equations in a medium with dispersion.  Huygens' principle is not a
+consequence of causality alone: it is the special property that makes
+the exact reconstruction of signals and the sharpness of radiation
+fronts possible in free space.
+
+\subsection{Solving the constraints on the initial slice}
+
+The data on $t=0$ are not freely specifiable: they must satisfy
+$\divg\vE_0=4\pi\rho_0$ and $\divg\vB_0=0$.  For fields in $L^2(\mathbb R^3)$
+the orthogonal (Helmholtz) decomposition $\vF=\vF_\parallel+\vF_\perp$ is
+given in Fourier space by $\widehat{\vF}_\parallel=\hat{\vk}(\hat{\vk}\cdot\widehat{\vF})$, $\widehat{\vF}_\perp=\widehat{\vF}-\widehat{\vF}_\parallel$.  Then
+\begin{equation}
+\vB_{0\parallel}=0,\qquad
+\vE_{0\parallel}=-\grad\varphi_0,\quad \varphi_0(\vx)=\int\frac{\rho_0(\vx')}{|\vx-\vx'|}\,\dd^3x',
+\end{equation}
+and the free data are $\vE_{0\perp}$ and $\vB_0$: two functions each
+(a divergence-free vector field on $\mathbb R^3$ has two independent
+components), i.e.\ four, as in Section~\ref{sec:mx-dof}.  The longitudinal
+(Coulomb) part of the field is slaved to the instantaneous charge
+distribution; all the independent dynamics lives in the transverse
+fields.  On a domain with non-trivial topology there are, in addition,
+finite-dimensional spaces of harmonic fields (Section~\ref{sec:mx-bvp}).
+
+\subsection{Cauchy problem for the potentials}
+
+For the potentials, count in the Lorenz gauge.  The second-order system
+\eqref{eq:lorenz-wave} has data $(A^\mu,\pa_tA^\mu)|_{t=0}$: $8$
+functions.  The Lorenz condition is preserved by the evolution only if it
+holds initially together with its time derivative, because
+$\Box(\pa_\mu A^\mu)=(4\pi/c)\pa_\mu j^\mu=0$.  Computing the time derivative
+with the $\nu=0$ equation $\Box\varphi=4\pi\rho$ gives
+\begin{equation}
+\frac1c\pa_t(\pa_\mu A^\mu)=4\pi\rho-\divg\vE ,
+\end{equation}
+so the Lorenz condition and its derivative at $t=0$ are equivalent to the
+Lorenz condition and \emph{Gauss's law}: two conditions ($8\to6$).  The
+residual gauge $\Box\chi=0$ with data $(\chi,\pa_t\chi)$ removes two more
+functions ($6\to4$).  Again $4=2\times(q,p)$.  In the Coulomb gauge the
+data are $(\vA_\perp,\pa_t\vA_\perp)$ (four functions), $\varphi_C$ is
+computed from $\rho$ at the same instant, and $\vA_\perp$ obeys
+\begin{equation}
+\Box\vA_\perp=\frac{4\pi}{c}\,\vj_\perp,\qquad \vj_\perp=\vj-\frac1{4\pi}\grad\pa_t\varphi_C .
+\end{equation}
+
+\begin{remark}[The Coulomb gauge is instantaneous, the field is not]
+In the Coulomb gauge $\varphi_C(t,\vx)=\int\rho(t,\vx')/|\vx-\vx'|\,\dd^3x'$ responds
+\emph{instantaneously} to the charge distribution, and the transverse part
+$\vA_\perp$ is nonlocal because it is sourced by $\vj_\perp$.  Yet
+the gauge-invariant fields $\vE=-\grad\varphi_C-c^{-1}\pa_t\vA_\perp$ and
+$\vB=\curl\vA_\perp$ are causal: the superluminal pieces of $\grad\varphi_C$ and of
+$c^{-1}\pa_t\vA_\perp$ cancel in the sum.  The instantaneous action at
+a distance belongs to the \emph{ideal world} of a particular
+parametrization (the gauge), not to the real world of measurable
+fields.  Causality is a property of the gauge-invariant quantities.
+\end{remark}
+
+\subsection{Time reversal and the arrow of time}
+
+Under $t\to-t$, $\vE\to\vE$, $\vB\to-\vB$, $\rho\to\rho$, $\vj\to-\vj$ the equations
+\eqref{eq:maxwell-3d} are invariant.  The Cauchy problem is therefore
+well posed backwards as well, \eqref{eq:energy-estimate} holds for $t<0$, and
+the free evolution is a unitary group, not merely a semigroup:
+\emph{nothing in the field equations at fixed sources distinguishes
+the future from the past}.  The distinction arises only when one decides
+how a free field and the sources are related: the retarded and the
+advanced solutions of Section~\ref{sec:mx-sources} are equally good solutions.
+
+% ==========================================================================
+\section{The source problem: Green functions and radiation}\label{sec:mx-sources}
+% ==========================================================================
+
+\subsection{Green functions of the wave operator}
+
+In the Lorenz gauge the sourced problem reduces to $\Box A^\mu=(4\pi/c)j^\mu$.
+Let $G$ be a fundamental solution, $\Box G=\delta^4(x)\equiv\delta(x^0)\delta^3(\vx)$.
+Two of them are of special interest, the retarded and the advanced one,
+\begin{equation}\label{eq:green}
+G_{\rm ret}(x)=\frac{\delta(x^0-r)}{4\pi r}=\frac1{2\pi}\,\theta(x^0)\,\delta(x^2),\qquad
+G_{\rm adv}(x)=\frac{\delta(x^0+r)}{4\pi r}=\frac1{2\pi}\,\theta(-x^0)\,\delta(x^2),
+\end{equation}
+$r=|\vx|$, $x^2=(x^0)^2-r^2$.  They are the Fourier integrals
+$G(x)=\int\!\frac{\dd^4k}{(2\pi)^4}\,\frac{e^{-\ii k\cdot x}}{|\vk|^2-k_0^2}$ with
+the prescription $k_0\to k_0\pm\ii0$ (poles displaced to the lower, respectively
+upper, half plane).  Their support lies on the light cone: this is
+Huygens' principle for the Green function.  Their difference
+\begin{equation}
+D=G_{\rm ret}-G_{\rm adv}=\frac1{2\pi}\,\operatorname{sgn}(x^0)\,\delta(x^2)
+=\frac{\delta(x^0-r)-\delta(x^0+r)}{4\pi r}
+\end{equation}
+is a solution of the \emph{homogeneous} equation with
+$D|_{x^0=0}=0$, $\pa_0D|_{x^0=0}=\delta^3(\vx)$, so the solution of the free equation
+$\Box u=0$ with data $(u_0,\pa_0u_0)$ on $x^0=0$ is
+$u(x^0,\vx)=\int\dd^3x'\,\big[D(x^0,\vx-\vx')\,\pa_0u_0(\vx')+\pa_0D(x^0,\vx-\vx')\,u_0(\vx')\big]$,
+which is Kirchhoff's formula \eqref{eq:kirchhoff} written with
+the Pauli--Jordan function $D$.
+
+\subsection{The retarded solution}
+
+The retarded potential of a conserved source is
+\begin{equation}\label{eq:retarded}
+\begin{aligned}
+A^\mu_{\rm ret}(x)&=\frac{4\pi}{c}\int G_{\rm ret}(x-x')\,j^\mu(x')\,\dd^4x',\quad\text{i.e.}\\
+\varphi&=\int\!\frac{\rho(t-|\vx-\vx'|/c,\vx')}{|\vx-\vx'|}\,\dd^3x',\qquad
+\vA=\frac1c\int\!\frac{\vj(t-|\vx-\vx'|/c,\vx')}{|\vx-\vx'|}\,\dd^3x' .
+\end{aligned}
+\end{equation}
+It satisfies the Lorenz condition because $\pa_\mu j^\mu=0$, and it depends
+on the source only on the backward light cone of the field point
+(sharply, with no tail).  A particular solution is not the general one:
+the general solution of the inhomogeneous Maxwell equations is
+\begin{equation}\label{eq:in-out}
+A^\mu=A^\mu_{\rm ret}+A^\mu_{\rm in}=A^\mu_{\rm adv}+A^\mu_{\rm out},\qquad
+\Box A^\mu_{\rm in}=\Box A^\mu_{\rm out}=0,
+\end{equation}
+where $A_{\rm in}$ is the incoming field (the field present before the sources
+act) and $A_{\rm out}$ the outgoing one.  Their difference
+\begin{equation}
+A_{\rm out}-A_{\rm in}=A_{\rm ret}-A_{\rm adv}=\frac{4\pi}{c}\int D(x-x')\,j(x')\,\dd^4x'
+\end{equation}
+is a free field: the \emph{radiation field} of the source.  Retarded solution
+$=$ Cauchy problem with zero data in the infinitely remote past;
+advanced solution $=$ zero data in the infinitely remote future.  Both
+are legitimate, the equations are time-reversal invariant, and the
+asymmetry is an additional condition, on the data at $t\to\mp\infty$.
+
+\begin{remark}[Real world vs.\ ideal world: free fields and remote sources]
+A field with no sources \emph{anywhere} in spacetime is an object of the
+ideal world.  In the real world a ``free'' field is a field whose sources
+are far from the region and the time of interest: starlight is a free
+field in the laboratory, produced by sources that are outside the
+region.  The decomposition \eqref{eq:in-out} makes this explicit:
+$A_{\rm in}$ is the retarded field of the sources of the
+distant past, written as if they did not exist.  The Cauchy problem for
+free fields and the source problem are therefore two descriptions of
+the same thing, differing in where the line is drawn between ``the
+system'' and ``the rest of the universe''; this is why the degrees of
+freedom counted in Section~\ref{sec:mx-dof} are carried by free fields
+although, in the real world, every free field originates in some
+source.  Choosing the retarded solution is the assumption that the
+region contains no incoming radiation from the future, an assumption
+about the whole of spacetime that no local experiment can check.
+\end{remark}
+
+\subsection{The field of a point charge; radiation}
+
+For a point charge $e$ on a prescribed worldline $\vx=\mathbf z(t)$ the
+integral \eqref{eq:retarded} gives the Liénard--Wiechert potentials
+\begin{equation}
+\varphi=\frac{e}{\big[(1-\vn\cdot\vbeta)R\big]_{\rm ret}},\qquad
+\vA=\frac{e\,\vbeta}{\big[(1-\vn\cdot\vbeta)R\big]_{\rm ret}},\qquad
+\vbeta=\frac{\dot{\mathbf z}}{c},\ \ R=|\vx-\mathbf z|,\ \ \vn=\frac{\vx-\mathbf z}{R},
+\end{equation}
+all bracketed quantities evaluated at the retarded time $t_{\rm r}$ defined by
+$t_{\rm r}+R(t_{\rm r})/c=t$.  The fields are
+\begin{equation}\label{eq:LW}
+\vE=e\Big[\frac{\vn-\vbeta}{\gamma^2(1-\vn\cdot\vbeta)^3R^2}\Big]_{\rm ret}
++\frac ec\Big[\frac{\vn\times\big((\vn-\vbeta)\times\dot\vbeta\big)}{(1-\vn\cdot\vbeta)^3R}\Big]_{\rm ret},\qquad
+\vB=[\vn\times\vE]_{\rm ret}.
+\end{equation}
+The first term (``velocity field'') falls as $R^{-2}$ and exists for
+uniform motion; the second (``acceleration'' or \emph{radiation}
+field) falls as $R^{-1}$, is proportional to $\dot\vbeta$, and for large $R$
+satisfies $\vE\perp\vn$, $\vB=\vn\times\vE$, $|\vE|=|\vB|$: it is
+asymptotically a \emph{null field} in the sense of
+Section~\ref{sec:mx-geom}.  The radiated power of a slowly moving charge is Larmor's,
+and in general Liénard's:
+\begin{equation}
+P=\frac{2e^2}{3c^3}\,|\dot{\vv}|^2,\qquad
+P=\frac{2e^2}{3c}\,\gamma^6\Big[\dot\vbeta^2-(\vbeta\times\dot\vbeta)^2\Big].
+\end{equation}
+For a small source of dipole moment $\mathbf d(t)$ (with wavelength much larger than the
+size of the source) the far field is $\vB=\ddot{\mathbf d}(t-r/c)\times\vn/(c^2r)$,
+$\vE=\vB\times\vn$, giving $\dd P/\dd\Omega=|\ddot{\mathbf d}|^2\sin^2\theta/(4\pi c^3)$
+and $P=2|\ddot{\mathbf d}|^2/(3c^3)$.
+
+\begin{remark}[Real world vs.\ ideal world: the point source]
+A $\delta$-function charge is the ideal-world limit of a small charged
+body; the field \eqref{eq:LW} diverges at the charge, the electrostatic
+self-energy $\tfrac12\!\int\!\rho\varphi$ is infinite, and the action of
+the field on its own source (the radiation reaction) requires either a
+regularization of the source or the renormalization of the mass.  These
+problems belong to the dynamics of the charge-plus-field system, not to
+the equations of the field with given sources, and for that reason they are
+postponed to the treatment of the relativistic charged particle.  The fields \eqref{eq:LW} are
+nonetheless solutions of the Maxwell equations with the $\delta$-source
+in the sense of distributions, since they are locally integrable; it is
+the field energy density, which behaves as $R^{-4}$, that is not
+integrable at the charge.
+\end{remark}
+
+% ==========================================================================
+\section{Boundary and initial--boundary value problems}\label{sec:mx-bvp}
+% ==========================================================================
+
+\subsection{Interfaces and the perfect conductor}
+
+At a surface $\mathcal S$ with unit normal $\vn$ carrying charge density
+$\sigma$ and current $\vK$ the jump conditions \eqref{eq:jump}
+hold.  They connect the fields on the two sides and determine the surface
+sources from the fields, or vice versa.  The most important idealization
+is the \emph{perfect conductor}: the field vanishes inside, and for the
+exterior vacuum region, with $\vn$ pointing out of the conductor,
+\begin{equation}\label{eq:PEC}
+\vn\times\vE=0,\qquad \vn\cdot\vB=0,\qquad
+\sigma=\frac{\vn\cdot\vE}{4\pi},\qquad \vK=\frac c{4\pi}\,\vn\times\vB .
+\end{equation}
+The first two are the boundary conditions of the vacuum problem; the last
+two merely determine the induced charge and current, which are
+\emph{outputs}.
+
+\begin{remark}[Real world vs.\ ideal world: the perfect conductor]
+No real metal is a perfect conductor.  Condition \eqref{eq:PEC} is the
+limit $\sigma_{\rm c}\to\infty$ of a conductor with Gaussian conductivity $\sigma_{\rm c}$: the field
+penetrates a skin depth $\delta=c/\sqrt{2\pi\sigma_{\rm c}\omega}$ and the
+perfect-conductor condition is the limit $\delta\to0$ in which this
+boundary layer is replaced by a surface.  It is a \emph{singular limit}:
+the dissipation, which is present for every finite $\sigma_{\rm c}$ and gives the
+cavity modes of the next subsections a finite quality factor, disappears in the limit, so
+that the energy of the ideal cavity is exactly conserved.  A theorem for the ideal problem
+is a statement about the model, and its relevance to a copper
+cavity is valid only on time scales short compared with the
+dissipation time.
+\end{remark}
+
+\subsection{The initial--boundary value problem in a bounded domain}
+
+Let $\Omega\subset\mathbb R^3$ be a bounded domain with smooth boundary
+$\pa\Omega$ and outward normal $\vn$.
+
+\begin{quote}
+\textbf{Problem.}  Find $\vE,\vB$ in $\Omega\times\mathbb R$ solving
+\eqref{eq:maxwell-3d}, with $\vn\times\vE=0$ on $\pa\Omega$ for all $t$,
+and with given initial data $\vE_0,\vB_0$ satisfying the constraints in $\Omega$
+and the compatibility conditions $\vn\times\vE_0=0$, $\vn\cdot\vB_0=0$ on $\pa\Omega$.
+\end{quote}
+Three observations explain why the problem is well posed.
+\begin{enumerate}
+\item \emph{Energy balance.}  With $\vj=0$ and the Poynting theorem,
+  \begin{equation}
+  \frac{\dd}{\dd t}\int_\Omega u\,\dd^3x=-\oint_{\pa\Omega}\vS\cdot\vn\,\dd a
+  =-\frac c{4\pi}\oint_{\pa\Omega}(\vn\times\vE)\cdot\vB\,\dd a=0 ,
+  \end{equation}
+  since $\vn\cdot(\vE\times\vB)=(\vn\times\vE)\cdot\vB$.  The boundary condition
+  makes the energy a conserved quantity: the problem is
+  \emph{conservative}, not merely dissipative.  The uniqueness proof is the
+  same as in Section~\ref{sec:mx-cauchy}; in terms of
+  operators, the Maxwell operator with the domain
+  $\{\vE\in H_0(\curl),\ \vB\in H(\curl)\}$ is skew-adjoint on
+  $L^2(\Omega)^6$, so it generates a unitary group.
+\item \emph{Compatibility of the boundary condition with the evolution.}
+  $\pa_t(\vn\cdot\vB)=-c\,\vn\cdot\curl\vE$ involves only the
+  tangential trace $\vn\times\vE$ of $\vE$ on the boundary, so
+  $\vn\times\vE=0$ for all $t$ preserves $\vn\cdot\vB=0$.  For smooth
+  solutions the initial data must also satisfy the higher-order
+  compatibility conditions, e.g.\ $\vn\times(\curl\vB_0-4\pi\vj_0/c)=0$
+  (because $\vn\times\pa_t\vE=0$), and so on.
+\item \emph{Finite propagation speed with reflection.}
+  Proposition~\ref{prop:local-energy} remains true as long as the cone
+  does not meet $\pa\Omega$; waves arriving at the wall are reflected and
+  the solution is determined by the data and by the geometry.
+\end{enumerate}
+
+\subsection{Topology and the static sector}
+
+Zero-frequency solutions play the role of the constraint modes of
+Section~\ref{sec:mx-dof}, and in a bounded domain they are governed by
+topology.  Static fields with $\vj=0$, $\rho=0$ in $\Omega$ obey
+$\curl\vE=0$, $\divg\vE=0$, $\vn\times\vE=0$, and $\curl\vB=0$,
+$\divg\vB=0$, $\vn\cdot\vB=0$.
+\begin{itemize}
+\item $\vE=\grad\phi$ with $\phi$ constant on each connected component of $\pa\Omega$.
+  If $\pa\Omega$ has $m$ components there are $m-1$ independent such fields:
+  the charges on the separate conductors (a conductor surrounded by
+  another, as in a coaxial line) are separately conserved.
+\item $\vB$ harmonic with $\vn\cdot\vB=0$: there are $b_1(\Omega)$ independent
+  ones, where $b_1$ is the first Betti number of $\Omega$ (the number of independent
+  non-contractible loops, e.g.\ $1$ for a toroidal cavity): the flux
+  through each ``handle'' is conserved.
+\end{itemize}
+These finite-dimensional spaces are exactly the frozen modes that
+carry the topological part of the constraint sector; on all of
+$\mathbb R^3$ they are absent.
+
+\subsection{Cavity modes}
+
+For $\vj=0$ separate $\vE=\operatorname{Re}[\vE_n(\vx)e^{-\ii\omega_nt}]$.
+Then
+\begin{equation}\label{eq:cavity}
+\curl\curl\vE_n=k_n^2\vE_n,\qquad\divg\vE_n=0,\qquad\vn\times\vE_n=0\ \text{on }\pa\Omega,\qquad
+\omega_n=ck_n,\ \ \vB_n=\frac1{k_n}\curl\vE_n .
+\end{equation}
+The operator $\curl\curl$ on divergence-free fields with this boundary condition has a compact
+resolvent, hence a discrete spectrum $0<k_1\le k_2\le\dots\to\infty$ and
+a complete orthonormal family $\{\vE_n\}$.  Expanding
+$\vE=\sum e_n(t)\vE_n$, $\vB=\sum b_n(t)\vB_n$ (plus the static fields above)
+the Maxwell equations become
+\begin{equation}
+\dot e_n=ck_n\,b_n-4\pi j_n,\qquad \dot b_n=-ck_n\,e_n,\qquad
+\ddot e_n+\omega_n^2e_n=-4\pi\dot j_n,\qquad j_n=\int_\Omega\vj\cdot\vE_n\,\dd^3x,
+\end{equation}
+with energy $\sum(e_n^2+b_n^2)/8\pi$: the field in a cavity is a countable
+set of independent, driven harmonic oscillators.  The degrees of
+freedom, $2$ per point of the continuum, have become a discrete set of
+oscillators; the number with frequency below $\omega$ is given for large $\omega$
+by Weyl's law
+\begin{equation}
+N(\omega)\simeq 2\times\frac{V}{(2\pi)^3}\cdot\frac{4\pi}3\Big(\frac\omega c\Big)^3
+=\frac{V\omega^3}{3\pi^2c^3},
+\end{equation}
+two polarizations per cell of volume $(2\pi)^3/V$ in $\vk$-space, which is
+the count of Section~\ref{sec:mx-dof} in disguise.
+
+\begin{example}[Rectangular cavity]
+For a box $[0,a]\times[0,b]\times[0,d]$ with perfectly conducting
+walls the modes are labelled by non-negative integers $(m,n,p)$,
+\begin{equation}
+\vk=\Big(\frac{m\pi}a,\frac{n\pi}b,\frac{p\pi}d\Big),\quad
+\begin{aligned}
+E_x&=A_x\cos k_xx\,\sin k_yy\,\sin k_zz,\\
+E_y&=A_y\sin k_xx\,\cos k_yy\,\sin k_zz,\\
+E_z&=A_z\sin k_xx\,\sin k_yy\,\cos k_zz,
+\end{aligned}
+\quad \omega=c|\vk| .
+\end{equation}
+The tangential components vanish on the walls automatically, and
+$\divg\vE=0$ is $\vk\cdot\mathbf A=0$.  If $m,n,p\ge1$ there are two
+independent polarizations; if exactly one index is zero there is one
+(the components that carry the vanishing index die); if two are zero
+there is none.  The one-polarization modes on the coordinate planes compensate the
+surface term of the separate Dirichlet and Neumann counts, so that for a
+rectangular box the first correction to Weyl's law is linear in $\omega$
+(proportional to the total edge length) rather than quadratic.
+\end{example}
+
+\subsection{Waveguides}
+
+For a cylinder (cross-section $\Sigma$) with perfectly conducting walls,
+fields $\propto e^{\ii(k_zz-\omega t)}$ split into TM waves
+($B_z=0$, $E_z=\psi$ with $-\nabla_\perp^2\psi=\gamma^2\psi$, $\psi|_{\pa\Sigma}=0$) and TE waves
+($E_z=0$, $B_z=\psi$ with $\pa_n\psi|_{\pa\Sigma}=0$), with
+\begin{equation}
+\omega^2=c^2(k_z^2+\gamma^2)
+\end{equation}
+and a cut-off frequency $c\gamma$ below which the wave does not propagate.  When
+$\Sigma$ is \emph{multiply connected} (coaxial line) there is in
+addition a TEM wave, $\omega=ck_z$, $\vE_\perp=-\grad_\perp\phi$ with
+$\phi$ constant on each boundary component: the waveguide version of the
+topological static sector above.
+
+\subsection{Exterior problems and the radiation condition}
+
+For time-harmonic fields $e^{-\ii\omega t}$ and $k=\omega/c$ the equations
+become $\curl\vE=\ii k\vB$, $\curl\vB=-\ii k\vE+4\pi\vj/c$, so that
+$\curl\curl\vE-k^2\vE=(4\pi\ii k/c)\vj$.  For an exterior domain (a
+scatterer, an antenna) the problem
+is well posed only with a condition at infinity that selects the
+\emph{outgoing} solution, the time-harmonic version of the
+retarded Green function.  This is the Silver--M\"uller radiation condition
+\begin{equation}\label{eq:SM}
+\lim_{r\to\infty}r\,\big(\vB\times\hat{\mathbf r}-\vE\big)=0
+\end{equation}
+(for an outgoing wave $\vB=\hat{\mathbf r}\times\vE$ and the bracket vanishes at leading order).
+For a perfectly conducting scatterer $D$ with incident field
+$(\vE^{\rm inc},\vB^{\rm inc})$, one seeks the scattered field with
+\begin{equation}
+\curl\curl\vE^{\rm sc}-k^2\vE^{\rm sc}=0\ \text{in }\mathbb R^3\setminus\overline D,\quad
+\vn\times(\vE^{\rm sc}+\vE^{\rm inc})=0\ \text{on }\pa D,\quad\text{and \eqref{eq:SM}.}
+\end{equation}
+For real $k>0$ this problem has exactly one solution (Rellich's lemma
+and unique continuation).  Far away, $\vE^{\rm sc}\simeq r^{-1}e^{\ii kr}\vE_\infty(\hat{\mathbf r})$
+with $\vE_\infty\perp\hat{\mathbf r}$, the \emph{far-field pattern},
+from which the scattering cross-section is computed.  The condition
+\eqref{eq:SM} is a statement about \emph{causality}: the retarded Green
+function is the boundary value as $\omega\to\omega+\ii0$ of a function
+analytic in $\operatorname{Im}\omega>0$, and the
+analyticity in the upper half plane is equivalent to the vanishing of
+the response before the cause (Kramers--Kronig-type relations).
+
+\subsection{Static boundary-value problems}
+
+For time-independent fields, \eqref{eq:maxwell-3d} decouples into
+electrostatics, $\curl\vE=0$, $\divg\vE=4\pi\rho$, i.e.\ $\vE=-\grad\varphi$,
+$\nabla^2\varphi=-4\pi\rho$, and magnetostatics, $\divg\vB=0$,
+$\curl\vB=4\pi\vj/c$ (which requires $\divg\vj=0$).  The standard
+uniqueness theorems follow from the energy identity
+$\int|\grad(\varphi_1-\varphi_2)|^2\,\dd^3x=\oint(\varphi_1-\varphi_2)\,\pa_n(\varphi_1-\varphi_2)\,\dd a$:
+the Dirichlet problem has a unique solution, the Neumann problem is unique
+up to a constant and solvable only if $\oint\pa_n\varphi\,\dd a=-4\pi Q$,
+and in the presence of conductors the field is unique when either the
+potential or the total charge of each conductor is specified.  In a
+non-simply-connected region the static magnetic problem requires,
+in addition, the circulation of $\vB$ around each independent loop,
+again the topological data of the previous subsection.
+
+\subsection{Other problems}
+
+\paragraph{Characteristic initial-value problem.}  Data may also be given on a null
+surface instead of a spacelike one.  On a null hyperplane $x^0+x^3=0$ the
+free data are only the \emph{two} transverse components of the potential in
+light-cone gauge, as functions of the three variables on the hyperplane:
+two functions instead of the four on a spacelike slice.  There is no
+contradiction: on a null surface the $(q,p)$ pair collapses into a
+single function, since the two are related by a constraint
+that is first order along the null generators.  Both
+describe the same two degrees of freedom.
+
+\paragraph{Data on a timelike surface: ill-posedness.}  Given $\vE,\vB$ and
+their normal derivatives on the plane $z=0$ for all $t$ (the ``sideways'' problem, as in
+reconstructing a source from measured near fields), the problem is
+\emph{ill posed} in the sense of Hadamard.  For a transverse wave
+vector $\vk_\perp$ with $|\vk_\perp|>\omega/c$ the waves are
+evanescent, decaying as $\exp(-\sqrt{k_\perp^2-\omega^2/c^2}\,|z|)$
+away from the source; in the reverse direction they grow
+exponentially, so errors in the high-$|\vk_\perp|$ part of the data are
+amplified without bound.  This is why the resolution of back-propagated
+images is limited to a fraction of the wavelength.
+
+\paragraph{The inverse source problem: non-uniqueness.}  Even with the field
+known exactly outside a bounded region the source is not unique.  For
+time-harmonic fields choose any smooth compactly supported vector field
+$\mathbf F$ and set
+$\vj=\dfrac{c^2}{4\pi\ii\omega}\big(\curl\curl\mathbf F-k^2\mathbf F\big)$:
+the solution of \eqref{eq:maxwell-3d} is $\vE=\mathbf F$, which vanishes outside the
+support, so the source is \emph{non-radiating}.  In the time-dependent
+case any spherically symmetric charge distribution with the same
+total charge produces the same exterior field (the Coulomb field,
+$\vB=0$).  A measurement of the exterior field determines the
+source only modulo non-radiating sources.
+
+% ==========================================================================
+\section{Discretization and the preservation of constraints}\label{sec:mx-num}
+% ==========================================================================
+
+The Cauchy problem is the prototype of the numerical treatment of
+Maxwell's equations, and it shows in a particularly clean way what the
+constraints are.  On a rectangular lattice (Yee) $\vE$ is stored on edges
+and $\vB$ on faces; $\vE$ is known at integer time steps $t^n=n\,\Delta t$ and
+$\vB$ at half-integer ones (leapfrog).  Let $\mathcal C$ be the discrete
+curl from edge values to face values, $\mathcal C^{\mathsf T}$ its transpose
+(face to edge, the curl from faces back to edges), and $\mathcal D$, $\mathcal D'$
+the discrete divergences of $\vB$ (on faces) and of $\vE$ (on edges).
+The scheme is
+\begin{equation}\label{eq:yee}
+\begin{aligned}
+\vB^{n+1/2}&=\vB^{n-1/2}-c\,\Delta t\ \mathcal C\,\vE^n,\\
+\vE^{n+1}&=\vE^n+c\,\Delta t\ \mathcal C^{\mathsf T}\vB^{n+1/2}-4\pi\,\Delta t\ \vj^{n+1/2}.
+\end{aligned}
+\end{equation}
+The staggering is arranged so that the \emph{lattice identities}
+\begin{equation}
+\mathcal D\,\mathcal C=0,\qquad \mathcal D'\,\mathcal C^{\mathsf T}=0
+\end{equation}
+hold exactly; these are the lattice versions of $\divg\curl\equiv0$ and
+of $\dd^2=0$.  Consequently:
+\begin{enumerate}
+\item $\mathcal D\vB^{n+1/2}=\mathcal D\vB^{n-1/2}$: the magnetic constraint
+  $\divg\vB=0$ is preserved \emph{exactly} (up to round-off), step by step,
+  exactly as \eqref{eq:propagate-B} states for the continuum.
+\item $\mathcal D'\vE^{n+1}-4\pi\rho^{n+1}=\mathcal D'\vE^n-4\pi\rho^n$ if
+  and only if the discrete continuity equation
+  $(\rho^{n+1}-\rho^n)/\Delta t+\mathcal D'\vj^{n+1/2}=0$ holds.  The current must be
+  deposited on the lattice in a charge-conserving way, otherwise
+  Gauss's law is violated from the first step on, which is the discrete
+  form of the compatibility condition \eqref{eq:continuity}.
+\item For $\vj=0$ the quadratic form
+  $W^n=\tfrac12|\vE^n|^2+\tfrac12\,\vB^{n-1/2}\!\cdot\vB^{n+1/2}$ (with the usual lattice
+  inner products, and up to the factor $1/4\pi$) is conserved exactly:
+  $W^{n+1}=W^n$: the contribution of the $\vE$ update,
+  $+\tfrac12c\,\Delta t\,\vB^{n+1/2}\!\cdot\mathcal C(\vE^{n+1}+\vE^n)$, cancels that of the
+  $\vB$ update, which is the same expression with the opposite sign.
+  $W^n$ is positive definite under the stability condition below.
+\item Substituting plane waves gives the numerical dispersion relation
+  \begin{equation}
+  \frac{\sin^2(\omega\Delta t/2)}{(c\Delta t)^2}=\sum_{i=1}^3\frac{\sin^2(k_i\Delta x_i/2)}{\Delta x_i^2},
+  \end{equation}
+  so the scheme is second-order accurate, the phase speed is anisotropic and
+  smaller than $c$ at short wavelengths, and the scheme is stable if and only if
+  the Courant--Friedrichs--Lewy condition
+  $c\,\Delta t\le\big(\sum_i\Delta x_i^{-2}\big)^{-1/2}$ holds ($c\Delta t\le\Delta x/\sqrt3$
+  for a cubic lattice), the discrete counterpart of the statement that the
+  numerical domain of dependence must contain the physical one.
+\end{enumerate}
+The lesson is general: a discretization that respects the structure
+\emph{constraints preserved by the evolution} reproduces the geometry of the
+continuum theory exactly, whereas a discretization that merely approximates
+each term does not, and the violation of the constraints grows.  Note also what kind of numerics this is: the lattice computation
+approximates a quantity, the field, that already has a real-world
+referent, in contrast to lattice formulations whose computed object has
+none.
+
+% ==========================================================================
+\section{Summary}\label{sec:mx-summary}
+% ==========================================================================
+
+\begin{itemize}
+\item The vacuum Maxwell equations are $8$ equations for $6$ unknowns,
+  with one identity and one compatibility condition (charge
+  conservation): $6$ evolution equations and $2$ constraints which the
+  evolution preserves.
+\item The field has $2$ degrees of freedom per point, i.e.\ $4$ free
+  functions of three variables: the transverse parts of $\vE$ and $\vB$.
+  The longitudinal parts are slaved to the instantaneous charge density
+  (Gauss's law) or vanish; gauge freedom removes the rest of the
+  potential.
+\item Geometrically, $F=\dd A$ is a closed $2$-form, $\dd{\star F}=(4\pi/c)\star J$;
+  the theory is Poincar\'e-, conformally- and (without sources)
+  duality-invariant, $F_{\mu\nu}$ has two invariants and a null/non-null classification,
+  and $\mathbf F=\vE+\ii\vB$ transforms under $SO(3,\mathbb C)$.
+\item The Cauchy problem is well posed (symmetric hyperbolic); the
+  maximal speed is $c$; free-space solutions obey the strong Huygens
+  principle.
+\item Retarded and advanced solutions are both solutions; the
+  distinction between them is a condition at infinity, not part of the
+  local field equations.
+\item In bounded domains the perfect-conductor problem is conservative, has a
+  discrete spectrum of cavity modes, and a topological static sector;
+  exterior problems require a radiation condition; problems with data on
+  timelike surfaces are ill posed; inverse source problems are not unique.
+\item A discretization that mirrors $\dd^2=0$ preserves the
+  constraints exactly.
+\end{itemize}
+
+\subsection*{Problems}
+
+\begin{problem}
+Derive \eqref{eq:wave-EB} from \eqref{eq:maxwell-3d}.  Show that
+$\Box\vE=0=\Box\vB$ does \emph{not} imply \eqref{eq:maxwell-3d} (count
+the Cauchy data).
+\end{problem}
+
+\begin{problem}
+Using \eqref{eq:boost}, show that if $\vE\cdot\vB=0$ and $|\vE|<|\vB|$ then
+in the frame moving with velocity $\vv=c\,\vE\times\vB/\vB^2$ the
+electric field vanishes.  What happens when $|\vE|=|\vB|$?
+\end{problem}
+
+\begin{problem}
+Verify that $F_{\mu\nu}F^{\mu\nu}=2(\vB^2-\vE^2)$,
+$F_{\mu\nu}\Ftil^{\mu\nu}=-4\vE\cdot\vB$, and that
+$\det(\lambda-F^\mu{}_\nu)=\lambda^4-I_1\lambda^2-I_2^2$ with
+$I_1=\vE^2-\vB^2$, $I_2=\vE\cdot\vB$.
+\end{problem}
+
+\begin{problem}
+Verify $\pa_\mu T^{\mu\nu}=-c^{-1}F^{\nu\lambda}j_\lambda$ from
+\eqref{eq:T} and \eqref{eq:maxwell-cov}, and show that $T^\mu{}_\mu=0$.
+\end{problem}
+
+\begin{problem}
+Show that in $D$ spacetime dimensions the Maxwell field has $D-2$ degrees of
+freedom, by the Hamiltonian counting of Section~\ref{sec:mx-dof}
+and by the little-group argument.
+\end{problem}
+
+\begin{problem}
+Prove Proposition~\ref{prop:local-energy} directly from the Kirchhoff
+formula \eqref{eq:kirchhoff}.  Show that the strong Huygens principle fails
+for waves independent of $z$ (hint: integrate the Green function over $z$).
+\end{problem}
+
+\begin{problem}
+In the rectangular cavity, count the modes below a given $\omega$ for a cube of side $a$
+and compare with Weyl's law $V\omega^3/(3\pi^2c^3)$; find the lowest resonance
+and its degeneracy.
+\end{problem}
+
+\begin{problem}
+Show that the quantity $W^n$ of Section~\ref{sec:mx-num} is conserved by the scheme
+\eqref{eq:yee} for $\vj=0$, using only
+that $\mathcal C^{\mathsf T}$ is the transpose of $\mathcal C$.  Show that a
+current deposition violating discrete continuity produces a Gauss-law
+residual that grows linearly in time for a steady error.
+\end{problem}
+
+\begin{problem}
+A spherical shell carries a time-dependent radial polarization
+$\mathbf P(r,t)\hat{\mathbf r}$, with $\rho=-\divg\mathbf P$ and
+$\vj=\pa_t\mathbf P$.  Show that the exterior field vanishes, and explain
+why the spherically symmetric part of any source never radiates.
+\end{problem}

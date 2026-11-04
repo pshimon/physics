@@ -1,0 +1,391 @@
+1. Change of metric signature
+We now take:
+\[
+\eta_{\mu\nu} = \mathrm{diag}(+1, -1, -1, -1)
+\]
+So:
+\[
+u^2 = \eta_{\mu\nu} u^\mu u^\nu = (u^0)^2 - \mathbf{u}^2
+\]
+Timelike vectors satisfy:
+\[
+u^2 > 0
+\]
+2. Relativistic particle action
+With this signature, the natural invariant length is:
+\[
+ds = \sqrt{u^2}\, d\lambda
+\]
+So the action becomes:
+\[
+S = -m \int d\lambda \sqrt{u^2}
+\]
+(Some authors omit the minus sign — we’ll address that.)
+3. Compute the canonical momentum
+Start from:
+\[
+L = -m \sqrt{u^2}
+\]
+Then:
+\[
+p_\mu = \frac{\partial L}{\partial u^\mu}
+\]
+Compute explicitly:
+\[
+p_\mu
+= -m \frac{1}{2} (u^2)^{-1/2} (2 \eta_{\mu\nu} u^\nu)
+= -m \frac{u_\mu}{\sqrt{u^2}}
+\]
+So again:
+\[
+p_\mu = -m \frac{u_\mu}{\sqrt{u^2}}
+\]
+If we choose proper-time parametrization:
+\[
+u^2 = 1
+\]
+then:
+\[
+p_\mu = -m u_\mu
+\]
+4. Is this a problem?
+No — because raising the index gives:
+\[
+p^\mu = \eta^{\mu\nu} p_\nu = -m u^\mu
+\]
+But what we physically call momentum is defined as:
+\[
+p^\mu_{\text{phys}} = m u^\mu
+\]
+So again, the minus sign is purely conventional.
+
+It corresponds to choosing:
+- future-directed vs past-directed parametrization,
+- or reversing the orientation of the worldline.
+5. What about the Hamiltonian?
+Compute:
+\[
+H = p_\mu u^\mu - L
+\]
+\[
+= (-m u_\mu u^\mu) - (-m \sqrt{u^2})
+= -m u^2 + m \sqrt{u^2}
+\]
+For \(u^2 = 1\):
+\[
+H = -m + m = 0
+\]
+Again: Hamiltonian vanishes due to reparametrization invariance.
+6. Mass-shell constraint
+From the definition:
+\[
+p_\mu p^\mu = m^2
+\]
+which is the correct mass-shell condition for signature \((+,-,-,-)\).
+
+Compare with the other convention:
+Metric	Constraint
+\((-,+,+,+)\)	\(p^2 + m^2 = 0\)
+\((+,-,-,-)\)	\(p^2 - m^2 = 0\)
+
+
+Same physics, different sign convention.
+7. Relation to field theory
+Scalar field Lagrangian with this signature:
+\[
+\mathcal{L}
+= \frac{1}{2} \partial_\mu \phi \partial^\mu \phi - \frac{1}{2} m^2 \phi^2
+\]
+Expands to:
+\[
+\mathcal{L}
+= \frac{1}{2} (\partial_t \phi)^2
+- \frac{1}{2} (\nabla \phi)^2
+- \frac{1}{2} m^2 \phi^2
+\]
+Same physics as before.
+8. Summary table
+Feature	Signature (+−−−)	Signature (−+++)
+Timelike norm	\(u^2 > 0\)	\(u^2 < 0\)
+Action	\(-m\sqrt{u^2}\)	\(-m\sqrt{-u^2}\)
+Constraint	\(p^2 = m^2\)	\(p^2 = -m^2\)
+Energy	\(p^0 > 0\)	\(p^0 > 0\)
+Physics	identical	identical
+
+
+9. Conceptual takeaway
+The metric signature only decides where the minus sign lives — in the metric or in the constraint — but not the physics.
+
+The “wrong sign” only appears when you forget that:
+- \(p_\mu\) is a covector,
+- raising/lowering indices changes signs,
+- reparametrization invariance removes absolute normalization.
+10. One-line conclusion
+Changing the metric signature reshuffles signs between the Lagrangian, momentum, and constraint, but leaves the physics completely invariant.
+1. What “nonrelativistic limit” really means
+The nonrelativistic (NR) limit is not simply “small velocity”.
+
+It is a gauge fixing + expansion:
+1. Choose a preferred time coordinate
+2. Break reparametrization invariance
+3. Expand in \(v/c \ll 1\)
+4. Drop terms of order \(v^4/c^4\)
+This already hides most relativistic structure.
+2. Start from the fully covariant action
+Take the relativistic point particle:
+\[
+S = -m \int d\lambda \sqrt{u^2}
+\quad\text{with}\quad
+u^\mu = \frac{dx^\mu}{d\lambda}
+\]
+Metric signature: \((+,-,-,-)\)
+3. Fix the gauge: choose coordinate time
+Choose the gauge:
+\[
+\lambda = t = x^0
+\]
+Then:
+\[
+u^\mu = (1, \dot{\mathbf{x}})
+\]
+and
+\[
+u^2 = 1 - \dot{\mathbf{x}}^2
+\]
+This breaks reparametrization invariance and selects a preferred time.
+4. Expand the square root
+\[
+L = -m \sqrt{1 - \dot{\mathbf{x}}^2}
+\]
+For small velocities:
+\[
+\sqrt{1 - v^2}
+= 1 - \frac{1}{2}v^2 - \frac{1}{8}v^4 + \cdots
+\]
+So:
+\[
+L = -m + \frac{1}{2} m v^2 + \mathcal{O}(v^4)
+\]
+5. The key moment: discarding the rest energy
+The constant term \(-m\) is dropped because it:
+
+• does not affect equations of motion
+• does not affect canonical momenta
+• does not affect Poisson brackets  
+
+This is where the relativistic structure disappears.
+
+We redefine:
+\[
+L_{\text{NR}} = \frac{1}{2} m v^2
+\]
+This is not innocent — it erases information.
+6. What disappears when we do this
+Relativistic feature	What happens in NR limit
+Reparametrization invariance	Fixed by \(t = x^0\)
+Hamiltonian constraint	Becomes trivial
+Mass-shell condition	Becomes definition of energy
+Lorentz symmetry	Reduced to Galilean
+Proper time	Identified with coordinate time
+Negative metric component	Disappears
+Square-root action	Linearized
+
+
+7. Canonical momenta comparison
+Relativistic:
+\[
+p_i = \frac{\partial L}{\partial \dot{x}^i}
+= \frac{m \dot{x}^i}{\sqrt{1 - v^2}}
+\]
+Nonrelativistic limit:
+\[
+p_i \approx m \dot{x}^i
+\]
+Time component:
+\[
+p_0 = -m \sqrt{1 - v^2} \approx -m + \frac{1}{2}mv^2
+\]
+The huge constant \(-m\) is simply discarded.
+8. Energy emerges from a constraint
+Relativistically:
+\[
+p_\mu p^\mu = m^2
+\]
+Solve for energy:
+\[
+p_0 = \sqrt{m^2 + \mathbf{p}^2}
+\]
+Expand:
+\[
+p_0 = m + \frac{\mathbf{p}^2}{2m} + \cdots
+\]
+Subtract the constant \(m\):
+\[
+E_{\text{NR}} = \frac{\mathbf{p}^2}{2m}
+\]
+So energy is not fundamental — it is extracted from the constraint after gauge fixing.
+9. Why the sign problem disappears
+In the NR limit:
+- There is no distinction between covariant and contravariant time components
+- There is no Lorentzian signature to worry about
+- There is no square root
+- There is no constraint surface
+Everything becomes Euclidean and positive definite.
+
+That’s why the “wrong sign” problem simply vanishes.
+10. Geometric interpretation
+Relativistic mechanics:
+Motion = geometry of worldlines in spacetime
+
+Nonrelativistic mechanics:
+Motion = evolution in absolute time
+
+By choosing a preferred time, you collapse spacetime geometry into dynamics.
+11. One-sentence summary
+The nonrelativistic limit hides the sign issues because it gauge-fixes time, eliminates the Hamiltonian constraint, and discards the rest energy that carries all information about Lorentzian geometry.
+
+12. Final intuition
+Relativity:
+“Time is part of geometry.”
+
+Nonrelativistic mechanics:
+“Time is a background parameter.”
+
+The price of that simplification is that all the beautiful sign structure disappears2. Quadratic (einbein) action
+The quadratic relativistic action is
+\[
+S = \frac{1}{2} \int d\lambda 
+\left(
+e^{-1} \dot x^\mu \dot x_\mu - e m^2
+\right)
+\]
+This action is:
+- reparametrization invariant
+- Lorentz invariant
+- equivalent to the square-root action
+3. Equations of motion
+(a) Variation w.r.t. \(x^\mu\)
+\[
+\delta S = \int d\lambda\, e^{-1} \dot x_\mu \delta \dot x^\mu
+\]
+Integrating by parts:
+\[
+\frac{d}{d\lambda} (e^{-1} \dot x_\mu) = 0
+\]
+Define canonical momentum:
+\[
+p_\mu := \frac{\partial L}{\partial \dot x^\mu} = e^{-1} \dot x_\mu
+\]
+(b) Variation w.r.t. the einbein \(e\)
+\[
+\frac{\delta S}{\delta e} = 0
+\quad\Rightarrow\quad
+- e^{-2} \dot x^2 - m^2 = 0
+\]
+So:
+\[
+\dot x^2 + e^2 m^2 = 0
+\]
+This is the mass-shell constraint.
+4. Solving the constraint
+Since \(\dot x^2 > 0\) (timelike):
+\[
+e = \frac{\sqrt{\dot x^2}}{m}
+\]
+Plug back into the action:
+\[
+S = \frac{1}{2} \int d\lambda
+\left(
+\frac{\dot x^2}{\sqrt{\dot x^2}/m}
+- m^2 \frac{\sqrt{\dot x^2}}{m}
+\right)
+= - m \int d\lambda \sqrt{\dot x^2}
+\]
+which is exactly the usual square-root action (with this signature).
+5. Hamiltonian formulation
+Canonical Hamiltonian:
+\[
+H = p_\mu \dot x^\mu - L
+\]
+Substitute:
+\[
+p_\mu = e^{-1} \dot x_\mu
+\]
+\[
+H = e \left( \frac{1}{2} p^2 + \frac{1}{2} m^2 \right)
+\]
+where
+\[
+p^2 = \eta^{\mu\nu} p_\mu p_\nu
+\]
+6. Constraint structure
+Because \(e\) has no momentum:
+\[
+\pi_e = 0
+\]
+and its equation of motion gives:
+\[
+\mathcal{H} \equiv \frac{1}{2}(p^2 + m^2) \approx 0
+\]
+This is the mass-shell constraint.
+
+The Hamiltonian is pure constraint:
+\[
+H = e \mathcal{H}
+\]
+7. Gauge symmetry (reparametrization invariance)
+Under:
+\[
+\lambda \to \lambda'(\lambda)
+\]
+the einbein transforms as:
+\[
+e(\lambda) \to e'(\lambda') = \frac{d\lambda}{d\lambda'} e(\lambda)
+\]
+This guarantees invariance of the action.
+8. Gauge fixing
+Proper time gauge:
+\[
+e = \frac{1}{m}
+\Rightarrow
+\dot x^2 = 1
+\]
+Then:
+\[
+p^\mu = m \dot x^\mu
+\]
+Coordinate time gauge:
+\[
+x^0 = \lambda
+\]
+Then:
+\[
+p^0 = \sqrt{m^2 + \mathbf{p}^2}
+\]
+and:
+\[
+H = p^0
+\]
+9. Nonrelativistic limit
+Expand:
+\[
+p^0 = \sqrt{m^2 + \mathbf{p}^2}
+= m + \frac{\mathbf{p}^2}{2m} - \frac{\mathbf{p}^4}{8m^3} + \cdots
+\]
+Drop constant \(m\):
+\[
+H_{\text{NR}} = \frac{\mathbf{p}^2}{2m}
+\]
+All relativistic structure disappears.
+10. Summary table
+Concept	Expression
+Action	\(\frac12 \int (e^{-1}\dot x^2 - e m^2) d\lambda\)
+Constraint	\(p^2 + m^2 = 0\)
+Gauge symmetry	reparametrization
+Physical Hamiltonian	emerges after gauge fixing
+Metric	\((+,-,-,-)\)
+
+
+11. Final takeaway
+With signature \((+,-,-,-)\), the quadratic relativistic Lagrangian cleanly shows that dynamics is entirely encoded in a constraint; time evolution appears only after gauge fixing, and all sign issues are bookkeeping artifacts of Lorentzian geometry..
+

@@ -1,0 +1,591 @@
+Mori–Zwanzig projection formalism
+How irreversible, dissipative dynamics emerges from reversible mechanics
+The Mori–Zwanzig (MZ) projection formalism is a systematic method for deriving effective equations of motion for a small number of physical variables from the dynamics of a much larger system.
+
+Its fundamental result is that when some degrees of freedom are eliminated from a Hamiltonian system, the remaining variables generally obey equations containing three contributions:
+\[
+\boxed{
+\underbrace{\dot A(t)}_{\text{reduced evolution}}
+=
+\underbrace{\text{instantaneous dynamics}}_{\text{reversible or mean force}}
++
+\underbrace{\text{memory}}_{\text{history dependence}}
++
+\underbrace{\text{fluctuating force}}_{\text{unresolved degrees of freedom}}.
+}
+\]
+
+The important point is that this decomposition can be derived exactly, without initially assuming friction, randomness, or irreversible dynamics.
+
+The formalism was developed by Robert Zwanzig and Hazime Mori, particularly during the 1960s, and remains central to nonequilibrium statistical mechanics, generalized Langevin equations, transport theory, and modern coarse-graining methods. 
+Oxford Academic+1
+
+
+It is especially relevant to our preceding discussion of metriplectic mechanics.
+
+Metriplectic dynamics begins with an effective description combining reversible Hamiltonian evolution and entropy-producing dissipation.
+
+Mori–Zwanzig addresses a more microscopic question:
+
+Starting with an ordinary conservative Hamiltonian system, what happens to its equations of motion when we retain only some degrees of freedom?
+
+We shall see that the immediate answer is not simply a dissipative force. The more fundamental result is nonlocality in time, or memory.
+1. The physical problem: eliminating degrees of freedom
+Consider an isolated Hamiltonian system with coordinates and momenta
+\[
+z=(q_1,\ldots,q_N,p_1,\ldots,p_N),
+\]
+
+and Hamiltonian
+\[
+H(z).
+\]
+
+Its microscopic evolution is
+\[
+\dot z^a=J^{ab}\partial_bH.
+\]
+
+Suppose that we are interested only in a small set of observables,
+\[
+A(z)=\big(A_1(z),\ldots,A_m(z)\big),
+\qquad m\ll 2N.
+\]
+
+For example, these may be the position and momentum of a massive particle immersed in a fluid. The remaining variables describe the molecules of the fluid.
+
+The exact equations are
+\[
+\dot A_i=\{A_i,H\}.
+\]
+
+But the right-hand side generally depends on microscopic variables not contained in \(A\). Therefore, the equations are not closed.
+
+One might try to replace the unknown microscopic forces by averages. Unfortunately, this loses something essential.
+
+The eliminated degrees of freedom retain information about their previous interactions with the observed subsystem. Later, that information can influence the subsystem again.
+
+Therefore, the effective force at time \(t\) generally depends not just on \(A(t)\), but on its past history,
+\[
+A(s),\qquad 0\leq s\leq t.
+\]
+
+This is the origin of memory.
+
+Furthermore, different microscopic initial conditions may have identical values of \(A(0)\), but subsequently produce different trajectories \(A(t)\).
+
+This is the origin of the fluctuating force.
+
+Neither effect requires fundamental stochasticity.
+2. From Hamiltonian mechanics to the Liouville operator
+Let \(\Phi_t\) denote the Hamiltonian flow in phase space:
+\[
+z(t)=\Phi_t(z_0).
+\]
+
+Instead of evolving phase-space points, we can evolve observables. For any function \(F(z)\),
+\[
+F(t,z_0)=F(\Phi_t(z_0)).
+\]
+
+Introduce the Liouville operator
+\[
+\boxed{
+LF=\{F,H\}.
+}
+\]
+
+For canonical coordinates,
+\[
+L
+=
+\sum_{i=1}^N
+\left(
+\frac{\partial H}{\partial p_i}
+\frac{\partial}{\partial q_i}
+-
+\frac{\partial H}{\partial q_i}
+\frac{\partial}{\partial p_i}
+\right).
+\]
+
+Then
+\[
+\frac{dF}{dt}=LF
+\]
+
+along a trajectory, and the formal solution is
+\[
+\boxed{F(t)=e^{tL}F(0).}
+\]
+
+The operator \(e^{tL}\) is the Koopman evolution operator acting on observables.
+
+Notice the distinction: \(L\) is a linear operator on functions even when the underlying Hamiltonian equations are nonlinear.
+
+This linearity is essential to the Mori–Zwanzig construction.
+3. Introducing the projection operator
+We now divide observables into two classes:
+- Relevant observables, expressible in terms of the retained variables \(A\).
+- Irrelevant observables, containing additional information about the eliminated degrees of freedom.
+Introduce a projection operator \(P\) and its complement \(Q\):
+\[
+\boxed{
+P^2=P,\qquad Q=I-P,\qquad PQ=QP=0.
+}
+\]
+
+The terminology projection deserves care.
+
+This is not, in general, a projection of phase-space points onto a smaller phase space. It is a projection in a function space of observables.
+
+There are two important versions.
+A. Mori's linear projection
+Suppose the equilibrium distribution is \(\rho_{\rm eq}(z)\), invariant under Hamiltonian evolution.
+
+Define an inner product on observables:
+\[
+(F,G)=\int F^*(z)G(z)\rho_{\rm eq}(z)\,dz.
+\]
+
+For one centered observable \(A\), Mori's projector can be written
+\[
+\boxed{
+PF=\frac{(A,F)}{(A,A)}A.
+}
+\]
+
+This selects the component of \(F\) parallel to \(A\).
+
+For several relevant observables, the construction uses their covariance matrix.
+
+Mori's projector is particularly useful for deriving linear generalized Langevin equations and equilibrium fluctuation–dissipation relations.
+B. Zwanzig's conditional expectation
+Zwanzig's projection is more general:
+\[
+\boxed{
+(PF)(z)=\mathbb E[F\mid A=A(z)].
+}
+\]
+
+It averages over microscopic states compatible with a given value of the relevant variables.
+
+For example, if \(A=(q,p)\) denotes the position and momentum of one particle, then \(PF\) averages over the remaining microscopic coordinates and momenta while holding \(q,p\) fixed.
+
+This projection is linear as an operator on functions but generally produces nonlinear functions of \(A\).
+
+It therefore permits nonlinear reduced evolution equations.
+
+Neither construction requires a Riemannian metric on the physical configuration space. In Mori's case, the inner product is a statistical structure on observables.
+4. Derivation of the exact Mori–Zwanzig equation
+We begin with
+\[
+\frac{d}{dt}e^{tL}A=e^{tL}LA.
+\]
+
+Insert \(I=P+Q\):
+\[
+\frac{dA(t)}{dt}
+=
+e^{tL}PLA+e^{tL}QLA.
+\]
+
+The first term represents the projected instantaneous dynamics.
+
+The second still contains unresolved information.
+
+The crucial step is the Dyson–Duhamel identity:
+\[
+\boxed{
+e^{tL}
+=
+e^{tQL}
++
+\int_0^t
+e^{(t-s)L}PL\,e^{sQL}\,ds.
+}
+\]
+
+Applying this identity to \(QLA\) gives
+\[
+\begin{aligned}
+\frac{dA(t)}{dt}
+={}&e^{tL}PLA\\
+&+\int_0^t e^{(t-s)L}
+PL\,e^{sQL}QLA\,ds\\
+&+e^{tQL}QLA.
+\end{aligned}
+\]
+
+Thus we obtain the exact Mori–Zwanzig identity:
+\[
+\boxed{
+\begin{aligned}
+\dot A(t)={}&
+\underbrace{e^{tL}PLA}_{\text{instantaneous term}}\\
+&+
+\underbrace{\int_0^t
+e^{(t-s)L}PL\,e^{sQL}QLA\,ds}_{\text{memory term}}\\
+&+
+\underbrace{e^{tQL}QLA}_{\text{fluctuating term}}.
+\end{aligned}
+}
+\]
+
+No approximation has been made in this algebraic derivation, assuming the operators and their evolutions are sufficiently well-defined. The same identity applies formally to nonlinear dynamical systems. 
+PMC+1
+
+
+Define the fluctuating force
+\[
+R(t)=e^{tQL}QLA.
+\]
+
+It satisfies the auxiliary equation
+\[
+\dot R(t)=QLR(t),
+\qquad R(0)=QLA.
+\]
+
+This is called the orthogonal dynamics equation.
+
+Its solution is generally not ordinary Hamiltonian motion restricted to the eliminated variables. Rather, it is evolution under the operator \(QL\) in the space of observables.
+
+For Zwanzig's conditional-expectation projector, the exact equation can be expressed as
+\[
+\boxed{
+\dot A(t)=
+b(A(t))
++\int_0^t K(A(t-s),s)\,ds
++R(t,z_0).
+}
+\]
+
+Here \(b\) is the projected instantaneous drift, \(K\) is a generally nonlinear memory kernel, and \(R\) depends on the unresolved microscopic initial conditions.
+
+This is a generalized Langevin equation, although \(R\) is not necessarily a stochastic process.
+5. Mori's memory kernel and fluctuation–dissipation relation
+Mori's linear projection gives a particularly instructive result.
+
+For a single centered, real observable \(A\), consider
+\[
+PF=\frac{\langle AF\rangle}{\langle A^2\rangle}A.
+\]
+
+For an equilibrium Hamiltonian system, the Liouville operator is antisymmetric with respect to the equilibrium inner product:
+\[
+\langle F\,LG\rangle=-\langle (LF)\,G\rangle.
+\]
+
+Using this property, the exact projected equation becomes
+\[
+\boxed{
+\dot A(t)
+=
+\Omega A(t)
+-\int_0^t K(s)A(t-s)\,ds
++R(t),
+}
+\]
+
+with
+\[
+\Omega=\frac{\langle ALA\rangle}{\langle A^2\rangle},
+\]
+
+and
+\[
+\boxed{
+K(t)=\frac{\langle R(t)R(0)\rangle}
+{\langle A^2\rangle}.
+}
+\]
+
+For one real observable in an invariant equilibrium ensemble, \(\Omega=0\); for a collection of variables, it becomes a matrix describing reversible couplings.
+
+The last equation is especially significant.
+
+The memory kernel is determined by the autocorrelation of the fluctuating force.
+
+The fluctuating and dissipative contributions therefore are not independent phenomenological additions.
+
+They arise together from the same eliminated degrees of freedom.
+
+This is one form of the second fluctuation–dissipation relation. 
+Oxford Academic+1
+
+6. Explicit Hamiltonian example: a particle coupled to an oscillator bath
+Let us derive a generalized Langevin equation by explicitly eliminating microscopic degrees of freedom.
+
+Consider a particle of mass \(M\), coordinate \(q\), and momentum \(p\), coupled to \(N\) harmonic oscillators.
+
+Choose the Hamiltonian
+\[
+\boxed{
+H=
+\frac{p^2}{2M}+V(q)
++
+\sum_{j=1}^N
+\left[
+\frac{p_j^2}{2m_j}
++
+\frac{m_j\omega_j^2}{2}
+\left(
+x_j-\frac{c_jq}{m_j\omega_j^2}
+\right)^2
+\right].
+}
+\]
+
+The shifted oscillator potentials include a counterterm that prevents an unwanted static renormalization of \(V(q)\).
+
+The full system is Hamiltonian, reversible, and energy conserving.
+
+Its equations are
+\[
+M\ddot q
+=
+-V'(q)
++\sum_j c_j
+\left(x_j-\frac{c_jq}{m_j\omega_j^2}\right),
+\]
+
+and
+\[
+m_j\ddot x_j+m_j\omega_j^2x_j=c_jq.
+\]
+
+Eliminating the bath variables
+The oscillator equations can be solved explicitly:
+\[
+\begin{aligned}
+x_j(t)={}&x_j(0)\cos\omega_jt\\
+&+\frac{p_j(0)}{m_j\omega_j}\sin\omega_jt\\
+&+\frac{c_j}{m_j\omega_j}
+\int_0^t\sin[\omega_j(t-s)]q(s)\,ds.
+\end{aligned}
+\]
+
+Substituting these solutions into the equation for \(q\), and integrating by parts, produces
+\[
+\boxed{
+M\ddot q(t)+V'(q(t))
++\int_0^t\Gamma(t-s)\dot q(s)\,ds
+=\xi(t).
+}
+\]
+
+The memory kernel is
+\[
+\boxed{
+\Gamma(t)=
+\sum_{j=1}^N
+\frac{c_j^2}{m_j\omega_j^2}
+\cos(\omega_jt).
+}
+\]
+
+The fluctuating force is
+\[
+\boxed{
+\begin{aligned}
+\xi(t)=\sum_jc_j\bigg[
+&\left(x_j(0)-\frac{c_jq(0)}{m_j\omega_j^2}\right)
+\cos\omega_jt\\
+&+\frac{p_j(0)}{m_j\omega_j}\sin\omega_jt
+\bigg].
+\end{aligned}
+}
+\]
+
+This is an exact result.
+
+It is closely related to Zwanzig's treatment of nonlinear generalized Langevin equations. 
+courses.physics.ucsd.edu
+
+What have we obtained?
+We started from completely ordinary Hamiltonian mechanics.
+
+After eliminating the oscillator variables, we obtained an equation involving:
+1. The instantaneous conservative force \(-V'(q)\).
+2. A history-dependent friction-like force.
+3. A fluctuating force determined by microscopic initial conditions.
+There is no stochastic assumption in this elimination. For specified initial conditions of every oscillator, \(\xi(t)\) is a definite function of time.
+
+It becomes random only when we replace the unknown initial bath coordinates and momenta by a probability distribution.
+Fluctuation–dissipation theorem
+Suppose the bath is initially in conditional canonical equilibrium at temperature \(T\), with the particle's initial \(q,p\) held fixed.
+
+Then
+\[
+\langle\xi(t)\rangle=0,
+\]
+
+and the force covariance is
+\[
+\boxed{
+\langle\xi(t)\xi(s)\rangle
+=
+k_{\mathrm B}T\,\Gamma(t-s).
+}
+\]
+
+This explicitly connects memory and fluctuations.
+
+The same microscopic couplings \(c_j\) appear in both quantities. Neither can be chosen independently if the equilibrium microscopic model is to be respected.
+7. How ordinary friction emerges
+Suppose that the bath contains a very large number of modes whose correlations decay rapidly.
+
+If the particle evolves much more slowly than the bath correlation time, we may approximate
+\[
+\int_0^t\Gamma(s)\dot q(t-s)\,ds
+\approx
+\dot q(t)\int_0^\infty\Gamma(s)\,ds.
+\]
+
+Define
+\[
+\gamma=\int_0^\infty\Gamma(s)\,ds,
+\]
+
+assuming the integral is well-defined in the relevant continuum-bath limit.
+
+Then
+\[
+M\ddot q+\gamma\dot q+V'(q)=\xi(t).
+\]
+
+If the force correlations also become effectively delta-correlated, the result is the ordinary Langevin equation,
+\[
+\boxed{
+M\ddot q+\gamma\dot q+V'(q)
+=
+\sqrt{2\gamma k_{\mathrm B}T}\,\eta(t),
+}
+\]
+
+where \(\eta\) is normalized Gaussian white noise in the idealized limit.
+
+Thus
+\[
+\text{Hamiltonian dynamics}
+\longrightarrow
+\text{generalized Langevin dynamics}
+\longrightarrow
+\text{Markovian Langevin dynamics}.
+\]
+
+The first step is an exact elimination of variables for the oscillator-bath model.
+
+The second step requires physical approximations or suitable limiting procedures: decay of correlations, separation of time scales, and statistical assumptions about the bath.
+
+There is an important qualification. For a finite oscillator bath, \(\Gamma(t)\) is a sum of cosines. The bath can return energy to the particle, and recurrences may occur.
+
+Consequently, eliminating variables does not itself establish strict thermodynamic irreversibility.
+8. Connection to metriplectic dynamics
+We can now return to your original question.
+
+Recall the metriplectic equation
+\[
+\dot z
+=
+J\nabla H+M\nabla S,
+\]
+
+with
+\[
+J\nabla S=0,\qquad M\nabla H=0.
+\]
+
+The symmetric positive semidefinite tensor \(M\) accounts for irreversible entropy-producing dynamics while conserving total energy.
+
+Mori–Zwanzig, by contrast, starts from a microscopic Hamiltonian equation,
+\[
+\dot z=J\nabla H,
+\]
+
+and derives memory and fluctuating forces after projecting onto selected variables.
+
+The conceptual relationship is:
+Microscopic Hamiltonian system
+
+Reversible evolution; all degrees of freedom retained
+
+Mori–Zwanzig projection
+
+Exact reduced equation
+
+Instantaneous dynamics + memory + fluctuating force
+
+Short-memory and statistical approximations
+
+Effective dissipative dynamics
+
+Friction, diffusion and transport equations
+
+Thermodynamically consistent closure, when available
+
+Metriplectic / GENERIC description
+
+Energy-conserving reversible–irreversible dynamics with entropy production
+
+
+The final step is not automatic.
+
+An arbitrary Mori–Zwanzig memory kernel does not necessarily admit representation by a local, symmetric, positive semidefinite metric bracket.
+
+Additional thermodynamic assumptions and suitable state variables are needed. In particular, for the isolated metriplectic formulation one must retain enough variables to represent both the total energy and entropy.
+
+One advantage of Mori–Zwanzig is that it can, in principle, provide microscopic expressions for transport coefficients that a metriplectic formulation otherwise leaves phenomenological.
+
+For example, friction and viscosity can often be related to time integrals of equilibrium correlation functions, leading to Green–Kubo formulas.
+9. What Mori–Zwanzig does and does not explain
+There are several points worth emphasizing.
+
+First, the exact formalism is not intrinsically irreversible. The full microscopic dynamics remains Hamiltonian. Apparent irreversibility emerges in a reduced statistical description, typically after further approximations or appropriate limits.
+
+Second, projection does not necessarily mean averaging over fast variables. It means selecting relevant observables. A useful exact projection can be constructed without separation of time scales, although short-memory approximations then become much less reliable.
+
+Third, the fluctuating force is not fundamental noise. It is the effect of unresolved microscopic initial conditions. Its identification with a Gaussian or white-noise process requires further assumptions.
+
+Fourth, exactness does not mean easy computability. Computing \(e^{tQL}\), the orthogonal dynamics, may be almost as difficult as solving the original microscopic system. The main practical challenge is finding controlled approximations for this term.
+
+Recent mathematical work has also clarified that rigorous justification of the projection identities can depend on the operator domains and the choice of projector, particularly for nonlinear conditional-expectation projections. 
+arXiv
+
+10. References
+These are particularly useful for a technical study.
+
+1. R. Zwanzig, “Memory Effects in Irreversible Thermodynamics,” Physical Review 124, 983–992 (1961). Original paper. Note that a correction to part of its nonlinear transport derivation appeared in Physical Review A 5, 2680 (1972). 
+Phys. Rev. A
+
+
+2. H. Mori, “Transport, Collective Motion, and Brownian Motion,” Progress of Theoretical Physics 33, 423–455 (1965). Original paper. Fundamental for the linear projection and memory-kernel formulation.
+
+3. R. Zwanzig, “Nonlinear Generalized Langevin Equations,” Journal of Statistical Physics 9, 215–220 (1973). Paper. Especially valuable for the oscillator-bath example.
+
+4. R. Zwanzig, Nonequilibrium Statistical Mechanics, Oxford University Press (2001). Chapter 8, “Projection Operators,” pp. 143–168, gives a systematic presentation. Chapter
+
+5. A. J. Chorin, O. H. Hald and R. Kupferman, “Optimal prediction and the Mori–Zwanzig representation of irreversible processes,” PNAS 97, 2968–2973 (2000). Open-access paper. Particularly interesting for its connection to mathematical model reduction.
+
+6. E. Darve, J. Solomon and A. Kia, “Computing generalized Langevin equations and generalized Fokker–Planck equations,” PNAS 106, 10884–10889 (2009). Open-access paper. Discusses numerical treatment of projection and memory.
+
+The deeper mechanical question
+There is an important distinction between two statements:
+\[
+\text{Eliminating variables produces memory and fluctuations}
+\]
+
+and
+\[
+\text{Eliminating variables produces irreversible dissipation}.
+\]
+The first is an exact structural result of the Mori–Zwanzig formalism.
+
+The second requires more: statistical assumptions, loss of accessible information, decay of correlations, or suitable limiting procedures.
+
+This distinction is closely related to the longstanding problem of deriving irreversible thermodynamics from reversible classical mechanics.
+
+For our discussion of metriplectic dynamics, a natural next technical problem would be to start with the Hamiltonian oscillator-bath model, derive its reduced Fokker–Planck equation in the Markovian limit, and then construct an explicit metriplectic formulation for the particle plus its thermal reservoir.
+
+That would connect Hamiltonian mechanics, projection theory, statistical mechanics, and metriplectic geometry within one concrete calculation.

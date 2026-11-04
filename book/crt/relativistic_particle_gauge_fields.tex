@@ -1,0 +1,1031 @@
+% =====================================================================
+%  Chapter: The relativistic point particle in electromagnetic and
+%           non-abelian external fields
+%  Conventions: Gaussian units, metric signature (+,-,-,-)
+%
+%  This file compiles stand-alone (pdflatex).  To embed it in a book,
+%  copy the macros from the preamble and everything from \chapter
+%  to the end of the "Notes and further reading" section.
+% =====================================================================
+\documentclass[11pt,a4paper]{book}
+
+% (OT1 default fonts: scalable without extra packages)
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs,array,enumitem}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage[expansion=false]{microtype}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+
+\numberwithin{equation}{section}
+
+% ---------------------------------------------------------------- macros
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\pdv}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\PB}[2]{\left\{#1,\,#2\right\}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Cc}{\mathcal{C}}          % mass-shell constraint
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bp}{\mathbf{p}}
+\newcommand{\bA}{\mathbf{A}}
+\newcommand{\bE}{\mathbf{E}}
+\newcommand{\bB}{\mathbf{B}}
+\newcommand{\bpi}{\boldsymbol{\pi}}
+
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\begin{document}
+
+% =====================================================================
+\chapter[Relativistic Particle in Gauge Fields]{The Relativistic Point Particle in Electromagnetic and\\ Non-Abelian External Fields}
+\label{ch:particle}
+% =====================================================================
+
+A relativistic point particle moving in a prescribed gauge field is the
+simplest system in which Lorentz invariance, gauge invariance and the
+canonical formalism meet.  Yet there is no single ``the'' Lagrangian for
+it.  The same world lines follow from half a dozen different actions---some
+regular but not manifestly covariant, some covariant but singular, some
+covariant with an auxiliary field, some with a fifth ``evolution''
+parameter---and each leads to its own Hamiltonian, its own constraints and
+its own list of conserved quantities.  In this chapter we put these
+descriptions side by side, first for the electromagnetic field and then for
+a non-abelian field.  In the second case the particle has to carry an
+internal ``colour'' degree of freedom, and the Lorentz force is replaced by
+the equations of Wong.
+
+Throughout, the field is \emph{external}: it is prescribed, the particle is
+a test body, and both radiation reaction and the back-reaction of the
+particle on the field are ignored.
+
+\medskip
+\noindent\textbf{Plan.}
+Section~\ref{sec:conv} fixes conventions.  Section~\ref{sec:free} treats the
+free particle, where the structure of the problem (reparametrization
+invariance, the mass-shell constraint, the einbein) is easiest to see.
+Section~\ref{sec:em} couples the particle to the electromagnetic field and
+derives the Lorentz force from each formulation; it also introduces the
+Stueckelberg--Horwitz--Piron (SHP) form with a fifth potential.
+Section~\ref{sec:examples} solves three standard problems exactly.
+Section~\ref{sec:nonabelian} generalizes to a non-abelian gauge field:
+colour variables, Wong's equations, Hamiltonian formalism with the
+Lie--Poisson bracket, the SHP generalization, and the Kaluza--Klein
+geodesic picture.  Section~\ref{sec:summary} compares the formulations.
+Problems and notes close the chapter.
+
+% =====================================================================
+\section{Conventions}\label{sec:conv}
+% =====================================================================
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Units.}  Gaussian units; $c$ and $\hbar$ are kept explicit.
+  The charge $q$ is measured in statcoulombs, and $q^2/\hbar c$ is
+  dimensionless.
+
+\item \textbf{Metric.}  $\eta_{\mu\nu}=\mathrm{diag}(+1,-1,-1,-1)$,
+  $x^\mu=(ct,\bx)$, $a\!\cdot\! b=a^\mu b_\mu=a^0b^0-\mathbf a\!\cdot\!\mathbf b$,
+  $\partial_\mu=\partial/\partial x^\mu=(c^{-1}\partial_t,\nabla)$.
+  Greek indices run over $0,\dots,3$, Latin ones over $1,2,3$.
+  A world line is $x^\mu(\lambda)$ with an \emph{arbitrary} parameter
+  $\lambda$ and $\dot{}\equiv \dd/\dd\lambda$; the proper time is
+  $\dd\tau=\dd s/c$, $\dd s^2=\eta_{\mu\nu}\dd x^\mu\dd x^\nu$.
+  The four-velocity $u^\mu=\dd x^\mu/\dd\tau=(\gamma c,\gamma\bv)$ obeys
+  $u\!\cdot\! u=c^2$, with $\gamma=(1-v^2/c^2)^{-1/2}$.
+
+\item \textbf{Electromagnetic field.}
+  $A^\mu=(\phi,\bA)$, $A_\mu=(\phi,-\bA)$,
+  $\bE=-\nabla\phi-c^{-1}\partial_t\bA$, $\bB=\nabla\times\bA$, and
+  \begin{equation}
+    F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu,\qquad
+    F_{0i}=E^i,\quad F_{ij}=-\varepsilon_{ijk}B^k,\qquad
+    F^{\mu\nu}=\begin{pmatrix}
+      0&-E_x&-E_y&-E_z\\ E_x&0&-B_z&B_y\\ E_y&B_z&0&-B_x\\ E_z&-B_y&B_x&0
+    \end{pmatrix}.
+    \label{eq:F-components}
+  \end{equation}
+
+\item \textbf{Momenta and brackets.}
+  For a Lagrangian $L(x,\dot x)$ the momentum conjugate to $x^\mu$ is
+  $\partial L/\partial\dot x^\mu$.  With signature $(+,-,-,-)$ this has the
+  ``wrong'' sign for the four-vector $p^\mu=(H/c,\bp)$ because
+  $p_i=-p^i$.  Following Landau and Lifshitz we therefore \emph{define}
+  \begin{equation}
+    p_\mu\equiv-\pdv{L}{\dot x^\mu},\qquad p^\mu=(H/c,\bp),
+    \label{eq:p-def}
+  \end{equation}
+  with $\bp$ the ordinary canonical momentum.  If $H_\lambda$ generates
+  evolution in $\lambda$, Hamilton's equations read
+  \begin{equation}
+    \dot x^\mu=-\pdv{H_\lambda}{p_\mu},\qquad
+    \dot p_\mu=\pdv{H_\lambda}{x^\mu},
+    \label{eq:Hamilton-cov}
+  \end{equation}
+  and the Poisson bracket is
+  $\PB fg=\partial_{p_\mu}f\,\partial_{x^\mu}g-\partial_{x^\mu}f\,\partial_{p_\mu}g$, so that
+  \begin{equation}
+    \PB{x^\mu}{p_\nu}=-\delta^\mu{}_\nu,\qquad
+    \PB{x^i}{p^j}=\delta^{ij},\qquad
+    \PB{p_\mu}{f(x)}=\partial_\mu f,\qquad \dot f=\PB f{H_\lambda}.
+    \label{eq:PB-conv}
+  \end{equation}
+  The sign in $\PB{x^\mu}{p_\nu}$ is the price of the mostly-minus metric;
+  the spatial part is the usual one.
+
+\item \textbf{Kinetic momentum.}  $\pi_\mu\equiv p_\mu-\tfrac qc A_\mu$
+  (and $\bpi=\bp-\tfrac qc\bA$).
+\end{itemize}
+
+% =====================================================================
+\section{The free particle: one system, several actions}\label{sec:free}
+% =====================================================================
+
+\subsection{The geometric action and its coordinate-time form}
+
+The world line of a free particle extremizes its proper length,
+\begin{equation}
+  S_0=-mc\int\!\dd s=-mc\int_{\lambda_1}^{\lambda_2}\!\sqrt{\dot x^\mu\dot x_\mu}\;\dd\lambda .
+  \label{eq:S0}
+\end{equation}
+The integrand is homogeneous of degree one in $\dot x^\mu$, hence
+$S_0$ is invariant under any reparametrization $\lambda\to\lambda'(\lambda)$.
+Choosing $\lambda=t$ gives the familiar \emph{non-covariant} Lagrangian
+\begin{equation}
+  L_0=-mc^2\sqrt{1-v^2/c^2}=-mc^2+\tfrac12mv^2+\tfrac18\,\frac{mv^4}{c^2}+\dots
+  \label{eq:L0-t}
+\end{equation}
+with
+\begin{equation}
+  \bp=\pdv{L_0}{\bv}=\gamma m\bv,\qquad
+  H_0=\bp\!\cdot\!\bv-L_0=\gamma mc^2=c\sqrt{\bp^2+m^2c^2}.
+  \label{eq:H0-t}
+\end{equation}
+This Lagrangian is \emph{regular}: the Hessian
+$\partial^2L_0/\partial v^i\partial v^j=\gamma m(\delta_{ij}+\gamma^2v_iv_j/c^2)$
+is positive definite, so the Legendre transform is invertible and no
+constraints arise.  Regularity is bought at the price of manifest covariance:
+time has been singled out.
+
+\subsection{Manifest covariance and the mass-shell constraint}
+
+Keep $\lambda$ arbitrary.  The covariant momentum is
+\begin{equation}
+  p_\mu=-\pdv{L}{\dot x^\mu}=\frac{mc\,\dot x_\mu}{\sqrt{\dot x^2}}
+  \quad\Longrightarrow\quad
+  p_\mu p^\mu=m^2c^2 \ \ \text{identically}.
+  \label{eq:massshell-free}
+\end{equation}
+The four components of $p_\mu$ are not independent functions of the
+velocities: the relativistic dispersion relation $E^2=p^2c^2+m^2c^4$ is a
+\emph{primary constraint}.  The cause is homogeneity.  The Hessian
+\begin{equation}
+  \pdv{^2L}{\dot x^\mu\partial\dot x^\nu}
+  =-\frac{mc}{\sqrt{\dot x^2}}\Bigl(\eta_{\mu\nu}-\frac{\dot x_\mu\dot x_\nu}{\dot x^2}\Bigr)
+\end{equation}
+annihilates $\dot x^\nu$, so it is singular, and Euler's theorem
+$\dot x^\mu\,\partial L/\partial\dot x^\mu=L$ shows that the canonical
+Hamiltonian vanishes identically,
+\begin{equation}
+  H_{\rm can}=-p_\mu\dot x^\mu-L=0 .
+\end{equation}
+In Dirac's language the dynamics is generated entirely by constraints:
+\begin{equation}
+  H_T=e(\lambda)\,\Cc,\qquad
+  \Cc\equiv\tfrac12\bigl(m^2c^2-p_\mu p^\mu\bigr)\approx0,
+  \label{eq:HT-free}
+\end{equation}
+with an arbitrary multiplier $e(\lambda)$.  Hamilton's equations
+\eqref{eq:Hamilton-cov} give $\dot x^\mu=e\,p^\mu$ and $\dot p_\mu=0$:
+straight lines with arbitrary parametrization.  The constraint is
+first class (there is only one, so $\PB{\Cc}{\Cc}=0$), and its gauge
+transformations \emph{are} the reparametrizations.
+
+Fixing the gauge breaks the symmetry and recovers the regular formulation.
+Choose $\chi\equiv x^0-c\lambda\approx0$.  Since
+$\PB{\chi}{\Cc}=p^0\neq0$ on shell, the pair $(\Cc,\chi)$ is second class;
+solving $\Cc=0$ for $p^0$ gives $p^0=\pm\sqrt{\bp^2+m^2c^2}$, and the
+generator of evolution in $t=\lambda$ is $H=c\,p^0=\pm c\sqrt{\bp^2+m^2c^2}$.
+The positive root is \eqref{eq:H0-t}; the negative root describes world
+lines traversed backwards in time, which in the Feynman--Stueckelberg
+interpretation are antiparticles.
+
+\subsection{The einbein (Polyakov) form}
+
+The square root in \eqref{eq:S0} is awkward and does not allow $m=0$.  Introduce an
+auxiliary field $e(\lambda)$, the \emph{einbein}:
+\begin{equation}
+  S_e[x,e]=-\frac12\int\!\dd\lambda\Bigl(\frac{\dot x^\mu\dot x_\mu}{e}+e\,m^2c^2\Bigr).
+  \label{eq:Se-free}
+\end{equation}
+The equation of motion for $e$ is algebraic, $\dot x^2=e^2m^2c^2$, so
+$e=\sqrt{\dot x^2}/(mc)$, and substituting back returns \eqref{eq:S0}.
+Under $\lambda\to\lambda'$ the einbein transforms as a density,
+$e'\,\dd\lambda'=e\,\dd\lambda$, so $e\,\dd\lambda=\dd\tau/m$ is the invariant
+proper time in units of $1/m$.  Now $p_\mu=\dot x_\mu/e$ and
+\begin{equation}
+  H=-p_\mu\dot x^\mu-L=-\frac{\dot x^2}{e}+\frac12\Bigl(\frac{\dot x^2}{e}+em^2c^2\Bigr)
+  =e\,\Cc,
+\end{equation}
+which is exactly the total Hamiltonian \eqref{eq:HT-free}: the einbein is
+the Lagrange multiplier of the mass-shell constraint.  (In Dirac's
+analysis $e$ has a vanishing conjugate momentum $p_e\approx0$ as a primary
+constraint, and its preservation produces $\Cc\approx0$ as a secondary
+constraint.)  The gauge $e=1/m$, $\lambda=\tau$ gives
+$L=-\tfrac12m(\dot x^2+c^2)$, and the constraint becomes the normalization
+$\dot x^2=c^2$.  For $m=0$, $S_e=-\tfrac12\int\dot x^2/e\,\dd\lambda$ describes a
+light ray.
+
+\subsection{The quadratic (Stueckelberg) Lagrangian}
+
+If one freezes the einbein, $e=1/M$ with $M$ a fixed constant, and drops the
+constant term, one obtains
+\begin{equation}
+  L_{S}=-\frac M2\,\dot x^\mu\dot x_\mu,\qquad
+  p_\mu=M\dot x_\mu,\qquad
+  K=-p_\mu\dot x^\mu-L_S=-\frac{1}{2M}\,p_\mu p^\mu .
+  \label{eq:LS-free}
+\end{equation}
+This is regular, quadratic in the velocities, and involves no constraint.
+It is the Lagrangian of Stueckelberg's parametrized relativistic mechanics
+(Section~\ref{sec:shp}).  The price is that the evolution parameter $\tau$
+is \emph{not} the proper time, and $\dot x^2$ is not fixed by the
+equations of motion but by initial conditions: for a free particle $K$ is
+conserved, and fixing $K=-m^2c^2/2M$ reproduces the mass shell.  Mass is
+promoted from a parameter to a constant of motion.  (In the $(-,+,+,+)$
+literature $K=+p^2/2M$ appears; the sign difference is the signature.)
+
+% =====================================================================
+\section{The charged particle in an electromagnetic field}\label{sec:em}
+% =====================================================================
+
+\subsection{Minimal coupling}
+
+The simplest Lorentz-scalar, reparametrization-invariant, local coupling of
+a world line to a one-form $A_\mu$ is $\int A_\mu\dd x^\mu$:
+\begin{equation}
+  S=-mc\int\!\dd s-\frac qc\int\!A_\mu\,\dd x^\mu
+   =\int\!\dd\lambda\Bigl(-mc\sqrt{\dot x^2}-\frac qc\,A_\mu\dot x^\mu\Bigr).
+  \label{eq:S-EM}
+\end{equation}
+With $\lambda=t$, $A_\mu\dot x^\mu=c\phi-\bA\!\cdot\!\bv$, and
+\begin{equation}
+  L=-mc^2\sqrt{1-v^2/c^2}-q\phi+\frac qc\,\bv\!\cdot\!\bA .
+  \label{eq:L-EM-t}
+\end{equation}
+For $q>0$ and static $\phi$ the potential energy is $q\phi$, as it should be.
+
+\subsection{Canonical momentum and Hamiltonian (coordinate time)}
+
+From \eqref{eq:L-EM-t},
+\begin{equation}
+  \bp=\pdv L\bv=\gamma m\bv+\frac qc\bA\equiv\bpi+\frac qc\bA ,
+  \label{eq:p-EM}
+\end{equation}
+and
+\begin{equation}
+  H=\bp\!\cdot\!\bv-L=\gamma mc^2+q\phi
+  =\boxed{\,c\sqrt{\bigl(\bp-\tfrac qc\bA\bigr)^2+m^2c^2}+q\phi\,}\ .
+  \label{eq:H-EM}
+\end{equation}
+(The velocity-dependent terms cancel in $\bp\!\cdot\!\bv-L$ because the
+magnetic coupling is linear in $\bv$.)  For $|\bpi|\ll mc$ this reduces to
+$mc^2+\bpi^2/2m+q\phi$, the nonrelativistic Hamiltonian with
+$\bp\to\bp-q\bA/c$.
+
+Hamilton's equations give $\bv=\partial H/\partial\bp=c\bpi/\sqrt{\bpi^2+m^2c^2}$ and
+\begin{equation}
+  \dot p_i=-\pdv H{x^i}=-q\,\partial_i\phi+\frac qc\,v^j\partial_iA^j .
+\end{equation}
+Since $\bpi=\bp-q\bA/c$ and $\dd A^i/\dd t=\partial_tA^i+v^j\partial_jA^i$,
+\begin{equation}
+  \dot\pi^i=q\Bigl(-\partial_i\phi-\frac1c\partial_tA^i\Bigr)
+  +\frac qc\,v^j\bigl(\partial_iA^j-\partial_jA^i\bigr)
+  =q\bigl[\bE+\tfrac1c\,\bv\times\bB\bigr]^i ,
+  \label{eq:Lorentz-3d}
+\end{equation}
+where we used $[\bv\times(\nabla\times\bA)]^i=v^j\partial_iA^j-v^j\partial_jA^i$.
+This is the Lorentz force, with $\bpi=\gamma m\bv$.
+
+\subsection{Covariant equations of motion}
+
+With arbitrary $\lambda$, the Euler--Lagrange equations of
+\eqref{eq:S-EM} read $\dd p_\mu/\dd\lambda=\tfrac qc\,\dot x^\nu\partial_\mu A_\nu$ with
+\begin{equation}
+  p_\mu=\frac{mc\,\dot x_\mu}{\sqrt{\dot x^2}}+\frac qc A_\mu .
+  \label{eq:p-cov-EM}
+\end{equation}
+In the gauge $\lambda=\tau$ the kinetic part is $m u_\mu$, and
+$\dd A_\mu/\dd\tau=u^\nu\partial_\nu A_\mu$ turns the equation into
+\begin{equation}
+  \boxed{\,m\,\frac{\dd u^\mu}{\dd\tau}=\frac qc\,F^{\mu\nu}u_\nu\,}
+  \qquad\Longleftrightarrow\qquad
+  \frac{\dd\bpi}{\dd t}=q\Bigl(\bE+\frac{\bv}c\times\bB\Bigr),\quad
+  \frac{\dd(\gamma mc^2)}{\dd t}=q\,\bE\!\cdot\!\bv .
+  \label{eq:Lorentz-cov}
+\end{equation}
+Antisymmetry of $F^{\mu\nu}$ gives $u_\mu\,\dd u^\mu/\dd\tau=0$, consistent with
+$u^2=c^2$: the field never changes the particle's mass.  The magnetic
+field does no work.  (The component form follows from
+\eqref{eq:F-components}: e.g.\ $m\,\dd u^i/\dd\tau=\tfrac qc(F^{i0}u_0+F^{ij}u_j)
+=q\gamma(E^i+(\bv\times\bB)^i/c)$.)
+
+\subsection{Gauge invariance}
+
+Under $A_\mu\to A_\mu+\partial_\mu\Lambda$, that is,
+$\phi\to\phi+c^{-1}\partial_t\Lambda$, $\bA\to\bA-\nabla\Lambda$,
+\begin{equation}
+  L\to L-\frac qc\,\frac{\dd\Lambda}{\dd t},\qquad
+  S\to S-\frac qc\bigl[\Lambda\bigr]_{\rm endpoints}.
+\end{equation}
+The Euler--Lagrange equations are unchanged.  The canonical variables are
+\emph{not} invariant: $\bp\to\bp-\tfrac qc\nabla\Lambda$ and
+$H\to H+\tfrac qc\partial_t\Lambda$, while $\bpi$, the kinetic energy
+$\gamma mc^2$, and the force are invariant.  The transformation of
+$(\bx,\bp,H)$ is a (time-dependent) canonical transformation.  Physical
+observables are gauge-invariant functions of $(\bx,\bpi)$.  In the quantum
+theory the same transformation is a phase,
+$\psi\to e^{-\ii q\Lambda/\hbar c}\psi$.
+
+\subsection{Symmetries and conserved quantities}
+
+Let $\xi^\mu(x)$ be a Killing vector of Minkowski space (a translation,
+rotation or boost) such that the field is invariant up to a gauge
+transformation, $\mathcal L_\xi A_\mu=\partial_\mu\Lambda_\xi$.  Then
+$\delta x^\mu=\varepsilon\xi^\mu$ changes $L$ by a total derivative
+$-\tfrac qc\varepsilon\,\dd\Lambda_\xi/\dd\lambda$, and Noether's theorem gives the
+conserved quantity
+\begin{equation}
+  \xi^\mu p_\mu-\frac qc\,\Lambda_\xi=\text{const}.
+  \label{eq:Noether-EM}
+\end{equation}
+Examples: for a translation $n^\mu$ with $n^\mu\partial_\mu A_\nu=0$ the
+\emph{canonical} (not kinetic) momentum component $n^\mu p_\mu$ is
+conserved; for rotation about $z$ in a field with $\bA=\tfrac12\bB\times\bx$
+the canonical angular momentum $p_\varphi=\gamma m\rho^2\dot\varphi+\tfrac{qB}{2c}\rho^2$ is
+conserved.
+
+\subsection{Covariant Hamiltonian formalism}\label{sec:cov-ham}
+
+The constraint structure of the free particle carries over with
+$p_\mu\to\pi_\mu=p_\mu-\tfrac qcA_\mu$:
+\begin{equation}
+  \pi_\mu\pi^\mu=m^2c^2,\qquad
+  H_T=e\,\Cc,\quad
+  \Cc=\tfrac12\bigl(m^2c^2-\pi_\mu\pi^\mu\bigr)\approx0 .
+  \label{eq:HT-EM}
+\end{equation}
+(This is also the Hamiltonian of the einbein action
+\begin{equation}
+  S_e=\int\!\dd\lambda\Bigl[-\frac{\dot x^2}{2e}-\frac e2m^2c^2-\frac qc A_\mu\dot x^\mu\Bigr],
+  \label{eq:Se-EM}
+\end{equation}
+for which $p_\mu=\dot x_\mu/e+\tfrac qc A_\mu$.)  Hamilton's equations
+\eqref{eq:Hamilton-cov} give
+\begin{equation}
+  \dot x^\mu=e\,\pi^\mu,\qquad
+  \dot p_\mu=\frac qc\,e\,\pi^\nu\partial_\mu A_\nu=\frac qc\,\dot x^\nu\partial_\mu A_\nu,
+\end{equation}
+which is the Euler--Lagrange equation above.  A particularly clean way to
+see the Lorentz force is through the brackets of the \emph{kinetic}
+momenta.  From \eqref{eq:PB-conv},
+\begin{equation}
+  \PB{x^\mu}{x^\nu}=0,\qquad
+  \PB{x^\mu}{\pi_\nu}=-\delta^\mu{}_\nu,\qquad
+  \boxed{\,\PB{\pi_\mu}{\pi_\nu}=-\frac qc\,F_{\mu\nu}\,}
+  \label{eq:PB-pi-pi}
+\end{equation}
+(for the spatial components, $\PB{\pi^i}{\pi^j}=\tfrac qc\,\varepsilon_{ijk}B^k$).
+Then
+\begin{equation}
+  \dot\pi_\mu=\PB{\pi_\mu}{e\Cc}=-e\,\pi^\nu\PB{\pi_\mu}{\pi_\nu}
+  =\frac qc F_{\mu\nu}\,e\pi^\nu=\frac qc F_{\mu\nu}\dot x^\nu .
+\end{equation}
+The algebra \eqref{eq:PB-pi-pi}, together with $\dot x^\mu\propto\pi^\mu$,
+\emph{is} the Lorentz force; the field strength appears as the curvature
+(non-commutativity) of the kinetic momenta, a point of view that
+generalizes verbatim to the non-abelian case and underlies Feynman's
+derivation of the Lorentz force from commutation relations (Dyson, 1990).
+
+\paragraph{Reduction to coordinate time.}
+Solve $\Cc=0$ for $\pi^0=(p^0-q\phi/c)$ with the gauge $x^0=c\lambda$:
+$(H-q\phi)^2/c^2=\bpi^2+m^2c^2$, i.e.\ \eqref{eq:H-EM}.
+
+\paragraph{First-order (phase-space) action.}
+Equivalently, vary independently $x^\mu$, $p_\mu$ and $e$ in
+\begin{equation}
+  S[x,p,e]=-\int\!\dd\lambda\,\bigl(p_\mu\dot x^\mu+e\,\Cc\bigr)
+  \ \xrightarrow{\ e\Cc=0\ }\ 
+  \int\bigl(\bp\!\cdot\!\dd\bx-H\,\dd t\bigr),
+  \label{eq:S-first-order}
+\end{equation}
+where we used $-p_\mu\dot x^\mu=-p_0\dot x^0-p_i\dot x^i=\bp\!\cdot\!\dot\bx-H\dot t$.
+Varying $p_\mu$ gives $\dot x^\mu=e\pi^\mu$, varying $e$ gives
+$\Cc=0$; eliminating $p_\mu$ reproduces \eqref{eq:Se-EM}.
+
+\subsection{The Hamilton--Jacobi equation}
+
+Since $p_\mu=-\partial_\mu S$ for the on-shell action, the constraint
+\eqref{eq:HT-EM} becomes the Hamilton--Jacobi equation
+\begin{equation}
+  \Bigl(\partial_\mu S+\frac qcA_\mu\Bigr)\Bigl(\partial^\mu S+\frac qcA^\mu\Bigr)=m^2c^2 .
+  \label{eq:HJ-EM}
+\end{equation}
+It is the eikonal limit of the Klein--Gordon equation
+$\bigl[D_\mu D^\mu+m^2c^2/\hbar^2\bigr]\psi=0$, $D_\mu=\partial_\mu+\ii\tfrac q{\hbar c}A_\mu$,
+with $\psi=e^{\ii S/\hbar}$.  For the free particle $S=-p_\mu x^\mu$.
+
+\subsection{Stueckelberg--Horwitz--Piron mechanics with a fifth potential}\label{sec:shp}
+
+In the SHP framework (Stueckelberg 1941; Horwitz and Piron 1973) events are
+parametrized by a universal evolution parameter $\tau$, with the dimension
+of time and independent of the proper time; the mass of the particle is not
+fixed a priori.  The dynamics uses the quadratic Lagrangian
+\eqref{eq:LS-free}.  If the fields are allowed to depend on $\tau$, gauge
+invariance under $A_\mu\to A_\mu+\partial_\mu\Lambda(x,\tau)$ requires a
+fifth potential $A_5(x,\tau)$.  With $x^5\equiv c\tau$ (so
+$\partial_5=c^{-1}\partial_\tau$, $\dot x^5=c$),
+\begin{equation}
+  L_{\rm SHP}=-\frac M2\,\dot x^\mu\dot x_\mu-\frac qc\bigl(A_\mu\dot x^\mu+c\,A_5\bigr),
+  \qquad A_5\to A_5+\partial_5\Lambda ,
+  \label{eq:L-SHP}
+\end{equation}
+because $A_\mu\dot x^\mu+cA_5\to A_\mu\dot x^\mu+cA_5+\dd\Lambda/\dd\tau$.  Then
+\begin{equation}
+  p_\mu=M\dot x_\mu+\frac qc A_\mu,\qquad
+  K=-\frac1{2M}\,\pi_\mu\pi^\mu+q\,A_5,
+  \label{eq:K-SHP}
+\end{equation}
+and the Euler--Lagrange equations are
+\begin{equation}
+  M\ddot x_\mu=\frac qc\,F_{\mu\nu}\dot x^\nu+q\,F_{\mu5},\qquad
+  F_{\mu5}=\partial_\mu A_5-\frac1c\,\partial_\tau A_\mu .
+  \label{eq:EOM-SHP}
+\end{equation}
+Two things are new compared with Maxwell dynamics.  First, the ``mass''
+$m\equiv M\sqrt{\dot x^2}/c$ is no longer constant:
+\begin{equation}
+  \frac{\dd}{\dd\tau}\Bigl(\tfrac12M\dot x^2\Bigr)=q\,\dot x^\mu F_{\mu5},
+  \qquad
+  m^2c^2=M^2\dot x^2=2M\bigl(qA_5-K\bigr)\quad(\partial_\tau K=0).
+  \label{eq:mass-SHP}
+\end{equation}
+Second, in the ``concatenation'' limit $A_5=0$, $\partial_\tau A_\mu=0$,
+the extra force vanishes, $\dot x^2$ is constant, and
+\eqref{eq:EOM-SHP} reduces to the Lorentz force \eqref{eq:Lorentz-cov} with
+$\tau\propto$ proper time and $m=M\sqrt{\dot x^2}/c$.
+
+% ---------------------------------------------------------------------
+\subsection{The formulations at a glance}
+% ---------------------------------------------------------------------
+
+\begin{table}[H]
+\centering\small
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{6.2cm}>{\raggedright\arraybackslash}p{5.7cm}@{}}
+\toprule
+Formulation & Lagrangian / action & Hamiltonian and constraints\\
+\midrule
+Coordinate time (regular)
+ & $L=-\dfrac{mc^2}{\gamma}-q\phi+\dfrac qc\,\bv\!\cdot\!\bA$
+ & $H=c\sqrt{\bpi^2+m^2c^2}+q\phi$; no constraints; not manifestly covariant.\\
+Geometric (square root)
+ & $L=-mc\sqrt{\dot x^2}-\dfrac qc A\!\cdot\!\dot x$
+ & $H_{\rm can}=0$; $\Cc=\tfrac12(m^2c^2-\pi^2)\approx0$; singular, covariant.\\
+Einbein
+ & $L=-\dfrac{\dot x^2}{2e}-\dfrac{e\,m^2c^2}2-\dfrac qc A\!\cdot\!\dot x$
+ & $H_T=e\Cc$; $e$ = multiplier; valid for $m=0$.\\
+First-order
+ & $S=-\!\int(p_\mu\dot x^\mu+e\Cc)\,\dd\lambda$
+ & Independent $x^\mu,p_\mu,e$; reduces to $\int(\bp\!\cdot\!\dd\bx-H\,\dd t)$.\\
+Quadratic (SHP)
+ & $L=-\dfrac M2\dot x^2-\dfrac qc(A\!\cdot\!\dot x+cA_5)$
+ & $K=-\dfrac{\pi^2}{2M}+qA_5$; no constraint; $m$ not fixed.\\
+5D geodesic (\S\ref{sec:KK})
+ & $L=-\dfrac M2\,G_{MN}\dot x^M\dot x^N$
+ & Charge = momentum of a cyclic coordinate.\\
+\bottomrule
+\end{tabular}
+\caption{Equivalent descriptions of a charged relativistic particle.  The
+first two rows describe the same dynamics with different gauge choices
+(time as parameter vs.\ arbitrary parameter); the first row is the gauge-fixed
+version of the second.}
+\label{tab:formulations}
+\end{table}
+
+% =====================================================================
+\section{Three exact solutions}\label{sec:examples}
+% =====================================================================
+
+\subsection{Uniform electric field: hyperbolic motion}
+
+Let $\bE=E\hat{\mathbf x}$ be constant and the particle start at rest at the
+origin.  With $a\equiv qE/m$ the equations \eqref{eq:Lorentz-cov} for
+$(u^0,u^1)$ are
+\begin{equation}
+  \frac{\dd u^0}{\dd\tau}=\frac ac\,u^1,\qquad
+  \frac{\dd u^1}{\dd\tau}=\frac ac\,u^0,
+\end{equation}
+and, with $u^2=c^2$,
+\begin{equation}
+  u^0=c\cosh\frac{a\tau}c,\quad
+  u^1=c\sinh\frac{a\tau}c,\qquad
+  ct=\frac{c^2}a\sinh\frac{a\tau}c,\quad
+  x=\frac{c^2}a\Bigl(\cosh\frac{a\tau}c-1\Bigr).
+  \label{eq:hyperbolic}
+\end{equation}
+Eliminating $\tau$: $(x+c^2/a)^2-(ct)^2=(c^2/a)^2$, a hyperbola with proper
+acceleration $a$, and
+\begin{equation}
+  x(t)=\frac{mc^2}{qE}\Bigl[\sqrt{1+\bigl(qEt/mc\bigr)^2}-1\Bigr]
+  \ \longrightarrow\ \tfrac12at^2\ \ (t\ll mc/qE).
+\end{equation}
+In the Hamiltonian formalism with $\phi=-Ex$, $\bA=0$:
+$H=c\sqrt{p_x^2+m^2c^2}-qEx$, so $\dot p_x=qE$ and $p_x=qEt$.
+
+\subsection{Uniform magnetic field}
+
+For $\bB=B\hat{\mathbf z}$ the speed, hence $\gamma$, is constant, and
+$\gamma m\,\dot\bv=\tfrac qc\bv\times\bB$ gives uniform circular motion in the
+plane perpendicular to $\bB$ with
+\begin{equation}
+  \omega_c=\frac{qB}{\gamma mc},\qquad
+  R=\frac{v_\perp}{\omega_c}=\frac{p_\perp c}{qB},
+\end{equation}
+and uniform drift along $\bB$.  In the symmetric gauge the conserved
+quantity is the canonical angular momentum of \eqref{eq:Noether-EM}.
+
+\subsection{Plane wave}
+
+Let $A^\mu=A^\mu(\varphi)$ with $\varphi=k_\mu x^\mu$, $k^2=0$ and
+$k\!\cdot\!A=0$ (radiation gauge), so that
+$F_{\mu\nu}=k_\mu A'_\nu-k_\nu A'_\mu$, with $'\equiv\dd/\dd\varphi$.  Because
+$k^\mu F_{\mu\nu}=0$,
+\begin{equation}
+  \frac{\dd(k\!\cdot\!u)}{\dd\tau}=0,\qquad
+  \frac{\dd\varphi}{\dd\tau}=k\!\cdot\!u_0\equiv\text{const},
+\end{equation}
+and the equation of motion becomes linear in $\varphi$:
+$\dd u_\mu/\dd\varphi=-\tfrac q{mc}A'_\mu+\tfrac q{mc\,(k\cdot u_0)}\,k_\mu(A'\!\cdot\!u)$.
+Its solution with $u^\mu(\varphi_0)=u_0^\mu$ and $a^\mu\equiv A^\mu(\varphi)-A^\mu(\varphi_0)$ is
+\begin{equation}
+  u^\mu(\varphi)=u_0^\mu-\frac q{mc}\,a^\mu
+  +k^\mu\Bigl[\frac{q\,(u_0\!\cdot\!a)}{mc\,(k\!\cdot\!u_0)}-\frac{q^2\,a\!\cdot\!a}{2m^2c^2\,(k\!\cdot\!u_0)}\Bigr],
+  \label{eq:Volkov-classical}
+\end{equation}
+as one verifies by substitution (the coefficient of $k^\mu$ is fixed by
+$u^2=c^2$ together with $k\!\cdot\!a=0$).  Since $a\!\cdot\!a=-|\mathbf a|^2\le0$ in
+radiation gauge, a particle initially at rest has
+\begin{equation}
+  \gamma(\varphi)=1+\frac{q^2}{2m^2c^4}\,\bigl|\mathbf A(\varphi)-\mathbf A(\varphi_0)\bigr|^2 ,
+\end{equation}
+so that the energy it carries away depends only on the instantaneous
+vector potential relative to its initial value---a classical
+``Volkov'' solution, with the $k^\mu$ term responsible for the drift along
+the propagation direction.
+
+% =====================================================================
+\section{Non-abelian external fields}\label{sec:nonabelian}
+% =====================================================================
+
+\subsection{Gauge field and covariant derivative}
+
+Let $G$ be a compact Lie group with hermitian generators $T^a$ in a
+representation $R$ of dimension $d$,
+\begin{equation}
+  [T^a,T^b]=\ii f^{abc}T^c,\qquad f^{abc}\ \text{real, totally antisymmetric},
+\end{equation}
+(for example $T^a=\sigma^a/2$, $f^{abc}=\varepsilon^{abc}$ for $SU(2)$).
+Colour indices $a,b,c$ are summed when repeated.  The gauge potential is
+$\mathcal A_\mu=A^a_\mu T^a$, and
+\begin{equation}
+  D_\mu=\partial_\mu+\ii\lambda\,\mathcal A_\mu,\qquad
+  \mathcal F_{\mu\nu}=\frac1{\ii\lambda}[D_\mu,D_\nu]
+  =\partial_\mu\mathcal A_\nu-\partial_\nu\mathcal A_\mu+\ii\lambda[\mathcal A_\mu,\mathcal A_\nu],
+  \label{eq:D-F}
+\end{equation}
+\begin{equation}
+  F^a_{\mu\nu}=\partial_\mu A^a_\nu-\partial_\nu A^a_\mu-\lambda f^{abc}A^b_\mu A^c_\nu .
+  \label{eq:Fa}
+\end{equation}
+The sign of $\lambda$ is chosen so that for a single abelian generator
+$\lambda\mathcal A_\mu\to\tfrac q{\hbar c}A_\mu$, matching the electromagnetic
+covariant derivative of Section~\ref{sec:em}.  In Gaussian units $A^a_\mu$
+has the dimension of an electrostatic potential, and $\lambda\equiv g/\hbar c$,
+where $g$ is the Yang--Mills coupling constant, with the dimension of an
+electric charge ($g^2/\hbar c$ is dimensionless).  The classical equations
+depend on $g$ and $\hbar$ only through the combination $\lambda$; the
+$\hbar$ in $\lambda$ is a matter of normalization of the structure constants,
+not a quantum effect.
+
+Under a gauge transformation $U(x)\in G$,
+\begin{equation}
+  \psi\to U\psi,\qquad
+  \mathcal A_\mu\to U\mathcal A_\mu U^{-1}+\frac\ii\lambda\,(\partial_\mu U)\,U^{-1},\qquad
+  \mathcal F_{\mu\nu}\to U\mathcal F_{\mu\nu}U^{-1},
+  \label{eq:gauge-NA}
+\end{equation}
+and for $U=1+\ii\alpha^aT^a$,
+\begin{equation}
+  \delta A^a_\mu=-\frac1\lambda\,(D_\mu\alpha)^a,\qquad
+  (D_\mu\alpha)^a=\partial_\mu\alpha^a-\lambda f^{abc}A^b_\mu\alpha^c .
+  \label{eq:gauge-NA-inf}
+\end{equation}
+The field strength is no longer invariant but rotates in the adjoint
+representation.
+
+\subsection{Why the charge must become dynamical}
+
+In electrodynamics $q$ is a constant because $U(1)$ is abelian.  If a
+particle were to couple to $F^a_{\mu\nu}$ through a \emph{fixed} colour
+vector $Q^a$, the force $Q^aF^a_{\mu\nu}u^\nu$ would not be gauge invariant,
+since $F^a$ rotates by a position-dependent adjoint rotation along the
+world line.  Gauge invariance of the physical force therefore requires $Q^a$
+to rotate together with $F^a$, and the rotation depends on the path.  So
+$Q^a(\tau)$ must itself be a dynamical variable obeying a
+\emph{covariant constancy} equation, $DQ^a/\dd\tau=0$.  The simplest
+Lagrangian that realizes this is obtained by giving the particle an
+internal state $\psi(\tau)\in\mathbb C^d$ in $R$.
+
+\subsection{Colour variables and Wong's equations}\label{sec:wong}
+
+Consider
+\begin{equation}
+  L=-mc\sqrt{\dot x^2}+\ii\hbar\,\psi^\dagger D_\lambda\psi,\qquad
+  D_\lambda\psi\equiv\dot\psi+\ii\lambda\,\dot x^\mu\mathcal A_\mu\psi,\qquad
+  \psi^\dagger\psi=1 .
+  \label{eq:L-wong}
+\end{equation}
+Up to a total derivative (which makes $L$ real) this is
+\begin{equation}
+  L=-mc\sqrt{\dot x^2}+\frac{\ii\hbar}2\bigl(\psi^\dagger\dot\psi-\dot\psi^\dagger\psi\bigr)
+  -\frac1c\,Q^aA^a_\mu\dot x^\mu,\qquad
+  Q^a\equiv g\,\psi^\dagger T^a\psi,
+  \label{eq:L-wong-expanded}
+\end{equation}
+since $\hbar\lambda=g/c$.  Its properties:
+\begin{itemize}[leftmargin=*]
+\item It is invariant under reparametrizations (all terms are of first order
+  in $\dd/\dd\lambda$).
+\item It is \emph{exactly} gauge invariant, with no total derivative:
+  $D_\lambda\psi\to U D_\lambda\psi$ and $\psi^\dagger U^\dagger U\,D_\lambda\psi=\psi^\dagger D_\lambda\psi$.
+\item In the abelian case $\psi=e^{\ii\theta}$, the internal term reduces to
+  $-\hbar\dot\theta-\tfrac qcA_\mu\dot x^\mu$ with $-\hbar\dot\theta$ a total
+  derivative, and one recovers \eqref{eq:S-EM}.
+\item The internal term is first order in time derivatives (symplectic)
+  with no internal energy; it is a Berry-phase-like term.
+\end{itemize}
+Varying $\psi^\dagger$ gives $\ii\hbar D_\lambda\psi=0$, i.e.\ \emph{parallel
+transport of the colour spinor},
+\begin{equation}
+  \dot\psi=-\ii\lambda\,\dot x^\mu\mathcal A_\mu\,\psi ,
+  \label{eq:psi-transport}
+\end{equation}
+which preserves $\psi^\dagger\psi$.  The colour charge then evolves as
+\begin{equation}
+  \dot Q^a=g\bigl(\dot\psi^\dagger T^a\psi+\psi^\dagger T^a\dot\psi\bigr)
+  =\ii\lambda\,\dot x^\mu A^b_\mu\,g\,\psi^\dagger[T^b,T^a]\psi
+  =\lambda f^{abc}\,\dot x^\mu A^b_\mu\,Q^c .
+  \label{eq:Qdot}
+\end{equation}
+For $x^\mu$ one finds, from \eqref{eq:L-wong-expanded} with $\lambda=\tau$,
+\begin{equation}
+  \dot p_\mu=\frac1c\,Q^au^\nu\partial_\mu A^a_\nu,\qquad
+  p_\mu=m u_\mu+\frac1c\,Q^aA^a_\mu .
+\end{equation}
+Expanding $\dot p_\mu$ and substituting \eqref{eq:Qdot},
+\begin{align}
+  m\dot u_\mu&=\frac1cQ^au^\nu\bigl(\partial_\mu A^a_\nu-\partial_\nu A^a_\mu\bigr)
+  -\frac\lambda c\,f^{abc}A^a_\mu A^b_\nu u^\nu Q^c \nonumber\\
+  &=\frac1c\,Q^aF^a_{\mu\nu}u^\nu ,
+\end{align}
+where the non-linear term of \eqref{eq:Fa} was recognized after a cyclic
+relabelling of colour indices.  Collecting the two equations gives
+\emph{Wong's equations}:
+\begin{equation}
+  \boxed{\ 
+  m\,\frac{\dd u^\mu}{\dd\tau}=\frac1c\,Q^aF^{a\,\mu\nu}u_\nu,\qquad
+  \frac{\dd Q^a}{\dd\tau}-\lambda f^{abc}\,u^\mu A^b_\mu\,Q^c=0\ }
+  \label{eq:Wong}
+\end{equation}
+The second equation is $D_\tau Q^a=0$ with the adjoint covariant derivative
+$(D_\mu Q)^a=\partial_\mu Q^a-\lambda f^{abc}A^b_\mu Q^c$.  Properties:
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item \emph{Gauge covariance.}  $Q^aT^a\to U(Q^bT^b)U^{-1}$ (adjoint
+  rotation), so $Q^aF^a_{\mu\nu}$ is gauge invariant and the world line is
+  too.  Individual components $Q^a$ have no gauge-invariant meaning.
+\item \emph{Casimirs.}  $D_\tau$ commutes with contraction by invariant
+  tensors, so $Q^aQ^a$ and, for $SU(N)$, $d^{abc}Q^aQ^bQ^c$, etc.\ are
+  constants of motion.  They label the orbit of $Q$ (Section~\ref{sec:orbit}).
+\item \emph{Mass shell.}  $u_\mu\,\dd u^\mu/\dd\tau=0$ by antisymmetry of
+  $F^a_{\mu\nu}$.  The energy changes only through the colour-electric field:
+  $m\,\dd u^0/\dd\tau=\tfrac1c\,Q^aE^{a\,i}u^i$ with $E^{a\,i}=F^a_{0i}$.
+\item \emph{Abelian limit.} One generator, $f=0$: $Q$ is constant and
+  \eqref{eq:Wong} is \eqref{eq:Lorentz-cov} with $q=Q$.
+\end{enumerate}
+
+\subsection{Group variables and coadjoint orbits}\label{sec:orbit}
+
+Write $\psi=g\,\psi_0$ with $g(\lambda)\in G$ (in the representation $R$)
+and $\psi_0$ a fixed unit vector, $P_0=\psi_0\psi_0^\dagger$.  Then
+\begin{equation}
+  L_{\rm col}=\ii\hbar\,\tr\bigl(P_0\,g^{-1}D_\lambda g\bigr),\qquad
+  D_\lambda g=\dot g+\ii\lambda\,\dot x^\mu\mathcal A_\mu g,\qquad
+  Q^a=g\,\tr\bigl(T^a\,gP_0g^{-1}\bigr).
+\end{equation}
+The Lagrangian is unchanged (up to a total derivative) under
+$g\to gh$ for $h$ in the stabilizer $H\subset G$ of the line through
+$\psi_0$, so the physical internal space is the coset $G/H$: $\mathbb{CP}^{N-1}$
+for the fundamental of $SU(N)$, $S^2$ for $SU(2)$.  In geometric language
+$Q=\mathrm{Ad}^*_g\,Q_0$ moves on a \emph{coadjoint orbit}, and the first-order
+term is the Kirillov--Kostant--Souriau symplectic potential on that orbit.
+The Poisson bracket that follows from \eqref{eq:L-wong-expanded}, where the
+momentum conjugate to $\psi$ is $\ii\hbar\psi^\dagger$ and hence
+$\PB{\psi_i}{\psi^\dagger_j}=-\tfrac\ii\hbar\delta_{ij}$, is the
+Lie--Poisson bracket
+\begin{equation}
+  \PB{Q^a}{Q^b}=\frac g\hbar\,f^{abc}Q^c=c\lambda\,f^{abc}Q^c .
+  \label{eq:LiePoisson}
+\end{equation}
+Its Casimirs are central: they are the invariants fixed by the choice of
+$Q_0$, i.e.\ by the representation.  A different but equivalent description
+uses Grassmann colour variables $\theta_i$ with $Q^a=g\,\theta^\dagger T^a\theta$
+(Balachandran et al., 1977; Brink et al., 1976), which leads to the same
+Wong equations for the bilinears $Q^a$.
+
+\subsection{Hamiltonian formalism}\label{sec:NA-ham}
+
+The colour sector does not contribute to $\partial L/\partial\dot x^\mu$, so
+\begin{equation}
+  p_\mu=\frac{mc\,\dot x_\mu}{\sqrt{\dot x^2}}+\frac1c\,Q^aA^a_\mu,\qquad
+  \pi_\mu\equiv p_\mu-\frac1c\,Q^aA^a_\mu,\qquad
+  \pi_\mu\pi^\mu=m^2c^2 ,
+\end{equation}
+and the total Hamiltonian is again $H_T=e\,\Cc$ with
+$\Cc=\tfrac12(m^2c^2-\pi_\mu\pi^\mu)$.  The phase space is
+$(x^\mu,p_\mu)$ together with the colour charges, with brackets
+\eqref{eq:PB-conv} and \eqref{eq:LiePoisson} and
+$\PB{x^\mu}{Q^a}=\PB{p_\mu}{Q^a}=0$.  Then:
+\begin{align}
+  \dot x^\mu&=e\,\pi^\mu,\\
+  \dot Q^a&=\PB{Q^a}{e\Cc}=-e\,\pi^\mu\PB{Q^a}{\pi_\mu}
+  =\lambda f^{abc}\dot x^\mu A^b_\mu Q^c,
+  \label{eq:Qdot-ham}\\
+  \dot p_\mu&=\frac1c\,Q^a\dot x^\nu\partial_\mu A^a_\nu ,
+\end{align}
+where $\PB{Q^a}{\pi_\mu}=-\lambda f^{abc}A^b_\mu Q^c$.  These reproduce
+\eqref{eq:Wong}.  The brackets of the gauge-covariant momenta are
+\begin{equation}
+  \boxed{\ \PB{\pi_\mu}{\pi_\nu}=-\frac1c\,Q^aF^a_{\mu\nu},\qquad
+  \PB{\pi_\mu}{Q^a}=\lambda f^{abc}A^b_\mu Q^c\ }
+  \label{eq:PB-NA}
+\end{equation}
+Indeed, 
+$\PB{\pi_\mu}{\pi_\nu}=-\tfrac1cQ^a(\partial_\mu A^a_\nu-\partial_\nu A^a_\mu)
++\tfrac\lambda c\,f^{abc}A^a_\mu A^b_\nu Q^c$, and the last term is the
+non-linear part of $-\tfrac1cQ^cF^c_{\mu\nu}$.  The Lorentz-force structure
+of Section~\ref{sec:cov-ham} is therefore unchanged: \emph{the force is the
+curvature of the kinetic momenta}, now weighted by the colour charge.
+(The second bracket in \eqref{eq:PB-NA} is not gauge covariant by itself:
+$Q^a$ and $\pi_\mu$ carry different $A$-dependent gauge transformations in
+canonical variables.)
+
+Solving $\Cc=0$ for $p^0$ with $A^a_0=\phi^a$, $\bA^a=(A^{a\,i})$ gives the
+coordinate-time Hamiltonian
+\begin{equation}
+  H=Q^a\phi^a+c\sqrt{\Bigl(\bp-\frac1c\,Q^a\bA^a\Bigr)^2+m^2c^2},\qquad
+  \dot f=\PB fH,
+  \label{eq:H-NA}
+\end{equation}
+with the ordinary $\PB{x^i}{p^j}=\delta^{ij}$ and \eqref{eq:LiePoisson}.  The
+corresponding Lagrangian is
+\begin{equation}
+  L=-\frac{mc^2}\gamma-Q^a\phi^a+\frac1c\,Q^a\,\bv\!\cdot\!\bA^a+L_{\rm col}.
+\end{equation}
+The colour charge enters exactly as $q$ does in
+\eqref{eq:H-EM}, but it also \emph{evolves}, with
+$\dd Q^a/\dd t=\lambda f^{abc}(c\,\phi^b-\bv\!\cdot\!\bA^b)Q^c$.
+
+\subsection{SHP mechanics in a non-abelian field}
+
+Combining \eqref{eq:L-SHP} and \eqref{eq:L-wong-expanded}, with the fifth
+component acting like an extra ``time-like'' colour potential rotating $Q$:
+\begin{equation}
+  L=-\frac M2\,\dot x^2+\ii\hbar\,\psi^\dagger D_\tau\psi,\qquad
+  D_\tau\psi=\dot\psi+\ii\lambda\bigl(\dot x^\mu\mathcal A_\mu+c\,\mathcal A_5\bigr)\psi,
+\end{equation}
+which gives
+\begin{equation}
+  M\ddot x_\mu=\frac1cQ^aF^a_{\mu\nu}\dot x^\nu+Q^aF^a_{\mu5},\qquad
+  \dot Q^a=\lambda f^{abc}\bigl(\dot x^\mu A^b_\mu+c\,A^b_5\bigr)Q^c,
+\end{equation}
+\begin{equation}
+  F^a_{\mu5}=\partial_\mu A^a_5-\frac1c\,\partial_\tau A^a_\mu-\lambda f^{abc}A^b_\mu A^c_5,\qquad
+  K=-\frac1{2M}\pi_\mu\pi^\mu+Q^aA^a_5 .
+\end{equation}
+The fifth component both exerts a force on the event and rotates the colour
+charge, and the ``mass'' $m^2c^2=M^2\dot x^2=2M(Q^aA^a_5-K)$ is exchanged
+with the colour-fifth-potential energy, as in \eqref{eq:mass-SHP}.
+
+\subsection{The geodesic (Kaluza--Klein) viewpoint}\label{sec:KK}
+
+Both the Lorentz force and Wong's equations can be obtained as geodesic
+motion in a higher-dimensional space.  In the abelian case consider
+\begin{equation}
+  L_5=-\frac M2\Bigl[\dot x^\mu\dot x_\mu-\bigl(\dot y+\kappa A_\mu\dot x^\mu\bigr)^2\Bigr],
+\end{equation}
+the geodesic Lagrangian of $\dd s_5^2=\eta_{\mu\nu}\dd x^\mu\dd x^\nu-(\dd y+\kappa A_\mu\dd x^\mu)^2$.
+The coordinate $y$ is cyclic, so $p_y=M(\dot y+\kappa A_\mu\dot x^\mu)$ is
+conserved.  Eliminating $y$ with the Routhian $R=L_5-p_y\dot y$,
+\begin{equation}
+  R=-\frac M2\,\dot x^2+\kappa\,p_y\,A_\mu\dot x^\mu-\frac{p_y^2}{2M},
+\end{equation}
+which is \eqref{eq:LS-free} with minimal coupling, provided
+$\kappa p_y=-q/c$: the charge is the conserved momentum of the extra
+dimension.  This is the origin of the observation (Kaluza, Klein) that
+electric charge is momentum in a compact fifth dimension.  For a
+non-abelian group, replace the circle by $G$: with the Maurer--Cartan forms
+$\sigma^a$ on $G$ and a bi-invariant metric $\gamma_{ab}$, the metric
+\begin{equation}
+  \dd s^2=\eta_{\mu\nu}\dd x^\mu\dd x^\nu-\gamma_{ab}\bigl(\sigma^a+\kappa A^a_\mu\dd x^\mu\bigr)\bigl(\sigma^b+\kappa A^b_\nu\dd x^\nu\bigr)
+\end{equation}
+on $M\times G$ has geodesics that project to solutions of Wong's equations,
+and the conserved momenta of the $G$-action are the colour charges
+(Kerner, 1968; see also Sternberg 1977 and Weinstein 1978 for the
+symplectic version of this statement).  We state this without proof;
+the normalization of $\kappa$ and the sign conventions must be matched to
+\eqref{eq:D-F}.  If the extra direction is taken \emph{null} instead of spacelike, the same
+Routh reduction gives Galilean (Bargmann) dynamics, with mass playing the
+role of $p_y$ (null reduction).
+
+\subsection{Two exactly solvable examples}
+
+\paragraph{Pure gauge.}  If $\mathcal A_\mu=\tfrac\ii\lambda(\partial_\mu U)U^{-1}$
+then $\mathcal F_{\mu\nu}=0$, there is no force, and $D_\mu(U\psi_0)=0$ shows
+that $\psi(\tau)=U(x(\tau))\psi_0$: the colour is merely rotated by the
+adjoint action of the gauge function, and the world line is a free
+straight line.
+
+\paragraph{Abelian-dominant field in $SU(2)$.}  Let $A^a_\mu=\delta^{a3}a_\mu(x)$.
+Then $F^a_{\mu\nu}=\delta^{a3}f_{\mu\nu}$ with $f_{\mu\nu}=\partial_\mu a_\nu-\partial_\nu a_\mu$
+(the non-linear term vanishes since $f^{a33}=0$).  Equations \eqref{eq:Wong} give
+$\dot Q^3=0$ and
+\begin{equation}
+  \frac{\dd}{\dd\tau}(Q^1+\ii Q^2)=\ii\lambda\,u^\mu a_\mu\,(Q^1+\ii Q^2)
+  \ \Rightarrow\ 
+  Q^1+\ii Q^2=\bigl(Q^1+\ii Q^2\bigr)_0\exp\Bigl[\ii\lambda\!\int a_\mu\dd x^\mu\Bigr].
+\end{equation}
+The particle moves exactly like an electromagnetic particle of charge
+$Q^3$ in the field $f_{\mu\nu}$---all results of Sections~\ref{sec:em}--\ref{sec:examples}
+apply with $q\to Q^3$---while the transverse colour components precess by
+the Wilson-line phase.  Genuinely non-abelian effects require non-commuting
+components of $\mathcal A_\mu$ (Problem~\ref{prob:const}).
+
+\subsection{Remark on the quantum theory}
+
+The same world line data arises from the multi-component Klein--Gordon equation
+$\bigl[D_\mu D^\mu+m^2c^2/\hbar^2\bigr]\psi=0$ with $D_\mu$ of
+\eqref{eq:D-F} acting on $\psi(x)\in\mathbb C^d$, and Wong's equations are
+its classical limit when the colour degree of freedom is treated as an
+independent classical variable (large representation, coherent-state
+limit).  The derivation is more delicate than in the abelian case, since the
+eikonal equation is matrix valued; see the notes.
+
+% =====================================================================
+\section{Summary and comparison}\label{sec:summary}
+% =====================================================================
+
+\begin{itemize}[leftmargin=*]
+\item The \emph{coordinate-time} Lagrangian and Hamiltonian
+  \eqref{eq:L-EM-t}, \eqref{eq:H-EM}, \eqref{eq:H-NA} are regular and best
+  for the nonrelativistic limit, perturbation theory, and numerical
+  integration, where one wants an explicit $H(\bx,\bp,t)$ and a symplectic
+  integrator.
+
+\item The \emph{covariant} (square-root or einbein) forms exhibit
+  reparametrization invariance as a gauge symmetry generated by the
+  first-class constraint $\Cc\approx0$.  They are the natural starting
+  point for quantization (Klein--Gordon from $\Cc$), for the BRST
+  formalism, and for generalizations to strings and spinning particles.
+
+\item The \emph{SHP} form removes the constraint at the cost of an extra
+  parameter and an extra potential $A_5$; the mass becomes dynamical.
+
+\item The \emph{curvature of kinetic momenta}, $\PB{\pi_\mu}{\pi_\nu}=-\tfrac1cQ^aF^a_{\mu\nu}$,
+  is the same statement in the abelian and non-abelian cases; the new
+  physics in the non-abelian case is that $Q^a$ evolves on a coadjoint
+  orbit under the Lie--Poisson bracket, and only the Casimirs of $Q$ are
+  gauge-invariant.
+
+\item The \emph{geodesic} picture explains \emph{why} charge is conserved
+  (a cyclic coordinate) and why colour precesses (the G-action), and
+  connects the particle dynamics to Kaluza--Klein theory.
+\end{itemize}
+
+% =====================================================================
+\section*{Problems}
+% =====================================================================
+
+\begin{problem}
+Show that $S_e$ in \eqref{eq:Se-free} is invariant under $\lambda\to\lambda'(\lambda)$
+if $e'(\lambda')=e(\lambda)\,\dd\lambda/\dd\lambda'$, and that the
+Hamiltonian derived from $S_e$ is $e\Cc$.
+\end{problem}
+
+\begin{problem}
+Solve the Hamilton--Jacobi equation \eqref{eq:HJ-EM} for a uniform electric
+field by separation of variables and recover \eqref{eq:hyperbolic}.
+\emph{Hint:} take $\phi=-Ex$, $\bA=0$, $S=-Et+W(x)$.
+\end{problem}
+
+\begin{problem}
+For crossed fields $\bE\perp\bB$ with $|\bE|<|\bB|$, show that the drift
+velocity is $\bv_d=c\,\bE\times\bB/B^2$.  \emph{Hint:} boost to a frame with
+$\bE'=0$.
+\end{problem}
+
+\begin{problem}
+Verify \eqref{eq:Volkov-classical} by substitution and show that a particle
+initially at rest in a linearly polarized plane wave acquires the
+Lorentz factor $\gamma=1+\tfrac{q^2}{2m^2c^4}|\mathbf A-\mathbf A_0|^2$.
+Find its mean drift velocity.
+\end{problem}
+
+\begin{problem}
+Prove the bracket \eqref{eq:PB-NA} and use it to rederive Wong's equations
+from $H_T=e\Cc$.
+\end{problem}
+
+\begin{problem}
+Show that for $SU(3)$ the cubic invariant $d^{abc}Q^aQ^bQ^c$ is a constant of
+motion of Wong's equations.  \emph{Hint:} the invariance identity for the
+symmetric tensor $d^{abc}$ is $f^{ade}d^{ebc}+f^{bde}d^{aec}+f^{cde}d^{abe}=0$.
+\end{problem}
+
+\begin{problem}
+Starting from \eqref{eq:EOM-SHP} derive $\dd(\tfrac12M\dot x^2)/\dd\tau=q\,\dot x^\mu F_{\mu5}$,
+and show that $K$ is conserved if and only if $\partial_\tau$ of the
+fields vanishes.
+\end{problem}
+
+\begin{problem}
+Check that Wong's equations are covariant under finite gauge
+transformations $U(x)$: if $(x,Q^a,A^a_\mu)$ solves them, so does
+$(x,Q'^a,A'^a_\mu)$ with $Q'T=UQTU^{-1}$ and $A'$ given by \eqref{eq:gauge-NA}.
+\end{problem}
+
+\begin{problem}\label{prob:const}
+For $SU(2)$ take constant potentials $A^1_x=\alpha$, $A^2_y=\beta$ and all
+others zero.  Show that $F^3_{xy}=-\lambda\alpha\beta$ is a constant
+colour-magnetic field with non-commuting potentials, and analyse the Wong
+motion for a heavy particle.  Why is the particle \emph{not} simply a charge
+$Q^3$ in a uniform magnetic field?
+\end{problem}
+
+% =====================================================================
+\section*{Notes and further reading}
+% =====================================================================
+
+\paragraph{Classical textbook treatments.}  The covariant electromagnetic
+case is treated in L.~D.\ Landau and E.~M.\ Lifshitz, \emph{The Classical
+Theory of Fields}, and J.~D.\ Jackson, \emph{Classical Electrodynamics}
+(note that Jackson uses Gaussian units in the older editions and the
+$(+,-,-,-)$ metric).
+
+\paragraph{Constraints, einbein.}  P.~A.\ M.\ Dirac, \emph{Lectures on
+Quantum Mechanics} (1964); M.\ Henneaux and C.\ Teitelboim,
+\emph{Quantization of Gauge Systems} (1992), for the constraint analysis
+of reparametrization-invariant systems.  A.~M.\ Polyakov, \emph{Gauge
+Fields and Strings} (1987), for the einbein form.  L.\ Brink, S.\
+Deser, B.\ Zumino, P.\ Di~Vecchia and P.\ Howe, Phys.\ Lett.\ B64 (1976)
+435, for the spinning particle.
+
+\paragraph{SHP.}  E.~C.~G.\ Stueckelberg, Helv.\ Phys.\ Acta 14 (1941) 322, 588;
+L.~P.\ Horwitz and C.\ Piron, Helv.\ Phys.\ Acta 46 (1973) 316;
+L.~P.\ Horwitz, \emph{Relativistic Quantum Mechanics} (Springer, 2015).
+The literature on SHP uses the metric $(-,+,+,+)$, so $K=+p^2/2M$ there.
+
+\paragraph{Non-abelian particles.}  S.~K.\ Wong, Nuovo Cimento A65 (1970)
+689; R.\ Kerner, Ann.\ Inst.\ H.\ Poincar\'e 9 (1968) 143;
+A.~P.\ Balachandran, S.\ Borchardt and A.\ Stern, Phys.\ Rev.\ D17 (1978) 3247;
+A.~P.\ Balachandran, P.\ Salomonson, B.-S.\ Skagerstam and J.-O.\ Winnberg,
+Phys.\ Rev.\ D15 (1977) 2308 (Grassmann colour variables);
+S.\ Sternberg, Proc.\ Natl.\ Acad.\ Sci.\ USA 74 (1977) 5253;
+A.\ Weinstein, Lett.\ Math.\ Phys.\ 2 (1978) 417;
+R.\ Montgomery, Lett.\ Math.\ Phys.\ 8 (1984) 59;
+B.\ P.\ Kosyakov, \emph{Introduction to the Classical Theory of Particles
+and Fields} (Springer, 2007).  For the classical limit of the quantum
+colour dynamics see U.\ Heinz, Phys.\ Rev.\ Lett.\ 51 (1983) 351.
+
+\paragraph{Feynman's derivation.}  F.~J.\ Dyson, Am.\ J.\ Phys.\ 58 (1990) 209.
+
+\medskip
+\noindent\emph{The bibliographic details above are given from memory and
+should be checked against the primary sources before publication.}
+
+\end{document}
