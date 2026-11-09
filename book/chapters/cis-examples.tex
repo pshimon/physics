@@ -1,0 +1,612 @@
+\section{Example II: electrodynamics, special relativity and the point particle}
+\label{sec:sr}
+
+\subsection{Lorentz covariance of Maxwell's equations}
+
+With $F^{0i}=-E^i$ and $F^{ij}=-\epsilon^{ijk}B^k$, the Maxwell equations in
+Gaussian units read
+\begin{equation}\label{eq:maxwell}
+  \partial_\mu F^{\mu\nu}=\frac{4\pi}{c}\,j^\nu,\qquad
+  \partial_\mu\tilde F^{\mu\nu}=0,\qquad
+  \tilde F^{\mu\nu}=\tfrac12\epsilon^{\mu\nu\alpha\beta}F_{\alpha\beta}.
+\end{equation}
+Under a Lorentz transformation \eqref{eq:poincare}, $F^{\mu\nu}$ transforms as a
+rank-two tensor and $j^\nu$ as a vector, so
+$\mathcal E^\nu\equiv\partial_\mu F^{\mu\nu}-\tfrac{4\pi}{c}j^\nu$ is a
+four-vector: $\mathcal E'^\nu=\Lambda^\nu{}_\alpha\mathcal E^\alpha$. This is
+\eqref{eq:covariant-eq} with $D_E(g)=\Lambda$; the metric $\eta_{\mu\nu}$,
+needed to raise and lower indices, is invariant, so Proposition~\ref{prop:main}
+gives Poincar\'e symmetry.
+
+It is worth stating exactly what is covariant and what is invariant.
+The fields ${\bm{E}}$ and ${\bm{B}}$ are \emph{components} of a tensor and mix under
+boosts; for a boost with velocity $c{\bm{\beta}}$,
+\begin{equation}\label{eq:boost-fields}
+  {\bm{E}}'_\parallel={\bm{E}}_\parallel,\quad {\bm{B}}'_\parallel={\bm{B}}_\parallel,\quad
+  {\bm{E}}'_\perp=\gamma({\bm{E}}_\perp+{\bm{\beta}}\times{\bm{B}}),\quad
+  {\bm{B}}'_\perp=\gamma({\bm{B}}_\perp-{\bm{\beta}}\times{\bm{E}}).
+\end{equation}
+The \emph{invariants} are scalars built from $F$ and $\eta$ (and $\epsilon$):
+\begin{equation}\label{eq:EM-invariants}
+  F_{\mu\nu}F^{\mu\nu}=2(B^2-E^2),\qquad
+  F_{\mu\nu}\tilde F^{\mu\nu}=-4\,{\bm{E}}\!\cdot\!{\bm{B}} .
+\end{equation}
+A purely electric field acquires a magnetic component in a moving frame, yet
+$E^2-B^2$ and ${\bm{E}}\!\cdot\!{\bm{B}}$ do not change. For example, a field with
+${\bm{E}}\!\cdot\!{\bm{B}}=0$ and $E^2>B^2$ can be boosted to a frame in which it is
+purely electric, but never to one in which it is purely magnetic. The
+Lagrangian density in \eqref{eq:maxwell-action} is $\tfrac1{8\pi}(E^2-B^2)$, a
+Lorentz scalar: covariance of the action in the sense of
+Section~\ref{sec:definitions}. (Because $\epsilon^{\mu\nu\alpha\beta}$ is a
+pseudotensor, covariance under parity requires $\tilde F$ to be treated as
+one.)
+
+The same equations are \emph{not} covariant under Galilean transformations
+with any local rule for ${\bm{E}},{\bm{B}}$; limits in which they are (``electric'' and
+``magnetic'' Galilean electromagnetism) exist, but each captures only part of
+the equations \cite{lbll}. The failure of Galilean covariance of Maxwell's
+theory was the original motivation for special relativity.
+
+\subsection{Larger symmetries and symmetry without an action}
+
+The Poincar\'e group is not the whole story.
+\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
+\item \emph{Conformal symmetry.} In four dimensions the sourceless Maxwell
+  equations are covariant under all diffeomorphisms that preserve the
+  \emph{conformal class} $[\eta]$, i.e.\ $\eta\to\Omega^2\eta$; the
+  corresponding symmetry group is the 15-parameter conformal group
+  (translations 4, Lorentz 6, dilatation 1, special conformal 4). The
+  stabilizer of $[\eta]$ is bigger than the stabilizer of $\eta$, which is why
+  the symmetry is bigger: Proposition~\ref{prop:main} with a weaker background.
+\item \emph{Duality.} In the absence of sources, the replacement
+  ${\bm{E}}\to{\bm{E}}\cos\alpha+{\bm{B}}\sin\alpha$, ${\bm{B}}\to-{\bm{E}}\sin\alpha+{\bm{B}}\cos\alpha$
+  maps solutions to solutions, so it is a symmetry of the \emph{equations}.
+  It is not a local variational symmetry of the action \eqref{eq:maxwell-action}
+  built from $A_\mu$ (for $\alpha=\pi/2$ the Lagrangian density changes sign),
+  though conserved charges can be obtained in a reformulation involving a
+  second potential \cite{deser}. This illustrates the failure of the converse
+  in Proposition~\ref{prop:variational}.
+\end{itemize}
+
+\subsection{The relativistic point particle: reparametrization as gauge symmetry}
+
+For a free particle, the manifestly covariant action is
+\begin{equation}\label{eq:particle}
+  S=-mc\int\sqrt{\eta_{\mu\nu}\,\dot x^\mu\dot x^\nu}\;\dd\lambda ,
+  \qquad \dot{}\equiv\frac{\dd}{\dd\lambda}.
+\end{equation}
+It is invariant under two very different kinds of transformation.
+
+\emph{(i) Poincar\'e transformations} \eqref{eq:poincare}, a global
+symmetry (the Lagrangian is a scalar and $\eta$ is invariant). Noether's first
+theorem gives the conserved quantities $\pi_\mu=\partial L/\partial\dot x^\mu$
+and $J^{\mu\nu}=x^\mu\pi^\nu-x^\nu\pi^\mu$.
+
+\emph{(ii) Reparametrizations} $\lambda\to f(\lambda)$, which depend on an
+arbitrary function: a local symmetry, $\delta x^\mu=\eps(\lambda)\dot x^\mu$.
+Noether's second theorem \eqref{eq:noether2} gives the identity
+\begin{equation}\label{eq:param-identity}
+  \dot x^\mu\,\mathrm{EL}_\mu\equiv0,
+\end{equation}
+so only three of the four equations for $x^\mu(\lambda)$ are independent, and
+one function (the parametrization) is undetermined. In the Hamiltonian
+description the momenta satisfy the identity
+$\eta^{\mu\nu}\pi_\mu\pi_\nu-m^2c^2=0$ (a primary constraint), the canonical
+Hamiltonian vanishes because $L$ is homogeneous of degree one in the
+velocities, and the dynamics is generated by the constraint times an arbitrary
+multiplier.
+
+Choosing the gauge $\lambda=t$ gives
+$L=-mc^2\sqrt{1-v^2/c^2}$, which is \emph{not} manifestly covariant: the
+boost acts \emph{nonlinearly} on $x^i(t)$, since a boost mixes $t$ with the
+coordinates and the gauge condition must be restored afterwards. The
+Poincar\'e symmetry is still there; it is merely hidden by the gauge choice.
+Covariance is a property of the formulation, symmetry is not.
+
+% ---------------------------------------------------------------------
+\section{Example III: general relativity}
+\label{sec:gr}
+
+\subsection{General covariance is not a symmetry of the world}
+
+Einstein's field equations in the convention of Landau and Lifshitz
+(signature $(+,-,-,-)$),
+\begin{equation}\label{eq:einstein}
+  R_{\mu\nu}-\tfrac12 g_{\mu\nu}R=\frac{8\pi G}{c^4}\,T_{\mu\nu},
+\end{equation}
+derive from $S=-\tfrac{c^3}{16\pi G}\int R\sqrt{-g}\,\dd^4x+S_{\rm matter}$
+and are covariant under the full diffeomorphism group $\diff(M)$. In
+Proposition~\ref{prop:main}, $\mathcal G=\diff(M)$ and the metric $g_{\mu\nu}$
+is \emph{dynamical}: there is no fixed background $b_0$ (in the absence of
+fixed matter fields). The stabilizer is therefore the entire group,
+\begin{equation}
+  G=\stab_{\diff(M)}(\varnothing)=\diff(M),
+\end{equation}
+and by Remark~\ref{rem:gauge} diffeomorphisms are a \emph{gauge redundancy}
+rather than a physical symmetry. Here lies the resolution of Kretschmann's
+objection: Einstein's theory is not special because its equations can be
+written covariantly (every theory can be), but because they contain
+\emph{no absolute objects} \cite{anderson} (Section~\ref{sec:kretschmann} gives
+the details). In special relativity written in arbitrary coordinates the metric $\eta$ is an absolute object; in GR it is
+replaced by the dynamical $g_{\mu\nu}$.
+
+\subsection{The hole argument}
+
+Let $g$ be a solution on $M$, and let $\psi$ be a diffeomorphism equal to the
+identity outside a compact region $H$. Then $\psi^*g$ is also a solution,
+equal to $g$ outside $H$ and different inside. If points of $M$ were taken to
+have physical identity (a metric field being \emph{the} object of physical
+interest), determinism would fail: the Einstein equations plus data outside $H$
+do not determine the field inside. The way out is to regard $g$ and $\psi^*g$
+as one and the same physical situation. Observables are then
+diffeomorphism-\emph{invariant} (relational) quantities: for instance,
+proper times along worldlines between their intersections. This is exactly
+the gauge-redundancy interpretation of Remark~\ref{rem:gauge}
+\cite{earman,norton}.
+
+\subsection{Noether's second theorem in GR: conservation only for Killing vectors}
+
+Under $\delta g_{\mu\nu}=-(\nabla_\mu\xi_\nu+\nabla_\nu\xi_\mu)$ with arbitrary
+$\xi^\mu(x)$ the action is invariant, and \eqref{eq:noether2} becomes the
+contracted Bianchi identity $\nabla_\mu G^{\mu\nu}\equiv0$. Consequently the
+field equations \eqref{eq:einstein} imply $\nabla_\mu T^{\mu\nu}=0$, which
+\emph{is not a conservation law} in the sense of a conserved charge: in a
+curved spacetime $\nabla_\mu T^{\mu\nu}=0$ does not integrate to a conserved
+quantity. A conserved current is obtained only if there exists a Killing vector
+$\xi$ of the particular solution under consideration:
+\begin{equation}
+  J^\mu=T^{\mu\nu}\xi_\nu,\qquad
+  \nabla_\mu J^\mu=(\nabla_\mu T^{\mu\nu})\xi_\nu+T^{\mu\nu}\nabla_{(\mu}\xi_{\nu)}=0.
+\end{equation}
+This is the distinction of Section~\ref{sec:law-solution} in its
+sharpest form: the \emph{law} has the symmetry $\diff(M)$ (gauge), but
+conservation of energy and momentum rests on the symmetry of the \emph{solution}
+(the isotropy group $G_{\phi_0}$ of the background spacetime, such as time
+translation invariance of the Schwarzschild solution).
+
+% ---------------------------------------------------------------------
+\section{Kretschmann's observation in detail}
+\label{sec:kretschmann}
+
+Remark~\ref{rem:kretschmann} stated Kretschmann's observation in one
+sentence. The confusion it addresses is among the most persistent in the
+foundations of relativity, so we now examine it more closely: the historical
+dispute, a constructive proof, what the proof does and does not show, and what
+remains of ``general covariance'' afterwards.
+
+\subsection{The dispute}
+
+In 1915--16 Einstein presented general covariance, the form-invariance of the
+field equations under arbitrary coordinate changes, as a physical principle,
+for two reasons. First, it seemed to extend the principle of relativity from
+inertial frames to arbitrary states of motion. Second, he argued that the
+physical content of any theory is exhausted by \emph{coincidences}: the
+intersection of two worldlines, the meeting of a pointer and a mark on a
+scale. Coordinates merely label such coincidences, no labeling can be
+physically privileged, and a theory that singles out a class of coordinates
+would draw a distinction without empirical basis (the \emph{point-coincidence
+argument}) \cite{norton}.
+
+Kretschmann accepted the premise and reversed the conclusion
+\cite{kretschmann}. If only coincidences are physical, he argued, then
+\emph{any} spacetime theory, however un-relativistic, can be restated in a form
+that does not depend on the labeling, at the price of mathematical effort: one
+adds to the formalism whatever is needed to keep track of the labeling. The
+demand for general covariance therefore tests the ingenuity of the theorist and
+places no restriction on nature. Einstein conceded the logical point in 1918
+\cite{einstein1918} but maintained that the demand retains a \emph{heuristic}
+value: among generally covariant equations only the simplest and most natural
+are plausible as fundamental laws, and the covariant versions of older theories
+are comparatively baroque. Historically the dispute coincided with the work of
+Hilbert, Klein and Noether on identities among the field equations of
+generally covariant theories, and the second theorem of
+Section~\ref{sec:noether} came out of that work \cite{ks}. Anderson and
+Friedman later turned Kretschmann's observation into a precise criterion
+\cite{anderson,friedman}, which we met in Remark~\ref{rem:smaller}; Norton's
+survey \cite{norton} and his later discussion \cite{bc} are the best guides to
+the debate.
+
+\subsection{A constructive proof}
+
+Let $E[\varphi]=0$ be \emph{any} system of differential equations for fields
+$\varphi$, written in a fixed ``preferred'' chart $x^a$ on a region of
+spacetime. It may be Galilean, Lorentzian, or covariant under no group at all.
+In an arbitrary chart $y^\mu$ the preferred coordinates appear as four scalar
+functions $X^a(y)$. Put
+\begin{equation}\label{eq:soldering}
+  e^a{}_\mu=\partial_\mu X^a,\qquad
+  e_a{}^\mu\,e^b{}_\mu=\delta_a^b .
+\end{equation}
+The \emph{frame components} of a tensor field are its contractions with
+$e_a{}^\mu$ and $e^a{}_\mu$ (for a covector, $\varphi_a=e_a{}^\mu\varphi_\mu$).
+They carry only the index $a$ and are therefore \emph{scalars} under changes
+of the chart $y$. The operators $D_a=e_a{}^\mu\partial_\mu$ map scalars to
+scalars. Let $\tilde E[\tilde\varphi;e]$ be obtained from $E$ by replacing every
+field by its frame components and every $\partial/\partial x^a$ by $D_a$.
+
+\begin{proposition}[Kretschmann]\label{prop:kretschmann}
+The system $\tilde E[\tilde\varphi;e]=0$ is $\diff(M)$-covariant in the sense
+of \eqref{eq:covariant-eq}, with the soldering form $e^a{}_\mu$ (Section~\ref{sec:soldering}) as background.
+It is equivalent to the original system: $(\tilde\varphi,e)$ solves
+$\tilde E=0$ if and only if the frame components of $\tilde\varphi$ solve
+$E=0$.
+\end{proposition}
+\begin{proof}
+Each frame component and each $D_a(\cdot)$ is a scalar under $\diff(M)$ acting
+on $(\tilde\varphi,e)$ by push-forward, so $\tilde E$ is built from scalars
+and $\tilde E[\psi\!\cdot\!\tilde\varphi;\psi\!\cdot\! e]
+=\psi\!\cdot\!\tilde E[\tilde\varphi;e]$ for every diffeomorphism $\psi$. In the
+particular chart $y=X$ one has $e^a{}_\mu=\delta^a_\mu$ and $D_a=\partial/\partial x^a$,
+so $\tilde E=E$. \qedhere
+\end{proof}
+
+Nothing about $E$ was used, which is precisely the content of Kretschmann's
+claim: general covariance is available for any theory, at the cost of a
+background field $e^a{}_\mu$ that the original formulation did not display.
+
+\begin{example}[Wave equation]\label{ex:wave}
+For $\eta^{ab}\partial_a\partial_b\varphi=0$ the construction gives
+$\eta^{ab}D_aD_b\varphi=0$. Expanding $D_aD_b\varphi=e_a{}^\mu\partial_\mu(e_b{}^\nu\partial_\nu\varphi)$
+and using $\eta^{ab}e_a{}^\mu e_b{}^\nu=\eta^{\mu\nu}$,
+\begin{equation}
+  \eta^{ab}D_aD_b\varphi
+  =\eta^{\mu\nu}\big(\partial_\mu\partial_\nu\varphi-\Gamma^\lambda{}_{\mu\nu}\partial_\lambda\varphi\big)
+  =\eta^{\mu\nu}\nabla_\mu\partial_\nu\varphi,\qquad
+  \eta_{\mu\nu}=\eta_{ab}e^a{}_\mu e^b{}_\nu,
+\end{equation}
+where $\Gamma^\lambda{}_{\mu\nu}=e_a{}^\lambda\partial_\mu e^a{}_\nu$ are the
+Christoffel symbols of $\eta_{\mu\nu}$ (flat, since $e^a{}_\mu$ is a gradient). This is exactly
+how Christoffel symbols enter the ``curvilinear'' form of every equation of
+special relativity.
+\end{example}
+
+\begin{example}[Newtonian mechanics, parametrized]\label{ex:param}
+The free Newtonian particle, $S=\int\tfrac12m\,\dd{\bm{x}}^2/\dd t$, becomes
+generally covariant (here: reparametrization invariant) if $t$ is promoted to a
+dynamical variable of the worldline,
+\begin{equation}
+  S=\int\frac m2\,\frac{\dot{{\bm{x}}}^2}{\dot t}\,\dd\lambda,\qquad
+  \dot{}=\frac{\dd}{\dd\lambda}.
+\end{equation}
+This is homogeneous of degree one in $(\dot t,\dot{\bm{x}})$, hence invariant under
+$\lambda\to f(\lambda)$; choosing $\lambda=t$ gives back the original
+action. The momenta obey $p_t+{\bm{p}}^2/2m\approx0$, the Newtonian analogue of the
+mass-shell constraint of Section~\ref{sec:sr}, with $-p_t$ playing the
+role of the energy. This is Kretschmann's observation in one dimension.
+\end{example}
+
+\begin{remark}[Dependence on the soldering form]\label{rem:soldering-dep}
+If $E$ is covariant under a group $G_0$ acting on the frame index $a$ (Lorentz
+transformations, say), then $\tilde E$ depends on $e^a{}_\mu$ only through its
+$G_0$-invariant parts: for the Poincar\'e group through the flat metric
+$\eta_{\mu\nu}=\eta_{ab}e^a{}_\mu e^b{}_\nu$ alone, and for the Galilei group
+through the Newton--Cartan data of Section~\ref{sec:galilei}.
+\end{remark}
+
+\subsection{The soldering form}
+\label{sec:soldering}
+
+The original formulation of $E$ contains two kinds of index that were never
+distinguished, because they are numerically identified in the preferred chart.
+The index $a$ labels the coordinates of the \emph{model space} $V=\mathbb R^4$,
+on which the group $G_0$ (Poincar\'e, Galilei, \dots) acts and in which the
+original theory lives. The index $\mu$ labels directions at a point of the
+spacetime manifold $M$, whose charts $y^\mu$ are arbitrary. Covariantization
+must pull the two apart: $\mu$ is acted on by $\diff(M)$, whereas $a$ is merely
+a label, acted on at most by $G_0$.
+
+The one-form $e^a{}_\mu\,\dd y^\mu=\dd X^a$ is the link between them. It is a
+one-form on $M$ with values in $V$: at each point $p$ it defines the linear map
+\begin{equation}
+  e_p\colon T_pM\to V,\qquad v^\mu\mapsto e^a{}_\mu\,v^\mu ,
+\end{equation}
+which is invertible precisely because $X^a$ is a chart. It identifies every
+tangent space with the model space, point by point, and thereby \emph{solders}
+(welds) the model space onto the manifold; hence the name. In the mathematical
+literature the \emph{solder form} (or canonical form) is the tautological
+$V$-valued one-form on the frame bundle, and its pull-backs by local sections
+are the coframes, tetrads or vierbeins $e^a{}_\mu$ \cite{kn}. In Cartan's
+generalization of Klein's Erlangen programme, a geometry is a manifold whose
+tangent spaces are soldered to the model space of a Klein geometry $G_0/H$
+\cite{sharpe}. (Some authors reserve ``soldering form'' for the canonical
+form and call $e^a{}_\mu$ a tetrad; we follow the usage of physics.)
+
+The soldering form does three jobs in the construction above.
+\begin{enumerate}[leftmargin=1.8em,itemsep=3pt,label=\textbf{\arabic*.}]
+\item \emph{It converts indices.} Frame components $\varphi_a=e_a{}^\mu\varphi_\mu$
+  and the derivatives $D_a=e_a{}^\mu\partial_\mu$ are scalars under
+  $\diff(M)$ because $e^a{}_\mu$ is the only place where an index of each kind
+  meets.
+\item \emph{It records the preferred chart and nothing else.} Since
+  $e^a{}_\mu=\partial_\mu X^a$, it is closed, $\dd e^a=0$. A translation
+  $X^a\to X^a+c^a$ leaves $e^a{}_\mu$ unchanged, and a Lorentz transformation
+  $X^a\to\Lambda^a{}_bX^b$ rotates it, $e\to\Lambda e$. Only the
+  $G_0$-invariant content matters (Remark~\ref{rem:soldering-dep}): for the
+  Poincar\'e group the metric $\eta_{\mu\nu}=\eta_{ab}e^a{}_\mu e^b{}_\nu$; for
+  the Galilei group the time one-form $t_\mu=e^0{}_\mu$ (with $X^0=t$) and the
+  spatial cometric $h^{\mu\nu}=\delta^{ij}e_i{}^\mu e_j{}^\nu$.
+\item \emph{It defines a connection.} The coefficients
+  $\Gamma^\lambda{}_{\mu\nu}=e_a{}^\lambda\partial_\mu e^a{}_\nu$ define the
+  derivative for which frame components are constant; they are symmetric in
+  $\mu\nu$ (no torsion) and give zero curvature, both consequences of
+  $\dd e^a=0$.
+\end{enumerate}
+
+\begin{example}[Polar coordinates]\label{ex:polar}
+Take the Euclidean plane with $X^1=r\cos\theta$, $X^2=r\sin\theta$. Then
+\begin{equation}
+  e^1=\cos\theta\,\dd r-r\sin\theta\,\dd\theta,\qquad
+  e^2=\sin\theta\,\dd r+r\cos\theta\,\dd\theta,
+\end{equation}
+so $\delta_{ab}e^a e^b=\dd r^2+r^2\dd\theta^2$, and
+$\Gamma^\lambda{}_{\mu\nu}=e_a{}^\lambda\partial_\mu e^a{}_\nu$ gives
+$\Gamma^r{}_{\theta\theta}=-r$ and $\Gamma^\theta{}_{r\theta}=1/r$, the familiar
+Christoffel symbols of polar coordinates. They are not extra input: they are
+what the soldering form of a flat chart looks like in a curvilinear one.
+\end{example}
+
+In general relativity the same object appears as the tetrad $e^a{}_\mu$, with
+local Lorentz transformations acting on $a$ as a gauge symmetry. The
+difference from Kretschmann's construction lies not in the object but in its
+status. There $e^a{}_\mu$ is prescribed as the gradient of a given chart, so
+$\dd e^a=0$ and the metric $\eta_{ab}e^a{}_\mu e^b{}_\nu$ is flat and the same
+in every solution. In general relativity $e^a{}_\mu$ is varied in the action,
+$\dd e^a\neq0$ in general (the torsion-free spin connection obeys
+$\dd e^a+\omega^a{}_b\wedge e^b=0$), and the metric is dynamical. The
+soldering form is the fixed background of every covariantized older theory and
+a dynamical field in general relativity, which is the distinction drawn by
+Proposition~\ref{prop:main} and Anderson's criterion.
+
+\subsection{Where the physics went}
+
+After the construction the covariance group is $\diff(M)$, acting on pairs
+$(\tilde\varphi,b)$ where $b$ is the $G_0$-invariant structure of
+Remark~\ref{rem:soldering-dep}. By Proposition~\ref{prop:main} the symmetry
+group is $\stab_{\diff(M)}(b)$, and this is exactly the original $G_0$, because
+$G_0$ is the automorphism group of its invariant structure. This is Klein's
+Erlangen idea read backwards: a geometry determines its group, and the group
+is recovered as the automorphism group of an invariant structure, as for
+$\mathrm{Poincar\acute e}=\mathrm{Aut}(\eta)$ and
+$\text{Galilei}=\mathrm{Aut}(t_\mu,h^{\mu\nu},\nabla)$. Covariantization
+therefore changes the \emph{formulation} (the covariance group becomes
+$\diff(M)$) and leaves the \emph{physics} (the symmetry group, the solution
+set) untouched. Table~\ref{tab:kretschmannize} lists the standard cases. The
+friction and preferred-frame rows show what happens when the original theory
+contains a genuinely non-symmetric ingredient: the covariantization turns it
+into an extra background field, and the stabilizer shrinks accordingly.
+
+\begin{table}[ht]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.7cm}%
+                  >{\raggedright\arraybackslash}p{5.6cm}%
+                  >{\raggedright\arraybackslash}p{5.0cm}@{}}
+\toprule
+Original theory & Absolute structure $b_0$ introduced & Stabilizer $\stab_{\diff(M)}(b_0)$\\
+\midrule
+Special-relativistic field theory & flat metric $\eta_{\mu\nu}$ & Poincar\'e group\\
+Galilean $N$-body mechanics & $t_\mu$, $h^{\mu\nu}$, flat connection $\nabla$ & Galilei group\\
+Newtonian gravity (Cartan) & $t_\mu$, $h^{\mu\nu}$; connection dynamical
+  & larger than Galilei (includes ${\bm{x}}\to{\bm{x}}+\bm a(t)$)\\
+Friction against a medium at rest & as for Galilei, plus the velocity field
+  $w^\mu$ of the medium & translations, rotations; no boosts\\
+Electrodynamics with a preferred frame & $\eta_{\mu\nu}$ plus a unit timelike
+  vector $u^\mu$ & translations, rotations fixing $u^\mu$; no boosts\\
+General relativity & none (the metric is dynamical) & $\diff(M)$, all gauge\\
+\bottomrule
+\end{tabular}
+\caption{Kretschmann's construction applied to several theories.}
+\label{tab:kretschmannize}
+\end{table}
+
+\subsection{Two attempted escapes, and why they do not help}
+
+\paragraph{Make the coordinates dynamical.}
+One may try to remove the background by promoting the preferred chart to
+dynamical fields. For a Poincar\'e-invariant action $S[\varphi;\eta]$ define the
+\emph{parametrized} theory
+\begin{equation}
+  S_P[\varphi,X]=S\big[\varphi;\ \eta_{\mu\nu}=\eta_{ab}\,\partial_\mu X^a\partial_\nu X^b\big],
+\end{equation}
+now varied with respect to $X^a$ as well \cite{kuchar}. The action is
+$\diff(M)$-invariant, no chart is singled out, and by Noether's second theorem
+\eqref{eq:noether2} the equations for $X^a$ are consequences of those for
+$\varphi$ (they express the conservation of the energy--momentum tensor). The
+$X^a$ are pure gauge: in the gauge $X^a=y^a$ one recovers special relativity.
+Nothing physical has changed. By Anderson's criterion this is not a
+counterexample, since the flat metric built from $X^a$ is the same in every
+solution up to diffeomorphism and is therefore still an absolute object, but
+it shows that the criterion must be applied to \emph{composite} objects built
+from the dynamical fields as well, and that the mere presence of
+diffeomorphism-gauge freedom does not distinguish general relativity from
+special relativity \cite{giulini}.
+
+\paragraph{Count the absolute objects.}
+Anderson's definition calls an object \emph{absolute} if it appears in the
+equations and is the same, up to diffeomorphism, in every solution, and
+\emph{dynamical} otherwise. In these terms the distinguishing feature of general
+relativity is that the metric is dynamical in the strong sense: different
+solutions are not isometric (they differ in their Weyl curvature, and there
+are gravitational waves), while every covariantized older theory carries an
+inertial structure that is fixed once and for all.
+
+\subsection{What survives of general covariance}
+
+\begin{enumerate}[leftmargin=1.8em,itemsep=3pt,label=\textbf{\arabic*.}]
+\item \textbf{As a formal requirement it is vacuous}
+  (Proposition~\ref{prop:kretschmann}); it constrains the notation, not the
+  theory.
+\item \textbf{As gauge invariance it has consequences.} If \emph{all}
+  geometric structures are dynamical, $\diff(M)$ is a gauge group and
+  Noether's second theorem gives the Bianchi identities. The consequence is
+  that $\nabla_\mu T^{\mu\nu}=0$ follows from the gravitational field equations
+  alone, for any matter content, so the matter equations must be compatible
+  with it. In a theory with a fixed $\eta$ the same conservation law is
+  instead a consequence of the matter equations. This is the part of Einstein's
+  intuition that the G\"ottingen group made precise \cite{ks}.
+\item \textbf{As a heuristic and a uniqueness statement it has content}, as
+  Einstein argued in reply. In four dimensions the only symmetric,
+  divergence-free tensor built from the metric and its first two derivatives,
+  linear in the second derivatives, is $G_{\mu\nu}+\Lambda g_{\mu\nu}$
+  \cite{lovelock}: combined with general covariance and a dynamical metric this
+  fixes the gravitational field equations almost uniquely.
+\item \textbf{The testable content lies in the stabilizer, not in
+  covariance.} Universality of free fall, tested to parts in $10^{13}$ and
+  beyond, and the null results of Hughes--Drever-type experiments say that
+  matter couples to a single metric and that no further background structure
+  (a preferred frame $u^\mu$, say) enters the equations. In the language of
+  Proposition~\ref{prop:main}: they test \emph{what is held fixed}, 
+ covariance, cannot be   tested at all.
+\end{enumerate}
+
+\begin{remark}[The Kretschmann scalar]\label{rem:kretschmann-scalar}
+The curvature invariant
+\begin{equation}
+  K=R_{\mu\nu\rho\sigma}R^{\mu\nu\rho\sigma}
+\end{equation}
+also carries Kretschmann's name. It illustrates the difference between covariant
+\emph{components} and invariant \emph{scalars}. For the Schwarzschild solution
+\begin{equation}
+  K=\frac{48\,G^2M^2}{c^4\,r^6}
+\end{equation}
+is finite at $r=2GM/c^2$, although $g_{tt}$ vanishes and $g_{rr}$ diverges
+there in Schwarzschild coordinates: the horizon is a coordinate artifact,
+while $r=0$ is a genuine curvature singularity. Statements about
+chart-dependent components are statements about the description; statements
+about invariants are statements about the world.
+\end{remark}
+
+\section{Example IV: gauge covariance}
+\label{sec:gauge}
+
+The vocabulary of Section~\ref{sec:three-words} is stretched, in a
+precise way, in gauge theory. Let a charged field $\psi$ with charge $q$
+transform under local $U(1)$:
+\begin{equation}\label{eq:u1}
+  \psi\to e^{-\ii q\Lambda(x)/\hbar c}\,\psi,\qquad
+  A_\mu\to A_\mu+\partial_\mu\Lambda .
+\end{equation}
+The ordinary derivative $\partial_\mu\psi$ is neither invariant nor covariant:
+it picks up an extra term $\propto\partial_\mu\Lambda\,\psi$. The
+\emph{covariant derivative}
+\begin{equation}\label{eq:covder}
+  D_\mu=\partial_\mu+\frac{\ii q}{\hbar c}A_\mu
+  \quad\Longrightarrow\quad
+  D_\mu\psi\to e^{-\ii q\Lambda/\hbar c}\,D_\mu\psi
+\end{equation}
+transforms with the \emph{same phase} as $\psi$ itself: it is
+gauge-\emph{covariant} in the sense of \eqref{eq:covariant-object}, with
+$D(g)$ the $U(1)$ phase. Gauge-\emph{invariant} objects are built from
+covariant ones by contracting the phases away:
+\begin{equation}
+  \psi^\dagger\psi,\qquad(D_\mu\psi)^\dagger(D^\mu\psi),\qquad
+  F_{\mu\nu}=\frac{\hbar c}{\ii q}[D_\mu,D_\nu]=\partial_\mu A_\nu-\partial_\nu A_\mu .
+\end{equation}
+For the non-Abelian case, $\psi\to U\psi$, $D_\mu=\partial_\mu-\ii gA_\mu$
+with $A_\mu=A_\mu^aT^a$, and
+\begin{equation}
+  A_\mu\to UA_\mu U^{-1}-\tfrac{\ii}{g}(\partial_\mu U)U^{-1},\quad
+  F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu-\ii g[A_\mu,A_\nu]\to UF_{\mu\nu}U^{-1}.
+\end{equation}
+$F_{\mu\nu}$ is gauge-\emph{covariant}, and $\tr F_{\mu\nu}F^{\mu\nu}$ is
+gauge-\emph{invariant}. In the Abelian case $F_{\mu\nu}$ is itself invariant,
+not merely covariant, because the adjoint representation of $U(1)$ is trivial.
+
+The interplay with Noether's theorems is instructive. The \emph{global} subgroup
+($\Lambda=\text{const}$) is an honest symmetry with a conserved, measurable
+charge, the electric charge of Table~\ref{tab:noether}. The \emph{local}
+transformations are redundancy: they yield the Noether identity
+$\partial_\mu j^\mu\approx0$ with $j^\mu=\partial\mathcal L_{\rm matter}/\partial A_\mu$
+(Example~\ref{ex:noether2-em}), and, in the Hamiltonian formalism,
+a first-class constraint, Gauss's law $\nabla\!\cdot{\bm{E}}=4\pi\rho$, that
+generates the gauge transformations.
+
+\section{Example VI: quantum mechanics}
+\label{sec:quantum}
+
+By Wigner's theorem a symmetry of a quantum system, a bijection of rays that
+preserves transition probabilities $|\langle\psi|\varphi\rangle|^2$, is
+implemented by an operator $U(g)$ that is unitary or antiunitary, unique up to
+a phase \cite{wigner}. The phase ambiguity means the group is represented
+\emph{projectively}:
+$U(g_1)U(g_2)=e^{\ii\omega(g_1,g_2)}U(g_1g_2)$. For rotations this gives
+spin-$\tfrac12$ representations of the double cover $SU(2)$; for the
+Galilei group the nontrivial phase is the mass $M$ of
+Section~\ref{sec:galilei}, the central charge appearing in the classical
+Poisson algebra.
+
+The three notions take the following operator form.
+\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
+\item \emph{Invariance} of the dynamics: $U(g)\,H\,U(g)^{-1}=H$, i.e.\
+  $[U(g),H]=0$. Symmetry of the law is invariance of one particular operator.
+\item \emph{Covariance} of observables: an observable $\mathcal O$
+  transforms into $U^\dagger\mathcal OU$. A \emph{vector operator} $V_i$
+  (position, momentum, angular momentum) transforms covariantly,
+  \begin{equation}\label{eq:vector-op}
+    U(R)^\dagger V_iU(R)=R_{ij}V_j\quad\Longleftrightarrow\quad
+    [J_i,V_j]=\ii\hbar\,\epsilon_{ijk}V_k,
+  \end{equation}
+  whereas the scalars $H$ and $\bm J^2$ are \emph{invariant}.
+\item \emph{Consequences.} If $[U,H]=0$, energy levels fall into multiplets
+  that carry representations of the symmetry group (the $(2j{+}1)$-fold
+  degeneracy for rotations), and matrix elements of covariant operators
+  between such multiplets are constrained by the Wigner--Eckart theorem,
+  yielding selection rules. Both facts follow from group theory alone,
+  without solving the dynamics.
+\end{itemize}
+The last bullet displays the practical power of the whole subject:
+covariance of operators and invariance of $H$ together determine selection
+rules before any wavefunction is computed. The classical analogue of
+\eqref{eq:vector-op} is $\pb{L_i}{V_j}=\epsilon_{ijk}V_k$.
+
+\begin{remark}[Discrete symmetries]
+Parity $P$ and time reversal $T$ are improper transformations. Electrodynamics
+is covariant (hence symmetric) under both if $\tilde F$, ${\bm{B}}$ and ${\bm{E}}$ are
+assigned the appropriate parity and time-reversal signs; the weak interaction
+is not symmetric under $P$, so the ``covariance'' of an equation under $P$
+is a statement about the formulation only until one also asks whether the
+symmetry is a property of the \emph{law} that nature obeys.
+\end{remark}
+
+Table~\ref{tab:summary} places the examples in the framework of
+Proposition~\ref{prop:main}.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3.1cm}@{}}
+\toprule
+System & Covariance group (of the formulation)
+  & Fixed background & Symmetry $=\stab(b_0)$ & Consequence\\
+\midrule
+Newtonian $N$-body & Galilei (or $\diff$ in Newton--Cartan form)
+  & $t_\mu,\ h^{\mu\nu}$ & Galilei, 10 parameters
+  & $E,\bm P,\bm L,\bm G$; mass as central charge\\
+Maxwell with sources & Lorentz (or $\diff$ with $\eta$ transported)
+  & $\eta_{\mu\nu}$ & Poincar\'e; conformal if $j=0$
+  & $P^\mu,J^{\mu\nu}$\\
+Relativistic particle & Poincar\'e, reparametrization
+  & $\eta_{\mu\nu}$ & Poincar\'e; reparametrization is gauge
+  & $\pi_\mu,J^{\mu\nu}$; $\pi^2-m^2c^2\approx0$\\
+General relativity & $\diff(M)$ & none & $\diff(M)$, entirely gauge
+  & $\nabla_\mu T^{\mu\nu}=0$; charges only for Killing $\xi$ of a solution\\
+Gauge theory & local $G$ & $\eta_{\mu\nu}$
+  & Poincar\'e $\times$ global $G$; local $G$ is gauge
+  & charge; $\partial_\mu j^\mu\approx0$; Gauss law\\
+Kepler problem & canonical transformations & --- 
+  & $SO(3)\times\mathbb R_t$ (geometric); $SO(4)$ (dynamical, $H<0$)
+  & ${\bm{L}},\ \bm A,\ H$\\
+Quantum mechanics & unitary / antiunitary operators & fixed by $H$
+  & $[U(g),H]=0$
+  & degeneracy multiplets; selection rules\\
+\bottomrule
+\end{tabular}
+\caption{The examples of this chapter in the language of
+Proposition~\ref{prop:main}.}
+\label{tab:summary}
+\end{table}
+
