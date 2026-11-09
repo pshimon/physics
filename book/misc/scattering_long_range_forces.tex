@@ -1,0 +1,1400 @@
+\documentclass[11pt,a4paper]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+
+\numberwithin{equation}{chapter}
+\setlist{itemsep=2pt,topsep=4pt}
+
+% --- macros -----------------------------------------------------------
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\vk}{\bm{k}}
+\newcommand{\vr}{\bm{r}}
+\newcommand{\vp}{\bm{p}}
+\newcommand{\Fhyp}{{}_1F_1}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\artanh}{\operatorname{artanh}}
+\newcommand{\Imag}{\operatorname{Im}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\dsdO}{\frac{\dd\sigma}{\dd\Omega}}
+\newcommand{\braket}[2]{\langle #1|#2\rangle}
+\newcommand{\bra}[1]{\langle #1|}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\afs}{\alpha_{\mathrm{f}}}
+
+\title{Scattering by Long-Range Forces:\\[2pt]
+       Classical, Quantum and Relativistic Theory}
+\author{Draft chapters for a physics text}
+\date{}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\chapter*{Scope and conventions}
+\addcontentsline{toc}{chapter}{Scope and conventions}
+
+Most treatments of scattering rest on one of two simplifications. Either the
+interaction vanishes beyond a finite radius, so that partial waves, phase
+shifts, scattering lengths, resonances and hard spheres apply; or the
+interaction is weak enough to be expanded in its strength, giving the Born
+series, Fermi's golden rule and Feynman diagrams. These chapters omit both on
+purpose. What remains is narrower in scope but richer in structure:
+\begin{itemize}
+  \item the language of scattering that does not depend on the dynamics:
+        cross sections, reference frames, invariants;
+  \item exact treatments of infinite-range forces, above all the Coulomb
+        potential, where finite-range methods fail and the classical, quantum
+        and relativistic descriptions can be compared in closed form;
+  \item non-perturbative structural results: unitarity, identical particles,
+        the meaning of asymptotic states, analyticity.
+\end{itemize}
+
+Part~I (Chapters~1--2) sets up kinematics and the classical theory.
+Part~II (Chapters~3--4) treats non-relativistic quantum scattering and ends
+with the exact Coulomb amplitude. Part~III (Chapters~5--8) treats relativistic
+scattering: classical orbits, the Klein--Gordon and Dirac Coulomb problems, the
+Klein step, the invariant formulation, and a final comparison of the three
+viewpoints.
+
+\paragraph{Conventions.}
+\begin{itemize}
+  \item The Coulomb strength is $\alpha=Z_1Z_2e^2$ in Gaussian units (in SI
+        replace $e^2$ by $e^2/4\pi\varepsilon_0$). The potential is
+        $V(r)=\alpha/r$, so $\alpha>0$ is repulsive and $\alpha<0$ attractive.
+  \item $E$ is the kinetic energy in the centre-of-mass (CM) frame unless
+        stated otherwise; $\mu$ is the reduced mass, $v$ the relative speed at
+        infinity, $p=\mu v$ and $k=p/\hbar$.
+  \item $\eta=\alpha/(\hbar v)$ is the (signed) Sommerfeld parameter.
+        Relativistically $v=pc^2/E$.
+  \item $\zeta=\alpha/\hbar c$ (equal to $Z\afs$ for a nucleus of charge $Z$)
+        measures how relativistic the Coulomb problem is; note
+        $\zeta=\eta\,v/c$.
+  \item An asterisk marks CM quantities; the subscript L marks the laboratory
+        frame (target at rest).
+\end{itemize}
+
+\mainmatter
+
+% =====================================================================
+\part{Foundations}
+% =====================================================================
+
+\chapter{The Scattering Experiment and Its Kinematics}
+
+\section{Cross sections}
+
+A scattering experiment sends a beam of projectiles, with flux $J$ (particles
+per unit area per unit time, measured transverse to the beam), onto $N$ targets
+and counts the particles emerging per unit time into the solid angle
+$\dd\Omega$ around the direction $(\theta,\varphi)$. If the targets do not
+shadow one another,
+\begin{equation}\label{eq:flux}
+  \dd\dot N = J\,N\,\dsdO\,\dd\Omega .
+\end{equation}
+The differential cross section $\dd\sigma/\dd\Omega$ has the dimension of an
+area; the total cross section is $\sigma=\int(\dd\sigma/\dd\Omega)\,\dd\Omega$.
+Three remarks fix the meaning of these definitions.
+\begin{enumerate}
+  \item A cross section is a ratio of rates. It is therefore independent of
+        beam intensity, target thickness and detector efficiency, and encodes
+        only the dynamics of the interaction.
+  \item Classically, $\dd\sigma$ is literally an area: the part of the
+        incident beam's transverse cross section whose particles end up in
+        $\dd\Omega$.
+  \item Because $\sigma$ is a transverse area, it is unchanged by Lorentz
+        boosts along the beam axis. Total cross sections therefore agree
+        between the lab and CM frames; differential cross sections differ only
+        through the change of angle.
+\end{enumerate}
+The definition \eqref{eq:flux} assumes a beam that is uniform over a region much
+wider than the range of the force. For an infinite-range force this assumption
+can never be fully met, and we will see that it is the origin of the infinite
+total cross sections that haunt Coulomb scattering.
+
+\section{Two-body reduction and the lab frame (non-relativistic)}
+
+For two particles interacting through a potential depending on
+$\vr=\vr_1-\vr_2$, the motion separates into free motion of the centre of mass
+and motion of a single particle of reduced mass $\mu=m_1m_2/(m_1+m_2)$ in the
+potential $V(r)$. Dynamics determines $\dd\sigma/\dd\Omega^*$ in the CM frame;
+everything else is kinematics.
+
+Let a projectile $m_1$ hit a target $m_2$ at rest and put $\rho=m_1/m_2$. For
+elastic scattering through CM angle $\theta^*$,
+\begin{align}
+  \tan\theta_{\mathrm L} &= \frac{\sin\theta^*}{\rho+\cos\theta^*}, \label{eq:labtan}\\[2pt]
+  \left.\dsdO\right|_{\mathrm L} &=
+      \frac{(1+\rho^2+2\rho\cos\theta^*)^{3/2}}{|1+\rho\cos\theta^*|}
+      \left.\dsdO\right|^{*}, \label{eq:labxs}\\[2pt]
+  T_2 &= \frac{4m_1m_2}{(m_1+m_2)^2}\,E_{\mathrm L}\sin^2\frac{\theta^*}{2}.
+      \label{eq:recoil}
+\end{align}
+Here $E_{\mathrm L}$ is the projectile's lab kinetic energy and $T_2$ the recoil
+energy of the target. For $\rho<1$ the lab angle covers
+$0\le\theta_{\mathrm L}\le\pi$; for $\rho>1$ it cannot exceed
+$\theta_{\max}$ with $\sin\theta_{\max}=1/\rho$, and each lab angle below
+$\theta_{\max}$ corresponds to two CM angles. Equation~\eqref{eq:recoil} shows
+that the energy transferred is a simple function of the CM angle alone, and it
+will turn Rutherford's angular law into an energy-transfer law
+(Section~\ref{sec:coullog}).
+
+\section{Relativistic kinematics}
+
+In this section $c=1$. For $p_1+p_2\to p_3+p_4$ define the Mandelstam
+invariants
+\begin{equation}\label{eq:mandelstam}
+  s=(p_1+p_2)^2,\quad t=(p_1-p_3)^2,\quad u=(p_1-p_4)^2,\qquad
+  s+t+u=m_1^2+m_2^2+m_3^2+m_4^2 .
+\end{equation}
+For elastic scattering ($m_3=m_1$, $m_4=m_2$) with the target at rest in the
+lab:
+\begin{itemize}
+  \item $s=m_1^2+m_2^2+2m_2E_{\mathrm L}$, and the CM momentum is
+        $p^*=m_2p_{\mathrm L}/\sqrt s$, where $p_{\mathrm L}$ is the beam
+        momentum in the lab;
+  \item the projectile's CM energy is $E_1^*=(s+m_1^2-m_2^2)/(2\sqrt s)$;
+  \item $t=-2p^{*2}(1-\cos\theta^*)$, so $-4p^{*2}\le t\le 0$, and the target's
+        lab recoil energy is $T_2=-t/(2m_2)$.
+\end{itemize}
+The CM moves in the lab with $\beta_c=p_{\mathrm L}/(E_{\mathrm L}+m_2)$ and
+$\gamma_c=(E_{\mathrm L}+m_2)/\sqrt s$. The lab scattering angle follows from
+transforming the projectile's momentum:
+\begin{equation}\label{eq:lab-rel}
+  \tan\theta_{\mathrm L}=\frac{\sin\theta^*}
+        {\gamma_c\left(\cos\theta^*+\beta_c/\beta_1^*\right)},
+  \qquad \beta_1^*=p^*/E_1^* .
+\end{equation}
+The non-relativistic limit is $\gamma_c\to1$, $\beta_c/\beta_1^*\to m_1/m_2$,
+which reproduces \eqref{eq:labtan}. For equal masses $\beta_c=\beta_1^*$, so
+$\tan\theta_{\mathrm L}=\tan(\theta^*/2)/\gamma_c$. The recoiling particle
+emerges at $\tan\theta_{\mathrm L}'=\cot(\theta^*/2)/\gamma_c$, hence
+\begin{equation}\label{eq:product}
+  \tan\theta_{\mathrm L}\,\tan\theta_{\mathrm L}'=\frac1{\gamma_c^2}
+  =\frac{2}{\gamma_{\mathrm L}+1},
+\end{equation}
+where $\gamma_{\mathrm L}$ is the projectile's lab Lorentz factor.
+Non-relativistically the product is~1 and the two outgoing particles separate
+at exactly $90^\circ$; relativistically the opening angle is always smaller
+than $90^\circ$.
+
+Two invariants will recur. The first is the flux factor,
+$F=4\sqrt{(p_1\!\cdot\! p_2)^2-m_1^2m_2^2}=4p^*\sqrt s=4m_2p_{\mathrm L}$. The
+second is the relation between the invariant $\dd\sigma/\dd t$ and the CM
+angular cross section,
+\begin{equation}\label{eq:dsdt}
+  \frac{\dd\sigma}{\dd t}=\frac{\pi}{p^{*2}}\left.\dsdO\right|^{*}.
+\end{equation}
+Equation~\eqref{eq:dsdt} follows from $\dd t=2p^{*2}\,\dd(\cos\theta^*)$ and
+$\dd\Omega=2\pi\,\dd(\cos\theta^*)$. It already hints at the main theme of
+Chapter~7: the Rutherford law, $\dd\sigma/\dd\Omega\propto1/\sin^4(\theta^*/2)$,
+is the statement $\dd\sigma/\dd t\propto1/t^2$.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:labtan} and \eqref{eq:labxs} from the velocity-addition
+        rule between the CM and lab frames.
+  \item Prove \eqref{eq:product}, and show that for a head-on collision of
+        equal masses the projectile stops.
+  \item For the elastic scattering of a proton of lab kinetic energy 1~GeV on a
+        proton at rest, find $s$, $p^*$, $\gamma_c$, and the largest lab angle
+        at which both outgoing protons can be detected together.
+\end{enumerate}
+
+\section*{Notes and references}
+Collision kinematics is developed concisely in \cite{LL1}. Relativistic kinematics, the Mandelstam variables and the K\"all\'en function are collected, with worked examples, in \cite{BK,Hagedorn} and in the kinematics review of \cite{PDG}; the invariants were introduced in \cite{Mandelstam58}. The definition of a cross section and its invariance under boosts are discussed in the general setting of scattering theory in \cite{Weinberg}.
+
+% =====================================================================
+\chapter{Classical Scattering}
+% =====================================================================
+
+\section{Orbits and the deflection function}
+
+In the CM frame a central potential $V(r)$ makes the relative motion planar.
+Let the incident relative speed be $v$ and the impact parameter $b$. Two
+constants of motion fix everything: the energy $E=\tfrac12\mu v^2$ and the
+angular momentum $L=\mu vb$. The radial and angular equations are
+\[
+  \dot r^2=\frac2\mu\Bigl[E-V(r)-\frac{L^2}{2\mu r^2}\Bigr],\qquad
+  \dot\varphi=\frac{L}{\mu r^2}.
+\]
+Eliminating time, the angle swept between the two asymptotes is
+\begin{equation}\label{eq:phi-swept}
+  \Delta\varphi(b)=2\int_{r_0}^{\infty}
+     \frac{b\,\dd r/r^2}{\sqrt{1-V(r)/E-b^2/r^2}},
+\end{equation}
+where $r_0$ is the largest root of the radicand (the distance of closest
+approach). For $V=0$, $r_0=b$ and $\Delta\varphi=\pi$. We define the
+deflection function
+\begin{equation}\label{eq:deflection}
+  \Theta(b)=\pi-\Delta\varphi(b),
+\end{equation}
+which is positive for repulsion and negative for attraction. The observed
+scattering angle $\theta\in[0,\pi]$ is the value of $|\Theta+2\pi n|$ that falls
+in that interval, for an integer $n$.
+
+\section{From deflection function to cross section}
+
+Particles with impact parameters between $b$ and $b+\dd b$ and azimuth between
+$\varphi$ and $\varphi+\dd\varphi$ cross the beam's transverse plane at a rate
+$J\,b\,\dd b\,\dd\varphi$. A central force conserves the azimuth, so those
+particles leave into $\sin\theta\,\dd\theta\,\dd\varphi$. Equating the two, and
+summing over all impact parameters $b_i$ that lead to the same $\theta$,
+\begin{equation}\label{eq:xs-sum}
+  \dsdO=\sum_i\frac{b_i}{\sin\theta}\left|\frac{\dd b_i}{\dd\theta}\right| .
+\end{equation}
+Three classical singularities of \eqref{eq:xs-sum} are generic and give the
+cleanest bridge to quantum mechanics.
+\begin{itemize}
+  \item \textbf{Rainbow.} Where $\dd\Theta/\dd b=0$, $\dd b/\dd\theta$ is
+        infinite and the classical cross section diverges (as
+        $(\theta-\theta_r)^{-1/2}$). Two branches merge at a caustic; quantum
+        mechanically the divergence becomes an Airy-function peak with
+        supernumerary oscillations.
+  \item \textbf{Glory.} Where $\Theta=0$ or $\pi$ at $b\neq0$, the factor
+        $1/\sin\theta$ makes $\dd\sigma/\dd\Omega$ diverge on the axis. The
+        quantum smoothing is a Bessel function $J_0^2(\dots)$.
+  \item \textbf{Orbiting.} If $E$ equals a maximum of the effective potential
+        $V+L^2/(2\mu r^2)$, $\Theta\to-\infty$ as $b\to b_c$: the particle
+        circles the centre many times.
+\end{itemize}
+Potentials in which these effects occur are typically finite-range and are not
+treated here. For the Coulomb case $\Theta(b)$ is monotonic, there is a single
+branch, and \eqref{eq:xs-sum} applies directly.
+
+\section{Rutherford scattering}
+
+For $V=\alpha/r$ put $u=1/r$. The orbit equation $u''+u=-\mu\alpha/L^2$ gives
+conic sections, here hyperbolas with eccentricity
+\[
+  \varepsilon=\sqrt{1+(2Eb/\alpha)^2}.
+\]
+The asymptotes are the zeros of $u$. For repulsion
+$u=(\varepsilon\cos\varphi'-1)/p$ with $p=L^2/(\mu\alpha)$, so
+$\cos(\Delta\varphi/2)=1/\varepsilon$, $\tan(\Delta\varphi/2)=2Eb/\alpha$, and
+with $\Theta=\pi-\Delta\varphi$,
+\begin{equation}\label{eq:b-ruth}
+  b=\frac{\alpha}{2E}\cot\frac\Theta2 .
+\end{equation}
+The attractive case gives the same relation with $\alpha$ replaced by
+$|\alpha|$ and $\Theta\to-\Theta$. Substituting in \eqref{eq:xs-sum} with
+$\dd b/\dd\theta=-(\alpha/4E)/\sin^2(\theta/2)$,
+\begin{equation}\label{eq:ruth}
+  \dsdO=\left(\frac{\alpha}{4E}\right)^{2}\frac1{\sin^4(\theta/2)} .
+\end{equation}
+This is Rutherford's formula. Notes:
+\begin{itemize}
+  \item It depends on $\alpha^2$ and therefore does not distinguish attraction
+        from repulsion.
+  \item It is exactly proportional to $E^{-2}$ and $\alpha^2$, so one scale
+        ($\alpha/E$, a length) fixes the whole angular distribution.
+  \item It is singular as $\theta\to0$ like $\theta^{-4}$. The total cross
+        section is infinite, because a particle at any impact parameter,
+        however large, is deflected a little ($\Theta\approx\alpha/Eb$ for
+        large $b$), and the area $\int2\pi b\,\dd b$ is unbounded.
+\end{itemize}
+
+\section{Energy transfer and the Coulomb logarithm}\label{sec:coullog}
+
+For a heavy target $m_2$ at rest (see \eqref{eq:recoil}), the recoil energy is
+$T=T_{\max}\sin^2(\theta^*/2)$. Changing variables in \eqref{eq:ruth} gives
+\begin{equation}\label{eq:dsdT}
+  \frac{\dd\sigma}{\dd T}=\frac{2\pi\alpha^2}{m_2v^2\,T^2},
+\end{equation}
+where $v$ is the projectile's lab speed. Notice that the result depends on the
+projectile only through its speed. The energy lost by a fast particle per unit
+path length in a medium with $n_2$ targets per unit volume,
+$\dd E/\dd x=n_2\!\int T\,\dd\sigma$, then diverges logarithmically at small
+$T$, since $\int\dd T/T=\ln(T_{\max}/T_{\min})$. The same logarithm appears in
+the momentum-transfer cross section
+\begin{equation}\label{eq:sigtr}
+  \sigma_{\mathrm{tr}}=\int(1-\cos\theta)\,\dd\sigma
+  =\pi\Bigl(\frac\alpha E\Bigr)^{2}\ln\frac{1}{\sin(\theta_{\min}/2)} .
+\end{equation}
+The cutoff $\theta_{\min}$ (or $T_{\min}$) is supplied by something outside the
+pure Coulomb problem, such as screening by other charges. This is the Coulomb
+logarithm of plasma physics and stopping-power theory; its appearance is the
+practical face of the infinite range.
+
+\section{Infinite range: scaling and the divergent total cross section}
+\label{sec:scaling}
+
+For $V=\alpha/r^n$ the only length that can be formed from $\alpha$ and $E$ is
+$(\alpha/E)^{1/n}$, so $b=(\alpha/E)^{1/n}g_n(\Theta)$ and
+\begin{equation}\label{eq:scaling}
+  \dsdO=\Bigl(\frac\alpha E\Bigr)^{2/n}F_n(\theta).
+\end{equation}
+For large $b$ the deflection decays as $\Theta\sim b^{-n}$, so the cross section
+for deflection by more than $\theta_{\min}$ grows like
+$\theta_{\min}^{-2/n}$ and diverges as $\theta_{\min}\to0$.
+\emph{The classical total cross section is infinite for every infinite-range
+potential}, however rapidly it falls off. As we shall see in Chapter~4, quantum
+mechanics is more forgiving: diffraction makes very small deflections
+unobservable, and the quantum total cross section is finite if and only if $V$
+falls faster than $r^{-2}$ (the Coulomb case, $n=1$, remains infinite).
+
+\section{The inverse-square potential}\label{sec:classinv2}
+
+The case $V=\alpha/r^2$ is exactly solvable and shows the generic structure.
+The radial equation is that of a free particle with an effective angular
+momentum, $L'^2=L^2+2\mu\alpha$. A free particle sweeps an angle $\pi$ in the
+variable $\varphi'=\int L'\,\dd t/(\mu r^2)$, so the physical angle is
+$\Delta\varphi=\pi L/L'$, and
+\begin{equation}\label{eq:Theta2}
+  \Theta(b)=\pi\left[1-\frac{b}{\sqrt{b^2+\alpha/E}}\right].
+\end{equation}
+Inverting,
+$b^2=(\alpha/E)(\pi-\Theta)^2/[\Theta(2\pi-\Theta)]$, and from
+\eqref{eq:xs-sum}
+\begin{equation}\label{eq:xs2}
+  \dsdO=\frac{\alpha}{E}\;
+   \frac{\pi^2(\pi-\theta)}{\theta^2(2\pi-\theta)^2\sin\theta}.
+\end{equation}
+At small angles $\dd\sigma/\dd\Omega\approx(\pi\alpha/4E)/\theta^3$, a lower
+power of $1/\theta$ than Rutherford's $\theta^{-4}$, but the total cross
+section still diverges. For attraction ($\alpha<0$) two new features arise. If
+$b^2<|\alpha|/E$, then $L'^2<0$ and the particle spirals into the centre; the
+capture cross section is
+\begin{equation}\label{eq:cap2}
+  \sigma_{\mathrm{cap}}=\frac{\pi|\alpha|}{E}.
+\end{equation}
+And as $b\to\sqrt{|\alpha|/E}$ from above, $\Theta\to-\infty$: orbiting. In both
+cases the unique scale is $\alpha/E$, and $\sigma_{\mathrm{cap}}\propto1/E$. We
+shall meet the quantum version of this problem in Section~\ref{sec:qinv2},
+where the semiclassical relation turns out to be exact.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:b-ruth} directly from \eqref{eq:phi-swept} by
+        evaluating the integral for $V=\alpha/r$.
+  \item Show that for the attractive $1/r^2$ potential the deflection function
+        \eqref{eq:Theta2}, continued to $\alpha<0$, gives infinitely many
+        branches for $\theta$ and compute the cross section as a sum over
+        windings $n$.
+  \item For electrons of 100~keV scattering from gold ($Z=79$), find the impact
+        parameter that gives $\theta=90^\circ$ and the classical cross section
+        per unit solid angle at that angle, and explain why the nucleus can be
+        treated as a point.
+\end{enumerate}
+
+\section*{Notes and references}
+The classical theory of scattering in a central field is in \cite{LL1,Goldstein}; Rutherford's original analysis is \cite{Rutherford11}. The classification of rainbow, glory and orbiting singularities and their quantum smoothing is treated in \cite{FordWheeler,BerryMount}. The Coulomb logarithm and the energy-transfer cross section are discussed in the context of stopping power in \cite{Jackson}. The inverse-square potential and the fall to the centre are treated in \cite{LL3,Case50}; the underlying questions of self-adjointness are explained in \cite{ReedSimonII}.
+
+% =====================================================================
+\part{Quantum Scattering}
+% =====================================================================
+
+\chapter{Quantum Scattering Without Finite Range}
+
+\section{Stationary scattering states and the cross section}
+
+A scattering experiment is a time-dependent process: a wave packet of mean
+momentum $\hbar k$, prepared far from the target, approaches, interacts and
+separates. For a packet that is sharp in momentum and broad in space, the
+description reduces to a stationary one: a solution of
+$(-\hbar^2\nabla^2/2\mu+V)\psi=E\psi$, with $E=\hbar^2k^2/2\mu$, that behaves
+at large $r$ as
+\begin{equation}\label{eq:asym}
+  \psi_{\vk}(\vr)\to \ee^{\ii\vk\cdot\vr}+f(\theta,\varphi)\,\frac{\ee^{\ii kr}}{r}.
+\end{equation}
+The incident plane wave carries current density $\hbar k/\mu$. The outgoing
+spherical wave carries a radial current $(\hbar k/\mu)|f|^2/r^2$, so the flux
+through $r^2\dd\Omega$ divided by the incident flux gives
+\begin{equation}\label{eq:xs-f}
+  \dsdO=|f(\theta,\varphi)|^2 .
+\end{equation}
+
+The form \eqref{eq:asym} presupposes that the particle moves freely at large
+distances, and the Coulomb potential sits exactly on the borderline where this
+fails. In the WKB picture the local wave number is
+$k(r)\approx k-\mu V(r)/(\hbar^2k)$, so the phase accumulated out to radius $r$
+contains $-(\mu/\hbar^2k)\int^{r}V\,\dd r'$. If $V$ falls faster than $1/r$ this
+integral converges and the asymptotic wave is a plane wave. If $V\propto1/r$ it
+grows like $\ln r$, so the incident wave carries a logarithmic phase and the
+outgoing wave is $\ee^{\ii(kr-\eta\ln2kr)}/r$, not $\ee^{\ii kr}/r$. The
+standard form \eqref{eq:asym} therefore holds for potentials that decay faster
+than $1/r$; a finite total cross section requires a still faster decay, as we
+saw in Section~\ref{sec:scaling} and will quantify below.
+
+\section{Formal structure: the T-matrix, unitarity and reciprocity}
+
+The stationary state with outgoing-wave boundary conditions obeys the
+Lippmann--Schwinger equation
+\begin{equation}\label{eq:LS}
+  \psi^+_{\vk}(\vr)=\ee^{\ii\vk\cdot\vr}+\int G_0^+(\vr,\vr')\,V(\vr')\,
+  \psi^+_{\vk}(\vr')\,\dd^3r',\qquad
+  G_0^+(\vr,\vr')=-\frac{\mu}{2\pi\hbar^2}\frac{\ee^{\ii k|\vr-\vr'|}}{|\vr-\vr'|}.
+\end{equation}
+Taking $r\to\infty$ along the direction $\vk'=k\hat{\vr}$ identifies the
+amplitude exactly:
+\begin{equation}\label{eq:fT}
+  f(\vk',\vk)=-\frac{\mu}{2\pi\hbar^2}\,\langle\vk'|V|\psi^+_{\vk}\rangle
+  =-\frac{\mu}{2\pi\hbar^2}\,\langle\vk'|T(E+\ii0)|\vk\rangle ,
+\end{equation}
+with $\langle\vr|\vk\rangle=\ee^{\ii\vk\cdot\vr}$ and $T=V+VG_0T$. We use
+\eqref{eq:LS}--\eqref{eq:fT} only as definitions; they are never expanded in
+powers of $V$. Several exact properties follow.
+\begin{itemize}
+  \item \textbf{Unitarity.} Probability conservation makes the S-matrix unitary.
+        On the energy shell, for any interaction for which the amplitude exists
+        and all channels are elastic,
+        \begin{equation}\label{eq:unitarity}
+          f(\vk',\vk)-f^*(\vk,\vk')=\frac{\ii k}{2\pi}\int\dd\Omega''\,
+          f^*(\vk'',\vk')\,f(\vk'',\vk).
+        \end{equation}
+  \item \textbf{Optical theorem.} Setting $\vk'=\vk$ in \eqref{eq:unitarity},
+        \begin{equation}\label{eq:optical}
+          \Imag f(\vk,\vk)=\frac{k}{4\pi}\,\sigma_{\mathrm{tot}} .
+        \end{equation}
+        The forward amplitude is the interference of the scattered wave with
+        the incident wave, and its imaginary part is the shadow cast by
+        whatever is removed from the beam. If inelastic channels are open,
+        \eqref{eq:optical} still holds with
+        $\sigma_{\mathrm{tot}}=\sigma_{\mathrm{el}}+\sigma_{\mathrm{inel}}$,
+        while \eqref{eq:unitarity} becomes an inequality.
+  \item \textbf{Reciprocity.} Time-reversal invariance gives
+        $f(\vk',\vk)=f(-\vk,-\vk')$. For a central, real potential $f$ depends
+        only on the angle $\theta$ between $\vk$ and $\vk'$, and
+        $f(\vk',\vk)=f(\vk,\vk')$.
+  \item \textbf{Coulomb.} For $V=\alpha/r$ the integral in \eqref{eq:fT} is only
+        conditionally defined and the forward amplitude is infinite. This is
+        consistent with \eqref{eq:optical}, since $\sigma_{\mathrm{tot}}$ is
+        infinite, but it means that \eqref{eq:optical} cannot be used as a
+        tool for the pure Coulomb problem.
+\end{itemize}
+
+\section{Long-range forces and Dollard's asymptotic states}\label{sec:dollard}
+
+The physical content of a scattering state is that the true evolution
+$\ee^{-\ii Ht/\hbar}\psi$ resembles a freely moving packet as $t\to\mp\infty$.
+Standard scattering theory compares $H=H_0+V$ with $H_0$ through the
+M{\o}ller operators
+$\Omega_\pm=\lim\,\ee^{\ii Ht/\hbar}\ee^{-\ii H_0t/\hbar}$ as $t\to\mp\infty$.
+For $V=\alpha/r$ this limit does not exist: a packet moving at speed $v$ is at
+distance $r=vt$, and the phase accumulated from the potential grows without
+bound as $-\eta(p)\ln|t|$. Dollard (1964) repaired the theory by modifying the
+comparison dynamics:
+\begin{equation}\label{eq:dollard}
+  U_D(t)=\exp\Bigl\{-\frac{\ii}{\hbar}H_0t-\ii\,\eta(\hat p)\,\sgn(t)\,
+  \ln\frac{4H_0|t|}{\hbar}\Bigr\},\qquad \eta(p)=\frac{\mu\alpha}{\hbar p}.
+\end{equation}
+The modified wave operators
+$\Omega^D_\pm=\lim\,\ee^{\ii Ht/\hbar}U_D(t)$ as $t\to\mp\infty$ exist, are
+isometric and complete, and define a unitary
+$S=(\Omega^D_+)^\dagger\Omega^D_-$, whose kernel is the Coulomb amplitude. One
+consequence is conceptually important. The scale inside the logarithm is
+arbitrary: replacing $4H_0|t|/\hbar$ by $|t|/\tau$ multiplies $S$ by a phase
+that depends on the energy only. Hence:
+\begin{itemize}
+  \item $|f_C(\theta)|^2$, the Rutherford cross section, is unambiguous;
+  \item the overall phase of $f_C$ is a matter of convention;
+  \item the phase of one Coulomb amplitude relative to another at the same
+        energy (as when two amplitudes interfere) is physical.
+\end{itemize}
+A real beam is screened at some distance $R$ by other charges, so that ordinary
+theory applies. As $R\to\infty$ the screened amplitude approaches $f_C$ times a
+phase factor that depends only on $k$ and $R$ and diverges logarithmically; the
+cross section at any fixed $\theta\neq0$ converges to Rutherford's.
+
+\section{Problems}
+\begin{enumerate}
+  \item Show by a flux argument that \eqref{eq:unitarity} with $\vk'=\vk$ leads
+        to \eqref{eq:optical}.
+  \item Verify that for $V\propto r^{-n}$ with $n>1$ the accumulated WKB phase
+        converges, and find the leading large-$r$ correction to the plane wave
+        for $1<n<2$.
+  \item Show that changing the scale of the logarithm in \eqref{eq:dollard}
+        shifts the phase of $f_C$ by a $\theta$-independent amount and leaves
+        $|f_C|^2$ unchanged.
+\end{enumerate}
+
+\section*{Notes and references}
+General formal scattering theory, including the Lippmann--Schwinger equation \cite{LS50}, the T-matrix, unitarity and the optical theorem, can be found in \cite{Newton,Taylor,GW,Messiah}. The failure of the standard asymptotic condition for the Coulomb potential and its repair were given by Dollard \cite{Dollard64}; a complete mathematical treatment of long-range scattering theory is in \cite{ReedSimonIII}.
+
+% =====================================================================
+\chapter{The Exact Coulomb Problem}
+% =====================================================================
+
+\section{Separation in parabolic coordinates}
+
+For $V=\alpha/r$ the Schr\"odinger equation is
+\begin{equation}\label{eq:coul-schr}
+  \Bigl[\nabla^2+k^2-\frac{2k\eta}{r}\Bigr]\psi=0,\qquad
+  \eta=\frac{\mu\alpha}{\hbar^2k}=\frac{\alpha}{\hbar v}.
+\end{equation}
+The equation separates in parabolic coordinates $\xi=r-z$, $\chi=r+z$,
+$\varphi$, where the $z$-axis is the incident direction. The Laplacian is
+\[
+  \nabla^2=\frac{4}{\xi+\chi}\Bigl[\partial_\xi(\xi\partial_\xi)
+  +\partial_\chi(\chi\partial_\chi)\Bigr]+\frac1{\xi\chi}\partial_\varphi^2 .
+\]
+For an axially symmetric solution of the form $\psi=\ee^{\ii kz}w(\xi)$, which
+carries a plane-wave factor along the beam, the $\chi$-dependence cancels and
+\begin{equation}\label{eq:kummer-w}
+  \xi\,w''+(1-\ii k\xi)\,w'-k\eta\,w=0 .
+\end{equation}
+With $s=\ii k\xi$ this is Kummer's equation
+$s\,w_{ss}+(1-s)\,w_s-a\,w=0$ with $a=-\ii\eta$ and $b=1$. Its second solution
+is logarithmically singular on the forward axis $\xi=0$, which is unphysical,
+so
+\begin{equation}\label{eq:psiC}
+  \psi_C(\vr)=C\,\ee^{\ii kz}\,\Fhyp\bigl(-\ii\eta;1;\ii k(r-z)\bigr).
+\end{equation}
+
+\section{Asymptotics and the scattering amplitude}
+
+For large $|s|$,
+$\Fhyp(a;1;s)\simeq(-s)^{-a}/\Gamma(1-a)+\ee^{s}s^{a-1}/\Gamma(a)$. Put
+$a=-\ii\eta$, $s=\ii k\xi$, $\xi=r(1-\cos\theta)=2r\sin^2(\theta/2)$. The two
+terms are
+\begin{align*}
+  \frac{(-\ii k\xi)^{\ii\eta}}{\Gamma(1+\ii\eta)}
+    &=\frac{\ee^{\pi\eta/2}\,\ee^{\ii\eta\ln k\xi}}{\Gamma(1+\ii\eta)},\\[2pt]
+  \frac{\ee^{\ii k\xi}(\ii k\xi)^{-\ii\eta-1}}{\Gamma(-\ii\eta)}
+    &=\frac{\ee^{\pi\eta/2}\,\ee^{\ii k\xi-\ii\eta\ln k\xi}}
+           {\ii k\xi\,\Gamma(-\ii\eta)} .
+\end{align*}
+Choosing $C=\ee^{-\pi\eta/2}\Gamma(1+\ii\eta)$ normalises the first term to unit
+amplitude, and using
+$\Gamma(1+\ii\eta)/\Gamma(-\ii\eta)=-\ii\eta\,\Gamma(1+\ii\eta)/\Gamma(1-\ii\eta)$
+for the second,
+\begin{align}
+  \psi_C&\to \ee^{\ii[kz+\eta\ln k(r-z)]}
+        +f_C(\theta)\,\frac{\ee^{\ii[kr-\eta\ln2kr]}}{r}, \label{eq:psiC-asym}\\[4pt]
+  f_C(\theta)&=-\frac{\eta}{2k\sin^2(\theta/2)}\,
+        \exp\!\bigl[-\ii\eta\ln\sin^2(\theta/2)+2\ii\sigma_0\bigr],
+        \qquad \sigma_0=\arg\Gamma(1+\ii\eta). \label{eq:fC}
+\end{align}
+The result holds for $kr(1-\cos\theta)\gg1$, that is away from the forward axis,
+and for either sign of $\eta$.
+
+\section{Rutherford's law, exactly}
+
+Since $\eta/k=\alpha/2E$,
+\begin{equation}\label{eq:ruth-q}
+  \dsdO=|f_C|^2=\Bigl(\frac{\alpha}{4E}\Bigr)^{2}\frac1{\sin^4(\theta/2)} .
+\end{equation}
+This is the classical result \eqref{eq:ruth}, and $\hbar$ has dropped out
+completely. The agreement is exact and holds for every value of $\eta$, large
+or small.
+
+\section{Anatomy of the Coulomb amplitude}
+
+\paragraph{The incident wave is distorted.} The unscattered wave in
+\eqref{eq:psiC-asym} is a plane wave with the extra phase $\eta\ln k(r-z)$.
+There is no region of space in which the particle is simply free, and the
+forward direction cannot be cleanly separated from the beam. The amplitude
+\eqref{eq:fC} diverges as $\theta^{-2}$ as $\theta\to0$, and
+\eqref{eq:psiC-asym} fails inside the paraboloid $r-z\lesssim1/k$ around the
+axis.
+
+\paragraph{The phase of $f_C$.} The phase $2\sigma_0-\eta\ln\sin^2(\theta/2)$
+depends on $\theta$ and is observable only through interference, for example
+between the two amplitudes for identical particles (Section~\ref{sec:mott}).
+
+\paragraph{Bound states are poles.} Since
+$\ee^{2\ii\sigma_0}=\Gamma(1+\ii\eta)/\Gamma(1-\ii\eta)$, the amplitude has
+poles where $1+\ii\eta=-m$, $m=0,1,2,\dots$, that is at $\eta=\ii n$ with
+$n=m+1$. For an attractive potential, $\alpha=-|\alpha|$, continue to imaginary
+momentum $k=\ii\kappa$: $\eta=-\mu|\alpha|/(\hbar^2\ii\kappa)
+=\ii\mu|\alpha|/(\hbar^2\kappa)$. The pole condition gives
+$\kappa=\mu|\alpha|/(\hbar^2n)$, hence
+\begin{equation}\label{eq:bohr}
+  E_n=-\frac{\mu\alpha^2}{2\hbar^2n^2},\qquad n=1,2,3,\dots
+\end{equation}
+The complete Bohr spectrum is encoded in the scattering amplitude, a prototype
+of the general statement that bound states are poles of the S-matrix at
+negative energy.
+
+\paragraph{Penetration factor.} The probability density at the origin is
+$|\psi_C(0)|^2=|C|^2=\ee^{-\pi\eta}|\Gamma(1+\ii\eta)|^2$, and using
+$|\Gamma(1+\ii\eta)|^2=\pi\eta/\sinh\pi\eta$,
+\begin{equation}\label{eq:sommerfeld}
+  |\psi_C(0)|^2=\frac{2\pi\eta}{\ee^{2\pi\eta}-1}.
+\end{equation}
+For repulsion with $\eta\gg1$ this is $\ee^{-2\pi\eta}$, the Gamow tunnelling
+factor that governs nuclear fusion at low energy. For attraction with
+$|\eta|\gg1$ it is $\approx2\pi|\eta|$, the Sommerfeld enhancement of reactions
+that happen at the origin, relevant for threshold production and annihilation of
+charged pairs. As $\eta\to0$ the factor tends to~1.
+
+\section{Partial waves and the semiclassical dictionary}\label{sec:partial}
+
+Even though the potential has infinite range, the problem can be expanded in
+partial waves, in terms of Coulomb functions $F_\ell(\eta,\rho)$ that solve
+$u''+[k^2-2k\eta/r-\ell(\ell+1)/r^2]u=0$:
+\begin{equation}\label{eq:cwaves}
+  \begin{gathered}
+  \psi_C=\sum_\ell(2\ell+1)\,\ii^\ell\,\ee^{\ii\sigma_\ell}\,
+  \frac{F_\ell(\eta,kr)}{kr}\,P_\ell(\cos\theta),\\[4pt]
+  F_\ell\to\sin\!\bigl(\rho-\eta\ln2\rho-\tfrac{\ell\pi}{2}+\sigma_\ell\bigr),
+  \qquad \sigma_\ell=\arg\Gamma(\ell+1+\ii\eta).
+  \end{gathered}
+\end{equation}
+The amplitude is then
+\begin{equation}\label{eq:fC-pw}
+  f_C(\theta)=\frac1{2\ii k}\sum_\ell(2\ell+1)
+  \bigl(\ee^{2\ii\sigma_\ell}-1\bigr)P_\ell(\cos\theta),
+\end{equation}
+where the $-1$ contributes only at $\theta=0$, because
+$\sum(2\ell+1)P_\ell=2\delta(1-\cos\theta)$. The phases obey
+$\sigma_\ell=\sigma_{\ell-1}+\arctan(\eta/\ell)$. Two warnings distinguish this
+from the finite-range case. First, the terms in \eqref{eq:fC-pw} do not decay:
+their modulus is $(2\ell+1)/2k$ at large $\ell$. The series converges only as a
+distribution, for example by Abel summation, and its sum is \eqref{eq:fC}.
+Second, the phases $\sigma_\ell$ do not tend to a constant but grow like
+$\eta\ln\ell$, which is the partial-wave form of the logarithmic phase of
+Section~\ref{sec:dollard}.
+
+The semiclassical dictionary connects the phases to classical deflection. In
+the convention where positive $\Theta$ means repulsion, the WKB phase shift
+obeys $\Theta(\ell)=2\,\dd\delta_\ell/\dd\ell$, with $\ell+\tfrac12=kb$. Applied
+to the Coulomb phases,
+\[
+  \frac{\dd\sigma_\ell}{\dd\ell}=\Imag\,\psi(\ell+1+\ii\eta)
+  \simeq\Imag\ln\bigl(\ell+\tfrac12+\ii\eta\bigr)
+  =\arctan\frac{\eta}{\ell+\tfrac12},
+\]
+where $\psi$ is the digamma function and the approximation is accurate to
+$O(1/\ell^2)$. Therefore
+\begin{equation}\label{eq:dict}
+  \tan\frac\Theta2=\frac{\eta}{\ell+\tfrac12}=\frac{\alpha}{2Eb}.
+\end{equation}
+This is exactly the classical deflection function \eqref{eq:b-ruth}. The
+Coulomb problem is the case where the dictionary is exact.
+
+\section{Identical particles: the Mott formula}\label{sec:mott}
+
+For two identical particles the exchange $\vr\to-\vr$ means
+$\theta\to\pi-\theta$, and the amplitude must be symmetrised. Write
+$s=\sin(\theta/2)$, $c=\cos(\theta/2)$, and use the Coulomb amplitude
+\eqref{eq:fC} with the CM energy $E$ and reduced mass $\mu=m/2$. Remember that
+$\eta/2k=\alpha/4E$.
+\begin{itemize}
+  \item \textbf{Spin 0} (or spin-polarised bosons): the cross section is
+        $|f(\theta)+f(\pi-\theta)|^2$,
+        \begin{equation}\label{eq:mott0}
+          \dsdO=\Bigl(\frac{\alpha}{4E}\Bigr)^{2}\Bigl[\frac1{s^4}+\frac1{c^4}
+          +\frac{2}{s^2c^2}\cos\bigl(\eta\ln\tan^2\tfrac\theta2\bigr)\Bigr].
+        \end{equation}
+  \item \textbf{Spin $\tfrac12$, unpolarised:} the singlet (weight $\tfrac14$) is
+        spatially symmetric and the triplet (weight $\tfrac34$) antisymmetric, so
+        $\dd\sigma/\dd\Omega=|f|^2+|f'|^2-\Real(ff'^*)$ with
+        $f'=f(\pi-\theta)$:
+        \begin{equation}\label{eq:mott12}
+          \dsdO=\Bigl(\frac{\alpha}{4E}\Bigr)^{2}\Bigl[\frac1{s^4}+\frac1{c^4}
+          -\frac{1}{s^2c^2}\cos\bigl(\eta\ln\tan^2\tfrac\theta2\bigr)\Bigr].
+        \end{equation}
+\end{itemize}
+At $\theta=90^\circ$ these give $16$, $4$ and, for distinguishable particles,
+$8$ in units of $(\alpha/4E)^2$: bosonic doubling and fermionic suppression of
+the classical value. The cosine terms carry the logarithmic Coulomb phase
+$\eta\ln\tan^2(\theta/2)$, so the unobservable-looking phase of
+Section~\ref{sec:dollard} shows up in the angular distribution. For $\eta\gg1$
+the cosine oscillates rapidly with $\theta$ and averages to zero over any
+realistic detector resolution, leaving the classical sum of Rutherford terms:
+quantum interference gives way to classical addition of probabilities.
+
+\section{The inverse-square potential in quantum mechanics}\label{sec:qinv2}
+
+For $V=\alpha/r^2$ the radial equation is
+$u''+[k^2-(\ell(\ell+1)+g)/r^2]u=0$ with $g=2\mu\alpha/\hbar^2$. This is the
+free radial equation with $\ell$ replaced by a non-integer $\lambda$, where
+$\lambda+\tfrac12=\sqrt{(\ell+\tfrac12)^2+g}$. The regular solutions are Bessel
+functions of order $\lambda+\tfrac12$, so
+\begin{equation}\label{eq:delta2}
+  \delta_\ell=\frac\pi2\Bigl[\ell+\tfrac12-\sqrt{(\ell+\tfrac12)^2+g}\Bigr].
+\end{equation}
+The phase shift is independent of the energy, a reflection of scale invariance.
+Three facts follow.
+\begin{itemize}
+  \item Applying $\Theta=2\,\dd\delta_\ell/\dd\ell$ with $kb=\ell+\tfrac12$ and
+        $g/k^2=\alpha/E$, one finds
+        $\Theta=\pi\bigl[1-b/\sqrt{b^2+\alpha/E}\bigr]$, exactly the classical
+        deflection \eqref{eq:Theta2}.
+  \item At large $\ell$, $\delta_\ell\approx-\pi g/4\ell$, so
+        $\sum(2\ell+1)\sin^2\delta_\ell$ diverges logarithmically: the total
+        cross section is infinite. This is the boundary case $n=2$ of the rule
+        stated in Section~\ref{sec:scaling}, that the total cross section is
+        finite if and only if $V$ falls faster than $r^{-2}$.
+  \item For attraction, if $g<-(\ell+\tfrac12)^2$ then $\lambda+\tfrac12$ is
+        imaginary. This is the quantum fall to the centre, and the condition is
+        the same as the classical capture condition $b^2<|\alpha|/E$, since
+        $(\ell+\tfrac12)^2=k^2b^2$. The Hamiltonian then fails to be
+        self-adjoint, and the physics requires a self-adjoint extension with a
+        new length scale.
+\end{itemize}
+
+\section{When is the classical description valid?}
+
+A wave packet localised to an impact parameter $b$ has an angular uncertainty
+$\delta\theta\approx1/(kb)$, while the classical deflection is
+$\Theta\approx2\eta/(kb)$. Classical trajectories are meaningful when
+$\Theta\gg\delta\theta$, that is when $\eta\gg1$. For the Coulomb potential
+$\eta=Z_1Z_2\,(e^2/\hbar c)\,(c/v)$, so heavy ions at low speed are classical
+($\eta$ of order 10--100), while fast electrons on light nuclei are in the wave
+regime. For the inverse-square potential the criterion is $g\gg1$.
+
+It is striking that the exact Coulomb cross section \eqref{eq:ruth-q} coincides
+with the classical one even for $\eta\ll1$, where the classical picture has no
+meaning. This is a property of the $1/r$ potential alone, tied to its hidden
+dynamical symmetry ($SO(4)$ for bound states, $SO(3,1)$ for scattering,
+generated by the Runge--Lenz vector). It fails for the screened Coulomb
+potential, it fails for $1/r^2$ (where the deflection function is exact but the
+quantum cross section differs from \eqref{eq:xs2} by interference), and, as
+Part~III shows, it fails for relativistic motion.
+
+\section{Problems}
+\begin{enumerate}
+  \item Carry out the substitution that leads from \eqref{eq:coul-schr} to
+        \eqref{eq:kummer-w} using the parabolic form of $\nabla^2$.
+  \item Prove $\sigma_\ell-\sigma_{\ell-1}=\arctan(\eta/\ell)$ from
+        $\Gamma(z+1)=z\Gamma(z)$, and use it to show $\sigma_\ell\simeq\eta\ln\ell$
+        at large $\ell$.
+  \item Derive \eqref{eq:mott12} from the singlet and triplet weights, and
+        evaluate the cross section for $\alpha$--$\alpha$ scattering at
+        $90^\circ$ for $\eta=0.5$ and $\eta=5$, treating the $\alpha$ particles
+        as spin~0.
+  \item Use \eqref{eq:sommerfeld} to estimate the Gamow factor for $p+p$ at
+        1~keV CM energy, and explain why fusion in the Sun, at about 1~keV,
+        proceeds only through the high-energy tail of the thermal distribution.
+\end{enumerate}
+
+\section*{Notes and references}
+The exact Coulomb scattering amplitude was obtained independently by Gordon \cite{GordonB} and Mott \cite{Mott28}. Textbook treatments are in \cite{LL3,Messiah,Newton}. Coulomb and Kummer functions are tabulated in \cite{AS,DLMF}, with a modern numerical treatment in \cite{Seaton02}; useful integrals are in \cite{GR}. The penetration factor of Section~4.4 goes back to Gamow \cite{Gamow28} and Sommerfeld \cite{Sommerfeld31}. The hidden $SO(4)$ symmetry of the Coulomb problem was found by Pauli, Fock and Bargmann \cite{Pauli26,Fock35,Bargmann36} and is reviewed in \cite{Bander66}. The scattering of identical particles by the Coulomb force was treated by Mott \cite{Mott30}.
+
+% =====================================================================
+\part{Relativistic Scattering}
+% =====================================================================
+
+\chapter{Classical Relativistic Scattering}
+
+The relativistic two-body problem has no simple Hamiltonian formulation with
+instantaneous interactions, so we treat a test particle of mass $m$ in the
+static field of an infinitely heavy source. This is a legitimate limit for
+$m\ll M$ and the classical starting point for the Klein--Gordon and Dirac
+problems of Chapter~6. Radiation losses are assumed negligible.
+
+\section{The relativistic Coulomb orbit}
+
+Let $E$ be the total energy, $p$ the momentum at infinity (so
+$E^2=p^2c^2+m^2c^4$), $v=pc^2/E$ the speed at infinity, and $L=pb$. Energy
+conservation reads $(E-\alpha/r)^2=p_r^2c^2+L^2c^2/r^2+m^2c^4$. With $u=1/r$
+this gives
+\begin{equation}\label{eq:pr2}
+  p_r^2=p^2-\frac{2E\alpha}{c^2}\,u-\Bigl(L^2-\frac{\alpha^2}{c^2}\Bigr)u^2 .
+\end{equation}
+The Hamilton--Jacobi equation gives $\dd\varphi=L\,\dd r/(r^2p_r)$. Define
+\begin{equation}\label{eq:kappa}
+  \kappa=\sqrt{1-\frac{\alpha^2}{L^2c^2}}=\sqrt{1-\Bigl(\frac{\alpha}{pcb}\Bigr)^2}.
+\end{equation}
+The integral is elementary and the orbit is
+$u(\varphi)=u_c+D\cos[\kappa(\varphi-\varphi_0)]$ with
+$u_c=-E\alpha/(c^2L^2\kappa^2)$. Compare the Newtonian conic, which has
+$\kappa=1$: the relativistic orbit is a precessing rosette whose angular period
+is $2\pi/\kappa$ rather than $2\pi$.
+
+\section{The deflection function}
+
+The asymptotes are the zeros of $u$. Solving $u(\varphi)=0$ gives, for either
+sign of $\alpha$ and $L>|\alpha|/c$, the swept angle and deflection
+\begin{equation}\label{eq:dphi-rel}
+  \Delta\varphi=\frac2\kappa\Bigl[\frac\pi2-\arctan\frac{\alpha}{\kappa\,b\,p\,v}\Bigr],
+  \qquad\Theta=\pi-\Delta\varphi .
+\end{equation}
+For $\kappa\to1$ and $pv\to2E$ this is $\tan(\Theta/2)=\alpha/(2Eb)$,
+Rutherford's result \eqref{eq:b-ruth}. For weak coupling,
+\begin{equation}\label{eq:theta-exp}
+  \Theta=\frac{2\alpha}{pvb}-\frac{\pi\alpha^2}{2p^2c^2b^2}+O(\alpha^3).
+\end{equation}
+The first term is the familiar impulse approximation, with $2E$ replaced by
+$pv$. The second term is a relativistic effect with no non-relativistic
+analogue: it comes from the precession factor $\kappa$ and is the scattering
+counterpart of the perihelion advance. Its size relative to the first term is
+$(\pi/4)(v/c)(\alpha/pcb)$.
+
+Because \eqref{eq:dphi-rel} is transcendental in $b$, the cross section
+\eqref{eq:xs-sum} has no closed form. To leading order in $\alpha$,
+$\tan(\Theta/2)=\alpha/(pvb)$ and
+\begin{equation}\label{eq:ruth-rel}
+  \dsdO=\Bigl(\frac{\alpha}{2pv}\Bigr)^{2}\frac1{\sin^4(\theta/2)},
+\end{equation}
+the relativistic Rutherford formula, in which the kinetic energy $2E$ of the
+non-relativistic law is replaced by $pv$.
+
+\section{Capture and the fall to the centre}\label{sec:capture}
+
+The coefficient of $u^2$ in \eqref{eq:pr2} changes sign when $L<|\alpha|/c$. For
+attraction the particle then spirals into the centre, since $p_r^2$ grows
+without bound as $r\to0$. The capture cross section is
+\begin{equation}\label{eq:cap-rel}
+  \sigma_{\mathrm{cap}}=\frac{\pi\alpha^2}{p^2c^2},
+\end{equation}
+with no counterpart in non-relativistic Coulomb motion. For repulsion with
+$L<\alpha/c$, $\kappa$ is imaginary and \eqref{eq:dphi-rel} continues
+analytically ($\arctan$ becomes $\artanh$); the particle is always turned back.
+For a head-on collision ($L=0$) the turning point is where the kinetic energy
+vanishes, $E-\alpha/r=mc^2$, so $r_{\min}=\alpha/(E-mc^2)$, the same as the
+non-relativistic $\alpha/T$.
+
+The capture threshold $L_c=\alpha/c$ has a quantum-mechanical meaning:
+$L_c/\hbar=\alpha/\hbar c=Z\afs$, with $\afs$ the fine-structure constant. For
+$Z<137$ this is below $\hbar$, smaller than the smallest non-zero orbital
+angular momentum. The classical capture region is therefore smaller than a
+wavelength and cannot occur as a classical process; Section~\ref{sec:dirac}
+shows that the Dirac equation indeed has no fall to the centre for $Z\afs<1$.
+
+\section{Invariant form}
+
+With $t=-4p^2\sin^2(\theta/2)$ and \eqref{eq:dsdt}, the leading-order law
+\eqref{eq:ruth-rel} reads
+\begin{equation}\label{eq:dsdt-rel}
+  \frac{\dd\sigma}{\dd t}=\frac{4\pi\alpha^2}{\beta^2\,t^2},
+\end{equation}
+where $\beta$ is the speed of the projectile in the rest frame of the source. It
+holds exactly in non-relativistic classical and quantum mechanics (with $\beta$
+the relative speed) and at leading order in $\alpha$ relativistically for
+spinless particles. Spin modifies it (Chapter~6). The $1/t^2$ is the
+relativistic seed of Chapter~7.
+
+\section{Scattering of radiation by a free charge: Thomson scattering}
+
+A free charge $e$ of mass $m$ in a plane wave of amplitude $E_0$ and frequency
+$\omega$ is accelerated to $a=eE_0\cos(\omega t)/m$, provided
+$a_0=eE_0/(mc\omega)\ll1$ so that the motion is non-relativistic. The Larmor
+formula gives the radiated power per unit solid angle
+$\dd P/\dd\Omega=(e^2a^2/4\pi c^3)\sin^2\Theta_a$, where $\Theta_a$ is the angle
+between $\bm a$ and the direction of observation. The time-averaged incident
+flux is $S=cE_0^2/8\pi$, so
+\begin{equation}\label{eq:thomson-b}
+  \dsdO=r_e^2\sin^2\Theta_a,\qquad r_e=\frac{e^2}{mc^2}.
+\end{equation}
+For an unpolarised beam, averaging over polarisations gives
+\begin{equation}\label{eq:thomson-u}
+  \dsdO=\frac{r_e^2}{2}\,(1+\cos^2\theta),\qquad
+  \sigma_T=\frac{8\pi}{3}\,r_e^2=6.65\times10^{-25}\ \mathrm{cm}^2 .
+\end{equation}
+The cross section is independent of frequency. It holds while
+$\hbar\omega\ll mc^2$, so that photon recoil is negligible; the Klein--Nishina
+corrections for larger $\hbar\omega$ come from perturbative quantum
+electrodynamics and are omitted here. When $a_0\gtrsim1$ the electron becomes
+relativistic in the wave, and the scattering becomes nonlinear: the scattered
+light contains harmonics of $\omega$, and the cycle-averaged mass is increased to
+$m\sqrt{1+a_0^2/2}$ for linear polarisation ($m\sqrt{1+a_0^2}$ for circular).
+This remains exactly solvable for a plane wave.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:pr2}--\eqref{eq:dphi-rel} from the Hamilton--Jacobi
+        equation.
+  \item Show that \eqref{eq:dphi-rel} continues to $L<\alpha/c$ for repulsion,
+        find the resulting $\Theta(b)$, and verify that $\Theta\to\pi$ as
+        $b\to0$.
+  \item Show that the relativistic head-on closest approach is
+        $r_{\min}=\alpha/(E-mc^2)$ and evaluate it for a 1~MeV electron on
+        gold.
+  \item Carry out the derivation of \eqref{eq:thomson-b} and
+        \eqref{eq:thomson-u} from Larmor's formula.
+\end{enumerate}
+
+\section*{Notes and references}
+The precession of the relativistic Coulomb orbit is due to Sommerfeld \cite{Sommerfeld16}. The fields of relativistic charges, Thomson scattering and the motion of a charge in a plane wave are treated in \cite{Jackson,LL2}. Thomson scattering is the low-energy limit of the Klein--Nishina result \cite{KN29}, which is perturbative and not treated here.
+
+% =====================================================================
+\chapter[Relativistic Quantum Scattering]{Relativistic Quantum Scattering in Exactly Solvable Fields}
+% =====================================================================
+
+In this chapter $\zeta=\alpha/\hbar c$ (equal to $Z\afs$ for a nucleus of charge
+$Z$) measures how relativistic the Coulomb problem is, while
+$\eta=\alpha/\hbar v$ with $v=pc^2/E$ measures how classical it is. The two are
+related by $\zeta=\eta v/c$.
+
+\section{The Klein--Gordon equation in a Coulomb field}
+
+For a spin-0 particle in the potential energy $V=\alpha/r$ the Klein--Gordon
+equation is $(E-V)^2\psi=(-\hbar^2c^2\nabla^2+m^2c^4)\psi$. Expanding
+$(E-\alpha/r)^2-m^2c^4=p^2c^2-2E\alpha/r+\alpha^2/r^2$ gives
+\begin{equation}\label{eq:kg}
+  \nabla^2\psi+\Bigl[k^2-\frac{2k\eta}{r}+\frac{\zeta^2}{r^2}\Bigr]\psi=0,
+  \qquad \hbar k=p,\quad \eta=\frac{E\alpha}{\hbar c^2p}=\frac{\alpha}{\hbar v}.
+\end{equation}
+For the partial wave $\ell$ the radial equation is
+\begin{equation}\label{eq:kg-rad}
+  u''+\Bigl[k^2-\frac{2k\eta}{r}-\frac{\ell(\ell+1)-\zeta^2}{r^2}\Bigr]u=0 .
+\end{equation}
+This is exactly the non-relativistic Coulomb radial equation of
+Section~\ref{sec:partial} with $\ell$ replaced by a non-integer $\Lambda$
+defined by
+\begin{equation}\label{eq:Lambda}
+  \Lambda(\Lambda+1)=\ell(\ell+1)-\zeta^2,\qquad
+  \Lambda+\tfrac12=\sqrt{(\ell+\tfrac12)^2-\zeta^2}.
+\end{equation}
+Every result of Chapter~4 therefore carries over, with $\Lambda$ for $\ell$ and
+the relativistic $\eta$. The regular solution behaves as
+$\sin(kr-\eta\ln2kr-\Lambda\pi/2+\sigma_\Lambda)$, where
+$\sigma_\Lambda=\arg\Gamma(\Lambda+1+\ii\eta)$. Measured against the reference
+$\sin(kr-\eta\ln2kr-\ell\pi/2)$, the partial-wave phase is
+\begin{equation}\label{eq:delta-kg}
+  \ee^{2\ii\delta_\ell}=\frac{\Gamma(\Lambda+1+\ii\eta)}{\Gamma(\Lambda+1-\ii\eta)}\,
+  \ee^{\ii\pi(\ell-\Lambda)},
+\end{equation}
+and the amplitude is
+$f(\theta)=(2\ii k)^{-1}\sum(2\ell+1)(\ee^{2\ii\delta_\ell}-1)P_\ell(\cos\theta)$,
+understood distributionally as in \eqref{eq:fC-pw}. Unlike the non-relativistic
+case the series has no known closed-form sum, because the factor
+$\ee^{\ii\pi(\ell-\Lambda)}$ spoils the summation that gives \eqref{eq:fC}; the
+series is evaluated numerically with convergence acceleration.
+
+\paragraph{Check against the classical orbit.} With $L=\hbar(\ell+\tfrac12)$ one
+has $\Lambda+\tfrac12=\kappa(\ell+\tfrac12)$, where $\kappa$ is the precession
+factor \eqref{eq:kappa}. The semiclassical rule $\Theta=2\,\dd\delta_\ell/\dd\ell$,
+with $\Imag\psi(\Lambda+1+\ii\eta)\simeq\arctan[\eta/(\Lambda+\tfrac12)]$, gives
+\[
+  \Theta=\pi\Bigl(1-\frac1\kappa\Bigr)+\frac2\kappa\arctan\frac{\alpha}{\kappa\,b\,pv},
+\]
+which is exactly the classical relativistic deflection function
+\eqref{eq:dphi-rel}. At large $\ell$, $\ell-\Lambda\approx\zeta^2/(2\ell+1)$, and
+the extra phase in \eqref{eq:delta-kg} reproduces the precession term
+$-\pi\alpha^2/(2p^2c^2b^2)$ of \eqref{eq:theta-exp}. The classical relativistic
+orbit is thus read off directly from the phases, just as in the non-relativistic
+case.
+
+\paragraph{Bound states.} For attraction, $\alpha=-|\alpha|$, the poles of
+$\Gamma(\Lambda+1+\ii\eta)$ at $\Lambda+1+\ii\eta=-n_r$ ($n_r=0,1,2,\dots$) give
+the energy levels
+\begin{equation}\label{eq:kg-levels}
+  E=mc^2\Bigl[1+\frac{\zeta^2}{(n_r+\Lambda+1)^2}\Bigr]^{-1/2}.
+\end{equation}
+These depend on $\ell$ through $\Lambda$, unlike the Dirac levels below.
+\emph{Fall to the centre} appears when $\Lambda+\tfrac12$ becomes imaginary, that
+is for $\ell+\tfrac12<\zeta$. This is the same condition $L<\alpha/c$ as the
+classical capture threshold of Section~\ref{sec:capture}, and for $\ell=0$ it
+first occurs at $\zeta=\tfrac12$.
+
+\section{The Dirac equation in a Coulomb field}\label{sec:dirac}
+
+For a spin-$\tfrac12$ particle,
+$[c\,\bm\alpha\cdot\bm p+\beta mc^2+\alpha/r]\psi=E\psi$. (Here $\bm\alpha$ and
+$\beta$ are the Dirac matrices, not to be confused with the coupling $\alpha$.)
+In a central field, $\bm J=\bm L+\bm S$ and parity are conserved, and the radial
+problem is labelled by $\kappa_D=-(\ell+1)$ for $j=\ell+\tfrac12$ and
+$\kappa_D=+\ell$ for $j=\ell-\tfrac12$, so that $|\kappa_D|=j+\tfrac12$.
+Eliminating the small radial component leads again to Coulomb structure, with the
+role of $\Lambda+\tfrac12$ played by
+\begin{equation}\label{eq:gamma}
+  \gamma=\sqrt{\kappa_D^2-\zeta^2}.
+\end{equation}
+Because $|\kappa_D|\ge1$, $\gamma$ is real for every $\zeta<1$:
+\emph{the Dirac Coulomb problem has no fall to the centre for $Z<137$}, in
+agreement with the argument of Section~\ref{sec:capture}. The regular solutions
+behave as $r^{\gamma-1}$ at the origin, and the bound-state energies are the
+Sommerfeld--Dirac levels
+\begin{equation}\label{eq:dirac-levels}
+  E=mc^2\Bigl[1+\frac{\zeta^2}{(n_r+\gamma)^2}\Bigr]^{-1/2},\qquad
+  n_r=n-|\kappa_D| .
+\end{equation}
+These depend only on $n$ and $j$, so levels with the same $j$ and different
+$\ell$ remain degenerate. The scattering phase shifts $\delta_\kappa$ are
+likewise given in closed form by ratios of Gamma functions with arguments
+$\gamma\pm\ii\eta$ (Mott, 1929), and at large $|\kappa_D|$ one has
+$\gamma\approx|\kappa_D|-\zeta^2/(2|\kappa_D|)$, the same structure as for
+$\Lambda+\tfrac12$.
+
+A spin-$\tfrac12$ particle scattering from a central field has two independent
+amplitudes, one that preserves the spin projection and one that flips it:
+\begin{align}
+  f(\theta)&=\frac1{2\ii k}\sum_\ell\Bigl[(\ell+1)\bigl(\ee^{2\ii\delta_{-\ell-1}}-1\bigr)
+      +\ell\bigl(\ee^{2\ii\delta_\ell}-1\bigr)\Bigr]P_\ell(\cos\theta),\notag\\
+  g(\theta)&=\frac1{2\ii k}\sum_\ell\Bigl[\ee^{2\ii\delta_\ell}
+      -\ee^{2\ii\delta_{-\ell-1}}\Bigr]P_\ell^1(\cos\theta), \label{eq:fg}
+\end{align}
+where $\delta_\ell$ and $\delta_{-\ell-1}$ are the phase shifts for
+$\kappa_D=\ell$ and $\kappa_D=-\ell-1$ (sign conventions for $g$ vary between
+authors). The unpolarised cross section is $|f|^2+|g|^2$. The two amplitudes
+differ in phase, so the scattered beam is polarised perpendicular to the
+scattering plane, $P(\theta)=2\Imag(fg^*)/(|f|^2+|g|^2)$, a spin--orbit effect
+with no counterpart for spin~0 and the basis of Mott polarimetry of electron
+beams. The Coulomb series \eqref{eq:fg} converge only distributionally, as in
+\eqref{eq:fC-pw}, and are summed in practice by series-reduction methods
+(Yennie, Ravenhall and Wilson).
+
+For orientation, the leading term for $\zeta\ll1$, which is obtained
+perturbatively and is quoted here without derivation, is Mott's correction to the
+relativistic Rutherford law \eqref{eq:ruth-rel}:
+\begin{equation}\label{eq:mott-factor}
+  \dsdO=\Bigl(\frac{\alpha}{2pv}\Bigr)^{2}
+  \frac{1-\beta^2\sin^2(\theta/2)}{\sin^4(\theta/2)},\qquad\beta=\frac vc .
+\end{equation}
+The extra factor tends to~1 as $\beta\to0$, and as $\beta\to1$ it becomes
+$\cos^2(\theta/2)$. The next section shows that this last behaviour is exact and
+does not depend on perturbation theory.
+
+\section{Helicity and backscattering}\label{sec:helicity}
+
+For a massless Dirac particle, or for $E\gg mc^2$, the Coulomb potential (the
+time component of a vector field) couples to the right- and left-handed
+components separately, so \emph{helicity is conserved}. Consider backscattering,
+$\theta=\pi$, of a particle with positive helicity incident along $+z$. For a
+plane wave along $z$ the orbital angular momentum component $L_z$ is zero, so
+the initial state has $J_z=+\tfrac12$. In the final state the momentum is along
+$-z$ and, by helicity conservation, the spin points along $-z$, so
+$J_z=-\tfrac12$, again with $L_z=0$ about the axis. A central potential conserves
+$J_z$, so the amplitude must vanish:
+\begin{equation}\label{eq:backward}
+  \dsdO\Big|_{\theta=\pi}=0\quad(\beta=1),\qquad
+  \dsdO\propto\cos^2\frac\theta2\quad\text{near }\theta=\pi .
+\end{equation}
+This is an exact statement, reproduced by the Mott factor
+\eqref{eq:mott-factor} at lowest order in $\zeta$. For $\beta<1$ helicity is not
+conserved and the backward cross section is non-zero. Compare the spinless
+non-relativistic law, which has $\dd\sigma/\dd\Omega(\pi)=(\alpha/4E)^2$, finite
+and equal to the law's minimum.
+
+\section{The Klein step}
+
+A simple exactly solvable relativistic scattering problem, non-perturbative in
+the strength of the potential and with a potential that does not vanish at
+infinity, is the step $V(x)=0$ for $x<0$ and $V(x)=V_0$ for $x>0$, with a
+particle incident from the left. Let $E>mc^2$ be the energy,
+$\hbar k=\sqrt{E^2-m^2c^4}/c$ the momentum outside, and $\hbar q$ the momentum
+inside, with $\hbar^2c^2q^2=(E-V_0)^2-m^2c^4$. Three regimes occur.
+\begin{enumerate}
+  \item $V_0<E-mc^2$. $q$ is real and the usual partial reflection and
+        transmission occur.
+  \item $E-mc^2<V_0<E+mc^2$. $q$ is imaginary, the wave is evanescent, and
+        $R=1$.
+  \item $V_0>E+mc^2$. $q$ is real again, but $E-V_0<-mc^2$: the transmitted wave
+        is a negative-energy solution whose group velocity points opposite to its
+        momentum. The outgoing transmitted wave has $q<0$.
+\end{enumerate}
+Matching the Dirac spinor at $x=0$ gives, in regimes 1 and 3,
+\begin{equation}\label{eq:klein}
+  R=\Bigl(\frac{1-r_K}{1+r_K}\Bigr)^{2},\quad
+  T=\frac{4r_K}{(1+r_K)^2},\quad
+  r_K=\frac{|q|}{k}\,\frac{E+mc^2}{|E-V_0+mc^2|},
+\end{equation}
+with $R+T=1$. In regime 3 both $R$ and $T$ are positive and $T$ does not vanish as
+$V_0\to\infty$: it tends to $4r_K/(1+r_K)^2$ with
+$r_K\to\sqrt{(E+mc^2)/(E-mc^2)}$. For $E=2mc^2$ this gives $T\approx0.93$, and
+$T\to1$ as $E\gg mc^2$. A particle sees an almost transparent barrier, however
+high the step. This is the Klein paradox (1929).
+
+The resolution lies beyond single-particle quantum mechanics. A step sharp on the
+Compton scale $\hbar/mc$, with $V_0>2mc^2$, can pull particle--antiparticle pairs
+out of the vacuum, and the transmitted current is carried by the created
+antiparticles. For a step smoothed over a distance much longer than $\hbar/mc$ the
+transmission is exponentially small (Sauter, 1931); in a uniform field
+$\mathcal E$ the pair-creation probability scales as
+$\exp(-\pi m^2c^3/e\mathcal E\hbar)$ (Schwinger). For spin~0 the Klein regime
+shows the bosonic version of the effect: the reflected flux exceeds the incident
+flux, because the pair creation is stimulated.
+
+\section{Problems}
+\begin{enumerate}
+  \item Show that \eqref{eq:kg} reduces to \eqref{eq:kg-rad} and
+        \eqref{eq:Lambda}, and find the condition on $\ell$ and $\zeta$ for which
+        the resulting radial problem is well behaved at the origin.
+  \item Verify that the semiclassical rule $\Theta=2\,\dd\delta_\ell/\dd\ell$
+        applied to \eqref{eq:delta-kg} gives exactly \eqref{eq:dphi-rel}.
+  \item Derive \eqref{eq:kg-levels} from the poles of \eqref{eq:delta-kg} and
+        show that for $\zeta\ll1$ it gives
+        $E\approx mc^2[1-\zeta^2/2n^2+\dots]$, the Bohr levels with relativistic
+        corrections.
+  \item Derive \eqref{eq:klein} by matching the Dirac spinor at $x=0$, and show
+        that the current is conserved in each regime.
+  \item Explain why the helicity argument of Section~\ref{sec:helicity} fails
+        for a scalar potential, which couples to the mass term $\beta mc^2$ and
+        therefore flips chirality.
+\end{enumerate}
+
+\section*{Notes and references}
+The Dirac equation in a Coulomb field was solved by Darwin and Gordon \cite{Darwin28,GordonA}; see also \cite{BetheSalpeter,Rose,BLP}. Mott's phase-shift treatment of the scattering of electrons is \cite{Mott29}; the first-order correction in $Z\alpha$ is due to McKinley and Feshbach \cite{McKinley48}; the reduction of the slowly convergent Coulomb series to a rapidly convergent one was given by Yennie, Ravenhall and Wilson \cite{YRW54}; and the review \cite{Motz64} collects the results and their range of validity. The polarization (Sherman) function and its use are described in \cite{Sherman56,GayDunning}. The Klein paradox is analysed in \cite{Klein29,Sauter31,Hansen81}, with a historical review in \cite{Dombey99}; Schwinger's calculation is \cite{Schwinger51}. For $Z>137$ see \cite{Pomeranchuk45,ZP71,Reinhardt77,Greiner}.
+
+% =====================================================================
+\chapter{The Invariant Formulation}
+% =====================================================================
+
+\section{The S-matrix and the invariant amplitude}
+
+At relativistic energies particle number is not conserved, so the natural
+objects are asymptotic multiparticle states and the S-matrix between them. In
+units $\hbar=c=1$ and with the normalisation
+$\langle p|p'\rangle=2E(2\pi)^3\delta^3(\bm p-\bm p')$, the invariant amplitude
+$\mathcal M$ is defined by
+\begin{equation}\label{eq:Smat}
+  S_{fi}=\delta_{fi}+\ii\,(2\pi)^4\delta^4(P_f-P_i)\,\mathcal M_{fi}.
+\end{equation}
+This is a definition, valid whether or not $\mathcal M$ can be expanded in the
+coupling. The cross section for $2\to n$ is
+\begin{equation}\label{eq:dsigma}
+  \dd\sigma=\frac1F\,|\mathcal M|^2\,\dd\Phi_n,\qquad
+  \dd\Phi_n=(2\pi)^4\delta^4\Bigl(P_f-p_1-p_2\Bigr)\prod_{j}
+  \frac{\dd^3p_j}{(2\pi)^3\,2E_j},
+\end{equation}
+with the invariant flux factor $F=4p^*\sqrt s$ of Section~1.3. For elastic
+$2\to2$ scattering this becomes
+\begin{equation}\label{eq:dsdOm-M}
+  \dsdO\Big|^*=\frac{|\mathcal M|^2}{64\pi^2s},\qquad
+  \frac{\dd\sigma}{\dd t}=\frac{|\mathcal M|^2}{64\pi\,s\,p^{*2}},
+\end{equation}
+which are mutually consistent through \eqref{eq:dsdt}. Comparison with
+\eqref{eq:xs-f} identifies $f=\mathcal M/(8\pi\sqrt s)$ up to a phase convention.
+Unitarity of $S$ gives the relativistic optical theorem,
+\begin{equation}\label{eq:opt-rel}
+  \Imag\mathcal M(s,t=0)=2p^*\sqrt s\,\sigma_{\mathrm{tot}}=\tfrac12F\,\sigma_{\mathrm{tot}},
+\end{equation}
+which reduces to \eqref{eq:optical} in the non-relativistic limit.
+
+\section{Singularities, crossing and the range of the force}
+
+The amplitude $\mathcal M(s,t,u)$ is a function of the invariants
+\eqref{eq:mandelstam}. Crossing symmetry says that one analytic function
+describes all the channels related by exchanging incoming and outgoing particles:
+$a+b\to c+d$ (the $s$-channel), $a+\bar c\to\bar b+d$ (the $t$-channel) and so on,
+each in its own physical region. Singularities of $\mathcal M$ carry the
+dynamical information:
+\begin{itemize}
+  \item a pole in $s$ at $s=m_R^2$ is a bound state or resonance in the
+        $s$-channel;
+  \item a pole in $t$ at $t=m_{\mathrm{ex}}^2$ is the exchange of a particle of
+        mass $m_{\mathrm{ex}}$ between the scatterers, with
+        \begin{equation}\label{eq:pole}
+          \mathcal M\simeq\frac{g^2}{m_{\mathrm{ex}}^2-t}
+        \end{equation}
+        near the pole.
+\end{itemize}
+In the non-relativistic limit $t=-q^2$, with $q$ the momentum transfer, and
+\eqref{eq:pole} is the momentum-space form of a Yukawa force of range
+$\hbar/m_{\mathrm{ex}}c$. The position of the nearest singularity in $t$ is
+therefore a model-independent measure of the range of the force.
+
+This gives a precise sense to long range. If the exchanged particle is massive,
+the nearest singularity lies at $t=m_{\mathrm{ex}}^2>0$, separated from the
+physical region $t\le0$ by a finite gap. Then $\dd\sigma/\dd t$ is finite at
+$t=0$ and $\sigma_{\mathrm{tot}}$ is finite. If the exchanged particle is
+massless, as for the photon, the pole sits at $t=0$, on the edge of the physical
+region, and
+\begin{equation}\label{eq:pole-xs}
+  \mathcal M\propto\frac1t\quad\Longrightarrow\quad\frac{\dd\sigma}{\dd t}\propto\frac1{t^2},
+\end{equation}
+which is the Rutherford law \eqref{eq:dsdt-rel}. The infinite Coulomb cross
+section is the integral of $1/t^2$ up to the edge of the physical region.
+
+The same singularity controls the partial-wave expansion. For
+\[
+  \mathcal M=16\pi\sum_\ell(2\ell+1)\,a_\ell(s)\,P_\ell(\cos\theta),
+\]
+the series converges inside an ellipse in $\cos\theta$ with foci $\pm1$ (the
+Lehmann--Martin ellipse) that passes through $z_t=1+t_0/(2p^{*2})$, where $t_0$
+is the nearest $t$-singularity. For a massive exchange the ellipse encloses the whole physical
+segment $-1\le\cos\theta\le1$. For the photon $t_0=0$, the ellipse collapses onto
+the segment, and the series has no region of ordinary convergence. This is exactly
+what we found in \eqref{eq:fC-pw}: the non-convergence of the Coulomb partial-wave
+series is not a computational nuisance but the partial-wave image of the
+masslessness of the photon.
+
+\section{Infrared structure and the relativistic Dollard problem}
+
+In quantum electrodynamics the Coulomb phase of Section~\ref{sec:dollard} has a
+relativistic counterpart. Amplitudes for charged particles with fixed momenta
+are infrared divergent, because the long-range field couples to arbitrarily soft
+photons. The divergence in the cross section cancels against the emission of
+real soft photons of energy below the detector resolution $\Delta E$ (Bloch and
+Nordsieck, 1937), so that the physical elastic cross section depends on
+$\Delta E$. The asymptotic states of charged particles are not Fock states: they
+carry coherent clouds of soft photons (Chung, 1965; Kulish and Faddeev, 1970),
+which play the role of Dollard's modified free dynamics \eqref{eq:dollard}.
+Radiation is negligible in the non-relativistic regime, which is why
+Chapter~4 can treat Coulomb scattering as strictly elastic.
+
+\section{Thresholds and the Sommerfeld--Sakharov factor}
+
+The penetration factor \eqref{eq:sommerfeld} survives relativistically as the
+factor by which a production cross section near threshold is modified by the
+Coulomb interaction of the final particles. For an oppositely charged pair of
+relative velocity $v_{\mathrm{rel}}=2\beta c$ the enhancement is
+\begin{equation}
+  S(\beta)=\frac{2\pi|\eta|}{1-\ee^{-2\pi|\eta|}},\qquad
+  2\pi|\eta|=\frac{\pi\afs}{\beta},
+\end{equation}
+which makes the cross section for pair production, for example
+$\mathrm e^+\mathrm e^-\to\mu^+\mu^-$ or $\pi^+\pi^-$, jump to a finite value at
+threshold instead of vanishing like the phase-space factor $\beta$.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:dsdOm-M} from \eqref{eq:dsigma} using the two-body phase
+        space $\dd\Phi_2=p^*\,\dd\Omega/(16\pi^2\sqrt s)$.
+  \item Show that \eqref{eq:opt-rel} reduces to \eqref{eq:optical} when
+        $f=\mathcal M/(8\pi\sqrt s)$.
+  \item For $\mathcal M=g^2/(m^2-t)$ in the non-relativistic limit, compute the
+        position-space potential and verify that its range is $\hbar/mc$.
+\end{enumerate}
+
+\section*{Notes and references}
+The invariant amplitude and the cross-section conventions follow \cite{Weinberg,PS,Itzykson}. The analytic properties of the S-matrix and the relation between singularities and the range of forces are the subject of \cite{Eden,MartinSpearman}; the convergence of the partial-wave expansion within an ellipse is due to Lehmann \cite{Lehmann58} and, in its sharpest form, to Martin \cite{Martin63}. Infrared divergences and the Bloch--Nordsieck theorem are in \cite{BlochNordsieck,Weinberg}; the coherent dressing of charged asymptotic states is treated in \cite{Chung65,KF70}. The Sakharov--Sommerfeld enhancement is \cite{Sakharov48,Sommerfeld31}.
+
+% =====================================================================
+\chapter{Synthesis: Three Descriptions of the Same Force}
+% =====================================================================
+
+\section{The Coulomb problem in the three settings}
+
+Two dimensionless numbers control every result of this book: $\eta=\alpha/\hbar v$,
+which measures how classical the motion is, and $\zeta=\alpha/\hbar c=\eta v/c$,
+which measures how relativistic it is. The three descriptions compare as follows.
+
+\medskip
+\noindent\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{4.8cm}@{}}
+\hline
+ & \textbf{Classical} & \textbf{Quantum (non-rel.)} & \textbf{Relativistic}\\
+\hline
+Coulomb cross section &
+  $(\alpha/4E)^2/\sin^4(\theta/2)$, \eqref{eq:ruth} &
+  identical, exact for every $\eta$, \eqref{eq:ruth-q} &
+  leading order $(\alpha/2pv)^2/\sin^4(\theta/2)$, \eqref{eq:ruth-rel}; Mott factor for spin~$\tfrac12$, \eqref{eq:mott-factor}; exact via \eqref{eq:delta-kg}, \eqref{eq:fg}\\[6pt]
+Phase of the amplitude &
+  none &
+  $2\sigma_0-\eta\ln\sin^2\tfrac\theta2$, \eqref{eq:fC} &
+  same structure with $\ell\to\Lambda$ or $\kappa_D\to\gamma$\\[6pt]
+Total cross section &
+  infinite for every infinite-range $V$ &
+  infinite for $V\propto r^{-1},r^{-2}$; finite iff $V$ falls faster than $r^{-2}$ &
+  infinite for Coulomb (massless exchange)\\[6pt]
+Bound motion &
+  closed Kepler ellipses &
+  Bohr levels as poles of $f_C$, \eqref{eq:bohr} &
+  precessing rosettes; levels \eqref{eq:kg-levels} (spin 0) and \eqref{eq:dirac-levels} (spin $\tfrac12$)\\[6pt]
+Fall to centre &
+  $1/r^2$ only, \eqref{eq:cap2} &
+  $1/r^2$ only, Section~\ref{sec:qinv2} &
+  Coulomb, $L<\alpha/c$, \eqref{eq:cap-rel}; KG for $\zeta>\tfrac12$; none in the Dirac case for $\zeta<1$\\[6pt]
+Controlling parameter &
+  none (scale $\alpha/E$) &
+  $\eta\gg1$ is the classical limit &
+  $\zeta$ and $\eta$\\
+\hline
+\end{tabular}
+\normalsize
+
+\section{Five faces of a long-range force}
+
+The same fact about the $1/r$ potential shows up in five apparently unrelated
+ways.
+\begin{enumerate}
+  \item The incident and outgoing waves carry a logarithmic phase,
+        \eqref{eq:psiC-asym}.
+  \item The standard scattering theory fails and must be replaced by Dollard's,
+        \eqref{eq:dollard}, with the overall phase of the amplitude
+        convention-dependent.
+  \item The total cross section is infinite and the angular distribution
+        diverges as $\theta^{-4}$, \eqref{eq:ruth-q}.
+  \item The invariant amplitude has a pole at $t=0$, on the boundary of the
+        physical region, \eqref{eq:pole-xs}.
+  \item The partial-wave series has no region of ordinary convergence,
+        \eqref{eq:fC-pw}.
+\end{enumerate}
+
+\section{What is and is not an accident}
+
+The coincidence of the classical and quantum Rutherford cross sections is an
+accident of the $1/r$ potential and its hidden $SO(4)$ symmetry. It does not hold
+for $1/r^2$, where the deflection function is exact but the cross section is not;
+it does not hold for the screened potentials of real plasmas; and relativity
+destroys it in two distinct ways: through the shift $\ell\to\Lambda$ in the
+orbital angular momentum, which makes the orbits precess and creates a capture
+region, and through spin, which adds the Mott factor and, in the ultra-relativistic
+limit, forbids backscattering by helicity conservation. What survives every
+change of setting is the structural content of Part~I: the definition of the cross
+section, its Lorentz invariance, unitarity, and the connection between the range
+of the force and the singularities of the amplitude.
+
+\section*{Notes and references}
+For comprehensive treatments of non-relativistic collision theory see \cite{MM,Newton,Taylor,GW}. The companion volume on inelastic scattering develops the consequences of coupling to other channels. Tables and numerical methods for the Coulomb functions are in \cite{AS,DLMF,Seaton02}.
+
+\backmatter
+\renewcommand{\bibname}{References}
+\addcontentsline{toc}{chapter}{References}
+\begin{thebibliography}{99}
+\bibitem{AS} M. Abramowitz and I. A. Stegun (eds.), \emph{Handbook of Mathematical Functions}, Dover, New York (1965). Chapters 13 and 14 treat Kummer and Coulomb wave functions.
+\bibitem{Bander66} M. Bander and C. Itzykson, Rev. Mod. Phys. \textbf{38}, 330 and 346 (1966).
+\bibitem{Bargmann36} V. Bargmann, Z. Phys. \textbf{99}, 576 (1936).
+\bibitem{BLP} V. B. Berestetskii, E. M. Lifshitz and L. P. Pitaevskii, \emph{Quantum Electrodynamics}, 2nd ed., Pergamon, Oxford (1982).
+\bibitem{BerryMount} M. V. Berry and K. E. Mount, Rep. Prog. Phys. \textbf{35}, 315 (1972).
+\bibitem{BetheSalpeter} H. A. Bethe and E. E. Salpeter, \emph{Quantum Mechanics of One- and Two-Electron Atoms}, Springer, Berlin (1957).
+\bibitem{BlochNordsieck} F. Bloch and A. Nordsieck, Phys. Rev. \textbf{52}, 54 (1937).
+\bibitem{BK} E. Byckling and K. Kajantie, \emph{Particle Kinematics}, Wiley, London (1973).
+\bibitem{Case50} K. M. Case, Phys. Rev. \textbf{80}, 797 (1950).
+\bibitem{Chung65} V. Chung, Phys. Rev. \textbf{140}, B1110 (1965).
+\bibitem{Darwin28} C. G. Darwin, Proc. R. Soc. A \textbf{118}, 654 (1928).
+\bibitem{DLMF} \emph{NIST Digital Library of Mathematical Functions}, \texttt{https://dlmf.nist.gov}. Chapters 13 and 33 treat confluent hypergeometric and Coulomb functions.
+\bibitem{Dollard64} J. D. Dollard, J. Math. Phys. \textbf{5}, 729 (1964).
+\bibitem{Dombey99} N. Dombey and A. Calogeracos, Phys. Rep. \textbf{315}, 41 (1999).
+\bibitem{Eden} R. J. Eden, P. V. Landshoff, D. I. Olive and J. C. Polkinghorne, \emph{The Analytic S-Matrix}, Cambridge University Press (1966).
+\bibitem{Fock35} V. Fock, Z. Phys. \textbf{98}, 145 (1935).
+\bibitem{FordWheeler} K. W. Ford and J. A. Wheeler, Ann. Phys. (N.Y.) \textbf{7}, 259 and 287 (1959).
+\bibitem{Gamow28} G. Gamow, Z. Phys. \textbf{51}, 204 (1928).
+\bibitem{GayDunning} T. J. Gay and F. B. Dunning, Rev. Sci. Instrum. \textbf{63}, 1635 (1992).
+\bibitem{GW} M. L. Goldberger and K. M. Watson, \emph{Collision Theory}, Wiley, New York (1964); Dover reprint (2004).
+\bibitem{Goldstein} H. Goldstein, C. Poole and J. Safko, \emph{Classical Mechanics}, 3rd ed., Addison-Wesley, San Francisco (2002).
+\bibitem{GordonA} W. Gordon, Z. Phys. \textbf{48}, 11 (1928).
+\bibitem{GordonB} W. Gordon, Z. Phys. \textbf{48}, 180 (1928).
+\bibitem{GR} I. S. Gradshteyn and I. M. Ryzhik, \emph{Table of Integrals, Series, and Products}, 7th ed., Academic Press, Amsterdam (2007).
+\bibitem{Greiner} W. Greiner, B. M\"uller and J. Rafelski, \emph{Quantum Electrodynamics of Strong Fields}, Springer, Berlin (1985).
+\bibitem{Hagedorn} R. Hagedorn, \emph{Relativistic Kinematics}, Benjamin, New York (1963).
+\bibitem{Hansen81} A. Hansen and F. Ravndal, Phys. Scr. \textbf{23}, 1036 (1981).
+\bibitem{Itzykson} C. Itzykson and J.-B. Zuber, \emph{Quantum Field Theory}, McGraw-Hill, New York (1980).
+\bibitem{Jackson} J. D. Jackson, \emph{Classical Electrodynamics}, 3rd ed., Wiley, New York (1999). Chapters 13 (collisions and energy loss), 14 (radiation by moving charges) and 15 (bremsstrahlung) are the most relevant.
+\bibitem{Klein29} O. Klein, Z. Phys. \textbf{53}, 157 (1929).
+\bibitem{KN29} O. Klein and Y. Nishina, Z. Phys. \textbf{52}, 853 (1929).
+\bibitem{KF70} P. P. Kulish and L. D. Faddeev, Theor. Math. Phys. \textbf{4}, 745 (1970).
+\bibitem{LL2} L. D. Landau and E. M. Lifshitz, \emph{The Classical Theory of Fields}, 4th ed., Pergamon, Oxford (1975).
+\bibitem{LL1} L. D. Landau and E. M. Lifshitz, \emph{Mechanics}, 3rd ed., Pergamon, Oxford (1976). Chapter IV treats collisions.
+\bibitem{LL3} L. D. Landau and E. M. Lifshitz, \emph{Quantum Mechanics: Non-Relativistic Theory}, 3rd ed., Pergamon, Oxford (1977). Chapters XVII and XVIII treat elastic and inelastic collisions.
+\bibitem{Lehmann58} H. Lehmann, Nuovo Cimento \textbf{10}, 579 (1958).
+\bibitem{LS50} B. A. Lippmann and J. Schwinger, Phys. Rev. \textbf{79}, 469 (1950).
+\bibitem{Mandelstam58} S. Mandelstam, Phys. Rev. \textbf{112}, 1344 (1958).
+\bibitem{Martin63} A. Martin, Phys. Rev. \textbf{129}, 1432 (1963); Nuovo Cimento A \textbf{42}, 930 (1966).
+\bibitem{MartinSpearman} A. D. Martin and T. D. Spearman, \emph{Elementary Particle Theory}, North-Holland, Amsterdam (1970).
+\bibitem{McKinley48} W. A. McKinley and H. Feshbach, Phys. Rev. \textbf{74}, 1759 (1948).
+\bibitem{Messiah} A. Messiah, \emph{Quantum Mechanics}, vols.~1--2, North-Holland, Amsterdam (1961--1962).
+\bibitem{Mott28} N. F. Mott, Proc. R. Soc. A \textbf{118}, 542 (1928).
+\bibitem{Mott29} N. F. Mott, Proc. R. Soc. A \textbf{124}, 425 (1929); \textbf{135}, 429 (1932).
+\bibitem{Mott30} N. F. Mott, Proc. R. Soc. A \textbf{126}, 259 (1930).
+\bibitem{MM} N. F. Mott and H. S. W. Massey, \emph{The Theory of Atomic Collisions}, 3rd ed., Clarendon Press, Oxford (1965).
+\bibitem{Motz64} J. W. Motz, H. Olsen and H. W. Koch, Rev. Mod. Phys. \textbf{36}, 881 (1964).
+\bibitem{Newton} R. G. Newton, \emph{Scattering Theory of Waves and Particles}, 2nd ed., Springer, New York (1982); Dover reprint (2002).
+\bibitem{Pauli26} W. Pauli, Z. Phys. \textbf{36}, 336 (1926).
+\bibitem{PS} M. E. Peskin and D. V. Schroeder, \emph{An Introduction to Quantum Field Theory}, Addison-Wesley, Reading (1995).
+\bibitem{Pomeranchuk45} I. Pomeranchuk and Ya. Smorodinsky, J. Phys. (USSR) \textbf{9}, 97 (1945).
+\bibitem{ReedSimonII} M. Reed and B. Simon, \emph{Methods of Modern Mathematical Physics II: Fourier Analysis, Self-Adjointness}, Academic Press, New York (1975).
+\bibitem{ReedSimonIII} M. Reed and B. Simon, \emph{Methods of Modern Mathematical Physics III: Scattering Theory}, Academic Press, New York (1979).
+\bibitem{Reinhardt77} J. Reinhardt and W. Greiner, Rep. Prog. Phys. \textbf{40}, 219 (1977).
+\bibitem{Rose} M. E. Rose, \emph{Relativistic Electron Theory}, Wiley, New York (1961).
+\bibitem{Rutherford11} E. Rutherford, Phil. Mag. \textbf{21}, 669 (1911).
+\bibitem{Sakharov48} A. D. Sakharov, Zh. Eksp. Teor. Fiz. \textbf{18}, 631 (1948).
+\bibitem{Sauter31} F. Sauter, Z. Phys. \textbf{69}, 742 (1931).
+\bibitem{Schwinger51} J. Schwinger, Phys. Rev. \textbf{82}, 664 (1951); \textbf{91}, 728 (1953).
+\bibitem{Seaton02} M. J. Seaton, Comput. Phys. Commun. \textbf{146}, 225 (2002).
+\bibitem{Sherman56} N. Sherman, Phys. Rev. \textbf{103}, 1601 (1956).
+\bibitem{Sommerfeld16} A. Sommerfeld, Ann. Phys. (Leipzig) \textbf{51}, 1 (1916).
+\bibitem{Sommerfeld31} A. Sommerfeld, Ann. Phys. (Leipzig) \textbf{403}, 257 (1931).
+\bibitem{Taylor} J. R. Taylor, \emph{Scattering Theory: The Quantum Theory of Nonrelativistic Collisions}, Wiley, New York (1972); Dover reprint (2006).
+\bibitem{Weinberg} S. Weinberg, \emph{The Quantum Theory of Fields}, vol.~1, Cambridge University Press (1995). Chapter 3 treats scattering theory and Chapter 13 infrared effects.
+\bibitem{YRW54} D. R. Yennie, D. G. Ravenhall and R. N. Wilson, Phys. Rev. \textbf{95}, 500 (1954).
+\bibitem{ZP71} Ya. B. Zel'dovich and V. S. Popov, Usp. Fiz. Nauk \textbf{105}, 403 (1971) [Sov. Phys. Usp. \textbf{14}, 673 (1972)].
+\bibitem{PDG} F. Takahashi \emph{et al.} (Particle Data Group), \emph{Review of Particle Physics}, Int. J. Mod. Phys. A \textbf{41}, 2630011 (2026), \texttt{https://pdg.lbl.gov}. The reviews on kinematics and on the passage of particles through matter are the relevant ones.
+\end{thebibliography}
+
+\end{document}
+
+

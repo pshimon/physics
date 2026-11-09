@@ -223,7 +223,8 @@ the limiting case of covariance in which the representation is trivial.
 \label{sec:definitions}
 
 Let $\phi$ denote the dynamical fields (collectively) and $b$ the background
-fields, both defined on spacetime $M$. A group $\mathcal G$ acts on pairs,
+fields, both defined on spacetime $M$ (for a mechanical system $M$ is the time axis;
+see Section~\ref{sec:dof}). A group $\mathcal G$ acts on pairs,
 $g\colon(\phi,b)\mapsto(g\cdot\phi,\,g\cdot b)$. A system of field equations
 is an operator $E$,
 \begin{equation}\label{eq:EOM}
@@ -542,6 +543,191 @@ situations. ``Gauge symmetry'' is thus a symmetry of the formulation in the
 sense of covariance, and the word symmetry is used for it only by courtesy.
 \end{remark}
 
+% ---- SUBSECTION BEGINS ----
+\subsection{Finite and infinite numbers of degrees of freedom}
+\label{sec:dof}
+
+The chapter moves freely between mechanical systems (the Galilei group, the
+Kepler problem, the relativistic particle) and field theories
+(electrodynamics, general relativity). This is legitimate because the two are
+not different theories: a mechanical system is a field theory on a
+one-dimensional base manifold, and a field theory is a mechanical system whose
+coordinates carry a continuous label. This subsection makes both statements
+explicit and notes where the reduction fails to be a pure special case.
+
+\paragraph{Mechanics as a field theory on $M=\mathbb R_t$.}
+Take the base manifold to be the time axis, with the single coordinate
+$x^0\equiv t$, and identify
+\begin{equation}\label{eq:dictionary-id}
+  \varphi_a(x^\mu)\;\leftrightarrow\;q^i(t),\qquad
+  \mathcal L(\varphi_a,\partial_\mu\varphi_a;x)\;\leftrightarrow\;L(q^i,\dot q^i,t),\qquad
+  \partial_\mu\;\leftrightarrow\;\frac{\dd}{\dd t}.
+\end{equation}
+The formulas of Sections~\ref{sec:definitions} and~\ref{sec:noether} then
+specialize as in Table~\ref{tab:dictionary-dof}.
+
+\begin{table}[ht]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{7.3cm}>{\raggedright\arraybackslash}p{7.3cm}@{}}
+\toprule
+Field theory on $M^d$ & Mechanics ($d=1$)\\
+\midrule
+Fields $\varphi_a(x^\mu)$ & Coordinates $q^i(t)$\\
+Euler--Lagrange: $\pd{\mathcal L}{\varphi_a}-\partial_\mu\pd{\mathcal L}{(\partial_\mu\varphi_a)}=0$
+  & $\pd{L}{q^i}-\dfrac{\dd}{\dd t}\pd{L}{\dot q^i}=0$\\
+Noether current: $J^\mu=\pd{\mathcal L}{(\partial_\mu\varphi_a)}X_a-K^\mu$,\ \ $\partial_\mu J^\mu\weakeq0$
+  & Noether charge: $Q=p_iX^i-K$,\ \ $\dot Q\weakeq0$\\
+Energy--momentum tensor: $T^\mu{}_\nu=\pd{\mathcal L}{(\partial_\mu\varphi_a)}\partial_\nu\varphi_a-\delta^\mu_\nu\mathcal L$
+  & $T^0{}_0=p_i\dot q^i-L=H$\\
+Explicit $x$-dependence: $\partial_\mu T^\mu{}_\nu\weakeq-\big(\pd{\mathcal L}{x^\nu}\big)_{\!\rm expl}$
+  & $\dot H=-\pd{L}{t}$\\
+\bottomrule
+\end{tabular}
+\caption{Mechanics as the case $d=1$ of field theory.}
+\label{tab:dictionary-dof}
+\end{table}
+
+In $d=1$ the divergence $\partial_\mu J^\mu$ is a single derivative, so the
+current \emph{is} the charge and the conservation law is constancy in time.
+The derivation of Noether's first theorem is the same line in both cases. For
+$\delta q^i=\eps X^i$ with $\delta L=\eps\dot K$,
+\begin{equation}\label{eq:noether-mech}
+  \delta L=\Big[\pd{L}{q^i}-\frac{\dd}{\dd t}\pd{L}{\dot q^i}\Big]\eps X^i
+  +\eps\,\frac{\dd}{\dd t}\big(p_iX^i\big)=\eps\dot K
+  \;\Longrightarrow\;
+  \frac{\dd}{\dd t}\big(p_iX^i-K\big)\weakeq0,\qquad p_i=\pd{L}{\dot q^i},
+\end{equation}
+which is \eqref{eq:noether1} with one base coordinate. The Galilean boost of
+Section~\ref{sec:galilei}, $X^i=u^it$ and $K=m\,\bm u\!\cdot\!\vx$, is an
+application of exactly this formula.
+
+\paragraph{The covariance machinery in $d=1$.}
+Proposition~\ref{prop:main} applies with $\mathcal G=\Diff(\mathbb R)$, the
+reparametrizations of time, and with the preferred chart, that is the one-form
+$\dd t$, as the background $b_0$. A reparametrization $t\to f(t)$ pulls $\dd t$
+back to $f'(t)\,\dd t$, so
+\begin{equation}
+  \Stab_{\Diff(\mathbb R)}(\dd t)=\{\,t\to t+c\,\}.
+\end{equation}
+The symmetry is time translation, and Noether's theorem gives conservation of
+$H$. A prescribed time-dependent external force is a second background; it
+shrinks the stabilizer to the identity and produces $\dot H=-\partial L/\partial t$,
+the last row of Table~\ref{tab:dictionary-dof}. Noether's \emph{second}
+theorem applies to the parametrized action of Example~\ref{ex:param} (or of
+Section~\ref{sec:sr}), where $t$ is promoted to a dynamical variable: the
+identity \eqref{eq:param-identity} is \eqref{eq:noether2} for
+$\Diff(\mathbb R)$. The soldering form of Section~\ref{sec:soldering} reduces
+to the single function $e_\lambda=\dd X^0/\dd\lambda=\dot t$, with
+$D=\dot t^{-1}\dd/\dd\lambda$; the parametrized Newtonian action is
+$\int\dot t\,\tfrac m2(D\vx)^2\,\dd\lambda$, which equals $\int\tfrac m2\dot\vx^2/\dot t\,\dd\lambda$.
+
+\paragraph{Base symmetries and target symmetries.}
+A mechanical system is a map $q\colon M^1\to N$ from the time axis into a
+\emph{target} space $N$ (a sigma model). Transformations then split into those
+acting on the base, which change the arguments of the fields, and those acting
+on the target, which change their values. Table~\ref{tab:base-target} shows
+that the distinction covers every example of the chapter.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.0cm}%
+                  >{\raggedright\arraybackslash}p{2.1cm}%
+                  >{\raggedright\arraybackslash}p{2.4cm}%
+                  >{\raggedright\arraybackslash}p{3.0cm}%
+                  >{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+System & Base $M$ & Target / fibre & Base symmetries & Target symmetries\\
+\midrule
+Newtonian particle & $\mathbb R_t$ & $E^3$ & time translation
+  & $E(3)$; boosts are target maps with $t$-dependent parameter\\
+Relativistic particle & $\mathbb R_\lambda$ & Minkowski space
+  & $\Diff(\mathbb R)$ (gauge) & Poincar\'e\\
+Real scalar field & Minkowski space & $\mathbb R$ & Poincar\'e
+  & $\varphi\to-\varphi$ if $V$ is even\\
+$O(N)$ scalar model & Minkowski space & $\mathbb R^N$ & Poincar\'e & $O(N)$\\
+Gravity (tetrad form) & $M^4$ & fields $e^a{}_\mu$ & $\Diff(M)$ (gauge)
+  & local Lorentz (gauge)\\
+\bottomrule
+\end{tabular}
+\caption{Base and target symmetries.}
+\label{tab:base-target}
+\end{table}
+
+\paragraph{Field theory as a mechanical system with a continuum of degrees of
+freedom.}
+In the opposite direction, a $3{+}1$ split of a field theory turns it into a
+mechanical system: set $q_{\vx}(t)=\varphi(\vx,t)$, so that the discrete index
+$i$ becomes the continuous label $\vx$. Sums become integrals,
+\begin{equation}
+  L=\int\dd^3x\,\mathcal L,\qquad
+  \pi(\vx)=\frac{\delta L}{\delta\dot\varphi(\vx)},\qquad
+  Q=\sum_ip_iX^i-K\ \longrightarrow\ \int\dd^3x\,\big(\pi X-K^0\big)=\int\dd^3x\,J^0 .
+\end{equation}
+A chain of masses shows how the two descriptions relate. On a ring of $N$
+masses,
+\begin{equation}
+  L=\sum_{n}\Big[\tfrac12m\,\dot q_n^2-\tfrac12k\,(q_{n+1}-q_n)^2\Big].
+\end{equation}
+Set $q_n(t)=\varphi(na,t)$, $m=\rho a$, $k=\tau/a$, and keep the length $Na$
+fixed. As $a\to0$,
+\begin{equation}
+  L\ \to\ \int\dd x\,\Big[\tfrac12\rho\,\dot\varphi^2-\tfrac12\tau\,\varphi'^2\Big],
+  \qquad\rho\ddot\varphi=\tau\varphi'' .
+\end{equation}
+The same system has three different symmetry statements.
+\begin{enumerate}[leftmargin=1.8em,itemsep=3pt,label=\textbf{\arabic*.}]
+\item \emph{Shift} $q_n\to q_n+\eps$ for all $n$, a target symmetry with $X=1$,
+  $K=0$. The charge $\sum_np_n=\sum_nm\dot q_n$ becomes $\int\rho\dot\varphi\,\dd x$,
+  with the local current $J^t=\rho\dot\varphi$, $J^x=-\tau\varphi'$, and
+  $\partial_tJ^t+\partial_xJ^x=\rho\ddot\varphi-\tau\varphi''=0$.
+\item \emph{Lattice translation} $n\to n+1$, a discrete symmetry (the cyclic group
+  $\mathbb Z_N$ of the ring). It has no Noether charge in the sense of
+  Section~\ref{sec:noether}.
+\item \emph{Continuum translation} $x\to x+b$, a base symmetry that exists only
+  in the limit. By \eqref{eq:noether1} with $\delta\varphi=-b\,\partial_x\varphi$
+  its charge is the field momentum $P=-\int\rho\,\dot\varphi\,\varphi'\,\dd x$.
+\end{enumerate}
+So the relation between the finite and the infinite system is not only
+``special case.'' The finite chain has \emph{fewer} symmetries than its
+continuum limit, because discretization generically breaks continuous base
+symmetries (and, for a relativistic theory on a lattice, Lorentz invariance).
+
+\paragraph{Where the reduction is not a pure special case.}
+\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
+\item \emph{Boundary conditions.} For $d=1$ the only boundaries are the initial
+  and final times, and $Q$ needs no fall-off condition. For $d>1$ the charge
+  $Q=\int J^0\,\dd^3x$ is conserved only if the flux through spatial infinity
+  vanishes, which requires conditions on the fields.
+\item \emph{Constraints.} A gauge parameter $\eps(\vx,t)$ yields one constraint
+  per spatial point (Gauss's law, $\nabla\!\cdot\vE=4\pi\rho$, in
+  Example~\ref{ex:noether2-em}), whereas reparametrization in $d=1$ yields a
+  single constraint.
+\item \emph{Soldering form.} It has $d$ components ($d=4$ for spacetime), not one.
+\item \emph{Manifest covariance.} A $3{+}1$ split gives up manifest covariance,
+  and boosts then act nonlinearly, exactly as for the gauge-fixed particle
+  $\lambda=t$ of Section~\ref{sec:sr}.
+\item \emph{Symmetry breaking in the quantum theory.} With finitely many
+  degrees of freedom the Stone--von Neumann theorem makes all irreducible
+  representations of the canonical commutation relations unitarily
+  equivalent, so a symmetry is implemented unitarily and a degenerate classical
+  minimum is resolved by tunneling (the ground state of a symmetric double well
+  is symmetric). With infinitely many degrees of freedom inequivalent
+  representations exist, and spontaneous symmetry breaking of the quantum
+  vacuum (Section~\ref{sec:kepler}) becomes possible. Classically, the
+  distinction between symmetry of the law and symmetry of the solution
+  (Section~\ref{sec:law-solution}) is already present in both cases.
+\end{itemize}
+In both directions Proposition~\ref{prop:main} is unchanged: the symmetry group
+is the stabilizer of the background in the covariance group. Only the
+dimension of the base and the supply of target symmetries differ.
+% ---- SUBSECTION ENDS ----
+
 % ---------------------------------------------------------------------
 \section{Example I: Newtonian mechanics and the Galilei group}
 \label{sec:galilei}
@@ -850,7 +1036,7 @@ field by its frame components and every $\partial/\partial x^a$ by $D_a$.
 
 \begin{proposition}[Kretschmann]\label{prop:kretschmann}
 The system $\tilde E[\tilde\varphi;e]=0$ is $\Diff(M)$-covariant in the sense
-of \eqref{eq:covariant-eq}, with the soldering form $e^a{}_\mu$ as background.
+of \eqref{eq:covariant-eq}, with the soldering form $e^a{}_\mu$ (Section~\ref{sec:soldering}) as background.
 It is equivalent to the original system: $(\tilde\varphi,e)$ solves
 $\tilde E=0$ if and only if the frame components of $\tilde\varphi$ solve
 $E=0$.
@@ -906,6 +1092,80 @@ $G_0$-invariant parts: for the Poincar\'e group through the flat metric
 $\eta_{\mu\nu}=\eta_{ab}e^a{}_\mu e^b{}_\nu$ alone, and for the Galilei group
 through the Newton--Cartan data of Section~\ref{sec:galilei}.
 \end{remark}
+
+\subsection{The soldering form}
+\label{sec:soldering}
+
+The original formulation of $E$ contains two kinds of index that were never
+distinguished, because they are numerically identified in the preferred chart.
+The index $a$ labels the coordinates of the \emph{model space} $V=\mathbb R^4$,
+on which the group $G_0$ (Poincar\'e, Galilei, \dots) acts and in which the
+original theory lives. The index $\mu$ labels directions at a point of the
+spacetime manifold $M$, whose charts $y^\mu$ are arbitrary. Covariantization
+must pull the two apart: $\mu$ is acted on by $\Diff(M)$, whereas $a$ is merely
+a label, acted on at most by $G_0$.
+
+The one-form $e^a{}_\mu\,\dd y^\mu=\dd X^a$ is the link between them. It is a
+one-form on $M$ with values in $V$: at each point $p$ it defines the linear map
+\begin{equation}
+  e_p\colon T_pM\to V,\qquad v^\mu\mapsto e^a{}_\mu\,v^\mu ,
+\end{equation}
+which is invertible precisely because $X^a$ is a chart. It identifies every
+tangent space with the model space, point by point, and thereby \emph{solders}
+(welds) the model space onto the manifold; hence the name. In the mathematical
+literature the \emph{solder form} (or canonical form) is the tautological
+$V$-valued one-form on the frame bundle, and its pull-backs by local sections
+are the coframes, tetrads or vierbeins $e^a{}_\mu$ \cite{kn}. In Cartan's
+generalization of Klein's Erlangen programme, a geometry is a manifold whose
+tangent spaces are soldered to the model space of a Klein geometry $G_0/H$
+\cite{sharpe}. (Some authors reserve ``soldering form'' for the canonical
+form and call $e^a{}_\mu$ a tetrad; we follow the usage of physics.)
+
+The soldering form does three jobs in the construction above.
+\begin{enumerate}[leftmargin=1.8em,itemsep=3pt,label=\textbf{\arabic*.}]
+\item \emph{It converts indices.} Frame components $\varphi_a=e_a{}^\mu\varphi_\mu$
+  and the derivatives $D_a=e_a{}^\mu\partial_\mu$ are scalars under
+  $\Diff(M)$ because $e^a{}_\mu$ is the only place where an index of each kind
+  meets.
+\item \emph{It records the preferred chart and nothing else.} Since
+  $e^a{}_\mu=\partial_\mu X^a$, it is closed, $\dd e^a=0$. A translation
+  $X^a\to X^a+c^a$ leaves $e^a{}_\mu$ unchanged, and a Lorentz transformation
+  $X^a\to\Lambda^a{}_bX^b$ rotates it, $e\to\Lambda e$. Only the
+  $G_0$-invariant content matters (Remark~\ref{rem:soldering-dep}): for the
+  Poincar\'e group the metric $\eta_{\mu\nu}=\eta_{ab}e^a{}_\mu e^b{}_\nu$; for
+  the Galilei group the time one-form $t_\mu=e^0{}_\mu$ (with $X^0=t$) and the
+  spatial cometric $h^{\mu\nu}=\delta^{ij}e_i{}^\mu e_j{}^\nu$.
+\item \emph{It defines a connection.} The coefficients
+  $\Gamma^\lambda{}_{\mu\nu}=e_a{}^\lambda\partial_\mu e^a{}_\nu$ define the
+  derivative for which frame components are constant; they are symmetric in
+  $\mu\nu$ (no torsion) and give zero curvature, both consequences of
+  $\dd e^a=0$.
+\end{enumerate}
+
+\begin{example}[Polar coordinates]\label{ex:polar}
+Take the Euclidean plane with $X^1=r\cos\theta$, $X^2=r\sin\theta$. Then
+\begin{equation}
+  e^1=\cos\theta\,\dd r-r\sin\theta\,\dd\theta,\qquad
+  e^2=\sin\theta\,\dd r+r\cos\theta\,\dd\theta,
+\end{equation}
+so $\delta_{ab}e^a e^b=\dd r^2+r^2\dd\theta^2$, and
+$\Gamma^\lambda{}_{\mu\nu}=e_a{}^\lambda\partial_\mu e^a{}_\nu$ gives
+$\Gamma^r{}_{\theta\theta}=-r$ and $\Gamma^\theta{}_{r\theta}=1/r$, the familiar
+Christoffel symbols of polar coordinates. They are not extra input: they are
+what the soldering form of a flat chart looks like in a curvilinear one.
+\end{example}
+
+In general relativity the same object appears as the tetrad $e^a{}_\mu$, with
+local Lorentz transformations acting on $a$ as a gauge symmetry. The
+difference from Kretschmann's construction lies not in the object but in its
+status. There $e^a{}_\mu$ is prescribed as the gradient of a given chart, so
+$\dd e^a=0$ and the metric $\eta_{ab}e^a{}_\mu e^b{}_\nu$ is flat and the same
+in every solution. In general relativity $e^a{}_\mu$ is varied in the action,
+$\dd e^a\neq0$ in general (the torsion-free spin connection obeys
+$\dd e^a+\omega^a{}_b\wedge e^b=0$), and the metric is dynamical. The
+soldering form is the fixed background of every covariantized older theory and
+a dynamical field in general relativity, which is the distinction drawn by
+Proposition~\ref{prop:main} and Anderson's criterion.
 
 \subsection{Where the physics went}
 
@@ -1313,6 +1573,10 @@ the three notions, including the debate on general covariance, is collected in
 \bibitem{norton} J.~D.~Norton, \emph{General covariance and the foundations of
   general relativity: eight decades of dispute}, Rep.\ Prog.\ Phys.\
   \textbf{56} (1993) 791--858.
+\bibitem{kn} S.~Kobayashi and K.~Nomizu, \emph{Foundations of Differential
+  Geometry}, Vol.~I, Interscience, 1963.
+\bibitem{sharpe} R.~W.~Sharpe, \emph{Differential Geometry: Cartan's
+  Generalization of Klein's Erlangen Program}, Springer, 1997.
 \bibitem{friedman} M.~Friedman, \emph{Foundations of Space-Time Theories},
   Princeton University Press, 1983.
 \bibitem{kuchar} C.~J.~Isham and K.~V.~Kucha\v{r}, \emph{Representations of

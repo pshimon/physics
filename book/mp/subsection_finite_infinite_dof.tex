@@ -1,0 +1,196 @@
+% =====================================================================
+%  Subsection: Finite and infinite numbers of degrees of freedom
+%  Paste inside the chapter, e.g. at the end of the section on Noether's
+%  theorems.
+%
+%  Needs these macros (preamble of the chapter file):
+%    \dd, \pd, \eps, \weakeq, \vx, \Stab, \Diff
+%  and packages: amsmath, booktabs, enumitem.
+%
+%  It cross-references these labels (adapt or delete if absent):
+%    sec:definitions, sec:noether, sec:galilei, sec:sr, sec:soldering,
+%    sec:kepler, sec:law-solution, prop:main, ex:param, ex:noether2-em,
+%    eq:noether1, eq:noether2, eq:param-identity
+% =====================================================================
+\subsection{Finite and infinite numbers of degrees of freedom}
+\label{sec:dof}
+
+The chapter moves freely between mechanical systems (the Galilei group, the
+Kepler problem, the relativistic particle) and field theories
+(electrodynamics, general relativity). This is legitimate because the two are
+not different theories: a mechanical system is a field theory on a
+one-dimensional base manifold, and a field theory is a mechanical system whose
+coordinates carry a continuous label. This subsection makes both statements
+explicit and notes where the reduction fails to be a pure special case.
+
+\paragraph{Mechanics as a field theory on $M=\mathbb R_t$.}
+Take the base manifold to be the time axis, with the single coordinate
+$x^0\equiv t$, and identify
+\begin{equation}\label{eq:dictionary-id}
+  \varphi_a(x^\mu)\;\leftrightarrow\;q^i(t),\qquad
+  \mathcal L(\varphi_a,\partial_\mu\varphi_a;x)\;\leftrightarrow\;L(q^i,\dot q^i,t),\qquad
+  \partial_\mu\;\leftrightarrow\;\frac{\dd}{\dd t}.
+\end{equation}
+The formulas of Sections~\ref{sec:definitions} and~\ref{sec:noether} then
+specialize as in Table~\ref{tab:dictionary-dof}.
+
+\begin{table}[ht]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{7.3cm}>{\raggedright\arraybackslash}p{7.3cm}@{}}
+\toprule
+Field theory on $M^d$ & Mechanics ($d=1$)\\
+\midrule
+Fields $\varphi_a(x^\mu)$ & Coordinates $q^i(t)$\\
+Euler--Lagrange: $\pd{\mathcal L}{\varphi_a}-\partial_\mu\pd{\mathcal L}{(\partial_\mu\varphi_a)}=0$
+  & $\pd{L}{q^i}-\dfrac{\dd}{\dd t}\pd{L}{\dot q^i}=0$\\
+Noether current: $J^\mu=\pd{\mathcal L}{(\partial_\mu\varphi_a)}X_a-K^\mu$,\ \ $\partial_\mu J^\mu\weakeq0$
+  & Noether charge: $Q=p_iX^i-K$,\ \ $\dot Q\weakeq0$\\
+Energy--momentum tensor: $T^\mu{}_\nu=\pd{\mathcal L}{(\partial_\mu\varphi_a)}\partial_\nu\varphi_a-\delta^\mu_\nu\mathcal L$
+  & $T^0{}_0=p_i\dot q^i-L=H$\\
+Explicit $x$-dependence: $\partial_\mu T^\mu{}_\nu\weakeq-\big(\pd{\mathcal L}{x^\nu}\big)_{\!\rm expl}$
+  & $\dot H=-\pd{L}{t}$\\
+\bottomrule
+\end{tabular}
+\caption{Mechanics as the case $d=1$ of field theory.}
+\label{tab:dictionary-dof}
+\end{table}
+
+In $d=1$ the divergence $\partial_\mu J^\mu$ is a single derivative, so the
+current \emph{is} the charge and the conservation law is constancy in time.
+The derivation of Noether's first theorem is the same line in both cases. For
+$\delta q^i=\eps X^i$ with $\delta L=\eps\dot K$,
+\begin{equation}\label{eq:noether-mech}
+  \delta L=\Big[\pd{L}{q^i}-\frac{\dd}{\dd t}\pd{L}{\dot q^i}\Big]\eps X^i
+  +\eps\,\frac{\dd}{\dd t}\big(p_iX^i\big)=\eps\dot K
+  \;\Longrightarrow\;
+  \frac{\dd}{\dd t}\big(p_iX^i-K\big)\weakeq0,\qquad p_i=\pd{L}{\dot q^i},
+\end{equation}
+which is \eqref{eq:noether1} with one base coordinate. The Galilean boost of
+Section~\ref{sec:galilei}, $X^i=u^it$ and $K=m\,\bm u\!\cdot\!\vx$, is an
+application of exactly this formula.
+
+\paragraph{The covariance machinery in $d=1$.}
+Proposition~\ref{prop:main} applies with $\mathcal G=\Diff(\mathbb R)$, the
+reparametrizations of time, and with the preferred chart, that is the one-form
+$\dd t$, as the background $b_0$. A reparametrization $t\to f(t)$ pulls $\dd t$
+back to $f'(t)\,\dd t$, so
+\begin{equation}
+  \Stab_{\Diff(\mathbb R)}(\dd t)=\{\,t\to t+c\,\}.
+\end{equation}
+The symmetry is time translation, and Noether's theorem gives conservation of
+$H$. A prescribed time-dependent external force is a second background; it
+shrinks the stabilizer to the identity and produces $\dot H=-\partial L/\partial t$,
+the last row of Table~\ref{tab:dictionary-dof}. Noether's \emph{second}
+theorem applies to the parametrized action of Example~\ref{ex:param} (or of
+Section~\ref{sec:sr}), where $t$ is promoted to a dynamical variable: the
+identity \eqref{eq:param-identity} is \eqref{eq:noether2} for
+$\Diff(\mathbb R)$. The soldering form of Section~\ref{sec:soldering} reduces
+to the single function $e_\lambda=\dd X^0/\dd\lambda=\dot t$, with
+$D=\dot t^{-1}\dd/\dd\lambda$; the parametrized Newtonian action is
+$\int\dot t\,\tfrac m2(D\vx)^2\,\dd\lambda$, which equals $\int\tfrac m2\dot\vx^2/\dot t\,\dd\lambda$.
+
+\paragraph{Base symmetries and target symmetries.}
+A mechanical system is a map $q\colon M^1\to N$ from the time axis into a
+\emph{target} space $N$ (a sigma model). Transformations then split into those
+acting on the base, which change the arguments of the fields, and those acting
+on the target, which change their values. Table~\ref{tab:base-target} shows
+that the distinction covers every example of the chapter.
+
+\begin{table}[ht]
+\centering
+\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.0cm}%
+                  >{\raggedright\arraybackslash}p{2.1cm}%
+                  >{\raggedright\arraybackslash}p{2.4cm}%
+                  >{\raggedright\arraybackslash}p{3.0cm}%
+                  >{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+System & Base $M$ & Target / fibre & Base symmetries & Target symmetries\\
+\midrule
+Newtonian particle & $\mathbb R_t$ & $E^3$ & time translation
+  & $E(3)$; boosts are target maps with $t$-dependent parameter\\
+Relativistic particle & $\mathbb R_\lambda$ & Minkowski space
+  & $\Diff(\mathbb R)$ (gauge) & Poincar\'e\\
+Real scalar field & Minkowski space & $\mathbb R$ & Poincar\'e
+  & $\varphi\to-\varphi$ if $V$ is even\\
+$O(N)$ scalar model & Minkowski space & $\mathbb R^N$ & Poincar\'e & $O(N)$\\
+Gravity (tetrad form) & $M^4$ & fields $e^a{}_\mu$ & $\Diff(M)$ (gauge)
+  & local Lorentz (gauge)\\
+\bottomrule
+\end{tabular}
+\caption{Base and target symmetries.}
+\label{tab:base-target}
+\end{table}
+
+\paragraph{Field theory as a mechanical system with a continuum of degrees of
+freedom.}
+In the opposite direction, a $3{+}1$ split of a field theory turns it into a
+mechanical system: set $q_{\vx}(t)=\varphi(\vx,t)$, so that the discrete index
+$i$ becomes the continuous label $\vx$. Sums become integrals,
+\begin{equation}
+  L=\int\dd^3x\,\mathcal L,\qquad
+  \pi(\vx)=\frac{\delta L}{\delta\dot\varphi(\vx)},\qquad
+  Q=\sum_ip_iX^i-K\ \longrightarrow\ \int\dd^3x\,\big(\pi X-K^0\big)=\int\dd^3x\,J^0 .
+\end{equation}
+A chain of masses shows how the two descriptions relate. On a ring of $N$
+masses,
+\begin{equation}
+  L=\sum_{n}\Big[\tfrac12m\,\dot q_n^2-\tfrac12k\,(q_{n+1}-q_n)^2\Big].
+\end{equation}
+Set $q_n(t)=\varphi(na,t)$, $m=\rho a$, $k=\tau/a$, and keep the length $Na$
+fixed. As $a\to0$,
+\begin{equation}
+  L\ \to\ \int\dd x\,\Big[\tfrac12\rho\,\dot\varphi^2-\tfrac12\tau\,\varphi'^2\Big],
+  \qquad\rho\ddot\varphi=\tau\varphi'' .
+\end{equation}
+The same system has three different symmetry statements.
+\begin{enumerate}[leftmargin=1.8em,itemsep=3pt,label=\textbf{\arabic*.}]
+\item \emph{Shift} $q_n\to q_n+\eps$ for all $n$, a target symmetry with $X=1$,
+  $K=0$. The charge $\sum_np_n=\sum_nm\dot q_n$ becomes $\int\rho\dot\varphi\,\dd x$,
+  with the local current $J^t=\rho\dot\varphi$, $J^x=-\tau\varphi'$, and
+  $\partial_tJ^t+\partial_xJ^x=\rho\ddot\varphi-\tau\varphi''=0$.
+\item \emph{Lattice translation} $n\to n+1$, a discrete symmetry (the cyclic group
+  $\mathbb Z_N$ of the ring). It has no Noether charge in the sense of
+  Section~\ref{sec:noether}.
+\item \emph{Continuum translation} $x\to x+b$, a base symmetry that exists only
+  in the limit. By \eqref{eq:noether1} with $\delta\varphi=-b\,\partial_x\varphi$
+  its charge is the field momentum $P=-\int\rho\,\dot\varphi\,\varphi'\,\dd x$.
+\end{enumerate}
+So the relation between the finite and the infinite system is not only
+``special case.'' The finite chain has \emph{fewer} symmetries than its
+continuum limit, because discretization generically breaks continuous base
+symmetries (and, for a relativistic theory on a lattice, Lorentz invariance).
+
+\paragraph{Where the reduction is not a pure special case.}
+\begin{itemize}[leftmargin=1.6em,itemsep=2pt]
+\item \emph{Boundary conditions.} For $d=1$ the only boundaries are the initial
+  and final times, and $Q$ needs no fall-off condition. For $d>1$ the charge
+  $Q=\int J^0\,\dd^3x$ is conserved only if the flux through spatial infinity
+  vanishes, which requires conditions on the fields.
+\item \emph{Constraints.} A gauge parameter $\eps(\vx,t)$ yields one constraint
+  per spatial point (Gauss's law, $\nabla\!\cdot\vE=4\pi\rho$, in
+  Example~\ref{ex:noether2-em}), whereas reparametrization in $d=1$ yields a
+  single constraint.
+\item \emph{Soldering form.} It has $d$ components ($d=4$ for spacetime), not one.
+\item \emph{Manifest covariance.} A $3{+}1$ split gives up manifest covariance,
+  and boosts then act nonlinearly, exactly as for the gauge-fixed particle
+  $\lambda=t$ of Section~\ref{sec:sr}.
+\item \emph{Symmetry breaking in the quantum theory.} With finitely many
+  degrees of freedom the Stone--von Neumann theorem makes all irreducible
+  representations of the canonical commutation relations unitarily
+  equivalent, so a symmetry is implemented unitarily and a degenerate classical
+  minimum is resolved by tunneling (the ground state of a symmetric double well
+  is symmetric). With infinitely many degrees of freedom inequivalent
+  representations exist, and spontaneous symmetry breaking of the quantum
+  vacuum (Section~\ref{sec:kepler}) becomes possible. Classically, the
+  distinction between symmetry of the law and symmetry of the solution
+  (Section~\ref{sec:law-solution}) is already present in both cases.
+\end{itemize}
+In both directions Proposition~\ref{prop:main} is unchanged: the symmetry group
+is the stabilizer of the background in the covariance group. Only the
+dimension of the base and the supply of target symmetries differ.

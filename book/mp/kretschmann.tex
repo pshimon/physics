@@ -1,0 +1,393 @@
+Kretschmann's observation about covariance: its mathematical and physical
+meaning Kretschmann's observation is one of the most important conceptual
+points in the foundations of general relativity. It exposes a distinction that
+is often overlooked: general covariance is not, by itself, a physical
+principle. The central point is that virtually any physical theory can be
+formulated in generally covariant form. Consequently, the fact that Einstein's
+equations are generally covariant cannot, on its own, distinguish general
+relativity from Newtonian mechanics, special relativity, or another physical
+theory. This observation is associated with the German physicist Erich
+Kretschmann, particularly his 1917 paper: Über den physikalischen Sinn der
+Relativitätspostulate. Let us examine what this means, especially from the
+perspective of covariance, invariance, and symmetry. 1. The original issue:
+what is special about general covariance? Einstein's general theory of
+relativity is formulated using tensor equations. For example, \[
+    G_{\mu\nu}=\frac{8\pi G}{c^4}T_{\mu\nu}. \] This equation retains its form
+under arbitrary smooth coordinate transformations: \[ x^\mu\longrightarrow
+x'^\mu(x). \] Einstein regarded general covariance as an important
+characteristic of the gravitational theory. The conceptual motivation was that
+no coordinate system should have a privileged physical status. In particular,
+the laws of physics should not depend on the arbitrary choice of coordinates.
+But Kretschmann asked a very sharp question: If general covariance is such an
+important physical criterion, why can't we formulate any physical theory in
+generally covariant form? His answer was essentially that we can. 2. An
+explicit example: special relativity in generally covariant form Consider
+special relativity in its familiar formulation: \[ ds^2=c^2dt^2-dx^2-dy^2-dz^2.
+\] The metric is the Minkowski metric, \[
+    \eta_{\mu\nu}=\operatorname{diag}(1,-1,-1,-1). \] The equation of motion of
+a free particle, using an affine parameter \(\lambda\), is \[
+    \frac{d^2x^\mu}{d\lambda^2}=0. \] This formulation uses inertial Cartesian
+coordinates. Now introduce arbitrary coordinates \(x^\mu\). The metric becomes
+\[ ds^2=g_{\mu\nu}(x)dx^\mu dx^\nu. \] The free-particle equation becomes \[
+    \boxed{ \frac{d^2x^\mu}{d\lambda^2} +\Gamma^\mu_{\alpha\beta}
+    \frac{dx^\alpha}{d\lambda} \frac{dx^\beta}{d\lambda}=0. } \] This is the
+geodesic equation. We can now write the equations of special relativity in a
+form that is covariant under arbitrary coordinate transformations. We must,
+however, retain the additional condition \[ \boxed{R^\mu{}_{\nu\alpha\beta}=0.}
+\] This condition tells us that the metric is flat. Thus, we have obtained a
+generally covariant formulation of special relativity: \[ \begin{cases}
+    R^\mu{}_{\nu\alpha\beta}=0,\\[2mm] \nabla_\mu T^{\mu\nu}=0,\\[2mm]
+\text{matter equations formulated using }g_{\mu\nu}. \end{cases} \] Nothing
+physical has changed. We have merely changed the mathematical formulation. The
+metric is still a prescribed, nondynamical background structure. It is not
+determined by the matter distribution. This is precisely the kind of example
+that illustrates Kretschmann's observation. sites.pitt.edu+1 3. Why does this
+not make special relativity equivalent to general relativity? Here we reach the
+essential point. Both theories can be expressed using arbitrary coordinates,
+but their physical structures are different. Consider: Special relativity
+General relativity Minkowski metric	Dynamical spacetime metric
+\(R^\mu{}_{\nu\alpha\beta}=0\)	Curvature generally nonzero Metric prescribed
+Metric determined by field equations Matter evolves on a fixed geometry	Matter
+and geometry interact Poincaré spacetime symmetry	No fixed background metric
+with a prescribed isometry group In general relativity, \[ G_{\mu\nu}[g]=\kappa
+T_{\mu\nu} \] determines the metric dynamically. In special relativity, by
+contrast, the metric is prescribed: \[ g_{\mu\nu}=\eta_{\mu\nu}. \] Even when
+we express the latter in arbitrary coordinates, we have not made the metric
+dynamical. This leads to a particularly important distinction: Coordinate
+covariance is not the same as physical symmetry. The full diffeomorphism group
+can be used to describe both theories, but the physical spacetime symmetries of
+special relativity are the Poincaré transformations, not arbitrary
+diffeomorphisms. The latter merely express the freedom to choose coordinates.
+4. Passive covariance versus active covariance This distinction is especially
+important. There are two different operations that are frequently confused. 4.1
+Passive transformation We change the coordinate labels assigned to spacetime
+events: \[ x^\mu\longrightarrow x'^\mu(x). \] The physical event remains the
+same. Tensor components change according to the usual transformation laws. For
+example, \[ g'_{\mu\nu}(x') = \frac{\partial x^\alpha}{\partial x'^\mu}
+\frac{\partial x^\beta}{\partial x'^\nu} g_{\alpha\beta}(x). \] This is simply
+a change of description. There is no new physical configuration. 4.2 Active
+transformation Now consider a diffeomorphism \[ \phi:M\longrightarrow M. \]
+Instead of changing coordinates, we transform the fields themselves. For
+example, \[ g_{\mu\nu}\longrightarrow \phi^*g_{\mu\nu}. \] The transformed
+metric generally represents a different assignment of geometrical fields to the
+manifold's points. In general relativity, however, if we transform all
+dynamical fields together, the transformed configuration is another solution of
+the same field equations. The question then becomes: Are these two solutions
+physically different? The modern answer is that solutions related by a
+diffeomorphism represent the same physical geometry, provided we are treating
+the diffeomorphism as a gauge transformation. This is a much stronger statement
+than passive covariance. It is a statement about the physical interpretation of
+the mathematical configurations. Norton's analysis is particularly useful here
+because it explains how Kretschmann's objection and the physical importance of
+diffeomorphism gauge freedom can both be correct. sites.pitt.edu+2 5. The
+deeper issue: covariance versus symmetry Let us connect this with the
+distinction between covariance and invariance. Suppose a theory is described by
+equations \[ E[\Psi]=0, \] where \(\Psi\) denotes all the fields of the theory.
+A transformation \(T\) is a symmetry of the theory if it maps solutions into
+solutions: \[ E[\Psi]=0 \quad\Longrightarrow\quad E[T\Psi]=0. \] But we must be
+careful: this condition alone does not distinguish physical symmetries from
+gauge redundancies. For a global physical symmetry, the transformation relates
+configurations that can represent physically different states, while preserving
+the laws. For a gauge symmetry, the transformation relates different
+mathematical descriptions of the same physical state. Now consider general
+covariance. A generally covariant formulation means that the equations can be
+expressed in tensorial form, retaining their form under arbitrary coordinate
+transformations. But this does not necessarily imply that arbitrary
+diffeomorphisms are physical symmetries. In particular, consider a theory with
+a nondynamical background tensor \(B\). Its equations might be written
+schematically as \[ E[\Psi;B]=0. \] Under an active diffeomorphism, we have \[
+    \Psi\longrightarrow\phi^*\Psi, \qquad B\longrightarrow\phi^*B. \] The
+equations are covariant if \[ E[\phi^*\Psi;\phi^*B] = \phi^*E[\Psi;B]. \]
+However, if \(B\) is fixed, we must ask whether \[ E[\phi^*\Psi;B]=0. \] This
+is generally not true. It is true only for transformations preserving the
+background: \[ \phi^*B=B. \] These transformations form the symmetry group of
+the background structure. For the Minkowski metric, this is the Poincaré group
+(including the appropriate discrete transformations if the full group is
+considered). This is an extremely useful way of understanding Kretschmann's
+observation: - Covariance concerns the form of the equations under changes of
+representation. - Symmetry concerns transformations preserving the physical
+structure of the theory. - Gauge symmetry concerns transformations that leave
+the physical state unchanged. These are three different notions. 6. Background
+structures and the physical content of general relativity This brings us to a
+more substantial interpretation of general relativity. A useful way to
+characterize the difference between general relativity and special relativity
+is through their background structures. In special relativity, the metric is
+absolute in the sense that it is prescribed independently of the matter
+dynamics. In general relativity, the metric is dynamical. This suggests that
+the physically significant distinction is not simply general covariance, but
+rather the status of the geometrical structures appearing in the theory. We can
+schematically distinguish: \[ \begin{aligned} \text{SR:}&\quad
+\eta_{\mu\nu}\text{ is prescribed},\\ \text{GR:}&\quad g_{\mu\nu}\text{ is
+dynamical}. \end{aligned} \] This is closely related to the notion of absolute
+objects, developed in the work of Anderson and Friedman. An absolute object is,
+roughly speaking, a geometrical structure that is not dynamically determined by
+the physical fields of the theory. There are technical subtleties in giving
+this definition precisely, but the distinction is important. It also explains
+why simply rewriting special relativity using arbitrary coordinates does not
+turn it into general relativity. The Minkowski metric remains an absolute
+background structure, even though its components are now coordinate-dependent.
+ScienceDirect+1 7. What was Einstein's response? Einstein accepted the central
+mathematical point of Kretschmann's objection. He nevertheless argued that
+general covariance retained heuristic significance. The argument was
+essentially that a generally covariant formulation could reveal physical
+content previously hidden in the choice of preferred coordinates. A theory
+might be expressible in arbitrary coordinates, but doing so could require
+introducing additional geometrical structures and making its equations
+considerably more complicated. The search for a generally covariant formulation
+could therefore guide the discovery of a more natural theory. This is an
+important qualification. General covariance may have little discriminatory
+power as a purely formal requirement, but it can be a useful methodological
+principle. John Norton discusses this distinction in detail in his historical
+analysis of the controversy. IOPscience+1 8. Connection with the hole argument
+There is another important consequence. Suppose we have a solution of
+Einstein's equations, \[ (M,g_{\mu\nu},T_{\mu\nu}). \] Consider a
+diffeomorphism \(\phi\) which differs from the identity only inside some
+bounded spacetime region \(H\), called the hole. Then \[
+    (M,\phi^*g_{\mu\nu},\phi^*T_{\mu\nu}) \] is also a solution. Outside the
+hole, the two solutions coincide. Inside, their field components differ. If we
+regard manifold points as possessing independent physical identities, we appear
+to have two different physical evolutions compatible with identical initial
+data. This was the source of Einstein's famous hole argument. The resolution is
+to recognize that the two configurations are physically equivalent: the
+manifold points have no independent physical identities apart from the
+geometrical and material relations defined by the fields. In other words,
+diffeomorphism invariance is associated with a redundancy in the mathematical
+description. This is where the apparently negative Kretschmann observation
+acquires a much more interesting modern significance. General covariance alone
+does not distinguish GR from other theories. But the gauge freedom associated
+with diffeomorphisms in GR has profound consequences for: - The physical
+interpretation of spacetime points. - The definition of observables. - The
+distinction between physical and gauge degrees of freedom. - The initial-value
+formulation of GR. - The quantization of gravity. See the detailed review by
+James Anderson and, especially, the review by John Norton. Springer Nature
+Link+1 9. An important qualification concerning Kretschmann himself There is a
+historical subtlety worth mentioning. The familiar textbook formulation of
+Kretschmann's objection is: "Any physical theory can be formulated in generally
+covariant form." This is a good summary of the central objection, but it is not
+a complete account of his original argument. Kretschmann also engaged with
+Einstein's point-coincidence argument and investigated the possibility of
+identifying spacetime points through invariant geometrical quantities. His
+argument was therefore not merely a complaint about tensor notation. The
+historical discussion is quite interesting, and Norton's 1993 review is a
+particularly valuable reference. IOPscience+1 10. My main conclusion: what
+should we actually demand of a physical theory? I would formulate the lesson as
+follows. There are three increasingly substantive requirements: 1. Covariant
+formulation: The equations can be expressed independently of the choice of
+coordinates. 2. Physical symmetry: The theory possesses transformations that
+preserve its physical laws and structures. 3. Relational or
+background-independent formulation: The theory does not rely on prescribed
+geometrical structures that determine physical spacetime independently of its
+dynamical contents. These requirements are not equivalent. In particular, the
+third is not a simple consequence of the first or second. A theory can be
+generally covariant while retaining absolute background structures. And a
+theory can have physical symmetries without being generally covariant in its
+original formulation. 11. A connection with Hamiltonian mechanics There is a
+particularly interesting analogy with constrained Hamiltonian mechanics.
+Consider a Hamiltonian system with first-class constraints: \[ \phi_a(q,p)=0.
+\] The constraints generate transformations in phase space. Some
+transformations connect different mathematical representations of the same
+physical state. The physical state space is then obtained by quotienting the
+constraint surface by the gauge transformations. Schematically, \[ \mathcal
+P_{\rm phys} = \frac{\{\phi_a=0\}}{\text{gauge transformations}}. \] In GR, the
+diffeomorphism freedom is reflected in the Hamiltonian and momentum
+constraints. Thus, the distinction between coordinate freedom and physical
+degrees of freedom becomes a question about the structure of the constrained
+dynamical system. This is not accidental. General relativity is a particularly
+rich example of a generally covariant gauge theory. References for further
+exploration I would suggest the following reading order: 1. J. D. Norton
+(1993), General covariance and the foundations of general relativity: eight
+decades of dispute, Reports on Progress in Physics 56, 791. Article. The best
+historical and conceptual overview. 2. J. D. Norton (2003), General covariance,
+gauge theories, and the Kretschmann objection, in Symmetries in Physics:
+Philosophical Reflections, pp. 110–123. Chapter. Particularly important for
+reconciling Kretschmann's objection with the modern gauge interpretation. 3.
+The Hole Argument and Some Physical and Philosophical Implications, Living
+Reviews in Relativity. Review. A detailed discussion of diffeomorphisms,
+spacetime individuation and the hole argument. One question I think deserves a
+separate investigation: Is the essential physical content of general relativity
+its general covariance, or is it the dynamical character of spacetime geometry?
+I would argue that the second is much closer to the heart of the matter. And
+this leads to a deeper question relevant to your interests in classical
+mechanics and the foundations of quantum mechanics: Can a theory be
+background-independent without being generally covariant, and can general
+covariance be formulated without introducing gauge redundancy? Those questions
+help separate the physics of spacetime from the mathematics used to describe
+it. continue 12. Beyond Kretschmann: is general covariance physically empty? We
+can now push the discussion further. I think the most interesting lesson of
+Kretschmann's observation is not that general covariance is unimportant, but
+that we must identify exactly where the physical content of a theory resides.
+Let us investigate this through three questions: 1. Can a theory be
+background-independent without being generally covariant? 2. Can a theory be
+generally covariant without possessing genuine gauge freedom? 3. What is the
+relationship between general covariance, gauge symmetry, and physical degrees
+of freedom? These questions are closely related, but their answers are not
+identical. 12.1 Background independence without general covariance First, we
+need to clarify what we mean by background independence. A theory is called
+background-independent, in a commonly used sense, when the geometrical
+structures governing its dynamics are not prescribed in advance but are
+themselves dynamical. For example, in GR, \[ S[g,\psi]= \frac{c^3}{16\pi G}
+\int d^4x\,\sqrt{-g}\,R +S_{\mathrm m}[g,\psi]. \] Here both matter fields
+\(\psi\) and the metric \(g_{\mu\nu}\) are dynamical. Compare this with a
+matter theory on a prescribed spacetime: \[ S[\psi;\eta]= \int d^4x\,\mathcal
+L(\psi,\partial\psi;\eta). \] The semicolon emphasizes that \(\eta_{\mu\nu}\)
+is not varied. The distinction is physical, not merely notational. However,
+does background independence necessarily require general covariance? Not as a
+matter of pure logic. One could formulate a theory using a preferred coordinate
+system, with dynamical geometrical variables and equations that refer
+explicitly to those coordinates. Such a theory could lack manifest general
+covariance while having no prescribed spacetime metric. Of course, we would
+then have to investigate whether the preferred coordinates represent genuine
+physical structure or merely an inconvenient choice of description. This
+distinction is important: background independence is a statement about the
+dynamical status of structures, whereas covariance is a statement about the
+form of equations. 12.2 Can general covariance exist without genuine gauge
+freedom? Yes. This is perhaps the most direct way to understand the force of
+Kretschmann's objection. Consider a scalar field on Minkowski spacetime: \[
+    S[\phi;\eta]= \frac12\int d^4x\,\sqrt{-\eta} \left(
+    \eta^{\mu\nu}\partial_\mu\phi\partial_\nu\phi -m^2\phi^2 \right). \] We can
+formulate this theory in arbitrary coordinates, replacing the constant
+Minkowski metric by \(g_{\mu\nu}(x)\), subject to the flatness condition. The
+resulting equations are generally covariant. But there is no new gravitational
+gauge field. The metric is still prescribed. There is an instructive
+distinction here. If we perform an active diffeomorphism on both the scalar
+field and the background metric, we obtain another representation of the same
+geometrical situation. But if we transform the scalar field while holding the
+background metric fixed, we generally obtain a physically different
+configuration, not a gauge-equivalent one. Thus, covariance of the complete
+geometrical description does not automatically establish that the matter
+configurations related by arbitrary diffeomorphisms are gauge-equivalent. This
+is one of the central points in Norton's analysis of the Kretschmann objection.
+sites.pitt.edu+1 12.3 The role of Noether's second theorem Here is a more
+technical way to distinguish ordinary symmetries from gauge symmetries.
+Noether's first theorem concerns continuous transformations depending on
+finitely many constant parameters. For example, translation invariance leads to
+energy-momentum conservation. Noether's second theorem concerns transformations
+depending on arbitrary functions of spacetime. Schematically, suppose the
+fields \(\Psi^A\) transform as \[ \delta\Psi^A = R^A_{\alpha}\epsilon^\alpha +
+R^{A\mu}_{\alpha}\partial_\mu\epsilon^\alpha +\cdots, \] where the
+\(\epsilon^\alpha(x)\) are arbitrary functions. If the action is invariant
+under these transformations, the Euler–Lagrange expressions satisfy
+differential identities: \[ \boxed{ R^{A}_{\alpha}E_A
+-\partial_\mu(R^{A\mu}_{\alpha}E_A) +\cdots=0. } \] Here \[ E_A=\frac{\delta
+S}{\delta\Psi^A}. \] These are Noether identities. They express dependencies
+among the field equations. In electromagnetism, for example, \[
+    A_\mu\longrightarrow A_\mu+\partial_\mu\chi \] is a gauge transformation.
+The field equations are \[ \partial_\mu F^{\mu\nu}=j^\nu, \] where \[
+    F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu. \] Taking the divergence
+gives \[ \partial_\nu j^\nu=0. \] The conservation of charge is therefore
+related to the differential identity arising from gauge invariance. In general
+relativity, the corresponding identity is the contracted Bianchi identity: \[
+    \boxed{\nabla_\mu G^{\mu\nu}=0.} \] Einstein's equations consequently imply
+\[ \nabla_\mu T^{\mu\nu}=0. \] This is a profound relationship between
+spacetime geometry, gauge freedom and the structure of the equations of motion.
+Notice, however, that the Bianchi identity is a geometrical identity. It does
+not depend on imposing Einstein's equations. This distinction between
+identities and equations of motion is essential. 13. General relativity as a
+constrained dynamical system Now let us connect this with Hamiltonian
+mechanics, where the distinction becomes particularly concrete. In the ADM
+formulation, spacetime is foliated into spatial hypersurfaces: \[ ds^2=N^2dt^2
+-h_{ij}(dx^i+N^i dt)(dx^j+N^jdt), \] using the \(+---\) spacetime signature.
+Here: - \(h_{ij}\) is the spatial metric; - \(N\) is the lapse; - \(N^i\) is
+the shift. The canonical variables are \[ (h_{ij},\pi^{ij}). \] The lapse and
+shift act as Lagrange multipliers. Their variation gives the constraints: \[
+    \mathcal H_\perp=0, \qquad \mathcal H_i=0. \] The Hamiltonian is \[ H_{\rm
+ADM} = \int d^3x \left( N\mathcal H_\perp+N^i\mathcal H_i \right)
++H_{\partial}. \] The constraints generate deformations of the spatial
+hypersurface, corresponding to spacetime diffeomorphisms, subject to important
+qualifications concerning boundaries and the precise generators. The constraint
+algebra is \[ \{H[\vec N],H[\vec M]\} =H[[\vec N,\vec M]], \] \[ \{H[\vec
+N],H_\perp[M]\} =H_\perp[\mathcal L_{\vec N}M], \] \[ \{H_\perp[N],H_\perp[M]\}
+= H\left[ h^{ij}(N\partial_jM-M\partial_jN) \right]. \] The last relation is
+especially interesting. It is not simply the Lie algebra of a fixed spacetime
+symmetry group. Its structure functions depend on the dynamical spatial metric.
+This is called the hypersurface-deformation algebra. It reflects the geometry
+of embedding one spatial hypersurface into spacetime. Counting physical degrees
+of freedom The spatial metric has six independent components at each point, and
+so does its conjugate momentum. Thus there are twelve phase-space variables.
+There are four first-class constraints: \[ \mathcal H_\perp=0,\qquad \mathcal
+H_i=0. \] Each independent first-class constraint removes two phase-space
+dimensions: one through the constraint and one through the associated gauge
+freedom. Consequently, \[ 12-2(4)=4 \] physical phase-space dimensions per
+spatial point, or \[ \boxed{2\text{ configuration-space degrees of freedom}.}
+\] These are the two propagating gravitational-wave polarizations. This is a
+much more substantive statement than saying that Einstein's equations are
+generally covariant. It tells us how many independent gravitational degrees of
+freedom the theory possesses. 14. An important subtlety: not every
+diffeomorphism is physically gauge There is a qualification to the usual
+statement that diffeomorphisms in GR are gauge transformations. Consider an
+asymptotically flat spacetime. We usually impose boundary conditions at spatial
+infinity. Some diffeomorphisms preserve these boundary conditions, but they do
+not necessarily represent pure gauge transformations. For example, asymptotic
+time translations can carry a nonzero ADM energy. Similarly, asymptotic spatial
+translations can carry momentum. The distinction is: - Proper gauge
+transformations: transformations that leave the physical state unchanged. -
+Large or asymptotic symmetries: transformations that may act nontrivially on
+physical states and carry conserved charges. Thus, even within general
+relativity, the statement that all diffeomorphisms are gauge requires
+qualification. The boundary conditions and the definition of the physical phase
+space matter. This becomes especially important in gravitational radiation,
+black-hole mechanics and the asymptotic symmetry group of spacetime. 15.
+Comparison with electromagnetism I think comparing electromagnetism and GR is
+particularly illuminating. Feature	Electromagnetism	General relativity
+Gauge variable	\(A_\mu\)	\(g_{\mu\nu}\) and spacetime description Gauge
+transformation	\(A_\mu\to A_\mu+\partial_\mu\chi\)	Diffeomorphisms
+Gauge-invariant field	\(F_{\mu\nu}\)	Curvature and relational geometrical
+quantities Background metric	Usually prescribed	Dynamical First-class
+constraints	Gauss constraint	Hamiltonian and momentum constraints Local
+propagating DOF	2	2 There is an important difference, however.
+Electromagnetism has an internal gauge group \(U(1)\), whereas GR's
+diffeomorphism freedom concerns spacetime itself. The two theories therefore
+have different geometrical interpretations, even though their constrained
+Hamiltonian structures have important similarities. This also explains why the
+general covariance of GR should not simply be identified with the local gauge
+invariance of electromagnetism. 16. What does this mean for the physical
+interpretation of spacetime? We can now return to the original question.
+Kretschmann showed that the mathematical form of general covariance cannot by
+itself establish the physical content of GR. But the subsequent development of
+the theory revealed something much deeper: The metric is not merely a
+geometrical background on which physical processes occur. It is itself a
+physical field whose dynamics participate in determining spacetime geometry.
+Moreover, the diffeomorphism freedom means that individual manifold points
+cannot be assigned independent physical identities. Physical predictions must
+ultimately be formulated in terms of invariant or relational quantities. For
+example, rather than asking for the value of a field at a bare manifold point
+\(x\), one might ask for its value where some physical clock field takes the
+value \(\tau\), and some physical spatial reference fields take specified
+values. This is one route towards relational observables. There is a
+difficulty: constructing sufficiently general and useful relational observables
+is not straightforward. But it is precisely here that the physical content of
+general relativity goes beyond Kretschmann's formal observation. 17. My
+synthesis I would summarize the entire discussion in the following hierarchy:
+Level 1 — Coordinate independence The physical predictions do not depend on the
+coordinate system used to describe them. Level 2 — General covariance The
+equations admit a formulation valid in arbitrary smooth coordinates. Level 3 —
+Gauge freedom Different mathematical configurations can represent the same
+physical state. Level 4 — Background independence The geometrical structures
+defining spacetime are not prescribed independently of the dynamics. Level 5 —
+Relational physical content Physical observables are defined through relations
+among dynamical fields and physical reference systems. These levels are
+related, but they are not logically equivalent. In particular, Kretschmann's
+observation concerns Level 2, whereas much of the distinctive physics of GR
+resides in Levels 3–5. Further reading Three particularly useful references: 1.
+J. D. Norton, General Covariance, Gauge Theories and the Kretschmann Objection.
+This directly addresses the apparent contradiction between Kretschmann's
+objection and the gauge interpretation. 2. J. Stachel, The Hole Argument and
+Some Physical and Philosophical Implications. Particularly useful for the
+relationship between diffeomorphisms, spacetime individuation and background
+independence. 3. Stanford Encyclopedia of Philosophy: Symmetry and Symmetry
+Breaking. Its discussion of general covariance and absolute objects is useful
+for placing the issue in the broader theory of symmetry. sites.pitt.edu+2 18. A
+question I would pursue next There is one issue that I think deserves
+particular attention in light of your interest in classical mechanics,
+reduction and constraints. Is general covariance fundamentally a symmetry
+principle, or is it fundamentally a statement about the redundancy of the
+dynamical description? These are not quite the same. In ordinary mechanics,
+symmetry reduction starts with a physical symmetry group acting on phase space.
+We then construct a reduced phase space. In GR, the diffeomorphism group is
+involved in the very definition of physical configurations, and the constraint
+algebra is not an ordinary Lie algebra with constant structure coefficients.
+This raises a deeper question: Can we understand general relativity as a
+particular kind of dynamical reduction, in which spacetime geometry is
+constructed only after eliminating the redundant variables? That would connect
+Kretschmann's observation directly with symplectic reduction, Dirac
+constraints, and the physical meaning of gauge symmetry.

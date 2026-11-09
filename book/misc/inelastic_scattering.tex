@@ -1,0 +1,1366 @@
+\documentclass[11pt,a4paper]{book}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+
+\numberwithin{equation}{chapter}
+\setlist{itemsep=2pt,topsep=4pt}
+
+% --- macros -----------------------------------------------------------
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\ee}{\mathrm{e}}
+\newcommand{\vk}{\bm{k}}
+\newcommand{\vr}{\bm{r}}
+\newcommand{\vp}{\bm{p}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Imag}{\operatorname{Im}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\dsdO}{\frac{\dd\sigma}{\dd\Omega}}
+\newcommand{\afs}{\alpha_{\mathrm{f}}}
+\newcommand{\kB}{\kappa_{\mathrm B}}
+
+\title{Inelastic Scattering:\\[2pt]
+       Classical, Quantum and Relativistic Theory}
+\author{Draft chapters for a physics text\\
+        (companion to \emph{Scattering by Long-Range Forces})}
+\date{}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\chapter*{Scope and conventions}
+\addcontentsline{toc}{chapter}{Scope and conventions}
+
+A collision is \emph{elastic} when the colliding objects emerge with the same
+internal states and the same identities, so that only their relative motion
+changes. It is \emph{inelastic} when kinetic energy is converted into, or
+released from, some other form: internal excitation of one or both partners,
+ionization, rearrangement or capture, radiation, or the creation of new
+particles. This volume is the companion of the volume on elastic scattering and
+follows the same rules of selection. Two broad families of methods are omitted
+on purpose: treatments restricted to interactions of finite range (partial
+waves with short-range potentials, scattering lengths, Breit--Wigner
+resonances of a short-range well), and treatments in which the interaction is
+expanded as a perturbation (the Born and distorted-wave Born approximations,
+Fermi's golden rule, tree-level Feynman diagrams, Bethe--Heitler and
+Klein--Nishina cross sections). What remains is:
+\begin{itemize}
+  \item the dynamics-independent framework: kinematics, thresholds, channels,
+        unitarity and its consequences;
+  \item classical and semiclassical treatments in which the long-range
+        Coulomb (or polarization) force is handled exactly: energy transfer,
+        stopping, capture, radiation, transitions at avoided crossings;
+  \item exact structural results for long-range forces in the multichannel
+        problem: threshold laws, Rydberg series, the Wannier law;
+  \item relativistic inelastic processes that are non-perturbative in the
+        strength of the field: pair creation in strong fields, supercritical
+        Coulomb centres.
+\end{itemize}
+Where a standard result is derived perturbatively (for example the Bethe
+stopping formula) it is quoted, flagged as such, and used only for comparison
+with the non-perturbative limit.
+
+Part~I (Chapters~1--2) sets up kinematics and the classical theory. Part~II
+(Chapters~3--5) treats quantum inelastic scattering: multichannel theory,
+long-range thresholds, and the semiclassical impact-parameter method.
+Part~III (Chapters~6--8) treats relativistic inelastic scattering and closes
+with a comparison of the three settings.
+
+\paragraph{Conventions.}
+\begin{itemize}
+  \item A \emph{channel} is a specification of the species and internal states
+        of the fragments; $i$ labels the initial channel and $f$ a final one.
+        $\Delta E=\varepsilon_f-\varepsilon_i$ is the internal excitation energy
+        ($\Delta E>0$ for excitation, $\Delta E<0$ for de-excitation or
+        ``superelastic'' collisions), and $Q=-\Delta E$ is the Q-value.
+  \item $\mu$ is the reduced mass, $E$ the CM kinetic energy of the relative
+        motion before the collision, $v$ the relative speed, $k_i=\mu v/\hbar$.
+  \item For a Coulomb interaction $V=\alpha/r$ with $\alpha=Z_1Z_2e^2$
+        (Gaussian units), the Sommerfeld parameter is $\eta=\alpha/\hbar v$.
+        Bohr's parameter is $\kB=2z e^2/\hbar v=2\eta$ for a projectile of
+        charge $ze$ and a unit-charge target particle.
+  \item $\omega$ is the angular frequency of an internal transition
+        ($\hbar\omega=\Delta E$), $m$ the electron mass, and $N$ the number
+        density of targets.
+  \item An asterisk marks CM quantities, the subscript L the laboratory frame.
+        In relativistic sections $c=1$ is stated explicitly where used.
+\end{itemize}
+
+\mainmatter
+
+% =====================================================================
+\part{Foundations}
+% =====================================================================
+
+\chapter{Inelastic Collisions: Definitions and Kinematics}
+
+\section{Channels and cross sections}
+
+A collision $a+A\to b+B$ is described by its \emph{channel}: the set of fragment
+species and internal states. The initial channel $i$ is fixed by the
+preparation; each final channel $f$ has its own cross section,
+\begin{equation}\label{eq:sigfi-def}
+  \dd\dot N_f=J\,N\,\frac{\dd\sigma_{fi}}{\dd\Omega}\,\dd\Omega ,
+\end{equation}
+exactly as for elastic scattering. The \emph{total inelastic cross section} is
+$\sigma_{\mathrm{inel}}=\sum_{f\neq i}\sigma_{fi}$ and the total cross section is
+$\sigma_{\mathrm{tot}}=\sigma_{\mathrm{el}}+\sigma_{\mathrm{inel}}$. Because the
+final channels have different momenta, the relation between cross section and
+amplitude contains a velocity ratio. Let the stationary wave function behave as
+$\psi\to\ee^{\ii k_iz}\phi_i+\sum_f f_{fi}\,\ee^{\ii k_fr}\phi_f/r$, where
+$\phi_n$ are the internal states and $k_f$ is the final relative wave number.
+The incident current is $\hbar k_i/\mu$ and the current into $\dd\Omega$ in
+channel $f$ is $(\hbar k_f/\mu)|f_{fi}|^2\dd\Omega$, so
+\begin{equation}\label{eq:sigfi}
+  \frac{\dd\sigma_{fi}}{\dd\Omega}=\frac{k_f}{k_i}\,|f_{fi}(\theta,\varphi)|^2 .
+\end{equation}
+The kinematic factor $k_f/k_i$ vanishes at threshold and will be the origin of
+all threshold laws.
+
+\section{Non-relativistic kinematics with internal excitation}
+
+Energy conservation in the CM frame reads $E=E'+\Delta E$, where $E'$ is the
+final kinetic energy. The final wave number is
+\begin{equation}\label{eq:kf}
+  k_f^2=k_i^2-\frac{2\mu\,\Delta E}{\hbar^2}.
+\end{equation}
+The process is possible only if $E\ge\Delta E$ (a CM threshold); in the lab the
+threshold kinetic energy of the projectile is
+$T_{\mathrm{th}}=\Delta E\,(m_1+m_2)/m_2$, larger because the motion of the
+centre of mass cannot be converted. Let $\rho=m_1/m_2$, and let the target be at
+rest in the lab. The lab angle and cross section follow from the elastic
+formulas with $\rho$ replaced by
+\begin{equation}\label{eq:rhoprime}
+  \rho'=\frac{\rho}{\sqrt{1-\Delta E/E}},
+\end{equation}
+the ratio of the CM velocity to the outgoing CM speed of the projectile:
+\begin{align}
+  \tan\theta_{\mathrm L}&=\frac{\sin\theta^*}{\rho'+\cos\theta^*},\label{eq:inel-labtan}\\
+  \left.\dsdO\right|_{\mathrm L}&=
+     \frac{(1+\rho'^2+2\rho'\cos\theta^*)^{3/2}}{|1+\rho'\cos\theta^*|}
+     \left.\dsdO\right|^*. \label{eq:inel-labxs}
+\end{align}
+The lab energy of the scattered projectile is
+\begin{equation}\label{eq:E1prime}
+  E_1'=\frac{E_{\mathrm L}}{(m_1+m_2)^2}\Bigl[m_1^2+m_2^2\bigl(1-\tfrac{\Delta E}{E}\bigr)
+    +2m_1m_2\sqrt{1-\tfrac{\Delta E}{E}}\,\cos\theta^*\Bigr],
+\end{equation}
+so a spectrum of scattered projectiles at fixed lab angle shows a peak for every
+accessible $\Delta E$. This is the basis of energy-loss spectroscopy.
+
+\section{Relativistic kinematics: invariant mass and thresholds}
+
+In this section $c=1$. For $p_1+p_2\to p_3+p_4$ the invariants
+$s=(p_1+p_2)^2$ and $t=(p_1-p_3)^2$ are as in the elastic case, but now
+$m_3,m_4$ differ from $m_1,m_2$. In the CM frame
+\begin{equation}\label{eq:rel-pstar}
+  p^*=\frac{\lambda^{1/2}(s,m_1^2,m_2^2)}{2\sqrt s},\qquad
+  p_f^*=\frac{\lambda^{1/2}(s,m_3^2,m_4^2)}{2\sqrt s},
+\end{equation}
+with the K\"all\'en function
+$\lambda(x,y,z)=x^2+y^2+z^2-2xy-2xz-2yz$. The reaction can proceed only if
+$\sqrt s\ge\sum_fm_f$. With the target at rest, $s=m_1^2+m_2^2+2m_2E_{\mathrm L}$
+and the threshold lab kinetic energy is
+\begin{equation}\label{eq:Tth}
+  T_{\mathrm{th}}=\frac{\bigl(\sum_fm_f\bigr)^2-(m_1+m_2)^2}{2m_2}.
+\end{equation}
+Examples: $p+p\to p+p+\pi^0$ gives $T_{\mathrm{th}}=2m_\pi+m_\pi^2/2m_p\approx280$~MeV;
+$p+p\to p+p+p+\bar p$ gives $T_{\mathrm{th}}=6m_p\approx5.6$~GeV, whereas a collider
+of two equal beams needs only $E_{\mathrm{beam}}=2m_p$ each. The CM angular cross
+section for a two-body final state is, with $\mathcal M$ the invariant amplitude
+of Chapter~7,
+\begin{equation}\label{eq:rel-inel-xs}
+  \left.\dsdO\right|^*=\frac{1}{64\pi^2s}\,\frac{p_f^*}{p^*}\,|\mathcal M|^2 .
+\end{equation}
+
+\section{Minimal momentum transfer and the adiabatic cutoff}\label{sec:qmin}
+
+In an elastic collision the momentum transfer $q=|\vk_i-\vk_f|$ ranges from $0$
+(forward) to $2k$. In an inelastic collision $k_f\ne k_i$ and
+\begin{equation}\label{eq:qmin}
+  \hbar q_{\min}=\hbar(k_i-k_f)=\frac{p_i^2-p_f^2}{p_i+p_f}
+  \simeq\frac{\Delta E}{v}\qquad(\Delta E\ll E),
+\end{equation}
+since $p_i^2-p_f^2=2\mu\Delta E$. The forward direction is no longer reachable.
+Relativistically, with energy transfer $\omega=\Delta E$ and longitudinal
+momentum transfer $\omega/v$, the invariant momentum transfer is bounded by
+\begin{equation}\label{eq:tmin}
+  |t|_{\min}=\frac{\omega^2}{v^2}-\omega^2=\frac{\omega^2}{\beta^2\gamma^2}.
+\end{equation}
+This result is the first of the structural facts of this volume. The conjugate
+variable to $q$ is the impact parameter, so \eqref{eq:qmin} translates into a
+largest effective impact parameter,
+\begin{equation}\label{eq:bmax}
+  b_{\max}=\frac{\hbar}{q_{\min}}=\frac{\hbar v}{\Delta E}\qquad
+  \Bigl(\text{relativistically }b_{\max}=\frac{\gamma\hbar v}{\Delta E}\Bigr),
+\end{equation}
+Bohr's \emph{adiabatic distance}: a distant passage lasts a time $\sim b/v$, and
+if that is long compared with $1/\omega$ the target follows the perturbation
+adiabatically and is left unexcited. For an infinite-range force the elastic
+cross section diverges because $q_{\min}=0$, whereas the inelastic cross section
+is cut off at $b_{\max}$ and is finite (typically with a logarithm). Inelasticity
+supplies its own infrared cutoff.
+
+\section{Observables: stopping power, straggling, mean free path}
+
+A projectile traversing a medium of number density $N$ loses energy in discrete
+events. Define, for a differential cross section $\dd\sigma(W)$ in the energy
+transferred $W$,
+\begin{equation}\label{eq:S-def}
+  S=-\frac{\dd E}{\dd x}=N\!\int W\,\dd\sigma(W),\quad
+  \Omega^2=\frac{\dd\langle(\Delta E)^2\rangle}{\dd x}=N\!\int W^2\,\dd\sigma(W),\quad
+  \lambda_{\mathrm{mfp}}=\frac1{N\sigma_{\mathrm{inel}}}.
+\end{equation}
+$S$ is the stopping power, $\Omega^2$ the energy straggling and
+$\lambda_{\mathrm{mfp}}$ the mean free path between inelastic events. The
+stopping power weights each event by $W$, so it is dominated by the large
+logarithmic region of intermediate $b$, while $\sigma_{\mathrm{inel}}$ is
+dominated by distant, weak events.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:rhoprime}--\eqref{eq:E1prime} from the velocity
+        addition between the CM and lab frames.
+  \item Show that \eqref{eq:tmin} follows from the invariant
+        $t=(p_1-p_3)^2$ evaluated at $\theta^*=0$ for $\omega\ll E$.
+  \item Evaluate $T_{\mathrm{th}}$ from \eqref{eq:Tth} for
+        $e^-+\mathrm{H}\to e^-+\mathrm{H}^*(n=2)$ and for
+        $p+p\to p+p+p+\bar p$, and compare the lab and collider requirements.
+\end{enumerate}
+
+\section*{Notes and references}
+The kinematics of inelastic collisions is treated in \cite{LL3} (Chapter XVIII), \cite{MM} and \cite{BJ}; relativistic kinematics and phase space in \cite{BK,Hagedorn,PDG}. The adiabatic cutoff and its role in energy loss are due to Bohr \cite{Bohr13,Bohr48}. Stopping power, straggling and the Bethe--Born theory are reviewed in \cite{Fano63,Inokuti71,Sigmund} and in the review on the passage of particles through matter in \cite{PDG}.
+
+% =====================================================================
+\chapter{Classical Inelastic Scattering}
+% =====================================================================
+
+\section{Energy transfer in a Coulomb collision}\label{sec:impulse}
+
+A heavy projectile of charge $ze$ and speed $v$ passes a free electron, at rest,
+at impact parameter $b$. If the deflection of the projectile is negligible the
+trajectory is a straight line and the transverse impulse delivered to the
+electron is
+\begin{equation}\label{eq:impulse}
+  \Delta p_\perp=\int\frac{ze^2\,b\,\dd t}{(b^2+v^2t^2)^{3/2}}=\frac{2ze^2}{bv}.
+\end{equation}
+The longitudinal impulse integrates to zero. The energy transferred is
+\begin{equation}\label{eq:Wb}
+  W(b)=\frac{\Delta p_\perp^2}{2m}=\frac{2z^2e^4}{mv^2b^2},
+\end{equation}
+which reaches the largest possible transfer $W_{\max}=2mv^2$ at
+$b_{\min}=ze^2/mv^2$. Since $b$ and $W$ are related monotonically,
+\begin{equation}\label{eq:dsdW}
+  \frac{\dd\sigma}{\dd W}=2\pi b\left|\frac{\dd b}{\dd W}\right|=\frac{2\pi z^2e^4}{mv^2W^2},
+\end{equation}
+the Rutherford law expressed in energy transfer. The energy loss per unit path in
+a medium with $N_e$ electrons per unit volume is then
+\begin{equation}\label{eq:S-free}
+  S=N_e\!\int W\,\dd\sigma=\frac{4\pi z^2e^4N_e}{mv^2}\,\ln\frac{b_{\max}}{b_{\min}} .
+\end{equation}
+The upper limit is the adiabatic distance \eqref{eq:bmax}; the lower is the
+distance at which the impulse approximation breaks down. A free electron
+supplies no $b_{\max}$ (it is not adiabatic), so for a free target the logarithm
+diverges, just as in elastic Coulomb scattering. Binding of the electron supplies
+the cutoff, as the next section shows.
+
+\section{A bound target: the classical oscillator and Bohr's stopping formula}
+
+Model a bound electron as a harmonic oscillator of frequency $\omega$ with
+charge $-e$. The force from the passing charge is linear in the oscillator
+coordinate, so the energy transferred is given \emph{exactly} by the Fourier
+transform of the force at $\omega$: for an oscillator initially at rest,
+$\Delta E=|\tilde F(\omega)|^2/2m$. For the straight-line trajectory with
+$F_\perp=ze^2b/(b^2+v^2t^2)^{3/2}$ and
+$F_\parallel=ze^2vt/(b^2+v^2t^2)^{3/2}$ the transforms involve the modified Bessel
+functions $K_0$, $K_1$. With $\xi=\omega b/v$ and an isotropic oscillator,
+\begin{equation}\label{eq:DEosc}
+  \Delta E(b)=\frac{2z^2e^4}{mv^2b^2}\,\xi^2\bigl[K_1^2(\xi)+K_0^2(\xi)\bigr].
+\end{equation}
+For $\xi\ll1$, $\xi K_1\to1$ and $\xi K_0\to0$, and \eqref{eq:DEosc} reduces to
+the free-electron result \eqref{eq:Wb}. For $\xi\gg1$ both Bessel functions decay
+like $\ee^{-\xi}$, so $\Delta E\propto\ee^{-2\omega b/v}$: the adiabatic
+suppression of Section~\ref{sec:qmin}, now derived. Integrating over impact
+parameters,
+\begin{equation}\label{eq:Bohr-int}
+  S=N\!\int2\pi b\,\dd b\,\Delta E(b)=\frac{4\pi z^2e^4NZ}{mv^2}\,
+    \int_{\xi_{\min}}^{\infty}\xi\bigl[K_1^2(\xi)+K_0^2(\xi)\bigr]\dd\xi ,
+\end{equation}
+for $Z$ electrons per target atom and $\xi_{\min}=\omega b_{\min}/v$. For small
+$\xi_{\min}$ the integral equals $\ln(2\ee^{-\gamma_E}/\xi_{\min})+O(\xi_{\min})$,
+where $\gamma_E$ is Euler's constant and $2\ee^{-\gamma_E}=1.123$. Hence
+\begin{equation}\label{eq:Bohr}
+  S=\frac{4\pi z^2e^4NZ}{mv^2}\,\ln\frac{1.123\,mv^3}{z\,e^2\,\omega}.
+\end{equation}
+This is Bohr's classical stopping formula. For a real atom $\omega$ is replaced
+by a mean frequency $\bar\omega$ defined by the oscillator-strength-weighted
+average of $\ln\omega_j$. Its range of validity is set by the requirement that
+$b_{\min}=ze^2/mv^2$ exceed the quantum length $\hbar/mv$ below which the
+electron cannot be localized, that is
+\begin{equation}\label{eq:kappaB}
+  \kB=\frac{2ze^2}{\hbar v}\gg1 .
+\end{equation}
+The Bohr parameter $\kB$ is twice the Sommerfeld parameter. Fast light
+projectiles have $\kB\ll1$, where the classical formula fails and Bethe's
+(perturbative, hence quoted rather than derived) formula
+$S=(4\pi z^2e^4NZ/mv^2)\ln(2mv^2/I)$ with mean excitation energy $I$ applies.
+Section~\ref{sec:bloch} shows that a single function interpolates between the
+two.
+
+\section{Thomson's classical ionization cross section}
+
+Treat the bound electron as free but requiring an energy transfer of at least
+the ionization potential $I$. For an incident electron of kinetic energy $E$,
+\eqref{eq:dsdW} reads $\dd\sigma/\dd W=\pi e^4/(EW^2)$. If the projectile and
+target electron are treated as distinguishable and $W$ runs from $I$ to $E$,
+\begin{equation}\label{eq:Thomson}
+  \sigma_{\mathrm{ion}}=\frac{\pi e^4}{E}\Bigl(\frac1I-\frac1E\Bigr).
+\end{equation}
+Including exchange classically, that is summing the Rutherford terms for the two
+outgoing electrons with $W\le E/2$ the energy of the slower one, the integrand is
+$(\pi e^4/E)[1/W^2+1/(E-W)^2]$ and
+\begin{equation}\label{eq:Thomson-ex}
+  \sigma_{\mathrm{ion}}=\frac{\pi e^4}{E}\Bigl(\frac1I-\frac1{E-I}\Bigr).
+\end{equation}
+Both vanish \emph{linearly} at threshold: with $E=I+\varepsilon$,
+$\sigma_{\mathrm{ion}}\simeq\pi e^4\varepsilon/I^3$. Section~\ref{sec:wannier}
+shows that the true threshold law, which accounts for the long-range Coulomb
+forces among the three bodies, has a different exponent.
+
+\section{Capture by a long-range attraction}\label{sec:capture}
+
+A particle in an attractive potential $V=-C/r^n$ with $n>2$ moves in the
+effective potential $V_{\mathrm{eff}}=L^2/(2\mu r^2)-C/r^n$, which has a barrier
+maximum at $r_m^{n-2}=nC\mu/L^2$ of height $V_m=(n-2)L^2/(2n\mu r_m^2)$. If the
+energy exceeds the barrier the particle falls to the centre. With
+$L^2=2\mu Eb^2$ the condition $V_m<E$ determines a critical impact parameter and
+a capture cross section
+\begin{equation}\label{eq:sigcap}
+  \sigma_{\mathrm{cap}}(E)=\pi b_c^2=\pi\Bigl(\frac{n}{n-2}\Bigr)^{(n-2)/n}
+     \Bigl(\frac{nC}{2E}\Bigr)^{2/n}\ \propto\ E^{-2/n}.
+\end{equation}
+Capture removes the particle from the elastic channel into a bound or reactive
+channel, so it is an inelastic cross section, and it is finite even though the
+force has infinite range. Two cases are important.
+\begin{itemize}
+  \item \textbf{Langevin capture} ($n=4$). A charge $ze$ induces a dipole
+        $\alpha_dze/r^2$ in a neutral particle of polarizability $\alpha_d$,
+        giving $V=-C/r^4$ with $C=\alpha_dz^2e^2/2$. Then
+        $\sigma_L=2\pi\sqrt{C/E}=\pi ze\sqrt{2\alpha_d/E}$. The rate coefficient
+        $k_L=v\sigma_L=2\pi ze\sqrt{\alpha_d/\mu}$ is independent of energy, which is why
+        ion--molecule reaction rates are nearly temperature independent.
+  \item \textbf{The limit $n\to2$.} The prefactor tends to 1 and
+        $\sigma_{\mathrm{cap}}\to\pi C/E$, the capture cross section of the
+        attractive inverse-square potential.
+\end{itemize}
+For a pure Coulomb attraction ($n=1$) the effective potential has no barrier
+and classical two-body capture does not occur: capture into Coulomb bound states
+requires an additional energy-loss mechanism (radiation or a third body).
+
+\section{Classical bremsstrahlung and the soft-photon theorem}\label{sec:soft}
+
+A charge that is accelerated radiates, so a Coulomb deflection is an inelastic
+process. For non-relativistic motion the Larmor formula gives the radiated
+energy spectrum of a single collision. In the low-frequency limit, where the
+collision time is short compared with $1/\omega$, the spectrum depends only on the
+net change of velocity $\Delta\bm v$ and not on the details of the orbit:
+\begin{equation}\label{eq:soft-nr}
+  \frac{\dd E_{\mathrm{rad}}}{\dd\omega}\bigg|_{\omega\to0}=
+  \frac{2e^2}{3\pi c^3}\,|\Delta\bm v|^2 .
+\end{equation}
+This is exact for any trajectory. For an elastic Coulomb deflection through angle
+$\Theta$, $|\Delta\bm v|^2=2v^2(1-\cos\Theta)$, so averaging over collisions
+weights the radiation by the momentum-transfer cross section
+$\sigma_{\mathrm{tr}}=\int(1-\cos\theta)\,\dd\sigma$:
+\begin{equation}\label{eq:brems-sigtr}
+  \frac{\dd\sigma_E}{\dd\omega}=\frac{4e^2v^2}{3\pi c^3}\,\sigma_{\mathrm{tr}} .
+\end{equation}
+For an electron on a nucleus of charge $Ze$, $\sigma_{\mathrm{tr}}=4\pi Z^2e^4
+m^{-2}v^{-4}\ln(b_{\max}/b_{\min})$ with $b_{\min}=Ze^2/mv^2$, and the collision
+duration condition gives $b_{\max}\approx v/\omega$:
+\begin{equation}\label{eq:brems}
+  \frac{\dd\sigma_E}{\dd\omega}=\frac{16}{3}\,\frac{Z^2e^6}{m^2c^3v^2}\,
+  \ln\frac{b_{\max}}{b_{\min}},\qquad b_{\max}\approx\frac v\omega .
+\end{equation}
+The logarithm is the same Coulomb logarithm as in the stopping power. The
+classical derivation requires $\eta=Ze^2/\hbar v\gg1$ so that $b_{\min}$ exceeds
+the quantum length $\hbar/mv$; in the opposite limit $\eta\ll1$ the perturbative
+(Born) calculation, not given here, replaces $b_{\min}$ by $\hbar/mv$. The
+classical treatment also requires $\hbar\omega\ll E$, since a classical
+spectrum cannot carry more energy than the electron has.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:impulse} and show that the longitudinal impulse
+        vanishes.
+  \item Evaluate $\int_{\xi_{\min}}^\infty\xi(K_1^2+K_0^2)\,\dd\xi$ numerically for
+        $\xi_{\min}=10^{-3}$ and compare with $\ln(1.123/\xi_{\min})$.
+  \item Derive \eqref{eq:sigcap} from the condition $V_m=E$, and verify the cases
+        $n=4$ and $n\to2$.
+  \item For a proton with $v=10^{-2}c$ passing through helium, find $\kB$ and
+        decide whether Bohr's or Bethe's formula is appropriate.
+\end{enumerate}
+
+\section*{Notes and references}
+Bohr's classical theory of energy loss \cite{Bohr13,Bohr48} is derived in \cite{Jackson} (Chapter 13), including the Bessel-function energy transfer; Bethe's quantum formula \cite{Bethe30} and Bloch's correction \cite{Bloch33} are discussed in Chapter~5. Thomson's classical ionization cross section is \cite{Thomson12}. Langevin's capture formula is \cite{Langevin05}; its application to ion--molecule reactions is in \cite{Gioumousis58}, see also \cite{LevineBernstein}. Classical bremsstrahlung goes back to Kramers \cite{Kramers23}; the soft-photon theorem is discussed in \cite{Jackson} (Chapter 15).
+
+% =====================================================================
+\part{Quantum Inelastic Scattering}
+% =====================================================================
+
+\chapter{Multichannel Scattering Theory}
+
+\section{Channels and coupled equations}
+
+Let the target have internal states $\phi_n(\xi)$ of energy $\varepsilon_n$ and
+expand the wave function as $\Psi=\sum_nF_n(\vr)\phi_n(\xi)$, where $\vr$ is the
+relative coordinate. With $V_{nm}(\vr)=\langle\phi_n|V|\phi_m\rangle$ the
+Schr\"odinger equation becomes a set of coupled equations,
+\begin{equation}\label{eq:cc}
+  \Bigl[-\frac{\hbar^2}{2\mu}\nabla^2+\varepsilon_n-E\Bigr]F_n(\vr)
+  +\sum_mV_{nm}(\vr)F_m(\vr)=0,
+\end{equation}
+exact for a complete set (this is the expansion, not a perturbative truncation).
+The channel wave number is $k_n^2=2\mu(E-\varepsilon_n)/\hbar^2$; the channel is
+\emph{open} for $k_n^2>0$ and \emph{closed} otherwise. For a central coupling,
+projecting on partial waves gives
+\begin{equation}\label{eq:cc-radial}
+  \Bigl[\frac{\dd^2}{\dd r^2}-\frac{\ell(\ell+1)}{r^2}+k_n^2\Bigr]u_n
+  =\frac{2\mu}{\hbar^2}\sum_mV_{nm}(r)\,u_m(r).
+\end{equation}
+The long-range character of the problem enters through the asymptotics of the
+couplings: a net charge gives a diagonal Coulomb term $\alpha/r$ in the channels
+concerned, a charge interacting with a target multipole of order $\lambda$ gives an
+off-diagonal tail $V_{nm}\sim r^{-\lambda-1}$, and, most importantly, a charge
+interacting with the dipole of a target that has degenerate states of opposite
+parity gives $V_{nm}\sim r^{-2}$, an inverse-square coupling that survives
+diagonalization (Section~\ref{sec:GD}). Asymptotically,
+$F_n\to\delta_{n0}\ee^{\ii k_0z}+f_{n0}\ee^{\ii k_nr}/r$ for short-range
+couplings, with the Coulomb-distorted form of the companion volume on elastic scattering
+when charges are involved, and the cross sections are given by \eqref{eq:sigfi}.
+
+\section{Unitarity with inelastic channels}\label{sec:unitarity}
+
+Probability conservation makes the full S-matrix, with all channels included,
+unitary: $S^\dagger S=1$. Consider the elastic channel in a partial wave $\ell$
+and write $S_\ell=\varrho_\ell\,\ee^{2\ii\delta_\ell}$ with $0\le\varrho_\ell\le1$
+and a real $\delta_\ell$; $\varrho_\ell<1$ means that flux is lost to other
+channels. Then
+\begin{align}
+  \sigma_{\mathrm{el}}&=\frac{\pi}{k^2}\sum_\ell(2\ell+1)\,|1-S_\ell|^2,\label{eq:pw-el}\\
+  \sigma_{\mathrm{inel}}&=\frac{\pi}{k^2}\sum_\ell(2\ell+1)\,\bigl(1-\varrho_\ell^2\bigr),\label{eq:pw-inel}\\
+  \sigma_{\mathrm{tot}}&=\frac{2\pi}{k^2}\sum_\ell(2\ell+1)\,\bigl(1-\Real S_\ell\bigr)
+  =\sigma_{\mathrm{el}}+\sigma_{\mathrm{inel}}.\label{eq:pw-tot}
+\end{align}
+Equation \eqref{eq:pw-tot} is the optical theorem in partial waves. The
+inelastic formula \eqref{eq:pw-inel} depends only on $|S_\ell|$ and therefore
+retains its form when Coulomb waves replace plane waves, even though the
+elastic cross section is then infinite. Three consequences follow.
+\begin{itemize}
+  \item \textbf{Unitarity bounds.} Each partial wave obeys
+        $0\le\sigma_{\mathrm{inel}}^{(\ell)}\le\pi(2\ell+1)/k^2$ and
+        $\sigma_{\mathrm{el}}^{(\ell)}\le4\pi(2\ell+1)/k^2$. The inelastic cross
+        section is finite only if $1-\varrho_\ell^2$ falls faster than $1/\ell$.
+  \item \textbf{Absorption implies elastic scattering.} Since $|1-S_\ell|\ge1-\varrho_\ell$,
+        a partial wave cannot absorb without also scattering elastically.
+  \item \textbf{The black disk.} If $S_\ell=0$ for $\ell\le ka$ and $S_\ell=1$
+        beyond, then $\sigma_{\mathrm{inel}}=\pi a^2$ and, from \eqref{eq:pw-el},
+        $\sigma_{\mathrm{el}}=\pi a^2$ also; $\sigma_{\mathrm{tot}}=2\pi a^2=2\sigma_{\mathrm{inel}}$.
+        The elastic part is shadow (diffraction) scattering, required for the
+        wave to be absent behind the absorber. A \emph{quantum} absorber with a
+        classical capture region of cross section $\sigma_{\mathrm{cap}}$ is
+        therefore accompanied by an equal elastic cross section; the classical
+        formulas of Section~\ref{sec:capture} give the inelastic part only.
+\end{itemize}
+
+\section{Reciprocity and detailed balance}
+
+Time-reversal invariance makes the S-matrix, in a suitable basis of states of
+definite total angular momentum, symmetric: $S_{fi}=S_{if}$. Summing and averaging
+over the degenerate states of each channel, with statistical weights $g_i$, $g_f$
+(the numbers of internal and spin states), gives the exact relation
+\begin{equation}\label{eq:detailed}
+  g_i\,k_i^2\,\sigma_{i\to f}=g_f\,k_f^2\,\sigma_{f\to i},
+\end{equation}
+at the same total energy. It connects excitation and de-excitation (``superelastic'')
+cross sections. At the threshold of an exoergic reaction $i\to f$ with $k_i\to0$,
+\eqref{eq:detailed} shows that $\sigma_{i\to f}\propto1/k_i\propto1/v$, the
+familiar $1/v$ law, provided the reverse process $f\to i$ has a finite cross
+section there.
+
+\section{Feshbach projection and the optical potential}
+
+To focus on the elastic channel, split the space with projectors $P$ onto the
+channel(s) of interest and $Q=1-P$ onto the rest. The Schr\"odinger equation
+$(E-H)\Psi=0$ becomes
+$(E-H_{PP})\Psi_P=H_{PQ}\Psi_Q$ and $(E-H_{QQ})\Psi_Q=H_{QP}\Psi_P$. Solving the
+second with outgoing-wave boundary conditions and substituting in the first gives
+an \emph{exact} one-channel equation,
+\begin{equation}\label{eq:optical-pot}
+  \bigl[E-T-U_{\mathrm{opt}}(E)\bigr]\Psi_P=0,\qquad
+  U_{\mathrm{opt}}=V_{PP}+V_{PQ}\,\frac{1}{E-H_{QQ}+\ii0}\,V_{QP}.
+\end{equation}
+The optical potential is non-local and energy-dependent, and above the lowest
+$Q$-space threshold it is complex, because
+$\Imag(E-H_{QQ}+\ii0)^{-1}=-\pi\delta(E-H_{QQ})$ makes
+$\Imag U_{\mathrm{opt}}=-\pi V_{PQ}\,\delta(E-H_{QQ})\,V_{QP}\le0$. A negative
+imaginary part is absorption of flux from the elastic channel. The continuity
+equation $\nabla\cdot\vec j=(2/\hbar)\Imag U\,|\Psi|^2$ gives, for a local
+$U_{\mathrm{opt}}$ (the non-local case replaces the integrand by
+$\Imag\langle\Psi|U|\Psi\rangle$),
+\begin{equation}\label{eq:sig-abs}
+  \sigma_{\mathrm{inel}}=-\frac{2}{\hbar v}\int\Imag U_{\mathrm{opt}}(\vr)\,
+  |\Psi_P^+(\vr)|^2\,\dd^3r .
+\end{equation}
+Equations \eqref{eq:optical-pot}--\eqref{eq:sig-abs} are exact; all the difficulty
+is hidden in $Q$-space. Their value is structural: they show that inelasticity acts
+on the elastic channel as a complex potential whose imaginary part is the
+absorption.
+
+The \emph{real} part has an exact long-range form. A slow charge $ze$ at distance
+$r$ polarizes a neutral target of polarizability $\alpha_d$, inducing a dipole
+$\alpha_dze/r^2$ with interaction energy $-\tfrac12\alpha_d(ze/r^2)^2$, so
+\begin{equation}\label{eq:Vpol}
+  \mathrm{Re}\,U_{\mathrm{opt}}\to-\frac{\alpha_d\,z^2e^2}{2r^4}\qquad(r\to\infty),
+\end{equation}
+the polarization potential. It is the origin of Langevin capture
+(Section~\ref{sec:capture}), valid when the projectile is slow compared with the
+internal motion of the target.
+
+\section{Opening of a new channel: the Wigner cusp}
+
+Consider the elastic S-wave amplitude $S_{ii}$ near the threshold of an S-wave
+channel $f$ that opens at energy $E_{\mathrm{th}}$, with $k_f\to0$. The matrix
+elements are analytic in $k_f$ (not in $E$): $S_{ii}=a+\beta k_f+\dots$ with
+$|a|=1$, and $S_{if}=c\sqrt{k_f}+\dots$ (the $\sqrt{k_f}$ is the flux factor in
+\eqref{eq:sigfi}). Unitarity for the row $i$ above threshold, with $k_f$ real,
+requires $|S_{ii}|^2+|S_{if}|^2=1$, that is $2\Real\beta+|c|^2=0$. Below
+threshold, $k_f=\ii\kappa_f$ is imaginary, channel $f$ is closed, only the
+elastic channel is open, and $|S_{ii}|=1$ requires $\Imag\beta=0$. Therefore
+$\beta=-|c|^2/2$ is real and fixed. Writing $a=\ee^{2\ii\delta^0}$,
+\begin{equation}\label{eq:cusp}
+  \Delta\sigma_{\mathrm{el}}=
+  \begin{cases}
+   -2\sin^2\delta^0\,\sigma_{if}, & E>E_{\mathrm{th}},\\[2pt]
+   \ -\dfrac{\pi}{k_i^2}\,|c|^2\kappa_f\,\sin2\delta^0, & E<E_{\mathrm{th}},
+  \end{cases}
+  \qquad \sigma_{if}=\frac{\pi}{k_i^2}|c|^2k_f .
+\end{equation}
+Above threshold the elastic cross section \emph{drops} by exactly
+$2\sin^2\delta^0$ times the newly opened inelastic cross section, with an
+infinite slope $\propto\sqrt{E-E_{\mathrm{th}}}$; below threshold it has a
+square-root cusp of either sign. This Wigner cusp is a nonperturbative
+consequence of unitarity and analyticity. One checks that the total cross section
+changes by $(\pi/k_i^2)|c|^2k_f\cos2\delta^0$, consistent with
+$\Delta\sigma_{\mathrm{el}}+\sigma_{if}$. Long-range forces in channel $f$ modify
+the analytic dependence on $k_f$ (Chapter~4).
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:pw-inel} from the flux lost from the partial wave
+        $\ell$, and verify the black-disk result $\sigma_{\mathrm{el}}=\sigma_{\mathrm{inel}}$.
+  \item Using \eqref{eq:detailed}, relate the cross section for $2^3S\to1^1S$
+        de-excitation of helium by electrons to the cross section for the
+        reverse excitation.
+  \item Derive \eqref{eq:cusp} in full, including the check on the total cross
+        section.
+\end{enumerate}
+
+\section*{Notes and references}
+Multichannel scattering theory is developed in \cite{Newton,Taylor,GW,Messiah}; R-matrix and close-coupling methods in \cite{Burke}. The projection-operator formalism and the optical potential are due to Feshbach \cite{Feshbach58} (see \cite{Feshbach92} for a textbook account). Threshold cusps were discussed by Wigner \cite{Wigner48} and Baz' \cite{Baz57}. The detailed-balance relation between excitation and de-excitation of atoms by electrons goes back to Klein and Rosseland \cite{KleinRosseland}; see also \cite{LL3,MM}. The polarization potential is discussed in \cite{MM,BJ}.
+
+% =====================================================================
+\chapter{Long-Range Forces and Thresholds}
+% =====================================================================
+
+\section{Threshold laws with a Coulomb tail}\label{sec:thr-coulomb}
+
+Near the threshold of channel $f$ with orbital angular momentum $\ell_f$, the
+transition amplitude is controlled by the value of the final-channel radial
+function in the region $r\lesssim r_0$ where the coupling acts, with
+$k_fr_0\ll1$. For short-range forces $u_f\propto(k_fr)^{\ell_f+1}$ and, with the
+flux normalization, $\sigma_{if}\propto k_f^{2\ell_f+1}$ (Wigner's law; the
+$S$-wave case $\propto k_f$ was used in Section~3.5). If channel $f$ contains a
+Coulomb tail, the Coulomb function that is normalized to unit amplitude at
+infinity has, at small $\rho=k_fr$, the form $F_\ell\simeq C_\ell(\eta_f)\rho^{\ell+1}$ with
+\begin{equation}\label{eq:Cl}
+  C_\ell(\eta)=\frac{2^\ell\,\ee^{-\pi\eta/2}\,|\Gamma(\ell+1+\ii\eta)|}{(2\ell+1)!},
+  \qquad C_0^2=\frac{2\pi\eta}{\ee^{2\pi\eta}-1}.
+\end{equation}
+Therefore the threshold law becomes
+\begin{equation}\label{eq:thr-law}
+  \sigma_{if}\ \propto\ k_f^{\,2\ell_f+1}\,C_{\ell_f}^2(\eta_f),\qquad
+  \eta_f=\frac{\mu_f\alpha_f}{\hbar^2k_f},
+\end{equation}
+with three qualitatively different regimes.
+\begin{itemize}
+  \item \textbf{Neutral final channel} ($\eta_f=0$): Wigner's power law
+        $\sigma\propto k_f^{2\ell+1}$, vanishing at threshold.
+  \item \textbf{Repulsive final channel} ($\eta_f>0$): $C_\ell^2\sim\ee^{-2\pi\eta_f}$
+        and the cross section vanishes faster than any power,
+        $\sigma_{if}\propto\exp(-2\pi\eta_f)$, the Gamow factor of tunnelling
+        out of the Coulomb barrier (nuclear reactions with charged outgoing
+        fragments).
+  \item \textbf{Attractive final channel} ($\eta_f<0$, an electron leaving an
+        ion): $|\Gamma(\ell+1+\ii\eta)|^2\simeq2\pi|\eta|^{2\ell+1}\ee^{-\pi|\eta|}$ so
+        $C_\ell^2\propto|\eta_f|^{2\ell+1}\propto k_f^{-(2\ell+1)}$, which cancels
+        the Wigner factor exactly: the cross section tends to a \emph{finite
+        constant} at threshold, a step. For $\ell_f=0$ the step is
+        \begin{equation}\label{eq:seaton-step}
+          \sigma_{if}\to\frac{2\pi^2|c|^2}{k_i^2\,a_f},\qquad
+          a_f=\frac{\hbar^2}{\mu_f|\alpha_f|},
+        \end{equation}
+        where $a_f$ is the Bohr radius of the final channel and $c$ is the
+        short-range coupling constant of Section~3.5.
+\end{itemize}
+The step \eqref{eq:seaton-step} is the Coulomb version of the Wigner cusp: the
+inelastic cross section does not vanish at threshold, so the elastic cross
+section drops abruptly there instead of with a square-root singularity. It is
+why electron--ion excitation cross sections are finite at threshold while
+electron--atom ones vanish.
+
+\section{Below threshold: quantum defects and Rydberg series}\label{sec:qdt}
+
+The attractive Coulomb tail has infinitely many bound states, and the closed
+channels below a threshold form Rydberg series that converge to it. Outside the
+core of an atom or ion, at $r>r_c$, the radial function is a combination of the
+regular and irregular Coulomb functions $f_\ell$ and $g_\ell$ of the pure
+$-e^2/r$ field. Since the core region has energy scales of order atomic units,
+while the Rydberg series spans energies of order $\mathrm{Ry}/n^2$, the
+matching to the core region is the same for all the Rydberg levels, and can be
+summarised by a slowly varying \emph{quantum defect} $\mu_\ell(E)$:
+\begin{equation}\label{eq:qdt}
+  u_\ell\propto f_\ell(E,r)\cos\pi\mu_\ell+g_\ell(E,r)\sin\pi\mu_\ell .
+\end{equation}
+For $E<0$, requiring decay at infinity gives the levels
+\begin{equation}\label{eq:qd-levels}
+  E_{n\ell}=-\frac{\mathrm{Ry}}{(n-\mu_\ell)^2},
+\end{equation}
+and for $E>0$ the same function gives a scattering phase shift, measured against
+the pure Coulomb waves, of $\delta_\ell=\pi\mu_\ell$. Since $\mu_\ell(E)$ is smooth
+through $E=0$, this is \emph{Seaton's theorem}: the phase shift just above the
+ionization threshold equals $\pi$ times the quantum defect of the Rydberg series
+just below it, and the bound and continuum spectra are two aspects of a single
+function. With coupled channels the quantum defects become a matrix and the
+Rydberg series of a closed channel become resonances in the open channels.
+Because the Rydberg wave function in the core region has density $\propto\nu^{-3}$
+($\nu=n-\mu$), the resonance widths scale as
+\begin{equation}\label{eq:gamma-nu3}
+  \Gamma_n=\frac{\Gamma^*}{\nu_n^3},\qquad
+  \frac{\Gamma_n}{|E_{n+1}-E_n|}\to\frac{\Gamma^*}{2\,\mathrm{Ry}},
+\end{equation}
+since the level spacing is also $\propto\nu^{-3}$. The ratio of width to spacing
+is independent of $n$, so the resonances overlap into a smooth continuum at
+threshold, and the cross section averaged over the resonances continues smoothly
+across it. Each resonance has the asymmetric shape found by Fano from the exact
+diagonalization of one discrete state coupled to a continuum:
+\begin{equation}\label{eq:fano}
+  \sigma(E)=\sigma_a\,\frac{(q+\epsilon)^2}{1+\epsilon^2}+\sigma_b,\qquad
+  \epsilon=\frac{2(E-E_r)}{\Gamma},
+\end{equation}
+with the asymmetry parameter $q$ and the width $\Gamma$ determined by the
+coupling. This is the long-range Coulomb origin of the dense resonance
+structure in electron--ion collisions.
+
+\section{The Wannier threshold law for ionization}\label{sec:wannier}
+
+Ionization of an atom or ion by electron impact leaves three charged particles
+interacting through long-range Coulomb forces: two electrons and the residual ion
+of charge $Z$. Section~2.3 gave Thomson's classical cross section, which rises
+linearly with the excess energy $\varepsilon=E-I$, and phase space for three free
+bodies would give $\varepsilon^2$ (the non-relativistic $n$-body phase space
+scales as $\varepsilon^{(3n-5)/2}$). Wannier (1953) showed that the Coulomb forces
+change the exponent.
+
+Take the nucleus fixed, let the electrons have distances $r_1,r_2$ from it and mutual
+angle $\theta_{12}$, and define the hyperradius $R=\sqrt{r_1^2+r_2^2}$ and the
+hyperangle $\tan\alpha=r_2/r_1$. The potential energy is
+$V=-e^2\mathcal C(\alpha,\theta_{12})/R$ with
+\begin{equation}\label{eq:Wannier-C}
+  \mathcal C(\alpha,\theta_{12})=\frac{Z}{\cos\alpha}+\frac{Z}{\sin\alpha}
+  -\frac1{\sqrt{1-\sin2\alpha\cos\theta_{12}}} .
+\end{equation}
+At the \emph{Wannier ridge} $r_1=r_2$, $\theta_{12}=\pi$ (the two electrons on
+opposite sides of the nucleus at equal distance), $\mathcal C=(4Z-1)/\sqrt2$. The
+ridge is a saddle point of $\mathcal C$: expanding to second order shows it is a
+minimum of the potential in $\theta_{12}$ (stable) and a maximum in $\alpha$
+(unstable: if one electron moves ahead it takes more of the energy and the other
+falls back). With $R$ playing the role of time, the deviations from the ridge
+grow or oscillate as powers of $R$, and the trajectories that lead to
+double escape are those that stay near the ridge through the Coulomb zone
+$R\lesssim e^2/\varepsilon$. The fraction of phase space that does so scales as a
+power of $\varepsilon$ determined by the instability exponent, with the result
+\begin{equation}\label{eq:wannier}
+  \sigma_{\mathrm{ion}}\propto\varepsilon^{\lambda},\qquad
+  \lambda=\frac14\left[\frac{100Z-9}{4Z-1}\right]^{1/2}-\frac14 .
+\end{equation}
+For electron impact on hydrogen ($Z=1$), $\lambda=1.127$; for ionization of
+He$^+$ ($Z=2$), $\lambda=1.056$. The exponent lies between the Thomson value $1$
+and the free-phase-space value $2$, and it is a property of the $1/r$ forces of all
+three pairs. It is a classical result; quantum calculations confirm the same
+exponent very close to threshold. We quote \eqref{eq:wannier} rather than
+re-derive the linear stability analysis here.
+
+\section{Dipole coupling and a geometric series of resonances}\label{sec:GD}
+
+When degenerate target states of opposite parity are coupled by a charge--dipole
+interaction, diagonalization of $V_{nm}\sim r^{-2}$ gives effective
+inverse-square potentials $g/r^2$ in the eigenchannels, with $g$ determined by the
+dipole matrix element. For the radial equation $u''+[k^2-g_{\mathrm{eff}}/r^2]u=0$
+with $g_{\mathrm{eff}}=\ell(\ell+1)+g$, the behaviour at small $r$ changes
+character when $g_{\mathrm{eff}}<-1/4$ (the fall-to-centre condition of the
+inverse-square potential). Writing $g_{\mathrm{eff}}=-(\tfrac14+s^2)$, the
+solutions are
+\begin{equation}\label{eq:logperiodic}
+  u\propto\sqrt r\,\cos(s\ln r+\varphi_0),
+\end{equation}
+which oscillates infinitely often as $r\to0$. Matching to the outer region at
+$kr\sim1$ requires $s\ln(1/k)=n\pi+\text{const}$, so resonances (or bound states)
+occur at
+\begin{equation}\label{eq:GD}
+  E_n=E_0\,\ee^{-2\pi n/s},\qquad\frac{E_{n+1}}{E_n}=\ee^{-2\pi/s},
+\end{equation}
+an infinite geometric series accumulating at threshold (Gailitis and Damburg,
+1963). The cross sections oscillate with the logarithm of the energy with period
+$2\pi/s$. The mechanism is the same scale invariance of the $1/r^2$ potential
+that gave the fall to the centre in the elastic problem.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive the small-$\rho$ behaviour $F_0\simeq C_0\rho$ and the formula for
+        $C_0^2$ from the Coulomb wave function normalization.
+  \item Show that for an attractive final channel with $\ell_f=1$ the threshold
+        law \eqref{eq:thr-law} again gives a finite step.
+  \item Verify that $\mathcal C=(4Z-1)/\sqrt2$ at the ridge, and that the
+        second-order expansion is $\mathcal C_0+\frac{12Z-1}{2\sqrt2}a^2-\frac{1}{8\sqrt2}\phi^2$
+        for $\alpha=\pi/4+a$, $\theta_{12}=\pi-\phi$.
+  \item Compute the ratio $E_{n+1}/E_n$ in \eqref{eq:GD} for $s=0.5$.
+\end{enumerate}
+
+\section*{Notes and references}
+Threshold laws are due to Wigner \cite{Wigner48}; their modification by Coulomb and dipole potentials is reviewed in \cite{Sadeghpour00}. Quantum defect theory is due to Seaton \cite{Seaton58,Seaton83}; see also \cite{Fano70,GFS79,GRF82} and the monographs \cite{FanoRau,Gallagher}. The asymmetric resonance profile is due to Fano \cite{Fano61}. Wannier's classical threshold law is \cite{Wannier53}; a quantum-mechanical derivation of the same exponent was given by Rau \cite{Rau71}. The dipole-induced oscillations are due to Gailitis and Damburg \cite{GD63}; the close-coupling treatment is in \cite{Burke}.
+
+% =====================================================================
+\chapter{The Semiclassical Impact-Parameter Method}
+% =====================================================================
+
+\section{Classical trajectory, quantum internal state}
+
+When the relative motion is classical ($\eta\gg1$) and the energy transferred is
+small compared with the collision energy ($\Delta E\ll E$), the heavy particles
+follow a classical trajectory $\vr(t)$, unchanged by the excitation, while the
+internal state evolves quantum mechanically in the time-dependent field
+$V(\vr(t))$. Expanding in the internal states $\phi_n$ with
+$\omega_{nm}=(\varepsilon_n-\varepsilon_m)/\hbar$,
+\begin{equation}\label{eq:sc-eqs}
+  \ii\hbar\,\dot c_n=\sum_mV_{nm}(\vr(t))\,\ee^{\ii\omega_{nm}t}\,c_m ,
+\end{equation}
+which is exact for given $\vr(t)$ and conserves $\sum_n|c_n|^2=1$. The
+probability of reaching state $n$ in a collision with impact parameter $b$ is
+$P_n(b)=|c_n(\infty)|^2$ and
+\begin{equation}\label{eq:sc-xs}
+  \sigma_n=\int2\pi b\,P_n(b)\,\dd b\quad\text{(straight line),}\qquad
+  \sigma_n=\int\dd\sigma_{\mathrm{R}}(\theta)\,P_n(\theta)\quad\text{(Rutherford orbit).}
+\end{equation}
+Equation \eqref{eq:sc-eqs} is non-perturbative in the coupling: it can be solved
+exactly or numerically for strong fields. The method needs $\eta\gg1$ so that the
+trajectory is classical; it is the quantum counterpart of the classical energy
+transfer of Chapter~2 in which the target is also quantum.
+
+\section{The forced harmonic oscillator: an exact result}\label{sec:forced}
+
+Let the target be a harmonic oscillator of frequency $\omega$ driven by a force
+$F(t)$: $H=\hbar\omega(a^\dagger a+\tfrac12)-xF(t)$. The solution is exact: starting
+in the ground state, the oscillator ends in a \emph{coherent state}, and the
+probability of finding it in level $n$ after the force has acted is Poissonian,
+\begin{equation}\label{eq:poisson}
+  P_n=\frac{\ee^{-\lambda}\lambda^n}{n!},\qquad
+  \lambda=\frac{|\tilde F(\omega)|^2}{2m\hbar\omega}=\frac{\Delta E_{\mathrm{cl}}}{\hbar\omega},
+\end{equation}
+where $\Delta E_{\mathrm{cl}}$ is the classical energy transfer. The mean energy
+transferred is therefore exactly the classical \eqref{eq:DEosc}, for every
+strength of coupling. For a passing charge on a straight line,
+\begin{equation}\label{eq:lambda-b}
+  \lambda(b)=\frac{b_0^2}{b^2}\,\xi^2\bigl[K_1^2(\xi)+K_0^2(\xi)\bigr],\qquad
+  b_0^2=\frac{2z^2e^4}{m\hbar\omega v^2},\quad\xi=\frac{\omega b}{v}.
+\end{equation}
+Two regimes appear. For $b\ll v/\omega$, $\lambda\simeq b_0^2/b^2$: the excitation
+probability $1-\ee^{-\lambda}$ saturates at 1 for $b\lesssim b_0$ and falls as
+$b_0^2/b^2$ beyond. For $b\gg v/\omega$, $\lambda\propto\ee^{-2\omega b/v}$: the
+adiabatic regime, with exponentially small probabilities.
+
+\section{Finite inelastic cross sections}
+
+The total inelastic cross section of the oscillator is
+\begin{equation}\label{eq:sig-osc}
+  \sigma_{\mathrm{inel}}=\int2\pi b\,\bigl[1-\ee^{-\lambda(b)}\bigr]\dd b
+  \simeq\pi b_0^2\Bigl[2\ln\frac{v}{\omega b_0}+O(1)\Bigr],
+\end{equation}
+with $\sigma_n=\int2\pi b\,P_n\,\dd b$ for individual levels. The integral
+converges at both ends: at small $b$ the quantum saturation $P\le1$ cuts off the
+$1/b^2$ growth of the classical energy transfer at $b\sim b_0$, and at large $b$
+the adiabatic factor cuts off the $1/b^2$ tail at $b\sim v/\omega$. This is the
+semiclassical realization of the general statement of Section~1.4: the
+inelastic cross section is finite for an infinite-range force, while the
+elastic Coulomb cross section is not. Higher excitations $n\gg1$ occur for
+$b\ll b_0$, with the characteristic Poisson width.
+
+\section{Bohr, Bethe and Bloch: the role of $b_{\min}$}\label{sec:bloch}
+
+Because the mean energy transfer of an oscillator is exactly classical
+(Section~\ref{sec:forced}), the quantum mechanics of the target does not change
+the stopping power \eqref{eq:Bohr-int}. What differs between the classical and
+quantum treatments is the lower cutoff. Classically $b_{\min}=ze^2/mv^2$ is set by
+the break-down of the impulse approximation; quantum mechanically the projectile
+cannot transfer momentum larger than $2mv$, so the smallest meaningful impact
+parameter is $\sim\hbar/mv$. The effective cutoff is the larger of the two, and
+their ratio is $b_{\min}^{\mathrm{cl}}/b_{\min}^{\mathrm{q}}=\kB/2$. Hence:
+\begin{itemize}
+  \item for $\kB\gg1$ the classical value controls and one finds Bohr's formula
+        \eqref{eq:Bohr}, whose logarithm contains the constant $1.123$;
+  \item for $\kB\ll1$ the quantum value controls and one finds Bethe's formula
+        $\ln(2mv^2/I)$ (quoted, since it is a Born-approximation result);
+  \item at intermediate $\kB$ Bloch's formula (quoted) interpolates between them,
+        \begin{equation}\label{eq:bloch}
+          L=\ln\frac{2mv^2}{I}+\psi(1)-\Real\,\psi\!\Bigl(1+\ii\,\frac{\kB}{2}\Bigr),
+        \end{equation}
+        where $\psi$ is the digamma function and $S=(4\pi z^2e^4NZ/mv^2)L$.
+\end{itemize}
+The two limits of \eqref{eq:bloch} can be checked: for $\kB\to0$,
+$\Real\,\psi(1+\ii y)-\psi(1)=O(y^2)\to0$ and $L\to\ln(2mv^2/I)$, while for
+$\kB\to\infty$, $\Real\,\psi(1+\ii y)\to\ln y$ and
+$L\to\ln\bigl[2mv^3\hbar/(Ize^2)\bigr]-\gamma_E=\ln\bigl[1.123\,mv^3/(ze^2\omega)\bigr]$
+with $I=\hbar\omega$, which is Bohr's formula \eqref{eq:Bohr} including the
+constant $1.123$. The digamma function is the same one that appeared in the exact
+elastic Coulomb problem; the parameter $\kB=2\eta$ governs the classical limit in
+both.
+
+\section{Nonadiabatic transitions: the Landau--Zener model}\label{sec:LZ}
+
+Slow collisions are better described in a basis of states that follow the
+instantaneous interaction. When two \emph{diabatic} potential curves cross at a
+separation $R_x$, with diabatic energies $H_{11}(R)$, $H_{22}(R)$ and a coupling
+$H_{12}$, the system can either stay on the diabatic curve (jumping between
+adiabatic curves) or follow the adiabatic one. Near the crossing the diabatic
+energy difference changes linearly in time, $\varepsilon(t)=\dot\varepsilon\,t$
+with $\dot\varepsilon=v_r|\Delta F|$, where $v_r$ is the radial velocity at the
+crossing and $\Delta F=\dd(H_{11}-H_{22})/\dd R$. The Landau--Zener model
+(constant $H_{12}$, linear $\varepsilon$) is exactly solvable and gives the
+probability of remaining diabatic in one passage,
+\begin{equation}\label{eq:LZ}
+  P_D=\exp\Bigl(-\frac{2\pi H_{12}^2}{\hbar\,v_r\,|\Delta F|}\Bigr).
+\end{equation}
+The result is non-perturbative in $H_{12}$: for strong coupling or slow motion
+$P_D\to0$ (adiabatic following), for weak coupling or fast motion $P_D\to1$. A
+collision passes the crossing twice, on the way in and on the way out, so the
+probability of ending on the other adiabatic curve is
+\begin{equation}\label{eq:LZ2}
+  P_{12}=2P_D(1-P_D)\qquad\text{(phase-averaged)},
+\end{equation}
+with Stueckelberg interference oscillations $4P_D(1-P_D)\sin^2\Phi$ when the phase
+$\Phi$ accumulated between the two passages is retained. The cross section is
+obtained by integrating over $b$ with $v_r(b)=v\sqrt{1-U-b^2/R_x^2}$, where
+$U=V(R_x)/E$:
+\begin{equation}\label{eq:sigLZ}
+  \sigma_{12}=4\pi R_x^2\int_0^{\sqrt{1-U}}x\,P_D(x)\,[1-P_D(x)]\,\dd x,\qquad
+  P_D(x)=\exp\!\Bigl(-\frac{A}{\sqrt{1-U-x^2}}\Bigr),
+\end{equation}
+with $x=b/R_x$ and $A=2\pi H_{12}^2/(\hbar v|\Delta F|)$.
+
+\section{Harpooning and the adiabaticity of Coulomb excitation}
+
+Long-range Coulomb forces produce crossings at large separations. In the
+collision of an alkali atom A with a halogen B, the covalent (neutral) curve is
+nearly flat at large $R$, while the ionic curve ($\mathrm A^+\mathrm B^-$) lies above
+it by $\Delta E_\infty=I_{\mathrm A}-\mathcal A_{\mathrm B}$ (ionization energy minus
+electron affinity) and falls as the Coulomb attraction:
+$V_{\mathrm{ion}}(R)=\Delta E_\infty-e^2/R$. The curves cross at
+\begin{equation}\label{eq:harpoon}
+  R_x=\frac{e^2}{I_{\mathrm A}-\mathcal A_{\mathrm B}}=\frac{14.40\ \text{eV\,\AA}}{I_{\mathrm A}-\mathcal A_{\mathrm B}} .
+\end{equation}
+For Na+Cl, $I-\mathcal A=1.53$~eV and $R_x\approx9$~\AA, so electron transfer
+(the ``harpoon'' mechanism) occurs at a distance large compared with the atomic
+sizes and gives reactive cross sections of order $\pi R_x^2\sim10^2$~\AA$^2$.
+The weak coupling $H_{12}$ at such a distance is the reason why the
+Landau--Zener probability \eqref{eq:LZ} governs the outcome.
+
+A second use of the same ideas concerns Coulomb excitation of nuclei at
+$\eta\gg1$. The relative motion follows the Rutherford orbit, with distance of
+closest approach $a=\alpha/(2E)$ in a head-on collision, and \eqref{eq:sc-eqs}
+describes the multiple excitation of the target. Whether a transition with energy
+$\Delta E$ is efficiently excited is governed by the Massey parameter
+\begin{equation}\label{eq:xi-massey}
+  \xi=\eta_f-\eta_i\simeq\eta\,\frac{\Delta E}{2E}=\frac{\Delta E\,a}{\hbar v}:
+\end{equation}
+excitation is strongly suppressed when $\xi\gg1$ (the collision is adiabatic)
+and unsuppressed when $\xi\lesssim1$. This is the Coulomb-orbit form of
+\eqref{eq:bmax}.
+
+\section{Problems}
+\begin{enumerate}
+  \item Show that for the forced oscillator the mean number of quanta
+        transferred is $\lambda$ in \eqref{eq:poisson}, and that the variance
+        is also $\lambda$.
+  \item Evaluate the two limits of \eqref{eq:lambda-b} and obtain
+        \eqref{eq:sig-osc} by cutting the integral at $b_0$ and $v/\omega$.
+  \item Expand $\Real\,\psi(1+\ii y)$ for small and large $y$ and verify the two
+        limits of \eqref{eq:bloch}.
+  \item For K+Br$_2$ ($I_{\mathrm K}=4.34$~eV, $\mathcal A_{\mathrm{Br_2}}\approx1.0$~eV)
+        estimate $R_x$ and the harpoon cross section.
+\end{enumerate}
+
+\section*{Notes and references}
+The semiclassical impact-parameter method and its application to Coulomb excitation are reviewed in \cite{Alder56,AlderWinther}; collision-induced transitions between molecular states are treated in \cite{MM,BM,Child,NU}. The Landau--Zener formula is \cite{Landau32,Zener32}, with the interference oscillations of Stueckelberg \cite{Stueckelberg32}. The adiabatic criterion is due to Massey \cite{Massey49}. The forced harmonic oscillator and its coherent-state solution are in \cite{Husimi53,Glauber63}. The stopping-power formulas of Bohr, Bethe and Bloch are \cite{Bohr13,Bethe30,Bloch33}; see \cite{Fano63,Inokuti71} for the quantum theory. The harpoon mechanism is discussed in \cite{LevineBernstein,Child}.
+
+% =====================================================================
+\part{Relativistic Inelastic Scattering}
+% =====================================================================
+
+\chapter{Classical Relativistic Inelastic Scattering}
+
+\section{Energy transfer by a relativistic charge}
+
+The transverse impulse delivered by a fast charge $ze$ to a particle at rest at
+impact parameter $b$ is unchanged by relativity. In the rest frame of the target
+the fields of the moving charge are, in Gaussian units,
+\begin{equation}\label{eq:rel-fields}
+  E_\perp(t)=\frac{\gamma ze\,b}{(b^2+\gamma^2v^2t^2)^{3/2}},\qquad
+  E_\parallel(t)=-\frac{\gamma ze\,vt}{(b^2+\gamma^2v^2t^2)^{3/2}},
+\end{equation}
+and $\int eE_\perp\,\dd t=2ze^2/(bv)$: the factor $\gamma$ in the field is
+compensated by the Lorentz-contracted duration of the encounter. Thus the
+energy transferred to a free electron is again $W=\Delta p_\perp^2/2m=2z^2e^4/(mv^2b^2)$
+and, with $W=-t/2m$ and the invariant Rutherford law
+$\dd\sigma/\dd t=4\pi z^2e^4/(\beta^2t^2)$,
+\begin{equation}\label{eq:rel-dsdW}
+  \frac{\dd\sigma}{\dd W}=\frac{2\pi z^2e^4}{mv^2W^2},\qquad W\ll W_{\max}.
+\end{equation}
+The largest energy a heavy projectile of mass $M$ can transfer to a free electron
+is
+\begin{equation}\label{eq:Wmax}
+  W_{\max}=\frac{2mc^2\beta^2\gamma^2}{1+2\gamma m/M+(m/M)^2}\ \simeq\ 2mc^2\beta^2\gamma^2,
+\end{equation}
+so the classical minimum impact parameter becomes
+$b_{\min}=ze^2/(\gamma mv^2)$, found by equating $W(b)=W_{\max}$. The quantum
+cutoff $\hbar/\gamma mv$ has the same ratio $\kB/2$ to $b_{\min}$ as in the
+non-relativistic case, because $\gamma$ cancels.
+
+\section{A bound target in a relativistic field}
+
+For an oscillator of frequency $\omega$, the exact energy transfer is again
+$|\tilde F(\omega)|^2/2m$. Fourier transforming \eqref{eq:rel-fields}, with
+$\xi=\omega b/(\gamma v)$ (the adiabatic parameter now involves the
+\emph{contracted} duration $b/\gamma v$):
+\begin{equation}\label{eq:rel-DE}
+  \Delta E(b)=\frac{2z^2e^4}{mv^2b^2}\,\xi^2\Bigl[K_1^2(\xi)+\frac1{\gamma^2}K_0^2(\xi)\Bigr].
+\end{equation}
+The longitudinal part is suppressed by $1/\gamma^2$. The adiabatic distance is
+$b_{\max}=\gamma v/\omega$ (cf.\ \eqref{eq:bmax}): relativistic charges transfer
+energy out to larger distances because their transverse field is boosted.
+
+\section{The relativistic Bohr formula and the relativistic rise}
+
+Integrating \eqref{eq:rel-DE} over impact parameters as in \eqref{eq:Bohr-int}
+requires $\int_{\xi_{\min}}^\infty\xi K_1^2\,\dd\xi=\ln(1.123/\xi_{\min})-\tfrac12$
+and $\int_0^\infty\xi K_0^2\,\dd\xi=\tfrac12$, so the bracketed integral becomes
+$\ln(1.123/\xi_{\min})-\tfrac12+1/(2\gamma^2)=\ln(1.123/\xi_{\min})-\beta^2/2$. With
+$\xi_{\min}=\omega b_{\min}/(\gamma v)=\omega ze^2/(\gamma^2mv^3)$,
+\begin{equation}\label{eq:rel-Bohr}
+  S=\frac{4\pi z^2e^4NZ}{mv^2}\Bigl[\ln\frac{1.123\,\gamma^2mv^3}{z\,e^2\,\omega}
+  -\frac{\beta^2}{2}\Bigr].
+\end{equation}
+Two features distinguish this from the non-relativistic result \eqref{eq:Bohr}.
+First, the logarithm contains $\gamma^2$: after its minimum, at $\beta\gamma$ of a few, the stopping power rises logarithmically with energy, the
+\emph{relativistic rise}, because the transverse field reaches farther. Second,
+the $-\beta^2/2$ term. The rise does not continue indefinitely in a medium: when
+$b_{\max}=\gamma v/\omega$ exceeds the interatomic distance the field is screened
+by the polarization of the medium (the density effect of Fermi), and the
+stopping power saturates at a plateau; we quote this effect without derivation.
+
+\section{Relativistic soft radiation}\label{sec:rel-soft}
+
+For a relativistic charge the radiated spectrum in the low-frequency limit
+depends again only on the initial and final velocities, now through
+\begin{equation}\label{eq:rel-soft}
+  \frac{\dd^2I}{\dd\omega\,\dd\Omega}\bigg|_{\omega\to0}=\frac{e^2}{4\pi^2c}\,
+  \left|\frac{\bm n\times(\bm n\times\bm\beta')}{1-\bm n\cdot\bm\beta'}-
+        \frac{\bm n\times(\bm n\times\bm\beta)}{1-\bm n\cdot\bm\beta}\right|^2 ,
+\end{equation}
+where $\bm\beta,\bm\beta'$ are the velocities before and after the collision and
+$\bm n$ is the direction of observation. This follows from the exact integral of
+the Li\'enard--Wiechert radiation amplitude, whose integrand is a total time
+derivative. For $\beta\ll1$, integrating over angles with
+$\int|\bm n\times(\bm n\times\Delta\bm\beta)|^2\dd\Omega=(8\pi/3)|\Delta\bm\beta|^2$
+reproduces \eqref{eq:soft-nr}. For $\gamma\gg1$ the factors $1/(1-\bm n\cdot\bm\beta)$ concentrate the
+radiation in a cone of angle $\sim1/\gamma$ about the velocity, and the spectrum
+is flat up to frequencies that grow with $\gamma$. Like \eqref{eq:soft-nr}, the
+result is exact classically, but it requires $\hbar\omega\ll E$ and, for Coulomb
+collisions, a classical orbit ($\eta\gg1$); at low $\eta$ the perturbative
+Bethe--Heitler result applies and is not derived here.
+
+\section{Relativistic capture revisited}
+
+In the elastic volume, the classical orbit of a relativistic particle in an
+attractive Coulomb field was shown to spiral into the centre when
+$L<|\alpha|/c$, with cross section
+\begin{equation}\label{eq:rel-cap}
+  \sigma_{\mathrm{cap}}=\frac{\pi\alpha^2}{p^2c^2}.
+\end{equation}
+This is an absorptive (inelastic) cross section produced by relativity alone,
+with no non-relativistic counterpart for a $1/r$ potential: compare the barrier
+capture of Section~\ref{sec:capture}, which needs $n>2$. Its quantum meaning is
+that $L_c/\hbar=\alpha/\hbar c=Z\afs<1$ for $Z<137$, smaller than the smallest
+non-zero orbital angular momentum: for light nuclei the capture region is smaller
+than a wavelength and the classical process does not exist. For $Z>137$ it does,
+and it connects to the supercritical Coulomb problem of Section~\ref{sec:supercrit}.
+
+\section{Problems}
+\begin{enumerate}
+  \item Verify \eqref{eq:rel-fields} by Lorentz-transforming the Coulomb field,
+        and prove $\int eE_\perp\dd t=2ze^2/(bv)$.
+  \item Derive \eqref{eq:Wmax} from the kinematics of a heavy particle colliding
+        with a free electron at rest.
+  \item Estimate, from \eqref{eq:rel-Bohr}, the factor by which $S$ at $\gamma=100$
+        exceeds its value at $\gamma=1$ when $\ln(mv^3/ze^2\omega)=10$ at
+        $\gamma=1$, ignoring the density effect.
+\end{enumerate}
+
+\section*{Notes and references}
+Relativistic energy transfer and the relativistic rise are treated in \cite{Jackson} (Chapter 13); the density effect was first calculated by Fermi \cite{Fermi40}. For comprehensive reviews of the stopping power at high energies see \cite{Sigmund,PDG}. The relativistic soft-photon formula and its derivation from the Li\'enard--Wiechert potentials are in \cite{Jackson,LL2}.
+
+% =====================================================================
+\chapter{Relativistic Quantum Inelastic Scattering}
+% =====================================================================
+
+\section{Generalized unitarity and phase space}
+
+With the invariant amplitude defined by
+$S_{fi}=\delta_{fi}+\ii(2\pi)^4\delta^4(P_f-P_i)\mathcal M_{fi}$ (units
+$\hbar=c=1$), unitarity of $S$ for \emph{all} channels gives the exact relation
+\begin{equation}\label{eq:gen-unit}
+  -\ii\bigl(\mathcal M_{fi}-\mathcal M^*_{if}\bigr)=\sum_n\int\dd\Phi_n\,
+  \mathcal M^*_{nf}\,\mathcal M_{ni},
+\end{equation}
+where the sum runs over every intermediate state $n$ and $\dd\Phi_n$ is the
+Lorentz-invariant phase space. Setting $f=i$ and forward kinematics,
+\begin{equation}\label{eq:rel-optical}
+  2\,\Imag\mathcal M_{ii}(s,t=0)=\sum_n\int\dd\Phi_n\,|\mathcal M_{ni}|^2
+  =F\,\sigma_{\mathrm{tot}},\qquad F=4p^*\sqrt s,
+\end{equation}
+the optical theorem with $\sigma_{\mathrm{tot}}$ summed over all channels. The
+two-body phase space is $\Phi_2=p_f^*/(4\pi\sqrt s)$, and near threshold the
+phase space of $n$ non-relativistic bodies behaves as
+$\Phi_n\propto\varepsilon^{(3n-5)/2}$ with $\varepsilon$ the kinetic energy above
+threshold. Relations \eqref{eq:gen-unit}--\eqref{eq:rel-optical} hold with no
+expansion in the coupling.
+
+\section{Thresholds, cuts and Coulomb final-state factors}
+
+Equation \eqref{eq:gen-unit} implies that $\mathcal M_{ii}(s)$ has a branch point at
+each threshold $s_{\mathrm{th}}=(\sum_fm_f)^2$ and a right-hand cut above it. The
+non-relativistic Wigner cusp of Section~3.5 is its low-energy form, with
+$k_f\to p_f^*$: near an S-wave threshold the elastic cross section drops by
+$2\sin^2\delta^0$ times the new inelastic cross section. The Coulomb tails of
+Chapter~4 persist relativistically as the \emph{Sommerfeld--Sakharov factor}: for a pair
+of final particles with opposite charges and relative velocity $v_{\mathrm{rel}}$
+the threshold cross section is multiplied by
+\begin{equation}\label{eq:sakharov}
+  S=\frac{2\pi|\eta|}{1-\ee^{-2\pi|\eta|}},\qquad|\eta|=\frac{\alpha}{v_{\mathrm{rel}}},
+\end{equation}
+which makes the pair-production cross section jump to a finite value at threshold
+instead of vanishing like the phase-space factor $\beta$. For like-charged final
+particles the corresponding factor $2\pi\eta/(\ee^{2\pi\eta}-1)$ is the
+Gamow suppression. These factors are the relativistic images of the threshold
+laws \eqref{eq:thr-law} and use the same function $C_0^2(\eta)$.
+
+\section{Impact-parameter unitarity and bounds on cross sections}
+
+At high energy and small angles the amplitude can be written in terms of a profile
+function in impact-parameter space, $S(b)=\ee^{2\ii\delta(b)}$ with
+$\Imag\delta\ge0$. The cross sections follow exactly from the profile
+$\Gamma(b)=1-S(b)$:
+\begin{equation}\label{eq:b-unit}
+  \sigma_{\mathrm{tot}}=2\!\int\!\dd^2b\,\Real\Gamma,\quad
+  \sigma_{\mathrm{el}}=\!\int\!\dd^2b\,|\Gamma|^2,\quad
+  \sigma_{\mathrm{inel}}=\!\int\!\dd^2b\,\bigl(1-|S|^2\bigr).
+\end{equation}
+These are the continuum counterparts of \eqref{eq:pw-el}--\eqref{eq:pw-tot}. For a
+black disk of radius $R$ ($S=0$ for $b<R$) they give
+$\sigma_{\mathrm{el}}=\sigma_{\mathrm{inel}}=\pi R^2$ and
+$\sigma_{\mathrm{el}}/\sigma_{\mathrm{tot}}=\tfrac12$.
+
+Unitarity also bounds how fast total cross sections can grow, provided the range
+of the force is finite. Suppose the amplitude has its nearest singularity in $t$ at
+the two-pion threshold $t_0=4m_\pi^2$. Then in impact-parameter space the
+profile decays as $\ee^{-2m_\pi b}$ times a power of $s$, so $\Gamma(b)$ is
+negligible beyond
+$b_{\max}\simeq\ln(s/s_0)/(2m_\pi)$, with $s_0$ a scale that unitarity alone does
+not fix. Since $|\Gamma|\le2$,
+\begin{equation}\label{eq:froissart}
+  \sigma_{\mathrm{tot}}\ \lesssim\ 4\pi b_{\max}^2=\frac{\pi}{m_\pi^2}\,\ln^2\frac{s}{s_0},
+\end{equation}
+the Froissart--Martin bound (our argument is heuristic; the rigorous proof uses
+analyticity in $\cos\theta$ within the Lehmann--Martin ellipse). The contrast with
+the long-range case is instructive: for a massless exchanged particle there is no
+mass gap, no $b_{\max}$, and the \emph{elastic} Coulomb cross section is already
+infinite. The finiteness of inelastic cross sections discussed in
+Section~\ref{sec:qmin} comes from a different mechanism, the adiabatic cutoff.
+
+\section{Pair creation as Landau--Zener tunnelling in the Dirac sea}\label{sec:schwinger}
+
+The Landau--Zener formula \eqref{eq:LZ} gives a non-perturbative derivation of
+vacuum pair creation in a uniform electric field $\mathcal E$. A Dirac particle of
+momentum $\bm p$ in a uniform field has kinetic momentum $p_z-e\mathcal Et$. For
+each $\bm p$, the diabatic states are the positive-energy and negative-energy
+branches. At $p_\perp=0$ they have energies $\pm c(p_z-e\mathcal Et)$, which cross
+as the momentum sweeps through zero, and the coupling that opens the gap is the
+mass term, $H_{12}=mc^2$. The rate of change of the diabatic energy difference is
+$|\dot\varepsilon|=2ce\mathcal E$. The Landau--Zener probability of the system
+staying on the diabatic curve, which is the probability that a negative-energy
+state becomes a positive-energy electron, i.e.\ that a pair is created, is
+\begin{equation}\label{eq:LZ-pair}
+  P=\exp\Bigl(-\frac{2\pi m^2c^4}{\hbar\cdot2ce\mathcal E}\Bigr)
+   =\exp\Bigl(-\frac{\pi m^2c^3}{\hbar e\mathcal E}\Bigr)=\exp\Bigl(-\pi\frac{\mathcal E_c}{\mathcal E}\Bigr),
+\end{equation}
+with the critical field $\mathcal E_c=m^2c^3/(e\hbar)=1.3\times10^{18}$~V/m. For
+nonzero $p_\perp$ the replacement $m^2\to m^2+p_\perp^2/c^2$ gives a Gaussian in
+$p_\perp$. Counting modes, with two spin states, a momentum range $\Delta p_z=e\mathcal ET$ and
+$\int\dd^2p_\perp\exp(-\pi cp_\perp^2/e\mathcal E\hbar)=e\mathcal E\hbar/c$, the pair
+production rate per unit volume and time is
+\begin{equation}\label{eq:schwinger}
+  w=2\,\frac{e\mathcal E}{(2\pi\hbar)^3}\,\frac{e\mathcal E\hbar}{c}\,\ee^{-\pi\mathcal E_c/\mathcal E}
+   =\frac{(e\mathcal E)^2}{4\pi^3\hbar^2c}\,\ee^{-\pi\mathcal E_c/\mathcal E},
+\end{equation}
+the leading term of Schwinger's result, whose complete form is a sum over
+multiple pairs, $\sum_{n\ge1}n^{-2}\exp(-n\pi\mathcal E_c/\mathcal E)$ (quoted).
+The same exponent follows from WKB tunnelling through the gap of width
+$2mc^2$, which a uniform field spans over a distance $2mc^2/e\mathcal E$:
+\begin{equation}
+  2\cdot\frac{1}{\hbar c}\int_{-x_0}^{x_0}\!\sqrt{m^2c^4-(e\mathcal Ex)^2}\,\dd x
+  =\frac{\pi m^2c^3}{\hbar e\mathcal E},
+\end{equation}
+which links the result to the Klein step of the elastic volume: for a step of
+height $V_0>2mc^2$ and width $w\gg\hbar/mc$ the transmission is exponentially
+small, with the Sauter--Schwinger exponent. The process is essentially
+non-perturbative in the field: the rate is non-analytic in the coupling $e$ at
+$e=0$ and cannot be expanded in a power series in it.
+
+\section{Supercritical Coulomb fields}\label{sec:supercrit}
+
+The Dirac equation for a point nucleus of charge $Ze$ gives the 1s level
+$E=mc^2\sqrt{1-\zeta^2}$ (from the Sommerfeld--Dirac formula with
+$n=1$, $\kappa_D=-1$, $\zeta=Z\afs$), which vanishes at $\zeta=1$,
+$Z=137$, where the point-nucleus problem becomes singular. For a nucleus of finite
+radius (uniformly charged sphere, $R_N\approx1.2A^{1/3}$~fm) the potential is
+regular at the origin and the level continues to fall, reaching
+$E=-mc^2$, the upper edge of the negative-energy continuum, at the critical
+charge $Z_{\mathrm{cr}}\approx173$. For $Z>Z_{\mathrm{cr}}$ the 1s state dives
+into the negative-energy continuum and becomes a resonance. It decays by
+\emph{spontaneous} positron emission: the vacuum is unstable, with two electrons
+filling the 1s shell (spin 1/2) and two positrons escaping. This is a
+non-perturbative inelastic process, and in the formalism of Fano
+(Section~\ref{sec:qdt}), with a discrete state coupled to a continuum, the width
+near threshold grows as
+\begin{equation}
+  \Gamma(Z)\propto(Z-Z_{\mathrm{cr}})^2,
+\end{equation}
+to leading order, because the coupling matrix element vanishes linearly at
+$Z_{\mathrm{cr}}$. Positron scattering from the supercritical nucleus shows a
+resonance of Fano shape at the energy of the diving level. The effect has been
+sought in collisions of heavy ions (such as U+U, with combined charge $184$) but
+the nuclei remain together only $\sim10^{-21}$~s, and the interpretation of the
+experiments is not settled.
+
+\section{Problems}
+\begin{enumerate}
+  \item Derive \eqref{eq:rel-optical} from \eqref{eq:gen-unit} and check that it
+        reduces to \eqref{eq:pw-tot} summed over partial waves.
+  \item Show that the exponent in \eqref{eq:LZ-pair} equals the WKB tunnelling
+        integral across the gap of the Dirac sea.
+  \item Compute $\mathcal E_c=m^2c^3/e\hbar$ in V/m and the corresponding laser
+        intensity.
+  \item Find the 1s energy of a point nucleus for $Z=100,\,130$ and estimate the
+        point at which the level reaches $E=0$.
+\end{enumerate}
+
+\section*{Notes and references}
+The general unitarity relations and the Lorentz-invariant phase space are treated in \cite{Weinberg,BK,PS}; the analytic S-matrix in \cite{Eden,MartinSpearman}. The Froissart bound is \cite{Froissart61}, with the sharpened version of \cite{Martin63}. Pair creation in a constant field was calculated by Sauter \cite{Sauter31}, Heisenberg and Euler \cite{HE36} and Schwinger \cite{Schwinger51}; see \cite{Brezin70} for oscillating fields and \cite{Dunne05,GelisTanji} for reviews. The Landau--Zener description of the same exponent uses \cite{Landau32,Zener32}. Supercritical Coulomb fields are discussed in \cite{Pomeranchuk45,ZP71,Reinhardt77,Greiner}. Sakharov--Sommerfeld factors are \cite{Sakharov48,Sommerfeld31}.
+
+% =====================================================================
+\chapter{Synthesis: Inelastic Collisions in Three Settings}
+% =====================================================================
+
+\section{The three descriptions compared}
+
+Two dimensionless parameters control the results: the Bohr parameter
+$\kB=2\eta=2ze^2/\hbar v$, which says whether the motion is classical, and the
+adiabatic parameter $\xi=\omega b/v$ (with $\gamma$ in the relativistic case),
+which says whether a target of excitation frequency $\omega$ responds at impact
+parameter $b$.
+
+\medskip
+\noindent\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{3.7cm}>{\raggedright\arraybackslash}p{4.2cm}>{\raggedright\arraybackslash}p{4.2cm}@{}}
+\hline
+ & \textbf{Classical} & \textbf{Quantum} & \textbf{Relativistic}\\
+\hline
+Energy transfer to a bound target &
+  Bessel formula, \eqref{eq:DEosc}, exact for a harmonic target &
+  Poisson distribution with the same mean, \eqref{eq:poisson} &
+  \eqref{eq:rel-DE} with contracted duration and $1/\gamma^2$ longitudinal term\\[6pt]
+Stopping power &
+  Bohr, \eqref{eq:Bohr}, $\kB\gg1$ &
+  Bethe, $\kB\ll1$; Bloch interpolation, \eqref{eq:bloch} &
+  $\ln(1.123\gamma^2\cdots)-\beta^2/2$, \eqref{eq:rel-Bohr}; density effect\\[6pt]
+Cutoffs &
+  $b_{\min}=ze^2/mv^2$, $b_{\max}=v/\omega$ &
+  $b_{\min}\sim\hbar/mv$, $b_{\max}=\hbar v/\Delta E$ &
+  $b_{\min}=ze^2/\gamma mv^2$, $b_{\max}=\gamma v/\omega$\\[6pt]
+Capture / absorption &
+  barrier capture $\propto E^{-2/n}$, \eqref{eq:sigcap}; none for $1/r$ &
+  black disk: $\sigma_{\mathrm{el}}=\sigma_{\mathrm{inel}}$, Section~3.2 &
+  $\pi\alpha^2/p^2c^2$, \eqref{eq:rel-cap}; classically absent for $Z<137$\\[6pt]
+Thresholds &
+  Thomson: linear, \eqref{eq:Thomson} &
+  Wigner $k_f^{2\ell+1}$; Gamow; Coulomb step, \eqref{eq:thr-law}; Wannier $\varepsilon^{1.127}$ &
+  cusps and Sommerfeld--Sakharov factor, \eqref{eq:sakharov}\\[6pt]
+Radiation &
+  soft theorem, \eqref{eq:soft-nr}, \eqref{eq:brems} &
+  needs $\eta\gg1$ for the classical form &
+  \eqref{eq:rel-soft}; beaming within $1/\gamma$\\[6pt]
+Strong-field effects &
+  none (energy loss only) &
+  Landau--Zener, \eqref{eq:LZ}; Fano profiles &
+  Schwinger pair creation, \eqref{eq:schwinger}; supercritical decay\\
+\hline
+\end{tabular}
+\normalsize
+
+\section{Five faces of inelasticity with long range}
+
+\begin{enumerate}
+  \item \textbf{A built-in cutoff.} Because $q_{\min}=\Delta E/\hbar v\neq0$,
+        inelastic cross sections do not suffer the forward divergence of elastic
+        Coulomb scattering, \eqref{eq:qmin}, \eqref{eq:bmax}.
+  \item \textbf{The Coulomb logarithm.} The same $\ln(b_{\max}/b_{\min})$ appears
+        in stopping, bremsstrahlung and the momentum-transfer cross section, with
+        $b_{\max}$ from adiabaticity and $b_{\min}$ from the classical orbit or the
+        quantum length, whichever is larger, \eqref{eq:Bohr}, \eqref{eq:bloch}.
+  \item \textbf{Coulomb factors at thresholds.} Gamow suppression, a finite
+        Coulomb step, and the Wannier exponent replace the power laws of
+        short-range physics, \eqref{eq:thr-law}, \eqref{eq:wannier}.
+  \item \textbf{Rydberg series.} Infinitely many closed channels converge on
+        every threshold, with widths $\propto\nu^{-3}$ and a smooth continuation
+        across it, \eqref{eq:gamma-nu3}.
+  \item \textbf{Non-perturbative transitions.} Landau--Zener crossings, forced
+        oscillators, Schwinger pair creation and the supercritical Coulomb centre
+        are exactly solvable, strong-field processes where perturbation theory in
+        the coupling fails, \eqref{eq:poisson}, \eqref{eq:LZ}, \eqref{eq:schwinger}.
+\end{enumerate}
+
+\section{What is, and is not, an accident}
+
+That the mean energy transferred to a harmonic target is exactly classical is an
+accident of linearity; the Bohr--Bethe crossover happens entirely through the
+lower cutoff $b_{\min}$, governed by $\kB=2\eta$, the same parameter that
+controls the elastic classical limit. The coincidence of classical and quantum
+Rutherford cross sections in the elastic volume and the exactness of the
+classical stopping law at large $\kB$ are two sides of the same fact: the $1/r$
+force has a classical limit that is controlled by a single number. Relativity
+adds $\gamma$ to the cutoffs and a genuine new process (spontaneous pair creation)
+that has no classical analogue and no perturbative expansion; the structural
+elements of Part~I (thresholds, channel counting, unitarity, the adiabatic cutoff)
+survive intact through all three settings.
+
+\section*{Notes and references}
+For wide-ranging treatments of atomic and molecular collisions see \cite{MM,BJ,FanoRau,BM,Child,NU,Burke}; for general scattering theory see \cite{Newton,Taylor,GW}.
+
+\backmatter
+\renewcommand{\bibname}{References}
+\addcontentsline{toc}{chapter}{References}
+\begin{thebibliography}{99}
+\bibitem{Alder56} K. Alder, A. Bohr, T. Huus, B. Mottelson and A. Winther, Rev. Mod. Phys. \textbf{28}, 432 (1956).
+\bibitem{AlderWinther} K. Alder and A. Winther, \emph{Electromagnetic Excitation: Theory of Coulomb Excitation with Heavy Ions}, North-Holland, Amsterdam (1975).
+\bibitem{Baz57} A. I. Baz', Zh. Eksp. Teor. Fiz. \textbf{33}, 923 (1957).
+\bibitem{Bethe30} H. Bethe, Ann. Phys. (Leipzig) \textbf{397}, 325 (1930).
+\bibitem{Bloch33} F. Bloch, Ann. Phys. (Leipzig) \textbf{408}, 285 (1933).
+\bibitem{Bohr13} N. Bohr, Phil. Mag. \textbf{25}, 10 (1913).
+\bibitem{Bohr48} N. Bohr, Mat.-Fys. Medd. Dan. Vid. Selsk. \textbf{18}, no.~8 (1948).
+\bibitem{BM} B. H. Bransden and M. R. C. McDowell, \emph{Charge Exchange and the Theory of Ion--Atom Collisions}, Clarendon Press, Oxford (1992).
+\bibitem{BJ} B. H. Bransden and C. J. Joachain, \emph{Physics of Atoms and Molecules}, 2nd ed., Prentice Hall, Harlow (2003).
+\bibitem{Brezin70} E. Br\'ezin and C. Itzykson, Phys. Rev. D \textbf{2}, 1191 (1970).
+\bibitem{Burke} P. G. Burke, \emph{R-Matrix Theory of Atomic Collisions}, Springer, Berlin (2011).
+\bibitem{BK} E. Byckling and K. Kajantie, \emph{Particle Kinematics}, Wiley, London (1973).
+\bibitem{Child} M. S. Child, \emph{Molecular Collision Theory}, Academic Press, London (1974); Dover reprint (1996).
+\bibitem{Dunne05} G. V. Dunne, Heisenberg--Euler effective Lagrangians: basics and extensions, in \emph{From Fields to Strings: Circumnavigating Theoretical Physics}, World Scientific, Singapore (2005); arXiv:hep-th/0406216.
+\bibitem{Eden} R. J. Eden, P. V. Landshoff, D. I. Olive and J. C. Polkinghorne, \emph{The Analytic S-Matrix}, Cambridge University Press (1966).
+\bibitem{Fano61} U. Fano, Phys. Rev. \textbf{124}, 1866 (1961).
+\bibitem{Fano63} U. Fano, Annu. Rev. Nucl. Sci. \textbf{13}, 1 (1963).
+\bibitem{Fano70} U. Fano, Phys. Rev. A \textbf{2}, 353 (1970).
+\bibitem{FanoRau} U. Fano and A. R. P. Rau, \emph{Atomic Collisions and Spectra}, Academic Press, Orlando (1986).
+\bibitem{Fermi40} E. Fermi, Phys. Rev. \textbf{57}, 485 (1940).
+\bibitem{Feshbach58} H. Feshbach, Ann. Phys. (N.Y.) \textbf{5}, 357 (1958); \textbf{19}, 287 (1962).
+\bibitem{Feshbach92} H. Feshbach, \emph{Theoretical Nuclear Physics: Nuclear Reactions}, Wiley, New York (1992).
+\bibitem{Froissart61} M. Froissart, Phys. Rev. \textbf{123}, 1053 (1961).
+\bibitem{GD63} M. Gailitis and R. Damburg, Proc. Phys. Soc. \textbf{82}, 192 (1963); Zh. Eksp. Teor. Fiz. \textbf{44}, 1644 (1963) [Sov. Phys. JETP \textbf{17}, 1107 (1963)].
+\bibitem{Gallagher} T. F. Gallagher, \emph{Rydberg Atoms}, Cambridge University Press (1994).
+\bibitem{GelisTanji} F. Gelis and N. Tanji, Prog. Part. Nucl. Phys. \textbf{87}, 1 (2016).
+\bibitem{Gioumousis58} G. Gioumousis and D. P. Stevenson, J. Chem. Phys. \textbf{29}, 294 (1958).
+\bibitem{Glauber63} R. J. Glauber, Phys. Rev. \textbf{131}, 2766 (1963).
+\bibitem{GW} M. L. Goldberger and K. M. Watson, \emph{Collision Theory}, Wiley, New York (1964); Dover reprint (2004).
+\bibitem{GFS79} C. H. Greene, U. Fano and G. Strinati, Phys. Rev. A \textbf{19}, 1485 (1979).
+\bibitem{GRF82} C. H. Greene, A. R. P. Rau and U. Fano, Phys. Rev. A \textbf{26}, 2441 (1982).
+\bibitem{Greiner} W. Greiner, B. M\"uller and J. Rafelski, \emph{Quantum Electrodynamics of Strong Fields}, Springer, Berlin (1985).
+\bibitem{Hagedorn} R. Hagedorn, \emph{Relativistic Kinematics}, Benjamin, New York (1963).
+\bibitem{HE36} W. Heisenberg and H. Euler, Z. Phys. \textbf{98}, 714 (1936).
+\bibitem{Husimi53} K. Husimi, Prog. Theor. Phys. \textbf{9}, 381 (1953).
+\bibitem{Inokuti71} M. Inokuti, Rev. Mod. Phys. \textbf{43}, 297 (1971).
+\bibitem{Jackson} J. D. Jackson, \emph{Classical Electrodynamics}, 3rd ed., Wiley, New York (1999). Chapters 13 (collisions and energy loss), 14 (radiation by moving charges) and 15 (bremsstrahlung) are the most relevant.
+\bibitem{KleinRosseland} O. Klein and S. Rosseland, Z. Phys. \textbf{4}, 46 (1921).
+\bibitem{Kramers23} H. A. Kramers, Phil. Mag. \textbf{46}, 836 (1923).
+\bibitem{Landau32} L. D. Landau, Phys. Z. Sowjetunion \textbf{2}, 46 (1932).
+\bibitem{LL2} L. D. Landau and E. M. Lifshitz, \emph{The Classical Theory of Fields}, 4th ed., Pergamon, Oxford (1975).
+\bibitem{LL3} L. D. Landau and E. M. Lifshitz, \emph{Quantum Mechanics: Non-Relativistic Theory}, 3rd ed., Pergamon, Oxford (1977). Chapters XVII and XVIII treat elastic and inelastic collisions.
+\bibitem{Langevin05} P. Langevin, Ann. Chim. Phys. \textbf{5}, 245 (1905).
+\bibitem{LevineBernstein} R. D. Levine and R. B. Bernstein, \emph{Molecular Reaction Dynamics and Chemical Reactivity}, Oxford University Press (1987).
+\bibitem{Martin63} A. Martin, Phys. Rev. \textbf{129}, 1432 (1963); Nuovo Cimento A \textbf{42}, 930 (1966).
+\bibitem{MartinSpearman} A. D. Martin and T. D. Spearman, \emph{Elementary Particle Theory}, North-Holland, Amsterdam (1970).
+\bibitem{Massey49} H. S. W. Massey, Rep. Prog. Phys. \textbf{12}, 248 (1949).
+\bibitem{Messiah} A. Messiah, \emph{Quantum Mechanics}, vols.~1--2, North-Holland, Amsterdam (1961--1962).
+\bibitem{MM} N. F. Mott and H. S. W. Massey, \emph{The Theory of Atomic Collisions}, 3rd ed., Clarendon Press, Oxford (1965).
+\bibitem{Newton} R. G. Newton, \emph{Scattering Theory of Waves and Particles}, 2nd ed., Springer, New York (1982); Dover reprint (2002).
+\bibitem{NU} E. E. Nikitin and S. Ya. Umanskii, \emph{Theory of Slow Atomic Collisions}, Springer, Berlin (1984).
+\bibitem{PS} M. E. Peskin and D. V. Schroeder, \emph{An Introduction to Quantum Field Theory}, Addison-Wesley, Reading (1995).
+\bibitem{Pomeranchuk45} I. Pomeranchuk and Ya. Smorodinsky, J. Phys. (USSR) \textbf{9}, 97 (1945).
+\bibitem{Rau71} A. R. P. Rau, Phys. Rev. A \textbf{4}, 207 (1971).
+\bibitem{Reinhardt77} J. Reinhardt and W. Greiner, Rep. Prog. Phys. \textbf{40}, 219 (1977).
+\bibitem{Sadeghpour00} H. R. Sadeghpour, J. L. Bohn, M. J. Cavagnero, B. D. Esry, I. I. Fabrikant, J. H. Macek and A. R. P. Rau, J. Phys. B \textbf{33}, R93 (2000).
+\bibitem{Sakharov48} A. D. Sakharov, Zh. Eksp. Teor. Fiz. \textbf{18}, 631 (1948).
+\bibitem{Sauter31} F. Sauter, Z. Phys. \textbf{69}, 742 (1931).
+\bibitem{Schwinger51} J. Schwinger, Phys. Rev. \textbf{82}, 664 (1951); \textbf{91}, 728 (1953).
+\bibitem{Seaton58} M. J. Seaton, Mon. Not. R. Astron. Soc. \textbf{118}, 504 (1958).
+\bibitem{Seaton83} M. J. Seaton, Rep. Prog. Phys. \textbf{46}, 167 (1983).
+\bibitem{Sigmund} P. Sigmund, \emph{Particle Penetration and Radiation Effects}, Springer, Berlin (2006).
+\bibitem{Sommerfeld31} A. Sommerfeld, Ann. Phys. (Leipzig) \textbf{403}, 257 (1931).
+\bibitem{Stueckelberg32} E. C. G. Stueckelberg, Helv. Phys. Acta \textbf{5}, 369 (1932).
+\bibitem{Taylor} J. R. Taylor, \emph{Scattering Theory: The Quantum Theory of Nonrelativistic Collisions}, Wiley, New York (1972); Dover reprint (2006).
+\bibitem{Thomson12} J. J. Thomson, Phil. Mag. \textbf{23}, 449 (1912).
+\bibitem{Wannier53} G. H. Wannier, Phys. Rev. \textbf{90}, 817 (1953).
+\bibitem{Weinberg} S. Weinberg, \emph{The Quantum Theory of Fields}, vol.~1, Cambridge University Press (1995). Chapter 3 treats scattering theory and Chapter 13 infrared effects.
+\bibitem{Wigner48} E. P. Wigner, Phys. Rev. \textbf{73}, 1002 (1948).
+\bibitem{ZP71} Ya. B. Zel'dovich and V. S. Popov, Usp. Fiz. Nauk \textbf{105}, 403 (1971) [Sov. Phys. Usp. \textbf{14}, 673 (1972)].
+\bibitem{Zener32} C. Zener, Proc. R. Soc. A \textbf{137}, 696 (1932).
+\bibitem{PDG} F. Takahashi \emph{et al.} (Particle Data Group), \emph{Review of Particle Physics}, Int. J. Mod. Phys. A \textbf{41}, 2630011 (2026), \texttt{https://pdg.lbl.gov}. The reviews on kinematics and on the passage of particles through matter are the relevant ones.
+\end{thebibliography}
+
+\end{document}
+
+
