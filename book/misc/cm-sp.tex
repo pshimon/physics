@@ -1,0 +1,355 @@
+ Classical mechanics and statistical mechanics admit a unified formulation in
+ which the fundamental object is not an individual trajectory but a state of
+ knowledge about the physical system. From this perspective, statistical
+ mechanics is not necessarily a different dynamical theory from mechanics. It
+ is an extension of mechanics from individual states to probability
+ distributions over individual states.
+
+There is, however, an important distinction between two questions:
+\begin{enumerate}
+   \item What is the physical state of a system?
+   \item What is the mathematical description of our knowledge of that state?
+\end{enumerate}
+Bayesian reasoning makes this distinction particularly visible.
+
+\section{ Mechanics as a theory of pure states}
+Consider an ordinary Hamiltonian system with \(n\) degrees of freedom.
+Its phase space is
+\[\Gamma=T^*Q,\]
+with coordinates
+\[z=(q^1,\ldots,q^n,p_1,\ldots,p_n).\]
+In classical mechanics, the state at time \(t\) is a point
+\[z(t)\in\Gamma.\]
+Its evolution is determined by Hamilton's equations:
+\[
+\dot q^i=\frac{\partial H}{\partial p_i},
+\qquad
+\dot p_i=-\frac{\partial H}{\partial q^i}.
+\]
+Equivalently,
+\[\dot z=X_H(z).\]
+This is what we might call a pure mechanical state: the system is assigned a
+definite point in phase space.
+
+Now introduce a probability density on phase space:
+\[\rho(q,p,t)\geq 0, \qquad \int_\Gamma \rho\,d\Gamma=1.\]
+This describes a statistical state. Instead of specifying one phase-space
+point, we specify a probability distribution over possible phase-space points.
+The evolution equation is the Liouville equation:
+\[\boxed{\frac{\partial\rho}{\partial t}+\{\rho,H\}=0.}\]
+Here is the important observation:
+
+\emph{The Liouville equation is not a new dynamical law added to Hamiltonian
+mechanics. It is Hamiltonian mechanics lifted from individual points to
+probability distributions over points.}
+Indeed, let \(\Phi_t\) denote the Hamiltonian flow. Then
+\[\rho_t=(\Phi_t)_*\rho_0,\]
+where the star denotes the pushforward of the probability measure.
+
+For a pure state,
+\[\rho(z,t)=\delta(z-z(t)),\]
+the Liouville equation reduces to the Hamiltonian equations for \(z(t)\).
+Thus, in this precise sense, ordinary mechanics is a special case of classical
+statistical mechanics.
+
+\section{ The Bayesian interpretation}
+Suppose we do not know the exact initial phase-space point. We have information
+about it, represented by a probability distribution
+\[\rho_0(z).\]
+The distribution is then our state of knowledge concerning the actual
+mechanical state.
+
+The distinction between a point and a distribution becomes:
+\begin{itemize}
+\item Pure state: complete specification of the phase-space point.
+\item Mixed state: incomplete specification, represented by a probability
+    measure over phase space.
+\end{itemize}
+This is analogous to the distinction between pure and mixed states in quantum
+mechanics, although there are important differences.
+For Bayesian inference, probabilities quantify uncertainty or degrees of
+belief, conditional on the available information.
+The probability distribution is therefore not necessarily a statement that the
+system itself is physically spread over phase space. It may simply represent
+our ignorance of its actual state.
+
+For example, consider a harmonic oscillator.
+Its actual state may be
+\[(q_0,p_0),\]
+but our knowledge might be described by a Gaussian distribution centered at that point:
+\[
+\rho(q,p)=
+\frac{1}{2\pi\sigma_q\sigma_p}
+\exp\left[
+-\frac{(q-q_0)^2}{2\sigma_q^2}
+-\frac{(p-p_0)^2}{2\sigma_p^2}
+\right].
+\]
+Hamiltonian evolution transports this distribution through phase space.
+Notice that the underlying dynamics has not changed. Only the description of
+the initial state has changed.
+
+\section{The deeper mathematical structure: a convex space of states}
+Let us define the space of all normalized probability measures on phase space:
+\[\mathcal S(\Gamma)=\left\{\mu:\mu(\Gamma)=1,\quad \mu\geq 0\right\}.\]
+This is a convex space.
+If \(\mu_1\) and \(\mu_2\) are two statistical states, then
+\[\mu=\lambda\mu_1+(1-\lambda)\mu_2,\qquad 0\leq\lambda\leq1,\]
+is also a statistical state.
+The crucial mathematical fact is that the extremal elements of this convex
+space are precisely the Dirac measures:
+\[\mu_z=\delta_z.\]
+These are the pure states in the classical statistical description.
+
+Every probability measure can, in fact, be represented as a mixture of these
+extremal states:
+\[\boxed{\mu=\int_\Gamma \delta_z\,d\mu(z).}\]
+This gives us a particularly clean formulation:
+\begin{table}
+    \begin{tabular}{rr}
+        Classical mechanics	& Classical statistical mechanics\\
+        Point \(z\in\Gamma\) &	Probability measure \(\mu\) on \(\Gamma\)\\
+        Pure state&	Pure or mixed statistical state\\
+        Hamiltonian flow&	Liouville evolution\\
+        Observable \(A(z(t))\)	&Expectation \(\langle A\rangle_\mu\)=\(\int_\Gamma A(z)\,d\mu_t(z)\)
+    \end{tabular}
+\end{table}
+The evolution of expectations follows directly:
+\[\frac{d}{dt}\langle A\rangle=\langle\{A,H\}\rangle.\]
+This is the statistical version of Hamiltonian dynamics.
+
+There is a useful parallel here with quantum mechanics. In quantum theory, the
+state space is also convex, and pure states are its extremal elements. But the
+quantum state space is not simply a space of probability distributions over
+classical phase-space points. Its noncommutative structure makes the
+distinction fundamental. In classical mechanics, by contrast, the underlying
+state space remains the ordinary phase space.
+
+\section{Statistical mechanics is not defined by an infinite number of particles}
+Statistical mechanics is often associated with systems containing an enormous
+number of particles, but this is not its defining characteristic.
+Consider just one particle moving in a potential.
+We can formulate statistical mechanics for it:
+\begin{itemize}
+\item A microcanonical distribution at fixed energy.
+\item A canonical distribution at fixed temperature.
+\item A general non-equilibrium probability distribution.
+\end{itemize}
+Conversely, a system with a very large number of particles can be described by
+ordinary mechanics if we specify all its initial positions and momenta.
+Thus, the distinction is not:
+\[
+\text{few particles}\quad\longleftrightarrow\quad
+\text{many particles}.
+\]
+Rather, it is:
+\[
+\boxed{
+\text{individual mechanical state}
+\quad\longleftrightarrow\quad
+\text{probability distribution of mechanical states}.
+}
+\]
+The thermodynamic limit,
+\[
+N\rightarrow\infty,\qquad
+V\rightarrow\infty,\qquad
+\frac NV=\text{constant},
+\]
+is important for explaining phase transitions, thermodynamic singularities and
+the emergence of macroscopic behavior.
+But it is not required to define statistical mechanics.
+
+\section{Entropy and coarse-graining}
+If we consider only the exact microscopic dynamics and probability
+distributions over its states, then the difference between mechanics and
+statistical mechanics really is largely a difference in the states being
+considered.
+However, statistical mechanics also introduces concepts that are not contained
+in the mere replacement of points by distributions.
+The most important is entropy.
+
+For a continuous probability density,
+\[S_{\mathrm G}[\rho]=-k_B\int_\Gamma \rho\ln\rho\,d\Gamma,\]
+where the reference phase-space measure and the units used inside the logarithm
+must be specified.
+Under exact Hamiltonian evolution, Liouville's theorem implies
+\[\boxed{\frac{dS_{\mathrm G}}{dt}=0.}\]
+This is a very significant result.
+The microscopic statistical state evolves reversibly, just as an individual
+mechanical state does.
+
+Yet thermodynamics tells us that entropy increases.
+Where does the difference come from?
+It comes from the fact that thermodynamic entropy is not simply the
+fine-grained Gibbs entropy.
+One introduces coarse-graining, reduced descriptions, macroscopic variables, or
+other restrictions on the information retained.
+For example, a distribution may develop increasingly fine structures in phase
+space. Its fine-grained entropy remains constant, but its coarse-grained
+entropy can increase.
+This is one of the fundamental connections between reversible mechanics and
+irreversible thermodynamics.
+
+It also means that one should distinguish three levels:
+\begin{enumerate}
+   \item Microscopic mechanics: evolution of individual phase-space points.
+   \item Fine-grained statistical mechanics: evolution of probability distributions.
+   \item  Macroscopic statistical physics: evolution of reduced descriptions and thermodynamic variables.
+\end{enumerate}
+The first two are related by a mathematically precise extension of the same
+dynamics. The third involves additional conceptual and mathematical
+ingredients.
+
+\section{Bayesian updating versus dynamical evolution}
+There is another distinction worth emphasizing.
+In Bayesian theory, a probability distribution can change for two different reasons.
+
+\paragraph{A. Dynamical evolution}
+We know that the physical system evolves, and therefore transport our
+probability distribution according to Hamiltonian mechanics:
+\[\rho_t=(\Phi_t)_*\rho_0.\]
+
+\paragraph{B. Acquisition of information}
+We obtain new information, for example through a measurement, and update the
+distribution:
+\[\rho(z\mid D)=\frac{P(D\mid z)\rho(z)}{\int P(D\mid z')\rho(z')\,dz'}.\]
+These are conceptually different operations.
+The first describes the physical evolution of the system's state of knowledge
+under a known dynamical law.
+The second describes a change in our knowledge resulting from new evidence.
+
+% do not understand that!@!!!!
+This distinction is especially important when discussing statistical mechanics
+from an epistemic or Bayesian standpoint.
+For instance, equilibrium distributions need not mean that the microscopic
+system has stopped evolving. They can represent stationary probability
+distributions, or equilibrium descriptions obtained after information has been
+discarded.
+
+\section{ The difficult question: is a mixed state merely ignorance?}
+There are at least three interpretations of a statistical state.
+
+\paragraph{Epistemic interpretation}
+The system has a definite microscopic state \(z\), but we do not know it. The
+distribution represents our uncertainty.
+
+\paragraph{Ensemble interpretation}
+The distribution describes a collection of similarly prepared systems, each
+having its own definite phase-space point.
+
+\paragraph{Objective statistical interpretation}
+The probability distribution is itself regarded as a physical description,
+possibly because the microscopic state is inaccessible or because the relevant
+physical description is intrinsically statistical.
+
+These interpretations can give identical mathematical predictions for many
+experiments, but they are not conceptually equivalent.
+
+There is also a subtle issue concerning ergodicity.
+Suppose the system is deterministic and has a definite initial point. Its
+trajectory might explore a large part of an energy surface. Under suitable
+ergodic assumptions, long-time averages can equal ensemble averages:
+\[\lim_{T\to\infty}\frac1T\int_0^T A(z(t))\,dt=
+\int_\Gamma A(z)\rho_{\rm eq}(z)\,d\Gamma.\]
+But this does not mean that the individual trajectory has become a probability
+distribution.
+It means that two different procedures for calculating averages can agree.
+This distinction is important: the probability description does not
+automatically replace the underlying mechanics.
+
+\section{The hierarchy of descriptions}
+For a system of \(N\) particles, the full mechanical phase space is
+\[\Gamma_N=T^*\mathbb R^{3N}.\]
+A statistical description is a probability density
+\[\rho_N(\mathbf q_1,\ldots,\mathbf q_N,\mathbf p_1,\ldots,\mathbf p_N).\]
+But in practical statistical mechanics, we rarely work with this complete
+distribution.
+Instead, we introduce reduced distributions:
+\[f_1(\mathbf q,\mathbf p),\]
+\[f_2(\mathbf q_1,\mathbf p_1;\mathbf q_2,\mathbf p_2),\]
+and so on.
+These are obtained by integrating out degrees of freedom.
+The evolution of these distributions leads to the BBGKY hierarchy.
+
+This gives us a sequence of descriptions:
+\begin{equation*}
+    \begin{gathered}
+\text{individual microscopic states}\\
+\downarrow \\
+\text{full probability distribution}\\
+\downarrow \\
+\text{reduced distributions}\\
+\downarrow \\
+\text{macroscopic variables}.
+    \end{gathered}
+\end{equation*}
+The important point is that the successive levels are not necessarily different
+physical theories. They are different levels of description of the same
+underlying dynamics, although approximations introduced in passing between them
+can produce new effective dynamical laws.
+This is particularly relevant to kinetic theory, where the transition from the
+Liouville equation to the Boltzmann equation involves assumptions such as
+molecular chaos.
+
+Classical mechanics and classical statistical mechanics are two levels of
+description within a single dynamical framework. The fundamental dynamical
+structure is Hamiltonian mechanics on phase space. Its pure states are points
+of phase space, while its general states are probability measures over phase
+space. Hamiltonian dynamics induces a natural evolution on the entire convex
+space of statistical states.
+
+In mathematical terms:
+\[
+\boxed{
+\begin{aligned}
+&\text{Configuration of the system:} &&\Gamma,\\
+&\text{Pure states:} &&z\in\Gamma,\\
+&\text{General states:} &&\rho\in\mathcal S(\Gamma),\\
+&\text{Dynamics:} &&\Phi_t:\Gamma\to\Gamma,\\
+&\text{Statistical dynamics:} &&
+(\Phi_t)_*:\mathcal S(\Gamma)\to\mathcal S(\Gamma).
+\end{aligned}
+}
+\]
+This is a very natural generalization of the usual Hamiltonian formulation.
+There is also a useful connection with the Liouville formulation of mechanics,
+in which pure and mixed states can be treated within the same formalism.
+
+\section{Comparison with quantum mechanics}
+We can put the three descriptions side by side:
+\begin{table}
+    \begin{tabular}{ccc}
+        &Classical&	Quantum\\
+        Pure state&	Phase-space point \(z\)	&State vector \(\psi\) \\
+        General state&	Probability measure \(\rho\)&	Density operator \(\hat\rho\)\\
+        Observable	&Function \(A(z)\)&	Operator \(\hat A\)\\
+        Expectation	&\(\int A\rho\,d\Gamma\)&	\(\mathrm{Tr}(\hat\rho\hat A)\)\\
+        Evolution&	Liouville equation&	von Neumann equation\\
+    \end{tabular}
+\end{table}
+The quantum evolution is
+\[i\hbar\frac{d\hat\rho}{dt}=[\hat H,\hat\rho].\]
+For a pure quantum state,
+\[\hat\rho=|\psi\rangle\langle\psi|,\]
+this reduces to the Schrödinger equation (up to the irrelevant overall phase).
+
+Notice the structural similarity:
+\begin{itemize}
+   \item Classical mechanics is the pure-state sector of classical statistical mechanics.
+   \item Quantum mechanics is the pure-state sector of quantum statistical mechanics.
+\end{itemize}
+But there is an essential difference: classical statistical states are
+probability measures on phase space, whereas quantum statistical states are
+positive operators on Hilbert space. Quantum superposition, noncommutativity
+and entanglement have no straightforward classical counterpart.
+
+ The distinction between mechanics and statistical mechanics is not
+ fundamentally a distinction between few and infinitely many particles, nor
+ necessarily between two different dynamical theories. At the microscopic
+ level, it can be understood as a distinction between pure and mixed states of
+ one and the same dynamical system.
+The genuinely additional content of statistical physics enters when we ask how
+to obtain macroscopic descriptions, equilibrium, irreversibility and
+thermodynamics from that unified microscopic framework.
+

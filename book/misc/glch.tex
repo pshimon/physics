@@ -1,0 +1,841 @@
+The Ginzburg–Landau and Cahn–Hilliard equations are particularly interesting in the context of our discussion of transformational dynamics. They describe systems that undergo qualitative changes of physical organization, while the underlying microscopic constituents may remain unchanged.
+
+They also provide an excellent example of how a variational principle can generate dynamics involving qualitative transformations without introducing explicit transition rules.
+
+There is, however, a fundamental difference between the two equations:
+- The time-dependent Ginzburg–Landau equation (TDGL) describes relaxation of a nonconserved order parameter.
+- The Cahn–Hilliard equation (CH) describes the evolution of a conserved order parameter, typically through diffusion and phase separation.
+Let us derive both from the beginning.
+1. The order parameter and the free-energy functional
+Consider a material that can exist in two different phases, for example a ferromagnet in two oppositely magnetized states, or a material undergoing a structural phase transition.
+
+We introduce an order parameter
+\[
+\phi(\mathbf x,t).
+\]
+
+Its physical meaning depends on the system:
+System	Possible order parameter
+Ferromagnet	Magnetization
+Liquid–gas transition	Density difference
+Binary mixture	Concentration difference
+Superconductor	Complex wavefunction
+Structural transition	Lattice distortion
+
+For simplicity, initially take \(\phi\) to be a real scalar.
+
+The central assumption is that the thermodynamic state can be characterized by a free-energy functional
+\[
+F[\phi]=\int_\Omega f(\phi,\nabla\phi)\,dV.
+\]
+
+The simplest useful expression is
+\[
+\boxed{
+F[\phi]=
+\int_\Omega
+\left[
+\frac{\kappa}{2}|\nabla\phi|^2+
+V(\phi)
+\right]dV.
+}
+\]
+
+Here:
+- \(V(\phi)\) describes the local thermodynamic preference;
+- \(\kappa>0\) penalizes spatial inhomogeneity;
+- the gradient term accounts for the energetic cost of interfaces between different phases.
+A particularly important example is the double-well potential:
+\[
+\boxed{
+V(\phi)=
+\frac{a}{2}\phi^2+
+\frac{b}{4}\phi^4,
+\qquad b>0.
+}
+\]
+
+For \(a>0\), the free energy has one minimum:
+\[
+\phi_{\mathrm{eq}}=0.
+\]
+
+For \(a<0\), there are two minima:
+\[
+\phi_{\mathrm{eq}}
+=\pm\sqrt{\frac{-a}{b}}.
+\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The transition from one minimum to two minima is the simplest mathematical representation of a qualitative change in the preferred physical state.
+
+Notice that we have not yet specified any dynamics. We have only specified the energy landscape.
+2. Time-dependent Ginzburg–Landau equation
+2.1 Variational derivative
+The first step is to calculate the functional derivative of \(F\).
+
+For
+\[
+F[\phi]=\int_\Omega
+\left[
+\frac{\kappa}{2}|\nabla\phi|^2+V(\phi)
+\right]dV,
+\]
+
+its variation is
+\[
+\delta F=
+\int_\Omega
+\left[
+\kappa\nabla\phi\cdot\nabla\delta\phi
++V'(\phi)\delta\phi
+\right]dV.
+\]
+
+Integrating by parts gives
+\[
+\delta F=
+\int_\Omega
+\left[
+-\kappa\nabla^2\phi+V'(\phi)
+\right]\delta\phi\,dV
++
+\int_{\partial\Omega}
+\kappa\frac{\partial\phi}{\partial n}
+\delta\phi\,dA.
+\]
+
+For appropriate boundary conditions, the surface term vanishes.
+
+Consequently,
+\[
+\boxed{
+\frac{\delta F}{\delta\phi}
+=
+-\kappa\nabla^2\phi+V'(\phi).
+}
+\]
+
+This quantity is often called the chemical potential or thermodynamic driving force, although its physical units depend on the definition of \(\phi\).
+2.2 The dynamical postulate
+For a nonconserved order parameter, we assume that its evolution is proportional to the negative variational derivative:
+\[
+\boxed{
+\frac{\partial\phi}{\partial t}
+=
+-\Gamma\frac{\delta F}{\delta\phi},
+\qquad \Gamma>0.
+}
+\]
+
+Substituting the functional derivative yields
+\[
+\boxed{
+\frac{\partial\phi}{\partial t}
+=
+\Gamma\left[
+\kappa\nabla^2\phi-V'(\phi)
+\right].
+}
+\]
+
+For the quartic Landau potential,
+\[
+\boxed{
+\frac{\partial\phi}{\partial t}
+=
+\Gamma\left[
+\kappa\nabla^2\phi-a\phi-b\phi^3
+\right].
+}
+\]
+
+This is the time-dependent Ginzburg–Landau equation for a real scalar order parameter.
+
+It is a nonlinear partial differential equation.
+2.3 Physical interpretation
+The equation describes relaxation toward a minimum of free energy.
+
+Indeed,
+\[
+\frac{dF}{dt}
+=
+\int_\Omega
+\frac{\delta F}{\delta\phi}
+\frac{\partial\phi}{\partial t}\,dV.
+\]
+
+Using the dynamical equation,
+\[
+\boxed{
+\frac{dF}{dt}
+=
+-\Gamma\int_\Omega
+\left(\frac{\delta F}{\delta\phi}\right)^2dV
+\leq0.
+}
+\]
+
+Thus, the free energy decreases monotonically.
+
+This is a very important property: the equation describes irreversible relaxation.
+
+The system does not simply move according to a conservative Hamiltonian flow. Instead, it approaches thermodynamic equilibrium.
+3. Cahn–Hilliard equation: conserved order parameter
+Now consider a binary mixture of two components, \(A\) and \(B\).
+
+Let
+\[
+\phi(\mathbf x,t)=c_A(\mathbf x,t)-c_B(\mathbf x,t)
+\]
+
+represent the local concentration difference (up to a normalization).
+
+Unlike the magnetization in the preceding example, the total amount of each component is conserved in a closed mixture.
+
+Consequently,
+\[
+\boxed{
+\frac{d}{dt}\int_\Omega\phi(\mathbf x,t)\,dV=0.
+}
+\]
+
+This conservation law changes the dynamical equation fundamentally.
+3.1 Derivation from the continuity equation
+Conservation requires
+\[
+\frac{\partial\phi}{\partial t}
++\nabla\cdot\mathbf J=0,
+\]
+
+where \(\mathbf J\) is the flux of the order parameter.
+
+We introduce the chemical potential
+\[
+\mu_{\mathrm{ch}}
+=
+\frac{\delta F}{\delta\phi}.
+\]
+
+The thermodynamic driving force for diffusion is the gradient of chemical potential. The simplest linear constitutive relation is
+\[
+\boxed{
+\mathbf J=-M\nabla\mu_{\mathrm{ch}},
+\qquad M>0.
+}
+\]
+
+This is a generalized Fick law.
+
+Substitution into the continuity equation gives
+\[
+\frac{\partial\phi}{\partial t}
+=
+\nabla\cdot
+\left(M\nabla\mu_{\mathrm{ch}}\right).
+\]
+
+Since
+\[
+\mu_{\mathrm{ch}}
+=
+-\kappa\nabla^2\phi+V'(\phi),
+\]
+
+we obtain
+\[
+\boxed{
+\frac{\partial\phi}{\partial t}
+=
+\nabla\cdot
+\left[
+M\nabla\left(
+-\kappa\nabla^2\phi+V'(\phi)
+\right)
+\right].
+}
+\]
+
+For constant mobility,
+\[
+\boxed{
+\frac{\partial\phi}{\partial t}
+=
+M\left[
+-\kappa\nabla^4\phi+
+\nabla^2V'(\phi)
+\right].
+}
+\]
+
+For the quartic potential,
+\[
+V(\phi)=\frac a2\phi^2+\frac b4\phi^4,
+\]
+
+the Cahn–Hilliard equation becomes
+\[
+\boxed{
+\frac{\partial\phi}{\partial t}
+=
+M\nabla^2
+\left(
+-\kappa\nabla^2\phi+a\phi+b\phi^3
+\right).
+}
+\]
+
+Notice that this is a fourth-order nonlinear PDE, whereas the TDGL equation is second order in space.
+3.2 Why conservation changes the dynamics
+Integrating the Cahn–Hilliard equation over the domain gives
+\[
+\frac{d}{dt}\int_\Omega\phi\,dV
+=
+\int_{\partial\Omega}
+M\frac{\partial\mu_{\mathrm{ch}}}{\partial n}\,dA.
+\]
+
+For an impermeable boundary,
+\[
+\frac{\partial\mu_{\mathrm{ch}}}{\partial n}=0,
+\]
+
+and therefore
+\[
+\boxed{
+\int_\Omega\phi(\mathbf x,t)\,dV
+=
+\mathrm{constant}.
+}
+\]
+
+This is not true for the TDGL equation.
+
+The distinction is physical, not merely mathematical.
+
+In the TDGL model, the order parameter can change locally without being transported from another location.
+
+In the Cahn–Hilliard model, a local increase of concentration must be accompanied by a corresponding redistribution elsewhere.
+3.3 The free-energy dissipation law
+The Cahn–Hilliard equation also follows a free-energy descent principle.
+
+We have
+\[
+\frac{dF}{dt}
+=
+\int_\Omega
+\mu_{\mathrm{ch}}\frac{\partial\phi}{\partial t}\,dV.
+\]
+
+Substituting the equation of motion and integrating by parts,
+\[
+\frac{dF}{dt}
+=
+-\int_\Omega
+M|\nabla\mu_{\mathrm{ch}}|^2\,dV.
+\]
+
+Thus,
+\[
+\boxed{
+\frac{dF}{dt}\leq0.
+}
+\]
+
+The free energy decreases, but the total order parameter remains constant.
+
+This is the essential difference between the two models:
+Property	TDGL	Cahn–Hilliard
+Order parameter	Nonconserved	Conserved
+Equation	Second-order spatial PDE	Fourth-order spatial PDE
+Dynamics	Local relaxation	Diffusive redistribution
+Total order parameter	Can change	Constant
+Free energy	Decreases	Decreases
+
+The two equations are sometimes called Model A and Model B, respectively, in the classification of critical dynamics. 
+thp.uni-koeln.de+1
+
+4. Worked example: spontaneous phase separation
+Let us examine what these equations actually predict.
+
+Take the double-well potential
+\[
+V(\phi)=
+\frac a2\phi^2+\frac b4\phi^4,
+\qquad a<0,\quad b>0.
+\]
+
+The two equilibrium phases are
+\[
+\phi_\pm=\pm\sqrt{\frac{-a}{b}}.
+\]
+
+Suppose initially the system is almost homogeneous:
+\[
+\phi(\mathbf x,0)=\phi_0+\delta\phi(\mathbf x),
+\]
+
+where \(\delta\phi\) is a small perturbation.
+
+We want to know whether these perturbations grow or decay.
+4.1 Linear stability analysis
+Write
+\[
+\phi=\phi_0+\delta\phi.
+\]
+
+For simplicity, consider the symmetric case \(\phi_0=0\), and retain only linear terms.
+
+For TDGL,
+\[
+\frac{\partial\delta\phi}{\partial t}
+=
+\Gamma\left(
+\kappa\nabla^2\delta\phi-a\delta\phi
+\right).
+\]
+
+Consider a Fourier mode
+\[
+\delta\phi=
+A_{\mathbf k}(t)e^{i\mathbf k\cdot\mathbf x}.
+\]
+
+Then
+\[
+\frac{dA_{\mathbf k}}{dt}
+=
+\lambda_{\mathrm{TDGL}}(k)A_{\mathbf k},
+\]
+
+where
+\[
+\boxed{
+\lambda_{\mathrm{TDGL}}(k)
+=
+-\Gamma(\kappa k^2+a).
+}
+\]
+
+Since \(a<0\), modes satisfying
+\[
+k^2<\frac{-a}{\kappa}
+\]
+
+grow exponentially.
+
+The homogeneous state is unstable.
+
+For Cahn–Hilliard, the corresponding calculation gives
+\[
+\boxed{
+\lambda_{\mathrm{CH}}(k)
+=
+-Mk^2(\kappa k^2+a).
+}
+\]
+
+Again, the modes in the interval
+\[
+0<k^2<\frac{-a}{\kappa}
+\]
+
+grow.
+
+But the \(k=0\) mode does not grow: the total concentration cannot change.
+
+This is a very important difference.
+4.2 What happens physically?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7
+
+
+
+
+
+
+
+
+
+
+
+In a mixture quenched into an unstable thermodynamic region:
+1. Initially, small concentration fluctuations are present.
+2. Some fluctuations grow exponentially.
+3. Regions rich in \(A\) and regions rich in \(B\) develop.
+4. The interfaces between the phases become increasingly well defined.
+5. The domains coarsen as the system reduces its interfacial free energy.
+This process is called spinodal decomposition.
+
+An important point is that the material does not undergo a uniform conversion from one phase to another. Instead, its spatial organization changes.
+
+The Cahn–Hilliard equation describes precisely this phenomenon.
+4.3 Most rapidly growing wavelength
+We can go one step further.
+
+The growth rate is
+\[
+\lambda(k)
+=
+-Mk^2(\kappa k^2+a).
+\]
+
+The maximum is found from
+\[
+\frac{d\lambda}{d(k^2)}=0.
+\]
+
+This gives
+\[
+k_{\mathrm{max}}^2=-\frac{a}{2\kappa}.
+\]
+
+Consequently, the most rapidly growing wavelength is
+\[
+\boxed{
+\ell_{\mathrm{max}}
+=
+2\pi\sqrt{\frac{2\kappa}{-a}}.
+}
+\]
+
+Thus, the theory predicts an initial characteristic length scale for the emerging spatial structure.
+
+This is an example of how a qualitative transformation can be predicted quantitatively from a free-energy functional and a dynamical law.
+5. Spinodal decomposition versus nucleation
+There is another important distinction.
+
+The double-well potential has two minima, but not every state between them is necessarily unstable.
+
+Consider the free-energy density
+\[
+V(\phi)=\frac a2\phi^2+\frac b4\phi^4.
+\]
+
+The curvature is
+\[
+V''(\phi)=a+3b\phi^2.
+\]
+
+A homogeneous state is locally unstable when
+\[
+V''(\phi)<0.
+\]
+
+For \(a<0\), this means
+\[
+|\phi|<\sqrt{\frac{-a}{3b}}.
+\]
+
+This defines the spinodal region in this symmetric model.
+
+Outside this region, but still within the thermodynamic coexistence region, the homogeneous phase can be metastable.
+
+The distinction is:
+- Spinodal decomposition: arbitrarily small fluctuations grow spontaneously.
+- Nucleation: a sufficiently large fluctuation must overcome a free-energy barrier before a new phase can grow.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5
+
+
+
+
+
+
+
+
+
+
+
+For nucleation, consider a spherical droplet of radius \(R\). Its free-energy change is approximately
+\[
+\Delta F(R)
+=
+4\pi R^2\sigma
+-\frac{4\pi}{3}R^3\Delta f,
+\]
+
+where \(\sigma\) is the interface tension and \(\Delta f>0\) is the bulk free-energy advantage of the new phase.
+
+The critical radius is
+\[
+\boxed{
+R_c=\frac{2\sigma}{\Delta f}.
+}
+\]
+
+Droplets smaller than \(R_c\) tend to disappear, whereas sufficiently large droplets tend to grow.
+
+This illustrates two different mechanisms of qualitative transformation: instability of the initial state and activation over an energy barrier.
+6. What about an actual action principle?
+This is particularly relevant to our preceding discussion.
+
+We have written a free-energy functional
+\[
+F[\phi]=\int_\Omega
+\left[
+\frac{\kappa}{2}|\nabla\phi|^2+V(\phi)
+\right]dV.
+\]
+
+But it is important not to confuse this with the ordinary mechanical action.
+
+The TDGL and Cahn–Hilliard equations are dissipative evolution equations. They are not, in general, Euler–Lagrange equations obtained from an ordinary single-history action
+\[
+S=\int L\,dt.
+\]
+
+Instead, they can be derived from a variational principle of a different kind.
+6.1 Gradient-flow formulation
+For TDGL, define a dissipation functional
+\[
+\mathcal D[\dot\phi]
+=
+\frac{1}{2\Gamma}
+\int_\Omega \dot\phi^2\,dV.
+\]
+
+At each instant, choose the rate \(\dot\phi\) that minimizes
+\[
+\mathcal R=
+\frac{dF}{dt}+\mathcal D.
+\]
+
+Variation with respect to \(\dot\phi\) gives
+\[
+\frac{\delta F}{\delta\phi}
++\frac{1}{\Gamma}\dot\phi=0.
+\]
+
+Therefore,
+\[
+\boxed{
+\dot\phi=-\Gamma\frac{\delta F}{\delta\phi}.
+}
+\]
+
+For Cahn–Hilliard, the corresponding dissipation functional is
+\[
+\mathcal D[\dot\phi]
+=
+\frac12\int_\Omega
+\dot\phi\,(-M\nabla^2)^{-1}\dot\phi\,dV.
+\]
+
+Here the inverse Laplacian is understood on the space of zero-mean functions, with appropriate boundary conditions.
+
+Minimizing \(dF/dt+\mathcal D\), subject to conservation of the mean order parameter, gives
+\[
+\boxed{
+\dot\phi=M\nabla^2\frac{\delta F}{\delta\phi}.
+}
+\]
+
+This is an especially elegant result: both equations arise from the same free-energy functional, but with different dissipation metrics.
+
+This is the mathematical basis of the distinction between nonconserved and conserved gradient flows.
+6.2 Including thermal fluctuations
+At finite temperature, the deterministic equations are not always sufficient.
+
+For TDGL, one can write
+\[
+\frac{\partial\phi}{\partial t}
+=
+-\Gamma\frac{\delta F}{\delta\phi}
++\eta(\mathbf x,t),
+\]
+
+where \(\eta\) is thermal noise.
+
+For Cahn–Hilliard, the noise must respect conservation:
+\[
+\frac{\partial\phi}{\partial t}
+=
+M\nabla^2\frac{\delta F}{\delta\phi}
++\nabla\cdot\boldsymbol\zeta.
+\]
+
+The noise correlations are chosen consistently with the fluctuation–dissipation relation. In particular, for constant mobility and thermal equilibrium,
+\[
+\langle\zeta_i(\mathbf x,t)
+\zeta_j(\mathbf x',t')\rangle
+=
+2Mk_BT\delta_{ij}
+\delta(\mathbf x-\mathbf x')
+\delta(t-t').
+\]
+
+The stochastic formulation allows nucleation and thermal activation to be described.
+7. A further generalization: coupled order parameters
+We need not restrict ourselves to a single order parameter.
+
+Suppose a material has two structural variables:
+\[
+\phi_1(\mathbf x,t),\qquad
+\phi_2(\mathbf x,t).
+\]
+
+They might represent magnetization and lattice distortion, or two independent structural ordering processes.
+
+We can construct a free energy
+\[
+F[\phi_1,\phi_2]
+=
+\int_\Omega
+\left[
+\frac{\kappa_1}{2}|\nabla\phi_1|^2
++\frac{\kappa_2}{2}|\nabla\phi_2|^2
++V(\phi_1,\phi_2)
+\right]dV.
+\]
+
+A possible local potential is
+\[
+V(\phi_1,\phi_2)
+=
+\frac{a_1}{2}\phi_1^2
++\frac{a_2}{2}\phi_2^2
++\frac{b_1}{4}\phi_1^4
++\frac{b_2}{4}\phi_2^4
++g\phi_1^2\phi_2^2.
+\]
+
+The dynamics can be written
+\[
+\frac{\partial\phi_i}{\partial t}
+=
+-\sum_j\Gamma_{ij}
+\frac{\delta F}{\delta\phi_j}.
+\]
+
+Here \(\Gamma_{ij}\) is a positive-semidefinite kinetic coefficient matrix.
+
+We can also mix conserved and nonconserved variables. For example,
+\[
+\begin{aligned}
+\dot\phi_1&=-\Gamma\frac{\delta F}{\delta\phi_1},\\
+\dot\phi_2&=M\nabla^2\frac{\delta F}{\delta\phi_2}.
+\end{aligned}
+\]
+
+One structural variable relaxes locally, while the other is transported by diffusion.
+
+This is a useful framework for systems in which several transformations occur simultaneously.
+
+8. What I find particularly important for your theoretical physics project
+There are three different mathematical structures here:
+A. Conservative mechanics
+\[
+\delta S=0
+\]
+
+The dynamics follows from an action and ordinarily conserves energy when the Lagrangian has no explicit time dependence.
+
+B. Dissipative gradient dynamics
+\[
+\dot\phi=-\Gamma\frac{\delta F}{\delta\phi}
+\]
+
+The system evolves toward minima of a free-energy functional.
+
+C. Conserved gradient dynamics
+\[
+\dot\phi=M\nabla^2\frac{\delta F}{\delta\phi}
+\]
+
+The system evolves toward free-energy minima while conserving an integral quantity.
+
+These are not merely three different equations. They represent three different ways of organizing physical evolution.
+
+One can go further and formulate conservative dynamics with internal variables, dissipative dynamics with a metriplectic structure, and stochastic dynamics with fluctuation–dissipation relations.
+
+For the purposes of your book, I would emphasize one especially interesting point:
+
+A qualitative transformation need not be represented by a transition between different configuration spaces. It can arise from the evolution of a field whose free-energy landscape admits several qualitatively different stable configurations.
+
+This is what makes phase-field theory such a useful bridge between ordinary mechanics and more general transformational dynamics.
+
+For further reading, I recommend:
+- A. J. Bray, Theory of Phase-Ordering Kinetics, Advances in Physics 43 (1994), 357–459. 
+  thp.uni-koeln.de
+- J. W. Cahn and J. E. Hilliard, Free Energy of a Nonuniform System. I. Interfacial Free Energy, Journal of Chemical Physics 28 (1958), 258–267.
+- P. C. Hohenberg and B. I. Halperin, Theory of Dynamic Critical Phenomena, Reviews of Modern Physics 49 (1977), 435–479.
+The next particularly interesting step would be to compare these gradient-flow equations with Hamiltonian and metriplectic dynamics. That would clarify whether phase transformations can be described within a unified dynamical framework containing both reversible and irreversible evolution.

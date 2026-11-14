@@ -1,0 +1,214 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\begin{document}
+
+\section*{Qualitative change of motion: bound $\leftrightarrow$ unbound}
+
+\subsection*{1. Classification and the conservation obstruction}
+Relative motion of two bodies (reduced mass $\mu$, $V=-k/r$, with
+$k=Gm_1m_2$ or $k=e^2/4\pi\epsilon_0$):
+\begin{equation}
+E=\tfrac12\mu\dot{\mathbf r}^{2}-\frac{k}{r},\qquad
+L=\mu\,|\mathbf r\times\dot{\mathbf r}|,\qquad
+\varepsilon=\sqrt{1+\frac{2EL^{2}}{\mu k^{2}}}
+\end{equation}
+\begin{itemize}
+  \item $E<0$ ($\varepsilon<1$): ellipse, bound, compact energy surface;
+  \item $E=0$ ($\varepsilon=1$): parabola, the separatrix;
+  \item $E>0$ ($\varepsilon>1$): hyperbola, scattering, non-compact energy surface.
+\end{itemize}
+Since $\dot E=\dot L=0$, the sets $\{E<0\}$ and $\{E\ge0\}$ are invariant:
+\emph{an isolated two-body system can neither capture nor ionize.}
+
+\subsection*{2. Transition = coupling that changes $E$}
+Add an external force $\mathbf F_{\rm ext}$ (or explicit time dependence):
+\begin{equation}
+\mu\ddot{\mathbf r}=-\nabla V+\mathbf F_{\rm ext},\qquad
+\dot E=\frac{\partial V}{\partial t}+\mathbf F_{\rm ext}\!\cdot\dot{\mathbf r}.
+\end{equation}
+Typical sources:
+\begin{align}
+\text{third body (tidal):}\quad
+&\mathbf F_{\rm ext}=\mu\,\frac{GM_3}{D^{3}}
+\left[3\hat{\mathbf D}(\hat{\mathbf D}\!\cdot\mathbf r)-\mathbf r\right]\\
+\text{drag / tidal friction:}\quad
+&\mathbf F_{\rm ext}=-\gamma\,\dot{\mathbf r}\ \Rightarrow\ \dot E=-\gamma\dot{\mathbf r}^{2}<0\\
+\text{radiation reaction (Larmor):}\quad
+&\dot E=-\frac{2}{3}\,\frac{k\,a^{2}}{c^{3}},\qquad a=\frac{k}{m r^{2}}\\
+\text{growing central mass:}\quad
+&\dot E=\partial_tV=-\frac{G\dot M m}{r}<0
+\end{align}
+Capture of a body arriving with relative speed $v_\infty$ requires
+\begin{equation}
+\Delta E=\int \mathbf F_{\rm ext}\!\cdot\dot{\mathbf r}\,dt<-\tfrac12\mu v_\infty^{2},
+\end{equation}
+and ionization/escape requires $\Delta E\ge|E|$.
+
+\subsection*{3. Planet captures satellite: restricted three-body (Hill) problem}
+Rotating frame centred on the planet ($M_p$), mean motion $n$ of the planet about the Sun:
+\begin{align}
+\ddot x-2n\dot y&=3n^{2}x-\frac{GM_p\,x}{r^{3}},\\
+\ddot y+2n\dot x&=-\frac{GM_p\,y}{r^{3}},\\
+\ddot z&=-n^{2}z-\frac{GM_p\,z}{r^{3}}.
+\end{align}
+Conserved Jacobi constant and Hill radius:
+\begin{equation}
+C_J=3n^{2}x^{2}-n^{2}z^{2}+\frac{2GM_p}{r}-v^{2},\qquad
+r_H=\left(\frac{GM_p}{3n^{2}}\right)^{1/3}.
+\end{equation}
+Since $v^{2}\ge0$, motion is confined to
+$3n^{2}x^{2}-n^{2}z^{2}+2GM_p/r\ge C_J$. The necks at $L_{1,2}$ open when
+$C_J<C_{L}=9n^{2}r_H^{2}$.
+\begin{itemize}
+  \item With $C_J$ conserved and the dynamics time-reversible, a body that enters
+        the Hill region also leaves it: permanent capture of a scattering orbit has
+        measure zero, and \emph{temporary capture} is a long sojourn on a chaotic set.
+  \item Permanent capture needs a change $\Delta C_J$: gas drag, tidal
+        dissipation, planet mass growth, collision, or an exchange reaction
+        (binary--planet encounter, one partner ejected, carrying away the energy).
+\end{itemize}
+
+\subsection*{4. Proton + electron $\leftrightarrow$ hydrogen}
+\begin{equation}
+\mathrm p+\mathrm e^-(E_k>0)\;\longrightarrow\;\mathrm H(nlm)+\gamma,
+\qquad
+\hbar\omega=\tfrac12mv^{2}+\frac{I}{n^{2}},\quad I=\frac{mk^{2}}{2\hbar^{2}},
+\end{equation}
+\begin{equation}
+\mathrm H(nlm)+\gamma\;\longrightarrow\;\mathrm p+\mathrm e^-
+\quad\text{(photoionization, the reverse process).}
+\end{equation}
+The closed system (e + p + field) is Hamiltonian; the photon carries away the
+energy, so the subsystem (e, p) changes from $E_{12}>0$ to $E_{12}<0$.
+
+Quantum description: the spectrum is discrete for $E<0$ and continuous for $E>0$, and the transition is a
+matrix element between a Coulomb continuum state $|\mathbf k\rangle$ and a bound state:
+\begin{equation}
+c_f(t)=-\frac{i}{\hbar}\int_0^{t}\langle f|H_{\rm int}(t')|i\rangle\,
+e^{i\omega_{fi}t'}\,dt',\qquad
+H_{\rm int}=\frac{e}{m}\,\mathbf A\!\cdot\!\mathbf p,
+\end{equation}
+\begin{equation}
+\Gamma_{i\to f}=\frac{2\pi}{\hbar}\,|\langle f|H_{\rm int}|i\rangle|^{2}\,\rho(E_f),
+\qquad
+A_{i\to f}=\frac{4k\,\omega^{3}}{3\hbar c^{3}}\,|\langle f|\mathbf r|i\rangle|^{2}
+\ \ \text{(dipole approx.)}
+\end{equation}
+Detailed balance (Milne relation) links the two directions:
+\begin{equation}
+g_\gamma g_n\Big(\frac{\hbar\omega}{c}\Big)^{2}\sigma_{\rm ion}
+= g_e g_p\,(mv)^{2}\,\sigma_{\rm rec}
+\;\Rightarrow\;
+\sigma_{\rm rec}=\frac{g_\gamma g_n}{g_e g_p}\,
+\frac{(\hbar\omega)^{2}}{m^{2}c^{2}v^{2}}\,\sigma_{\rm ion},
+\end{equation}
+with $g_\gamma=2$, $g_e=2$, $g_p=1$, $g_n=2n^2$.
+
+Population dynamics and thermal equilibrium (Saha):
+\begin{equation}
+\frac{dn_{\rm H}}{dt}=\alpha(T)\,n_en_p-\Gamma_{\rm ion}n_{\rm H},\quad
+\alpha=\langle\sigma_{\rm rec}v\rangle,\qquad
+\frac{n_en_p}{n_{\rm H}}=\frac{2g_p}{g_n}
+\Big(\frac{2\pi mk_BT}{h^{2}}\Big)^{3/2}e^{-I/k_BT}.
+\end{equation}
+
+\subsection*{5. Unified criterion}
+Define $E_{12}(t)=H_{12}$ for the subsystem. The state is bound iff $E_{12}<0$;
+capture and ionization/escape are the crossings $E_{12}=0$ with $\dot E_{12}<0$ and $\dot E_{12}>0$.
+Classically, $\Delta E=\int\mathbf F_{\rm ext}\!\cdot\dot{\mathbf r}\,dt$;
+quantum mechanically,
+$P_{\rm bound}(t)=\sum_{nlm}|\langle nlm|\psi(t)\rangle|^{2}$ with
+amplitudes $c_f(t)$ as above.
+
+\subsection*{6. Worked example: capture by one drag pass through a gas envelope}
+
+\paragraph{Model.}
+A small body (radius $a$, density $\rho_b$, mass $m=\tfrac43\pi a^{3}\rho_b$) arrives at a planet
+(mass $M$, radius $R$) with relative speed $v_\infty$ and impact parameter $b$.
+It passes periapsis $r_p$ inside an extended gas envelope of outer radius $r_{\rm atm}$.
+Assumptions: a two-body hyperbola before the encounter, a single \emph{impulsive}
+drag pass at periapsis through a slab of constant column density $\Sigma=\int\rho_g\,ds$,
+and a constant drag coefficient $C_D$.
+
+\paragraph{Drag loss.} With $m\,v\,\dfrac{dv}{ds}=-\tfrac12 C_D A\rho_g v^{2}$ and $A=\pi a^{2}$,
+\begin{equation}
+v_{\rm out}=v_{\rm in}\,e^{-\kappa},\qquad
+\kappa=\frac{C_D A\,\Sigma}{2m}=\frac{3\,C_D\,\Sigma}{8\,\rho_b\,a}.
+\end{equation}
+Smaller bodies have larger $\kappa$ ($\kappa\propto 1/a$), so they are captured more easily.
+
+\paragraph{Capture condition.}
+The periapsis speed is $v_p^{2}=v_\infty^{2}+2GM/r_p$. The specific energy after the pass is
+\begin{equation}
+\varepsilon'=\tfrac12 v_p^{2}\,e^{-2\kappa}-\frac{GM}{r_p}.
+\end{equation}
+Requiring $\varepsilon'<0$ gives
+\begin{equation}
+v_\infty^{2}<v_{\rm esc}^{2}(r_p)\,\big(e^{2\kappa}-1\big)
+\quad\Longleftrightarrow\quad
+r_p<r_c\equiv r_g\big(e^{2\kappa}-1\big),\qquad
+r_g\equiv\frac{2GM}{v_\infty^{2}}.
+\end{equation}
+
+\paragraph{Cross-section with gravitational focusing.}
+Conservation of $L=b\,v_\infty=r_p v_p$ gives
+\begin{equation}
+b^{2}(r_p)=r_p^{2}\Big(1+\frac{2GM}{r_p v_\infty^{2}}\Big)=r_p^{2}+r_g\,r_p .
+\end{equation}
+Capture occurs for $R\le r_p\le r_{\max}=\min(r_{\rm atm},r_c)$ (smaller $r_p$ means collision), so
+\begin{equation}
+\sigma_{\rm cap}=\pi\big[b^{2}(r_{\max})-b^{2}(R)\big]
+=\pi\Big[(r_{\max}^{2}-R^{2})+r_g\,(r_{\max}-R)\Big],
+\qquad
+\Gamma=n_b\,\sigma_{\rm cap}\,v_\infty .
+\end{equation}
+Capture is impossible if $\kappa<\kappa_{\min}=\tfrac12\ln(1+R/r_g)$. The result is limited
+by the envelope size if $\kappa\ge\tfrac12\ln(1+r_{\rm atm}/r_g)$.
+
+\paragraph{Numbers (Jupiter).}
+\begin{itemize}
+  \item $GM=1.267\times10^{17}\,\mathrm{m^{3}\,s^{-2}}$, $R=7.149\times10^{7}\,\mathrm{m}$,
+        $r_{\rm atm}=10R=7.149\times10^{8}\,\mathrm{m}$;
+  \item $v_\infty=1\,\mathrm{km\,s^{-1}}$, which is comparable to $n r_H\approx0.9\,\mathrm{km\,s^{-1}}$
+        with $r_H\approx5.3\times10^{10}\,\mathrm{m}$ and $n=1.68\times10^{-8}\,\mathrm{s^{-1}}$;
+  \item $r_g=2GM/v_\infty^{2}=2.534\times10^{11}\,\mathrm{m}$, and $v_{\rm esc}(R)=59.5\,\mathrm{km\,s^{-1}}$;
+  \item body: $a=1\,\mathrm{km}$, $\rho_b=2000\,\mathrm{kg\,m^{-3}}$, $C_D=1$,
+        so $\kappa=1.875\times10^{-7}\,\Sigma$ with $\Sigma$ in $\mathrm{kg\,m^{-2}}$;
+  \item thresholds: $\kappa_{\min}=1.41\times10^{-4}$ and $\kappa_{\rm env}=1.41\times10^{-3}$.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+$\kappa$ & $\Sigma\ (\mathrm{kg\,m^{-2}})$ & $r_{\max}$ & $\sigma_{\rm cap}\ (\mathrm{m^{2}})$ & $b_{\max}/r_H$\\
+\hline
+$10^{-1}$ & $5.3\times10^{5}$ & $r_{\rm atm}=7.15\times10^{8}\,\mathrm{m}$ (envelope-limited) & $5.1\times10^{20}$ & $0.25$\\
+$10^{-3}$ & $5.3\times10^{3}$ & $r_c=5.07\times10^{8}\,\mathrm{m}\ (7.1\,R)$ (drag-limited) & $3.5\times10^{20}$ & $0.21$\\
+$10^{-4}$ & $5.3\times10^{2}$ & $r_c<R$ & $0$ (collision only) & ---\\
+\hline
+\end{tabular}
+\end{center}
+
+The geometric area $\pi r_{\rm atm}^{2}=1.6\times10^{18}\,\mathrm{m^{2}}$ is enlarged by the focusing factor
+$1+v_{\rm esc}^{2}(r_{\rm atm})/v_\infty^{2}\approx 355$, so the first row is
+$\sigma_{\rm cap}\approx3\times10^{2}\,\pi r_{\rm atm}^{2}$ once the exclusion of $r_p<R$ is accounted for.
+
+\paragraph{Resulting orbit ($\kappa=0.1$, $r_p=r_{\rm atm}$).}
+\begin{align}
+v_p^{2}&=v_\infty^{2}+\frac{2GM}{r_p}=3.554\times10^{8}\,\mathrm{m^{2}s^{-2}},\\
+\varepsilon'&=\tfrac12 v_p^{2}e^{-0.2}-\frac{GM}{r_p}=-3.17\times10^{7}\,\mathrm{J\,kg^{-1}}<0,\\
+a_{\rm sat}&=-\frac{GM}{2\varepsilon'}=2.0\times10^{9}\,\mathrm{m}\approx28\,R,\qquad
+e=1-\frac{r_p}{a_{\rm sat}}\approx0.64,\\
+r_a&=2a_{\rm sat}-r_p=3.3\times10^{9}\,\mathrm{m}\approx46\,R,\qquad
+T=2\pi\sqrt{a_{\rm sat}^{3}/GM}\approx18\ \mathrm{d}.
+\end{align}
+Here $a_{\rm sat}/r_H\approx0.04$, so the captured orbit lies deep inside the Hill sphere.
+The final state is bound ($E_{12}<0$) because the gas removed $\Delta E=-\tfrac12 m v_p^{2}(1-e^{-2\kappa})$.
+
+\paragraph{Validity.}
+The formulas are two-body results, accurate for $b_{\max}\ll r_H$. Here $b_{\max}/r_H\approx0.2$--$0.25$ is only
+marginal, and the true cross-section should be obtained from Hill-problem integrations
+with $C_J$ tracked. A real envelope has $\Sigma=\Sigma(r_p)$ rather than a uniform slab,
+which replaces $r_{\max}=\min(r_{\rm atm},r_c)$ by the solution of $r_p=r_c(\kappa(r_p))$.
+Later passes keep shrinking $a_{\rm sat}$, so this single-pass result is a first estimate.
+\end{document}

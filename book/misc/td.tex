@@ -1,0 +1,999 @@
+I suggest distinguishing two broad classes of physical problems:
+1. Evolution problems: The system retains its identity, composition, and basic structure, while its state changes.
+2. Transformation problems: The system can change its identity, composition, number of constituents, or organization.
+The distinction is not absolute. For example, capture can be described as ordinary Hamiltonian dynamics if we include all the relevant degrees of freedom and consider the planet, satellite, and radiation together. Nevertheless, from the perspective of the two-body subsystem, a transition from an unbound to a bound state is a qualitative change.
+
+There is also an important distinction between a change of state within a given state space and a transition between different sectors of the state space.
+For a book on theoretical physics, I particularly like:
+- Evolutionary dynamics — dynamics within a given physical structure.
+- Transformational dynamics — dynamics involving qualitative changes of physical structure.
+Alternatively, a more conventional and less potentially ambiguous terminology would be:
+
+- Conservative evolution and reactive processes.
+
+I would probably use transformational dynamics as the general heading and then distinguish capture, dissociation, recombination, reactions, particle creation and annihilation, and phase transitions.
+
+One interesting question follows: whether these two classes really require different fundamental dynamical principles, or whether transformational dynamics can always be formulated as ordinary evolution in a sufficiently enlarged state space. That is a particularly fruitful organizing principle for a theoretical physics book.
+5. Phase transitions
+Consider the transition between liquid and solid phases:
+\[
+\mathrm{H_2O}_{(l)}
+\rightleftharpoons
+\mathrm{H_2O}_{(s)}.
+\]
+
+Here the molecular composition does not change, but the collective organization does.
+
+A useful description is given by an order parameter \(\phi\), with free-energy functional
+\[
+F[\phi]
+=
+\int d^3x
+\left[
+\frac{\kappa}{2}(\nabla\phi)^2
++V(\phi,T)
+\right].
+\]
+
+For nonconserved order parameter dynamics, one can use the time-dependent Ginzburg–Landau equation:
+\[
+\frac{\partial\phi}{\partial t}
+=
+-\Gamma\frac{\delta F}{\delta\phi}.
+\]
+
+For a conserved order parameter, the corresponding Cahn–Hilliard equation is
+\[
+\frac{\partial\phi}{\partial t}
+=
+\nabla\cdot
+\left(
+M\nabla\frac{\delta F}{\delta\phi}
+\right).
+\]
+6. A general mathematical formulation
+There is a useful way to unify these examples.
+
+Suppose a physical system can exist in several qualitatively different configurations or sectors:
+\[
+\mathcal S=\bigcup_{\alpha}\mathcal S_\alpha.
+\]
+
+Here \(\alpha\) labels, for example:
+- an unbound planet and satellite;
+- a bound planet-satellite system;
+- a proton and electron;
+- a hydrogen atom;
+- a different particle composition;
+- different phases of matter.
+Within each sector, the evolution may be described by equations
+\[
+\dot x_\alpha=X_\alpha(x_\alpha,t).
+\]
+
+A transformation between sectors can be represented schematically as
+\[
+(x_\alpha,\alpha)
+\xrightarrow{\mathcal T_{\alpha\beta}}
+(x_\beta,\beta).
+\]
+
+In a probabilistic description, let \(P_\alpha(x,t)\) denote the probability density in sector \(\alpha\). Then a general master equation is
+\[
+\boxed{
+\frac{\partial P_\alpha}{\partial t}
+=
+-\nabla\cdot(X_\alpha P_\alpha)
++
+\sum_{\beta\ne\alpha}
+\left[
+W_{\alpha\beta}P_\beta
+-
+W_{\beta\alpha}P_\alpha
+\right].
+}
+\]
+
+The first term describes ordinary evolution within a sector. The second describes transitions between sectors.
+
+This formulation is particularly interesting because it separates two mechanisms:
+1. Continuous evolution within a given physical structure.
+2. Transitions that change the physical structure itself.
+My suggestion for your book: this last formulation could serve as a general starting point for a chapter on transformational dynamics. It encompasses capture, recombination, chemical reactions, and phase transitions at an abstract level, although the specific transition rates and state spaces must be supplied by the underlying physical theory.
+a transformation should not be regarded as an additional operation imposed on dynamics; it should itself be part of the dynamics.
+
+The distinction between evolution within a sector and transitions between sectors is useful mathematically, but it should not suggest that the transition is governed by a fundamentally different, nondynamical prescription.
+
+Let me develop this idea.
+1. The basic principle
+Suppose we have a system whose physical state is described by \(x\). In ordinary mechanics,
+\[
+\dot x=X(x,t).
+\]
+
+The state evolves continuously in a fixed state space \(M\).
+
+For transformational dynamics, we need a more general state space. One possibility is
+\[
+\mathcal M=\bigcup_{\alpha}M_\alpha,
+\]
+
+where \(M_\alpha\) represents a particular physical configuration or sector.
+
+The crucial point is that the dynamics must describe both:
+- evolution within \(M_\alpha\);
+- transitions between different \(M_\alpha\).
+We should therefore seek a single dynamical model on an appropriately enlarged state space.
+2. Example: gravitational capture
+Consider a satellite approaching a planet.
+
+If we use only the relative coordinate, the equation is
+\[
+\mu\ddot{\mathbf r}
+=-\frac{GMm}{r^3}\mathbf r.
+\]
+
+This equation cannot describe capture in an isolated two-body system.
+
+But suppose we include an additional dynamical degree of freedom, for example an internal deformation mode \(q\) of the planet.
+
+A schematic Lagrangian is
+\[
+L=
+\frac{\mu}{2}\dot{\mathbf r}^{\,2}
++\frac{m_q}{2}\dot q^2
+-V_g(r)-V_q(q)-g(r)q.
+\]
+
+The equations are
+\[
+\mu\ddot{\mathbf r}
+=-\nabla_{\mathbf r}
+\left[V_g(r)+g(r)q\right],
+\]
+
+\[
+m_q\ddot q+V_q'(q)+g(r)=0.
+\]
+
+Energy is conserved for the complete system, but energy can be transferred from orbital motion to internal oscillations.
+
+Consequently, the satellite can become gravitationally bound.
+
+Notice what happened: we did not introduce a separate capture rule. Capture emerges from ordinary evolution in an enlarged dynamical system.
+3. Example: formation of hydrogen
+The same idea applies to the formation of an atom, although now quantum dynamics is required.
+
+We can describe the electron, proton and electromagnetic field using a common Hamiltonian:
+\[
+H=H_{\mathrm{matter}}+H_{\mathrm{EM}}+H_{\mathrm{int}}.
+\]
+
+The state evolves according to
+\[
+i\hbar\frac{\partial}{\partial t}|\Psi(t)\rangle
+=H|\Psi(t)\rangle.
+\]
+
+The Hilbert space includes both scattering states and bound states, together with the photon degrees of freedom.
+
+Schematically,
+\[
+|\Psi\rangle
+=
+a_{\mathrm{sc}}|\text{proton,electron}\rangle
++
+a_H|\text{hydrogen}\rangle
++
+a_\gamma|\text{photon states}\rangle+\cdots.
+\]
+
+The interaction couples these configurations. Radiative recombination is then a dynamical transition, not an externally imposed change of description.
+
+The reverse process is governed by the same interaction.
+4. A more general mathematical model
+There is another useful formulation.
+
+Introduce a continuous variable \(x\) describing ordinary degrees of freedom and an additional variable \(\xi\) describing the structural configuration of the system.
+
+Then write
+\[
+L=L(x,\dot x,\xi,\dot\xi).
+\]
+
+The equations are
+\[
+\frac{d}{dt}\frac{\partial L}{\partial\dot x}
+-\frac{\partial L}{\partial x}=0,
+\]
+
+\[
+\frac{d}{dt}\frac{\partial L}{\partial\dot\xi}
+-\frac{\partial L}{\partial\xi}=0.
+\]
+
+Here \(\xi\) is not merely a label identifying the sector. It is a genuine dynamical variable.
+
+For example, consider a potential with two minima:
+\[
+V(\xi)=\frac{\lambda}{4}(\xi^2-a^2)^2.
+\]
+
+The system can evolve between different configurations of \(\xi\), depending on its energy and coupling to other degrees of freedom.
+
+This is a simple model of structural transformation, although it does not by itself describe particle recombination or gravitational capture.
+5. An important distinction: continuous and discrete transformations
+Not every transformation can be represented by a continuous variable of the type \(\xi\).
+
+There are at least two possibilities:
+Type	Mathematical description	Example
+Continuous structural transformation	Additional continuous dynamical variables	Phase transitions, deformation
+Discrete structural transformation	Dynamically coupled sectors	Atomic recombination, particle reactions
+
+But even a discrete transformation can be generated by continuous time evolution. For example, a quantum state can evolve continuously while its amplitudes in different particle-number sectors change.
+
+Thus, discrete changes in the observed configuration do not necessarily imply discontinuous fundamental dynamics.
+6. The conceptual conclusion
+I would formulate the principle as follows:
+
+Transformational dynamics is dynamics in which the physical structure of the system is itself a dynamical quantity.
+
+This leads to a potentially important distinction for your book:
+- Ordinary dynamics: the state changes while the physical structure is prescribed.
+- Transformational dynamics: the state and the physical structure evolve together.
+There is one further question worth emphasizing. Does every transformational process admit a description as ordinary dynamics on an enlarged state space?
+
+For classical capture, the answer is generally yes, provided all relevant degrees of freedom are included.
+
+For quantum reactions, quantum field theory provides precisely such a framework through its interacting fields and Fock-space sectors.
+
+But the question is more subtle when the system changes its very ontology or when the relevant state spaces have different dimensions or different mathematical structures.
+
+I would make this last question central to the discussion: is transformational dynamics a genuinely new type of dynamics, or is it ordinary dynamics with a more general notion of state space? My inclination is that the latter is the more productive starting point, but the mathematical and physical consequences deserve separate investigation.
+Let us construct an explicit dynamical model of gravitational capture of a satellite by a planet. The purpose is to show how capture can emerge from equations of motion, rather than being introduced as a separate rule saying that an unbound orbit suddenly becomes bound.
+
+There is one important physical requirement: in a conservative two-body problem, capture is impossible. We must include a mechanism that transfers orbital energy into another degree of freedom.
+
+I will use a simple model of tidal capture.
+1. The physical model
+Consider:
+- a planet of mass \(M\);
+- a satellite of mass \(m\);
+- a tidal deformation mode of the planet, represented by a generalized coordinate \(q\).
+The satellite approaches on an initially unbound orbit. Its gravitational interaction excites the planet's internal mode. Orbital energy is transferred into the mode, and the satellite can become bound.
+
+
+
+
+
+
+
+
+slideserve.com
+
+
+We use the relative coordinate \(r\), reduced mass
+\[
+\mu=\frac{Mm}{M+m},
+\]
+
+and restrict attention to planar motion.
+2. Constructing the Lagrangian
+Let \(q\) be a dimensionless amplitude of a quadrupolar deformation mode, with effective mass parameter \(m_q\) and frequency \(\omega_0\).
+
+A simple Lagrangian is
+\[
+\boxed{
+L=
+\frac{\mu}{2}(\dot r^2+r^2\dot\theta^2)
++\frac{m_q}{2}\dot q^2
+-\frac{m_q\omega_0^2}{2}q^2
++\frac{C}{r^3}q
++\frac{GMm}{r}.
+}
+\]
+
+Here \(C\) measures the coupling between the satellite's tidal field and the deformation mode.
+
+The term \(Cq/r^3\) is a simplified representation of tidal coupling. A more complete tidal model would include orientation and multiple quadrupole components.
+3. Equations of motion
+Applying the Euler–Lagrange equations gives
+
+For the radial coordinate:
+\[
+\boxed{
+\mu(\ddot r-r\dot\theta^2)
+=
+-\frac{GMm}{r^2}
++\frac{3Cq}{r^4}.
+}
+\]
+
+For the angular coordinate:
+\[
+\boxed{
+\frac{d}{dt}(\mu r^2\dot\theta)=0.
+}
+\]
+
+For the internal deformation:
+\[
+\boxed{
+m_q\ddot q+m_q\omega_0^2q
+=\frac{C}{r^3}.
+}
+\]
+
+These three equations constitute one dynamical system.
+
+The satellite's orbital motion excites the internal oscillator, and the oscillator reacts back on the orbital motion.
+
+Notice that there is no separate equation for capture.
+4. Energy conservation and the mechanism of capture
+The complete system is autonomous, so its total energy is conserved:
+\[
+\boxed{
+E=
+\frac{\mu}{2}(\dot r^2+r^2\dot\theta^2)
++\frac{m_q}{2}\dot q^2
++\frac{m_q\omega_0^2}{2}q^2
+-\frac{Cq}{r^3}
+-\frac{GMm}{r}
+=\mathrm{const}.
+}
+\]
+
+The orbital part is
+\[
+E_{\mathrm{orb}}
+=
+\frac{\mu}{2}(\dot r^2+r^2\dot\theta^2)
+-\frac{GMm}{r}.
+\]
+
+The internal mode can acquire energy at the expense of orbital motion.
+
+Far before the encounter, suppose the deformation mode is unexcited:
+\[
+q(-\infty)=0,\qquad \dot q(-\infty)=0.
+\]
+
+The satellite arrives with positive orbital energy:
+\[
+E_{\mathrm{orb}}(-\infty)
+=\frac{\mu v_\infty^2}{2}>0.
+\]
+
+After the encounter, when the satellite is again far from the planet, the coupling term becomes negligible. The oscillator retains some energy \(E_q\), and consequently
+\[
+E_{\mathrm{orb}}(+\infty)
+=
+\frac{\mu v_\infty^2}{2}-E_q.
+\]
+
+Therefore, capture occurs when
+\[
+\boxed{
+E_q>\frac{\mu v_\infty^2}{2}.
+}
+\]
+
+This is the central capture condition.
+5. Calculating the energy transferred to the internal mode
+We can actually calculate this energy in a useful approximation.
+
+Suppose the encounter is sufficiently weak that we can first calculate the satellite's trajectory without the tidal backreaction.
+
+The oscillator then obeys
+\[
+\ddot q+\omega_0^2q
+=\frac{C}{m_qr(t)^3}.
+\]
+
+This is a forced harmonic oscillator.
+
+For an initially unexcited oscillator, its energy after the encounter is
+\[
+\boxed{
+E_q=
+\frac{C^2}{2m_q}
+\left|
+\int_{-\infty}^{+\infty}
+\frac{e^{i\omega_0t}}{r(t)^3}\,dt
+\right|^2.
+}
+\]
+
+This expression is particularly informative:
+- \(r(t)\) describes the incoming and outgoing orbital trajectory;
+- \(1/r^3\) describes the strength of tidal forcing;
+- \(\omega_0\) determines how efficiently the internal mode responds;
+- the integral determines the amount of energy transferred.
+We now have a quantitative criterion for capture, rather than just a qualitative description.
+6. An explicit numerical illustration
+To see the mechanism even more clearly, approximate the tidal forcing during a short encounter by a Gaussian pulse:
+\[
+F(t)=F_0\exp\left(-\frac{t^2}{2\tau^2}\right).
+\]
+
+The oscillator equation becomes
+\[
+m_q\ddot q+m_q\omega_0^2q=F(t).
+\]
+
+The energy remaining in the oscillator after the pulse is
+\[
+\boxed{
+E_q=
+\frac{\pi F_0^2\tau^2}{m_q}
+e^{-\omega_0^2\tau^2}.
+}
+\]
+
+For illustration, choose dimensionless parameters
+\[
+m_q=1,\qquad \tau=1,\qquad
+\omega_0=1,\qquad F_0=0.4.
+\]
+
+Then
+\[
+E_q=\frac{0.16\pi}{e}
+\simeq 0.185.
+\]
+
+Suppose the incoming satellite has orbital energy
+\[
+E_{\mathrm{orb}}(-\infty)=0.10.
+\]
+
+After the encounter,
+\[
+E_{\mathrm{orb}}(+\infty)
+\simeq 0.10-0.185=-0.085.
+\]
+
+Capture condition satisfied
+The satellite has entered a bound orbit. The positive energy of the excited internal mode compensates for the negative orbital energy.
+
+This Gaussian-pulse calculation is a weak-coupling approximation: it prescribes the encounter forcing rather than solving the fully coupled radial equation. The full model in Sections 2–4 supplies the corresponding self-consistent dynamics.
+7. One important physical qualification
+Our oscillator is conservative. It can give energy back to the orbit during a subsequent encounter. Thus, negative orbital energy immediately after the first encounter does not necessarily guarantee permanent capture.
+
+For permanent capture, we need the excitation energy to become effectively unavailable to the orbital motion. This can happen through:
+- damping of internal oscillations;
+- transfer into many internal modes;
+- conversion into heat;
+- radiation.
+A phenomenological damping term would give
+\[
+m_q\ddot q+
+2m_q\gamma\dot q+
+m_q\omega_0^2q
+=\frac{C}{r^3}.
+\]
+
+Strictly speaking, this damped equation is no longer the closed Lagrangian system above. To retain a fully conservative formulation, we must include the additional degrees of freedom responsible for damping.
+
+Also, a sign correction to the radial equation in Section 3: with the Lagrangian as written, it is
+\[
+\boxed{
+\mu(\ddot r-r\dot\theta^2)
+=-\frac{GMm}{r^2}
+-\frac{3Cq}{r^4}.
+}
+\]
+
+
+8. What this example tells us about transformational dynamics
+This example illustrates something important for the conceptual organization of your book.
+
+We started with an apparently qualitative distinction:
+\[
+\text{unbound system}
+\longrightarrow
+\text{bound system}.
+\]
+
+But the equations themselves contain no discontinuity, no externally imposed transition, and no special capture rule.
+
+Instead, we have
+\[
+(r,\theta,q,\dot r,\dot\theta,\dot q)
+\]
+
+as the state of the complete system, evolving according to ordinary differential equations.
+
+The distinction between unbound and bound motion is made afterward, by examining the orbital energy.
+
+In other words,
+\[
+\boxed{
+\text{Transformation of physical configuration}
+=
+\text{ordinary dynamical evolution}
++
+\text{change in the qualitative character of the solution}In fact, the satellite-capture example is particularly suitable for an action formulation. We can formulate the entire process using a single variational principle, with no need to introduce a separate variational principle for the capture event.
+
+There are several interesting aspects to this.
+1. Action for the complete system
+Starting from the Lagrangian of the satellite and the internal tidal mode, define
+\[
+S[r,\theta,q]=\int_{t_1}^{t_2}L(r,\theta,q,\dot r,\dot\theta,\dot q)\,dt,
+\]
+
+where
+\[
+\begin{aligned}
+L={}&
+\frac{\mu}{2}(\dot r^2+r^2\dot\theta^2)
++\frac{m_q}{2}\dot q^2\\
+&-\frac{m_q\omega_0^2}{2}q^2
++\frac{Cq}{r^3}
++\frac{GMm}{r}.
+\end{aligned}
+\]
+
+The variational principle is
+\[
+\boxed{\delta S=0.}
+\]
+
+We vary all three dynamical variables independently:
+\[
+\delta r,\qquad \delta\theta,\qquad \delta q.
+\]
+
+The resulting Euler–Lagrange equations describe the complete process, including energy transfer between orbital motion and internal deformation.
+
+There is no special capture condition in the action.
+2. Boundary conditions and the meaning of capture
+This is an important point.
+
+Suppose the satellite approaches from infinity with velocity \(v_\infty\), and the internal mode is initially unexcited:
+\[
+r(t)\rightarrow\infty,\qquad
+\dot r(t)\rightarrow -v_\infty,
+\]
+
+\[
+q(t)\rightarrow0,\qquad
+\dot q(t)\rightarrow0
+\quad (t\rightarrow-\infty).
+\]
+
+After the encounter, the satellite may escape or remain bound.
+
+The two possibilities correspond to different solutions of the same equations:
+\[
+E_{\mathrm{orb}}^{\mathrm{out}}>0
+\quad\Rightarrow\quad\text{escape},
+\]
+
+\[
+E_{\mathrm{orb}}^{\mathrm{out}}<0
+\quad\Rightarrow\quad\text{capture}.
+\]
+
+Thus, capture is a property of the solution, not an additional postulate of the variational principle.
+3. Can we formulate the problem using a reduced action?
+Yes. This is particularly interesting.
+
+The internal oscillator is a dynamical variable, but it enters quadratically in the action. We can eliminate it by solving its equation of motion and substituting the solution back into the action.
+
+Write
+\[
+J(t)=\frac{C}{r(t)^3}.
+\]
+
+The oscillator part of the action is
+\[
+S_q=\int dt\left[
+\frac{m_q}{2}\dot q^2
+-\frac{m_q\omega_0^2}{2}q^2
++J(t)q
+\right].
+\]
+
+Its equation of motion is
+\[
+m_q(\partial_t^2+\omega_0^2)q=J(t).
+\]
+
+With appropriate boundary conditions, formally,
+\[
+q(t)=\frac{1}{m_q}
+\int dt'\,G(t,t')J(t'),
+\]
+
+where \(G\) is the Green function of the oscillator operator.
+
+Substitution gives an effective action for the orbital coordinate alone:
+\[
+\boxed{
+S_{\mathrm{eff}}[r,\theta]
+=
+S_{\mathrm{orb}}[r,\theta]
++
+\frac{1}{2m_q}
+\int dt\,dt'\,
+J(t)G(t,t')J(t').
+}
+\]
+
+This is a nonlocal action: the orbital motion at one time is coupled to its motion at another time.
+
+It is a particularly revealing result. Eliminating internal degrees of freedom can turn an ordinary local action into a nonlocal effective action.
+
+There is a qualification: the appropriate Green function and boundary conditions matter. For a conservative, time-symmetric variational problem one uses a symmetric Green function. A purely retarded response generally requires an initial-value or doubled-variable formulation rather than an ordinary single-history action.
+4. What happens when we include irreversible capture?
+Suppose internal oscillations dissipate their energy into heat.
+
+The simplest phenomenological model is
+\[
+m_q\ddot q+2m_q\gamma\dot q
++m_q\omega_0^2q=\frac{C}{r^3}.
+\]
+
+This equation cannot be obtained from the ordinary single-coordinate Lagrangian above.
+
+But there are several action-based possibilities:
+- Introduce additional environmental degrees of freedom and construct a conservative action for the enlarged system.
+- Use the Rayleigh dissipation function for a phenomenological description.
+- Use a doubled-variable action, such as the Schwinger–Keldysh or closed-time-path formalism, for dissipative effective dynamics.
+The first option is conceptually the most straightforward: the complete system remains variational, while its reduced description appears dissipative.
+5. A broader formulation for transformational dynamics
+I think we can extract a general principle from this example.
+
+Let \(Q\) denote the ordinary configuration variables and \(\xi\) the variables describing internal structure or composition. Then consider
+\[
+\boxed{
+S[Q,\xi]=
+\int_{t_1}^{t_2}
+L(Q,\dot Q,\xi,\dot\xi)\,dt.
+}
+\]
+
+The essential feature is that \(\xi\) is a genuine dynamical variable, not an externally prescribed label.
+
+The resulting equations are
+\[
+\frac{d}{dt}\frac{\partial L}{\partial\dot Q}
+-\frac{\partial L}{\partial Q}=0,
+\]
+
+\[
+\frac{d}{dt}\frac{\partial L}{\partial\dot\xi}
+-\frac{\partial L}{\partial\xi}=0.
+\]
+
+Different qualitative configurations can then correspond to different regions, minima, or dynamical regimes of the enlarged configuration space.
+
+For discrete structural changes, we can instead use several coupled fields or configuration sectors, with an action that generates transitions between them.
+
+One distinction I would emphasize in your book: there are two different questions:
+1. Can we formulate an action for a system whose qualitative configuration changes? Yes.
+2. Can we formulate an action directly on the space of qualitatively different configurations, without first embedding them into a larger ordinary configuration space?
+The second question is more fundamental and considerably more interesting. It concerns the possible generalization of the configuration space itself, rather than merely adding extra degrees of freedom.
+
+I would investigate this distinction before deciding how to introduce transformational dynamics as a separate category in the book.
+Let us investigate the more fundamental formulation: an action principle in which the physical configuration space itself is allowed to change.
+
+I think this is a worthwhile direction because it raises a question that is usually hidden in conventional mechanics:
+Does a variational principle require the physical system to have a fixed configuration space, or can the configuration space, its dimension, and even the identity of its degrees of freedom change during evolution?
+
+There are several levels of generalization. We should distinguish them carefully, because not all of them require new mathematics or new physical principles.
+1. Ordinary action: fixed configuration space
+In conventional mechanics, we start with a configuration manifold \(Q\), with local coordinates
+\[
+q=(q^1,\ldots,q^n).
+\]
+
+The action is
+\[
+S[q]=\int_{t_1}^{t_2}L(q,\dot q,t)\,dt.
+\]
+
+The physical trajectory is a curve
+\[
+q:I\longrightarrow Q.
+\]
+
+The Euler–Lagrange equations determine this curve.
+
+The important assumption is that the configuration space \(Q\), including its dimension \(n\), is specified in advance.
+
+Even if the system passes through very different physical regimes, its trajectory remains a curve in the same \(Q\).
+
+For example, gravitational capture can be described using
+\[
+Q=\mathbb R^2\times\mathbb R,
+\]
+
+where the first two coordinates describe the relative position and the last describes the internal deformation.
+
+Nothing happens to the configuration space when the satellite becomes bound.
+
+This is mathematically sufficient, but it may conceal an interesting physical distinction.
+2. Several configuration spaces and transitions between them
+Suppose that different physical configurations are naturally described by different configuration spaces:
+\[
+Q_1,\quad Q_2,\quad Q_3,\ldots
+\]
+
+For example:
+- \(Q_1\): a planet and an independent satellite;
+- \(Q_2\): a planet with a gravitationally bound satellite;
+- \(Q_3\): a planet with a satellite and excited internal modes.
+We can define a disjoint union
+\[
+\mathcal Q=\coprod_{\alpha}Q_\alpha.
+\]
+
+A state is now described by
+\[
+(q,\alpha),\qquad q\in Q_\alpha.
+\]
+
+Within each sector, we have an action
+\[
+S_\alpha[q]
+=
+\int L_\alpha(q,\dot q,t)\,dt.
+\]
+
+But we also need to describe transitions between sectors.
+
+A useful first construction is a hybrid variational system.
+
+Let the transition from sector \(\alpha\) to sector \(\beta\) occur at an unknown time \(\tau\). Then
+\[
+S=
+\int_{t_1}^{\tau}L_\alpha\,dt
++
+S_{\alpha\beta}^{\mathrm{tr}}
++
+\int_{\tau}^{t_2}L_\beta\,dt.
+\]
+
+Here \(S_{\alpha\beta}^{\mathrm{tr}}\) is an action associated with the transition.
+
+Variation with respect to \(\tau\), when the transition configuration is fixed and there is no explicit dependence on \(\tau\), gives
+\[
+\boxed{
+H_\alpha(\tau^-)=H_\beta(\tau^+).
+}
+\]
+
+More generally, if the transition action depends explicitly on time,
+\[
+H_\alpha-H_\beta
+=
+\frac{\partial S_{\alpha\beta}^{\mathrm{tr}}}{\partial\tau},
+\]
+
+with the appropriate endpoint conventions.
+
+This is an interesting construction, but it has a limitation: the transition action can become an externally prescribed rule. We would prefer to derive the transition itself dynamically.
+3. A more general construction: configuration space as a stratified space
+There is a natural mathematical framework for this problem.
+
+Instead of assuming that the configuration space is a single smooth manifold, consider a space made of several manifolds of possibly different dimensions, joined along transition regions.
+
+Such a space is called a stratified space.
+
+Schematically,
+\[
+\mathcal Q=
+Q_1\cup Q_2\cup\cdots\cup Q_N.
+\]
+
+Each \(Q_\alpha\) is a smooth manifold, but the whole space need not be a manifold.
+
+
+
+
+
+
+
+
+math.ubc.ca
+
+
+For example, consider a reaction
+\[
+A+B\rightleftharpoons C.
+\]
+
+If we describe the positions of the particles, the configuration spaces are
+\[
+Q_{AB}=\mathbb R^3\times\mathbb R^3,
+\]
+
+and
+\[
+Q_C=\mathbb R^3.
+\]
+
+The first has six configuration coordinates; the second has three.
+
+The transition is not simply a trajectory within either of these spaces. It connects two different configuration spaces.
+
+This is precisely the situation that a stratified configuration space is intended to accommodate.
+3.1 Action on the stratified space
+We can define an action on a history consisting of several segments:
+\[
+\Gamma=
+\left(
+q_{\alpha_1}(t),
+q_{\alpha_2}(t),\ldots,
+q_{\alpha_N}(t)
+\right).
+\]
+
+Let the transition times be
+\[
+t_1<\tau_1<\tau_2<\cdots<\tau_N<t_2.
+\]
+
+Then
+\[
+\boxed{
+S[\Gamma,\{\tau_i\}]
+=
+\sum_{\alpha}
+\int_{\tau_{\alpha-1}}^{\tau_\alpha}
+L_\alpha(q_\alpha,\dot q_\alpha,t)\,dt
++
+\sum_\alpha
+S_{\alpha,\alpha+1}^{\mathrm{tr}}.
+}
+\]
+
+The transition terms must specify how the different configuration spaces are connected.
+
+This is a generalized variational principle, but it is not yet a complete physical theory: we must specify the allowed transitions and their dynamics.
+4. A more physical example: particle reaction as a worldline action
+Consider a reaction
+\[
+A+B\longrightarrow C.
+\]
+
+The number of particles changes from two to one. This is a particularly clean example of a change in the number of degrees of freedom.
+
+We can describe the particles by worldlines.
+
+Let \(x_A^\mu(s_A)\), \(x_B^\mu(s_B)\), and \(x_C^\mu(s_C)\) be their spacetime trajectories.
+
+The free relativistic particle action is
+\[
+S_{\mathrm{free}}
+=
+-mc\int ds.
+\]
+
+For the reaction, consider the action
+\[
+\begin{aligned}
+S={}&
+-m_Ac\int_{A}ds_A
+-m_Bc\int_{B}ds_B\\
+&-m_Cc\int_{C}ds_C\\
+&+\lambda_{A\mu}
+\left[x_A^\mu(s_A^*)-X^\mu\right]\\
+&+\lambda_{B\mu}
+\left[x_B^\mu(s_B^*)-X^\mu\right]\\
+&+\lambda_{C\mu}
+\left[x_C^\mu(s_C^*)-X^\mu\right].
+\end{aligned}
+\]
+
+Here \(X^\mu\) is the spacetime position of the reaction event, and the Lagrange multipliers enforce the coincidence of the three worldline endpoints:
+\[
+x_A^\mu(s_A^*)=
+x_B^\mu(s_B^*)=
+x_C^\mu(s_C^*)=X^\mu.
+\]
+
+Variation of the worldline endpoints and of \(X^\mu\) produces momentum conservation:
+\[
+\boxed{
+p_A^\mu+p_B^\mu=p_C^\mu.
+}
+\]
+
+This is a useful example because the reaction is represented by a vertex joining worldlines, rather than by an arbitrary replacement of one state by another.
+
+There is an important physical qualification: for an isolated reaction, the masses must permit the reaction kinematically. In particular, a two-particle system cannot simply turn into one particle of arbitrary mass while conserving four-momentum.
+
+For actual particle reactions, additional fields and quantum interactions are generally needed. The worldline construction illustrates the variational geometry of a reaction vertex, not a complete microscopic theory of particle creation.
+5. The most general formulation: sum over possible histories
+Here we arrive at an especially interesting possibility.
+
+Instead of specifying in advance which configuration space the system occupies, consider all admissible histories, including different sequences of configurations and transitions.
+
+We can write schematically
+\[
+\boxed{
+\mathcal Z=
+\sum_{\Gamma}
+\int_{\Gamma}\mathcal Dq\,
+\exp\left(\frac{i}{\hbar}S[\Gamma,q]\right).
+}
+\]
+
+The sum is over possible histories \(\Gamma\), which may have different numbers of particles, different transition events, and different configuration-space dimensions.
+
+This is closely related to the path-integral formulation of quantum field theory.
+
+In ordinary classical mechanics, we select stationary-action histories:
+\[
+\delta S=0.
+\]
+
+In the quantum formulation, different histories contribute amplitudes, and interference determines the physical predictions.
+
+The important conceptual point is that the history itself can contain changes in the physical composition of the system.
+
+This is not merely motion on a fixed configuration manifold.
+6. Returning to satellite capture: which formulation is appropriate?
+It is important not to overcomplicate this example.
+
+For gravitational capture, the satellite does not disappear, nor does the number of particles change. The configuration space remains the same.
+
+The interesting change is in the dynamical regime.
+
+We can describe it using the action
+\[
+S=\int L(r,\theta,q,\dot r,\dot\theta,\dot q)\,dt.
+\]
+
+The same variational principle generates both the unbound and bound trajectories.
+
+The distinction is made through the orbital energy:
+\[
+E_{\mathrm{orb}}>0
+\quad\longleftrightarrow\quad
+E_{\mathrm{orb}}<0.
+\]
+
+Thus, satellite capture is an example of a qualitative transformation of a dynamical regime, not a change of configuration-space topology.
+
+For atomic recombination, the situation is more substantial: the number and identity of particles in the effective description change. A field-theoretic action is more natural.
+7. Three levels of variational mechanics
+I would summarize the possibilities as follows.
+Level	Configuration space	Variational formulation
+Ordinary dynamics	Fixed manifold \(Q\)	\(S=\int L\,dt\)
+Extended dynamics	Fixed enlarged manifold \(Q\times Y\)	\(S=\int L(q,y,\dot q,\dot y)\,dt\)
+Structural dynamics	Several spaces \(Q_\alpha\), possibly of different dimensions	Action on a stratified space or sum over histories
+
+The second level is particularly important. Many apparently transformational processes can be described by enlarging the configuration space.
+
+The third level becomes relevant when different physical configurations genuinely have different degrees of freedom, particle content, or topology.
+8. My proposed direction for your book
+I would introduce a general chapter or section entitled:
+
+Dynamics with Variable Physical Structure
+
+Its central question would be:
+
+What is the most general configuration space on which a physical action can be defined?
+
+I would develop it in this order:
+1. Ordinary variational mechanics and fixed configuration spaces.
+2. Enlarged configuration spaces and internal degrees of freedom.
+3. Capture, binding and dissociation as changes of dynamical regime.
+4. Configuration spaces with different dimensions.
+5. Stratified spaces and transition conditions.
+6. Particle reactions and worldline vertices.
+7. Field theory and variable particle number.
+8. Path integrals and summation over histories.
+There is one conceptual distinction I would preserve throughout:
+- A change in the state of a system.
+- A change in its dynamical regime.
+- A change in its physical composition.
+- A change in the mathematical space needed to describe it.
+These are four different phenomena, and they should not be conflated.
+
+My main conclusion: the action principle need not be abandoned when the physical system undergoes a qualitative transformation. But the usual formulation \(S[q]\), with a fixed configuration manifold and a fixed number of coordinates, may be too restrictive. Generalizing the space of admissible histories, rather than merely generalizing the equations of motion, is a promising way to approach the problem.
+

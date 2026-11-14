@@ -1,0 +1,1190 @@
+\chapter{Classical Mechanics}
+\label{ch:cm}
+{
+\setlength\epigraphwidth{0.6\textwidth}
+\epigraph {
+    Motion\\
+There is no motion, said a wise old Greek.\\
+The other sage just smiled and walked around.\\
+A better answer hardly could be found,\\
+And everybody praised this tongue in cheek.\\
+But, gentlemen, this funny story might\\
+Remind us of a man of great renown:\\
+Day after day the Sun walks up and down,\\
+And yet the stubborn Galilei was right.
+} {A.S. Pushkin, Translated by D. Broytman }
+}
+
+Classical mechanics  is the most important model in physics. Until the end of
+the 19th century, mechanics was considered as direct and the only the basis of
+all physics. By words understand or to explain a physical phenomenon meant
+constructing a mechanical model of it.
+
+Situation has changed,  other physical models exist, e.g. quantum mechanics so 
+"usual" mechanics has changed its name to "classical mechanics" and still is
+the central part of theoretical physics. All main physical concepts emerged from
+it.
+
+Classical mechanics is based on three principles:
+\begin{description}
+  \item[ Absolute Time] 
+    Time is universal and global in classical mechanics. State of the system is
+    determined by positions and velocities at fixed time. Every particle
+    has its own coordinates however time is common. We can always measure
+    time  exactly and instantly without any influence on mechanical
+    systems. Time is continuous, discrete time would lead to finite
+    difference equations instead of differential ones. So dynamics would be
+    undefined, since one always can add periodical function to solution.
+\item [Instant Interaction] All interactions are instant i.e. depend on system
+    state at one fixed moment of time. It can be seen as action on a distance
+        or infinite velocity of signal propagation. In particular it means that
+        all accelerations and hence evolution is determined by one state (not
+        necessary initial one). It is possible to think that any interaction
+        takes small but finite period of time. This supposition will lead to
+        functional equations instead of differential ones.
+  \item [ Absolute Measurability]
+    We can find out and set up exact value of any variable at any time
+    instantly without disturbing the system in any way. In particular we
+    can set exactly positions and velocities which means among other things
+    that space is continuous.
+\end{description}
+
+Classical mechanics occupies a peculiar position among physical theories. It is,
+first, a complete and self-contained subject: a body of concepts, equations, and
+results describing the motion of bodies under forces, valid and useful on its own
+terms, with no reference whatsoever to the Planck constant $\hbar$ or the speed of
+light $c$. Celestial mechanics, rigid-body dynamics, the theory of small
+oscillations, continuum mechanics, and the modern theory of dynamical systems and
+chaos are all classical mechanics pursued for its own sake, and none of them is
+waiting to be corrected by a more fundamental theory in order to be meaningful.
+
+Second,  classical mechanics is
+the \emph{base} on which relativistic and quantum mechanics are built. Special and
+general relativity are commonly introduced as corrections to Newtonian mechanics
+that become significant when velocities approach $c$ or fields become strong;
+quantum mechanics is commonly introduced as a modification that becomes significant
+at the scale of $\hbar$. In both cases, the classical theory is treated as a known,
+well-understood limit --- the solid ground from which the generalization departs
+and to which it must reduce.
+
+This book is devoted to the second role of classical mechanics, some
+interesting problems beyond this role are briefly discussed in Appendices.
+
+Classical mechanics is usually presented in one of two logical orders:
+\begin{description} 
+    \item[Newton first.] The postulates are equations of motion (together with
+        a catalogue of force laws and a statement about constraint reactions).
+        Lagrange's equations, the principle of least action and the Hamiltonian
+        formalism are \emph{derived}. This is the order of Goldstein
+        \cite{GoldsteinPooleSafko2000}, Arnold's \cite{Arnold1989} first
+        chapters, and most introductory courses. The strength of this approach
+        is that    every step has a physical referent. Students see where the
+        action comes from and, crucially, \emph{when it does not exist}.
+        Constraint reactions are computed, not suppressed. The nonholonomic and
+        dissipative cases are included without a change of philosophy. 
+    \item[Action first.] The postulate is Hamilton's principle, $\delta S=0$ with
+    $S=\int L\,dt$. Newton's equations are \emph{derived}, and conservation
+        laws follow from symmetries of $L$ via Noether's theorem. This is the
+        order of Landau and Lifshitz \cite{LandauLifshitz-1}, Lanczos
+        \cite{Lanczos1970} and many others. Symmetry becomes the organizing
+        principle: Noether's theorem explains energy, momentum and angular
+        momentum at once. Coordinate independence is manifest: $\delta S=0$
+        does not know what coordinates are. The road to field theory and
+        quantization is short. However the phrase ``least action'' invites
+        teleology. The student learns that dissipative systems are ``not
+        mechanics'' and that constraint reactions are an afterthought. Most
+        damagingly, the nonholonomic case produces a \emph{wrong answer} that
+        is indistinguishable, in form, from the right one.
+\end{description} 
+
+Both orders lead to the same equations for simple systems of point particles,
+so it is tempting to regard the choice as a matter of taste. It is not. The two
+roads are \emph{not} mutually inverse once we leave the simplest class of
+systems: the road from Newton to the action requires hypotheses (potential
+forces, ideal constraints) that the road back silently assumes. 
+
+In the language of chapter \ref{ch:rm}, the Newtonian laws are statements anchored
+in the real world: forces are measured, constraints are realized by hinges,
+rails and blades. The action is a construction of the ideal world: a functional
+whose extremals are, by design, trajectories. Both routes have their strengths
+and weaknesses.
+
+Here I follow \cite{Arnold1989} as more physical, later
+I shall use mainly second (action first) approach with some reservations.
+I see Hamilton's principle, $\delta S=0$ not as law of nature but as 
+powerful heuristic.
+
+\section{Equations of Motion}
+\label{sec:cm-eom}
+In Ideal world of classical mechanics space is three-dimensional  and euclidean
+$\mathbb{R}^3$ and time is one-dimensional $\mathbb{T}$.
+So universe of classical mechanics is $\mathbb{T} \times \mathbb{R}^3$. 
+
+The simplest object of classical mechanics is point mass (particle) i.e. object
+whose shape, sizes and internal structure are inessential, so mass (positive
+scalar $m$) is the only parameter. 
+The state of a particle is fully determined by position ($\bm x \in\mathbb{R}^3$) 
+and velocity ($\bm v \in\mathbb{R}^3$). 
+More accurately: A motion in $\mathbb{R}^3$ is a differentiable mapping 
+\[\bm x: \mathbb{I}\rightarrow \mathbb{R}^3, \mathbb{I} \subset \mathbb{R}.\] 
+The derivative 
+\[\dot {\bm x}(t)=\frac{d{\bm x}}{dt}(t)\]
+is called the velocity vector. 
+The derivative 
+\[\ddot {\bm x}(t)=\frac{ d^2 {\bm x}}{dt^2}(t)\]
+is called the acceleration vector. 
+The image of motion (curve in $\mathbb{R}^3$) called trajectory and  curve in 
+$\mathbb{T} \times \mathbb{R}^3$ which appears  as the graph of a motion, is
+called a world line.
+
+The initial state of a mechanical system (the totality of positions and
+velocities of its points at some moment of time) uniquely determines all of
+its motion. In particular, the initial positions and velocities determine the
+accelerations. This is called `Newton's principle of determinacy'.
+
+Let us consider the mechanical system consisting of $n$ particles 
+with masses $m_j,j=1\ldots n$ and word lines $\bm x_j(t)$.
+Suppose that $n$ vector functions   
+\[{\bm F}_j:\mathbb{R}^{3 n}\times\mathbb{R}^{3 n}
+\times\mathbb{R}\rightarrow\mathbb{R}^3,j=1\ldots n\]
+are defined. Then the motion of all particles is determined by equations
+\begin{equation}
+  \label {newton-eq}
+    m_j \ddot {\bm x}_j={\bm F}_j({\bm x}_k,\dot {\bm x}_k,t) \quad j,k=1\ldots n 
+\end{equation}
+and initial conditions
+\begin{equation}
+\label {newton-ic}
+    {\bm x}_j(t_0)={\bm y}_j\quad\dot {\bm x}_j(t_0)={\bm v}_j  \quad j=1\ldots n 
+\end{equation}
+
+Newton's equation \eqref{newton-eq} is  the basis of mechanics. Functions 
+$\bm F_j$ are called forces they should be determined  for each specific 
+mechanical system. If our system is isolated i.e. includes explicitly all 
+interacting particles, then galilean invariance puts some restrictions 
+on forces.
+
+Namely 
+\begin{equation*}
+     m_j \ddot {\bm x}_j=
+    {\bm F}_j({\bm x}_j-{\bm x}_k,\dot {\bm x}_j-\dot {\bm x}_k)\quad j,k=1\ldots n 
+\end{equation*}
+practically such systems occur in celestial mechanics. In most other cases the
+system considered is not isolated and forces of general kind \eqref{newton-eq} 
+appear as a result of interaction with environment.
+
+Some forces can not be set explicitly they appear as a result of constraints
+imposed on the system and should be figured out form the prescribed movement.
+\begin{equation}
+  \label {newton-eq-const}
+    m_j \ddot {\bm x}_j={\bm F}_j({\bm x}_k,\dot {\bm x}_k,t) 
+    +{\bm R}_j \quad j,k=1\ldots n 
+\end{equation}
+These constraint forces ${\bm R}_j$ are result of collective action of 
+\emph{all constraints}. If a system consists of mass points connected by 
+rods, hinges, etc., then the need may arise to talk about the constraint force 
+of some particular constraint. However the concept of a constraint force for an 
+individual constraint is generally \emph{impossible to define}.
+
+Mathematics of  Cauchy problem (\ref{newton-eq},\ref{newton-ic}) 
+one can find in e.g. \cite{Arnold1992}. Generally the unique solution exists if
+all functions are smooth enough. However smoothness may be violated in 
+physically important cases, anyway functions $\bm x_j(t)$ should be continuous,
+$\bm v_j(t)$  may have finite jumps as a results of strong force acting for 
+very short time (e.g. elastic collision).
+
+Note that initial conditions have nothing to do with causality. Causality makes
+sense in Real world only, in Ideal world we are free to set final conditions or
+fix $\bm x_j(t_1)$ and $\bm v_j(t_1)$ for some intermediate time $t_1$. In
+many cases we are interested in solution of equation \eqref{newton-eq} with
+fixed initial velocities and final coordinates  (aiming) or fixed coordinates
+on both ends (boundary problem). Anyway when conditions are set at two
+different times  solution may be not unique (unless force is changing
+relatively slow) \footnote {I discovered this fact around 1980 and was very
+proud of myself until I found papers \cite{Maslov1962a} and \cite{Maslov1962b}.}.
+
+If we allow only potential forces i.e. 
+\begin{equation}
+  \label {pot-force}
+        \bm F_j(\bm x_k,t)=-\frac{\partial U(\bm x_k,t)}{\partial \bm x_j} \quad j,k=1\ldots n 
+\end{equation}
+we shall see that equations of motion (\ref{newton-eq}) can be written as 
+\begin{equation}
+   \label {lagr-eq}
+    \frac{d}{dt} \frac{\partial L({\bm x}_k,{\bm v}_k,t)}{\partial {\bm v}_j}= 
+    \frac{\partial L({\bm x}_k,{\bm v}_k,t)}{\partial {\bm x}_j}\quad j,k=1\ldots n 
+\end{equation} 
+where 
+\begin{equation}
+  \label{lagr-nat}
+        L({\bm x}_k,{\bm v}_k,t)=\Sigma_1^n \frac{m_k}{2} {\bm v}_k \cdot {\bm v}_k-U({\bm x}_k,t) 
+\end{equation}
+Function $L({\bm x}_k,{\bm v}_k,t)$ is called Lagrangian, vectors 
+\[{\bm p}_j= \frac{\partial L({\bm x}_k,{\bm v}_k,t)}{\partial {\bm v}_j}
+=m_j \bm v_j \] 
+are called momenta. 
+We can write the equations \eqref{lagr-eq} in more symmetrical way:
+\begin{equation}
+   \label {ham-eq}
+   \begin{split}
+       \dot {\bm x}_j&=\frac{\partial H(\bm x_k,\bm p_k,t)}{\partial \bm p_j}  \\ 
+        \dot {\bm p}_j&= -\frac{\partial H(\bm x_k,\bm p_k,t)}{\partial \bm x_j}\quad j,k=1\ldots n    
+   \end{split}
+\end{equation}
+where 
+\begin{equation}
+        H(\bm x_k,\bm p_k,t)=\Sigma_1^n \frac{1}{2 m_k} \bm p_k \cdot \bm p_k+U(\bm x_k,t) \label{ham-nat}
+\end{equation}
+Note that functions $L$ (Lagrangian) and $H$ (Hamiltonian) are connected by Legendre transform:
+\begin{equation}
+        L(\bm x_k,\bm v_k,t)=\Sigma_1^n  \bm p_k \cdot \bm v_k -H(\bm x_k,\bm p_k,t)|_{\bm p_k=m_k\bm v_k}
+\quad k=1\ldots n \label {lagr-ham}
+\end{equation}
+
+
+\begin{definition}
+        The equation
+        \[\frac{d}{d t}(\frac{\partial L}{\partial \dot {\bm x}})-\frac{\partial L}{\partial  {\bm x}}=0 \]
+        is called the Euler-Lagrange equation for the functional
+        \[S=\int_{t_1}^{t_2} L(\bm x,\dot {\bm x},t) dt \]
+\end{definition}
+Let \( \gamma= \bm x(t) \quad t_1 \le t \le t_2 \) be a curve  in  $\mathbb{R} \times \mathbb{R}^n$ and 
+$L: \mathbb{R}^n \times \mathbb{R}^n \times \mathbb{R}\rightarrow \mathbb{R}$ a function of $2 n +1$
+variables, then
+\begin{theorem}
+    The curve $\gamma$ is an extremal of the functional \[S=\int_{t_1}^{t_2} L(\bm x,\dot {\bm x},t) dt \]
+        on the space of curves joining $(t_1, \bm x_1)$ and $(t_2,\bm x_2)$, if and only if the Euler-
+Lagrange equation is satisfied along $\gamma$.
+\end{theorem}
+This is a system of n second-order equations, and the solution depends on
+$2 n$ arbitrary constants. The $2 n$ conditions $\bm x(t_1) = \bm x_0$ and $\bm x(t_2) = \bm x_2$ are used
+for finding them.
+Two important remarks:
+\begin{enumerate}
+        \item There may be many extremals connecting two
+given points or none at all.
+\item The condition for a curve  to be an extremal of a functional does not depend
+on the choice of coordinate system. This paves way to geometrisation of mechanics.
+\end{enumerate}
+
+It is easy to see that equation of motion (\ref{lagr-eq}) are actually
+Euler-Lagrange equations for lagrangian \eqref{lagr-nat}. So we have  Hamilton's
+principle of least action.
+
+Equations of motion (EOM) are the heart of classical mechanics in both its roles.
+However equations themselves are not enough, to get meaningful solution
+one should fix the \emph{problem} i.e. specify the conditions imposed.
+The problems usually  associated with classical mechanics are:
+\begin{description}
+    \item [IVP / Cauchy problem]  The full state (position and velocity, or a
+  phase-space point) at one instant $t_0$ is specified.
+   The Picard--Lindel\"of theorem gives
+  local existence and uniqueness for Lipschitz forces; global existence
+  requires a no-blow-up bound.
+   This is what time-stepping integrators  actually solve.
+    Two large class of methods are in use: 
+    \begin{enumerate} 
+    \item "Usual" one-time integrators when differential equations are replaced
+        with finite difference ones defining snapshots at discrete time steps.
+        These integrators allow accurate description of standard problem:
+        initial conditions, finite time interval. 
+    \item Geometric integrators which are less accurate for any single trajectory
+    but accurately present qualitative picture for large set of initial data
+        and long times. Such integrators may calculate  coordinates and momenta
+        at different times
+    \end{enumerate}
+    One can look for details in \cite{HairerLubichWanner2006} for example.
+
+    \item [Boundary Value Problem (BVP)] Data at two or more distinct times/points,
+  e.g. $x(t_0) = x_0$, $x(t_1) = x_1$ --- not a full state at one
+  instant is fixed.
+   Existence and uniqueness are \emph{not} automatic (unlike the
+  IVP): zero, one, or many solutions can occur.
+   \textbf{Prototypes:} the brachistochrone problem, geodesics
+  between two points, Lambert's problem, and any Euler--Lagrange
+  equation arising from a fixed-endpoint action principle.
+   \textbf{Numerically:} shooting methods, relaxation /
+  finite-difference methods, collocation.
+
+    \item [Scattering Problem] An asymptotic free state as $t \to
+  -\infty$ (or $r \to \infty$) is specified.
+   The asymptotic outgoing state as $t \to
+  +\infty$ --- the $S$-matrix or cross-section --- given a localized
+  interaction region in between is sought.
+   This is asymptotic BVP: the conditions sit at $t = \pm\infty$ rather
+   than at finite times, which   is exactly why it needs its own machinery 
+   ($S$-matrix, asymptotic
+  completeness) rather than shooting/relaxation methods.
+ Often the trajectory itself is discarded --- only the
+  in $\to$ out map matters.
+
+    \item [Inverse Problem] Having observed trajectories or scattering data,
+   one searches  the force law / potential / EOM itself
+  (inverse scattering; Newton inferring $1/r^2$ from Kepler's laws is
+  the archetype).
+\end{description}
+
+\section{Covariance, Invariance and Symmetry}
+\label{sec:cm-cis}
+\epigraph{‘When I use a word,’ Humpty Dumpty said in rather a scornful tone,
+‘it means just what I choose it to mean --- neither more nor less.’} {Lewis
+Carroll}
+
+Few words in physics are used as loosely as \emph{invariant}, \emph{covariant}
+and \emph{symmetric}. One reads of the ``Lorentz invariance of Maxwell's
+equations'' and, a page later, of their ``Lorentz covariance''; of ``general
+covariance'' as the foundation of general relativity and, in the next
+paragraph, as a triviality of notation; of ``gauge symmetry'' that is plainly
+not a symmetry in the sense in which rotations are. The three notions are
+tied together by one logical structure, but they live at \emph{different
+levels of description}, and mixing the levels is a dependable source of
+confusion.
+
+\begin{itemize}
+\item \textbf{Invariance} is a property of an \emph{object}: a number, a
+  function, a tensor field, a functional, a particular solution. The object is
+  left unchanged by a transformation.
+\item \textbf{Covariance} is a property of a \emph{formulation}: a family of
+  quantities, or an equation built from them, transforms in a definite,
+  prescribed way (a representation of the transformation group), so that the
+  equation keeps its form.
+\item \textbf{Symmetry} is a property of a \emph{law} (a dynamical system): a
+  transformation that carries solutions into solutions, or leaves the action
+  unchanged.
+\end{itemize}
+
+Symmetry is the only one of the three that is a claim about the real world. It
+says that if an experiment on an isolated system is repeated after the
+\emph{entire} arrangement has been displaced, rotated or boosted, the outcome
+is the transformed outcome. That claim can be, and has been, tested with
+extraordinary precision (Michelson--Morley-type experiments for boosts,
+Hughes--Drever-type experiments for rotations). Covariance, by contrast, is
+a statement about how we write equations; whether it carries any physical
+content depends on what else is held fixed.
+
+A \emph{passive} transformation relabels the points of spacetime, $x\mapsto
+x'=f(x)$, and asks how the \emph{same} physical quantity is described in the
+new coordinates. An \emph{active} transformation by $g$ moves the quantity
+itself, keeping the coordinates.The new quantity \emph{function} is given by
+the same formula in both cases what differs is the interpretation. In the
+passive reading one compares two descriptions of one physical situation; in the
+active reading one compares two different physical situations in one
+description. Symmetry is an active notion: it asks whether the second situation
+is also allowed by the law. Covariance is naturally passive: it asks whether
+the \emph{description} keeps its form. The active reading carries a warning
+that will turn out to be the heart of the matter: \emph{everything that enters
+the equations must be transformed, or else be invariant.}
+
+\begin{example}[Coulomb field of a fixed charge]
+    \label{ex:coulomb} The equation
+    $\nabla\!\cdot{\bm{E}}=4\pi\rho$ with a prescribed source
+    $\rho=q\,\delta^3({\bm{x}}-{\bm{x}}_0)$ has the solution
+    ${\bm{E}}({\bm{x}})=q({\bm{x}}-{\bm{x}}_0)/|{\bm{x}}-{\bm{x}}_0|^3$.
+    Translating the field alone, ${\bm{E}}_a({\bm{x}})={\bm{E}}({\bm{x}}-\bm
+    a)$, gives a field whose divergence is $4\pi
+    q\,\delta^3({\bm{x}}-{\bm{x}}_0-\bm a)$: it is \emph{not} a solution for
+    the original source. If the source is translated too, the pair
+    $({\bm{E}}_a,\rho_a)$ is a solution. Translation is therefore a symmetry of
+    the closed system ``field $+$ charge,'' and is broken as soon as the charge
+    is treated as a fixed, external, non-dynamical object. 
+\end{example}
+
+Whatever is held fixed and not transformed is called a \emph{background} (or
+\emph{absolute}) structure: a prescribed source, a fixed metric, a preferred
+velocity field. Prescribing backgrounds is unavoidable in practice, and it is
+precisely what separates covariance from symmetry.
+
+
+\paragraph{Covariance and invariance of Newton's law.}
+Take $N$ particles with $m_a\ddot{{\bm{x}}}_a=\sum_{b\ne a}\bm F_{ab}$, where
+$\bm F_{ab}=-\nabla_{a}V(|{\bm{x}}_a-{\bm{x}}_b|)$ is a central force. The Galilei group
+(10 parameters) acts as
+\begin{equation}\label{galilei}
+  t'=t+s,\qquad {\bm{x}}'=R\,{\bm{x}}+{\bm{v}}\,t+\bm a,\qquad R\in SO(3).
+\end{equation}
+For \eqref{galilei},
+\begin{equation}
+  \ddot{{\bm{x}}}'_a=R\,\ddot{{\bm{x}}}_a,\qquad
+  {\bm{x}}'_a-{\bm{x}}'_b=R\,({\bm{x}}_a-{\bm{x}}_b).
+\end{equation}
+The acceleration is thus \emph{invariant} under boosts and translations and
+\emph{covariant} under rotations, and boosts and translations cancel in
+differences of positions. Hence $\bm F'_{ab}=R\bm F_{ab}$ and the equation of
+motion is covariant. The velocity $\dot{\bm{x}}'=R\dot{\bm{x}}+{\bm{v}}$, by contrast, is
+\emph{not} covariant under boosts (it transforms inhomogeneously), so it can
+enter a boost-symmetric force law only through differences of velocities.
+
+\paragraph{Breaking by a background: the medium.}
+Add friction against a medium with prescribed velocity field $\bm w({\bm{x}},t)$:
+\begin{equation}\label{friction}
+  m\ddot{\bm{x}}=-\gamma\,(\dot{\bm{x}}-\bm w).
+\end{equation}
+Under a boost, $\bm w\to\bm w'=\bm w+{\bm{v}}$, so \eqref{friction} is
+\emph{covariant} under the Galilei group provided $\bm w$ is transformed
+along with ${\bm{x}}$. But the boost is a symmetry only if the background is
+unchanged. For a medium at rest ($\bm w=0$) the stabilizer consists of time
+translations, space translations and rotations: boosts are excluded. The medium
+plays the role of Anderson's absolute object, and its rest frame is a
+preferred frame. Including the medium's atoms as dynamical degrees of
+freedom restores the boost symmetry of the \emph{closed} system, exactly as in
+Example~\ref{ex:coulomb}.
+
+\paragraph{Boosts: invariance up to a total derivative.}
+The Lagrangian $L=\sum\tfrac12m_a\dot{\bm{x}}_a^2-V$ is not invariant under boosts
+but is \emph{quasi-invariant}: for the infinitesimal boost
+$\delta{\bm{x}}_a=\eps\,\bm u\,t$,
+\begin{equation}
+  \delta L=\eps\sum_a m_a\bm u\cdot\dot{\bm{x}}_a=\eps\,\frac{\dd}{\dd t}\Big(\bm u\cdot\sum_a m_a{\bm{x}}_a\Big),
+\end{equation}
+which has the form \eqref{quasi} with $K=\bm u\cdot\sum m_a{\bm{x}}_a$. The
+Noether charge $Q=\sum_a{\bm{p}}_a\!\cdot\delta{\bm{x}}_a/\eps-K=-\bm u\cdot\big(M\bm X-\bm P\,t\big)$
+shows that
+\begin{equation}
+  \bm G=M\bm X_{\rm cm}-\bm P\,t=\text{const.}
+\end{equation}
+which says that the centre of mass moves uniformly. The quasi-invariance has a
+deeper consequence: $\pb{G_i}{P_j}=M\delta_{ij}$, so the total mass $M$
+appears as a \emph{central charge} of the Galilei algebra, in contrast to
+the Poincar\'e algebra where $[K_i,P_j]\propto\delta_{ij}H$. This is why mass
+is a conserved parameter of Galilean systems and why its quantum version
+requires a projective representation.
+
+\paragraph{Non-inertial frames and the geometric formulation}
+Under a time-dependent change of frame ${\bm{x}}'=R(t){\bm{x}}+\bm a(t)$ Newton's law
+acquires extra terms (Coriolis, centrifugal, Euler, and translational
+inertial forces) and no longer has the same form. So the law is covariant under the Galilei group
+\eqref{galilei} only. It can, however, be \emph{reformulated} so that it is
+covariant under arbitrary coordinate changes: this is Cartan's
+Newton--Cartan geometry. Free fall is the geodesic equation
+of a connection with $\Gamma^i{}_{00}=\partial_i\Phi$, and the absolute
+objects are the time one-form $t_\mu=\partial_\mu t$ and the spatial
+cometric $h^{\mu\nu}$. The formulation is generally covariant, the symmetry
+is the subgroup preserving $t_\mu$ and $h^{\mu\nu}$, which is larger than the
+Galilei group (it includes ${\bm{x}}\to{\bm{x}}+\bm a(t)$ acting on $\Phi$ by a term
+linear in ${\bm{x}}$, proportional to $\ddot{\bm a}$, an expression of the
+Newtonian equivalence principle). 
+
+Symmetry is often introduced to students as a single, monolithic idea: ``the
+Lagrangian is invariant under such-and-such transformation, therefore there is
+a conserved quantity, therefore the system respects the symmetry.'' In
+practice, the situation is considerably richer, and the richness is not a
+technicality but the source of some of the deepest phenomena in physics, from
+the accidental degeneracies of the Kepler problem to the existence of the
+electron mass and the pion.
+
+It is useful to keep distinct objects in view:
+\begin{enumerate}
+\item the \textbf{Lagrangian} (or action, or Hamiltonian) that \emph{defines} 
+    the dynamics;
+\item the \textbf{equations of motion} (EOM) that it \emph{generates}; and
+\item an actual \textbf{solution} of those equations, singled out by initial
+    or boundary data;
+\item the state that is actually realized as the ground state or equilibrium 
+    configuration of the system.\footnote { Spontaneous Symmetry Breaking: 
+        The Lagrangian, the equations of motion,
+        \emph{and} the boundary conditions are all fully symmetric, and yet the
+        stable, physically realized solution is not. This is not contingent: it
+        is a structural consequence of the existence of a degenerate manifold
+        of energy-minimizing (or free-energy-minimizing) configurations,
+        together with an instability of the symmetric configuration and, in the
+        case of a genuine phase transition, the thermodynamic (infinite-volume)
+        limit.}
+
+\end{enumerate}
+Each of these objects has its own symmetry group, and the three groups need not
+coincide. 
+
+Let $q^a(t)$, $a=1,\dots,n$, be generalized coordinates on a 
+configuration
+space $Q$, with Lagrangian $L(q,\dot q,t)$ and action
+\[
+S[q] = \int_{t_1}^{t_2} L(q(t),\dot q(t),t)\,dt .
+\]
+\begin{equation*}
+   p_a=\frac{ \partial L(q,\dot q,t)}{\partial \dot q_a}
+\end{equation*}
+The Euler--Lagrange (EL) operator acting on $L$ is
+\[
+[L]_a = \frac{\partial L}{\partial q^a} - 
+\frac{d}{dt}\frac{\partial L}{\partial \dot q^a}
+\]
+and the equations of motion are $[L]_a=0$.
+
+\begin{definition}[Variational / Noether symmetry]
+An infinitesimal transformation $\delta q^a = \epsilon X^a(q,\dot q,t)$ is a
+    \emph{variational symmetry} of $L$ if there exists a function $F(q,\dot
+    q,t)$ such that, \emph{identically in $q(t)$} (not only on solutions),
+    $\delta L=\epsilon \tfrac{dF}{dt}$. Equivalently, the action changes only by
+    a boundary term, $\delta S = \epsilon\big[F\big]_{t_1}^{t_2}$, for
+    arbitrary paths, not just extremal ones.
+\end{definition}
+
+Evidently adding the total derivative
+\begin{equation*}
+    \frac{d F (q,t)}{d t}=\frac{\partial F(q,t)}{\partial t} + \frac{ \partial F (q,t)}{\partial q_j} \dot q_j
+\end{equation*}
+to Lagrangian does not change equations of motion. However canonical momenta
+become
+\[ P_a=p_a+\frac{\partial F}{\partial q_a} \]
+it is nothing but gauge invariance. Transformation $ p,q \rightarrow P,q $ is evidently
+canonical and new Hamiltonian becomes 
+\[ H_{new}=H(p(P),q)- \frac{\partial F}{\partial t}.\]
+
+We are used to think that gauge invariance is about electromagnetism, actually it appears
+already in classical mechanics. 
+So canonical momenta have no physical meaning (since it is not gauge invariant).
+This fact correspond to geometrical point of view: $p_a,q_a$ are merely local
+coordinates on phase space.
+
+Having EOM as system of ordinary differential equations,
+we can transform it into equivalent one, say by multiplying every equation by arbitrary 
+function which never becomes zero. This new system may correspond to another Lagrangian and
+the difference between new and old one need not come down to total derivative. Most probably
+new system will not be Lagrangian at all.
+
+Let us look at two-dimensional harmonic oscillator.
+Usual Lagrangian is
+\begin{equation}
+   \label {ho1}
+    L_1= \frac{1}{2} (\dot x^2+\dot y^2) -\frac{ \omega^2}{2} ( x^2+ y^2)
+\end{equation}
+which yields equation  of motions:
+\begin{equation}
+   \label {hoe1}
+   \begin{split}
+       \ddot x+ \omega^2 x & =0 \\
+       \ddot y+ \omega^2 y & =0 
+   \end{split}
+\end{equation}
+Same equations of motion come form 
+another Lagrangian
+\begin{equation}
+   \label {ho2}
+    L_2= \frac{1}{2} (\dot x^2-\dot y^2) -\frac{ \omega^2}{2} ( x^2- y^2)
+\end{equation}
+or
+\begin{equation}
+   \label {ho3}
+    L_3= \dot x\dot y - \omega^2  x y .
+\end{equation}
+Evidently these Lagrangians are not connected by adding total derivative.
+Corresponding  Hamiltonians 
+\begin{equation}
+   \label {ho2h}
+    H_2= \frac{1}{2} ( p_x^2-p_y^2) +\frac{ \omega^2}{2} ( x^2- y^2)
+\end{equation}
+and
+\begin{equation}
+   \label {ho3h}
+    H_3= p_x p_y +\omega^2  x y
+\end{equation}
+are not even positive definite!
+
+\begin{definition}[Symmetry of the equations of motion]
+A transformation $g$ (finite or infinitesimal) is a \emph{symmetry of the EOM},
+    or a \emph{dynamical symmetry}, if it maps every solution of $[L]_a=0$ to 
+    another solution of the \emph{same} equations, i.e. it maps the solution 
+    set to itself. No reference to the action or to boundary terms is required 
+    by this definition.
+\end{definition}
+
+Two inclusions organize the entire subject:
+\begin{itemize}
+    \item $G_L \subseteq G_{EOM}$: \emph{every symmetry of the Lagrangian is a
+        symmetry of the equations of motion, but the equations of motion can
+        admit strictly more symmetry than is manifest in the Lagrangian one
+        wrote down.} 
+    \item $G_{sol} \subseteq G_{EOM}$: \emph{a particular solution, or a
+        particular physically realized state, generally respects only a
+        subgroup of the symmetry of the equations that produced it.} 
+        Asymmetry is put in by hand
+        through the choice of initial or boundary data. This is contingent:
+        choosing symmetric data restores a symmetric solution, and averaging
+        over the group orbit of solutions restores the full symmetry at the
+        ensemble level.
+   \end{itemize}
+
+\begin{example}[Free particle: hidden $SL(2,\mathbf R)$]
+The Lagrangian $L=\tfrac12 m\dot x^2$ manifestly has the Galilei symmetry
+    (translations, boosts) plus time translation. But the equation of motion
+    $\ddot x=0$ has straight lines as its general solution, and the space of
+    straight lines is left invariant by the larger, one-dimensional-time
+    conformal (``Schr\"odinger/M\"obius'') group acting projectively on $t$,
+\[
+t \;\longmapsto\; \frac{\alpha t+\beta}{\gamma t+\delta},
+    \qquad \alpha\delta-\beta\gamma=1,
+\]
+together with a compensating rescaling of $x$. This $SL(2,\mathbf R)$ ``dynamical''
+    symmetry (closely related to the conformal/Schr\"odinger symmetry of the
+    free Schr\"odinger equation, and to the Ermakov--Lewis invariant of the
+    time-dependent oscillator) is not visible as a point symmetry of
+    $L=\tfrac12 m\dot x^2$ written in the ordinary way, yet it is a genuine
+    symmetry of $\ddot x=0$.
+\end{example}
+
+\begin{example}[Kepler problem: hidden symmetry]
+For $H={\bm{p}}^2/2m-k/r$ the geometric symmetry is $SO(3)\times\mathbb R_t$
+(rotations and time translation), with conserved ${\bm{L}}={\bm{x}}\times{\bm{p}}$ and $H$.
+There is, however, an additional conserved vector, the Runge--Lenz vector
+\begin{equation}\label{rl}
+  \bm A={\bm{p}}\times{\bm{L}}-mk\,\hat{{\bm{x}}},\qquad \pb{A_i}{H}=0 .
+\end{equation}
+The transformation it generates, $\delta{\bm{x}}=\eps\,\pb{{\bm{x}}}{{\bm{n}}\!\cdot\!\bm A}$,
+\begin{equation}
+  \delta{\bm{x}}=\eps\,\big[\,2({\bm{n}}\!\cdot\!{\bm{x}})\,{\bm{p}}-({\bm{x}}\!\cdot\!{\bm{p}})\,{\bm{n}}-({\bm{n}}\!\cdot\!{\bm{p}})\,{\bm{x}}\,\big],
+\end{equation}
+involves the \emph{momentum}: it is not a point transformation of
+configuration space and is not related to any covariance of the
+equation $m\ddot{\bm{x}}=-k{\bm{x}}/r^3$ under coordinate changes. It is nonetheless a
+canonical symmetry of the Hamiltonian, and the Poisson algebra
+\begin{equation}
+  \pb{L_i}{L_j}=\epsilon_{ijk}L_k,\quad
+  \pb{L_i}{A_j}=\epsilon_{ijk}A_k,\quad
+  \pb{A_i}{A_j}=-2mH\,\epsilon_{ijk}L_k
+\end{equation}
+closes on $so(4)$ for $H<0$ (after the rescaling $\bm A\to\bm A/\sqrt{-2mH}$),
+$e(3)$ for $H=0$, and $so(3,1)$ for $H>0$. The extra symmetry explains why
+bound orbits are closed (the perihelion does not precess) \cite{goldstein}
+and, in the quantum problem, the extra degeneracy of the hydrogen levels.
+It is an example of a \emph{dynamical} (hidden) symmetry:
+a symmetry of the law that is not visible as a covariance of the formulation.
+\end{example}
+
+\begin{example}[Integrable systems: toroidal symmetry from action-angle variables]
+More generally, for a Liouville-integrable Hamiltonian system with $n$ degrees
+    of freedom, one can pass to action-angle variables $(I_i,\theta^i)$ in
+    which $\mathcal{H} = \mathcal{H}(I)$ depends only on the actions. 
+    The flow generated by
+    $\mathcal{H}$ is then, trivially, an ($n$-torus of) simultaneous phase shifts
+    $\theta^i \to \theta^i+c^i$, an abelian $U(1)^n$ symmetry group of the
+    equations of motion. This symmetry is exact and completely general for
+    integrable systems, yet it is essentially never visible as a point symmetry
+    of the Lagrangian written in the original coordinates; the free-particle
+    $SL(2,\mathbf R)$ and the Kepler $SO(4)$ above are, in this sense, special
+    cases of the general toroidal symmetry structure of integrable systems,
+    made visible only after a nontrivial (often nonlocal, momentum-dependent)
+    change of variables.
+\end{example}
+
+\paragraph{The stabilizer of a solution}
+Suppose $G_{EOM}$ acts on the solution space $\mathcal S$ of $[L]_a=0$.
+ this action is well defined at least for
+$g\in G_L$, and by definition for all of $G_{EOM}$). A single solution
+$q(t)\in\mathcal S$, picked out by initial data $(q(t_0),\dot q(t_0))$ or by
+boundary data, need not be a fixed point of this action. Its symmetry is the
+\emph{stabilizer subgroup}
+\[
+    G_{sol}=\mathrm{Stab}_{G_{EOM}}(q) = \{ g\in G_{EOM} : g\cdot q
+    = q \} \subseteq G_{EOM} .
+\]
+Generically $G_{sol} \subsetneq G_{EOM}$: the group moves the given
+solution to a \emph{different} member of $\mathcal S$ (still a valid solution —
+the equations do not care — but a different trajectory), rather than mapping it
+to itself.
+
+\begin{example}[Central force problem]
+The Kepler/central-force EOM has full $SO(3)$ symmetry.
+     A single
+    orbit, however, has a definite, fixed angular momentum vector $\bm L = \bm
+    r\times\bm p\neq 0$, determined by the initial position and velocity, and
+    lies entirely in the plane orthogonal to $\bm L$. The stabilizer of this
+    orbit inside $SO(3)$ is only the $SO(2)$ subgroup of rotations about the
+    $\bm L$ axis (together with, for a closed orbit, possibly a discrete
+    reflection). The other two rotational generators move the orbital plane to
+    a different plane, i.e. map this solution to a genuinely different
+    solution. Nothing is wrong with the dynamics; the reduction from $SO(3)$ to
+    $SO(2)$ is entirely a consequence of the choice of initial data.
+\end{example}
+
+\begin{example}[Free particle]
+$\ddot x=0$ is invariant under all spatial translations and Galilean boosts. A
+    single trajectory $x(t)=x_0+v_0t$ is left invariant only by time
+    translations (and, trivially, the identity among boosts/translations); a
+    spatial translation or a boost maps it to a different straight line.
+    Symmetric \emph{initial data} — e.g. $x_0=0,\,v_0=0$, the particle
+    permanently at rest at the origin — is the unique choice whose stabilizer
+    is the full translation-and-boost group; any other data breaks it
+    explicitly.
+\end{example}
+
+\paragraph{Summary}
+\begin{enumerate}
+    \item \textbf{``Covariant'' and ``invariant'' are not synonyms.} The fields
+  ${\bm{E}},{\bm{B}}$ are covariant (they mix under boosts); $E^2-B^2$ and
+  ${\bm{E}}\!\cdot\!{\bm{B}}$ are invariant. A covariant equation $\mathcal E=0$ is
+  \emph{form-invariant}, while its left-hand side is not invariant but
+  transforms in a representation. The standard phrase ``the equations are
+  Lorentz invariant'' is acceptable shorthand only because it is clear from
+  context that it is the \emph{solution set} that is invariant.
+\item \textbf{Covariance is not physics; its stabilizer is.} Any equation can
+  be written covariantly; what matters is
+  which structures must then be declared as backgrounds, and whether they are
+  invariant.
+\item \textbf{A symmetry of the equations need not be a symmetry of the action.}
+  The rescaling $x\to\lambda x$ of a \emph{linear} equation, such as the
+  harmonic oscillator, maps solutions to solutions, but changes the action by
+  $\lambda^2$; it has no Noether charge. Electromagnetic duality is another case.
+  The converse (variational $\Rightarrow$ equation symmetry) holds
+  (Proposition~\ref{prop:variational}).
+\item \textbf{A symmetry of the law is not a symmetry of the solution.}
+  Elliptic orbits, the Coulomb field, the vacuum of a broken theory, and the
+  Schwarzschild metric all have smaller symmetry than their laws.
+\item \textbf{Gauge ``symmetry'' is a redundancy.} Constant gauge
+  transformations are symmetries with charges; local gauge transformations are
+  not, and ``spontaneous breaking of a local symmetry'' is a statement about
+  the \emph{description} and not about physical degeneracy.
+\item \textbf{Transform everything.} An active symmetry transformation must act on
+  the whole closed system (fields \emph{and} sources, apparatus,
+  boundary conditions). Leaving a source untransformed amounts to introducing a
+  background that breaks the symmetry (Example~\ref{ex:coulomb}).
+\end{enumerate}
+
+\section{Finite and infinite numbers of degrees of freedom}
+\label{sec:cm-dof}
+Usually mechanical systems (finite number of degrees of freedom) 
+and field theories (infinite number of degrees of freedom) are seen
+as absolutely different. However form symmetry (or covariance) point
+of view the two are
+not different theories: a mechanical system is a field theory on a
+one-dimensional base manifold, and a field theory is a mechanical system whose
+coordinates carry a continuous label. This is an illustration of the strength
+of Action First approach.
+
+\paragraph{Mechanics as a field theory on $M=\mathbb R_t$.}
+Take the base manifold to be the time axis, with the single coordinate
+$x^0\equiv t$, and identify
+\begin{equation}
+    \label{dictionary-id}
+    \begin{split}
+        \varphi_a(x^\mu)&\leftrightarrow q^i(t),\\
+        \mathcal L(\varphi_a,\partial_\mu\varphi_a;x)&\leftrightarrow L(q^i,\dot q^i,t),\\
+        \partial_\mu &\leftrightarrow \frac{\dd}{\dd t}.
+    \end{split}
+\end{equation}
+In $d=1$ the divergence $\partial_\mu J^\mu$ is a single derivative, so the
+current \emph{is} the charge and the conservation law is constancy in time.
+Transformations are reparametrizations of time and the symmetry is time 
+translation. Noether's theorem gives conservation of $H$. 
+
+\paragraph{Field theory as a mechanical system with a continuum of degrees of
+freedom.}
+In the opposite direction, a $3{+}1$ split of a field theory turns it into a
+mechanical system: set 
+\[q_{\bm{x}}(t)=\varphi(\bm{x},t),\]
+so that the discrete index
+$i$ becomes the continuous label $\bm{x}$. Then
+\begin{equation*}
+    \begin{split}
+        L&=\int\dd^3 x \mathcal{L} \\
+        \pi(\bm{x})&=\frac{\delta \mathcal{L}}{\delta\dot\varphi(\bm{x})}.
+    \end{split}
+\end{equation*}
+A chain of masses is a textbook example. On a ring of $N$
+masses,
+\begin{equation*}
+  L=\sum_{n}\Big[\tfrac12m\,\dot q_n^2-\tfrac12k\,(q_{n+1}-q_n)^2\Big].
+\end{equation*}
+Set $q_n(t)=\varphi(na,t)$, $m=\rho a$, $k=\tau/a$, and keep the length $Na$
+fixed. As $a\to0$,
+\begin{equation*}
+  L\ \to\ \int\dd x\,\Big[\tfrac12\rho\,\dot\varphi^2-\tfrac12\tau\,\varphi'^2\Big],
+  \qquad\rho\ddot\varphi=\tau\varphi'' .
+\end{equation*}
+This is an example of 'singular limit'. Sure the analogy of mechanics and
+filed theory is pure formal and does not mean that physics is the same.
+
+\section{Geometric Setup}
+\label{sec:cm-geom}
+
+The configuration space of a mechanical system comprising $k$ particles is 
+\[   
+ \underbrace{\mathbb R^3\times\mathbb R^3\times\cdots\times\mathbb R^3}_{k\ \text{times}}. 
+\]
+which is naturally isomorphic (as vector space, topological space, and smooth manifold) to
+\begin{equation}
+   \label {flat-Q}
+   Q=\mathbb R^{3k}.
+\end{equation}
+
+However this isomorphism hides the important difference ---
+the \(3k\) coordinates are not just arbitrary coordinates. They come in \(k\)
+distinguished groups of three. Rotations illustrate the difference:
+Suppose we rotate physical space by
+\[ R\in SO(3). \]
+For \(k\) particles, the same physical rotation acts on every particle:
+\[
+    (\mathbf r_1,\ldots,\mathbf r_k) \longrightarrow (R\mathbf r_1,\ldots,R\mathbf r_k). 
+\]
+Thus the physical rotation group is represented as
+$ SO(3)\subset SO(3k)$, with the action
+\[ R\mapsto 
+\begin{pmatrix} R&0&\cdots&0\\ 
+0&R&\cdots&0\\ 
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&R 
+\end{pmatrix}. 
+\]
+Natural rotation group of configuration space \eqref{flat-Q} is \(SO(3k)\).
+But a general element of \(SO(3k)\) can mix coordinates belonging to different particles,
+such a transformation is generally not a rotation of physical three-dimensional space.
+
+This distinction becomes particularly important in configuration-space
+formulations of  quantum mechanics, because it is closely related
+to the question of whether the \(3k\)-dimensional configuration space should be
+regarded as a merely mathematical construction or as having some independent
+physical reality.
+\footnote{In quantum mechanics  $ 1,2,\ldots,3k $,
+are not physically meaningful for identical particles. One should then identify
+configurations related by a permutation,
+so the physical configuration space is more properly
+\[ Q_{\rm identical} = (\mathbb R^3)^k/S_k. \]}
+
+Flat configuration space  come with a price. Let us look at simple example.
+The two-dimensional isotropic harmonic oscillator and two identical, spatially
+distant, non-interacting one-dimensional oscillators have exactly the same
+configuration space, $\mathbb{R}^2$, and, once the two one-dimensional
+coordinates are laid side by side, exactly the same Hamiltonian. This
+coincidence might seem to threaten the idea that configuration space carries
+direct physical meaning: if the bare pair $(Q,H)$ cannot distinguish ``one
+particle moving in a plane'' from ``two particles moving on separate, distant
+lines,'' in what sense does configuration space represent physical positions at
+all? 
+
+This coincidence  persists at every
+level of structure computable from $(Q,H)$ alone --- classical trajectories,
+the symplectic structure, the quantum spectrum and its degeneracies.
+Additional data is needed to tell the two systems
+apart: 
+\begin{enumerate}
+   \item an embedding of $Q$ into physical space together with the action of
+the spatial isometry group, which is geometrically realized in one case and
+merely accidental in the other;
+   \item statistics and particle-content data,
+which matter only when exchange effects are actually observable;
+   \item the
+algebra of interactions that locality in physical space picks out as natural,
+which governs how each system couples to a generic environment.
+\end{enumerate}
+Configuration space, taken on its own, is best understood as a
+representation-dependent bookkeeping device rather than a self-standing arena
+of physical positions: its physical reading requires further data as an
+independent postulate, not something read off the space itself.
+
+Nevertheless, in most cases, especially when $K$ (holonomic) constraints 
+ exist it is very convenient to forget
+of physical meaning of coordinates and consider configuration space as $ n=3 k -K $
+dimensional manifold  $ Q $ with arbitrary coordinates $q_1,q_2,\ldots q_n$ on it.
+
+Velocities of the system live in the tangent bundle $TQ$; the Lagrangian is
+intrinsically a function $L : TQ\times\mathbb R \to \mathbb R$, stated without
+reference to any coordinates at all. The Euler--Lagrange
+equations~\eqref{lagr-eq} themselves have a coordinate-free meaning: they are
+the flow of a specific vector field on $TQ$, picked out by the
+Poincar\'e--Cartan structure that $L$ induces on $TQ$, satisfying the
+second-order condition that this flow really does generate velocities
+consistent with positions. What one writes down in coordinates
+as~\eqref{lagr-eq} is the local expression of this single intrinsic object,
+valid in every chart, looking different in each.
+
+Passing (via the Legendre transform, where it is well defined) to
+the momenta 
+\begin{equation}
+   \label {gen-mom}
+   p_i = \partial L/\partial \dot q^i
+\end{equation}
+carries the
+description to the cotangent bundle $T^*Q$, the phase space. This
+space carries a canonical structure that exists with reference to no
+coordinates whatsoever: the \emph{tautological} (or Liouville) 1-form
+$\theta$, defined at a point $(q,p)\in T^*Q$ by $\theta(v) =
+p\bigl(\pi_*v\bigr)$ for any tangent vector $v$ there, where $\pi:
+T^*Q\to Q$ is the projection. Its exterior derivative $\omega =
+d\theta$ is the canonical symplectic form on $T^*Q$: closed,
+nondegenerate, and built entirely out of the bundle structure of
+$T^*Q$ over $Q$, with no reference to a coordinate system anywhere in
+its definition.
+
+Hamilton's equations are then the local expression of a single
+intrinsic equation,
+\begin{equation}
+  \iota_{X_H}\,\omega \;=\; dH,
+  \label{hamiltonian-vf}
+\end{equation}
+which defines the Hamiltonian vector field $X_H$ for any smooth
+function $H$ on phase space. In local coordinates $(q^i,p_i)$ in
+which $\theta = p_i\,dq^i$ and $\omega$ takes its standard constant
+form, \eqref{hamiltonian-vf} reproduces exactly the familiar
+\begin{equation}
+  \dot q^i \;=\; \frac{\partial H}{\partial p_i},
+  \qquad
+  \dot p_i \;=\; -\,\frac{\partial H}{\partial q^i}.
+  \label{hamilton-coord}
+\end{equation}
+Coordinates in which $\omega$ takes this simple constant form are
+called \emph{canonical}, or \emph{Darboux}, coordinates, after Gaston
+Darboux, who proved in 1882 that such coordinates always exist, at
+least locally, around every point of every symplectic
+manifold. This is a striking fact with no analogue
+in Riemannian geometry, where curvature is a genuine local invariant
+obstructing the metric from being brought to a standard flat form
+even at a single point's neighborhood. Symplectic manifolds have no
+such local invariant: every symplectic manifold of a given dimension
+looks, locally, exactly like every other one. This is precisely why
+Hamilton's equations can always be brought to the same simple
+form~\eqref{hamilton-coord}, no matter how complicated the
+physical system --- the complexity of a hard mechanics problem lives
+entirely in the choice of \emph{which} canonical coordinates to use,
+never in whether they exist.
+
+
+\paragraph{"Spin" in constant magnetic field}
+\label{par:cm-spin}
+We used to natural systems where hamiltonian is quadratic form over momenta and
+phase space is $T^*Q$ 
+but there are physical systems for which both statements are false.
+Let us consider 
+dynamic of point magnetic moment in constant magnetic field has not only
+clear physical meaning but also significant practical value. I investigated
+this problem (actually slightly more general one) in connection with control of MRI
+scanner \cite{RPZ4},\cite{RPZ3},\cite{RPZ2},\cite{RPZ1}.
+
+
+Hamiltonian is $ H=\bm M \cdot \bm B $ where $\bm M$ is magnetic moment 
+and $ \bm B $ is constant magnetic field.
+It is convenient to write $ \bm M=\frac{e}{m c}\bm S $ where $ \bm S $
+is angular moment ("spin")  and  include gyromagnetic ratio into magnetic field
+$ \bm \Omega = \frac{e}{m c}\bm B$. Components of $ \bm S $ are not
+canonical variables, their Poisson brackets are
+\begin{equation}
+   \label {pb}
+    \{S_i,S_j\}= \epsilon_{ijk} S_k
+\end{equation}
+However they define phase space (sphere)  and equation of motion:
+\begin{equation}
+   \label {sp1}
+    \dot S_i=\{S_i,H\}
+\end{equation} 
+or 
+\begin{equation}
+   \label {sp2}
+    \dot {\bm S} =-\bm S \times \bm \Omega
+\end{equation}
+
+In canonical variables 
+\begin{equation}
+   \label {sp3}
+   \begin{split}
+       S_x & = \sqrt{S^2-p^2} \cos q \\
+       S_y & = \sqrt{S^2-p^2} \sin q \\
+       S_z & = p,\quad -S\le p \le S
+   \end{split}
+\end{equation}
+Let $ \bm \Omega =(0,0, \Omega) $ then $ H=p \Omega $ and canonical equations are:
+\begin{equation}
+   \label {sp4}
+   \begin{split}
+       \dot p & =0\\
+       \dot q & = \Omega
+   \end{split}
+\end{equation}
+Lagrangian $ L=0 $, so we can not get equations of motion as second order equation.
+
+Moment $ p $ is integral of motion which is fine but velocity is not connected to 
+moment at all, it is constant. For pair of points in phase space generally there is
+no trajectory passable for given time. Variation problem simply can not be posed.
+
+Hamiltonian $ H=p \Omega $ looks like that for harmonic oscillator in
+action-angle variables and so we can  transform it to usual quadratic form, but
+the condition $  -S\le p \le S$ makes this transformation pure formal.
+
+\section{Constraints}
+\label{sec:cm-const}
+Constraints---restrictions on the positions and velocities a mechanical system may
+assume---are present in practically every realistic model.   A classification may be established along several independent axes: the order of the
+derivatives involved (geometric, kinematic, dynamic), integrability (holonomic,
+semi-holonomic, nonholonomic, with the finer distinction between partially and completely
+nonholonomic systems), explicit time dependence (scleronomic, rheonomic), sidedness
+(bilateral, unilateral), the work done by the constraint reactions (ideal, non-ideal),
+regularity, and, in the Hamiltonian setting, Dirac's primary/secondary and
+first-class/second-class constraints.
+Only ideal holonomic  constraints will be discussed here.
+
+Let $q=(q^1,\dots,q^n)$ be generalized coordinates.
+A system of constraints is \emph{holonomic} if it is
+    equivalent to a system of finite
+relations (geometric constraints)
+\begin{equation}
+   \label {holonomic-const}
+   f_\beta(t,q)=0 \quad \beta =1,\dots m .
+\end{equation}
+ Note that since
+ \[\df{f_\beta}{t}=\pd{f_\beta}{t}+\sum_{i=k}^n\pd{f_\beta}{q_k} \dot q_k=0 \]
+every \emph{holonomic} constraint is can be seen as \emph{integrable} 
+Pfaffian (linear over velocities) constraint:
+\begin{equation}
+  \sum_{i=1}^n a_i(q,t) \dot q^i + a_t(q,t) = 0,
+  \label{pfaffian-const}
+\end{equation}
+
+\paragraph{d'Alembert--Lagrange principle and Lagrange multipliers}
+Let $L(q,\dot q,t)=T-V$ and let $Q_i$ denote applied generalised forces not derived from
+$V$. The \emph{d'Alembert--Lagrange principle} states that for \emph{ideal} constraints the
+true motion satisfies
+\begin{equation}\label{dalembert}
+  \sum_{i=1}^n\Bigl(\frac{d}{dt}\pd L{\dot q^i}-\pd L{q^i}-Q_i\Bigr)\delta q^i=0
+  \qquad\forall\,\delta q\in\mathcal V_{(t,q)}.
+\end{equation}
+Because $\mathcal V_{(t,q)}=\{\delta q:\sum a_{\alpha i}\delta q^i=0\}$, the bracket must lie in the
+span of the constraint gradients, which gives the \emph{Lagrange equations of the first kind}
+\begin{equation}
+    \label{lagrange-first}
+  \frac{d}{dt}\pd L{\dot q^i}-\pd L{q^i}=Q_i+\sum_{\alpha=1}^m\lambda_\alpha\,a_{\alpha i}(q,t),
+  \qquad i=1,\dots,n,
+\end{equation}
+together with the $m$ constraint equations \eqref{pfaffian-const}. The $n+m$ equations determine
+the $n$ functions $q^i(t)$ and the $m$ multipliers $\lambda_\alpha(t)$. The constraint force
+is $R_i=\sum_\alpha\lambda_\alpha a_{\alpha i}$; in particular the multipliers carry
+direct physical meaning (tensions, normal forces). For a holonomic constraint $f_\beta(q,t)=0$
+one has $a_{\beta i}=\partial f_\beta/\partial q^i$.
+
+\paragraph{Holonomic reduction.} If all constraints are holonomic one can eliminate
+the multipliers \emph{a priori}: choose $n-m$ independent coordinates $s=(s^1,\dots,s^{n-m})$
+with $q=q(s,t)$ solving $f_\beta=0$, substitute into $L$ to obtain $\tilde L(s,\dot s,t)$, and
+write the ordinary Lagrange equations
+\begin{equation*}
+   \label {}
+    \frac{d}{dt}\pd{\tilde L}{\dot s^r}-\pd{\tilde L}{s^r}=\tilde Q_r
+\end{equation*}
+ with no reactions at all.
+This is the standard route and the main practical benefit of holonomic constraints.
+
+Physically constraints are  the idealization build from the 
+family of smooth models. A holonomic constraint $f=0$ is the limit
+$\kappa\to\infty$ of a stiff potential $V_\kappa=\tfrac12\kappa f^2$. The limit
+is delicate (see chapter \ref{lm}).
+
+If the initial position lies on the surface and the initial velocity is tangent
+to it, the motion converges to the d'Alembert motion on the surface. If the
+initial velocity has a normal component, the normal motion is a fast
+oscillation with a conserved action, and the limiting motion on the surface is
+governed by the original Hamiltonian \emph{plus an extra potential} that
+depends on that action. Rubin and Ungar \cite{RubinUngar1957}proved this for
+codimension one; Takens \cite{Takens1980} treated the general case, under a
+non-resonance condition on the frequencies of the normal oscillations. When
+that condition fails (frequencies crossing along the surface), there may be no
+differential equation on the surface governing the limiting motion at all.
+Similarly, a nonholonomic constraint (not discussed here)  is the limit of a
+large viscous friction $-\mu\,(a_i\dot q^i)\,a^i$ as $\mu\to\infty$. 
+
+This is a clean illustration of the thesis that a theory is not a limit of
+another but a chart on it: the same rod, with the same symbol $f=0$, belongs
+to different physical charts depending on whether it is the limit of a stiff
+spring or the limit of a viscous friction.
+
+\section[Geometry vs Coordinates]{Geometric Elegance versus Coordinate Practice }
+\label{sec:cm-geom-vs-coord}
+The geometric form tells, in advance and for
+free, which features of a set of equations of motion are physical
+and which are artifacts of a chart. It explains why canonical
+transformations exist and behave the way they do (Darboux's
+theorem). It makes the relationship between symmetry and conservation
+essentially automatic: a continuous symmetry is the flow of a vector
+field preserving both $\omega$ and $H$, and when that symmetry comes
+from the action of a Lie group, the associated conserved quantity is
+the group's \emph{momentum map} --- the modern, coordinate-free
+statement of Noether's theorem.
+It also exposes genuinely global, topological facts that no single
+coordinate patch can see: the phase space of a rigid body, for
+instance, is the cotangent bundle of the rotation group $SO(3)$,
+which cannot be covered by a single nonsingular coordinate chart at
+all --- the root cause of gimbal lock, which textbooks often present
+as an engineering nuisance but which is, geometrically, an
+unavoidable topological obstruction. A coordinate singularity, on
+this view, is never a physical singularity: it is only ever the
+failure of one particular chart, repaired by changing coordinates or,
+better, by working with the coordinate-free structure directly, where
+the question of a "singularity" never even arises.
+
+The coordinate form is actually the only form in which a
+problem is actually solved, in closed form or on a computer, and the
+only form that connects directly to a measurement, which is always
+reported as a number relative to some frame. Darboux's theorem
+guarantees good coordinates exist near any point; it says nothing
+whatsoever about how to find the ones adapted to a \emph{specific}
+Hamiltonian's structure --- action-angle variables for an integrable
+system, say, which is frequently the entire technical content of
+actually solving a hard problem in mechanics. No amount of abstract
+symplectic geometry does that work for you.
+
+Seen from the perspective of the wider project of this book, the two
+forms sit on opposite sides of its recurring divide: a coordinate
+expression is what gets compared, number for number, against
+measurement, and so belongs to the "real world" side of the ledger;
+the manifold, the connection, the symplectic form are pieces of
+"ideal world" mathematics, whose entire justification is that they
+correctly organize and predict the coordinate-level facts, and
+nothing more. Neither side is dispensable, and neither is more
+fundamental than the other in any sense that would let one be
+discarded.
+
+A single example run in both languages makes the trade-off concrete.
+A pendulum of length $\ell$ and bob mass $m$, free to swing in any
+direction, has configuration space the sphere of radius $\ell$
+centered on the pivot.
+
+\emph{Coordinate form.} Using the polar angle $\theta$ from the
+downward vertical and the azimuth $\phi$, the Lagrangian is
+\begin{equation}
+  L \;=\; \tfrac12 m\ell^2\bigl(\dot\theta^2 + \sin^2\theta\,
+  \dot\phi^2\bigr) \;+\; mg\ell\cos\theta .
+  \label{sph-pendulum-L}
+\end{equation}
+The coordinate $\phi$ does not appear in $L$ itself, so its conjugate
+momentum
+\begin{equation}
+  p_\phi \;=\; m\ell^2\sin^2\theta\,\dot\phi
+  \label{sph-pendulum-pphi}
+\end{equation}
+is conserved --- it is the angular momentum about the vertical axis
+--- and the problem reduces to an effective one-dimensional motion in
+$\theta$ alone, with effective potential $V_{\mathrm{eff}}(\theta) =
+mg\ell\cos\theta + p_\phi^2/(2m\ell^2\sin^2\theta)$. This is the form
+in which the problem is actually solved, e.g.\ by quadrature or
+numerically.
+
+\emph{Geometric form.} Configuration space is the sphere $S^2$
+itself, with the circle group $SO(2)$ acting on it by rotation about
+the vertical axis, an action that preserves the Lagrangian. The
+conservation of $p_\phi$ is nothing but the momentum map for this
+$SO(2)$ symmetry, an instance of Noether's theorem requiring no
+mention of $\theta,\phi$ at all. And the coordinate singularities of
+$(\theta,\phi)$ at the poles $\theta=0,\pi$ --- where $\phi$ becomes
+undefined and equation~\eqref{sph-pendulum-pphi} degenerates ---
+are transparently artifacts of this particular chart: $S^2$ has no
+distinguished points and no singularity there whatsoever. A pendulum
+hanging straight down, or balanced straight up, is a perfectly smooth
+physical configuration; it is only the coordinate system built from
+$(\theta,\phi)$ that breaks down at exactly those two points, for the
+same reason that all spherical coordinate systems break down at their
+poles.
+
+The two languages are not competitors; they specialize in different
+questions. The geometric form is the place to ask what is really
+happening, structurally, and what is guaranteed to remain true no
+matter which coordinates one happens to choose. The coordinate form
+is the place --- indeed the only place --- to ask what number a
+system actually produces. A physicist who works only in coordinates
+is at permanent risk of mistaking an artifact of a chosen chart for a
+physical effect, exactly as happened, for a good part of the
+twentieth century, with the coordinate singularity of the
+Schwarzschild solution at its horizon: a singularity of the
+particular $(t,r,\theta,\phi)$ coordinates originally used to write
+the metric down, mistaken for decades for a genuine physical
+singularity of spacetime itself, and only cleared up by passing to
+coordinates (Eddington--Finkelstein, Kruskal) in which the horizon is
+manifestly perfectly smooth. A physicist who
+works only in the geometric language, on the other hand, has an
+elegant theory of everything and the means to compute nothing. The
+working practice of mechanics has always required both, spoken
+fluently, and switched between as the problem at hand demands.
+

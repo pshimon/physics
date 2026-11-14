@@ -281,7 +281,7 @@ positive definite Hessian at every point.  Then:
   \item The function $f^*(p):=\ip{p}{x(p)}-f(x(p))$ on $\Omega^*$ satisfies
         $f^*(p)=\max_{\xi\in\Omega}\,[\ip{p}{\xi}-f(\xi)]$.
   \item $\nabla f^*=(\nabla f)^{-1}$ and
-        $\Hess f^*(p)=\bigl[\Hess f(x(p))\bigr]^{-1}$ (in particular, it is
+        $\hess f^*(p)=\bigl[\hess f(x(p))\bigr]^{-1}$ (in particular, it is
         positive definite).
   \item $f^{**}=f$ on $\Omega$, and $f(x)+f^*(p)\ge\ip{p}{x}$ with equality iff
         $p=\nabla f(x)$.
@@ -291,9 +291,9 @@ positive definite Hessian at every point.  Then:
 \begin{proof}
 (i) \emph{Injectivity.} Suppose $x\neq y$ in $\Omega$ and put $v=y-x$,
 $g(t)=\ip{\nabla f(x+tv)}{v}$ for $t\in[0,1]$ (the segment lies in $\Omega$ by
-convexity).  Then $g'(t)=v^{\mathsf T}\Hess f(x+tv)\,v>0$, so
+convexity).  Then $g'(t)=v^{\mathsf T}\hess f(x+tv)\,v>0$, so
 $g(0)\neq g(1)$ and hence $\nabla f(x)\neq\nabla f(y)$.  \emph{Local
-diffeomorphism.} The Jacobian of $\nabla f$ is $\Hess f$, which is
+diffeomorphism.} The Jacobian of $\nabla f$ is $\hess f$, which is
 invertible, so the inverse function theorem applies; in particular $\nabla f$
 is an open map and $\Omega^*$ is open.
 
@@ -306,8 +306,8 @@ $\xi=x(p)$; hence this is the unique global maximiser.
   \pd{f^*}{p_i}=x_i+\sum_j\bigl(p_j-\partial_jf(x(p))\bigr)\pd{x_j}{p_i}=x_i .
 \]
 Differentiating $\nabla f(x(p))=p$ gives
-$\Hess f(x(p))\,Dx(p)=\mathbb 1$, so $Dx=(\Hess f)^{-1}$, and
-$\Hess f^*=D(\nabla f^*)=Dx$.
+$\hess f(x(p))\,Dx(p)=\mathbb 1$, so $Dx=(\hess f)^{-1}$, and
+$\hess f^*=D(\nabla f^*)=Dx$.
 
 (iv) $\nabla f^*\colon\Omega^*\to\Omega$ is the inverse of $\nabla f$, so
 by (iii) $f^*$ satisfies the hypotheses on $\Omega^*$ (locally; the argument
@@ -320,7 +320,7 @@ Fenchel--Young follows from (ii) as in the one-dimensional case.
 
 In applications one often transforms with respect to \emph{some} variables
 and keeps the others as passive parameters.  Let $f=f(x,y)$ with
-$x\in\mathbb{R}^m$, $y\in\mathbb{R}^\ell$, and $\Hess_xf\succ0$.  Define
+$x\in\mathbb{R}^m$, $y\in\mathbb{R}^\ell$, and $\hess_xf\succ0$.  Define
 \[
   g(p,y):=\sup_{x}\,\bigl[\ip{p}{x}-f(x,y)\bigr]=\ip{p}{x(p,y)}-f\bigl(x(p,y),y\bigr),
   \qquad \pd{f}{x}\bigl(x(p,y),y\bigr)=p .
